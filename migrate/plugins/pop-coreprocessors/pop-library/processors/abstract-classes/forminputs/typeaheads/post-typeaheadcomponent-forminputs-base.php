@@ -1,0 +1,43 @@
+<?php
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+
+abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
+{
+    protected function getValueKey(array $module, array &$props)
+    {
+        return 'title';
+    }
+    protected function getComponentTemplateResource(array $module)
+    {
+        return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_TYPEAHEAD_COMPONENT];
+    }
+    protected function getTokenizerKeys(array $module, array &$props)
+    {
+        return array('title');
+    }
+
+    protected function getThumbprintQuery(array $module, array &$props)
+    {
+        return array(
+            // 'fields' => 'ids',
+            'limit' => 1,
+            'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:id'),
+            'order' => 'DESC',
+        );
+    }
+    protected function executeThumbprint($query)
+    {
+        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+    }
+
+    protected function getPendingMsg(array $module)
+    {
+        return TranslationAPIFacade::getInstance()->__('Loading Content', 'pop-coreprocessors');
+    }
+    protected function getNotfoundMsg(array $module)
+    {
+        return TranslationAPIFacade::getInstance()->__('No Content found', 'pop-coreprocessors');
+    }
+}

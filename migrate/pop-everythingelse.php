@@ -7,7 +7,7 @@ class Plugins
     public function __construct()
     {
         // Priority: new section, after PoP CMS Model and PoP Meta
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 1000);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 100);
     }
     public function init()
     {
@@ -83,13 +83,6 @@ class Plugins
             'pop-cdn-foundation',
             'pop-cdn-foundation-wp',
             'pop-cdn-wp',
-            'pop-cluster',
-            'pop-cluster-resourceloader',
-            'pop-cluster-resourceloader-aws',
-            'pop-cluster-wp',
-            'pop-clustercommonpages',
-            'pop-clustercommonpages-processors',
-            'pop-clustercommonpages-webplatform',
             'pop-cmsmodel-processors',
             'pop-coauthors',
             'pop-coauthors-processors',
@@ -127,7 +120,6 @@ class Plugins
             'pop-emailsender',
             'pop-emailsender-aws',
             'pop-emailsender-wp',
-            'pop-engine-filesystemcache',
             'pop-engine-htmlcssplatform',
             'pop-engine-htmlcssplatform-wp',
             'pop-engine-processors',
@@ -276,6 +268,7 @@ class Plugins
             'pop-volunteering-webplatform',
             'poptheme-wassup',
             'poptheme-wassup-getpop-demo',
+            'poptheme-wassup-webplatform',
             'public-post-preview-pop',
             'qtranslate-x-pop',
             'user-avatar-popfork',
@@ -285,7 +278,7 @@ class Plugins
             'wp-super-cache-pop',
         ];
         foreach ($plugins as $plugin) {
-            require_once ($plugin.'/'.$plugin.'.php');
+            require_once ('plugins/'.$plugin.'/'.$plugin.'.php');
         }
     }
 }

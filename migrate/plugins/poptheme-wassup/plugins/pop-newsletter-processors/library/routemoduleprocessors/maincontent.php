@@ -1,0 +1,30 @@
+<?php
+
+use PoP\Routing\RouteNatures;
+
+class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+{
+    public function getModulesVarsPropertiesByNatureAndRoute()
+    {
+        $ret = array();
+
+        $routemodules = array(
+            POP_NEWSLETTER_ROUTE_NEWSLETTER => [PoP_Newsletter_Module_Processor_Blocks::class, PoP_Newsletter_Module_Processor_Blocks::MODULE_BLOCK_NEWSLETTER],
+            POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION => [PoP_Newsletter_Module_Processor_Blocks::class, PoP_Newsletter_Module_Processor_Blocks::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION],
+        );
+        foreach ($routemodules as $route => $module) {
+            $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
+        }
+
+        return $ret;
+    }
+}
+
+/**
+ * Initialization
+ */
+add_action('init', function() { 
+	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
+		new Wassup_Newsletter_Module_MainContentRouteModuleProcessor()
+	);
+}, 200);

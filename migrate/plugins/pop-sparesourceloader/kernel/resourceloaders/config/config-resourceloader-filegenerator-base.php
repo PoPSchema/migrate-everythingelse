@@ -1,0 +1,34 @@
+<?php
+abstract class PoP_SPAResourceLoader_ConfigFileBase extends \PoP\FileStore\File\AbstractAccessibleRenderableFile
+{
+    protected function getBaseDir()
+    {
+        return POP_SPARESOURCELOADER_CONTENT_DIR;
+    }
+    protected function getBaseUrl()
+    {
+        return POP_SPARESOURCELOADER_CONTENT_URL;
+    }
+
+    protected function getFolderSubpath()
+    {
+
+        // We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
+        $subfolder = PoP_ResourceLoader_ServerUtils::bundleExternalFiles() ? 'global' : 'local';
+        if (defined('POP_THEME_INITIALIZED')) {
+            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
+        }
+
+        return $subfolder;
+    }
+
+    public function getDir()
+    {
+        return $this->getBaseDir().$this->getFolderSubpath();
+    }
+    public function getUrl()
+    {
+        return $this->getBaseUrl().$this->getFolderSubpath();
+    }
+}

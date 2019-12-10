@@ -1,0 +1,43 @@
+<?php
+use PoP\LooseContracts\Facades\NameResolverFacade;
+
+define('POP_CDN_THUMBPRINT_USER', 'user');
+
+class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
+{
+    public function getName()
+    {
+        return POP_CDN_THUMBPRINT_USER;
+    }
+
+    public function getQuery()
+    {
+        return array(
+            // 'fields' => 'ID',
+            'limit' => 1,
+            // Moved under WordPress-specific file
+            // 'meta_key' => \PoP\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
+            // 'orderby' => 'meta_value',
+            'orderby' => NameResolverFacade::getInstance()->getName('popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate'),
+            'order' => 'DESC',
+            'role' => GD_ROLE_PROFILE,
+        );
+    }
+
+    public function executeQuery($query, array $options = [])
+    {
+        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $options['return-type'] = POP_RETURNTYPE_IDS;
+        return $cmsusersapi->getUsers($query, $options);
+    }
+    
+    public function getTimestamp($user_id)
+    {
+        return \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
+    }
+}
+    
+/**
+ * Initialize
+ */
+new PoP_CDN_Thumbprint_User();

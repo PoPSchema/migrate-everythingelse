@@ -1,0 +1,7 @@
+<?php
+use PoP\ComponentModel\ModuleProcessors\AbstractRelationalFieldQueryDataModuleProcessor;
+
+abstract class PoP_Module_Processor_DataQuery_RelationalLayoutsBase extends AbstractRelationalFieldQueryDataModuleProcessor
+{
+    use PoP_Module_Processor_DataQuery_UpdateDataLayouts_Trait;
+}

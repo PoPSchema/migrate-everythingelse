@@ -1,0 +1,39 @@
+<?php
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+
+abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase
+{
+
+    //-------------------------------------------------
+    // Feedback
+    //-------------------------------------------------
+
+    public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
+    {
+        $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        
+        // Show error message if no items, but only if the checkpoint did not fail
+        // Do not show the message when doing loadLatest
+        $checkpoint_failed = \PoP\ComponentModel\GeneralUtils::isError($dataaccess_checkpoint_validation);
+        if (!$checkpoint_failed && empty($dbobjectids) && !$vars['loading-latest']) {
+            $query_args = $data_properties[DataloadingConstants::QUERYARGS];
+            $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
+        
+            // If pagenumber < 2 => There are no results at all
+            $msg = array(
+                'codes' => array(
+                    ($pagenumber < 2) ? 'noresults' : 'nomore',
+                ),
+            );
+            if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
+                $msg[GD_JS_CLASS] = 'alert-warning';
+            }
+            $ret['msgs'] = array(
+                $msg
+            );
+        }
+        
+        return $ret;
+    }
+}
