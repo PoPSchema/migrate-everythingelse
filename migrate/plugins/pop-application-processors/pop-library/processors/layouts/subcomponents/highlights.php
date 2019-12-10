@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Highlights\TypeDataResolvers\HighlightTypeDataResolver;
 
 class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -30,9 +30,9 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
-                return ConvertiblePostTypeDataResolver::class;
+                return HighlightTypeDataResolver::class;
         }
-    
+
         return parent::getSubcomponentTypeDataResolverClass($module);
     }
 
@@ -44,12 +44,12 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
                 $ret[] = [Wassup_Module_Processor_LayoutContents::class, Wassup_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_HIGHLIGHTS];
                 break;
-            
+
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
                 $ret[] = [Wassup_Module_Processor_LayoutContents::class, Wassup_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -60,7 +60,7 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
                 return false;
         }
-    
+
         return parent::isIndividual($module, $props);
     }
 
@@ -72,7 +72,7 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
                 $this->appendProp($module, $props, 'class', 'referencedby clearfix');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
 
 class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -30,9 +30,9 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                return ConvertiblePostTypeDataResolver::class;
+                return StanceTypeDataResolver::class;
         }
-    
+
         return parent::getSubcomponentTypeDataResolverClass($module);
     }
 
@@ -44,12 +44,12 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
             case self::MODULE_SUBCOMPONENT_STANCES:
                 $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES];
                 break;
-            
+
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
                 $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES_APPENDABLE];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -60,7 +60,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
                 return false;
         }
-    
+
         return parent::isIndividual($module, $props);
     }
 
@@ -72,7 +72,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
                 $this->appendProp($module, $props, 'class', 'referencedby clearfix');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
