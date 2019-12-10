@@ -25,7 +25,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:

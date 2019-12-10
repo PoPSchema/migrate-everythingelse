@@ -44,7 +44,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
@@ -54,7 +54,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
                 return 'has-organization-details';
         }
 
-        return null;
+        return 'has-organization-details';
     }
 }
 

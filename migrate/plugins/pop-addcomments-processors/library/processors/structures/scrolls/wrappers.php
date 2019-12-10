@@ -42,7 +42,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         parent::initModelProps($module, $props);
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:

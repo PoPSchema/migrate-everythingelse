@@ -24,7 +24,7 @@ class UserStance_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONWRAPPER_STANCEVIEW:

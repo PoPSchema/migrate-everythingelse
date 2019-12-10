@@ -30,7 +30,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_WIDGETWRAPPER_COMMUNITIES:

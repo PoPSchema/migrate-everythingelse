@@ -26,7 +26,7 @@ abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends P
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         return 'has-locations';
     }

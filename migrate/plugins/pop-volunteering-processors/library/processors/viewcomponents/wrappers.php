@@ -36,7 +36,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:

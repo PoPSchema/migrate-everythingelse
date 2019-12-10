@@ -53,7 +53,7 @@ class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_Con
     //     return $ret;
     // }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION:

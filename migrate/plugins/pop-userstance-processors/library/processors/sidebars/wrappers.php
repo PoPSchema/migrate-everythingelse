@@ -121,7 +121,7 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         parent::initModelProps($module, $props);
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:

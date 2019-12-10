@@ -30,7 +30,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:

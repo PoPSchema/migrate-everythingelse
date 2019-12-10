@@ -42,7 +42,7 @@ class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT:

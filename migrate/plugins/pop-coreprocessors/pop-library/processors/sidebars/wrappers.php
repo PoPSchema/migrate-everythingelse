@@ -67,7 +67,7 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         parent::initModelProps($module, $props);
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:

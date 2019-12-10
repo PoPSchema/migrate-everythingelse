@@ -54,7 +54,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:

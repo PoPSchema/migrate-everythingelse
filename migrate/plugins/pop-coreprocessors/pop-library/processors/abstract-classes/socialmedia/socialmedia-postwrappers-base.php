@@ -10,13 +10,13 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
     public function getConditionSucceededSubmodules(array $module)
     {
         $ret = parent::getConditionSucceededSubmodules($module);
-    
+
         $ret[] = $this->getSocialmediaModule($module);
 
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         return FieldQueryInterpreterFacade::getInstance()->getField('is-status', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
     }

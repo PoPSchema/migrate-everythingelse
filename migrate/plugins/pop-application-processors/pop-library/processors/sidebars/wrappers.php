@@ -151,7 +151,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
         parent::initModelProps($module, $props);
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_CATEGORIES:

@@ -40,7 +40,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:

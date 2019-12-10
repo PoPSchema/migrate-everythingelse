@@ -37,7 +37,7 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:

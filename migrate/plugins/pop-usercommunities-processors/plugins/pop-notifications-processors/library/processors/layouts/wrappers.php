@@ -31,7 +31,7 @@ class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP:

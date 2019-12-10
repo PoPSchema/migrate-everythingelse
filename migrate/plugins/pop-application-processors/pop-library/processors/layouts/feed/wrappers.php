@@ -24,7 +24,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:

@@ -30,7 +30,7 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $module)
+    public function getConditionField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:

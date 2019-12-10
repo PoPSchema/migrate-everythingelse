@@ -54,17 +54,18 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
 
     public function getDataFields(array $module, array &$props): array
     {
-        $ret = array(
-            $this->getConditionField($module),
-        );
-        if ($conditionfailed_layouts = $this->getConditionFailedSubmodules($module)) {
+        $ret = [];
+        if ($conditionDataField = $this->getConditionField($module)) {
+            $ret[] = $conditionDataField;
+        }
+        if (!empty($this->getConditionFailedSubmodules($module))) {
             $ret[] = $this->getNotConditionField($module);
         }
 
         return $ret;
     }
 
-    abstract public function getConditionField(array $module);
+    abstract public function getConditionField(array $module): ?string;
 
     public function getNotConditionField(array $module)
     {
