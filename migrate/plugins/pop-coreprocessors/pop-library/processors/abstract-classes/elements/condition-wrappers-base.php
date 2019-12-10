@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -118,8 +117,6 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         if ($this->showDiv($module, $props)) {
             $ret['show-div'] = true;
