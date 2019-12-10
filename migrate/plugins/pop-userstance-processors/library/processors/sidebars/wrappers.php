@@ -133,6 +133,8 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
             case self::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT:
                 return 'has-stances';
 
+            case self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE:
+            case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
                 return 'has-loggedinuser-stances';
         }
