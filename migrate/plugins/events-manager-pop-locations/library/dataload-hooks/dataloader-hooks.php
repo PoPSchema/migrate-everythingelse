@@ -8,11 +8,11 @@ class EM_PoPLocations_DataloaderHooks
 
         // Comment Leo 02/05/2018: commented because it destroys everything: it makes the locations appear repeated
         // HooksAPIFacade::getInstance()->addAction(
-        //     'LocationTypeDataResolver:executeQueryIds:before',
+        //     'LocationTypeDataLoader:executeQueryIds:before',
         //     array($this, 'addFilter')
         // );
         // HooksAPIFacade::getInstance()->addAction(
-        //     'LocationTypeDataResolver:executeQueryIds:after',
+        //     'LocationTypeDataLoader:executeQueryIds:after',
         //     array($this, 'removeFilter')
         // );
     }

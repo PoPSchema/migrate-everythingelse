@@ -1,12 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeDataLoaders\UserTypeDataLoader;
 
 define('GD_ROLE_PROFILE', 'profile');
 
 // Set the default role for the user typeDataResolver
-HooksAPIFacade::getInstance()->addFilter('UserTypeDataResolver:query', 'gdUreMaybeProfileRole');
+HooksAPIFacade::getInstance()->addFilter('UserTypeDataLoader:query', 'gdUreMaybeProfileRole');
 function gdUreMaybeProfileRole($query)
 {
 
@@ -53,7 +53,7 @@ function userHasProfileAccess($user_id = null)
 /**
  * User Type Data Resolver: allow to select users only with at least role GD_ROLE_PROFILE
  */
-HooksAPIFacade::getInstance()->addFilter(UserTypeDataResolver::class.':gd_dataload_query', 'gdUreUserlistQuery');
+HooksAPIFacade::getInstance()->addFilter(UserTypeDataLoader::class.':gd_dataload_query', 'gdUreUserlistQuery');
 function gdUreUserlistQuery($query)
 {
     // The role can only be Profile (Organization + Individual), force there's no other (protection against hackers).

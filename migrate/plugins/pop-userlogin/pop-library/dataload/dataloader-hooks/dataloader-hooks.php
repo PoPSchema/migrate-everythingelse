@@ -17,7 +17,7 @@ class PoP_UserLogin_DataLoad_DataloaderHooks
     public function moveEntriesUnderDBName($dbname_datafields, $typeResolver)
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        $typeDataResolverClass = $typeResolver->getTypeDataResolverClass();
+        $typeDataResolverClass = $typeResolver->getTypeDataLoaderClass();
         $typeDataResolver = $instanceManager->getInstance($typeDataResolverClass);
         if ($dataquery_name = $typeDataResolver->getDataquery()) {
             // The data-fields include both state-less/cacheable and state-full/non-cacheable fields

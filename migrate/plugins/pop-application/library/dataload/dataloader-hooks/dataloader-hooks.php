@@ -14,11 +14,11 @@ class PoP_Application_DataloaderHooks
             array($this, 'maybeGetLoadinglatestLimit')
         );
         HooksAPIFacade::getInstance()->addFilter(
-            'PostTypeDataResolver:query:limit',
+            'PostTypeDataLoader:query:limit',
             array($this, 'maybeGetLoadinglatestLimitForPost')
         );
         HooksAPIFacade::getInstance()->addFilter(
-            'PostTypeDataResolver:query',
+            'PostTypeDataLoader:query',
             array($this, 'maybeAddLoadinglatestTimestamp'),
             10,
             2
@@ -31,7 +31,7 @@ class PoP_Application_DataloaderHooks
         if ($vars['loading-latest']) {
             return 1;
         }
-    
+
         return $pagenumber;
     }
 
@@ -41,7 +41,7 @@ class PoP_Application_DataloaderHooks
         if ($vars['loading-latest']) {
             return 0;
         }
-    
+
         return $limit;
     }
 
@@ -52,7 +52,7 @@ class PoP_Application_DataloaderHooks
         if ($vars['loading-latest']) {
             return -1;
         }
-    
+
         return $limit;
     }
 
@@ -70,7 +70,7 @@ class PoP_Application_DataloaderHooks
             // );
             $query['date-from'] = date('Y-m-d H:i:s', $timestamp);
         }
-    
+
         return $query;
     }
 }

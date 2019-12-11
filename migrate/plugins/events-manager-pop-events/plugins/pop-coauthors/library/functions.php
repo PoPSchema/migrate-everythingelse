@@ -29,19 +29,19 @@ function gdUserEventPostIds($authors = null)
     return $post_ids;
 }
 
-// HooksAPIFacade::getInstance()->addFilter('EventTypeDataResolver:query', 'gdCapEmDataloaderChangeOwnerWithPostIds', 10);
+// HooksAPIFacade::getInstance()->addFilter('EventTypeDataLoader:query', 'gdCapEmDataloaderChangeOwnerWithPostIds', 10);
 // function gdCapEmDataloaderChangeOwnerWithPostIds($query)
 // {
-    
+
 //     // Always use no owner. If needed to filter by author, it's done getting the post_ids below (because of interaction with CoAuthor Plus plugin)
 //     if ($profiles = $query['owner']) {
 //         $query['owner'] = false;
 
 //         $post_ids = gdUserEventPostIds($profiles);
-        
+
 //         // If empty, then force it to bring no results with a -1 id (otherwise, it brings all results)
 //         $post_ids = empty($post_ids) ? array(-1) : $post_ids;
-    
+
 //         // Limit posts to the profile
 //         $query['post_id'] = $post_ids;
 //     }
@@ -55,7 +55,7 @@ function gdCapEmFilterChangeOwnerWithPostIds($query)
     // Remove the author, use owner post_id instead
     if ($profiles = $query['owner']) {
         $post_ids = gdUserEventPostIds($profiles);
-        
+
         // If empty, then force it to bring no results with a -1 id (otherwise, it brings all results)
         if (empty($post_ids)) {
             $post_ids = array(-1);
@@ -75,7 +75,7 @@ function gdCapEmFilterChangeOwnerWithPostIds($query)
 // Override the can_manage function from em-event and em-object: this one contrasts against owner (which is unique) instead of (multiple) authors, so it does not co-authors to edit the event
 function gdEmCapCanManage($event, $owner_capability = false, $admin_capability = false, $user_to_check = false)
 {
-    
+
     // copied from events-manager/classes/em-object.php
     // Then replaced `owner` with `author`
     global $em_capabilities_array;
@@ -85,10 +85,10 @@ function gdEmCapCanManage($event, $owner_capability = false, $admin_capability =
             $user = false;
         }
     }
-    
+
     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
     $pluginapi = PoP_Coauthors_APIFactory::getInstance();
-    
+
     $authors = $pluginapi->getCoauthors($event->post_id, ['return-type' => POP_RETURNTYPE_IDS]);
     $is_author = ((in_array($vars['global-userstate']['current-user-id'], $authors)) || (!empty($user) && in_array($user->ID, $authors)));
 
@@ -98,7 +98,7 @@ function gdEmCapCanManage($event, $owner_capability = false, $admin_capability =
         //user owns the object and can therefore manage it
         $can_manage = true;
     }
-    
+
     return $can_manage;
 }
 
@@ -109,7 +109,7 @@ function gdEmCapEventCanManage($can_manage, $event, $owner_capability = false, $
     if ($can_manage) {
         return true;
     }
-    
+
     return gdEmCapCanManage($event, $owner_capability, $admin_capability, $user_to_check);
 }
 
@@ -119,7 +119,7 @@ function gdEmCanManageAddError($add_error, $event, $owner_capability = false, $a
     if (!$add_error) {
         return false;
     }
-    
+
     return !gdEmCapCanManage($event, $owner_capability, $admin_capability, $user_to_check);
 }
 
@@ -140,7 +140,7 @@ function gdEmEventsAdminArgsAddCoauthors($args, $event)
         $args['owner'] = false;
         $args['post_id'] = $post_ids;
     }
-    
+
     return $args;
 }
 
@@ -161,7 +161,7 @@ function gdEmGetBookingsLimitToCoauthoredEvents($args)
         }
         $args['event'] = $event_ids;
     }
-    
+
     return $args;
 }
 
@@ -174,7 +174,7 @@ function gdEmGetBookingsNoOwnerArgs($args)
 
     // Allow for co-authors: owner = false => the profiles can see also events which are owned by others
     $args['owner'] = false;
-    
+
     return $args;
 }
 
@@ -193,11 +193,11 @@ function gdEmGetBookingsCsvPersonArgs($args)
     if (!isset($args['event'])) {
         $args = gdEmGetBookingsLimitToCoauthoredEvents($args);
     }
-    
+
     if (!empty($_REQUEST['event_id']) && !isset($args['event'])) {
         $args['event'] = $_REQUEST['event_id'];
     }
-    
+
     return $args;
 }
 
@@ -214,6 +214,6 @@ function gdEmBookingsBuildSqlConditions($conditions, $args)
     if (is_numeric($args['person'])) {
         $conditions['person'] = EM_BOOKINGS_TABLE.'.person_id='.$args['person'];
     }
-    
+
     return $conditions;
 }
