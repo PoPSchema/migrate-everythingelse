@@ -5,7 +5,7 @@ use PoP\Users\TypeDataLoaders\UserTypeDataLoader;
 
 define('GD_ROLE_PROFILE', 'profile');
 
-// Set the default role for the user typeDataResolver
+// Set the default role for the user typeDataLoader
 HooksAPIFacade::getInstance()->addFilter('UserTypeDataLoader:query', 'gdUreMaybeProfileRole');
 function gdUreMaybeProfileRole($query)
 {
