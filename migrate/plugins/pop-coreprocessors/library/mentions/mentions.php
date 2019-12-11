@@ -12,10 +12,10 @@ class PoP_Mentions
 {
     protected $regex_general;
     protected $regex_users;
-  
+
     public function __construct()
     {
-    
+
         // $this->regex_users =    '/(^|[\s!\.:;\?(>])*@([\p{L}][\p{L}0-9_]+)(?=[^<>]*(?:<|$))/u';
         // $this->regex_users =    '/(^|[\s!\.:;\?(>])\@([\p{L}][\p{L}0-9_]+)(?=[^<>]*(?:<|$))/u';
 
@@ -45,20 +45,20 @@ class PoP_Mentions
         // Allow also underscore ("_"), dash ("-") and dots ("."), but only when they are not the final char (@pedro.perez. = pedro.perez). Eg: greenpeace-asia
         // Regex taken from https://stackoverflow.com/questions/13639478/how-do-i-extract-words-starting-with-a-hash-tag-from-a-string-into-an-array
         $this->regex_users =    '/(?<!\w)@([a-z0-9-._]+[a-z0-9])/iu';
-    
+
         // Save the tags immediately
         HooksAPIFacade::getInstance()->addAction(
             'popcms:savePost',
-            array($this, 'generatePostTags'), 
+            array($this, 'generatePostTags'),
             0
         );
         HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment', 
-            array($this, 'generateCommentTags'), 
-            0, 
+            'popcms:insertComment',
+            array($this, 'generateCommentTags'),
+            0,
             2
         );
-    
+
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM
@@ -72,7 +72,7 @@ class PoP_Mentions
             HooksAPIFacade::getInstance()->addFilter('gd_comments_content', array($this, 'processContent'), 5);
         }
     }
-  
+
     // this function extracts the hashtags from content and adds them as tags to the post
     public function generatePostTags($post_id)
     {
@@ -159,34 +159,34 @@ class PoP_Mentions
             }
         }
     }
-  
+
     // this function returns an array of hashtags from a given content - used by generate_tags()
     public function getHashtagsFromContent($content)
     {
         preg_match_all($this->regex_general, $content, $matches);
         return $matches[1];
     }
-  
+
     // this function returns an array of user_nicenames from a given content - used by generate_tags()
     public function getUserNicenamesFromContent($content)
     {
         preg_match_all($this->regex_users, $content, $matches);
         return $matches[1];
     }
-  
+
     // general function to process content
     public function work($content)
     {
-    
+
         // Tags
         $content = str_replace('##', '#', preg_replace_callback($this->regex_general, array( $this, 'makeLinkTag' ), $content));
-    
+
         // Usernames
         $content = str_replace('@@', '@', preg_replace_callback($this->regex_users, array( $this, 'makeLinkUserNicenames' ), $content));
 
         return $content;
     }
-  
+
     // replace hashtags with links when displaying content
     // since v 3.0 post type depending
     public function processContent($content)
@@ -204,7 +204,7 @@ class PoP_Mentions
         }
         return $content;
     }
-  
+
     // callback functions for preg_replace_callback used in content()
     public function makeLinkTag($match)
     {
@@ -214,7 +214,7 @@ class PoP_Mentions
     {
         return $this->makeLinkUsers($match);
     }
-  
+
     // function to generate tag link
     private function makeLink($match)
     {
@@ -248,7 +248,7 @@ class PoP_Mentions
             // Allow for the popover by adding data-popover-id
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-'.\PoP\ComponentModel\Utils::getDomainId($cmsengineapi->getSiteURL()).'-'.UserTypeResolver::TYPE_COLLECTION_NAME.'-'.$cmsusersresolver->getUserId($user),
+                '#popover-'.\PoP\ComponentModel\Utils::getDomainId($cmsengineapi->getSiteURL()).'-'.UserTypeResolver::NAME.'-'.$cmsusersresolver->getUserId($user),
                 $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
                 $cmsusersresolver->getUserDisplayName($user)
             );
