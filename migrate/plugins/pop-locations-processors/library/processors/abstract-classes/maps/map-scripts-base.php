@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -22,7 +21,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
         if ($script_customize = $this->getCustomizationSubmodule($module)) {
             $ret[] = $script_customize;
         }
-        
+
         return $ret;
     }
 
@@ -30,9 +29,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
     {
         return array(
             'locations' => array(
-                LocationTypeResolver::class => array(
-                    [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS],
-                ),
+                [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS],
             )
         );
     }
@@ -48,7 +45,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
         }
         $markers = [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS];
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-markers'] = ModuleUtils::getModuleOutputName($markers);
-        
+
         return $ret;
     }
 }

@@ -27,9 +27,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     public function getDomainSwitchingSubmodules(array $module): array
     {
         return array(
-            $this->getSubcomponentField($module) => array(
-                $this->getSubcomponentTypeResolverClass($module) => $this->getLayoutSubmodules($module),
-            ),
+            $this->getSubcomponentField($module) => $this->getLayoutSubmodules($module),
         );
     }
 
@@ -48,17 +46,17 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-    
+
         $ret['subcomponent-field'] = $this->getSubcomponentField($module);
         if ($layouts = $this->getLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $layouts
             );
         }
         $ret['individual'] = $this->isIndividual($module, $props);
         $ret['html-tag'] = $this->getHtmlTag($module, $props);
-        
+
         return $ret;
     }
 }

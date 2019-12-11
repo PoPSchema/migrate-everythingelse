@@ -12,7 +12,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_EXAMPLE_LATESTPOSTS = 'example-latestposts';
     public const MODULE_EXAMPLE_AUTHORLATESTPOSTS = 'example-authorlatestposts';
     public const MODULE_EXAMPLE_AUTHORDESCRIPTION = 'example-authordescription';
@@ -42,11 +42,11 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                $ret[] = [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHORPROPERTIES];
+                $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES];
                 break;
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                $ret[] = [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_TAGPROPERTIES];
+                $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_TAGPROPERTIES];
                 break;
         }
 
@@ -60,12 +60,12 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);                
+                return $this->getQueriedDBObjectID($module, $props, $data_properties);
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
                 $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
                 return $cmspagesapi->getHomeStaticPage();
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
@@ -120,14 +120,10 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
                 $ret['author'] = array(
-                    UserTypeResolver::class => array(
-                        [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHORPROPERTIES],
-                    ),
+                    [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES],
                 );
                 $ret['comments'] = array(
-                    CommentTypeResolver::class => array(
-                        [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
-                    ),
+                    [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
                 );
                 break;
         }

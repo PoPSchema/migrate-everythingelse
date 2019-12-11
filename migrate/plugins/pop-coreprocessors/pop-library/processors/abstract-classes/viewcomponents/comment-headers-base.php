@@ -1,7 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -20,9 +19,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         if ($header = $this->getHeaderSubmodule($module)) {
             return array(
                 'post-id' => array(
-                    PostConvertibleTypeResolver::class => array(
-                        $header,
-                    ),
+                    $header,
                 ),
             );
         }

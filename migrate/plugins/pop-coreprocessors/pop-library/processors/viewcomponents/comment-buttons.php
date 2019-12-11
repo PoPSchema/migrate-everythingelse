@@ -1,5 +1,4 @@
 <?php
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Processor_CommentViewComponentButtonsBase
 {
@@ -30,9 +29,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return array(
                     'post-id' => array(
-                        PostConvertibleTypeResolver::class => array(
-                            [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
-                        ),
+                        [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
                     ),
                 );
         }

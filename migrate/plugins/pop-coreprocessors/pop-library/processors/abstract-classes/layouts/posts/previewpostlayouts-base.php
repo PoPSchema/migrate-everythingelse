@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWPOST];
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -91,9 +91,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         }
 
         if ($modules) {
-            $ret['authors'] = array(
-                UserTypeResolver::class => $modules,
-            );
+            $ret['authors'] = $modules;
         }
 
         return $ret;
@@ -208,43 +206,43 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         if ($belowthumb_modules = $this->getBelowthumbLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowthumb'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $belowthumb_modules
             );
         }
         if ($abovecontent_modules = $this->getAbovecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $abovecontent_modules
             );
         }
         if ($belowcontent_modules = $this->getBelowcontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowcontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $belowcontent_modules
             );
         }
         if ($top_modules = $this->getTopSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['top'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $top_modules
             );
         }
         if ($bottom_modules = $this->getPreviewpostBottomSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $bottom_modules
             );
         }
         if ($beforecontent_modules = $this->getBeforecontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['beforecontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $beforecontent_modules
             );
         }
         if ($aftercontent_modules = $this->getAftercontentSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['aftercontent'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $aftercontent_modules
             );
         }
@@ -289,7 +287,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         if ($author_module = $this->getAuthorModule($module)) {
             $this->appendProp($author_module, $props, 'class', 'preview-author');
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

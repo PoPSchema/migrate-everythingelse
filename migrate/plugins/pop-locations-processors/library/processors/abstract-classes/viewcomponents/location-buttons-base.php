@@ -3,7 +3,6 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP_Module_Processor_ViewComponentButtonsBase
 {
@@ -25,7 +24,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     {
         return null;
     }
-    
+
     public function initMarkers(array $module)
     {
 
@@ -34,7 +33,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         // (which were initialized then drawn then initialized again and remained there in the memory)
         return true;
     }
-    
+
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
@@ -43,7 +42,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             $ret[] = [PoP_Module_Processor_MapResetMarkerScripts::class, PoP_Module_Processor_MapResetMarkerScripts::MODULE_MAP_SCRIPT_RESETMARKERS];
             $ret[] = $this->getMapscriptSubmodule($module);
         }
-        
+
         return $ret;
     }
 
@@ -60,9 +59,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
             if ($modules) {
                 return array(
-                    'locations' => array(
-                        LocationTypeResolver::class => $modules,
-                    ),
+                    'locations' => $modules,
                 );
             }
         }
@@ -141,7 +138,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             $ret['show-each'] = true;
             $ret['each-separator'] = $this->getEachSeparator($module);
             $ret['complement-separator'] = $this->getComplementSeparator($module);
-    
+
             if ($location_module = $this->getLocationModule($module)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = ModuleUtils::getModuleOutputName($location_module);
             }
@@ -149,7 +146,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-complement'] = ModuleUtils::getModuleOutputName($location_complement);
             }
         }
-        
+
         return $ret;
     }
 }

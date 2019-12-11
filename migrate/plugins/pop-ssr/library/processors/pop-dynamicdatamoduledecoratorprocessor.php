@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\DataloadUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleFilters\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
@@ -169,40 +170,38 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $processor = $this->getDecoratedmoduleProcessor($module);
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
-        foreach ($processor->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_typeResolver_options) {
-            foreach ($subcomponent_typeResolver_options as $subcomponent_typeResolver_class => $subcomponent_modules) {
-                $subcomponent_modules_data_properties = array(
-                    'data-fields' => array(),
-                    'subcomponents' => array()
+        foreach ($processor->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
+            $subcomponent_modules_data_properties = array(
+                'data-fields' => array(),
+                'subcomponents' => array()
+            );
+            foreach ($subcomponent_modules as $subcomponent_module) {
+                if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][POP_PROPS_SUBMODULES])) {
+                    $subcomponent_modules_data_properties = array_merge_recursive(
+                        $subcomponent_modules_data_properties,
+                        $subcomponent_module_data_properties
+                    );
+                }
+            }
+
+            $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
+            if ($subcomponent_modules_data_properties['data-fields']) {
+                $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
+
+                $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? array();
+                $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_unique(
+                    array_merge(
+                        $ret['subcomponents'][$subcomponent_data_field]['data-fields'],
+                        $subcomponent_modules_data_properties['data-fields']
+                    )
                 );
-                foreach ($subcomponent_modules as $subcomponent_module) {
-                    if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][POP_PROPS_SUBMODULES])) {
-                        $subcomponent_modules_data_properties = array_merge_recursive(
-                            $subcomponent_modules_data_properties,
-                            $subcomponent_module_data_properties
-                        );
-                    }
-                }
-
-                $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class] ?? array();
-                if ($subcomponent_modules_data_properties['data-fields']) {
-                    $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
-
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] ?? array();
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] = array_unique(
-                        array_merge(
-                            $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'],
-                            $subcomponent_modules_data_properties['data-fields']
-                        )
-                    );
-                }
-                if ($subcomponent_modules_data_properties['subcomponents']) {
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] ?? array();
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] = array_merge_recursive(
-                        $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'],
-                        $subcomponent_modules_data_properties['subcomponents']
-                    );
-                }
+            }
+            if ($subcomponent_modules_data_properties['subcomponents']) {
+                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
+                $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
+                    $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
+                    $subcomponent_modules_data_properties['subcomponents']
+                );
             }
         }
         $modulefilter_manager->restoreFromPropagation($module, $props);

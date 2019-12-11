@@ -152,10 +152,8 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         if ($field = $this->getDbobjectField($module)) {
             return array(
                 $field => array(
-                    $this->getTriggerTypeResolverClass($module) => array(
-                        $this->getTriggerSubmodule($module),
-                    ),
-                )
+                    $this->getTriggerSubmodule($module),
+                ),
             );
         }
 

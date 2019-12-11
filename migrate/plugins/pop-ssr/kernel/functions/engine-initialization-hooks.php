@@ -1,10 +1,12 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\DataloadUtils;
+use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\TypeResolvers\ConvertibleTypeHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
@@ -204,7 +206,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Call recursively to also copy the data from the subcomponents
             if ($subcomponents = $data_properties['subcomponents']) {
-                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_typeResolver_data_properties) {
+                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_data_properties) {
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
                     foreach ($data_fields as $dbname => $db_data_fields) {
@@ -213,12 +215,12 @@ class PoP_SSR_EngineInitialization_Hooks
                             break;
                         }
                     }
-                    foreach ($subcomponent_typeResolver_data_properties as $subcomponent_typeResolver_class => $subcomponent_data_properties) {
-                        // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
-                        $subcomponent_dataset = array();
-                        $resultItemIDs = array_keys($sourcedb[$database_key]);
+                    // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
+                    $subcomponent_dataset = array();
+                    $resultItemIDs = array_keys($sourcedb[$database_key]);
 
-                        // If it is a convertible type data resolver, then we must add the converted type on each ID
+                    // If it is a convertible type data resolver, then we must add the converted type on each ID
+                    if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver_class, $subcomponent_data_field)) {
                         $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForConvertibleTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
                             $isConvertibleType = false;

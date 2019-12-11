@@ -2,7 +2,6 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -28,7 +27,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-        
+
         if ($layout_extra = $this->getLayoutExtraSubmodule($module)) {
             $ret[] = $layout_extra;
         }
@@ -36,15 +35,12 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return $ret;
     }
 
-    // function getDomainSwitchingSubmodules(array $module, array &$props) {
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($authors_module = $this->getAuthorsModule($module)) {
             return array(
                 'author' => array(
-                    UserTypeResolver::class => array(
-                        $authors_module,
-                    ),
+                    $authors_module,
                 ),
             );
         }
@@ -55,7 +51,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     public function getThumbField(array $module, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
-            $this->getThumbFieldName($module, $props), 
+            $this->getThumbFieldName($module, $props),
             $this->getThumbFieldArgs($module, $props),
             $this->getThumbFieldAlias($module, $props)
         );
@@ -99,7 +95,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         if ($layout_extra = $this->getLayoutExtraSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-extra'] = ModuleUtils::getModuleOutputName($layout_extra);
         }
-        
+
         return $ret;
     }
 }

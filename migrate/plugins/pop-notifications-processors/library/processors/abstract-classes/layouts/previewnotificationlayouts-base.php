@@ -3,7 +3,6 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -70,9 +69,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($modules) {
-            $ret['user-id'] = array(
-                UserTypeResolver::class => $modules,
-            );
+            $ret['user-id'] = $modules;
         }
 
         return $ret;
@@ -99,7 +96,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             $ret[] = 'url';
             $ret[] = 'target';
         }
-        
+
         return $ret;
     }
 
@@ -132,13 +129,13 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         // Only fetch data if doing loadingLatest and is a comment notification
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
-            'and', 
+            'and',
             [
                 'values' => [
-                    $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('is-comment-notification'), 
+                    $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('is-comment-notification'),
                     $fieldQueryInterpreter->getField('var', ['name' => 'loading-latest']),
                 ],
-            ], 
+            ],
             'is-comment-notification-and-loading-latest'
         );
         $ret[$field] = [
@@ -151,7 +148,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             $module
         );
     }
-    
+
     public function getBottomSubmodules(array $module)
     {
         return array(
@@ -164,7 +161,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     {
         return true;
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -198,14 +195,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         if ($this->getBottomSubmodules($module)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $this->getBottomSubmodules($module)
             );
             foreach ($this->getConditionalBottomSubmodules($module) as $conditionDataField => $conditionSubmodules) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
                     array_map(
-                        [ModuleUtils::class, 'getModuleOutputName'], 
+                        [ModuleUtils::class, 'getModuleOutputName'],
                         $conditionSubmodules
                     )
                 );
@@ -219,14 +216,14 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = ModuleUtils::getModuleOutputName($user_avatar);
             }
         }
-        
+
         return $ret;
     }
 
     public function initWebPlatformModelProps(array $module, array &$props)
     {
         if (in_array(
-            [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION], 
+            [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION],
             $this->getSubmodules($module)
         )) {
             //-----------------------------------
@@ -243,7 +240,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 );
                 $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('onActionThenClick'));
             }
-            
+
             //-----------------------------------
             // Add class "read" to the notification layout to make it appear as read or not when clicking on the corresponding button
             //-----------------------------------
