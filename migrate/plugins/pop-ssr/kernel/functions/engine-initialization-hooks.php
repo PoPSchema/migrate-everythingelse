@@ -220,7 +220,7 @@ class PoP_SSR_EngineInitialization_Hooks
                     $resultItemIDs = array_keys($sourcedb[$database_key]);
 
                     // If it is a convertible type data resolver, then we must add the converted type on each ID
-                    if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver_class, $subcomponent_data_field)) {
+                    if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                         $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForConvertibleTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
                             $isConvertibleType = false;
