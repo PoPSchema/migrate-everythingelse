@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\LocationPosts\TypeDataResolvers\LocationPostTypeDataResolver;
+use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -72,16 +72,16 @@ class GD_Custom_EM_Module_Processor_MySectionDataloads extends PoP_Module_Proces
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return LocationPostTypeDataResolver::class;
+                return LocationPostTypeResolver::class;
         }
             
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

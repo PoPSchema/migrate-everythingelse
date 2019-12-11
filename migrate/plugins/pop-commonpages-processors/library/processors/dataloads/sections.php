@@ -1,5 +1,5 @@
 <?php
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -41,17 +41,17 @@ class GD_Custom_Module_Processor_CustomSectionDataloads extends PoP_Module_Proce
         return $inner_modules[$module[1]];
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST:
             case self::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
             
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function getDatasource(array $module, array &$props): string

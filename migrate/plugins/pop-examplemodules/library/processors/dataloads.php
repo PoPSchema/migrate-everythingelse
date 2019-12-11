@@ -3,11 +3,11 @@ namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Comments\TypeDataResolvers\CommentTypeDataResolver;
-use PoP\Pages\TypeDataResolvers\PageTypeDataResolver;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Comments\TypeResolvers\CommentTypeResolver;
+use PoP\Pages\TypeResolvers\PageTypeResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {
@@ -69,27 +69,27 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
             case self::MODULE_EXAMPLE_SINGLE:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
 
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
 
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
-                return PageTypeDataResolver::class;
+                return PageTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
@@ -120,12 +120,12 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
                 $ret['author'] = array(
-                    UserTypeDataResolver::class => array(
+                    UserTypeResolver::class => array(
                         [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHORPROPERTIES],
                     ),
                 );
                 $ret['comments'] = array(
-                    CommentTypeDataResolver::class => array(
+                    CommentTypeResolver::class => array(
                         [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
                     ),
                 );

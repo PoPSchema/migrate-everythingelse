@@ -3,9 +3,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoP\Events\TypeDataResolvers\EventTypeDataResolver;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -183,7 +183,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
@@ -195,15 +195,15 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
-                return EventTypeDataResolver::class;
+                return EventTypeResolver::class;
 
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

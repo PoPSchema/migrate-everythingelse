@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\DBObjectIDsFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_Posts_Module_Processor_PostsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -83,15 +83,15 @@ class PoP_Posts_Module_Processor_PostsDataloads extends PoP_Module_Processor_Dat
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_CONTENT_UPDATEDATA:
             case self::MODULE_DATALOAD_DATAQUERY_CONTENT_REQUESTLAYOUTS:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

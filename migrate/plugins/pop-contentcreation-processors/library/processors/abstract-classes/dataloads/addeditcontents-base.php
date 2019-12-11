@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -33,9 +33,9 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return PostTypeDataResolver::class;
+        return PostTypeResolver::class;
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

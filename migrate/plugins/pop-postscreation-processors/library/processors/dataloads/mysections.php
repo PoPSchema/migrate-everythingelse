@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -91,16 +91,16 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Menus\TypeDataResolvers\MenuTypeDataResolver;
+use PoP\Menus\TypeResolvers\MenuTypeResolver;
 use PoP\Menus\Misc\MenuHelpers;
 
 abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Processor_DataloadsBase
@@ -35,8 +35,8 @@ abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Process
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return MenuTypeDataResolver::class;
+        return MenuTypeResolver::class;
     }
 }

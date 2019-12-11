@@ -4,13 +4,12 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
 {
     use CommunityFieldResolverTrait;
- 
+
     public static function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -49,7 +48,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'members':
                 return URE_CommunityUtils::getCommunityMembers($typeResolver->getId($user));
-            
+
             case 'has-members':
                 return !empty($typeResolver->resolveValue($user, 'members', $variables, $expressions, $options));
         }
@@ -57,14 +56,14 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'members':
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
 

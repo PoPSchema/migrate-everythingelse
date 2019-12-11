@@ -1,10 +1,10 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Processor_CommentViewComponentButtonsBase
 {
     public const MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY = 'viewcomponent-commentbutton-reply';
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -30,7 +30,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return array(
                     'post-id' => array(
-                        ConvertiblePostTypeDataResolver::class => array(
+                        PostConvertibleTypeResolver::class => array(
                             [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
                         ),
                     ),
@@ -73,7 +73,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return 'replycomment-url';
         }
-        
+
         return parent::getUrlField($module);
     }
     public function getLinktarget(array $module, array &$props)
@@ -93,7 +93,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                 $this->appendProp($module, $props, 'class', 'pop-hidden-print');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -1,11 +1,11 @@
 <?php
-use PoP\Pages\TypeDataResolvers\PageTypeDataResolver;
+use PoP\Pages\TypeResolvers\PageTypeResolver;
 
 abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return PageTypeDataResolver::class;
+        return PageTypeResolver::class;
     }
 
     public function getPage(array $module, array &$props)

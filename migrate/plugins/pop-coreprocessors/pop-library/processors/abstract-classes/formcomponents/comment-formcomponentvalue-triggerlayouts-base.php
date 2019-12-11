@@ -1,10 +1,10 @@
 <?php
-use PoP\Comments\TypeDataResolvers\CommentTypeDataResolver;
+use PoP\Comments\TypeResolvers\CommentTypeResolver;
 
 abstract class PoP_Module_Processor_CommentTriggerLayoutFormComponentValuesBase extends PoP_Module_Processor_TriggerLayoutFormComponentValuesBase
 {
-    public function getTriggerTypeDataResolverClass(array $module)
+    public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return CommentTypeDataResolver::class;
+        return CommentTypeResolver::class;
     }
 }

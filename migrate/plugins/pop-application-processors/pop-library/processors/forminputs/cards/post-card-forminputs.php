@@ -12,8 +12,8 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
             [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST],
         );
     }
-    
-    public function getTriggerSubmodule(array $module)
+
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_POST:
@@ -35,7 +35,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
             case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
                 return 'post-id';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

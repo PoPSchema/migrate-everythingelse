@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Events\TypeDataResolvers\EventTypeDataResolver;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -116,15 +116,15 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_UPDATE:
             case self::MODULE_DATALOAD_EVENT_CREATE:
-                return EventTypeDataResolver::class;
+                return EventTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 }
 

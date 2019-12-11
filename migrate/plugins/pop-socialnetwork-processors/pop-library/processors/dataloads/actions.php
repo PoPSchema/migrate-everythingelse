@@ -2,9 +2,9 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -241,12 +241,12 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
 
             case self::MODULE_DATALOADACTION_RECOMMENDPOST:
             case self::MODULE_DATALOADACTION_UNRECOMMENDPOST:
@@ -254,14 +254,14 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
     
     public function initModelProps(array $module, array &$props)

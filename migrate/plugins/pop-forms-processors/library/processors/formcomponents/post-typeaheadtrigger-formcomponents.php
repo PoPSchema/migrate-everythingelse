@@ -11,7 +11,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents extends 
         );
     }
 
-    public function getTriggerSubmodule(array $module)
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES:

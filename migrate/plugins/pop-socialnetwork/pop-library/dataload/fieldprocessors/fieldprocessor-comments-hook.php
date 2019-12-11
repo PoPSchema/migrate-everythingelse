@@ -6,7 +6,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Comments\TypeResolvers\CommentTypeResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
@@ -52,14 +52,14 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'taggedusers':
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
     

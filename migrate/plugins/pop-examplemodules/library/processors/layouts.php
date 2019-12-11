@@ -2,7 +2,7 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class ModuleProcessor_Layouts extends AbstractModuleProcessor
 {
@@ -57,7 +57,7 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_COMMENT:
                 $ret['author'] = array(
-                    UserTypeDataResolver::class => array(
+                    UserTypeResolver::class => array(
                         [self::class, self::MODULE_EXAMPLE_AUTHORPROPERTIES],
                     ),
                 );

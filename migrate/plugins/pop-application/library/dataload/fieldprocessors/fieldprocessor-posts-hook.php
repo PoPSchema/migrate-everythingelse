@@ -9,7 +9,7 @@ use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Media\Misc\MediaHelpers;
 use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -172,14 +172,14 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'authors':
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
     

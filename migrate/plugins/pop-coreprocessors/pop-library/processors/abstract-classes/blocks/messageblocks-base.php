@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
 {
@@ -27,16 +27,16 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return ConvertiblePostTypeDataResolver::class;
+        return PostConvertibleTypeResolver::class;
     }
-    
+
     // function initModelProps(array $module, array &$props) {
-    
+
     //     $layout = $this->getLayoutSubmodule($module);
     //     $this->setProp($layout, $props, 'layout-inner', [self::class, self::MODULE_LAYOUTPOST_SPEECHBUBBLE]);
-            
+
     //     parent::initModelProps($module, $props);
     // }
 }

@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return array();
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
         return null;
     }
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
     {
         return array(
             $this->getSubcomponentField($module) => array(
-                $this->getSubcomponentTypeDataResolverClass($module) => $this->getLayoutSubmodules($module),
+                $this->getSubcomponentTypeResolverClass($module) => $this->getLayoutSubmodules($module),
             ),
         );
     }

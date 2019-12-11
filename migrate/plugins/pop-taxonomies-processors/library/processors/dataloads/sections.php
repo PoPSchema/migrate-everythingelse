@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\DBObjectIDsFromURLParamModuleProcessorTrait;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 
 class PoP_Taxonomies_Module_Processor_TaxonomiesDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -83,15 +83,15 @@ class PoP_Taxonomies_Module_Processor_TaxonomiesDataloads extends PoP_Module_Pro
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_TAGS_UPDATEDATA:
             case self::MODULE_DATALOAD_DATAQUERY_TAGS_REQUESTLAYOUTS:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

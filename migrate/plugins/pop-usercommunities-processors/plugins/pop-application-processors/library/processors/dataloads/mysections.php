@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -114,15 +114,15 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
     
     protected function getCheckpointmessageModule(array $module)

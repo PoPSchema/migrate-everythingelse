@@ -10,8 +10,8 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
             [self::class, self::MODULE_FORMCOMPONENT_CARD_COMMENT],
         );
     }
-    
-    public function getTriggerSubmodule(array $module)
+
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
@@ -27,7 +27,7 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
             case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
                 return 'id';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

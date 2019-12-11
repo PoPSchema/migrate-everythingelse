@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -33,8 +33,8 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         }
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return ConvertiblePostTypeDataResolver::class;
+        return PostConvertibleTypeResolver::class;
     }
 }

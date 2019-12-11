@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
@@ -56,7 +56,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CONTENT];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -121,7 +121,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS:
@@ -129,10 +129,10 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 }
 

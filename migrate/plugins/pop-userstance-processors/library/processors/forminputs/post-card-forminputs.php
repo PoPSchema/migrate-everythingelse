@@ -10,8 +10,8 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
             [self::class, self::MODULE_FORMCOMPONENT_CARD_STANCETARGET],
         );
     }
-    
-    public function getTriggerSubmodule(array $module)
+
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_STANCETARGET:
@@ -27,7 +27,7 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
             case self::MODULE_FORMCOMPONENT_CARD_STANCETARGET:
                 return 'stancetarget';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

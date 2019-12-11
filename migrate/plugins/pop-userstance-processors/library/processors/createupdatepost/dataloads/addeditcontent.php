@@ -1,5 +1,5 @@
 <?php
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -150,16 +150,16 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return StanceTypeDataResolver::class;
+                return StanceTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

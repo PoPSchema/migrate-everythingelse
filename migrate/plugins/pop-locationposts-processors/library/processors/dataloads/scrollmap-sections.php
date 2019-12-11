@@ -1,7 +1,7 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\LocationPosts\TypeDataResolvers\LocationPostTypeDataResolver;
+use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -126,7 +126,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP:
@@ -135,10 +135,10 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
             case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                return LocationPostTypeDataResolver::class;
+                return LocationPostTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

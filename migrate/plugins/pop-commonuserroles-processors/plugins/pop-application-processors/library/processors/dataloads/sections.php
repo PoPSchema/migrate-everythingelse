@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -180,7 +180,7 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD:
@@ -197,10 +197,10 @@ class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

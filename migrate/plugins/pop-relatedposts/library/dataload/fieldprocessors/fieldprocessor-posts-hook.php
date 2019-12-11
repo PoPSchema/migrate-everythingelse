@@ -6,7 +6,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -16,7 +16,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             PostTypeResolver::class,
         );
     }
-    
+
     public static function getFieldNamesToResolve(): array
     {
         return [
@@ -79,17 +79,17 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'references':
             case 'referencedby':
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
 
-        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_RelatedPosts_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

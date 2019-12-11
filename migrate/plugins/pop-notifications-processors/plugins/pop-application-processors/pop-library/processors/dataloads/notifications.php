@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Notifications\TypeDataResolvers\NotificationTypeDataResolver;
+use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -124,15 +124,15 @@ class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Modul
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST:
-                return NotificationTypeDataResolver::class;
+                return NotificationTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
     
     public function initModelProps(array $module, array &$props)

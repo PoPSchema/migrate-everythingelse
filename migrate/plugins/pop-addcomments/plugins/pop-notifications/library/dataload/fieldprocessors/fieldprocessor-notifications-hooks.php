@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Comments\TypeDataResolvers\CommentTypeDataResolver;
+use PoP\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
@@ -158,14 +158,14 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 
-    public function resolveFieldDefaultTypeDataResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
+    public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
             case 'comment-object-id':
-                return CommentTypeDataResolver::class;
+                return CommentTypeResolver::class;
         }
 
-        return parent::resolveFieldDefaultTypeDataResolverClass($typeResolver, $fieldName, $fieldArgs);
+        return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
     

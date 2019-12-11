@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -29,21 +29,21 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
                 return 'referencedby-lazy';
         }
-    
+
         return parent::getSubcomponentField($module);
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
 
-        return parent::getSubcomponentTypeDataResolverClass($module);
+        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function getLayoutSubmodules(array $module)
@@ -67,7 +67,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 $ret[] = [PoPApplicationProcessors_Module_Processor_CommentScrolls::class, PoPApplicationProcessors_Module_Processor_CommentScrolls::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE];
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -80,7 +80,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
                 return false;
         }
-    
+
         return parent::isIndividual($module, $props);
     }
 
@@ -94,7 +94,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 $this->appendProp($module, $props, 'class', 'referencedby clearfix');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -10,8 +10,8 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
             [self::class, self::MODULE_FORMCOMPONENT_CARD_USER],
         );
     }
-    
-    public function getTriggerSubmodule(array $module)
+
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_USER:
@@ -27,7 +27,7 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
             case self::MODULE_FORMCOMPONENT_CARD_USER:
                 return 'id';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

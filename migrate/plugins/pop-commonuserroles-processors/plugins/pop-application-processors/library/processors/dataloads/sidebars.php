@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -65,15 +65,15 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
     }
 
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION:
             case self::MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 }
 

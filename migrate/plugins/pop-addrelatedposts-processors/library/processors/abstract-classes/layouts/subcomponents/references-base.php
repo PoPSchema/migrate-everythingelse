@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 abstract class PoP_Module_Processor_ReferencesLayoutsBase extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -8,8 +8,8 @@ abstract class PoP_Module_Processor_ReferencesLayoutsBase extends PoP_Module_Pro
         return 'references';
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
-        return ConvertiblePostTypeDataResolver::class;
+        return PostConvertibleTypeResolver::class;
     }
 }

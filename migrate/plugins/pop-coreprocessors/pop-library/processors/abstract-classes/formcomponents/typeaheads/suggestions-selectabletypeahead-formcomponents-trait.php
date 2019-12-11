@@ -36,7 +36,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
         return $ret;
     }
-    
+
     public function getExtraTemplateResources(array $module, array &$props): array
     {
         $ret = parent::getExtraTemplateResources($module, $props);
@@ -75,13 +75,13 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         if ($this->enableSuggestions($module)) {
             if ($suggestions_layout = $this->getSuggestionsLayoutSubmodule($module)) {
                 $ret[] = $suggestions_layout;
             }
         }
-        
+
         return $ret;
     }
 
@@ -108,12 +108,12 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['suggestions-layout'] = ModuleUtils::getModuleOutputName($suggestions_layout);
 
-                    // Load the typeDataResolver from the trigger, for the suggestions
+                    // Load the typeResolver from the trigger, for the suggestions
                     $instanceManager = InstanceManagerFacade::getInstance();
                     $trigger_layout = $this->getTriggerLayoutSubmodule($module);
-                    $suggestions_typeDataResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeDataResolverClass($trigger_layout);
-                    $suggestions_typeDataResolver = $instanceManager->getInstance($suggestions_typeDataResolver_class);
-                    $ret['dbkeys']['suggestions'] = $suggestions_typeDataResolver->getDatabaseKey();
+                    $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
+                    $suggestions_typeResolver = $instanceManager->getInstance($suggestions_typeResolver_class);
+                    $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeName();
                 }
                 if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($module, $props)) {
                     $ret['suggestions-fontawesome'] = $suggestions_fontawesome;
@@ -129,7 +129,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
 
         return $ret;
     }
-    
+
     public function getModelSupplementaryDbobjectdata(array $module, array &$props): array
     {
 
@@ -144,11 +144,11 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     // The Typeahead set the data-settings under 'typeahead-trigger'
                     $moduleFullName = ModuleUtils::getModuleFullName($module);
                     $data_properties = $moduleprocessor_manager->getProcessor($trigger_layout)->getDatasetmoduletreeSectionFlattenedDataFields($trigger_layout, $props[$moduleFullName][POP_PROPS_SUBMODULES]);
-                    $suggestions_typeDataResolver = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeDataResolverClass($trigger_layout);
+                    $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
 
                     // Extend the dataload ids
                     return array(
-                        $suggestions_typeDataResolver => array(
+                        $suggestions_typeResolver_class => array(
                             'ids' => $suggestions,
                             'data-fields' => $data_properties['data-fields'],
                         ),
@@ -156,7 +156,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                 }
             }
         }
-        
+
         return parent::getModelSupplementaryDbobjectdata($module, $props);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Locations\TypeDataResolvers\LocationTypeDataResolver;
+use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -59,15 +59,15 @@ class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_P
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONS_SCROLL:
             case self::MODULE_DATALOAD_LOCATIONS_TYPEAHEAD:
-                return LocationTypeDataResolver::class;
+                return LocationTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

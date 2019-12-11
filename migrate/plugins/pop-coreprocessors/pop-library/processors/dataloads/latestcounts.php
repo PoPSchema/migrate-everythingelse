@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -24,14 +24,14 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         if ($inner = $inner_modules[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 PoP_Application_SectionUtils::addDataloadqueryargsLatestcounts($ret);
@@ -48,7 +48,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         $latestcounts = array(
             [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
         );
-        
+
         if (in_array($module, $latestcounts)) {
             $format = POP_FORMAT_LATESTCOUNT;
         }
@@ -62,18 +62,18 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 return ListQueryInputOutputHandler::class;
         }
-        
+
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)
@@ -90,7 +90,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Locations\TypeDataResolvers\LocationTypeDataResolver;
+use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
 {
@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
         if ($location_module = $this->getLocationModule($module)) {
             return array(
                 'locations' => array(
-                    LocationTypeDataResolver::class => array(
+                    LocationTypeResolver::class => array(
                         $location_module,
                     ),
                 ),

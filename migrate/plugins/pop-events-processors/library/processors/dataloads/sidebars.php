@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Events\TypeDataResolvers\EventTypeDataResolver;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -64,15 +64,15 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     // }
 
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
             case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
-                return EventTypeDataResolver::class;
+                return EventTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

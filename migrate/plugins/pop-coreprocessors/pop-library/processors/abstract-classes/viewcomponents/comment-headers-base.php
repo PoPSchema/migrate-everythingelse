@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_COMMENTPOST];
     }
 
-    public function getHeaderSubmodule(array $module)
+    public function getHeaderSubmodule(array $module): ?array
     {
         return null;
     }
@@ -20,13 +20,13 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         if ($header = $this->getHeaderSubmodule($module)) {
             return array(
                 'post-id' => array(
-                    ConvertiblePostTypeDataResolver::class => array(
+                    PostConvertibleTypeResolver::class => array(
                         $header,
                     ),
                 ),
             );
         }
-        
+
         return parent::getDomainSwitchingSubmodules($module);
     }
 
@@ -45,11 +45,11 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         if ($this->headerShowUrl($module, $props)) {
             $ret['header-show-url'] = true;
         }
-    
+
         if ($header = $this->getHeaderSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header-post'] = ModuleUtils::getModuleOutputName($header);
         }
-        
+
         return $ret;
     }
 }

@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Notifications\TypeDataResolvers\NotificationTypeDataResolver;
+use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
@@ -107,15 +107,15 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
         return GD_DataLoad_QueryInputOutputHandler_NotificationList::class;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
-                return NotificationTypeDataResolver::class;
+                return NotificationTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

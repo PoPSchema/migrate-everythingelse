@@ -14,7 +14,7 @@ function gdUreMaybeProfileRole($query)
     if (!$query['role']) {
         $query['role'] = GD_ROLE_PROFILE;
     }
-    
+
     return $query;
 }
 

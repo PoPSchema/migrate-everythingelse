@@ -13,7 +13,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
         );
     }
 
-    public function getTriggerSubmodule(array $module)
+    public function getTriggerSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:
@@ -37,7 +37,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION:
                 return 'location';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

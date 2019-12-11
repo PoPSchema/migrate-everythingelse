@@ -1,5 +1,5 @@
 <?php
-use PoP\Highlights\TypeDataResolvers\HighlightTypeDataResolver;
+use PoP\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -25,15 +25,15 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         }
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
-                return HighlightTypeDataResolver::class;
+                return HighlightTypeResolver::class;
         }
 
-        return parent::getSubcomponentTypeDataResolverClass($module);
+        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function getLayoutSubmodules(array $module)

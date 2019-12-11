@@ -3,7 +3,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
 
         if ($modules) {
             $ret['user-id'] = array(
-                UserTypeDataResolver::class => $modules,
+                UserTypeResolver::class => $modules,
             );
         }
 

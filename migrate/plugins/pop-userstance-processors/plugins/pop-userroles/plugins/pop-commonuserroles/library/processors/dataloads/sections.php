@@ -1,5 +1,5 @@
 <?php
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -173,7 +173,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -184,10 +184,10 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST:
             case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
-                return StanceTypeDataResolver::class;
+                return StanceTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

@@ -81,7 +81,7 @@ class PoP_SSR_EngineInitialization_Hooks
                 // $this->removeDataset($data, $engine);
             }
         }
-            
+
         return $data;
     }
 
@@ -143,7 +143,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             $entry_model_props = $engine->model_props;
             $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessordecorator($moduleprocessor_manager->getProcessor($entryModule))->getDynamicDataFieldsDatasetmoduletree($entryModule, $entry_model_props);
-            
+
             if ($useCache) {
                 $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES, $dynamic_data_properties);
             }
@@ -154,16 +154,16 @@ class PoP_SSR_EngineInitialization_Hooks
         // Then, simply iterate this information, and build the dynamic database by copying the corresponding data from the database
         foreach ($dynamic_data_properties[$entryModuleOutputName][GD_JS_SUBMODULES] as $pagesection_settings_id => $pagesection_data_properties) {
             foreach ($pagesection_data_properties[GD_JS_SUBMODULES] as $block_settings_id => $block_settings_id_data_properties) {
-                // If the block has no typeDataResolver, it will be empty
-                if ($block_typeDataResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
+                // If the block has no typeResolver, it will be empty
+                if ($block_typeResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
                     $block_dataset = $dbobjectids[$entryModuleOutputName][$pagesection_settings_id][$block_settings_id];
-                    
-                    // The data_properties has a unique key as the typeDataResolver
-                    reset($block_typeDataResolver_data_properties);
-                    $block_typeDataResolver_class = key($block_typeDataResolver_data_properties);
-                    $block_data_properties = $block_typeDataResolver_data_properties[$block_typeDataResolver_class];
 
-                    $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $block_dataset, $block_typeDataResolver_class, $block_data_properties);
+                    // The data_properties has a unique key as the typeResolver
+                    reset($block_typeResolver_data_properties);
+                    $block_typeResolver_class = key($block_typeResolver_data_properties);
+                    $block_data_properties = $block_typeResolver_data_properties[$block_typeResolver_class];
+
+                    $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $block_dataset, $block_typeResolver_class, $block_data_properties);
                 }
             }
         }
@@ -172,7 +172,7 @@ class PoP_SSR_EngineInitialization_Hooks
         $data['databases'] = $dynamicdatabases;
     }
 
-    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $typeDataResolver_class, array $data_properties)
+    protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $typeResolver_class, array $data_properties)
     {
         if ($data_properties['data-fields']) {
             $instanceManager = InstanceManagerFacade::getInstance();
@@ -183,13 +183,13 @@ class PoP_SSR_EngineInitialization_Hooks
             $convertibleDBKeyIDs = $data['convertibleDBKeyIDs'];
 
             // Obtain the data from the database, copy it to the dynamic database
-            $typeDataResolver = $instanceManager->getInstance($typeDataResolver_class);
-            $database_key = $typeDataResolver->getDatabaseKey();
+            $typeResolver = $instanceManager->getInstance($typeResolver_class);
+            $database_key = $typeResolver->getTypeName();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of datafields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")
             $engine = EngineFacade::getInstance();
-            $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $typeDataResolver);
+            $data_fields = $engine->moveEntriesUnderDBName($data_properties['data-fields'], true, $typeResolver);
 
             foreach ($dbobjectids as $resultItem_id) {
                 // Copy to the dynamic database
@@ -204,7 +204,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Call recursively to also copy the data from the subcomponents
             if ($subcomponents = $data_properties['subcomponents']) {
-                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_typeDataResolver_data_properties) {
+                foreach ($subcomponents as $subcomponent_data_field => $subcomponent_typeResolver_data_properties) {
                     // Check if the subcomponent data fields lives under database or userstatedatabase
                     $sourcedb = null;
                     foreach ($data_fields as $dbname => $db_data_fields) {
@@ -213,13 +213,13 @@ class PoP_SSR_EngineInitialization_Hooks
                             break;
                         }
                     }
-                    foreach ($subcomponent_typeDataResolver_data_properties as $subcomponent_typeDataResolver_class => $subcomponent_data_properties) {
+                    foreach ($subcomponent_typeResolver_data_properties as $subcomponent_typeResolver_class => $subcomponent_data_properties) {
                         // From the $subcomponent_data_field we obtain the subcomponent dbobjectids IDs, fetching the corresponding values from the DB
                         $subcomponent_dataset = array();
                         $resultItemIDs = array_keys($sourcedb[$database_key]);
 
                         // If it is a convertible type data resolver, then we must add the converted type on each ID
-                        $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForConvertibleTypeDataResolver($subcomponent_typeDataResolver_class, $resultItemIDs);
+                        $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForConvertibleTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
                             $isConvertibleType = false;
                             $typeResultItemIDs = $resultItemIDs;
@@ -246,7 +246,7 @@ class PoP_SSR_EngineInitialization_Hooks
                             );
                         }
 
-                        $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $subcomponent_dataset, $subcomponent_typeDataResolver_class, $subcomponent_data_properties);
+                        $this->addDynamicDatabaseEntries($data, $dynamicdatabases, $subcomponent_dataset, $subcomponent_typeResolver_class, $subcomponent_data_properties);
                     }
                 }
             }
@@ -258,7 +258,7 @@ class PoP_SSR_EngineInitialization_Hooks
         if (PoP_SSR_ServerUtils::includeScriptsAfterHtml()) {
             return 'footer';
         }
-            
+
         return $where;
     }
 }

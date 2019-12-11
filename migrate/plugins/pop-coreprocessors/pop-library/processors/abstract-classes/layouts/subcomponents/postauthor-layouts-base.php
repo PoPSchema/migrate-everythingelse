@@ -1,5 +1,5 @@
 <?php
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PostAuthorLayoutsBase extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -8,8 +8,8 @@ abstract class PoP_Module_Processor_PostAuthorLayoutsBase extends PoP_Module_Pro
         return 'authors';
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
-        return UserTypeDataResolver::class;
+        return UserTypeResolver::class;
     }
 }

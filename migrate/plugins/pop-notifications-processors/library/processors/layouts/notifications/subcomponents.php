@@ -1,5 +1,5 @@
 <?php
-use PoP\Comments\TypeDataResolvers\CommentTypeDataResolver;
+use PoP\Comments\TypeResolvers\CommentTypeResolver;
 
 class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -35,14 +35,14 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
         return parent::getSubcomponentField($module);
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
-                return CommentTypeDataResolver::class;
+                return CommentTypeResolver::class;
         }
 
-        return parent::getSubcomponentTypeDataResolverClass($module);
+        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function isIndividual(array $module, array &$props)

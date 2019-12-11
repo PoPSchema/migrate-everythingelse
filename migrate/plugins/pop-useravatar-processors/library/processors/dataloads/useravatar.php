@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -34,14 +34,14 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
     
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     protected function getFeedbackmessageModule(array $module)

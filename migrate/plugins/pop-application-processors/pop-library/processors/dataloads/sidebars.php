@@ -3,13 +3,13 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 
 class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
     public const MODULE_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
 
@@ -29,18 +29,18 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
         $vertical = ($orientation == 'vertical');
 
         $block_inners = array(
-            self::MODULE_DATALOAD_TAG_SIDEBAR => $vertical ? 
-                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::MODULE_VERTICALSIDEBAR_TAG] : 
+            self::MODULE_DATALOAD_TAG_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalTagSidebars::class, Wassup_Module_Processor_CustomVerticalTagSidebars::MODULE_VERTICALSIDEBAR_TAG] :
                 [PoP_Module_Processor_CustomTagLayoutSidebars::class, PoP_Module_Processor_CustomTagLayoutSidebars::MODULE_LAYOUT_TAGSIDEBAR_HORIZONTAL],
-            self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ? 
-                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_POST] : 
+            self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR => $vertical ?
+                [Wassup_Module_Processor_CustomVerticalSingleSidebars::class, Wassup_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_POST] :
                 [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST],
         );
 
         if ($block_inner = $block_inners[$module[1]]) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -53,7 +53,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
     //         case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -64,21 +64,21 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
             case self::MODULE_DATALOAD_TAG_SIDEBAR:
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TAG_SIDEBAR:
-                return TagTypeDataResolver::class;
-                    
+                return TagTypeResolver::class;
+
             case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
-        
-        return parent::getTypeDataResolverClass($module);
+
+        return parent::getTypeResolverClass($module);
     }
 }
 

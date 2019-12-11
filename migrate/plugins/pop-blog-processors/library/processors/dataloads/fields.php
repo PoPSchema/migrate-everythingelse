@@ -1,10 +1,10 @@
 <?php
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -33,30 +33,30 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         );
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_POSTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORPOSTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_TAGPOSTLIST_FIELDS:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
 
             case self::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORCONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
 
             case self::MODULE_DATALOAD_DATAQUERY_USERLIST_FIELDS:
-                return UserTypeDataResolver::class;
-            
+                return UserTypeResolver::class;
+
             case self::MODULE_DATALOAD_DATAQUERY_TAGLIST_FIELDS:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
 
             case self::MODULE_DATALOAD_DATAQUERY_SINGLEAUTHORLIST_FIELDS:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string
@@ -80,7 +80,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORPOSTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORCONTENTLIST_FIELDS:
@@ -94,7 +94,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS:
                 PoP_Application_SectionUtils::addDataloadqueryargsAllcontentBysingletag($ret);
                 break;
-        
+
             case self::MODULE_DATALOAD_DATAQUERY_SINGLEAUTHORLIST_FIELDS:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsSingleauthors($ret);
                 break;
@@ -105,7 +105,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_POSTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORPOSTLIST_FIELDS:
@@ -136,7 +136,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
             case self::MODULE_DATALOAD_DATAQUERY_TAGLIST_FIELDS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGS];
-                
+
             case self::MODULE_DATALOAD_DATAQUERY_USERLIST_FIELDS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
 
@@ -152,7 +152,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCONTENT];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 }

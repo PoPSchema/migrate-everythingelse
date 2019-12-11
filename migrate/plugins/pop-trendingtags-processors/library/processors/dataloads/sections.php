@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 
-class PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
+class PoP_TrendingTags_Module_Processor_SectionDataloads extends Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads
 {
     public const MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS = 'dataload-trendingtags-scroll-details';
     public const MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST = 'dataload-trendingtags-scroll-list';
@@ -35,7 +35,6 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Proc
 
     public function getFormat(array $module): ?string
     {
-
         // Add the format attr
         $details = array(
             [self::class, self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS],
@@ -50,28 +49,6 @@ class PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Proc
         }
 
         return $format ?? parent::getFormat($module);
-    }
-
-    public function getQueryInputOutputHandlerClass(array $module): ?string
-    {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST:
-                return \PoP\TrendingTags\QueryInputOutputHandler_TrendingTagList::class;
-        }
-        
-        return parent::getQueryInputOutputHandlerClass($module);
-    }
-
-    public function getTypeDataResolverClass(array $module): ?string
-    {
-        switch ($module[1]) {
-            case self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_DETAILS:
-            case self::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST:
-                return \PoP\TrendingTags\TrendingTagList::class;
-        }
-
-        return parent::getTypeDataResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

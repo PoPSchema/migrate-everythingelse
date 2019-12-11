@@ -1,5 +1,5 @@
 <?php
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -25,15 +25,15 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         }
     }
 
-    public function getSubcomponentTypeDataResolverClass(array $module)
+    public function getSubcomponentTypeResolverClass(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                return StanceTypeDataResolver::class;
+                return StanceTypeResolver::class;
         }
 
-        return parent::getSubcomponentTypeDataResolverClass($module);
+        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function getLayoutSubmodules(array $module)

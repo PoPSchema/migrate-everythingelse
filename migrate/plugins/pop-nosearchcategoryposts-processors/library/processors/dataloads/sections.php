@@ -1,7 +1,7 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -4448,9 +4448,9 @@ class NSCPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Secti
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return PostTypeDataResolver::class;
+        return PostTypeResolver::class;
     }
 
     public function initModelProps(array $module, array &$props)

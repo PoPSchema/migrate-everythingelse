@@ -13,7 +13,7 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
         );
     }
 
-    public function getHeaderSubmodule(array $module)
+    public function getHeaderSubmodule(array $module): ?array
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST:
@@ -22,7 +22,7 @@ class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Proces
             case self::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL:
                 return [PoP_Module_Processor_PostViewComponentHeaders::class, PoP_Module_Processor_PostViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_POST_URL];
         }
-        
+
         return parent::getHeaderSubmodule($module);
     }
 

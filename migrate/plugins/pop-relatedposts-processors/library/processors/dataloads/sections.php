@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -57,7 +57,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CONTENT];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -105,14 +105,14 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
     //         case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW:
@@ -126,7 +126,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS:
@@ -134,10 +134,10 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)
@@ -151,7 +151,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('results', 'poptheme-wassup'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 use PoP\Engine\ModuleProcessors\DBObjectIDsFromURLParamModuleProcessorTrait;
-use PoP\Locations\TypeDataResolvers\LocationTypeDataResolver;
+use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -60,14 +60,14 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONSMAP:
-                return LocationTypeDataResolver::class;
+                return LocationTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 }
 

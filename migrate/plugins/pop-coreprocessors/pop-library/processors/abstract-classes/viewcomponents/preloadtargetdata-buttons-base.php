@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
 
     public function initModelProps(array $module, array &$props)
     {
-    
+
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR
         if (defined('POP_SSR_INITIALIZED')) {
             if ($dynamic_modules = $this->getTargetDynamicallyRenderedSubmodules($module)) {
@@ -56,8 +56,8 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
             }
 
             if ($subcomponent_dynamic_templates = $this->getTargetDynamicallyRenderedSubcomponentSubmodules($module)) {
-                foreach ($subcomponent_dynamic_templates as $data_field => $typeDataResolver_modules) {
-                    foreach ($typeDataResolver_modules as $typeDataResolver => $modules) {
+                foreach ($subcomponent_dynamic_templates as $data_field => $typeResolver_modules) {
+                    foreach ($typeResolver_modules as $typeResolver => $modules) {
                         foreach ($modules as $dynamic_module) {
                             $this->setProp($dynamic_module, $props, 'needs-dynamic-data', true);
                         }
@@ -65,7 +65,7 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
                 }
             }
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
 {
@@ -9,8 +9,8 @@ abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_P
         return $vars['global-userstate']['current-user-id'];
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return UserTypeDataResolver::class;
+        return UserTypeResolver::class;
     }
 }

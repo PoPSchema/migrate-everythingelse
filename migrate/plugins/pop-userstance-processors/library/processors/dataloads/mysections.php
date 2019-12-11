@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -62,15 +62,15 @@ class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processo
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYSTANCES_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW:
-                return StanceTypeDataResolver::class;
+                return StanceTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

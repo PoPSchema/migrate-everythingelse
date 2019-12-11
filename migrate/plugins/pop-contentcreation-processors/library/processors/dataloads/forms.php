@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -110,14 +110,14 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 }
 

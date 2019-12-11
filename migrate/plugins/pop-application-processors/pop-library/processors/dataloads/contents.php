@@ -4,15 +4,15 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Pages\TypeDataResolvers\PageTypeDataResolver;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Pages\TypeResolvers\PageTypeResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_AUTHOR_CONTENT = 'dataload-author-content';
     public const MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT = 'dataload-author-summarycontent';
     public const MODULE_DATALOAD_TAG_CONTENT = 'dataload-tag-content';
@@ -43,7 +43,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -99,10 +99,10 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 $ret[] = [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE];
                 break;
         }
-    
+
         return $ret;
     }
-    
+
     // public function getNature(array $module)
     // {
     //     switch ($module[1]) {
@@ -117,7 +117,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //         case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -130,31 +130,31 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
             case self::MODULE_DATALOAD_TAG_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return $this->getQueriedDBObjectID($module, $props, $data_properties);                
+                return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
 
             case self::MODULE_DATALOAD_TAG_CONTENT:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
 
             case self::MODULE_DATALOAD_PAGE_CONTENT:
-                return PageTypeDataResolver::class;
+                return PageTypeResolver::class;
         }
-        
-        return parent::getTypeDataResolverClass($module);
+
+        return parent::getTypeResolverClass($module);
     }
 }
 

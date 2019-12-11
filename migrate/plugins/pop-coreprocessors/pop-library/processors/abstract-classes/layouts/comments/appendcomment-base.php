@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -21,7 +22,7 @@ abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_Q
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $ret['post-dbkey'] = \PoP\Posts\TypeResolvers\PostTypeResolver::NAME;
+        $ret['post-dbkey'] = PostTypeResolver::NAME;
         $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = 'comments';
 
         return $ret;

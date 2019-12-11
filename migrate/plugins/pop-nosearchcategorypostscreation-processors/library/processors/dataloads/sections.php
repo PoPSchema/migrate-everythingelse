@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -489,9 +489,9 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
-        return PostTypeDataResolver::class;
+        return PostTypeResolver::class;
     }
 
     public function initModelProps(array $module, array &$props)

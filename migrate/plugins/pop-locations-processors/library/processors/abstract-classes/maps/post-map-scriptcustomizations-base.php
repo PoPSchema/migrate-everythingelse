@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         if ($authors_module = $this->getAuthorsModule($module)) {
             return array(
                 'author' => array(
-                    UserTypeDataResolver::class => array(
+                    UserTypeResolver::class => array(
                         $authors_module,
                     ),
                 ),

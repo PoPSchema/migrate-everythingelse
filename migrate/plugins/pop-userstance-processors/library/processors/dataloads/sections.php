@@ -3,7 +3,7 @@
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Stances\TypeDataResolvers\StanceTypeDataResolver;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -796,7 +796,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_TYPEAHEAD:
@@ -870,10 +870,10 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
             case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-                return StanceTypeDataResolver::class;
+                return StanceTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Comments\TypeDataResolvers\CommentTypeDataResolver;
+use PoP\Comments\TypeResolvers\CommentTypeResolver;
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -106,15 +106,15 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return \PoP\Comments\CommentTypeDataResolver::class;
+                return \PoP\Comments\CommentTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)

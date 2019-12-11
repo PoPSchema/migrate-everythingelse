@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -120,22 +120,22 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
 
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                return TagTypeDataResolver::class;
+                return TagTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
     
     public function initModelProps(array $module, array &$props)

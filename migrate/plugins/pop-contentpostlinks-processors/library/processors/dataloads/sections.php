@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\TypeDataResolvers\PostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -284,7 +284,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
@@ -305,10 +305,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return PostTypeDataResolver::class;
+                return PostTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

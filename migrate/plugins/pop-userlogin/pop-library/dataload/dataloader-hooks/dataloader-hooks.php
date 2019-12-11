@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class PoP_UserLogin_DataLoad_DataloaderHooks
 {
@@ -13,8 +14,11 @@ class PoP_UserLogin_DataLoad_DataloaderHooks
         );
     }
 
-    public function moveEntriesUnderDBName($dbname_datafields, $typeDataResolver)
+    public function moveEntriesUnderDBName($dbname_datafields, $typeResolver)
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        $typeDataResolverClass = $typeResolver->getTypeDataResolverClass();
+        $typeDataResolver = $instanceManager->getInstance($typeDataResolverClass);
         if ($dataquery_name = $typeDataResolver->getDataquery()) {
             // The data-fields include both state-less/cacheable and state-full/non-cacheable fields
             // The typeResolver knows what fields are non-cacheable. Get these and return the results in another array
@@ -27,7 +31,7 @@ class PoP_UserLogin_DataLoad_DataloaderHooks
         return $dbname_datafields;
     }
 }
-    
+
 /**
  * Initialize
  */

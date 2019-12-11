@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
+use PoP\ComponentModel\Facades\ModuleFilters\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
@@ -15,7 +16,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         global $pop_module_processordynamicdatadecorator_manager;
         return $pop_module_processordynamicdatadecorator_manager;
     }
-    
+
     //-------------------------------------------------
     // PUBLIC Functions
     //-------------------------------------------------
@@ -45,14 +46,14 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // Only if this module loads data
         $processor = $this->getDecoratedmoduleProcessor($module);
-        if ($typeDataResolverClass = $processor->getTypeDataResolverClass($module)) {
+        if ($typeResolverClass = $processor->getTypeResolverClass($module)) {
             if ($properties = $this->getDynamicDatasetmoduletreeSectionFlattenedDataFields($module, $props)) {
                 $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
-                    $typeDataResolverClass => $properties,
+                    $typeResolverClass => $properties,
                 );
             }
         }
-    
+
         return $ret;
     }
 
@@ -73,7 +74,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // Propagate down to the subcomponent modules
         $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $module, $props);
-        
+
         return $ret;
     }
 
@@ -88,18 +89,18 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     //     $ret = array();
 
-    //     // Only if this module has a typeDataResolver
+    //     // Only if this module has a typeResolver
     //     $processor = $this->getDecoratedmoduleProcessor($module);
-    //     if ($typeDataResolver = $processor->getTypeDataResolverClass($module)) {
+    //     if ($typeResolver = $processor->getTypeResolverClass($module)) {
 
     //         if ($properties = $this->getMutableonrequestDynamicDataPropertiesDatasetmoduletreeSection($module, $props)) {
 
     //             $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
-    //                 $typeDataResolver => $properties,
+    //                 $typeResolver => $properties,
     //             );
     //         }
     //     }
-    
+
     //     return $ret;
     // }
 
@@ -120,7 +121,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     //     // Propagate down to the subcomponent modules
     //     $this->flattenRelationaldbobjectDataProperties(__FUNCTION__, $ret, $module, $props);
-        
+
     //     return $ret;
     // }
 
@@ -132,7 +133,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // Exclude the subcomponent modules here
         $processor = $this->getDecoratedmoduleProcessor($module);
-        $modulefilter_manager = ModuleFilterManager::getInstance();
+        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
         if ($submodules = $processor->getModulesToPropagateDataProperties($module)) {
             foreach ($submodules as $submodule) {
@@ -149,7 +150,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                     }
                 }
             }
-            
+
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
             if ($ret['data-fields']) {
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
@@ -163,13 +164,13 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         global $pop_module_processordynamicdatadecorator_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $moduleFullName = ModuleUtils::getModuleFullName($module);
-        
+
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $processor = $this->getDecoratedmoduleProcessor($module);
-        $modulefilter_manager = ModuleFilterManager::getInstance();
+        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
-        foreach ($processor->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_typeDataResolver_options) {
-            foreach ($subcomponent_typeDataResolver_options as $subcomponent_typeDataResolver_class => $subcomponent_modules) {
+        foreach ($processor->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_typeResolver_options) {
+            foreach ($subcomponent_typeResolver_options as $subcomponent_typeResolver_class => $subcomponent_modules) {
                 $subcomponent_modules_data_properties = array(
                     'data-fields' => array(),
                     'subcomponents' => array()
@@ -182,23 +183,23 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                         );
                     }
                 }
-                
-                $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class] ?? array();
+
+                $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class] ?? array();
                 if ($subcomponent_modules_data_properties['data-fields']) {
                     $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
-                    
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['data-fields'] ?? array();
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['data-fields'] = array_unique(
+
+                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] ?? array();
+                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'] = array_unique(
                         array_merge(
-                            $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['data-fields'],
+                            $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['data-fields'],
                             $subcomponent_modules_data_properties['data-fields']
                         )
                     );
                 }
                 if ($subcomponent_modules_data_properties['subcomponents']) {
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['subcomponents'] ?? array();
-                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['subcomponents'] = array_merge_recursive(
-                        $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver_class]['subcomponents'],
+                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] ?? array();
+                    $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'] = array_merge_recursive(
+                        $ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver_class]['subcomponents'],
                         $subcomponent_modules_data_properties['subcomponents']
                     );
                 }
@@ -208,7 +209,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     }
 
     // protected function removeEmptyEntries(&$ret) {
-    
+
     //     // If after the propagation, we have entries of 'subcomponents' empty, then remove them
     //     if ($ret['subcomponents']) {
 
@@ -216,26 +217,26 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //         $subcomponent_data_fields = array_keys($ret['subcomponents']);
     //         foreach ($subcomponent_data_fields as $subcomponent_data_field) {
 
-    //             $subcomponent_typeDataResolvers = array_keys($ret['subcomponents'][$subcomponent_data_field]);
-    //             foreach ($subcomponent_typeDataResolvers as $subcomponent_typeDataResolver) {
-    //                 if (empty($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver])) {
-                        
-    //                     unset($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeDataResolver]);
+    //             $subcomponent_typeResolvers = array_keys($ret['subcomponents'][$subcomponent_data_field]);
+    //             foreach ($subcomponent_typeResolvers as $subcomponent_typeResolver) {
+    //                 if (empty($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver])) {
+
+    //                     unset($ret['subcomponents'][$subcomponent_data_field][$subcomponent_typeResolver]);
     //                 }
     //             }
 
     //             if (empty($ret['subcomponents'][$subcomponent_data_field])) {
-                        
+
     //                 unset($ret['subcomponents'][$subcomponent_data_field]);
     //             }
     //         }
 
     //         if (empty($ret['subcomponents'])) {
-                    
+
     //             unset($ret['subcomponents']);
     //         }
     //     }
-        
+
     //     return $ret;
     // }
 }

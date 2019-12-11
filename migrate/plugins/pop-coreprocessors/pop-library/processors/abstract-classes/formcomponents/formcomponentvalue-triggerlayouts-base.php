@@ -29,11 +29,11 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
-    public function getTriggerTypeDataResolverClass(array $module)
+    public function getTriggerTypeResolverClass(array $module): ?string
     {
         return null;
     }
-    public function getTriggerSubmodule(array $module)
+    public function getTriggerSubmodule(array $module): ?array
     {
         return null;
     }
@@ -41,16 +41,16 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         $ret[] = $this->getTriggerSubmodule($module);
-        
+
         return $ret;
     }
 
     public function initWebPlatformModelProps(array $module, array &$props)
     {
         $trigger_module = $this->getTriggerSubmodule($module);
-        
+
         // Add the class to be able to merge
         $this->appendProp($module, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($trigger_module));
 
@@ -91,20 +91,22 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         // if ($this->getProp($module, $props, 'replicable')) {
 
         $instanceManager = InstanceManagerFacade::getInstance();
-        $typeDataResolver = $instanceManager->getInstance($this->getTriggerTypeDataResolverClass($module));
-        $database_key = $typeDataResolver->getDatabaseKey();
+        if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
+            $triggerTypeResolver = $instanceManager->getInstance((string)$triggerTypeResolverClass);
+            $database_key = $triggerTypeResolver->getTypeName();
 
-        // Needed to execute fillInput on the typeahead input to get the value from the request
-        $this->mergeProp(
-            $module,
-            $props,
-            'params',
-            array(
-                'data-database-key' => $database_key,
-                'data-urlparam' => $this->getUrlParam($module),
-            )
-        );
-        // }
+            // Needed to execute fillInput on the typeahead input to get the value from the request
+            $this->mergeProp(
+                $module,
+                $props,
+                'params',
+                array(
+                    'data-database-key' => $database_key,
+                    'data-urlparam' => $this->getUrlParam($module),
+                )
+            );
+            // }
+        }
 
         parent::initModelProps($module, $props);
     }
@@ -132,10 +134,10 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $ret = parent::getImmutableConfiguration($module, $props);
 
         $instanceManager = InstanceManagerFacade::getInstance();
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $typeDataResolver_class = $this->getTriggerTypeDataResolverClass($module);
-        $typeDataResolver = $instanceManager->getInstance($typeDataResolver_class);
-        $ret['dbkey'] = $typeDataResolver->getDatabaseKey();
+        if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
+            $triggerTypeResolver = $instanceManager->getInstance($triggerTypeResolverClass);
+            $ret['dbkey'] = $triggerTypeResolver->getTypeName();
+        }
 
         $trigger_module = $this->getTriggerSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = ModuleUtils::getModuleOutputName($trigger_module);
@@ -144,19 +146,19 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
         return $ret;
     }
-    
+
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($field = $this->getDbobjectField($module)) {
             return array(
                 $field => array(
-                    $this->getTriggerTypeDataResolverClass($module) => array(
+                    $this->getTriggerTypeResolverClass($module) => array(
                         $this->getTriggerSubmodule($module),
                     ),
                 )
             );
         }
-        
+
         return parent::getDomainSwitchingSubmodules($module);
     }
 
@@ -197,7 +199,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
                 }
             }
         }
-        
+
         return $value;
     }
 
@@ -213,13 +215,13 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
 
             // Extend the dataload ids
             return array(
-                $this->getTriggerTypeDataResolverClass($module) => array(
+                $this->getTriggerTypeResolverClass($module) => array(
                     'ids' => $value,
                     'data-fields' => $trigger_data_properties['data-fields'],
                 ),
             );
         }
-        
+
         return parent::getMutableonrequestSupplementaryDbobjectdata($module, $props);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoP\Events\TypeDataResolvers\EventTypeDataResolver;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsCreation_Module_Processor_MySectionDataloadsBase
 {
@@ -118,7 +118,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT:
@@ -127,10 +127,10 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             case self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
-                return EventTypeDataResolver::class;
+                return EventTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

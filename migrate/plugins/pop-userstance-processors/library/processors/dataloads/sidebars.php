@@ -3,12 +3,12 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR = 'dataload-single-stance-sidebar';
 
     public function getModulesToProcess(): array
@@ -26,24 +26,24 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
         $vertical = ($orientation == 'vertical');
 
         $inners = array(
-            self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR => $vertical ? 
-                [UserStance_Module_Processor_CustomVerticalSingleSidebars::class, UserStance_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_STANCE] : 
+            self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR => $vertical ?
+                [UserStance_Module_Processor_CustomVerticalSingleSidebars::class, UserStance_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_STANCE] :
                 [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_STANCE],
         );
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
-    
+
     // public function getNature(array $module)
     // {
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -53,18 +53,18 @@ class UserStance_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_STANCE_SIDEBAR:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
         }
-        
-        return parent::getTypeDataResolverClass($module);
+
+        return parent::getTypeResolverClass($module);
     }
 }
 

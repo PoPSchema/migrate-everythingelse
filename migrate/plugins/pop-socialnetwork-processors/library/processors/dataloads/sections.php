@@ -4,9 +4,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
-use PoP\Taxonomies\TypeDataResolvers\TagTypeDataResolver;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -60,12 +60,12 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             [self::class, self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST],
-            
+
             [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL],
             [self::class, self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST],
-            
+
             [self::class, self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_DETAILS],
@@ -127,7 +127,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_DETAILS],
             self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_CONTENT_DETAILS],
             self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_CONTENT_SIMPLEVIEW],
-            
+
             self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORCONTENT_FULLVIEW],
@@ -143,7 +143,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
             self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_LIST],
-            
+
             self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
             self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
             self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_USERS_FULLVIEW],
@@ -204,7 +204,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -308,14 +308,14 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
@@ -350,7 +350,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorrecommendedposts($ret);
                 break;
-            
+
             case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL:
@@ -376,19 +376,19 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
-                return TagTypeDataResolver::class;
-            
+                return TagTypeResolver::class;
+
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
-                return ConvertiblePostTypeDataResolver::class;
+                return PostConvertibleTypeResolver::class;
 
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW:
@@ -414,10 +414,10 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)
@@ -466,7 +466,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('followers', 'poptheme-wassup'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

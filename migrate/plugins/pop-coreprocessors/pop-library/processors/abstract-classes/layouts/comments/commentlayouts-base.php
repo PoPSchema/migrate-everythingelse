@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         }
     
         $ret['author'] = array(
-            UserTypeDataResolver::class => $modules,
+            UserTypeResolver::class => $modules,
         );
         
         return $ret;

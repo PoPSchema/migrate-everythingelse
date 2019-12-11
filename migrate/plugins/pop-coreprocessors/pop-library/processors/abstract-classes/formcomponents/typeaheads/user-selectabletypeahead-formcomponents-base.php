@@ -1,5 +1,5 @@
 <?php
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_SelectableTypeaheadFormComponentsBase
 {
@@ -8,12 +8,12 @@ abstract class PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase ex
         return GD_AVATAR_SIZE_40;
     }
 
-    public function getTriggerTypeDataResolverClass(array $module)
+    public function getTriggerTypeResolverClass(array $module): ?string
     {
-        return UserTypeDataResolver::class;
+        return UserTypeResolver::class;
     }
 
-    public function getTriggerSubmodule(array $module)
+    public function getTriggerSubmodule(array $module): ?array
     {
         return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_CARD];
     }

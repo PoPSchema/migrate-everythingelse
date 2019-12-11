@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoP\Events\TypeDataResolvers\EventTypeDataResolver;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -598,7 +598,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTS_TYPEAHEAD:
@@ -648,10 +648,10 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST:
-                return EventTypeDataResolver::class;
+                return EventTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

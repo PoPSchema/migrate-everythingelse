@@ -1,4 +1,5 @@
 <?php
+use PoP\Pages\TypeResolvers\PageTypeResolver;
 
 class PoP_Pages_Module_Processor_PagesDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -59,15 +60,15 @@ class PoP_Pages_Module_Processor_PagesDataloads extends PoP_Module_Processor_Dat
         return $format ?? parent::getFormat($module);
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_DATAQUERY_PAGECONTENT_UPDATEDATA:
             case self::MODULE_DATALOAD_DATAQUERY_PAGECONTENT_REQUESTLAYOUTS:
-                return GD_TYPEDATARESOLVER_PARAMPAGE;
+                return PageTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

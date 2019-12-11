@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Locations\TypeDataResolvers\LocationTypeDataResolver;
+use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         $urlparam = $this->getUrlparamSubmodule($module);
         return array(
             'locations' => array(
-                LocationTypeDataResolver::class => array(
+                LocationTypeResolver::class => array(
                     $urlparam,
                 ),
             ),

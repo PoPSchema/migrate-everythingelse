@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Notifications\TypeDataResolvers\NotificationTypeDataResolver;
+use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 
 class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -61,16 +61,16 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
-                return NotificationTypeDataResolver::class;
+                return NotificationTypeResolver::class;
         }
         
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
     
     public function initModelProps(array $module, array &$props)

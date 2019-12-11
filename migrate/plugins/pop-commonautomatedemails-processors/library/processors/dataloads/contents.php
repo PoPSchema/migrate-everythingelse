@@ -1,12 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeDataResolvers\ConvertiblePostTypeDataResolver;
+use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
 
 class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use DBObjectIDFromURLParamModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
 
     public function getModulesToProcess(): array
@@ -23,7 +23,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         );
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -44,7 +44,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
                 $ret[] = [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -66,15 +66,15 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         return null;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
-                // Decide on the typeDataResolver based on the post_type of the single element
-                return ConvertiblePostTypeDataResolver::class;
+                // Decide on the typeResolver based on the post_type of the single element
+                return PostConvertibleTypeResolver::class;
         }
-        
-        return parent::getTypeDataResolverClass($module);
+
+        return parent::getTypeResolverClass($module);
     }
 }
 

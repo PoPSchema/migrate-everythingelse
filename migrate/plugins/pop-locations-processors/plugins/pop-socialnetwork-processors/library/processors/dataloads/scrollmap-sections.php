@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
@@ -139,7 +139,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
         return $ret;
     }
 
-    public function getTypeDataResolverClass(array $module): ?string
+    public function getTypeResolverClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP:
@@ -148,10 +148,10 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
             case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-                return UserTypeDataResolver::class;
+                return UserTypeResolver::class;
         }
 
-        return parent::getTypeDataResolverClass($module);
+        return parent::getTypeResolverClass($module);
     }
 
     public function initModelProps(array $module, array &$props)

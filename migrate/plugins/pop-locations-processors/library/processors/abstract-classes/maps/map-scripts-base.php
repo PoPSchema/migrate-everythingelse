@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Locations\TypeDataResolvers\LocationTypeDataResolver;
+use PoP\Locations\TypeResolvers\LocationTypeResolver;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
     {
         return array(
             'locations' => array(
-                LocationTypeDataResolver::class => array(
+                LocationTypeResolver::class => array(
                     [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS],
                 ),
             )

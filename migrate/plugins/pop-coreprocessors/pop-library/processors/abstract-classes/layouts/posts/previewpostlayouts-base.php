@@ -7,7 +7,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeDataResolvers\UserTypeDataResolver;
+use PoP\Users\TypeResolvers\UserTypeResolver;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
 {
@@ -92,7 +92,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
 
         if ($modules) {
             $ret['authors'] = array(
-                UserTypeDataResolver::class => $modules,
+                UserTypeResolver::class => $modules,
             );
         }
 
