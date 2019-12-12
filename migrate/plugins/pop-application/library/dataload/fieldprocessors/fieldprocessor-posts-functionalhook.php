@@ -40,8 +40,8 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
 			'multilayout-keys' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
             'latestcounts-trigger-values' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
             'cats-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'comments-lazy' => SchemaDefinition::TYPE_ARRAY,
-            'noheadercomments-lazy' => SchemaDefinition::TYPE_ARRAY,
+            'comments-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'noheadercomments-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
             'addcomment-url' => SchemaDefinition::TYPE_URL,
             'topics-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
             'appliesto-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
@@ -110,7 +110,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);
                 return GeneralUtils::addQueryArgs([
-                    $post_name => $typeResolver->getId($post), 
+                    $post_name => $typeResolver->getId($post),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topics-byname':
@@ -133,6 +133,6 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Application_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
