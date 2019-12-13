@@ -31,9 +31,9 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'references' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'references' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'has-references' => SchemaDefinition::TYPE_BOOL,
-            'referencedby' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'referencedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'has-referencedby' => SchemaDefinition::TYPE_BOOL,
             'referencedby-count' => SchemaDefinition::TYPE_INT,
         ];

@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
     public const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
     public const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     //         case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -57,7 +57,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'ure-popprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -73,7 +73,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
                 return GD_URE_FormInput_MultiMemberStatus::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -89,16 +89,16 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
                 return 'status';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
+            self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            self::MODULE_URE_FILTERINPUT_MEMBERTAGS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            self::MODULE_URE_FILTERINPUT_MEMBERSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
         ];
         return $types[$module[1]];
     }

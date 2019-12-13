@@ -28,7 +28,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'multilayout-keys' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+			'multilayout-keys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'mention-queryby' => SchemaDefinition::TYPE_STRING,
             'description-formatted' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
@@ -58,7 +58,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
                 return array(
                     $typeResolver->resolveValue($user, 'role', $variables, $expressions, $options),
                 );
-            
+
              // Needed for tinyMCE-mention plug-in
             case 'mention-queryby':
                 return $typeResolver->resolveValue($user, 'display-name', $variables, $expressions, $options);
@@ -80,6 +80,6 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Application_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

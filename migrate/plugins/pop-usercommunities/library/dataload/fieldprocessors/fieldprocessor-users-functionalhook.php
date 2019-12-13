@@ -8,7 +8,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunctionalFieldResolver
-{    
+{
     public static function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -30,9 +30,9 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
         $types = [
 			'edit-membership-url' => SchemaDefinition::TYPE_URL,
             'edit-memberstatus-inline-url' => SchemaDefinition::TYPE_URL,
-            'memberstatus-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'memberprivileges-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'membertags-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'memberstatus-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberprivileges-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'membertags-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -88,6 +88,6 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

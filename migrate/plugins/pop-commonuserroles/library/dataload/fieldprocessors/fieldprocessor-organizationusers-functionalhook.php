@@ -27,8 +27,8 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'organizationtypes-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'organizationcategories-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+			'organizationtypes-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'organizationcategories-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -67,6 +67,6 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

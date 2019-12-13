@@ -19,7 +19,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             PostTypeResolver::class,
         );
     }
-    
+
     public function getThumb($post, TypeResolverInterface $typeResolver, $size = null, $add_description = false)
     {
         $thumb_id = PostMediaHelpers::getThumbId($typeResolver->getId($post));
@@ -58,10 +58,10 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 			'favicon' => SchemaDefinition::TYPE_OBJECT,
             'thumb' => SchemaDefinition::TYPE_OBJECT,
             'thumb-full-src' => SchemaDefinition::TYPE_URL,
-            'authors' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'topics' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'authors' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'topics' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'has-topics' => SchemaDefinition::TYPE_BOOL,
-            'appliesto' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'appliesto' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'has-appliesto' => SchemaDefinition::TYPE_BOOL,
             'has-userpostactivity' => SchemaDefinition::TYPE_BOOL,
             'userpostactivity-count' => SchemaDefinition::TYPE_INT,
@@ -182,6 +182,6 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Application_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

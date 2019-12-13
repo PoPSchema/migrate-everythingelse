@@ -36,8 +36,8 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             'linkcontent' => SchemaDefinition::TYPE_STRING,
             'linkaccess' => SchemaDefinition::TYPE_ENUM,
             'linkaccess-byname' => SchemaDefinition::TYPE_STRING,
-            'linkcategories' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            'linkcategories-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'linkcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            'linkcategories-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'has-linkcategories' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -134,6 +134,6 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_ContentPostLinks_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

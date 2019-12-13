@@ -45,7 +45,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
     //         case self::MODULE_FILTERINPUT_APPLIESTO:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -59,7 +59,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             case self::MODULE_FILTERINPUT_APPLIESTO:
                 return TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -78,7 +78,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             case self::MODULE_FILTERINPUT_APPLIESTO:
                 return GD_FormInput_AppliesTo::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -95,17 +95,17 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
             case self::MODULE_FILTERINPUT_APPLIESTO:
                 return 'sections';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_APPLIESTO => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            self::MODULE_FILTERINPUT_CATEGORIES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_CONTENTSECTIONS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_POSTSECTIONS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_APPLIESTO => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            self::MODULE_FILTERINPUT_CATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_CONTENTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_POSTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$module[1]];
     }

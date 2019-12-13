@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_Module_Processor_ButtonGroupFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES = 'filterinput-buttongroup-categories';
     public const MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS = 'filterinput-buttongroup-contentsections';
     public const MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS = 'filterinput-buttongroup-postsections';
@@ -41,7 +41,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
     //         case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -62,7 +62,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
                 $input = $inputs[$module[1]];
                 return $moduleprocessor_manager->getProcessor($input)->getName($input);
         }
-        
+
         return parent::getName($module);
     }
 
@@ -78,7 +78,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
             case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
                 return GD_FormInput_PostSections::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -90,16 +90,16 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFilterInputs extends PoP_M
             case self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS:
                 return true;
         }
-        
+
         return parent::isMultiple($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_BUTTONGROUP_POSTSECTIONS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$module[1]];
     }

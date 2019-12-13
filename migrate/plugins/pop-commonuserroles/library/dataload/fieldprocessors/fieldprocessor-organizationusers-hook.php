@@ -31,8 +31,8 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
         $types = [
 			'contact-person' => SchemaDefinition::TYPE_STRING,
             'contact-number' => SchemaDefinition::TYPE_STRING,
-            'organizationtypes' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'organizationcategories' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'organizationtypes' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'organizationcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'has-organization-details' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -60,7 +60,7 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
 
             case 'contact-number':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
-            
+
             case 'organizationtypes':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES);
 

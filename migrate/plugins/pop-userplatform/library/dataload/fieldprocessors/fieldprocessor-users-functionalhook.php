@@ -28,7 +28,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         $types = [
             'short-description-formatted' => SchemaDefinition::TYPE_STRING,
             'contact-small' => SchemaDefinition::TYPE_STRING,
-            'user-preferences' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'user-preferences' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -75,6 +75,6 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

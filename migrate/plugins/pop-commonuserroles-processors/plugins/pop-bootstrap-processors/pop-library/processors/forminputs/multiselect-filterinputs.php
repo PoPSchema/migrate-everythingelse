@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
     public const MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
@@ -42,7 +42,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
     //         case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -51,14 +51,14 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
-                
+
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 // Allow AgendaUrbana to Override
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'GD_URE_Module_Processor_MultiSelectFormInputs:label:categories',
                     TranslationAPIFacade::getInstance()->__('Organization Categories', 'poptheme-wassup')
                 );
-                
+
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 // Allow AgendaUrbana to Override
                 return HooksAPIFacade::getInstance()->applyFilters(
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
                     TranslationAPIFacade::getInstance()->__('Organization Types', 'poptheme-wassup')
                 );
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -75,14 +75,14 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
-                
+
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 return GD_FormInput_OrganizationCategories::class;
-                
+
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 return GD_FormInput_OrganizationTypes::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -98,16 +98,16 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
             case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
                 return 'types';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$module[1]];
     }

@@ -27,9 +27,9 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'recommendsposts' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'followers' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'following' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+			'recommendsposts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'followers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'following' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followers-count' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);

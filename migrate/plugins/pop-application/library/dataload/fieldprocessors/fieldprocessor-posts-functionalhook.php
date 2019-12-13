@@ -37,14 +37,14 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'multilayout-keys' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'latestcounts-trigger-values' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'cats-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'comments-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'noheadercomments-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+			'multilayout-keys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'latestcounts-trigger-values' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'cats-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'comments-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'noheadercomments-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'addcomment-url' => SchemaDefinition::TYPE_URL,
-            'topics-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'appliesto-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'topics-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'appliesto-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }

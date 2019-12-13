@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Utils;
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -38,7 +38,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
             'content-edit' => SchemaDefinition::TYPE_STRING,
             'edit-url' => SchemaDefinition::TYPE_URL,
             'delete-url' => SchemaDefinition::TYPE_URL,
-            'coauthors' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'coauthors' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -115,6 +115,6 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_ContentCreation_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

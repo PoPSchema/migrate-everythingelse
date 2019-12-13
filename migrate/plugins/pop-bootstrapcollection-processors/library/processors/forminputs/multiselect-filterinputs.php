@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public const MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
 
@@ -37,7 +37,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     //         case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -48,7 +48,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 return TranslationAPIFacade::getInstance()->__('Status', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -61,7 +61,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
                 return GD_FormInput_UnmoderatedStatus::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -73,15 +73,15 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
                 // Add a nice name, so that the URL params when filtering make sense
                 return 'status';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
+            self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
         ];
         return $types[$module[1]];
     }
@@ -95,7 +95,7 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
         ];
         return $descriptions[$module[1]];
     }
-    
+
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
     {
         switch ($module[1]) {

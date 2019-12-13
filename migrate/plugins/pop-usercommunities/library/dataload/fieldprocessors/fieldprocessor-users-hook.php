@@ -33,8 +33,8 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
             'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'membertags' => SchemaDefinition::TYPE_ENUM,
             'is-community' => SchemaDefinition::TYPE_BOOL,
-            'communities' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'active-communities' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            'communities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'active-communities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'has-active-communities' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);

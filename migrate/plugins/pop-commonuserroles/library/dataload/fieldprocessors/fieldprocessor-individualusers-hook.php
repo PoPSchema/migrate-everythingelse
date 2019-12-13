@@ -9,7 +9,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
 {
     use IndividualFieldResolverTrait;
-    
+
     public static function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -26,7 +26,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'individualinterests' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+			'individualinterests' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'has-individual-details' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -45,7 +45,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $user = $resultItem;
-        switch ($fieldName) {            
+        switch ($fieldName) {
             case 'individualinterests':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
 

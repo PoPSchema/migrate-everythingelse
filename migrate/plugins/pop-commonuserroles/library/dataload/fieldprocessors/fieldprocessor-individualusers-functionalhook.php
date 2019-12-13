@@ -10,7 +10,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends AbstractFunctionalFieldResolver
 {
     use IndividualFieldResolverTrait;
-    
+
     public static function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -26,7 +26,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'individualinterests-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+			'individualinterests-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -56,6 +56,6 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

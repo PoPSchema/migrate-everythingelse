@@ -10,7 +10,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Module_Processor_UserSelectableTypeaheadFormComponentsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
 
     public function getModulesToProcess(): array
@@ -34,7 +34,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     //         case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -44,7 +44,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return TranslationAPIFacade::getInstance()->__('Authors', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -98,7 +98,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$module[1]];
     }

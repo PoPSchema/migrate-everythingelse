@@ -27,8 +27,8 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'highlights-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'referencedby-lazy' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+			'highlights-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'referencedby-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }

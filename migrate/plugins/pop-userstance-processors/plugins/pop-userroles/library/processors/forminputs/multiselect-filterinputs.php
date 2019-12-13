@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
     public function getModulesToProcess(): array
@@ -33,7 +33,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
     //         case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -43,7 +43,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
             case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Author Role', 'pop-userstance-processors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -53,7 +53,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
             case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return GD_URE_FormInput_MultiAuthorRole::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -63,14 +63,14 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
             case self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT:
                 return 'role';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            self::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$module[1]];
     }

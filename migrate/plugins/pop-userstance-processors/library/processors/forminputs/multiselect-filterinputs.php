@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 
     public function getModulesToProcess(): array
@@ -33,7 +33,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
     //         case self::MODULE_FILTERINPUT_STANCE_MULTISELECT:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
             case self::MODULE_FILTERINPUT_STANCE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('Stance', 'pop-userstance-processors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -53,7 +53,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
             case self::MODULE_FILTERINPUT_STANCE_MULTISELECT:
                 return GD_FormInput_MultiStance::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -63,14 +63,14 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
             case self::MODULE_FILTERINPUT_STANCE_MULTISELECT:
                 return 'stance';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_STANCE_MULTISELECT => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_STANCE_MULTISELECT => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$module[1]];
     }

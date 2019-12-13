@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Utils;
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -36,12 +36,12 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         $types = [
             'edit-user-membership-url' => SchemaDefinition::TYPE_URL,
             'community-members-url' => SchemaDefinition::TYPE_URL,
-            'memberstatus' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            'memberstatus-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'memberprivileges' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            'memberprivileges-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
-            'membertags' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ENUM),
-            'membertags-byname' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_STRING),
+            'memberstatus' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            'memberstatus-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberprivileges' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            'memberprivileges-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'membertags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
+            'membertags-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
@@ -178,7 +178,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                         return getRouteIcon(POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES, false);
                 }
                 return null;
-            
+
             case 'url':
                 switch ($notification->action) {
                     case URE_AAL_POP_ACTION_USER_JOINEDCOMMUNITY:
@@ -198,7 +198,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                             $cmsusersapi->getUserDisplayName($notification->user_id),
                             $cmsusersapi->getUserDisplayName($notification->object_id)
                         );
-                
+
                     case URE_AAL_POP_ACTION_USER_UPDATEDUSERMEMBERSHIP:
                         // Change the message depending if the logged in user is the object of this action
                         $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('your', 'ure-pop') : sprintf('<strong>%s</strong>’s', $cmsengineapi->getUserDisplayName($notification->object_id));
@@ -223,6 +223,6 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 URE_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

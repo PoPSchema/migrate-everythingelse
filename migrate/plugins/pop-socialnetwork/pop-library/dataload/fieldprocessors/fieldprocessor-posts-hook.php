@@ -29,8 +29,8 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'taggedusers' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
-            'recommendedby' => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+			'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'recommendedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'recommendpost-count' => SchemaDefinition::TYPE_INT,
             'upvotepost-count' => SchemaDefinition::TYPE_INT,
             'downvotepost-count' => SchemaDefinition::TYPE_INT,
@@ -90,6 +90,6 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_SocialNetwork_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

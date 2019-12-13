@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
     public const MODULE_FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
 
@@ -37,7 +37,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
     //         case self::MODULE_FILTERINPUT_LINKACCESS:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -50,7 +50,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
             case self::MODULE_FILTERINPUT_LINKACCESS:
                 return TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -63,7 +63,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
             case self::MODULE_FILTERINPUT_LINKACCESS:
                 return GD_FormInput_LinkAccess::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -73,7 +73,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
             case self::MODULE_FILTERINPUT_LINKACCESS:
                 return 'linkaccess';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 
@@ -86,14 +86,14 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
             case self::MODULE_FILTERINPUT_LINKACCESS:
                 return 'access';
         }
-        
+
         return parent::getName($module);
     }
 
     public function getSchemaFilterInputType(array $module): ?string
     {
         $types = [
-            self::MODULE_FILTERINPUT_LINKCATEGORIES => TypeCastingHelpers::combineTypes(SchemaDefinition::TYPE_ARRAY, SchemaDefinition::TYPE_ID),
+            self::MODULE_FILTERINPUT_LINKCATEGORIES => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             self::MODULE_FILTERINPUT_LINKACCESS => TYPE_SEARCH,
         ];
         return $types[$module[1]];
