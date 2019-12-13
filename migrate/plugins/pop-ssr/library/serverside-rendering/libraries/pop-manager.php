@@ -44,7 +44,7 @@ class PoP_ServerSideManager
     public function &getDatabases($domain)
     {
         $datastore = PoP_ServerSide_LibrariesFactory::getDatastoreInstance();
-        $databases =& $datastore->store[$domain]['databases'] ?? array();
+        $databases =& $datastore->store[$domain]['dbData'] ?? array();
         return $databases;
     }
 
@@ -76,7 +76,7 @@ class PoP_ServerSideManager
 
         // Databases and stateless data can be integrated straight
         $datastore->store[$domain] = $datastore->store[$domain] ?? array();
-        $datastore->store[$domain]['databases'] = $json['databases'];
+        $datastore->store[$domain]['dbData'] = $json['dbData'];
         $datastore->store[$domain]['statelessdata'] = $json['statelessdata'];
 
         // Stateful data is to be integrated under the corresponding URL
@@ -130,7 +130,7 @@ class PoP_ServerSideManager
             //                 'uniquetodomain' => array(),
             //             ),
             //         ),
-            //         'databases' => array(
+            //         'dbData' => array(
             //             'primary' => array(),
             //             'userstate' => array(),
             //         ),
@@ -158,7 +158,7 @@ class PoP_ServerSideManager
 
     public function isFirstLoad($pageSection)
     {
-        
+
         // ------------------------------------------------------
         // Comment Leo: rendering html in server-side is always firstLoad
         // ------------------------------------------------------
@@ -280,13 +280,13 @@ class PoP_ServerSideManager
 
     public function getSettingsId($objectOrId)
     {
-        
+
         // ------------------------------------------------------
         // Comment Leo: Impossible in PHP => Commented out
         // ------------------------------------------------------
         // // target: pageSection or Block, or already pssId or bsId (when called from a .tmpl.js file)
         // if ($.type(objectOrId) == 'object') {
-            
+
         //     var object = objectOrId;
         //     return object.attr('data-moduleoutputname');
         // }
@@ -314,7 +314,7 @@ class PoP_ServerSideManager
     {
         $modulePath = $this->getModulePath($domain, $pageSection, $target, $moduleName);
         $targetConfiguration = $this->getPageSectionConfiguration($domain, $pageSection);
-        
+
         // Go down all levels of the configuration, until finding the level for the module-cb
         if ($modulePath) {
             foreach ($modulePath as $pathLevel) {
@@ -328,7 +328,7 @@ class PoP_ServerSideManager
 
     public function getTemplate($domain, $moduleOrTemplateName)
     {
-    
+
         // If empty, then the module is already the template
         $templates = $this->getTemplates($domain);
         return $templates[$moduleOrTemplateName] ?? $moduleOrTemplateName;
@@ -336,7 +336,7 @@ class PoP_ServerSideManager
 
     public function initPageSectionSettings($domain, $pageSection, &$psConfiguration)
     {
-    
+
         // Initialize TopLevel / Blocks from the info provided in the feedback
         $tls = $this->getTopLevelSettings($domain);
         $psConfiguration['tls'] = $tls;
@@ -399,7 +399,7 @@ class PoP_ServerSideManager
 
     public function isMultiDomain($blockTLDomain, $pssId, $bsId)
     {
-    
+
         // Comments Leo 27/07/2017: the query-multidomain-urls are stored under the domain from which the block was initially rendered,
         // and not that from where the data is being rendered
         // $multidomain_urls = $this->getRuntimeSettings($blockTLDomain, $pssId, $bsId, 'query-multidomain-urls');
@@ -479,10 +479,10 @@ class PoP_ServerSideManager
         $domain = getDomain($url);
         return $domain.'/destroy'.substr($url, strlen($domain));
     }
-    
+
     public function getModuleOrObjectSettingsId($el)
     {
-        
+
         // ------------------------------------------------------
         // Comment Leo: Impossible in PHP => Commented out
         // ------------------------------------------------------
@@ -504,13 +504,13 @@ class PoP_ServerSideManager
         $modulePaths = $this->getStatelessSettings($domain, $pageSection, $target, 'modules-paths');
         return $modulePaths[$moduleName];
     }
-    
+
     public function getExecutableTemplate($domain, $moduleOrTemplateName)
     {
         $template = $this->getTemplate($domain, $moduleOrTemplateName);
         return PoP_ServerSideRenderingFactory::getInstance()->getTemplateRenderer($template);
     }
-    
+
     public function getHtml($domain, $moduleOrTemplateName, $context)
     {
         $executableTemplate = $this->getExecutableTemplate($domain, $moduleOrTemplateName);

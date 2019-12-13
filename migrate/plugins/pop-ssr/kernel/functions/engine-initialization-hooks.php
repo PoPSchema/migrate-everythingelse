@@ -114,7 +114,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
     protected function removeDatabases(&$data, $engine)
     {
-        if (!$data['databases']) {
+        if (!$data['dbData']) {
             return;
         }
 
@@ -171,7 +171,7 @@ class PoP_SSR_EngineInitialization_Hooks
         }
 
         // Replace the DBs with the ones with dynamic data
-        $data['databases'] = $dynamicdatabases;
+        $data['dbData'] = $dynamicdatabases;
     }
 
     protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $typeResolver_class, array $data_properties)
@@ -181,7 +181,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $dataquery_manager = \PoP\ComponentModel\DataQueryManagerFactory::getInstance();
 
             // Data to be copied can come from either the database or the userstatedatabase
-            $databases = $data['databases'];
+            $databases = $data['dbData'];
             $convertibleDBKeyIDs = $data['convertibleDBKeyIDs'];
 
             // Obtain the data from the database, copy it to the dynamic database
