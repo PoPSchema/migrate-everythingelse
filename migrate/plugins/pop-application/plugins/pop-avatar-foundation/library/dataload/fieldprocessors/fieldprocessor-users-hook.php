@@ -46,10 +46,8 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
                     [
                         SchemaDefinition::ARGNAME_NAME => 'size',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('Avatar size, in pixels. By default it is \'%s\'', ''),
-                            GD_AVATAR_SIZE_60
-                        ),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Avatar size, in pixels', ''),
+                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => GD_AVATAR_SIZE_60,
                     ],
                 ];
         }

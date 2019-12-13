@@ -98,15 +98,14 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                     [
                         SchemaDefinition::ARGNAME_NAME => 'size',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => sprintf(
-                            $translationAPI->__('Thumbnail size. By default it is \'%s\'', 'pop-posts'),
-                            $this->getDefaultThumbSize()
-                        ),
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Thumbnail size', 'pop-posts'),
+                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultThumbSize(),
                     ],
                     [
                         SchemaDefinition::ARGNAME_NAME => 'addDescription',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Add description on the thumb', 'pop-posts'),
+                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => 'false',
                     ],
                 ];
         }
@@ -125,8 +124,8 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
-                $size = $fieldAtts['size'] ?? $this->getDefaultThumbSize();
-                $add_description = isset($fieldAtts['addDescription']) ? $fieldAtts['addDescription'] : false;
+                $size = $fieldArgs['size'] ?? $this->getDefaultThumbSize();
+                $add_description = isset($fieldArgs['addDescription']) ? $fieldArgs['addDescription'] : false;
                 return $this->getThumb($post, $typeResolver, $size, $add_description);
 
             case 'thumb-full-src':
