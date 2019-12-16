@@ -30,10 +30,10 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_POST:
-                return 'id';
+                return 'self';
 
             case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
-                return 'post-id';
+                return 'post';
         }
 
         return parent::getDbobjectField($module);

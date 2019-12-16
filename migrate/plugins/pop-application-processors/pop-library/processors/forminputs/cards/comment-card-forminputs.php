@@ -25,7 +25,7 @@ class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues e
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_COMMENT:
-                return 'id';
+                return 'self';
         }
 
         return parent::getDbobjectField($module);

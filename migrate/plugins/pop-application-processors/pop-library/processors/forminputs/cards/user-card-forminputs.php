@@ -25,7 +25,7 @@ class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues exte
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_USER:
-                return 'id';
+                return 'self';
         }
 
         return parent::getDbobjectField($module);
