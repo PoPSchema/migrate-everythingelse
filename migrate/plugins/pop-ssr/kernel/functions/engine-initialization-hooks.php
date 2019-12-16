@@ -186,7 +186,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Obtain the data from the database, copy it to the dynamic database
             $typeResolver = $instanceManager->getInstance($typeResolver_class);
-            $database_key = $typeResolver->getTypeName();
+            $database_key = $typeResolver->getTypeOutputName();
 
             // Allow plugins to split the object into several databases, not just "primary". Eg: "userstate", by PoP User Login
             // The hook below can modify the list of datafields to be added under "primary", and add those fields directly into $databaseitems under another dbname ("userstate")

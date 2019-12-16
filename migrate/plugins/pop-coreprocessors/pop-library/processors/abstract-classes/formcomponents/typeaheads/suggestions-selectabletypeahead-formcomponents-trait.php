@@ -113,7 +113,7 @@ trait SuggestionsSelectableTypeaheadFormComponentsTrait
                     $trigger_layout = $this->getTriggerLayoutSubmodule($module);
                     $suggestions_typeResolver_class = $moduleprocessor_manager->getProcessor($trigger_layout)->getTriggerTypeResolverClass($trigger_layout);
                     $suggestions_typeResolver = $instanceManager->getInstance($suggestions_typeResolver_class);
-                    $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeName();
+                    $ret['dbkeys']['suggestions'] = $suggestions_typeResolver->getTypeOutputName();
                 }
                 if ($suggestions_fontawesome = $this->getSuggestionsFontawesome($module, $props)) {
                     $ret['suggestions-fontawesome'] = $suggestions_fontawesome;

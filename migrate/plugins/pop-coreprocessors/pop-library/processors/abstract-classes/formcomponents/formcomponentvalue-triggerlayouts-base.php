@@ -93,7 +93,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $instanceManager = InstanceManagerFacade::getInstance();
         if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
             $triggerTypeResolver = $instanceManager->getInstance((string)$triggerTypeResolverClass);
-            $database_key = $triggerTypeResolver->getTypeName();
+            $database_key = $triggerTypeResolver->getTypeOutputName();
 
             // Needed to execute fillInput on the typeahead input to get the value from the request
             $this->mergeProp(
@@ -136,7 +136,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         $instanceManager = InstanceManagerFacade::getInstance();
         if ($triggerTypeResolverClass = $this->getTriggerTypeResolverClass($module)) {
             $triggerTypeResolver = $instanceManager->getInstance($triggerTypeResolverClass);
-            $ret['dbkey'] = $triggerTypeResolver->getTypeName();
+            $ret['dbkey'] = $triggerTypeResolver->getTypeOutputName();
         }
 
         $trigger_module = $this->getTriggerSubmodule($module);
