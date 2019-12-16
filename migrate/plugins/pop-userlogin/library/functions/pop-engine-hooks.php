@@ -1,20 +1,20 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\FieldResolvers\OperatorFieldResolver;
+use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 
 class PoP_UserLogin_Engine_Hooks
 {
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addAction(
-            '\PoP\ComponentModel\Engine_Vars:addVars', 
-            [$this, 'addVars'], 
+            '\PoP\ComponentModel\Engine_Vars:addVars',
+            [$this, 'addVars'],
             10,
             1
         );
         HooksAPIFacade::getInstance()->addAction(
-            OperatorFieldResolver::HOOK_SAFEVARS, 
-            [$this, 'setSafeVars'], 
+            OperatorGlobalFieldResolver::HOOK_SAFEVARS,
+            [$this, 'setSafeVars'],
             10,
             1
         );

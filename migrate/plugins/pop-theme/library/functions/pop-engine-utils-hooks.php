@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Theme;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\FieldResolvers\OperatorFieldResolver;
+use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 
 class PoP_Theme_UtilsHooks
 {
@@ -30,4 +30,4 @@ class PoP_Theme_UtilsHooks
  * Initialization
  */
 HooksAPIFacade::getInstance()->addAction('\PoP\ComponentModel\Engine_Vars:addVars', array(PoP_Theme_UtilsHooks::class, 'addVars'), 10, 1);
-HooksAPIFacade::getInstance()->addAction(OperatorFieldResolver::HOOK_SAFEVARS, array(PoP_Theme_UtilsHooks::class, 'setSafeVars'), 10, 1);
+HooksAPIFacade::getInstance()->addAction(OperatorGlobalFieldResolver::HOOK_SAFEVARS, array(PoP_Theme_UtilsHooks::class, 'setSafeVars'), 10, 1);
