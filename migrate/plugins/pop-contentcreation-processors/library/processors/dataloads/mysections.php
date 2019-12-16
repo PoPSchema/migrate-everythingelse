@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -96,7 +96,7 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
-                return PostConvertibleTypeResolver::class;
+                return PostUnionTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

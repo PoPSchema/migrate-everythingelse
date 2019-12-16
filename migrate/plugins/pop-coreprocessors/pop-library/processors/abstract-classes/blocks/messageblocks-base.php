@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
 {
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
 
     public function getTypeResolverClass(array $module): ?string
     {
-        return PostConvertibleTypeResolver::class;
+        return PostUnionTypeResolver::class;
     }
 
     // function initModelProps(array $module, array &$props) {

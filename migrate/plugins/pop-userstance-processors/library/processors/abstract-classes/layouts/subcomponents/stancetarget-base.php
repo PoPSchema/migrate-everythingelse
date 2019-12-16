@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 abstract class PoP_Module_Processor_StanceTargetSubcomponentLayoutsBase extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -10,6 +10,6 @@ abstract class PoP_Module_Processor_StanceTargetSubcomponentLayoutsBase extends 
 
     public function getSubcomponentTypeResolverClass(array $module)
     {
-        return PostConvertibleTypeResolver::class;
+        return PostUnionTypeResolver::class;
     }
 }

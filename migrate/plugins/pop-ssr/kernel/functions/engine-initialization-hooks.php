@@ -4,7 +4,7 @@ use PoP\ComponentModel\DataloadUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
-use PoP\ComponentModel\TypeResolvers\ConvertibleTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
@@ -221,20 +221,20 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a convertible type data resolver, then we must add the converted type on each ID
                     if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
-                        $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForConvertibleTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
+                        $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForUnionTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
-                            $isConvertibleType = false;
+                            $isUnionType = false;
                             $typeResultItemIDs = $resultItemIDs;
                         } else {
-                            $isConvertibleType = true;
+                            $isUnionType = true;
                         }
 
                         foreach ($typeResultItemIDs as $resultItem_id) {
-                            if ($isConvertibleType) {
+                            if ($isUnionType) {
                                 list(
                                     $database_key,
                                     $resultItem_id
-                                ) = ConvertibleTypeHelpers::extractDBObjectTypeAndID($resultItem_id);
+                                ) = UnionTypeHelpers::extractDBObjectTypeAndID($resultItem_id);
                             }
                             // This value may be an array (eg: 'locations' => array(123, 343)) or a single value (eg: 'author' => 432)
                             // So convert to array, to deal with all cases

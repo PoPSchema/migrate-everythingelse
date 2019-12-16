@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 interface PoP_Events_API
 {
@@ -26,7 +26,7 @@ interface PoP_Events_API
     public function populate(&$event, $post_data);
 
     // This function is not ideal, since it ties the interface to WordPress logic,
-    // however it is needed currently because the Delelegator TypeResolver (PostConvertibleTypeResolver::class)
+    // however it is needed currently because the Delelegator TypeResolver (PostUnionTypeResolver::class)
     // decides what typeResolver to use based on the object's post type
     public function getEventPostType();
     public function getEventPostTypeSlug();

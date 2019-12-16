@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 
 class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
@@ -75,7 +75,7 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
                 return TagTypeResolver::class;
 
             case self::MODULE_DATALOAD_SINGLE_POST_SIDEBAR:
-                return PostConvertibleTypeResolver::class;
+                return PostUnionTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

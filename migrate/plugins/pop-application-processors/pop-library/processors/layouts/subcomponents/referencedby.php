@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
@@ -40,7 +40,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
-                return PostConvertibleTypeResolver::class;
+                return PostUnionTypeResolver::class;
         }
 
         return parent::getSubcomponentTypeResolverClass($module);

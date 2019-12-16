@@ -1,8 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 
 class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -60,7 +59,7 @@ class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR:
-                return PostConvertibleTypeResolver::class;
+                return PostUnionTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

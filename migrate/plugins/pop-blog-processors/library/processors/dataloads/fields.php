@@ -2,7 +2,7 @@
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Posts\TypeResolvers\PostConvertibleTypeResolver;
+use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
@@ -44,7 +44,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORCONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS:
-                return PostConvertibleTypeResolver::class;
+                return PostUnionTypeResolver::class;
 
             case self::MODULE_DATALOAD_DATAQUERY_USERLIST_FIELDS:
                 return UserTypeResolver::class;
