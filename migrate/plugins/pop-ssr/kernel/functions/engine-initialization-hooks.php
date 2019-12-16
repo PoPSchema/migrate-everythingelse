@@ -182,7 +182,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Data to be copied can come from either the database or the userstatedatabase
             $databases = $data['dbData'];
-            $convertibleDBKeyIDs = $data['convertibleDBKeyIDs'];
+            $unionDBKeyIDs = $data['unionDBKeyIDs'];
 
             // Obtain the data from the database, copy it to the dynamic database
             $typeResolver = $instanceManager->getInstance($typeResolver_class);
@@ -219,7 +219,7 @@ class PoP_SSR_EngineInitialization_Hooks
                     $subcomponent_dataset = array();
                     $resultItemIDs = array_keys($sourcedb[$database_key]);
 
-                    // If it is a convertible type data resolver, then we must add the converted type on each ID
+                    // If it is a union type data resolver, then we must add the converted type on each ID
                     if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
                         $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForUnionTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
