@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -18,8 +19,8 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                         $field = $fieldQueryInterpreter->getField(
                             'equals', 
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('post-type'), 
-                                'value2' => 'post',
+                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
+                                'value2' => PostTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -16,8 +17,8 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                     $field = $fieldQueryInterpreter->getField(
                         'equals', 
                         [
-                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('post-type'), 
-                            'value2' => POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT,
+                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
+                            'value2' => HighlightTypeResolver::NAME,
                         ]
                     );
                     $layouts[$field] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];

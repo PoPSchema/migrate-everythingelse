@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -30,8 +31,8 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
                         $field = $fieldQueryInterpreter->getField(
                             'equals', 
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('post-type'), 
-                                'value2' => $event_post_type,
+                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
+                                'value2' => EventTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

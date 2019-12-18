@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -37,8 +38,8 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                         $field = $fieldQueryInterpreter->getField(
                             'equals', 
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('post-type'), 
-                                'value2' => POP_USERSTANCE_POSTTYPE_USERSTANCE,
+                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
+                                'value2' => StanceTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -19,8 +20,8 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
                     $field = $fieldQueryInterpreter->getField(
                         'equals', 
                         [
-                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('post-type'), 
-                            'value2' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,
+                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
+                            'value2' => LocationPostTypeResolver::NAME,
                         ]
                     );
                     $layouts[$field] = $layout;
