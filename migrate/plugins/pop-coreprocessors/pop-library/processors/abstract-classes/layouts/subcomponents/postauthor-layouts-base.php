@@ -7,9 +7,4 @@ abstract class PoP_Module_Processor_PostAuthorLayoutsBase extends PoP_Module_Pro
     {
         return 'authors';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return UserTypeResolver::class;
-    }
 }

@@ -19,11 +19,6 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return array();
     }
 
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return null;
-    }
-
     public function getDomainSwitchingSubmodules(array $module): array
     {
         return array(

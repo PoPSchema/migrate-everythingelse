@@ -7,9 +7,4 @@ abstract class PoP_Module_Processor_ReferencesLayoutsBase extends PoP_Module_Pro
     {
         return 'references';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return PostUnionTypeResolver::class;
-    }
 }

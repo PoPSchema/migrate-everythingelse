@@ -33,19 +33,6 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
         return parent::getSubcomponentField($module);
     }
 
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
-            case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
-            case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
-            case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
-                return PostUnionTypeResolver::class;
-        }
-
-        return parent::getSubcomponentTypeResolverClass($module);
-    }
-
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);

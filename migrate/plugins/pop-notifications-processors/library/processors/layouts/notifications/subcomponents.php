@@ -31,18 +31,8 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return 'comment-object-id';
         }
-    
+
         return parent::getSubcomponentField($module);
-    }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
-                return CommentTypeResolver::class;
-        }
-
-        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function isIndividual(array $module, array &$props)
@@ -51,7 +41,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
                 return false;
         }
-    
+
         return parent::isIndividual($module, $props);
     }
 
@@ -62,7 +52,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
                 // Make the comment shine whenever added, similar to PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_ADD
                 // but without adding the scrollTop effect
                 $this->appendProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST], $props, 'class', 'pop-highlight');
-                
+
                 // Make it beep
                 $this->mergeJsmethodsProp([PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST], $props, array('beep'));
                 break;

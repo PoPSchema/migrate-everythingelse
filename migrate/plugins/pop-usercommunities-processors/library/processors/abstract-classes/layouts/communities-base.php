@@ -7,9 +7,4 @@ abstract class GD_URE_Module_Processor_UserCommunityLayoutsBase extends PoP_Modu
     {
         return 'active-communities';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return UserTypeResolver::class;
-    }
 }

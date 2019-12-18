@@ -7,9 +7,4 @@ abstract class PoP_Module_Processor_CommentUserMentionsLayoutsBase extends PoP_M
     {
         return 'taggedusers';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return UserTypeResolver::class;
-    }
 }

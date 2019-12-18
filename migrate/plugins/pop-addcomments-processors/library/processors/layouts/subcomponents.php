@@ -46,20 +46,8 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
             case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
                 return 'noheadercomments-lazy';
         }
-    
+
         return parent::getSubcomponentField($module);
-    }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:
-            case self::MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS:
-            case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
-                return CommentTypeResolver::class;
-        }
-
-        return parent::getSubcomponentTypeResolverClass($module);
     }
 
     public function isIndividual(array $module, array &$props)
@@ -70,7 +58,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
             case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
                 return false;
         }
-    
+
         return parent::isIndividual($module, $props);
     }
 
@@ -83,7 +71,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
                 $this->appendProp($module, $props, 'class', 'postcomments clearfix');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

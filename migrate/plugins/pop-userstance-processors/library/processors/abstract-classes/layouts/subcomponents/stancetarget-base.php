@@ -7,9 +7,4 @@ abstract class PoP_Module_Processor_StanceTargetSubcomponentLayoutsBase extends 
     {
         return 'stancetarget';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return PostUnionTypeResolver::class;
-    }
 }

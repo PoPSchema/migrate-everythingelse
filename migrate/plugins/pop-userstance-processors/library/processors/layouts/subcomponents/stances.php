@@ -25,17 +25,6 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         }
     }
 
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_STANCES:
-            case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                return StanceTypeResolver::class;
-        }
-
-        return parent::getSubcomponentTypeResolverClass($module);
-    }
-
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);

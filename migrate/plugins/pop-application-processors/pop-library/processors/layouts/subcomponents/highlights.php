@@ -25,17 +25,6 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
         }
     }
 
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        switch ($module[1]) {
-            case self::MODULE_SUBCOMPONENT_HIGHLIGHTS:
-            case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
-                return HighlightTypeResolver::class;
-        }
-
-        return parent::getSubcomponentTypeResolverClass($module);
-    }
-
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);

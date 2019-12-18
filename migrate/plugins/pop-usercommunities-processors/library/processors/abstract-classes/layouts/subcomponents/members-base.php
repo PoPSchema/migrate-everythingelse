@@ -7,9 +7,4 @@ abstract class GD_URE_Module_Processor_MembersLayoutsBase extends PoP_Module_Pro
     {
         return 'members';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return UserTypeResolver::class;
-    }
 }

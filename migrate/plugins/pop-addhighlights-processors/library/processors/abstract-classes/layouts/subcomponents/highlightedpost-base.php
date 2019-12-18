@@ -7,9 +7,4 @@ abstract class PoP_Module_Processor_HighlightedPostSubcomponentLayoutsBase exten
     {
         return 'highlightedpost';
     }
-
-    public function getSubcomponentTypeResolverClass(array $module)
-    {
-        return PostUnionTypeResolver::class;
-    }
 }
