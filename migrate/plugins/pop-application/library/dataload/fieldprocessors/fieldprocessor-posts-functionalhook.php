@@ -67,7 +67,6 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             case 'multilayout-keys':

@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\ComponentModel\GeneralUtils;
 
 class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -48,7 +48,10 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
                 return PoP_AddPostLinks_Utils::getLink($typeResolver->getId($post));
 
             case 'has-link':
-                if ($typeResolver->resolveValue($post, 'link', $variables, $expressions, $options)) {
+                $link = $typeResolver->resolveValue($post, 'link', $variables, $expressions, $options);
+                if (GeneralUtils::isError($link)) {
+                    return $link;
+                } elseif ($link) {
                     return true;
                 }
                 return false;
@@ -57,6 +60,6 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_AddPostLinks_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

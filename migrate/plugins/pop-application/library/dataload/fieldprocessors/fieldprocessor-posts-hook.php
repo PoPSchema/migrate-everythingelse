@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -10,6 +9,7 @@ use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Media\Misc\MediaHelpers;
 use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\GeneralUtils;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -130,6 +130,9 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
             case 'thumb-full-src':
                 $thumb = $typeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
+                if (GeneralUtils::isError($thumb)) {
+                    return $thumb;
+                }
                 return $thumb['src'];
 
             case 'authors':
@@ -139,7 +142,10 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'has-topics':
-                if ($typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options)) {
+                $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
+                if (GeneralUtils::isError($topics)) {
+                    return $topics;
+                } elseif ($topics) {
                     return true;
                 }
                 return false;
@@ -148,24 +154,45 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'has-appliesto':
-                if ($typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options)) {
+                $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
+                if (GeneralUtils::isError($appliesto)) {
+                    return $appliesto;
+                } elseif ($appliesto) {
                     return true;
                 }
                 return false;
 
             case 'has-userpostactivity':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                return
-                    $typeResolver->resolveValue($resultItem, 'has-comments', $variables, $expressions, $options) ||
-                    $typeResolver->resolveValue($resultItem, 'has-referencedby', $variables, $expressions, $options) ||
-                    $typeResolver->resolveValue($resultItem, 'has-highlights', $variables, $expressions, $options);
+                $hasComments = $typeResolver->resolveValue($resultItem, 'has-comments', $variables, $expressions, $options);
+                if ($hasComments) {
+                    return $hasComments;
+                }
+                $hasReferencedBy = $typeResolver->resolveValue($resultItem, 'has-referencedby', $variables, $expressions, $options);
+                if ($hasReferencedBy) {
+                    return $hasReferencedBy;
+                }
+                $hasHighlights = $typeResolver->resolveValue($resultItem, 'has-highlights', $variables, $expressions, $options);
+                if ($hasHighlights) {
+                    return $hasHighlights;
+                }
+                return $hasComments || $hasReferencedBy || $hasHighlights;
 
             case 'userpostactivity-count':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                return
-                    $typeResolver->resolveValue($resultItem, 'comments-count', $variables, $expressions, $options) +
-                    $typeResolver->resolveValue($resultItem, 'referencedby-count', $variables, $expressions, $options) +
-                    $typeResolver->resolveValue($resultItem, 'highlights-count', $variables, $expressions, $options);
+                $commentsCount = $typeResolver->resolveValue($resultItem, 'comments-count', $variables, $expressions, $options);
+                if ($commentsCount) {
+                    return $commentsCount;
+                }
+                $referencedByCount = $typeResolver->resolveValue($resultItem, 'referencedby-count', $variables, $expressions, $options);
+                if ($referencedByCount) {
+                    return $referencedByCount;
+                }
+                $highlightsCount = $typeResolver->resolveValue($resultItem, 'highlights-count', $variables, $expressions, $options);
+                if ($highlightsCount) {
+                    return $highlightsCount;
+                }
+                return $commentsCount + $referencedByCount + $highlightsCount;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

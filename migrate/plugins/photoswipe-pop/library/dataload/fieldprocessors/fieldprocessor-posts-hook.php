@@ -1,11 +1,11 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\ComponentModel\GeneralUtils;
 
 class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -46,6 +46,9 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
             case 'thumb-full-dimensions':
                 // This is the format needed by PhotoSwipe under attr data-size
                 $thumb = $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
+                if (GeneralUtils::isError($thumb)) {
+                    return $thumb;
+                }
                 return sprintf(
                     '%sx%s',
                     $thumb['width'],
@@ -56,6 +59,6 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PS_POP_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);
