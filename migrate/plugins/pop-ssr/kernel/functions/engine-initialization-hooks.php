@@ -221,7 +221,8 @@ class PoP_SSR_EngineInitialization_Hooks
 
                     // If it is a union type data resolver, then we must add the converted type on each ID
                     if ($subcomponent_typeResolver_class = DataloadUtils::getTypeResolverClassFromSubcomponentDataField($typeResolver, $subcomponent_data_field)) {
-                        $typeResultItemIDs = $engine->maybeGetDBObjectIDOrIDsForUnionTypeResolver($subcomponent_typeResolver_class, $resultItemIDs);
+                        $subcomponentTypeResolver = $instanceManager->getInstance((string)$subcomponent_typeResolver_class);
+                        $typeResultItemIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($resultItemIDs);
                         if (is_null($typeResultItemIDs)) {
                             $isUnionType = false;
                             $typeResultItemIDs = $resultItemIDs;
