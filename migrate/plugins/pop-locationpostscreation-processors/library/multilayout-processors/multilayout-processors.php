@@ -18,10 +18,9 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
                 if ($layout = $location_modules[$format]) {
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(
-                        'equals', 
+                        'isType',
                         [
-                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                            'value2' => LocationPostTypeResolver::NAME,
+                            'type' => LocationPostTypeResolver::NAME,
                         ]
                     );
                     $layouts[$field] = $layout;

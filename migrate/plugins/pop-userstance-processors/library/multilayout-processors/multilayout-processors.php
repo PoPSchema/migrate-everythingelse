@@ -36,10 +36,9 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                     if ($layout = $stance_layouts[$format]) {
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'equals', 
+                            'isType',
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                                'value2' => StanceTypeResolver::NAME,
+                                'type' => StanceTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

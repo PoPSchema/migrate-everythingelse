@@ -17,10 +17,9 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                     if (POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE) {
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'equals', 
+                            'isType',
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                                'value2' => PostTypeResolver::NAME,
+                                'type' => PostTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

@@ -15,10 +15,9 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                 case POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT:
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(
-                        'equals', 
+                        'isType',
                         [
-                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                            'value2' => HighlightTypeResolver::NAME,
+                            'type' => HighlightTypeResolver::NAME,
                         ]
                     );
                     $layouts[$field] = [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT];

@@ -17,10 +17,9 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
-            'equals', 
+            'isType',
             [
-                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                'value2' => LocationPostTypeResolver::NAME,
+                'type' => LocationPostTypeResolver::NAME,
             ]
         );
         switch ($handle) {

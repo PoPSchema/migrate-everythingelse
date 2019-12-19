@@ -24,10 +24,9 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
                     if ($layout = $event_layouts[$format]) {
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'equals', 
+                            'isType',
                             [
-                                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                                'value2' => EventTypeResolver::NAME,
+                                'type' => EventTypeResolver::NAME,
                             ]
                         );
                         $layouts[$field] = $layout;

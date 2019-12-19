@@ -11,10 +11,9 @@ class PoP_LocationPostCategoryLayouts_Multilayout_Processor extends PoP_Applicat
                 if (POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE) {
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(
-                        'equals', 
+                        'isType',
                         [
-                            'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('__typename'), 
-                            'value2' => LocationPostTypeResolver::NAME,
+                            'type' => LocationPostTypeResolver::NAME,
                         ]
                     );
                     $layouts[$field] = [PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::class, PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents::MODULE_MULTICOMPONENT_LOCATIONMAP];
