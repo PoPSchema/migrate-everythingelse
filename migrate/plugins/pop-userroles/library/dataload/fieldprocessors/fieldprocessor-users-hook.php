@@ -1,6 +1,7 @@
 <?php
 namespace PoP\UserRoles;
-use PoP\ComponentModel\Utils;
+
+use PoP\ComponentModel\GeneralUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -19,6 +20,7 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
     {
         return [
 			'role',
+			'hasRole',
         ];
     }
 
@@ -26,6 +28,7 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
     {
         $types = [
 			'role' => SchemaDefinition::TYPE_STRING,
+			'hasRole' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,8 +38,27 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'role' => $translationAPI->__('', ''),
+			'hasRole' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
+    }
+
+    public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
+    {
+        $translationAPI = TranslationAPIFacade::getInstance();
+        switch ($fieldName) {
+            case 'hasRole':
+                return [
+                    [
+                        SchemaDefinition::ARGNAME_NAME => 'role',
+                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('The role name to compare against', 'user-roles'),
+                        SchemaDefinition::ARGNAME_MANDATORY => true,
+                    ],
+                ];
+        }
+
+        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
     }
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
@@ -46,19 +68,24 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'role':
                 $user_roles = $cmsuserrolesapi->getUserRoles($typeResolver->getId($user));
-
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
                 return HooksAPIFacade::getInstance()->applyFilters(
-                    'UserTypeResolver:getValue:role', 
-                    array_shift($user_roles), 
+                    'UserTypeResolver:getValue:role',
+                    array_shift($user_roles),
                     $typeResolver->getId($user)
                 );
+            case 'hasRole':
+                $role = $typeResolver->resolveValue($user, 'role', $variables, $expressions, $options);
+                if (GeneralUtils::isError($role)) {
+                    return $role;
+                }
+                return $role == $fieldArgs['role'];
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

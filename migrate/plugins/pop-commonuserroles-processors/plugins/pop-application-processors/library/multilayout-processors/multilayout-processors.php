@@ -7,17 +7,15 @@ class PoP_CommonUserRoles_Multilayout_Processor extends PoP_Application_Multilay
     {
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field_organization = $fieldQueryInterpreter->getField(
-            'equals', 
+            'hasRole',
             [
-                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('role'), 
-                'value2' => GD_URE_ROLE_ORGANIZATION,
+                'role' => GD_URE_ROLE_ORGANIZATION,
             ]
         );
         $field_individual = $fieldQueryInterpreter->getField(
-            'equals', 
+            'hasRole',
             [
-                'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('role'), 
-                'value2' => GD_URE_ROLE_INDIVIDUAL,
+                'role' => GD_URE_ROLE_INDIVIDUAL,
             ]
         );
         switch ($handle) {
