@@ -1,9 +1,9 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\GeneralUtils;
 
 abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems extends AbstractFunctionalFieldResolver
 {
@@ -97,7 +97,13 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
         switch ($fieldName) {
             case 'share-url':
                 $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
+                if (GeneralUtils::isError($url)) {
+                    return $url;
+                }
                 $title = $typeResolver->resolveValue($resultItem, $this->getTitleField(), $variables, $expressions, $options);
+                if (GeneralUtils::isError($title)) {
+                    return $title;
+                }
                 return $this->getShareUrl($url, $title, $this->getProviderURLs()[$fieldArgs['provider']]);
         }
 
