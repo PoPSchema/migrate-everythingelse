@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
 {
@@ -27,13 +28,13 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
             }
             if ($add_layout) {
                 // Priority: place it before the 'post-type' layout key
-                array_unshift($keys, POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST.'-map');
+                array_unshift($keys, LocationPostTypeResolver::NAME.'-map');
             }
         }
         return $keys;
     }
 }
-    
+
 /**
  * Initialize
  */

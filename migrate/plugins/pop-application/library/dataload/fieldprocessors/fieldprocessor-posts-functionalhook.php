@@ -74,21 +74,22 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'PoP_Application:TypeResolver_Posts:multilayout-keys',
                     array(
-                        $typeResolver->resolveValue($post, 'post-type', $variables, $expressions, $options),
+                        strtolower($typeResolver->getTypeName()),
                     ),
-                    $typeResolver->getId($post)
+                    $typeResolver->getId($post),
+                    $typeResolver
                 );
 
             case 'latestcounts-trigger-values':
                 $value = array();
-                $post_type = $typeResolver->resolveValue($post, 'post-type', $variables, $expressions, $options);
+                $type = strtolower($typeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
                 if ($cats = $typeResolver->resolveValue($post, 'cats', $variables, $expressions, $options)) {
                     foreach ($cats as $cat) {
-                        $value[] = $post_type.'-'.$cat;
+                        $value[] = $type.'-'.$cat;
                     }
                 } else {
-                    $value[] = $post_type;
+                    $value[] = $type;
                 }
                 return $value;
 
