@@ -70,28 +70,6 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
         ];
     }
 
-    public function resolveSchemaValidationErrorDescription(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
-    {
-        $translationAPI = TranslationAPIFacade::getInstance();
-        switch ($fieldName) {
-            case 'share-url':
-                $provider = $fieldArgs['provider'];
-                if (!$provider) {
-                    return $translationAPI->__('Argument \'provider\' cannot be empty', '');
-                }
-                $providers = array_keys($this->getProviderURLs());
-                if (!in_array($provider, $providers)) {
-                    return sprintf(
-                        $translationAPI->__('Argument \'provider\' can only have these values: \'%s\'', ''),
-                        implode($translationAPI->__('\', \''), $providers)
-                    );
-                }
-                break;
-        }
-
-        return parent::resolveSchemaValidationErrorDescription($typeResolver, $fieldName, $fieldArgs);
-    }
-
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         switch ($fieldName) {
