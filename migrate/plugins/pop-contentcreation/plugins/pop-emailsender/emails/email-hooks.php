@@ -302,14 +302,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         // Check if the post has references. If so, also send email to the owners of those
         if ($references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_name = gdGetPostname($post_id);
-            $url = $postTypeAPI->getPermalink($post_id);
-            $title = $postTypeAPI->getTitle($post_id);
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
-
-            // Get the name of the poster
-            $post_author_id = get_post_field('post_author', $post_id);
-            $author_name = $cmsusersapi->getUserDisplayName($post_author_id);
-
             foreach ($references as $reference_post_id) {
                 $reference_post_name = gdGetPostname($reference_post_id);
                 $reference_url = $postTypeAPI->getPermalink($reference_post_id);
@@ -342,10 +335,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmspostsresolver->getPostId($post);
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post_name = gdGetPostname($post_id);
-        $url = $postTypeAPI->getPermalink($post_id);
-        $title = $postTypeAPI->getTitle($post_id);
         $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
 
         $subject = sprintf(TranslationAPIFacade::getInstance()->__('Your %s was approved!', 'pop-emailsender'), $post_name);
