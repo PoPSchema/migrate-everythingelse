@@ -1,13 +1,14 @@
 <?php
 
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -59,6 +60,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $post = $resultItem;
@@ -66,7 +68,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
             case 'title-edit':
                 if (gdCurrentUserCanEdit($typeResolver->getId($post))) {
-                    return $cmspostsresolver->getPostTitle($post);
+                    return $postTypeAPI->getTitle($post);
                 }
                 return '';
 

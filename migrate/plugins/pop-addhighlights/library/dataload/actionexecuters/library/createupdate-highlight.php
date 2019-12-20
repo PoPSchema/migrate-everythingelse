@@ -26,9 +26,8 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $referenced = $postTypeAPI->getPost($form_data['highlightedpost']);
-        $form_data['title'] = $cmspostsresolver->getPostTitle($referenced);
+        $form_data['title'] = $postTypeAPI->getTitle($referenced);
 
         return $form_data;
     }
@@ -74,10 +73,10 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
     protected function getSuccessTitle($referenced = null)
     {
         if ($referenced) {
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             return sprintf(
                 TranslationAPIFacade::getInstance()->__('Highlight from “%s”', 'poptheme-wassup'),
-                $cmspostsresolver->getPostTitle($referenced)
+                $postTypeAPI->getTitle($referenced)
             );
         }
 

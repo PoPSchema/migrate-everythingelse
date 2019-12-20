@@ -84,11 +84,11 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         $feedback_title = PoP_UserStance_PostNameUtils::getNameUc();
         if ($referenced) {
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             return sprintf(
                 TranslationAPIFacade::getInstance()->__('%1$s after reading “%2$s”', 'pop-userstance'),
                 $feedback_title,
-                $cmspostsresolver->getPostTitle($referenced)
+                $postTypeAPI->getTitle($referenced)
             );
         }
 
