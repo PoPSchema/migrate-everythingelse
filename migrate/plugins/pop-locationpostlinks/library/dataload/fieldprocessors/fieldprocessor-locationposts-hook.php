@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -48,7 +47,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
         ])) {
             $locationpost = $resultItem;
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-            return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $taxonomyapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $typeResolver->getId($locationpost));
+            return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $taxonomyapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $typeResolver->getID($locationpost));
         }
         return true;
     }
@@ -67,6 +66,6 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

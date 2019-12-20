@@ -55,10 +55,10 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
         $user = $resultItem;
         switch ($fieldName) {
             case 'edit-membership-url':
-                return gdUreEditMembershipUrl($typeResolver->getId($user));
+                return gdUreEditMembershipUrl($typeResolver->getID($user));
 
             case 'edit-memberstatus-inline-url':
-                return gdUreEditMembershipUrl($typeResolver->getId($user), true);
+                return gdUreEditMembershipUrl($typeResolver->getID($user), true);
 
             case 'memberstatus-byname':
                 $selected = $typeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);

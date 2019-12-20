@@ -6,7 +6,7 @@ trait CommunityFieldResolverTrait
     public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
     {
         $user = $resultItem;
-        if (!gdUreIsCommunity($typeResolver->getId($user))) {
+        if (!gdUreIsCommunity($typeResolver->getID($user))) {
             return false;
         }
         return parent::resolveCanProcessResultItem($typeResolver, $resultItem, $fieldName, $fieldArgs);

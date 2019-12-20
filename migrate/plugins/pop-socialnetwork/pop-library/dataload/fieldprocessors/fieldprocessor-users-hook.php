@@ -56,21 +56,21 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
         switch ($fieldName) {
             case 'recommendsposts':
                 $query = [];
-                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorrecommendedposts($query, $typeResolver->getId($user));
+                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorrecommendedposts($query, $typeResolver->getID($user));
                 return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'followers':
                 $query = [];
-                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowers($query, $typeResolver->getId($user));
+                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowers($query, $typeResolver->getID($user));
                 return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'following':
                 $query = [];
-                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowingusers($query, $typeResolver->getId($user));
+                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowingusers($query, $typeResolver->getID($user));
                 return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'followers-count':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

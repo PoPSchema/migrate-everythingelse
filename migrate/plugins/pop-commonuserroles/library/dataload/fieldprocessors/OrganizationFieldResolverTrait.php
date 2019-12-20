@@ -6,7 +6,7 @@ trait OrganizationFieldResolverTrait
     public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
     {
         $user = $resultItem;
-        if (!gdUreIsOrganization($typeResolver->getId($user))) {
+        if (!gdUreIsOrganization($typeResolver->getID($user))) {
             return false;
         }
         return parent::resolveCanProcessResultItem($typeResolver, $resultItem, $fieldName, $fieldArgs);

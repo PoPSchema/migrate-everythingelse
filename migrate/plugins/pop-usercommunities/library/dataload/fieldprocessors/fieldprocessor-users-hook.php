@@ -79,35 +79,35 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         switch ($fieldName) {
             case 'memberstatus':
                 // All status for all communities
-                $status = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($status);
 
             case 'memberprivileges':
                 // All privileges for all communities
-                $privileges = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($privileges);
 
             case 'membertags':
                 // All privileges for all communities
-                $tags = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($tags);
 
             case 'is-community':
-                return gdUreIsCommunity($typeResolver->getId($user)) ? true : null;
+                return gdUreIsCommunity($typeResolver->getID($user)) ? true : null;
 
             case 'communities':
                 // Return only the communities where the user's been accepted as a member
-                return gdUreGetCommunities($typeResolver->getId($user));
+                return gdUreGetCommunities($typeResolver->getID($user));
 
             case 'active-communities':
                 // Return only the communities where the user's been accepted as a member
-                return gdUreGetCommunitiesStatusActive($typeResolver->getId($user));
+                return gdUreGetCommunitiesStatusActive($typeResolver->getID($user));
 
             case 'has-active-communities':
                 $communities = $typeResolver->resolveValue($resultItem, 'active-communities', $variables, $expressions, $options);

@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
@@ -43,13 +42,13 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
         $post = $resultItem;
         switch ($fieldName) {
             case 'preview-url':
-                // Use function getId to also cater for events (whose ID is $event->post_id)
-                return $pluginapi->getPreviewLink($typeResolver->getId($post));
+                // Use function getID to also cater for events (whose ID is $event->post_id)
+                return $pluginapi->getPreviewLink($typeResolver->getID($post));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PPPPoP_DataLoad_FieldResolver_FunctionalProfiles::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

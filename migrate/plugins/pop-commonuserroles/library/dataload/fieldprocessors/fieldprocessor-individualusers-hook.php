@@ -47,7 +47,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'individualinterests':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
 
             case 'has-individual-details':
                 return !empty($typeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options));

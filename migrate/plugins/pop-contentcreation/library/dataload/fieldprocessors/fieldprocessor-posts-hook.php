@@ -66,28 +66,28 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
         switch ($fieldName) {
 
             case 'title-edit':
-                if (gdCurrentUserCanEdit($typeResolver->getId($post))) {
+                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
                     return $postTypeAPI->getTitle($post);
                 }
                 return '';
 
             case 'content-editor':
-                if (gdCurrentUserCanEdit($typeResolver->getId($post))) {
-                   return $cmseditpostsapi->getPostEditorContent($typeResolver->getId($post));
+                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
+                   return $cmseditpostsapi->getPostEditorContent($typeResolver->getID($post));
                 }
                 return '';
 
             case 'content-edit':
-                if (gdCurrentUserCanEdit($typeResolver->getId($post))) {
+                if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
                     return $postTypeAPI->getContent($post);
                 }
                 return '';
 
             case 'edit-url':
-                return urldecode($cmseditpostsapi->getEditPostLink($typeResolver->getId($post)));
+                return urldecode($cmseditpostsapi->getEditPostLink($typeResolver->getID($post)));
 
             case 'delete-url':
-                return $cmseditpostsapi->getDeletePostLink($typeResolver->getId($post));
+                return $cmseditpostsapi->getDeletePostLink($typeResolver->getID($post));
 
             case 'coauthors':
                 $authors = $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);

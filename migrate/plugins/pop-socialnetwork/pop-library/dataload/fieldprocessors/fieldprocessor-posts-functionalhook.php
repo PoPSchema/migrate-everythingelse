@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
@@ -69,12 +68,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         switch ($fieldName) {
             case 'recommendpost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST));
 
             case 'unrecommendpost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
             case 'recommendpost-count-plus1':
@@ -85,12 +84,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 
             case 'upvotepost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UPVOTEPOST));
 
             case 'undoupvotepost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
             case 'upvotepost-count-plus1':
@@ -101,12 +100,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
 
             case 'downvotepost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST));
 
             case 'undodownvotepost-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_POSTID => $typeResolver->getId($post), 
+                    POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
             case 'downvotepost-count-plus1':
@@ -119,6 +118,6 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

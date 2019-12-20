@@ -47,7 +47,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'members':
-                return URE_CommunityUtils::getCommunityMembers($typeResolver->getId($user));
+                return URE_CommunityUtils::getCommunityMembers($typeResolver->getID($user));
 
             case 'has-members':
                 return !empty($typeResolver->resolveValue($user, 'members', $variables, $expressions, $options));

@@ -67,13 +67,13 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'role':
-                $user_roles = $cmsuserrolesapi->getUserRoles($typeResolver->getId($user));
+                $user_roles = $cmsuserrolesapi->getUserRoles($typeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'UserTypeResolver:getValue:role',
                     array_shift($user_roles),
-                    $typeResolver->getId($user)
+                    $typeResolver->getID($user)
                 );
             case 'hasRole':
                 $role = $typeResolver->resolveValue($user, 'role', $variables, $expressions, $options);

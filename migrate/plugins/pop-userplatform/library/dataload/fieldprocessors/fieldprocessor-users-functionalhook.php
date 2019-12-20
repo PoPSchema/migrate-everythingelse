@@ -69,7 +69,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
 
          // User preferences
             case 'user-preferences':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_USERPREFERENCES);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_USERPREFERENCES);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

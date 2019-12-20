@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -43,7 +42,7 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
         $user = $resultItem;
         switch ($fieldName) {
             case 'userphoto':
-                $userphoto = gdGetAvatarPhotoinfo($typeResolver->getId($user));
+                $userphoto = gdGetAvatarPhotoinfo($typeResolver->getID($user));
                 return array(
                     'src' => $userphoto['src'],
                     'width' => $userphoto['width'],
@@ -54,6 +53,6 @@ class PoP_Avatar_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolve
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Avatar_DataLoad_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

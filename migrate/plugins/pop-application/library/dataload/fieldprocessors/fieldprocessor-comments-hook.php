@@ -63,7 +63,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
                 $comment_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT])->getName([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT]);
                 return GeneralUtils::addQueryArgs([
                     $post_name => $postID,
-                    $comment_name => $typeResolver->getId($comment),
+                    $comment_name => $typeResolver->getID($comment),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }
 

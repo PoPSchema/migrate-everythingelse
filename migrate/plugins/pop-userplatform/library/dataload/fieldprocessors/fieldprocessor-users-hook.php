@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -73,13 +72,13 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
 
         switch ($fieldName) {
             case 'short-description':
-                return gdGetUserShortdescription($typeResolver->getId($user));
+                return gdGetUserShortdescription($typeResolver->getID($user));
 
             case 'title':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_TITLE, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_TITLE, true);
 
             case 'display-email':
-                return (bool)\PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_DISPLAYEMAIL, true);
+                return (bool)\PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_DISPLAYEMAIL, true);
 
          // Override
             case 'contact':
@@ -105,7 +104,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                     }
                 }
                 // if ($blog = $typeResolver->resolveValue($user, 'blog', $variables, $expressions, $options)) {
-            
+
                 //     $value[] = array(
                 //         'tooltip' => TranslationAPIFacade::getInstance()->__('Blog', 'poptheme-wassup'),
                 //         'url' => maybeAddHttp($blog),
@@ -164,29 +163,29 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
             case 'has-contact':
                 $contact = $typeResolver->resolveValue($resultItem, 'contact', $variables, $expressions, $options);
                 return !empty($contact);
-            
+
             case 'facebook':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_FACEBOOK, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_FACEBOOK, true);
 
             case 'twitter':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_TWITTER, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_TWITTER, true);
 
             case 'linkedin':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_LINKEDIN, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_LINKEDIN, true);
 
             case 'youtube':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_YOUTUBE, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_YOUTUBE, true);
 
             case 'instagram':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
 
             case 'is-profile':
-                return isProfile($typeResolver->getId($user));
+                return isProfile($typeResolver->getID($user));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_UserPlatform_DataLoad_FieldResolver_Users::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

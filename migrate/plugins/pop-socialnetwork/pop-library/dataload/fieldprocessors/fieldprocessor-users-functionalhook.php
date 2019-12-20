@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
@@ -48,18 +47,18 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
         switch ($fieldName) {
             case 'followuser-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_USERID => $typeResolver->getId($user), 
+                    POP_INPUTNAME_USERID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_FOLLOWUSER));
 
             case 'unfollowuser-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_USERID => $typeResolver->getId($user), 
+                    POP_INPUTNAME_USERID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

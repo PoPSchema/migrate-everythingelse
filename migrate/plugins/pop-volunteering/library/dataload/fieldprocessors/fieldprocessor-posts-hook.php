@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -42,12 +41,12 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $post = $resultItem;
         switch ($fieldName) {
             case 'volunteers-needed':
-                return (bool)\PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
+                return (bool)\PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Volunteering_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

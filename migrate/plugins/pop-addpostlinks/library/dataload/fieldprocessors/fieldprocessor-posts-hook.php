@@ -45,7 +45,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $post = $resultItem;
         switch ($fieldName) {
             case 'link':
-                return PoP_AddPostLinks_Utils::getLink($typeResolver->getId($post));
+                return PoP_AddPostLinks_Utils::getLink($typeResolver->getID($post));
 
             case 'has-link':
                 $link = $typeResolver->resolveValue($post, 'link', $variables, $expressions, $options);

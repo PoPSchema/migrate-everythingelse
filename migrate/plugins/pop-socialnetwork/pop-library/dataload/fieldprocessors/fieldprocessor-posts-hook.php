@@ -60,21 +60,21 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         switch ($fieldName) {
             // Users mentioned in the post: @mentions
             case 'taggedusers':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_TAGGEDUSERS);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_TAGGEDUSERS);
 
             case 'recommendedby':
                 $query = [];
-                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($query, $typeResolver->getId($post));
+                PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($query, $typeResolver->getID($post));
                 return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'recommendpost-count':
-                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_RECOMMENDCOUNT, true);
+                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_RECOMMENDCOUNT, true);
 
             case 'upvotepost-count':
-                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_UPVOTECOUNT, true);
+                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_UPVOTECOUNT, true);
 
             case 'downvotepost-count':
-                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_DOWNVOTECOUNT, true);
+                return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_DOWNVOTECOUNT, true);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

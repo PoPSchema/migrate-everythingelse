@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -48,18 +47,18 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'subscribetotag-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_TAGID => $typeResolver->getId($tag), 
+                    POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG));
 
             case 'unsubscribefromtag-url':
                 return GeneralUtils::addQueryArgs([
-                    POP_INPUTNAME_TAGID => $typeResolver->getId($tag), 
+                    POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_DataLoad_FieldResolver_Tags::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

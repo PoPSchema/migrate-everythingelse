@@ -58,14 +58,14 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $post = $resultItem;
         switch ($fieldName) {
             case 'references':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_REFERENCES);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_REFERENCES);
 
             case 'has-references':
                 $references = $typeResolver->resolveValue($resultItem, 'references', $variables, $expressions, $options);
                 return !empty($references);
 
             case 'referencedby':
-                return PoP_RelatedPosts_SectionUtils::getReferencedby($typeResolver->getId($post));
+                return PoP_RelatedPosts_SectionUtils::getReferencedby($typeResolver->getID($post));
 
             case 'has-referencedby':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'referencedby', $variables, $expressions, $options);

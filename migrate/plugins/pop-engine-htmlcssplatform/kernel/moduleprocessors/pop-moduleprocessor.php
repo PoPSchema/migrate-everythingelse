@@ -3,7 +3,6 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
@@ -21,7 +20,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         if ($this->getProp($module, $props, 'frontend-id')) {
             return true;
         }
-    
+
         return false;
     }
 
@@ -40,8 +39,8 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
             return $frontend_id;
         }
 
-        $id = $this->getId($module, $props);
-        
+        $id = $this->getID($module, $props);
+
         // If the ID in the htmlcssplatform is not unique, then we gotta make it unique by adding POP_CONSTANT_UNIQUE_ID at the end
         // Since POP_CONSTANT_UNIQUE_ID will change its value when fetching pageSection, this allows to add an HTML element
         // similar to an existing one but with a different ID
@@ -49,11 +48,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         if (!$this->isFrontendIdUnique($module, $props)) {
             return $id.POP_CONSTANT_UNIQUE_ID;
         }
-    
+
         return $id;
     }
-    
-    public function getId(array $module, array &$props)
+
+    public function getID(array $module, array &$props)
     {
         $moduleOutputName = ModuleUtils::getModuleOutputName($module);
         // if ($this->fixedId($module, $props)) {
@@ -61,10 +60,10 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         // 	$block_settings_id = $props['block-moduleoutputname'];
         // 	return $pagesection_settings_id.'_'.$block_settings_id.'_'.$moduleOutputName;
         // }
-    
+
         return $moduleOutputName;
     }
-    
+
     public function getDbobjectParams(array $module): array
     {
         return array();
@@ -109,12 +108,12 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 	return $this->getProp($module, $props, 'module-cb');
     // }
     // function getModuleCbActions(array $module, array &$props) {
-    
+
     // 	return null;
     // }
 
     // function getModulePath(array $module, array &$props) {
-    
+
     // 	// Allow to be set from upper modules. Eg: Datum Dynamic Layout can set it to its triggered module,
     // 	// which will need to be rendered dynamically on the htmlcssplatform on runtime
     // 	if ($this->getProp($module, $props, 'module-path')) {
@@ -132,7 +131,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     public function getTemplateResources(array $module, array &$props): array
     {
-    
+
         // We must send always the template, even if it's similar to the module,
         // so that we have the information of all required templates for the ResourceLoader
         // Eg: otherwise loading template 'status' fails
@@ -142,14 +141,14 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
             arrayFlatten(
                 array_values(
                     $this->getExtraTemplateResources($module, $props)
-                ), 
+                ),
                 true
             )
         );
     }
 
     // function getModulesCbs(array $module, array &$props) {
-    
+
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
     // 	// Return initialized empty array at the last level
@@ -171,9 +170,9 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 		}
     // 	}
     // 	foreach ($this->getSubmodulesByGroup($module) as $submodule) {
-        
+
     // 		if ($submodule_ret = $moduleprocessor_manager->getProcessor($submodule)->getModulesCbs($submodule, $props)) {
-            
+
     // 			$ret['cbs'] = array_merge(
     // 				$ret['cbs'],
     // 				$submodule_ret['cbs']
@@ -184,16 +183,16 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 			);
     // 		}
     // 	}
-        
+
     // 	return $ret;
     // }
 
     // function getModulesPaths(array $module, array &$props) {
-    
+
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
     // 	$moduleOutputName = ModuleUtils::getModuleOutputName($module);
-        
+
     // 	// Return initialized empty array at the last level
     // 	$ret = array();
 
@@ -209,7 +208,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 	foreach ($submodules as $submodule) {
 
     // 		if ($submodule_ret = $moduleprocessor_manager->getProcessor($submodule)->getModulesPaths($submodule, $props)) {
-            
+
     // 			// Add the extra path to the module
     // 			foreach ($submodule_ret as $submodule_module => $submodule_module_path) {
 
@@ -220,11 +219,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     // 			}
     // 		}
     // 	}
-        
+
     // 	return $ret;
     // }
 
-    
+
     public function getMutableonrequestConfiguration(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestConfiguration($module, $props);
@@ -240,7 +239,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         }
 
         if ($this->fixedId($module, $props)) {
-        
+
             // Whenever the id is fixed, we can already know what the front-end id will be
             // this is needed for the module to print its id in advance
             $ret[GD_JS_FRONTENDID] = $this->getFrontendId($module, $props);
@@ -263,7 +262,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     }
 
     public function getImmutableConfiguration(array $module, array &$props): array
-    {        
+    {
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
@@ -281,7 +280,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         // Add the htmlcssplatform stuff
         $this->addHTMLCSSPlatformModuleConfiguration($ret, $module, $props);
 
-        $ret['id'] = $this->getId($module, $props);
+        $ret['id'] = $this->getID($module, $props);
         if ($this->fixedId($module, $props)) {
             $ret[GD_JS_FIXEDID] = true;
         }
@@ -310,11 +309,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         if ($previousmodules_ids = $this->getProp($module, $props, 'previousmodules-ids')) {
             // We receive entries of key => module, convert them to key => moduleOutputName
             $ret[GD_JS_PREVIOUSMODULESIDS] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $previousmodules_ids
             );
         }
-        
+
         // Load additional/extension templates?
         if ($extra_template_resources = $this->getExtraTemplateResources($module, $props)) {
             $ret[POP_JS_TEMPLATES] = array_map(
@@ -325,7 +324,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
                         },
                         $resources
                     );
-                }, 
+                },
                 $extra_template_resources
             );
         }
@@ -350,7 +349,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         if ($this->addModuleNameAsClass($module, $props)) {
             $this->appendProp($module, $props, 'class', DefinitionManagerFacade::getInstance()->getOriginalName($module));
         }
-    
+
         // // Add the properties below either as static or mutableonrequest
         // if (in_array($this->getDatasource($module, $props), array(
         // 	POP_DATALOAD_DATASOURCE_IMMUTABLE,
@@ -370,7 +369,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
             if ($dbobject_params = $this->getDbobjectParams($module)) {
                 $this->mergeProp($module, $props, 'dbobject-params', $dbobject_params);
             }
-        
+
             $this->initHTMLCSSPlatformModelProps($module, $props);
         }
 
@@ -379,7 +378,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     public function initHTMLCSSPlatformRequestProps(array $module, array &$props)
     {
-    
+
         // // Add the properties below either as static or mutableonrequest
         // if ($this->getDatasource($module, $props) == POP_DATALOAD_DATASOURCE_MUTABLEONREQUEST) {
 

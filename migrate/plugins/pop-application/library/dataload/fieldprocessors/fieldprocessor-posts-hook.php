@@ -22,7 +22,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
     public function getThumb($post, TypeResolverInterface $typeResolver, $size = null, $add_description = false)
     {
-        $thumb_id = PostMediaHelpers::getThumbId($typeResolver->getId($post));
+        $thumb_id = PostMediaHelpers::getThumbId($typeResolver->getID($post));
         $img = MediaHelpers::getAttachmentImageProperties($thumb_id, $size);
 
         // Add the image description
@@ -136,10 +136,10 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return $thumb['src'];
 
             case 'authors':
-                return gdGetPostauthors($typeResolver->getId($post));
+                return gdGetPostauthors($typeResolver->getID($post));
 
             case 'topics':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_CATEGORIES);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'has-topics':
                 $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
@@ -151,7 +151,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return false;
 
             case 'appliesto':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_APPLIESTO);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'has-appliesto':
                 $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);

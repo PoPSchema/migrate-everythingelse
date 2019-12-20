@@ -56,16 +56,16 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
         $user = $resultItem;
         switch ($fieldName) {
             case 'contact-person':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
 
             case 'contact-number':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
 
             case 'organizationtypes':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES);
 
             case 'organizationcategories':
-                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getId($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES);
+                return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES);
 
             case 'has-organization-details':
                 return

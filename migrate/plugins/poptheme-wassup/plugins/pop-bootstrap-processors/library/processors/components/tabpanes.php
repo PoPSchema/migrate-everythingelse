@@ -62,14 +62,14 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
         return $ret;
     }
 
-    public function getId(array $module, array &$props)
+    public function getID(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_ADDONS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_ADDONS;
         }
 
-        return parent::getId($module, $props);
+        return parent::getID($module, $props);
     }
 
     public function getModelPropsForDescendantModules(array $module, array &$props): array
@@ -131,7 +131,7 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
 
                 // // Editor rows
                 // $this->add_general_prop($ret, 'editor-rows', 5);
-                
+
                 HooksAPIFacade::getInstance()->doAction(
                     'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
                     $module,

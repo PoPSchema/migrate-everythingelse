@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -14,7 +13,7 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
             PostTypeResolver::class,
         );
     }
-    
+
     public static function getFieldNamesToResolve(): array
     {
         return [
@@ -45,7 +44,7 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
         switch ($fieldName) {
             // Override to make sure the category comes from the main ones
             case 'cat':
-                if ($main_cat = getTheMainCategory($typeResolver->getId($post))) {
+                if ($main_cat = getTheMainCategory($typeResolver->getID($post))) {
                     return $main_cat;
                 }
                 return null;
@@ -54,6 +53,6 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

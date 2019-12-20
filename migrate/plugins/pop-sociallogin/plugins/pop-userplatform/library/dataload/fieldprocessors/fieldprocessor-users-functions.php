@@ -41,7 +41,7 @@ class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
     {
         // Only if the user is a subscriber
         $user = $resultItem;
-        return !userHasProfileAccess($typeResolver->getId($user));
+        return !userHasProfileAccess($typeResolver->getID($user));
     }
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])

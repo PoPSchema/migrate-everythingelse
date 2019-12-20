@@ -76,7 +76,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                     array(
                         strtolower($typeResolver->getTypeName()),
                     ),
-                    $typeResolver->getId($post),
+                    $typeResolver->getID($post),
                     $typeResolver
                 );
 
@@ -110,7 +110,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);
                 return GeneralUtils::addQueryArgs([
-                    $post_name => $typeResolver->getId($post),
+                    $post_name => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
             case 'topics-byname':

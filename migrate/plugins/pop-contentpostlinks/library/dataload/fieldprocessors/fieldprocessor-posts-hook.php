@@ -82,7 +82,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
         ])) {
             $post = $resultItem;
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-            return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $taxonomyapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getId($post));
+            return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $taxonomyapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
         }
         return true;
     }
@@ -103,7 +103,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                 return PoP_ContentPostLinks_Utils::getLinkContent($post, true);
 
             case 'linkaccess':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_LINKACCESS, true);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkaccess-byname':
                 $selected = $typeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $options);
@@ -114,7 +114,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                 return $linkaccess->getSelectedValue();
 
             case 'linkcategories':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getId($post), GD_METAKEY_POST_LINKCATEGORIES);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkcategories-byname':
                 $selected = $typeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options);

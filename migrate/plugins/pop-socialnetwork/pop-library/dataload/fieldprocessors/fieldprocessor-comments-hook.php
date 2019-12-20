@@ -46,7 +46,7 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             // Users mentioned in the comment: @mentions
             case 'taggedusers':
-                return \PoP\CommentMeta\Utils::getCommentMeta($typeResolver->getId($comment), GD_METAKEY_COMMENT_TAGGEDUSERS);
+                return \PoP\CommentMeta\Utils::getCommentMeta($typeResolver->getID($comment), GD_METAKEY_COMMENT_TAGGEDUSERS);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

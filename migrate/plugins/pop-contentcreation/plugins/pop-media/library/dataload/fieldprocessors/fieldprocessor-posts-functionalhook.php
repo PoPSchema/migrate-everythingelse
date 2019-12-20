@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
@@ -44,7 +43,7 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         $post = $resultItem;
         switch ($fieldName) {
             case 'featuredimage-attrs':
-                if ($featuredimage = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getId($post))) {
+                if ($featuredimage = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getID($post))) {
                     return MediaHelpers::getAttachmentImageProperties($featuredimage, 'thumb-md');
                 }
                 return null;
@@ -53,6 +52,6 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

@@ -70,11 +70,11 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
             case 'excerpt':
                 $readmore = sprintf(
                     TranslationAPIFacade::getInstance()->__('... <a href="%s">Read more</a>', 'pop-application'),
-                    $cmsusersapi->getUserURL($typeResolver->getId($user))
+                    $cmsusersapi->getUserURL($typeResolver->getID($user))
                 );
                 // Excerpt length can be set through fieldArgs
                 $length = $fieldArgs['length'] ? (int) $fieldArgs['length'] : 300;
-                return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($cmsusersapi->getUserDescription($typeResolver->getId($user)))), $length, $readmore));
+                return $cmsapplicationhelpers->makeClickable(limitString(strip_tags($cmsapplicationhelpers->convertLinebreaksToHTML($cmsusersapi->getUserDescription($typeResolver->getID($user)))), $length, $readmore));
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

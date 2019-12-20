@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Utils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
@@ -43,7 +42,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         switch ($fieldName) {
             case 'is-link-embeddable':
                 $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
-                $link = PoP_AddPostLinks_Utils::getLink($typeResolver->getId($post));
+                $link = PoP_AddPostLinks_Utils::getLink($typeResolver->getID($post));
                 $host = getUrlHost($link);
                 return (!is_ssl() || substr($link, 0, 8) == 'https://') && !in_array($host, $nonembeddable);
         }
@@ -51,6 +50,6 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

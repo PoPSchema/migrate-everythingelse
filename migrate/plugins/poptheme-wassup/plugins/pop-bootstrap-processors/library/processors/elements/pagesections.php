@@ -31,7 +31,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     public const MODULE_PAGESECTION_BODY = 'pagesection-body';
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
-    
+
     public function getModulesToProcess(): array
     {
         return array(
@@ -57,7 +57,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         $ret = parent::getSubmodules($module);
 
         $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
-        
+
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_QUICKVIEW:
             case self::MODULE_PAGESECTION_QUICKVIEWSIDEINFO:
@@ -108,7 +108,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 if ($moduleAtts) {
                     $ret[] = [
                         $submodule[0],
-                        $submodule[1], 
+                        $submodule[1],
                         $moduleAtts
                     ];
                 } else {
@@ -124,7 +124,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function getId(array $module, array &$props)
+    public function getID(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_HOVER:
@@ -162,7 +162,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_PAGESECTION_HOLE:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_HOLE;
-        
+
             case self::MODULE_PAGESECTION_MODALS:
                 return POP_MODULEID_PAGESECTIONCONTAINERID_MODALS;
 
@@ -170,7 +170,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
                 return POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
         }
 
-        return parent::getId($module, $props);
+        return parent::getID($module, $props);
     }
 
     public function initModelProps(array $module, array &$props)
