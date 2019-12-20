@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
@@ -36,7 +36,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
             case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('past event', 'poptheme-wassup');
         }
-    
+
         return parent::getObjectName($module, $props);
     }
 
@@ -53,7 +53,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
             case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('past events', 'poptheme-wassup');
         }
-    
+
         return parent::getObjectNames($module, $props);
     }
 
@@ -77,7 +77,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
                 $ret[] = $event_post_type.'-'.POP_EVENTS_SCOPE_PAST;
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -88,7 +88,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
             case self::MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS:
                 return true;
         }
-    
+
         return parent::isAuthor($module, $props);
     }
 
@@ -99,7 +99,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
             case self::MODULE_LATESTCOUNT_TAG_PASTEVENTS:
                 return true;
         }
-    
+
         return parent::isTag($module, $props);
     }
 }

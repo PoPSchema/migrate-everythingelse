@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 // Event and Past Event have different configurations, so we must differentiate among them
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popEmModuleInstanceComponents');

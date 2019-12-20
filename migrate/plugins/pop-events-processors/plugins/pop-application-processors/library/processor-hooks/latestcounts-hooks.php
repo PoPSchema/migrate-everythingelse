@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_Events_LatestCounts_Hooks
 {

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('pop_module:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
 function popEmAllcontentTaxqueryItems($tax_query_items)

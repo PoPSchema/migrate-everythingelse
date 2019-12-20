@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\Constants;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('gd_dataload:post_types', 'gdEmAddEventPosttype');
 function gdEmAddEventPosttype($post_types)
@@ -53,7 +53,7 @@ function gdEmPosticonImpl($icon, $post_id)
 }
 
 HooksAPIFacade::getInstance()->addFilter(
-    Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS, 
+    Constants::HOOK_QUERYDATA_WHITELISTEDPARAMS,
     function($params) {
         $params[] = GD_URLPARAM_YEAR;
         $params[] = GD_URLPARAM_MONTH;

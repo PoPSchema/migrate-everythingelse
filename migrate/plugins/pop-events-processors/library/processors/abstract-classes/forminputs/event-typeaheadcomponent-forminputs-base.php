@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extends PoP_Module_Processor_PostTypeaheadComponentFormInputsBase
 {
@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extend
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $ret['post-types'] = [$eventTypeAPI->getEventPostType()];
-        
+
         return $ret;
     }
 

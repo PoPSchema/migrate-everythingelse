@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -14,7 +14,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
 
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
-        
+
         // The event is a special case: both future and past events have different configurations
         // However, we can't tell from the URL which one it is (mesym.com/events/...)
         // So then, we gotta calculate the resources for both cases, and add them together
@@ -89,7 +89,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
                 $this->future_events[] = $results[0];
             }
         }
-        
+
         if ($ids) {
             $nature = PostRouteNatures::POST;
             $merge = true;
@@ -124,7 +124,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         return $event;
     }
 }
-    
+
 /**
  * Initialize
  */

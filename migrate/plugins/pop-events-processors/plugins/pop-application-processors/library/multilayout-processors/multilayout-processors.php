@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Events\TypeResolvers\EventTypeResolver;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {

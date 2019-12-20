@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Events\FacadesEventTypeAPIFacade;
+use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_EM_Processors_ContentHooks
 {
@@ -27,7 +27,7 @@ class PoPTheme_EM_Processors_ContentHooks
                 }
             }
         }
-        
+
         return $inner;
     }
 }
