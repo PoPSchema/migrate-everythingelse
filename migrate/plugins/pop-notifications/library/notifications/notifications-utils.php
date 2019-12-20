@@ -46,7 +46,6 @@ class PoP_Notifications_Utils
     public static function notifyAllUsers($post_id, $notification)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
         if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)
             PoP_Notifications_API::deleteLog(
@@ -58,13 +57,12 @@ class PoP_Notifications_Utils
             );
 
             // Insert into the Activity Log
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
             PoP_Notifications_Utils::insertLog(
                 array(
                     'action'      => AAL_POP_ACTION_POST_NOTIFIEDALLUSERS,
                     'object_type' => 'Post',
                     'object_subtype' => $postTypeAPI->getPostType($post_id),
-                    'user_id'     => $cmspostsresolver->getPostAuthor($post), //POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
+                    'user_id'     => $postTypeAPI->getAuthorID($post_id), //POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
                     'object_id'   => $post_id,
                     'object_name' => stripslashes($notification),
                 )

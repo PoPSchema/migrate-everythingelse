@@ -432,7 +432,6 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
 
         // Only for published posts
         if ($postTypeAPI->getStatus($post_id) != POP_POSTSTATUS_PUBLISHED) {
@@ -441,9 +440,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         if ($newly_taggedusers_ids = array_diff($newly_taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
 
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
             $post_name = gdGetPostname($post_id, 'lc');
-            $post_author_id = $cmspostsresolver->getPostAuthor($post);
+            $post_author_id = $postTypeAPI->getAuthorID($post_id);
 
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%s">%s</a> mentioned you in %s:</p>', 'pop-emailsender'),

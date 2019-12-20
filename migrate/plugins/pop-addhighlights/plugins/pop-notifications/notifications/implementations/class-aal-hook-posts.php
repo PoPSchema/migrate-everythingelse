@@ -48,11 +48,9 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     protected function referencedPost($post_id, $referenced_post_id)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
         PoP_Notifications_Utils::insertLog(
             array(
-                'user_id' => $cmspostsresolver->getPostAuthor($post),
+                'user_id' => $postTypeAPI->getAuthorID($post_id),
                 'action' => AAL_POP_ACTION_POST_HIGHLIGHTEDFROMPOST,
                 'object_type' => 'Post',
                 'object_subtype' => $postTypeAPI->getPostType($referenced_post_id),

@@ -231,9 +231,7 @@ class PoP_ContentCreation_EmailSender_Hooks
                 $post_title = $postTypeAPI->getTitle($post_id);
                 $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are currently receiving notifications for all new content posted on the website.', 'pop-emailsender'));
 
-                $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-                $post = $postTypeAPI->getPost($post_id);
-                $author = $cmspostsresolver->getPostAuthor($post);
+                $author = $postTypeAPI->getAuthorID($post_id);
                 $author_name = $cmsusersapi->getUserDisplayName($author);
                 $author_url = $cmsusersapi->getUserURL($author);
                 $subject = sprintf(
