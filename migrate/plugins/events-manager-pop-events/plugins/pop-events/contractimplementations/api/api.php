@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
 {
@@ -115,7 +116,7 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
             $post = $post_or_post_id;
             $post_id = $cmspostsresolver->getPostId($post);
         }
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         return $cmspostsapi->getPostType($post_id) == $this->getEventPostType();
     }
 

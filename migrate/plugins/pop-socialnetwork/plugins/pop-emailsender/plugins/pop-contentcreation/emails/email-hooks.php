@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -58,7 +59,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
 
         // Send email if the created post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
@@ -70,7 +71,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
@@ -89,7 +90,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
 
         // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
         $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
@@ -153,7 +154,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
@@ -162,7 +163,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
 
         // Send email if the created post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
@@ -177,7 +178,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // If the post has tags...
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
         if ($post_tags = $taxonomyapi->getPostTags($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
@@ -251,7 +252,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, $networkusers)) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+                $cmspostsapi = PostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -308,7 +309,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // If the post has tags...
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
         if ($post_tags = $taxonomyapi->getPostTags($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
@@ -433,7 +434,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     public function sendemailToUsersTaggedInPost($post_id, $taggedusers_ids, $newly_taggedusers_ids)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post = $cmspostsapi->getPost($post_id);
 
         // Only for published posts
@@ -488,7 +489,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // From those, remove all users who got an email in a previous email function
         if ($taggedusers_ids = array_diff($taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $title = $cmspostsapi->getTitle($cmscommentsresolver->getCommentPostId($comment));
             $url = $cmspostsapi->getPermalink($cmscommentsresolver->getCommentPostId($comment));
             $post_name = gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc');

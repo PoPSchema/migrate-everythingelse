@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_Wassup_EM_ContentHooks
 {
@@ -22,7 +23,7 @@ class PoPTheme_Wassup_EM_ContentHooks
     public function getTopSidebar($sidebar, $post_id)
     {
         $pluginapi = PoP_Events_APIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {
             return $pluginapi->isFutureEvent($post_id) ? 
                 [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT] : 
@@ -35,7 +36,7 @@ class PoPTheme_Wassup_EM_ContentHooks
     public function getBottomSidebar($sidebar, $post_id)
     {
         $pluginapi = PoP_Events_APIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {
             return [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
         }

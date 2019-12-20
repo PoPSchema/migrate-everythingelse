@@ -1,13 +1,14 @@
 <?php
+define('POP_EMAILFRAME_DEFAULT', 'default');
+define('POP_EMAILTEMPLATE_BUTTON', 'button.html');
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\PostMedia\Misc\MediaHelpers;
 use PoP\Taxonomies\Misc\TagHelpers;
-
-define('POP_EMAILFRAME_DEFAULT', 'default');
-define('POP_EMAILTEMPLATE_BUTTON', 'button.html');
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -80,7 +81,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     public function getPosthtml($post_id)
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_url = $cmspostsapi->getPermalink($post_id);
         $post_title = $cmspostsapi->getTitle($post_id);
         $post_excerpt = $cmspostsapi->getExcerpt($post_id);
@@ -149,7 +150,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     public function getCommentcontenthtml($comment)
     {
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
         $url = $cmspostsapi->getPermalink($post_id);

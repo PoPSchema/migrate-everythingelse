@@ -6,6 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class GD_CreateUpdate_PostBase
 {
@@ -216,7 +217,7 @@ class GD_CreateUpdate_PostBase
             return;
         }
 
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post = $cmspostsapi->getPost($post_id);
         if (!$post) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Cheating, huh?', 'pop-application');
@@ -454,7 +455,7 @@ class GD_CreateUpdate_PostBase
 
     protected function getUpdatepostDataLog($post_id, $form_data)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $log = array(
             'previous-status' => $cmspostsapi->getPostStatus($post_id),
         );

@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 {
@@ -32,7 +33,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         if ($form_data['stancetarget']) {
             // Check that the referenced post exists
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $referenced = $cmspostsapi->getPost($form_data['stancetarget']);
             if (!$referenced) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post does not exist', 'poptheme-wassup');
@@ -106,7 +107,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         parent::validatecreatecontent($errors, $form_data);
 
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
         // - Each article: each referenced $post_id

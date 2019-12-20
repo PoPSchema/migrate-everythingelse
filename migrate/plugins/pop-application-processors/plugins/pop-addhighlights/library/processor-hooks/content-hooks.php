@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_AddHighlights_Processors_ContentHooks
 {
@@ -18,7 +19,7 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $post_id = $vars['routing-state']['queried-object-id'];
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             if ($cmspostsapi->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
                 if (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_HIGHLIGHTSINGLE];

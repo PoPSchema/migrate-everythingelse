@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Routing\Routes as RoutingRoutes;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSectionBlocksUtils
 {
@@ -60,7 +61,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function getSingleTitle()
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_id = $vars['routing-state']['queried-object-id'];
         $ret = $cmspostsapi->getTitle($post_id);
 
@@ -80,7 +81,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_SINGLE];

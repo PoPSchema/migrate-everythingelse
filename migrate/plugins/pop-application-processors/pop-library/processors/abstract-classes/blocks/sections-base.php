@@ -8,6 +8,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
@@ -70,7 +71,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {

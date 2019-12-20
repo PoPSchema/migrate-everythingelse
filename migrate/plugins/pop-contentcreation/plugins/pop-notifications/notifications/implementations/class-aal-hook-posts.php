@@ -1,5 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
+
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -40,7 +42,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
         // Check if the post needs or not be notified (eg: Highlights must not, since they have their own action)
         // If the post type is not allowed, then skip. Otherwise, by default, create the notification
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $skip = !in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
         return HooksAPIFacade::getInstance()->applyFilters(
@@ -56,7 +58,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             return;
         }
         
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_status = $cmspostsapi->getPostStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             $this->logCreatedPost($post_id);
@@ -76,7 +78,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Is it being created? (Eg: first created as draft, then "updated" to status publish)
         // Then trigger event Create, not Update
         // Simply check the previous status, if it was not published then trigger Create
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_status = $cmspostsapi->getPostStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
@@ -123,7 +125,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     protected function logByPostAuthors($post_id, $action)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post = $cmspostsapi->getPost($post_id);
 
         $post_title = $cmspostsapi->getTitle($post_id);

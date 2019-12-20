@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_ActionExecuterInstance_Volunteer
 {
@@ -21,7 +22,7 @@ class PoP_ActionExecuterInstance_Volunteer
             $errors->add('emptytargetid', TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms'));
         } else {
             // Make sure the post exists
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $target = $cmspostsapi->getPost($form_data['target-id']);
             if (!$target) {
                 $errors->add('nonexistanttargetid', TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms'));
@@ -59,7 +60,7 @@ class PoP_ActionExecuterInstance_Volunteer
     protected function execute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_title = $cmspostsapi->getTitle($form_data['target-id']);
         $subject = sprintf(
             TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),

@@ -1,5 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
+
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
@@ -57,7 +59,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     protected function logComment($comment_id, $user_id, $action)
     {
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($comment_id);
         PoP_Notifications_Utils::insertLog(

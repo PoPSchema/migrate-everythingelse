@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_SpecialSinglePost extends PoP_UserPreferences_SimpleProcessorAutomatedEmailsBase
 {
@@ -16,7 +17,7 @@ class PoPTheme_Wassup_AE_SpecialSinglePost extends PoP_UserPreferences_SimplePro
     {
         
         // The post id is passed through param pid
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         return $cmspostsapi->getTitle($_REQUEST[POP_INPUTNAME_POSTID]);
     }
 }

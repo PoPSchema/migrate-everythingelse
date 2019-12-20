@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\PostMedia\Misc\MediaHelpers;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
@@ -37,7 +38,7 @@ function gdGetPostDescription()
 {
     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     $post_id = $vars['routing-state']['queried-object-id'];
     $excerpt = $cmspostsapi->getExcerpt($post_id);
 

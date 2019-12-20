@@ -1,10 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'nosearchcategorypostsPostParentpageid', 10, 2);
 // function nosearchcategorypostsPostParentpageid($pageid, $post_id)
 // {
-//     $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+//     $cmspostsapi = PostTypeAPIFacade::getInstance();
 //     if ($cmspostsapi->getPostType($post_id) == 'post') {
 //         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
 //         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_Notifications_Utils
 {
@@ -24,7 +25,7 @@ class PoP_Notifications_Utils
 
     public static function logPostAction($post_id, $action, $user_id = null)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if (!$user_id) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
@@ -44,7 +45,7 @@ class PoP_Notifications_Utils
 
     public static function notifyAllUsers($post_id, $notification)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post = $cmspostsapi->getPost($post_id);
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)

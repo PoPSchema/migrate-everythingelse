@@ -1,13 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
  * Extracts #hashtags from the post and adds them as tags
  * Extracts @user_nicenames from the post and adds a notification for that user
  */
-
 class PoP_Mentions
 {
     protected $regex_general;
@@ -78,7 +78,7 @@ class PoP_Mentions
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         if (in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
@@ -197,7 +197,7 @@ class PoP_Mentions
 
     public function processContentPost($content, $post_id)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $content = $this->work($content);

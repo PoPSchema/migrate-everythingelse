@@ -14,6 +14,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -285,7 +286,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars = &\PoP\ComponentModel\Engine_Vars::$vars;
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 

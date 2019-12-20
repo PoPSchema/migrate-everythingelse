@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
@@ -28,7 +29,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
     }
     protected function executeThumbprint($query)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 

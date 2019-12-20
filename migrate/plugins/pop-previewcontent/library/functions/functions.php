@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdate-post:execute:successstring', 'gdPppCreateupdateAddPreviewLink', 10, 3);
 function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
@@ -29,7 +30,7 @@ function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
 HooksAPIFacade::getInstance()->addFilter('gd_createupdate_post', 'gdPppAddPublicPreview', 10, 1);
 function gdPppAddPublicPreview($post_id)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     $post_status = $cmspostsapi->getPostStatus($post_id);
     if (in_array($post_status, array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();

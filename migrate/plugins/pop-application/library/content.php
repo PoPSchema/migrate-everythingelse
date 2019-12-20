@@ -1,13 +1,14 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // function gdGetDocumentTitle()
 // {
 //     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
 //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 //     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-//     $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+//     $cmspostsapi = PostTypeAPIFacade::getInstance();
 //     $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
 //     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
 //     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

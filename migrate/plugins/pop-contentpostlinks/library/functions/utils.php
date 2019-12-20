@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_ContentPostLinks_Utils
 {
@@ -42,7 +43,7 @@ class PoP_ContentPostLinks_Utils
             
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
-                $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+                $cmspostsapi = PostTypeAPIFacade::getInstance();
                 $post_id = $cmspostsresolver->getPostId($post);
                 $collapse_id = $cmspostsapi->getPostType($post_id).$post_id.'-'.POP_CONSTANT_CURRENTTIMESTAMP;
                 $messages[] = sprintf(
@@ -115,7 +116,7 @@ class PoP_ContentPostLinks_Utils
 
     public static function getLinkHost($post_id)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post = $cmspostsapi->getPost($post_id);
         $url = self::getLinkUrl($post);
         return getUrlHost($url);

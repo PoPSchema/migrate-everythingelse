@@ -1,11 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class GD_RecommendUnrecommendPost extends GD_UpdateUserMetaValue_Post
 {
     protected function eligible($post)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $eligible = in_array($cmspostsapi->getPostType($post), $cmsapplicationpostsapi->getAllcontentPostTypes());
         return HooksAPIFacade::getInstance()->applyFilters('GD_RecommendUnrecommendPost:eligible', $eligible, $post);

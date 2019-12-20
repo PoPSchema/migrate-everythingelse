@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // Important: adding support for the tags for the Events, we can use the #Hashtags extracted in mentions.php,
 // in which these are added as "post_tag". If not registering event to post_tag, then EM_TAXONOMY_TAG must be used,
@@ -16,7 +17,7 @@ function popEmRegisterTagForEvents()
 HooksAPIFacade::getInstance()->addAction('PoP_Mentions:post_tags:add', 'popEmMentionsAddEventTags', 10, 2);
 function popEmMentionsAddEventTags($post_id, $tags)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if ($cmspostsapi->getPostType($post_id) == EM_POST_TYPE_EVENT) {
         wp_set_object_terms($post_id, $tags, EM_TAXONOMY_TAG);
     }

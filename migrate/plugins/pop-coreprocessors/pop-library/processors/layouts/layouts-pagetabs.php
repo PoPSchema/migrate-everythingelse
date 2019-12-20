@@ -4,6 +4,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\PostMedia\Misc\MediaHelpers;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
 {
@@ -94,7 +95,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     protected function getTitle(array $module, array &$props)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

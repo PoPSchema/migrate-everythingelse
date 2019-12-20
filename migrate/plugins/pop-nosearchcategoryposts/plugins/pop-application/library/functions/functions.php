@@ -1,10 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'nosearchcategorypostsPostname', 10, 3);
 function nosearchcategorypostsPostname($name, $post_id, $format)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if ($cmspostsapi->getPostType($post_id) == 'post') {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
@@ -21,7 +22,7 @@ function nosearchcategorypostsPostname($name, $post_id, $format)
 HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'nosearchcategorypostsPosticon', 10, 2);
 function nosearchcategorypostsPosticon($icon, $post_id)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if ($cmspostsapi->getPostType($post_id) == 'post') {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

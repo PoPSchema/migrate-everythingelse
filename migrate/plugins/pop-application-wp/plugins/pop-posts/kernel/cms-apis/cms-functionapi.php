@@ -3,7 +3,7 @@ namespace PoP\Application\WP;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class PostsFunctionAPI extends \PoP\Posts\WP\FunctionAPI
+class PostsFunctionAPI extends \PoP\PostsWP\TypeAPIs\PostTypeAPI
 {
     public function getExcerpt($post_id)
     {

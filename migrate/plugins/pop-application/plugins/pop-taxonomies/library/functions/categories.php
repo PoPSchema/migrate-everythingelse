@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 function getTheMainCategories()
 {
@@ -8,7 +9,7 @@ function getTheMainCategories()
 
 function getTheMainCategory($post_id)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if ($cmspostsapi->getPostType($post_id) == 'post') {
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         if ($cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {

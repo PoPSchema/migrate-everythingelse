@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
@@ -49,7 +50,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
 
     public function initRequestProps(array $module, array &$props)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:

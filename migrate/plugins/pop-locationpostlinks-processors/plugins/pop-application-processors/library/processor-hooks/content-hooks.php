@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_LocationPostLinks_ContentHooks
 {
@@ -17,7 +18,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
     {
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE]) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
             if ($cmspostsapi->getPostType($post_id) == 'post'

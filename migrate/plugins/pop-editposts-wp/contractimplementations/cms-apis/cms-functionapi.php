@@ -1,6 +1,8 @@
 <?php
 namespace PoP\EditPosts\WP;
 
+use PoP\PostsWP\TypeAPIs\PostTypeAPIUtils;
+
 class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
 {
     public function getEditPostLink($post_id)
@@ -15,8 +17,7 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
     {
         // Convert the parameters
         if (isset($query['post-status'])) {
-
-            $query['post_status'] = \PoP\Posts\WP\Utils::convertPostStatusFromPoPToCMS($query['post-status']);
+            $query['post_status'] = PostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['post-status']);
             unset($query['post-status']);
         }
         if (isset($query['id'])) {

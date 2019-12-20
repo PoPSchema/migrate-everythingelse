@@ -1,8 +1,9 @@
 <?php
+define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-
-define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_AddComments_EmailSender_Hooks
 {
@@ -38,7 +39,7 @@ class PoP_AddComments_EmailSender_Hooks
         }
         
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
 
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
         $title = $cmspostsapi->getTitle($post_id);

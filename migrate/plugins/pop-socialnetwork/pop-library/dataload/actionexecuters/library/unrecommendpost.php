@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class GD_UnrecommendPost extends GD_RecommendUnrecommendPost
 {
@@ -10,7 +11,7 @@ class GD_UnrecommendPost extends GD_RecommendUnrecommendPost
 
         if (!$errors) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 

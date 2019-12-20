@@ -1,9 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-
-/**
- * Thumb sizes
- */
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addAction('after_setup_theme', 'gdThumbEnable');
 function gdThumbEnable()
@@ -36,7 +33,7 @@ gdCustomThumbSizes();
 HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'gdThumbDefault', 10, 2);
 function gdThumbDefault($thumb_id, $post_id)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if ($cmspostsapi->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT && POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST) {
         return POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST;
     } elseif (POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEPOST) {

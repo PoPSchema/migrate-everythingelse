@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoPTheme_UserStance_ModuleHooks
 {
@@ -17,7 +18,7 @@ class PoPTheme_UserStance_ModuleHooks
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $add = in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
         $add = HooksAPIFacade::getInstance()->applyFilters(

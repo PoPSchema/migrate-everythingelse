@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
 {
@@ -24,7 +25,7 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
         $form_data['highlightedpost'] = $moduleprocessor_manager->getProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $referenced = $cmspostsapi->getPost($form_data['highlightedpost']);
         $form_data['title'] = $cmspostsresolver->getPostTitle($referenced);
@@ -42,7 +43,7 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
             $errors[] = TranslationAPIFacade::getInstance()->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $referenced = $cmspostsapi->getPost($form_data['highlightedpost']);
             if (!$referenced) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The highlighted post does not exist', 'poptheme-wassup');

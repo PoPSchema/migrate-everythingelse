@@ -1,5 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 {
@@ -15,7 +16,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
         return $cmspostsapi->getPosts($query, $options);
     }
@@ -23,7 +24,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     public function getTimestamp($post_id)
     {
         // Doing it the manual way
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $post = $cmspostsapi->getPost($post_id);
         return mysql2date('U', $cmspostsresolver->getPostModified($post));

@@ -1,5 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
+
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -24,7 +26,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function createdStance($post_id)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $referenced_post_id = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, true);
             $this->referencedPost($post_id, $referenced_post_id);
@@ -33,7 +35,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function updatedStance($post_id, $form_data, $log)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             // If doing a create (changed "draft" to "publish"), then add all references
             if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
@@ -45,7 +47,7 @@ class PoP_UserStance_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     protected function referencedPost($post_id, $referenced_post_id)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $post = $cmspostsapi->getPost($post_id);
         PoP_Notifications_Utils::insertLog(

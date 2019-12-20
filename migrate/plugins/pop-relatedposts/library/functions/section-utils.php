@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_RelatedPosts_SectionUtils
 {
@@ -30,7 +31,7 @@ class PoP_RelatedPosts_SectionUtils
         ];
         self::addDataloadqueryargsReferences($query, $post_id);
 
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 }

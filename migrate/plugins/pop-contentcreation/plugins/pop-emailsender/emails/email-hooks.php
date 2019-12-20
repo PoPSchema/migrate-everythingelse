@@ -1,8 +1,9 @@
 <?php
+define('POP_EMAIL_CREATEDCONTENT', 'created-content');
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-
-define('POP_EMAIL_CREATEDCONTENT', 'created-content');
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -59,7 +60,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $permalink = $cmspostsapi->getPermalink($post_id);
@@ -135,7 +136,7 @@ class PoP_ContentCreation_EmailSender_Hooks
             return;
         }
 
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $status = $cmspostsapi->getPostStatus($post_id);
         
@@ -185,7 +186,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
         
         // Send email if the created post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
@@ -197,7 +198,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
@@ -218,7 +219,7 @@ class PoP_ContentCreation_EmailSender_Hooks
             // From those, remove all users who got an email in a previous email function
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+                $cmspostsapi = PostTypeAPIFacade::getInstance();
 
                 $emails = $names = array();
                 foreach ($users as $user) {
@@ -270,7 +271,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
@@ -279,7 +280,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
 
         // Send email if the created post has been published
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
@@ -292,7 +293,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     protected function sendemailToUsersFromPostReferences($post_id)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $skip = !in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
@@ -344,7 +345,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmspostsresolver->getPostId($post);
 
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         $post_name = gdGetPostname($post_id);
         $url = $cmspostsapi->getPermalink($post_id);
         $title = $cmspostsapi->getTitle($post_id);

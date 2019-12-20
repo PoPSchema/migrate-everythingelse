@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_Events_Engine_Hooks
 {
@@ -23,7 +24,7 @@ class PoP_Events_Engine_Hooks
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == PostRouteNatures::POST) {
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $pluginapi = PoP_Events_APIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
             if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {

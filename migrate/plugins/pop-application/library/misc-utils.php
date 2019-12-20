@@ -1,10 +1,11 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 function limitString($string, $length = null, $more = null, $bywords = false)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     if (!$length) {
         $length = $cmspostsapi->getExcerptLength();
     }
@@ -40,7 +41,7 @@ function maybeAddHttp($url)
 // function gdGetCategories($post_id)
 // {
 //     $categories = array();
-//     $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+//     $cmspostsapi = PostTypeAPIFacade::getInstance();
 //     if ($cmspostsapi->getPostType($post_id) == 'post') {
 //         if ($cats = getTheCategory($post_id)) {
 //             $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();

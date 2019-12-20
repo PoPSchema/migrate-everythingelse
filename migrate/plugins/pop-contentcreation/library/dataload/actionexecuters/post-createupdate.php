@@ -3,12 +3,13 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ActionExecuterInterface
 {
     public function getSuccessString($post_id, $status)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         if ($status == POP_POSTSTATUS_PUBLISHED) {
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
@@ -44,7 +45,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
             $this->modifyDataProperties($data_properties, $post_id);
 
             // Success String: check if the post status is 'publish' or 'pending', and so print the corresponding URL or Preview URL
-            $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+            $cmspostsapi = PostTypeAPIFacade::getInstance();
             $status = $cmspostsapi->getPostStatus($post_id);
             $success_string = $this->getSuccessString($post_id, $status);
 

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -49,7 +50,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
     public function getMutableonrequestText(array $module, array &$props)
     {
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:

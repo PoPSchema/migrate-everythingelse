@@ -1,4 +1,5 @@
 <?php
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
@@ -75,7 +76,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     public function initRequestProps(array $module, array &$props)
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-        $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+        $cmspostsapi = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
             case self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS:

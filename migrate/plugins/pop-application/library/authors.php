@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Posts\Facades\PostTypeAPIFacade;
 
 /**
  * Return the author of the post (to be overriden by Co-Authors plus)
  */
 function gdGetPostauthors($post_id)
 {
-    $cmspostsapi = \PoP\Posts\FunctionAPIFactory::getInstance();
+    $cmspostsapi = PostTypeAPIFacade::getInstance();
     $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
     $post = $cmspostsapi->getPost($post_id);
     return HooksAPIFacade::getInstance()->applyFilters(
