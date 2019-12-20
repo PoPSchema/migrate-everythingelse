@@ -1,19 +1,17 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
-/**
- * Section Filters
- */
 HooksAPIFacade::getInstance()->addFilter('wassup_section_taxonomyterms', 'popEmSectionTaxonomyterms', 0);
 function popEmSectionTaxonomyterms($section_taxonomyterms)
 {
     if (POP_EVENTS_CAT_ALL) {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $section_taxonomyterms = array_merge_recursive(
             $section_taxonomyterms,
             array(
-                $pluginapi->getEventCategoryTaxonomy() => array(
+                $eventTypeAPI->getEventCategoryTaxonomy() => array(
                     POP_EVENTS_CAT_ALL,
                 ),
             )
@@ -27,9 +25,9 @@ HooksAPIFacade::getInstance()->addFilter('GD_FormInput_ContentSections:taxonomyt
 function popEmSectionTaxonomytermsName($name, $taxonomy, $term)
 {
     if (POP_EVENTS_ROUTE_EVENTS) {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        if ($taxonomy == $pluginapi->getEventCategoryTaxonomy()) {
+        if ($taxonomy == $eventTypeAPI->getEventCategoryTaxonomy()) {
             return RouteUtils::getRouteTitle(POP_EVENTS_ROUTE_EVENTS);
         }
     }

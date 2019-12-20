@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class GD_CreateUpdate_Event extends GD_CreateUpdate_PostBase
 {
@@ -62,8 +63,8 @@ class GD_CreateUpdate_Event extends GD_CreateUpdate_PostBase
 
     protected function populate(&$EM_Event, $post_data)
     {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        $pluginapi->populate($EM_Event, $post_data);
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        $eventTypeAPI->populate($EM_Event, $post_data);
 
         return $EM_Event;
     }

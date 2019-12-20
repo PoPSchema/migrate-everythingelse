@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -35,8 +36,8 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         // API Documentation: http://wp-events-plugin.com/documentation/event-search-attributes/
         // Hook in POP_EVENTLINKS_CAT_EVENTLINKS
         // To exclude category, simply make the ID negative
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        if ($results = $pluginapi->get(
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        if ($results = $eventTypeAPI->get(
             array_merge(
                 $query,
                 $independent_cats ?
@@ -63,7 +64,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         }
         // Get Event Links
         foreach ($independent_cats as $independent_cat) {
-            if ($results = $pluginapi->get(
+            if ($results = $eventTypeAPI->get(
                 array_merge(
                     $query,
                     array(
@@ -104,8 +105,8 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
     {
 
         // Change the date for the event, make it future
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        if (in_array($pluginapi->getPostId($event), $this->future_events)) {
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        if (in_array($eventTypeAPI->getPostId($event), $this->future_events)) {
             // Modify start and end dates
             $event->start = POP_CONSTANT_CURRENTTIMESTAMP + 1000;
             $event->end = POP_CONSTANT_CURRENTTIMESTAMP + 2000;

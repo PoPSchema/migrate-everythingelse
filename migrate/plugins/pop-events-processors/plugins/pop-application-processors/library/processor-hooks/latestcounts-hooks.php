@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoP_Events_Events_LatestCounts_Hooks
 {
@@ -15,8 +16,8 @@ class PoP_Events_Events_LatestCounts_Hooks
     {
         if (defined('POP_TAXONOMIES_INITIALIZED') && PoP_Application_Taxonomy_ConfigurationUtils::hookAllcontentComponents()) {
             if (defined('POP_EVENTS_CAT_ALL') && POP_EVENTS_CAT_ALL) {
-                $pluginapi = PoP_Events_APIFactory::getInstance();
-                $event_post_type = $pluginapi->getEventPostType();
+                $eventTypeAPI = EventTypeAPIFacade::getInstance();
+                $event_post_type = $eventTypeAPI->getEventPostType();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
                 if (in_array($event_post_type, $cmsapplicationpostsapi->getAllcontentPostTypes())) {
                     $classes[] = $event_post_type.'-'.POP_EVENTS_SCOPE_FUTURE;

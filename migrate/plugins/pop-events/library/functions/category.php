@@ -1,18 +1,16 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
-/**
- * Integration with Latest Everything Block
- */
 HooksAPIFacade::getInstance()->addFilter('pop_module:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
 function popEmAllcontentTaxqueryItems($tax_query_items)
 {
     if (POP_EVENTS_CAT_ALL) {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        if (in_array($pluginapi->getEventPostType(), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+        if (in_array($eventTypeAPI->getEventPostType(), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $tax_query_items[] = array(
-                'taxonomy' => $pluginapi->getEventCategoryTaxonomy(),
+                'taxonomy' => $eventTypeAPI->getEventCategoryTaxonomy(),
                 'terms' => array(
                     POP_EVENTS_CAT_ALL,
                 ),

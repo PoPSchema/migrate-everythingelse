@@ -1,12 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels', 'gdEmCustomMultilayoutLabels');
 function gdEmCustomMultilayoutLabels($labels)
 {
-    $pluginapi = PoP_Events_APIFactory::getInstance();
-    $event_post_type = $pluginapi->getEventPostType();
+    $eventTypeAPI = EventTypeAPIFacade::getInstance();
+    $event_post_type = $eventTypeAPI->getEventPostType();
     $label = '<span class="label label-%s">%s</span>';
     return array_merge(
         array(

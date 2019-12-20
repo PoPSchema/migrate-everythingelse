@@ -1,13 +1,14 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
     public function addLayoutModules(&$layouts, $handle, $format = '')
     {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        $event_post_type = $pluginapi->getEventPostType();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        $event_post_type = $eventTypeAPI->getEventPostType();
 
         // Only if this post type is shown in All Content
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

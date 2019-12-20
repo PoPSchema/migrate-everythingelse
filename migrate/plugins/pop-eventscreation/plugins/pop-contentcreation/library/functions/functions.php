@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'maybeGetEventEditUrl', 10, 2);
 function maybeGetEventEditUrl($url, $post_id)
 {
-    $pluginapi = PoP_Events_APIFactory::getInstance();
-    if ($pluginapi->isEvent($post_id)) {
+    $eventTypeAPI = EventTypeAPIFacade::getInstance();
+    if ($eventTypeAPI->isEvent($post_id)) {
         // Allow PoP Event Links Creation to hook in its value
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         return HooksAPIFacade::getInstance()->applyFilters(

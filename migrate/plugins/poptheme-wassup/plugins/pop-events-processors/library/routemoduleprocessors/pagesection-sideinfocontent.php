@@ -4,6 +4,7 @@ use PoP\Routing\RouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -29,7 +30,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
         $modules = array(
@@ -40,7 +41,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $pluginapi->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                         'queried-object-is-past-event' => true,
                     ],
                 ],
@@ -56,7 +57,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $pluginapi->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                     ],
                 ],
             ];
@@ -78,14 +79,14 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
     {
         $ret = array();
 
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
         $ret[PostRouteNatures::POST][] = [
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
             'conditions' => [
                 'routing-state' => [
-                    'queried-object-post-type' => $pluginapi->getEventPostType(),
+                    'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                     'queried-object-is-past-event' => true,
                 ],
             ],
@@ -96,7 +97,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR],
             'conditions' => [
                 'routing-state' => [
-                    'queried-object-post-type' => $pluginapi->getEventPostType(),
+                    'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                 ],
             ],
         ];

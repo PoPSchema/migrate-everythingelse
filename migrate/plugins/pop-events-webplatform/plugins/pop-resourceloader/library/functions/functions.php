@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 //-------------------------------------------------------------------------------------
 // Load Plugin-specific Libraries
@@ -9,7 +10,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('PoP_ResourceLoader_FileReproduction_Config:configuration:category-paths', 'emPopResourceloaderSinglePaths');
 function emPopResourceloaderSinglePaths($paths)
 {
-    $pluginapi = PoP_Events_APIFactory::getInstance();
-    $paths[] = $pluginapi->getEventPostTypeSlug().'/';
+    $eventTypeAPI = EventTypeAPIFacade::getInstance();
+    $paths[] = $eventTypeAPI->getEventPostTypeSlug().'/';
     return $paths;
 }

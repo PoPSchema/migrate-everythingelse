@@ -1,6 +1,7 @@
 <?php
 
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -8,7 +9,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
     {
         $ret = array();
 
-        $pluginapi = PoP_Events_APIFactory::getInstance();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
         $modules = array(
@@ -19,7 +20,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $pluginapi->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                         'queried-object-is-past-event' => true,
                     ],
                 ],
@@ -35,7 +36,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $pluginapi->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
                     ],
                 ],
             ];

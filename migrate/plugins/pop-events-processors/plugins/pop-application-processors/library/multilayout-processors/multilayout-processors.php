@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
@@ -15,8 +16,8 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
 
     public function addLayoutModules(&$layouts, $handle, $format = '')
     {
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        $event_post_type = $pluginapi->getEventPostType();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        $event_post_type = $eventTypeAPI->getEventPostType();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
             'isType',

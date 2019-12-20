@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Events\FacadesEventTypeAPIFacade;
 
 class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
@@ -60,8 +61,8 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
     {
         $ret = parent::getSectionClasses($module, $props);
 
-        $pluginapi = PoP_Events_APIFactory::getInstance();
-        $event_post_type = $pluginapi->getEventPostType();
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        $event_post_type = $eventTypeAPI->getEventPostType();
         switch ($module[1]) {
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:
