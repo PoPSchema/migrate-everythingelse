@@ -126,8 +126,6 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     protected function logByPostAuthors($post_id, $action)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
-
         $post_title = $postTypeAPI->getTitle($post_id);
 
         // Allow for co-authors
