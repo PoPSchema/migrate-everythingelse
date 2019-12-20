@@ -282,12 +282,11 @@ class PoP_ContentCreation_EmailSender_Hooks
     }
     public function sendemailToUsersFromPostReferencestransition($post)
     {
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $this->sendemailToUsersFromPostReferences($cmspostsresolver->getPostId($post));
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $this->sendemailToUsersFromPostReferences($postTypeAPI->getID($post));
     }
     protected function sendemailToUsersFromPostReferences($post_id)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $skip = !in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
@@ -330,8 +329,8 @@ class PoP_ContentCreation_EmailSender_Hooks
 
     public function sendemailToUsersFromPostPostapproved($post)
     {
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $post_id = $cmspostsresolver->getPostId($post);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post_id = $postTypeAPI->getID($post);
 
         $post_name = gdGetPostname($post_id);
         $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);

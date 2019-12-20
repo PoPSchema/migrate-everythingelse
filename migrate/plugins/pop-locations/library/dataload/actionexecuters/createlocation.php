@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\Locations\Facades\LocationTypeAPIFacade;
 
 class GD_DataLoad_ActionExecuter_CreateLocation implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -14,12 +15,13 @@ class GD_DataLoad_ActionExecuter_CreateLocation implements \PoP\ComponentModel\A
 
             $pluginapi = PoP_Locations_APIFactory::getInstance();
             $location = $pluginapi->getNewLocationObject();
-                
+
             // Load from $_REQUEST and Validate
             if ($pluginapi->getPost($location)  && $pluginapi->save($location)) { //EM_location gets the location if submitted via POST and validates it (safer than to depend on JS)
+                $locationTypeAPI = LocationTypeAPIFacade::getInstance();
                 // Save the result for some module to incorporate it into the query args
                 $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-                $gd_dataload_actionexecution_manager->setResult(self::class, $pluginapi->getPostId($location));
+                $gd_dataload_actionexecution_manager->setResult(self::class, $locationTypeAPI->getID($location));
 
                 return array(
                     ResponseConstants::SUCCESS => true
@@ -34,4 +36,4 @@ class GD_DataLoad_ActionExecuter_CreateLocation implements \PoP\ComponentModel\A
         return null;
     }
 }
-    
+

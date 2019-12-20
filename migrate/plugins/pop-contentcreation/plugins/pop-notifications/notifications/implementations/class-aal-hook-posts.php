@@ -118,8 +118,8 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     public function removedPost($new_status, $old_status, $post)
     {
         if ($old_status == POP_POSTSTATUS_PUBLISHED && $new_status != POP_POSTSTATUS_PUBLISHED) {
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-            $this->logByPostAuthors($cmspostsresolver->getPostId($post), AAL_POP_ACTION_POST_REMOVEDPOST);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $this->logByPostAuthors($postTypeAPI->getID($post), AAL_POP_ACTION_POST_REMOVEDPOST);
         }
     }
 
@@ -185,12 +185,14 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                 AAL_POP_ACTION_POST_TRASHEDPOST,
                 AAL_POP_ACTION_POST_SPAMMEDPOST,
             );
-            // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $cmspostsresolver->getPostId($post), $clear_actions);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $postID = $postTypeAPI->getID;
+            // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $postID, $clear_actions);
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-            PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $cmspostsresolver->getPostId($post), $clear_actions);
+            PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $postID, $clear_actions);
 
             // Only after log the action
-            PoP_Notifications_Utils::logPostAction($cmspostsresolver->getPostId($post), $action, POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS);
+            PoP_Notifications_Utils::logPostAction($postID, $action, POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS);
         }
     }
 }

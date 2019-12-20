@@ -32,7 +32,6 @@ class PoP_ContentPostLinks_Utils
         // Check if the source is embeddable (eg: Facebook is not)
         $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
         if (!in_array($host, $nonembeddable) && (!is_ssl() || (is_ssl() && $parse['scheme'] == 'https'))) {
-            $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             // iframe wrapper: setting up width and height in code to fix the iOS Safari problem: https://stackoverflow.com/questions/16937070/iframe-size-with-css-on-ios
             $iframe = sprintf(
@@ -44,8 +43,7 @@ class PoP_ContentPostLinks_Utils
 
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
-                $post_id = $cmspostsresolver->getPostId($post);
+                $post_id = $postTypeAPI->getID($post);
                 $collapse_id = $postTypeAPI->getPostType($post_id).$post_id.'-'.POP_CONSTANT_CURRENTTIMESTAMP;
                 $messages[] = sprintf(
                     '<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',

@@ -17,11 +17,6 @@ class EM_PoP_Locations_API extends PoP_Locations_API_Base implements PoP_Locatio
         return $EM_Location->save();
     }
 
-    public function getPostId($EM_Location)
-    {
-        return $EM_Location->post_id;
-    }
-
     public function getErrors($EM_Location)
     {
         return $EM_Location->get_errors();

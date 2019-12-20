@@ -103,10 +103,9 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
 
     public function forceEventScope($event)
     {
-
         // Change the date for the event, make it future
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        if (in_array($eventTypeAPI->getPostId($event), $this->future_events)) {
+        if (in_array($eventTypeAPI->getID($event), $this->future_events)) {
             // Modify start and end dates
             $event->start = POP_CONSTANT_CURRENTTIMESTAMP + 1000;
             $event->end = POP_CONSTANT_CURRENTTIMESTAMP + 2000;
