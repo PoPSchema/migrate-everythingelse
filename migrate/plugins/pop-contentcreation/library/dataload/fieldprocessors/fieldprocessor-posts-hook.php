@@ -61,7 +61,6 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
@@ -80,7 +79,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
             case 'content-edit':
                 if (gdCurrentUserCanEdit($typeResolver->getId($post))) {
-                    return $cmspostsresolver->getPostContent($post);
+                    return $postTypeAPI->getContent($post);
                 }
                 return '';
 

@@ -33,10 +33,11 @@ class PoP_ContentPostLinks_Utils
         $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
         if (!in_array($host, $nonembeddable) && (!is_ssl() || (is_ssl() && $parse['scheme'] == 'https'))) {
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             // iframe wrapper: setting up width and height in code to fix the iOS Safari problem: https://stackoverflow.com/questions/16937070/iframe-size-with-css-on-ios
             $iframe = sprintf(
                 '<div class="iframe-wrapper content-iframe-wrapper" style="width: %2$s; height: %3$spx;"><iframe src="%1$s" width="%2$s" height="%3$s" frameborder="0"></iframe></div>',
-                $cmspostsresolver->getPostContent($post),
+                $postTypeAPI->getContent($post),
                 '100%',
                 '400'
             );
@@ -110,8 +111,8 @@ class PoP_ContentPostLinks_Utils
     public static function getLinkUrl($post)
     {
         // for the Link, its content IS the URL
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        return $cmspostsresolver->getPostContent($post);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        return $postTypeAPI->getContent($post);
     }
 
     public static function getLinkHost($post_id)
