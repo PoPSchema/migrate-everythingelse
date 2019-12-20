@@ -25,8 +25,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     {
         // Doing it the manual way
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
-        return mysql2date('U', $cmspostsresolver->getPostModified($post));
+        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsengineapi->getDate('U', $postTypeAPI->getModifiedDate($post_id));
     }
 }

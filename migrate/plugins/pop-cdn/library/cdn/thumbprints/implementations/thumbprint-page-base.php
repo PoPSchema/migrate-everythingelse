@@ -19,13 +19,14 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
         $options['return-type'] = POP_RETURNTYPE_IDS;
         return $cmspagesapi->getPages($query, $options);
     }
-    
+
     public function getTimestamp($page_id)
     {
         // Doing it the manual way
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $cmspagesresolver = \PoP\Pages\ObjectPropertyResolverFactory::getInstance();
         $page = $cmspagesapi->getPage($page_id);
-        return mysql2date('U', $cmspagesresolver->getPageModified($page));
+        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
+        $cmsengineapi->getDate('U', $cmspagesresolver->getPageModified($page));
     }
 }

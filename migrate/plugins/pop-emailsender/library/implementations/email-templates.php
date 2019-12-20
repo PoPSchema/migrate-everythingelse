@@ -129,6 +129,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
         );
 
         $comment_styles = HooksAPIFacade::getInstance()->applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
+        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $comment_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
             '<tr valign="top">'.
@@ -140,7 +141,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $comment->comment_author_url,
             $comment->comment_author,
-            mysql2date($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
+            $cmsengineapi->getDate($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
             $cmscommentsresolver->getCommentContent($comment)
         );
 
