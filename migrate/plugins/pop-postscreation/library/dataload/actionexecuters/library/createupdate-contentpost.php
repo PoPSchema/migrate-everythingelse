@@ -224,7 +224,7 @@ class GD_CreateUpdate_PostBase
             return;
         }
 
-        if (!in_array($postTypeAPI->getPostStatus($post_id), array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
+        if (!in_array($postTypeAPI->getStatus($post_id), array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -457,7 +457,7 @@ class GD_CreateUpdate_PostBase
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $log = array(
-            'previous-status' => $postTypeAPI->getPostStatus($post_id),
+            'previous-status' => $postTypeAPI->getStatus($post_id),
         );
 
         if ($this->addReferences()) {

@@ -59,7 +59,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         }
 
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post_status = $postTypeAPI->getPostStatus($post_id);
+        $post_status = $postTypeAPI->getStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             $this->logCreatedPost($post_id);
         } elseif ($post_status == POP_POSTSTATUS_PENDING) {
@@ -79,7 +79,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Then trigger event Create, not Update
         // Simply check the previous status, if it was not published then trigger Create
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post_status = $postTypeAPI->getPostStatus($post_id);
+        $post_status = $postTypeAPI->getStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
                 $this->logCreatedPost($post_id);

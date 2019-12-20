@@ -31,7 +31,7 @@ HooksAPIFacade::getInstance()->addFilter('gd_createupdate_post', 'gdPppAddPublic
 function gdPppAddPublicPreview($post_id)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();
-    $post_status = $postTypeAPI->getPostStatus($post_id);
+    $post_status = $postTypeAPI->getStatus($post_id);
     if (in_array($post_status, array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
 

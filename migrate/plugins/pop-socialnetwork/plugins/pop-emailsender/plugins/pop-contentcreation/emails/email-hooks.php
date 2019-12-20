@@ -57,22 +57,20 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
      */
     public function emailnotificationsNetworkCreatedpostCreate($post_id)
     {
-
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
     }
     public function emailnotificationsNetworkCreatedpostUpdate($post_id, $log)
     {
-
         // Send an email to all post owners's network when a post is published
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
     }
@@ -155,16 +153,15 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
     }
     public function emailnotificationsSubscribedtopicCreatedpostCreate($post_id)
     {
-
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
     }
@@ -438,11 +435,10 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $post = $postTypeAPI->getPost($post_id);
 
         // Only for published posts
-        if ($postTypeAPI->getPostStatus($post_id) != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) != POP_POSTSTATUS_PUBLISHED) {
             return;
         }
 
-        //
         if ($newly_taggedusers_ids = array_diff($newly_taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
 
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();

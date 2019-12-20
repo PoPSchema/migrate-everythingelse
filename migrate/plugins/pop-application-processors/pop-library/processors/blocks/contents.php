@@ -135,7 +135,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = $vars['routing-state']['queried-object-id'];
                 $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getPostType($post_id).'-'.$post_id);
-                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getPostStatus($post_id));
+                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getStatus($post_id));
                 break;
         }
 

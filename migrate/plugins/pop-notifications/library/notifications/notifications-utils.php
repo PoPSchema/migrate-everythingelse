@@ -47,7 +47,7 @@ class PoP_Notifications_Utils
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post = $postTypeAPI->getPost($post_id);
-        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)
             PoP_Notifications_API::deleteLog(
                 array(

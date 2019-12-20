@@ -46,7 +46,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
 
             // Success String: check if the post status is 'publish' or 'pending', and so print the corresponding URL or Preview URL
             $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $status = $postTypeAPI->getPostStatus($post_id);
+            $status = $postTypeAPI->getStatus($post_id);
             $success_string = $this->getSuccessString($post_id, $status);
 
             // Save the result for some module to incorporate it into the query args
