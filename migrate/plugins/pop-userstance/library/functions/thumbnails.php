@@ -6,8 +6,8 @@ HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'userstanceThumbD
 function userstanceThumbDefaulthighlight($thumb_id, $post_id)
 {
     if (POP_USERSTANCE_IMAGE_NOFEATUREDIMAGESTANCEPOST) {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        if ($cmspostsapi->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return POP_USERSTANCE_IMAGE_NOFEATUREDIMAGESTANCEPOST;
         }
     }

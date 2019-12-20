@@ -217,14 +217,14 @@ class GD_CreateUpdate_PostBase
             return;
         }
 
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post = $cmspostsapi->getPost($post_id);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post = $postTypeAPI->getPost($post_id);
         if (!$post) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Cheating, huh?', 'pop-application');
             return;
         }
 
-        if (!in_array($cmspostsapi->getPostStatus($post_id), array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
+        if (!in_array($postTypeAPI->getPostStatus($post_id), array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -264,7 +264,7 @@ class GD_CreateUpdate_PostBase
                 }
             }
         }
-    
+
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
             \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_APPLIESTO, $form_data['appliesto']);
         }
@@ -335,7 +335,7 @@ class GD_CreateUpdate_PostBase
             $appliesto = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO])->getValue([PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs::MODULE_FORMINPUT_APPLIESTO]);
             $form_data['appliesto'] = $appliesto ?? array();
         }
-        
+
         // Allow plugins to add their own fields
         return HooksAPIFacade::getInstance()->applyFilters(
             'GD_CreateUpdate_Post:form-data',
@@ -419,7 +419,7 @@ class GD_CreateUpdate_PostBase
         if ($this->supportsTitle()) {
             $post_data['post-title'] = $form_data['title'];
         }
-        
+
         // Add Post Categories and Post Type
         $this->maybeAddPostCategories($post_data, $form_data);
         $this->maybeAddPostType($post_data, $form_data);
@@ -455,9 +455,9 @@ class GD_CreateUpdate_PostBase
 
     protected function getUpdatepostDataLog($post_id, $form_data)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $log = array(
-            'previous-status' => $cmspostsapi->getPostStatus($post_id),
+            'previous-status' => $postTypeAPI->getPostStatus($post_id),
         );
 
         if ($this->addReferences()) {
@@ -472,7 +472,7 @@ class GD_CreateUpdate_PostBase
     {
         $post_data = $this->getUpdatepostData($form_data);
         $post_id = $post_data['id'];
-        
+
         // Create the operation log, to see what changed. Needed for
         // - Send email only when post published
         // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
@@ -511,7 +511,7 @@ class GD_CreateUpdate_PostBase
             $errors[] = TranslationAPIFacade::getInstance()->__('Ops, there was a problem... this is embarrassing, huh?', 'pop-application');
             return;
         }
-        
+
         $this->createupdatepost($errors, $form_data, $post_id);
 
         // Allow for additional operations (eg: set Action categories)
@@ -531,7 +531,7 @@ class GD_CreateUpdate_PostBase
 
         if ($this->getFeaturedimageModule()) {
             $featuredimage = $form_data['featuredimage'];
-            
+
             // Featured Image
             if ($featuredimage) {
                 set_post_thumbnail($post_id, $featuredimage);

@@ -6,8 +6,8 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popPostscreationCreateupdateutilsEditUrl', 0, 2);
 function popPostscreationCreateupdateutilsEditUrl($url, $post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == 'post') {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == 'post') {
         return RouteUtils::getRouteURL(POP_POSTSCREATION_ROUTE_EDITPOST);
     }
 

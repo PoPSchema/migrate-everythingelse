@@ -31,7 +31,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -50,7 +50,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
 
     public function initRequestProps(array $module, array &$props)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
@@ -58,7 +58,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($cmspostsapi->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;
@@ -78,7 +78,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

@@ -26,8 +26,8 @@ class PoP_ActionExecuterInstance_Flag
             $errors[] = TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            $target = $cmspostsapi->getPost($form_data['target-id']);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $target = $postTypeAPI->getPost($form_data['target-id']);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms');
             }
@@ -52,21 +52,21 @@ class PoP_ActionExecuterInstance_Flag
             'whyflag' => $moduleprocessor_manager->getProcessor([PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG])->getValue([PoP_ContentCreation_Module_Processor_TextareaFormInputs::class, PoP_ContentCreation_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYFLAG]),
             'target-id' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]),
         );
-        
+
         return $form_data;
     }
 
     protected function execute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             TranslationAPIFacade::getInstance()->__('Flag post', 'pop-genericforms')
         );
-        $target = $cmspostsapi->getPost($form_data['target-id']);
+        $target = $postTypeAPI->getPost($form_data['target-id']);
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
@@ -89,7 +89,7 @@ class PoP_ActionExecuterInstance_Flag
         ).sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Post title', 'pop-genericforms'),
-            $cmspostsapi->getTitle($form_data['target-id'])
+            $postTypeAPI->getTitle($form_data['target-id'])
         ).sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Why flag', 'pop-genericforms'),

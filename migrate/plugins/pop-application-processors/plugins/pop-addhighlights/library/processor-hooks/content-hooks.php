@@ -19,8 +19,8 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $post_id = $vars['routing-state']['queried-object-id'];
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            if ($cmspostsapi->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
                 if (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_HIGHLIGHTSINGLE];
                 } elseif (($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION])) {
@@ -28,7 +28,7 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
                 }
             }
         }
-        
+
         return $inner;
     }
 }

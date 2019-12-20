@@ -22,7 +22,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-        
+
         return $ret;
     }
 
@@ -39,11 +39,11 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
     public function initRequestProps(array $module, array &$props)
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($cmspostsapi->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;
@@ -58,7 +58,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::MODULE_FILTER_HIGHLIGHTS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 }

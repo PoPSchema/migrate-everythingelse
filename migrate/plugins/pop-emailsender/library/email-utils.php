@@ -16,13 +16,13 @@ class PoP_EmailSender_Utils
         // Header is default, or a custom one
         $headers_name = $headers_name ?? 'default';
         $headers = self::$headers[$headers_name] ?? self::$headers['default'];
-        
+
         $cmsemailsenderapi = \PoP\EmailSender\FunctionAPIFactory::getInstance();
         return $cmsemailsenderapi->sendEmail($to, $subject, $msg, $headers);
     }
     protected static function init()
     {
-        
+
         // Allow to add extra headers. Eg: newsletters
         self::$headers = HooksAPIFacade::getInstance()->applyFilters(
             'PoP_EmailSender_Utils:init:headers',
@@ -42,16 +42,16 @@ class PoP_EmailSender_Utils
 
     public static function sendemailSkip($post_id)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $skip = !in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $skip = !in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
         // Check if for a given type of post the email must not be sent (eg: Highlights)
         return HooksAPIFacade::getInstance()->applyFilters('create_post:skip_sendemail', $skip, $post_id);
     }
     public static function getAdminNotificationsEmail()
     {
-        
+
         $cmsemailsenderapi = \PoP\EmailSender\FunctionAPIFactory::getInstance();
 
         // By default, use the admin_email, but this can be overriden
@@ -142,7 +142,7 @@ class PoP_EmailSender_Utils
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $email = $cmsusersapi->getUserEmail($user_id);
         $name = $cmsusersapi->getUserDisplayName($user_id);
-        
+
         self::sendemailToUsers($email, $name, $subject, $msg);
     }
 }

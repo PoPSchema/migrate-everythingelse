@@ -7,11 +7,11 @@ class ApplicationPostsFunctionAPI extends \PoP\Application\PostsFunctionAPI_Base
     public function getAllcontentPostTypes()
     {
         // All searchable post types
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $args = array(
             'exclude-from-search' => false,
         );
-        return array_keys($cmspostsapi->getPostTypes($args));
+        return array_keys($postTypeAPI->getPostTypes($args));
     }
 }
 

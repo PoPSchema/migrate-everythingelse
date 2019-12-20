@@ -5,8 +5,8 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'nosearchcategorypostsPostname', 10, 3);
 function nosearchcategorypostsPostname($name, $post_id, $format)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == 'post') {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == 'post') {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
@@ -22,8 +22,8 @@ function nosearchcategorypostsPostname($name, $post_id, $format)
 HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'nosearchcategorypostsPosticon', 10, 2);
 function nosearchcategorypostsPosticon($icon, $post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == 'post') {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == 'post') {
         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);

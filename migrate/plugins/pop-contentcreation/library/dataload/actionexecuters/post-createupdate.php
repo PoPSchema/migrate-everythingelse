@@ -9,11 +9,11 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
 {
     public function getSuccessString($post_id, $status)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         if ($status == POP_POSTSTATUS_PUBLISHED) {
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
-                $cmspostsapi->getPermalink($post_id),
+                $postTypeAPI->getPermalink($post_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == POP_POSTSTATUS_DRAFT) {
@@ -45,8 +45,8 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
             $this->modifyDataProperties($data_properties, $post_id);
 
             // Success String: check if the post status is 'publish' or 'pending', and so print the corresponding URL or Preview URL
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            $status = $cmspostsapi->getPostStatus($post_id);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $status = $postTypeAPI->getPostStatus($post_id);
             $success_string = $this->getSuccessString($post_id, $status);
 
             // Save the result for some module to incorporate it into the query args
@@ -69,8 +69,8 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
         // Modify the block-data-settings, saying to select the id of the newly created post
         $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($post_id);
         $data_properties[DataloadingConstants::QUERYARGS]['post-status'] = [
-            POP_POSTSTATUS_PUBLISHED, 
-            POP_POSTSTATUS_PENDING, 
+            POP_POSTSTATUS_PUBLISHED,
+            POP_POSTSTATUS_PENDING,
             POP_POSTSTATUS_DRAFT,
         ];
     }

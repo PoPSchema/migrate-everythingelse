@@ -51,13 +51,13 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'recommendsposts':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorrecommendedposts($query, $typeResolver->getId($user));
-                return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
             case 'followers':
                 $query = [];

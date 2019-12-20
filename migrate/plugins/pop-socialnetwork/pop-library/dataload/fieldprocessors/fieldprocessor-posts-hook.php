@@ -54,7 +54,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {

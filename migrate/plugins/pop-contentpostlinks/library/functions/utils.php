@@ -40,12 +40,12 @@ class PoP_ContentPostLinks_Utils
                 '100%',
                 '400'
             );
-            
+
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
-                $cmspostsapi = PostTypeAPIFacade::getInstance();
+                $postTypeAPI = PostTypeAPIFacade::getInstance();
                 $post_id = $cmspostsresolver->getPostId($post);
-                $collapse_id = $cmspostsapi->getPostType($post_id).$post_id.'-'.POP_CONSTANT_CURRENTTIMESTAMP;
+                $collapse_id = $postTypeAPI->getPostType($post_id).$post_id.'-'.POP_CONSTANT_CURRENTTIMESTAMP;
                 $messages[] = sprintf(
                     '<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',
                     '#'.$collapse_id,
@@ -116,8 +116,8 @@ class PoP_ContentPostLinks_Utils
 
     public static function getLinkHost($post_id)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post = $cmspostsapi->getPost($post_id);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post = $postTypeAPI->getPost($post_id);
         $url = self::getLinkUrl($post);
         return getUrlHost($url);
     }

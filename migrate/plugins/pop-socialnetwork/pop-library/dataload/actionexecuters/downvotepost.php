@@ -21,14 +21,14 @@ class GD_DataLoad_ActionExecuter_DownvotePost implements \PoP\ComponentModel\Act
                 ResponseConstants::ERRORSTRINGS => $errors
             );
         }
-        
+
         // Save the result for some module to incorporate it into the query args
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $cmspostsapi->getTitle($target_id)
+            $postTypeAPI->getTitle($target_id)
         );
 
         // No errors => success
@@ -38,4 +38,4 @@ class GD_DataLoad_ActionExecuter_DownvotePost implements \PoP\ComponentModel\Act
         );
     }
 }
-    
+

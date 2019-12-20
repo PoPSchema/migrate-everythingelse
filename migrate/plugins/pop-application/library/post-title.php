@@ -9,9 +9,9 @@ function maybeGetTitleAsBasicContent($title, $post_id = null)
         'get_title_as_basic_content:post_types',
         array()
     );
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if (in_array($cmspostsapi->getPostType($post_id), $post_types)) {
-        return limitString($cmspostsapi->getBasicPostContent($post_id), 100);
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if (in_array($postTypeAPI->getPostType($post_id), $post_types)) {
+        return limitString($postTypeAPI->getBasicPostContent($post_id), 100);
     }
 
     return $title;

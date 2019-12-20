@@ -8,8 +8,8 @@ class PoP_Events_Engine_Hooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addAction(
-            'augmentVarsProperties', 
-            [$this, 'augmentVarsProperties'], 
+            'augmentVarsProperties',
+            [$this, 'augmentVarsProperties'],
             10,
             1
         );
@@ -24,10 +24,10 @@ class PoP_Events_Engine_Hooks
 
         // Attributes needed to match the RouteModuleProcessor vars conditions
         if ($nature == PostRouteNatures::POST) {
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             $pluginapi = PoP_Events_APIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
-            if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {
+            if ($postTypeAPI->getPostType($post_id) == $pluginapi->getEventPostType()) {
                 if ($pluginapi->isFutureEvent($post_id)) {
                     $vars['routing-state']['queried-object-is-future-event'] = true;
                 } elseif ($pluginapi->isCurrentEvent($post_id)) {

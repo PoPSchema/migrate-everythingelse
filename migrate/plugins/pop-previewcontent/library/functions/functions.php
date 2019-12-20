@@ -30,11 +30,11 @@ function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
 HooksAPIFacade::getInstance()->addFilter('gd_createupdate_post', 'gdPppAddPublicPreview', 10, 1);
 function gdPppAddPublicPreview($post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    $post_status = $cmspostsapi->getPostStatus($post_id);
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    $post_status = $postTypeAPI->getPostStatus($post_id);
     if (in_array($post_status, array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
-        
+
         // Add the post to have "public preview"
         if (in_array($post_status, array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING))) {
             $pluginapi->setPreview($post_id);

@@ -17,9 +17,9 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
 
     public function addMultilayoutKeys($keys, $post_id)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        if ($cmspostsapi->getPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
+        if ($postTypeAPI->getPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
             // Add the layout if the post has any of the defined categories for the Map Layout
             $add_layout = false;
             foreach (POP_LOCATIONPOSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTMAP as $cat) {

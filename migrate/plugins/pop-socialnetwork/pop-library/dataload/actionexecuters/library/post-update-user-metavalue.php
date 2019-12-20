@@ -16,10 +16,10 @@ class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
 
         if (!$errors) {
             $target_id = $form_data['target_id'];
-            
+
             // Make sure the post exists
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            $target = $cmspostsapi->getPost($target_id);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $target = $postTypeAPI->getPost($target_id);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {

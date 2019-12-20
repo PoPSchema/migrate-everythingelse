@@ -7,12 +7,12 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
  */
 function gdGetPostauthors($post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
     $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-    $post = $cmspostsapi->getPost($post_id);
+    $post = $postTypeAPI->getPost($post_id);
     return HooksAPIFacade::getInstance()->applyFilters(
-    	'gdGetPostauthors', 
-    	array($cmspostsresolver->getPostAuthor($post)), 
+    	'gdGetPostauthors',
+    	array($cmspostsresolver->getPostAuthor($post)),
     	$post_id
     );
 }

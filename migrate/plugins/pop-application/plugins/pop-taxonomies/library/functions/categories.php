@@ -9,8 +9,8 @@ function getTheMainCategories()
 
 function getTheMainCategory($post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == 'post') {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == 'post') {
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         if ($cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
             // If this post has any of the categories set as main, then return the any one of them

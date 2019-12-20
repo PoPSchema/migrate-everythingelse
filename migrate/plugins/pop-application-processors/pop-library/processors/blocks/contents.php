@@ -53,12 +53,12 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
         return parent::getDescriptionBottom($module, $props);
     }
-    
+
     public function getTitle(array $module, array &$props)
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_CONTENT:
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
@@ -68,9 +68,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
             case self::MODULE_BLOCK_SINGLE_CONTENT:
             case self::MODULE_BLOCK_PAGE_CONTENT:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $cmspostsapi->getTitle($post_id);
+                return $postTypeAPI->getTitle($post_id);
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -83,7 +83,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
         return parent::getControlgroupTopSubmodule($module);
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -121,24 +121,24 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 $this->appendProp($module, $props, 'class', 'block-single-content');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
     public function initRequestProps(array $module, array &$props)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
                 $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-                
+
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = $vars['routing-state']['queried-object-id'];
-                $this->appendProp($module, $props, 'runtime-class', $cmspostsapi->getPostType($post_id).'-'.$post_id);
-                $this->appendProp($module, $props, 'runtime-class', $cmspostsapi->getPostStatus($post_id));
+                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getPostType($post_id).'-'.$post_id);
+                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getPostStatus($post_id));
                 break;
         }
-        
+
         parent::initRequestProps($module, $props);
     }
 
@@ -161,18 +161,18 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     //         case self::MODULE_BLOCK_AUTHOR_CONTENT:
     //         case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                
+
     //             return UserRouteNatures::USER;
 
     //         case self::MODULE_BLOCK_TAG_CONTENT:
-                
+
     //             return TaxonomyRouteNatures::TAG;
 
     //         case self::MODULE_BLOCK_SINGLE_CONTENT:
 
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 }

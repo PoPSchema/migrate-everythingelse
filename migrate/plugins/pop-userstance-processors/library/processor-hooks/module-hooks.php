@@ -18,9 +18,9 @@ class PoPTheme_UserStance_ModuleHooks
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $add = in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $add = in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
         $add = HooksAPIFacade::getInstance()->applyFilters(
             'PoPTheme_UserStance_ModuleHooks:single-block:add-createorupdate-vote',
             $add,
@@ -29,12 +29,12 @@ class PoPTheme_UserStance_ModuleHooks
         if ($add) {
             // Add the "What do you think about TPP" Create Block
             array_splice(
-                $modules, 
+                $modules,
                 array_search(
-                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT], 
+                    [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
                     $blocks
-                )+1, 
-                0, 
+                )+1,
+                0,
                 array(
                     [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE]
                 )

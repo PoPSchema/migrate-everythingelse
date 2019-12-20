@@ -58,7 +58,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         // Potentially, add an extra header level if the current page is one of the subheaders
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $route = $vars['route'];
-        
+
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $ret[RoutingRoutes::$MAIN] = HooksAPIFacade::getInstance()->applyFilters(
@@ -114,7 +114,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
@@ -130,10 +130,10 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return \PoP\ComponentModel\Utils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:
-                $url = $cmspostsapi->getPermalink($vars['routing-state']['queried-object-id']);
+                $url = $postTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                 return \PoP\ComponentModel\Utils::addRoute($url, $route);
         }
-    
+
         return parent::getUrl($module, $route, $props);
     }
 }

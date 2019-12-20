@@ -6,8 +6,8 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'maybeGetHighlightEditUrl', 10, 2);
 function maybeGetHighlightEditUrl($url, $post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
         return RouteUtils::getRouteURL(POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT);
     }
 

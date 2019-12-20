@@ -58,7 +58,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -68,13 +68,13 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
                         return getRouteIcon(POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS, false);
                 }
                 return null;
-            
+
             case 'url':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_POST_HIGHLIGHTEDFROMPOST:
                         // Can't point to the posted article since we don't have the information (object_id is the original, referenced post, not the referencing one),
                         // so the best next thing is to point to the tab of all related content of the original post
-                        return \PoP\ComponentModel\Utils::addRoute($cmspostsapi->getPermalink($notification->object_id), POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS);
+                        return \PoP\ComponentModel\Utils::addRoute($postTypeAPI->getPermalink($notification->object_id), POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS);
                 }
                 return null;
 
@@ -84,7 +84,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
                         return sprintf(
                             TranslationAPIFacade::getInstance()->__('<strong>%s</strong> added a highlight from <strong>%s</strong>', 'poptheme-wassup'),
                             $cmsusersapi->getUserDisplayName($notification->user_id),
-                            $cmspostsapi->getTitle($notification->object_id)
+                            $postTypeAPI->getTitle($notification->object_id)
                         );
                 }
                 return null;
@@ -93,6 +93,6 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

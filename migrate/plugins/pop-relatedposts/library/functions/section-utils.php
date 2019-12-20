@@ -31,7 +31,7 @@ class PoP_RelatedPosts_SectionUtils
         ];
         self::addDataloadqueryargsReferences($query, $post_id);
 
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        return $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 }

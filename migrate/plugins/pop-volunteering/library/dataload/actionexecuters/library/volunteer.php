@@ -22,8 +22,8 @@ class PoP_ActionExecuterInstance_Volunteer
             $errors->add('emptytargetid', TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms'));
         } else {
             // Make sure the post exists
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            $target = $cmspostsapi->getPost($form_data['target-id']);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $target = $postTypeAPI->getPost($form_data['target-id']);
             if (!$target) {
                 $errors->add('nonexistanttargetid', TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms'));
             }
@@ -53,15 +53,15 @@ class PoP_ActionExecuterInstance_Volunteer
             'whyvolunteer' => $moduleprocessor_manager->getProcessor([PoP_Volunteering_Module_Processor_TextareaFormInputs::class, PoP_Volunteering_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYVOLUNTEER])->getValue([PoP_Volunteering_Module_Processor_TextareaFormInputs::class, PoP_Volunteering_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_WHYVOLUNTEER]),
             'target-id' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]),
         );
-        
+
         return $form_data;
     }
 
     protected function execute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post_title = $cmspostsapi->getTitle($form_data['target-id']);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post_title = $postTypeAPI->getTitle($form_data['target-id']);
         $subject = sprintf(
             TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
@@ -80,7 +80,7 @@ class PoP_ActionExecuterInstance_Volunteer
             sprintf(
                 TranslationAPIFacade::getInstance()->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
                 $form_data['name'],
-                $cmspostsapi->getPermalink($form_data['target-id']),
+                $postTypeAPI->getPermalink($form_data['target-id']),
                 $post_title
             )
         ).sprintf(

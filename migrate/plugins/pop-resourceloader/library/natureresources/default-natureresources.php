@@ -77,7 +77,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, false, $options);
         }
     }
-    
+
     public function addAuthorResources(&$resources, $modulefilter, $options)
     {
 
@@ -135,8 +135,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
         $nature = PostRouteNatures::POST;
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+
         // Get one ID per category from the DB
         $ids = array();
 
@@ -156,7 +156,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
                 $all_categories
             );
             foreach ($categories as $category) {
-                if ($post_ids = $cmspostsapi->getPosts(
+                if ($post_ids = $postTypeAPI->getPosts(
                     array_merge(
                         $query,
                         array(
@@ -173,7 +173,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // if (PoP_ResourceLoader_NatureResources_DefaultResources_Utils::add_nocategory_single_resources()) {
 
             //     // Also, add the configuration for one post without any category
-            //     if ($post_ids = $cmspostsapi->getPosts(array_merge(
+            //     if ($post_ids = $postTypeAPI->getPosts(array_merge(
             //         $query,
             //         array(
             //             'category__not_in' => $all_categories,
@@ -187,7 +187,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             $ids = array_unique($ids);
         } else {
 
-            $ids = $cmspostsapi->getPosts(
+            $ids = $postTypeAPI->getPosts(
                 $query,
                 ['return-type' => POP_RETURNTYPE_IDS]
             );
@@ -233,7 +233,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, array(), false, $options);
     }
 }
-    
+
 /**
  * Initialize
  */

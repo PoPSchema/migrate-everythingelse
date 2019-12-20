@@ -35,7 +35,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
             10,
             1
         );
-        
+
         // parent::__construct();
     }
 
@@ -46,7 +46,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
 
     public function spamComment($comment_id)
     {
-        
+
         // Enable if the current logged in user is the System Notification's defined user
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         if (!POP_ADDCOMMENTS_URLPLACEHOLDER_SPAMMEDCOMMENTNOTIFICATION || $vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
@@ -59,7 +59,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     protected function logComment($comment_id, $user_id, $action)
     {
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($comment_id);
         PoP_Notifications_Utils::insertLog(
@@ -67,9 +67,9 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Comments',
-                'object_subtype' => $cmspostsapi->getPostType($cmscommentsresolver->getCommentPostId($comment)),
+                'object_subtype' => $postTypeAPI->getPostType($cmscommentsresolver->getCommentPostId($comment)),
                 'object_id' => $comment_id,
-                'object_name' => $cmspostsapi->getTitle($cmscommentsresolver->getCommentPostId($comment)),
+                'object_name' => $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment)),
             )
         );
     }

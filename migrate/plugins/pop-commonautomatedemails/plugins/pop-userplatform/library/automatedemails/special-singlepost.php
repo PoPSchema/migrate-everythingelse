@@ -12,13 +12,13 @@ class PoPTheme_Wassup_AE_SpecialSinglePost extends PoP_UserPreferences_SimplePro
     {
         return POP_USERPREFERENCES_EMAILDIGESTS_SPECIALPOSTS;
     }
-    
+
     protected function getSubject()
     {
-        
+
         // The post id is passed through param pid
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        return $cmspostsapi->getTitle($_REQUEST[POP_INPUTNAME_POSTID]);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        return $postTypeAPI->getTitle($_REQUEST[POP_INPUTNAME_POSTID]);
     }
 }
 

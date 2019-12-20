@@ -38,14 +38,14 @@ function gdGetPostDescription()
 {
     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
     $post_id = $vars['routing-state']['queried-object-id'];
-    $excerpt = $cmspostsapi->getExcerpt($post_id);
+    $excerpt = $postTypeAPI->getExcerpt($post_id);
 
     // If the excerpt is empty, return the post content instead
     if (!$excerpt) {
         // 300 characters long is good enough, remove all whitespaces
-        $excerpt = str_replace(array("\n\r", "\n", "\r", "\t"), array(' ', '', '', ' '), limitString($cmspostsapi->getBasicPostContent($post_id), 300));
+        $excerpt = str_replace(array("\n\r", "\n", "\r", "\t"), array(' ', '', '', ' '), limitString($postTypeAPI->getBasicPostContent($post_id), 300));
     }
 
     return $cmsapplicationhelpers->escapeHTML($excerpt);

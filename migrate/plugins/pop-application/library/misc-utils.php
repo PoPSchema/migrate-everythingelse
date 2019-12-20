@@ -5,14 +5,14 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 
 function limitString($string, $length = null, $more = null, $bywords = false)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
     if (!$length) {
-        $length = $cmspostsapi->getExcerptLength();
+        $length = $postTypeAPI->getExcerptLength();
     }
-        
+
     // Similar to wp_trim_excerpt in wp-includes/formatting.php
     if (!$more) {
-        $more = $cmspostsapi->getExcerptMore();
+        $more = $postTypeAPI->getExcerptMore();
     }
     if (!$bywords) {
         // Comment Leo 11/07/2017: it works fine using mb_substr instead, so use that one
@@ -26,7 +26,7 @@ function limitString($string, $length = null, $more = null, $bywords = false)
             $string = substr($string, 0, $pos[$length]) . $more;
         }
     }
-    
+
     return $string;
 }
 
@@ -41,8 +41,8 @@ function maybeAddHttp($url)
 // function gdGetCategories($post_id)
 // {
 //     $categories = array();
-//     $cmspostsapi = PostTypeAPIFacade::getInstance();
-//     if ($cmspostsapi->getPostType($post_id) == 'post') {
+//     $postTypeAPI = PostTypeAPIFacade::getInstance();
+//     if ($postTypeAPI->getPostType($post_id) == 'post') {
 //         if ($cats = getTheCategory($post_id)) {
 //             $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 //             foreach ($cats as $cat) {
@@ -58,7 +58,7 @@ function maybeAddHttp($url)
 function gdGetPostname($post_id, $format = 'title')
 {
     $postname = HooksAPIFacade::getInstance()->applyFilters('gd_postname', TranslationAPIFacade::getInstance()->__('Post', 'pop-coreprocessors'), $post_id, $format);
-    
+
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {
         $postname = strtolower($postname);
@@ -71,7 +71,7 @@ function gdGetCategoryname($cat_id, $format = 'title')
 {
     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
     $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $taxonomyapi->getCategoryName($cat_id), $cat_id, $format);
-    
+
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {
         $catname = strtolower($catname);

@@ -19,7 +19,7 @@ function gdCustomThumbSizes()
     // Below two thumbs have the same proportions
     add_image_size('thumb-feed', 480, 267, true);
     add_image_size('thumb-md', 360, 200, true);
-    
+
     add_image_size('thumb-sm', 75, 60, true);
     add_image_size('thumb-xs', 40, 40, true);
     add_image_size('favicon', 16, 16, true);
@@ -33,8 +33,8 @@ gdCustomThumbSizes();
 HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'gdThumbDefault', 10, 2);
 function gdThumbDefault($thumb_id, $post_id)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT && POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST) {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT && POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST) {
         return POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST;
     } elseif (POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEPOST) {
         return POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEPOST;

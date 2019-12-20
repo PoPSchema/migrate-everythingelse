@@ -37,9 +37,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                $cmspostsapi = PostTypeAPIFacade::getInstance();
+                $postTypeAPI = PostTypeAPIFacade::getInstance();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-                if (in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+                if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
                 }
                 break;
@@ -145,7 +145,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT]], $props, 'class', 'col-xs-12');
                 $this->setProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT]], $props, 'title', '');
                 break;
-                
+
             case self::MODULE_BLOCK_AUTHORSUMMARY:
                 $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'title', '');
                 $this->appendProp([[PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT]], $props, 'class', 'col-xs-12');
@@ -202,24 +202,24 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
     public function initRequestProps(array $module, array &$props)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $vars = \PoP\ComponentModel\Engine_Vars::getVars();
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($cmspostsapi->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;
         }
-        
+
         parent::initRequestProps($module, $props);
     }
 
@@ -235,11 +235,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
-        
+
             case self::MODULE_BLOCK_TAG:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
         }
-        
+
         return parent::getSubmenuSubmodule($module);
     }
 
@@ -252,7 +252,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     TranslationAPIFacade::getInstance()->__('Aiyoooo, it seems there is nothing here. Where else would you like to go?', 'poptheme-wassup')
                 );
         }
-    
+
         return parent::getDescription($module, $props);
     }
 
@@ -260,25 +260,25 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_404:
                 return TranslationAPIFacade::getInstance()->__('Ops, this page doesn\'t exist!', 'poptheme-wassup');
 
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $cmspostsapi->getTitle($post_id);
+                return $postTypeAPI->getTitle($post_id);
 
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
             case self::MODULE_BLOCK_AUTHORSUMMARY:
                 $author = $vars['routing-state']['queried-object-id'];
                 return $cmsusersapi->getUserDisplayName($author);
-        
+
             case self::MODULE_BLOCK_TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle(true, false);
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -321,7 +321,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                         $top_modules
                     );
                 }
-                
+
                 // Content module
                 if ($content_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
                     $ret[] = $content_module;
@@ -340,7 +340,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                         $top_modules
                     );
                 }
-                
+
                 // Content module
                 if ($content_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
                     $ret[] = $content_module;

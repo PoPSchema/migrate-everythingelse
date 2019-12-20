@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
     {
         return array();
     }
-    
+
     public function getTitle(array $module, array &$props)
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
 
         // If the title has been set in the $props by a parent, use it
         // Otherwise, use the local module level. This bizarre solution is used, instead of directly
-        // overriding the value of 'title' in the $props, since the title is dynamic (eg: $cmspostsapi->getPermalink($page))
+        // overriding the value of 'title' in the $props, since the title is dynamic (eg: $postTypeAPI->getPermalink($page))
         // however it is saved in the static cache. So then the assumption is that, if the title is set
         // from above, then it shall be static, otherwise this same level can be runtime
         return $this->getProp($module, $props, 'title') ?? $this->getTitle($module, $props);
@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
                 $block_inners
             );
         }
-                
+
         return $ret;
     }
 
@@ -57,7 +57,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $submodules
             );
         }
@@ -69,11 +69,11 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
         if ($title_htmltag = $this->getProp($module, $props, 'title-htmltag')) {
             $ret['title-htmltag'] = $title_htmltag;
         }
-        
+
         if ($classes = $this->getBlocksectionsClasses($module)) {
             $ret[GD_JS_CLASSES] = $classes;
         }
-        
+
         return $ret;
     }
 
@@ -90,7 +90,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
                 }
             }
         }
-        
+
         return $ret;
     }
 
@@ -157,7 +157,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
         if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] || $data_properties[DataloadingConstants::EXTERNALLOAD]) && !$dbobjectids) {
             $ret['do-not-render'] = true;
         }
-        
+
         return $ret;
     }
 }

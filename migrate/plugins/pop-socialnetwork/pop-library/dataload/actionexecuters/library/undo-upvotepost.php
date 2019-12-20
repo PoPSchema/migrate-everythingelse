@@ -11,7 +11,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 
         if (!$errors) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -20,7 +20,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $cmspostsapi->getTitle($target_id)
+                    $postTypeAPI->getTitle($target_id)
                 );
             }
         }

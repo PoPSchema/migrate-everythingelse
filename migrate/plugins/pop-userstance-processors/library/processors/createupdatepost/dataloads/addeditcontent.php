@@ -48,7 +48,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             self::MODULE_DATALOAD_STANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATECONTENT],
             self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE => [PoP_ContentCreation_Module_Processor_FeedbackMessages::class, PoP_ContentCreation_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATECONTENT],
         );
-    
+
         if ($feedback = $feedbacks[$module[1]]) {
             return $feedback;
         }
@@ -81,7 +81,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 $ret[] = [UserStance_Module_Processor_CreateUpdatePostForms::class, UserStance_Module_Processor_CreateUpdatePostForms::MODULE_FORM_STANCE];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -107,7 +107,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedInOut');
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -139,11 +139,11 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     $post_id = $vars['routing-state']['queried-object-id'];
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $post_id);
                 }
-                
+
                 // Stances are unique, just 1 per person/article.
                 // Check if there is a Stance for the given post.
-                $cmspostsapi = PostTypeAPIFacade::getInstance();
-                if ($stances = $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+                $postTypeAPI = PostTypeAPIFacade::getInstance();
+                if ($stances = $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
                     return array($stances[0]);
                 }
                 return [];
@@ -170,7 +170,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return GD_DataLoad_QueryInputOutputHandler_AddPost::class;
         }
-        
+
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
@@ -197,12 +197,12 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT], $props, 'objectname', $name);
                 break;
-        
+
             case self::MODULE_DATALOAD_STANCE_UPDATE:
                 $this->setProp([PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT], $props, 'objectname', $name);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

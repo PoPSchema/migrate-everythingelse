@@ -12,14 +12,14 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-        
+
         // Created/Updated/Removed Post
         HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'createdPost'));
         HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'updatedPost'), 10, 2);
         HooksAPIFacade::getInstance()->addAction(
-            'popcms:transitionPostStatus', 
-            array($this, 'removedPost'), 
-            10, 
+            'popcms:transitionPostStatus',
+            array($this, 'removedPost'),
+            10,
             3
         );
 
@@ -27,9 +27,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if ($cmsapplicationapi->isAdminPanel()) {
             HooksAPIFacade::getInstance()->addAction(
-                'popcms:transitionPostStatus', 
-                array($this, 'adminApprovalPost'), 
-                10, 
+                'popcms:transitionPostStatus',
+                array($this, 'adminApprovalPost'),
+                10,
                 3
             );
         }
@@ -42,9 +42,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
         // Check if the post needs or not be notified (eg: Highlights must not, since they have their own action)
         // If the post type is not allowed, then skip. Otherwise, by default, create the notification
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $skip = !in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $skip = !in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ContentCreation_Notifications_Hook_Posts:skipNotificationForPost',
             $skip,
@@ -57,9 +57,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if ($this->skipNotificationForPost($post_id)) {
             return;
         }
-        
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post_status = $cmspostsapi->getPostStatus($post_id);
+
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post_status = $postTypeAPI->getPostStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             $this->logCreatedPost($post_id);
         } elseif ($post_status == POP_POSTSTATUS_PENDING) {
@@ -74,12 +74,12 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if ($this->skipNotificationForPost($post_id)) {
             return;
         }
-        
+
         // Is it being created? (Eg: first created as draft, then "updated" to status publish)
         // Then trigger event Create, not Update
         // Simply check the previous status, if it was not published then trigger Create
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post_status = $cmspostsapi->getPostStatus($post_id);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post_status = $postTypeAPI->getPostStatus($post_id);
         if ($post_status == POP_POSTSTATUS_PUBLISHED) {
             if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
                 $this->logCreatedPost($post_id);
@@ -110,7 +110,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             PoP_Notifications_API::deletePostNotifications($author, $post_id, $clear_actions);
             // }
         }
-        
+
         // Only after log the action
         $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_CREATEDPOST);
     }
@@ -125,10 +125,10 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     protected function logByPostAuthors($post_id, $action)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post = $cmspostsapi->getPost($post_id);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post = $postTypeAPI->getPost($post_id);
 
-        $post_title = $cmspostsapi->getTitle($post_id);
+        $post_title = $postTypeAPI->getTitle($post_id);
 
         // Allow for co-authors
         $authors = gdGetPostauthors($post_id);
@@ -138,7 +138,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                     'user_id' => $author,
                     'action' => $action,
                     'object_type' => 'Post',
-                    'object_subtype' => $cmspostsapi->getPostType($post_id),
+                    'object_subtype' => $postTypeAPI->getPostType($post_id),
                     'object_id' => $post_id,
                     'object_name' => $post_title,
                 )
@@ -148,7 +148,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function adminApprovalPost($new_status, $old_status, $post)
     {
-        
+
         // Enable if the current logged in user is the System Notification's defined user
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
@@ -175,7 +175,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                 $action = AAL_POP_ACTION_POST_SPAMMEDPOST;
             }
         }
-    
+
         if ($action) {
             // If any of these actions must be logged, then delete all previous admin_approval actions
             // This is needed for 2 reasons:
@@ -190,7 +190,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $cmspostsresolver->getPostId($post), $clear_actions);
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
             PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $cmspostsresolver->getPostId($post), $clear_actions);
-            
+
             // Only after log the action
             PoP_Notifications_Utils::logPostAction($cmspostsresolver->getPostId($post), $action, POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS);
         }

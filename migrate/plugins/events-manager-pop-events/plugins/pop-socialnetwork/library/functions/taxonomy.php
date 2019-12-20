@@ -17,8 +17,8 @@ function popEmRegisterTagForEvents()
 HooksAPIFacade::getInstance()->addAction('PoP_Mentions:post_tags:add', 'popEmMentionsAddEventTags', 10, 2);
 function popEmMentionsAddEventTags($post_id, $tags)
 {
-    $cmspostsapi = PostTypeAPIFacade::getInstance();
-    if ($cmspostsapi->getPostType($post_id) == EM_POST_TYPE_EVENT) {
+    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    if ($postTypeAPI->getPostType($post_id) == EM_POST_TYPE_EVENT) {
         wp_set_object_terms($post_id, $tags, EM_TAXONOMY_TAG);
     }
 }

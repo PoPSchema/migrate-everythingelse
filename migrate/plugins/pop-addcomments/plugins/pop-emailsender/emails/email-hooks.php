@@ -14,13 +14,13 @@ class PoP_AddComments_EmailSender_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         HooksAPIFacade::getInstance()->addAction(
-            'popcms:insertComment', 
-            array($this, 'sendemailToUsersFromComment'), 
-            10, 
+            'popcms:insertComment',
+            array($this, 'sendemailToUsersFromComment'),
+            10,
             2
         );
     }
-    
+
     /**
      * Send Email when adding comments
      */
@@ -37,22 +37,22 @@ class PoP_AddComments_EmailSender_Hooks
         if (in_array($cmscommentsresolver->getCommentType($comment), $skip) || !$cmscommentsresolver->isCommentApproved($comment)) {
             return;
         }
-        
+
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
 
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
-        $title = $cmspostsapi->getTitle($post_id);
+        $title = $postTypeAPI->getTitle($post_id);
         $intro = $cmscommentsresolver->getCommentParent($comment) ?
             TranslationAPIFacade::getInstance()->__('<p>There is a response to a comment from <a href="%s">%s</a>:</p>', 'pop-emailsender') :
             TranslationAPIFacade::getInstance()->__('<p>A new comment has been added to <a href="%s">%s</a>:</p>', 'pop-emailsender');
         $content = sprintf(
             $intro,
-            $cmspostsapi->getPermalink($post_id),
+            $postTypeAPI->getPermalink($post_id),
             $title
         );
         $content .= PoP_EmailTemplatesFactory::getInstance()->getCommentcontenthtml($comment);
-        
+
         // Possibly the title has html entities, these must be transformed again for the subjects below
         $title = html_entity_decode($title);
 
@@ -108,7 +108,7 @@ class PoP_AddComments_EmailSender_Hooks
             TranslationAPIFacade::getInstance()->__('New comment added in “%s”', 'pop-emailsender'),
             $title
         );
-        
+
         $authors = PoP_EmailSender_Utils::sendemailToUsersFromPost($post_ids, $subject, $content, $exclude_authors);
 
         // Add the users to the list of users who got an email sent to

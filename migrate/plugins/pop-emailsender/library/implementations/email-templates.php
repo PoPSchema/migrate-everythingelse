@@ -74,17 +74,17 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar_html,
             $name_html
         );
-        
+
         return $user_html;
     }
 
     public function getPosthtml($post_id)
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post_url = $cmspostsapi->getPermalink($post_id);
-        $post_title = $cmspostsapi->getTitle($post_id);
-        $post_excerpt = $cmspostsapi->getExcerpt($post_id);
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post_url = $postTypeAPI->getPermalink($post_id);
+        $post_title = $postTypeAPI->getTitle($post_id);
+        $post_excerpt = $postTypeAPI->getExcerpt($post_id);
         $thumb = $cmsmediaapi->getMediaSrc(MediaHelpers::getThumbId($post_id), 'thumb-sm');
         $thumb_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%4$s"></a>',
@@ -112,7 +112,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $title_html,
             $post_excerpt
         );
-        
+
         return $post_html;
     }
 
@@ -127,7 +127,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             $avatar['src'],
             $avatar['size']
         );
-        
+
         $comment_styles = HooksAPIFacade::getInstance()->applyFilters('sendemailToUsersFromComment:comment_styles', array('width: 100%'));
         $comment_html = sprintf(
             '<table cellpadding=10 cellspacing=0 border=0 style="%s">'.
@@ -143,17 +143,17 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             mysql2date($cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:dateFormat')), $cmscommentsresolver->getCommentDateGmt($comment)),
             $cmscommentsresolver->getCommentContent($comment)
         );
-        
+
         return $comment_html;
     }
 
     public function getCommentcontenthtml($comment)
     {
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
-        $url = $cmspostsapi->getPermalink($post_id);
+        $url = $postTypeAPI->getPermalink($post_id);
         if ($cmscommentsresolver->getCommentParent($comment)) {
             $parent = $cmscommentsapi->getComment($cmscommentsresolver->getCommentParent($comment));
         }
@@ -171,7 +171,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
         $btn_title = TranslationAPIFacade::getInstance()->__('Click here to reply the comment', 'pop-emailsender');
         $content .= $this->getButtonhtml($btn_title, $url);
-        
+
         return $content;
     }
 
@@ -196,7 +196,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
             implode(';', $userhtml_styles),
             $tagname_html
         );
-        
+
         return $tag_html;
     }
 

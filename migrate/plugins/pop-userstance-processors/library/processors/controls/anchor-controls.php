@@ -50,7 +50,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
     public function getMutableonrequestText(array $module, array &$props)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
@@ -127,7 +127,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 // $query['limit'] = 0;
                 // $query['fields'] = 'ids';
 
-                $count = $cmspostsapi->getPostCount($query);
+                $count = $postTypeAPI->getPostCount($query);
 
                 return sprintf(
                     '<strong>%s</strong> %s',

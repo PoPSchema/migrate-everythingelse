@@ -33,13 +33,13 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         if ($form_data['stancetarget']) {
             // Check that the referenced post exists
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
-            $referenced = $cmspostsapi->getPost($form_data['stancetarget']);
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $referenced = $postTypeAPI->getPost($form_data['stancetarget']);
             if (!$referenced) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($cmspostsapi->getPostStatus($referenced) != POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getPostStatus($referenced) != POP_POSTSTATUS_PUBLISHED) {
                     $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -107,7 +107,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         parent::validatecreatecontent($errors, $form_data);
 
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
         // - Each article: each referenced $post_id
@@ -131,7 +131,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $cmspostsapi->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($stances = $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 TranslationAPIFacade::getInstance()->__('You have already added your %s', 'pop-userstance'),
@@ -141,8 +141,8 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
                 $error = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
                     $error,
-                    $cmspostsapi->getPermalink($referenced_id),
-                    $cmspostsapi->getTitle($referenced_id)
+                    $postTypeAPI->getPermalink($referenced_id),
+                    $postTypeAPI->getTitle($referenced_id)
                 );
             }
             $errors[] = sprintf(
@@ -158,7 +158,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     // protected function getCreatepostData($form_data)
     // {
     //     $post_data = parent::getCreatepostData($form_data);
-        
+
     //     // Allow to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
     //     // For that, General thoughts have menu_order "0" (already default one), article-related ones have menu_order "1"
     //     if ($form_data['stancetarget']) {

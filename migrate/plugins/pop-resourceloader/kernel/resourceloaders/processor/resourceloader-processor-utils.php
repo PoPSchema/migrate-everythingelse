@@ -156,7 +156,7 @@ class PoP_ResourceLoaderProcessorUtils {
             foreach ($route_formats as $route => $formats) {
 
                 foreach ($formats as $format) {
-                    
+
                     $item_options = $options;
                     $components = array(
                         'format' => $format,
@@ -212,7 +212,7 @@ class PoP_ResourceLoaderProcessorUtils {
         global $pop_jsresourceloaderprocessor_manager;
 
         $resources = array();
-        
+
         // Make sure there are no duplicates
         $critical_methods = array_unique($critical_methods);
         $noncritical_methods = array_unique($noncritical_methods);
@@ -223,11 +223,11 @@ class PoP_ResourceLoaderProcessorUtils {
             $pop_jsresourceloaderprocessor_manager->addResourceDependencies($resources, $template_resource, true);
         }
         $critical_resources = $noncritical_resources = array();
-        
+
         // Add the initial resources only when doing "loading-site". When doing "fetching-json" no need, since those assets will have been already loaded by then
         $loadingSite = self::isLoadingSite($modulefilter);
         $pop_jsresourceloaderprocessor_manager->addResourcesFromJsmethods($critical_resources, $critical_methods, $template_resources, $loadingSite);
-        
+
         // Add the dependencies for the template resources also
         foreach ($template_resources as $template_resource) {
             $pop_jsresourceloaderprocessor_manager->addResourceDependencies($critical_resources, $template_resource, false);
@@ -236,7 +236,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // If a resource is both critical and non-critical, then remove it from non-critical
         $noncritical_resources = array_values(array_diff(
-            $noncritical_resources, 
+            $noncritical_resources,
             $critical_resources
         ));
 
@@ -276,7 +276,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function addResourcesFromCurrentVars($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $components = array(), $options = array()) {
-        
+
         // Use the $vars identifier to store the wrapper cache, so there is no collision with the values saved for the current request
         global /*$pop_module_processor_runtimecache, */$pop_jsresourceloaderprocessor_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -286,7 +286,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars = &\PoP\ComponentModel\Engine_Vars::$vars;
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 
@@ -329,7 +329,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $params = array();
         $format = $components['format'] ?? ($loadingSite ? '' : POP_VALUES_DEFAULT);
 		$route = $components['route'];
-        
+
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
         // So if we have that format, use the correponding target, or if not, the default is main
         // Give priority to $components['target'] though, so if we set this value, then it will use that value
@@ -350,7 +350,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // Notice that we are not changing here the format to default, but say to duplicate the entry
                 // This is to avoid having complete entries in the corresponding resourceloader-config-....js file
-                // (such as config-resources-pagenavigator.js), because it treats an empty array as "[]" in JSON, 
+                // (such as config-resources-pagenavigator.js), because it treats an empty array as "[]" in JSON,
                 // instead of "{}", which may make the JS produce an error
                 $target = $format_targets[$format];
                 $duplicate_as_default_format = true;
@@ -367,7 +367,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // If doing JSON, then the key is the combination of the format/tab/target
         // Then, resources for author => Individual/Organization must be bundled together
         if (!$loadingSite) {
-    		
+
             $params[] = POP_RESOURCELOADERIDENTIFIER_FORMAT.$format;
     		if ($route) {
     			$params[] = POP_RESOURCELOADERIDENTIFIER_ROUTE.$route;
@@ -376,7 +376,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
     		$key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
         }
-        
+
         // Pretend we are in that intended page, by setting the $vars in accordance
         // Comment Leo 07/11/2017: allow to have both $fetching_page and $loadingSite,
         // the latter one is needed for enqueuing bundles/bundlegroups instead of resources when first loading the website
@@ -435,7 +435,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 $path = GeneralUtils::maybeAddTrailingSlash(PathUtils::getPagePath($page_id));
                 $paths[] = $path;
-                
+
                 // Calculate and save the resources
                 $resources[$path][$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
@@ -446,7 +446,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             $vars['routing-state'] = [];
             \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
-            
+
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
             foreach ($ids as $route) {
@@ -466,7 +466,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 $path = $route.'/';
                 $paths[] = $path;
-                
+
                 // Calculate and save the resources
                 $resources[$path][$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
@@ -477,7 +477,7 @@ class PoP_ResourceLoaderProcessorUtils {
             }
         } elseif ($nature == PostRouteNatures::POST) {
 
-            // // For all the posts passed, get the resources and place them under the path of the post, 
+            // // For all the posts passed, get the resources and place them under the path of the post,
             // // without including the post's slug itself (eg: mesym.com/en/posts/this-is-a-post/ will save
             // // resources under key mesym.com/en/posts/)
             // $homeUrl = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
@@ -488,10 +488,10 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $post_id);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $cmspostsapi->getPost($post_id);
+                $vars['routing-state']['queried-object'] = $postTypeAPI->getPost($post_id);
                 $vars['routing-state']['queried-object-id'] = $post_id;
                 \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
-                
+
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
@@ -517,7 +517,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // Allow to set the extra vars: "source" => "community"/"organization", with the value set under the author id
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
-                
+
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $cmsusersapi->getUserById($author);
                 $vars['routing-state']['queried-object-id'] = $author;
@@ -543,7 +543,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
-                
+
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $taxonomyapi->getTag($tag_id);
                 $vars['routing-state']['queried-object-id'] = $tag_id;
@@ -572,7 +572,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
             }
-        
+
             // Calculate and save the resources
             $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
@@ -589,7 +589,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
             }
-        
+
             // Calculate and save the resources
             $resources[$key] = self::getResourcesFromCurrentVars($modulefilter, $options);
 
@@ -597,17 +597,17 @@ class PoP_ResourceLoaderProcessorUtils {
             // $pop_module_processor_runtimecache->deleteCache();
         }
 
-        // If doing JSON, then we may need to duplicate entries. 
+        // If doing JSON, then we may need to duplicate entries.
         // For loadingSite, no need
         if (!$loadingSite) {
 
             $flat_natures = array(
-                RouteNatures::HOME, 
-                TaxonomyRouteNatures::TAG, 
+                RouteNatures::HOME,
+                TaxonomyRouteNatures::TAG,
                 UserRouteNatures::USER,
             );
             $path_natures = array(
-                PostRouteNatures::POST, 
+                PostRouteNatures::POST,
                 PageRouteNatures::PAGE,
                 RouteNatures::STANDARD,
             );
@@ -616,8 +616,8 @@ class PoP_ResourceLoaderProcessorUtils {
             // add an entry without the tab (we can't add t:default in JS since we don't know which is the default tab for each nature, just from the URL pattern)
             $noroute_natures = array(
                 // Comment Leo 10/04/2019: since switching from page to route, only routes cannot have a tab
-                // UserRouteNatures::USER, 
-                // PostRouteNatures::POST, 
+                // UserRouteNatures::USER,
+                // PostRouteNatures::POST,
                 // TaxonomyRouteNatures::TAG,
                 RouteNatures::STANDARD,
             );
@@ -700,7 +700,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Calculate and save the resources
         $item_resources = self::getResourcesFromCurrentVars($modulefilter, $options);
-        if ($merge) {  
+        if ($merge) {
 
             $resources[$key] = $resources[$key] ?? array();
             $resources[$key] = array_unique(
@@ -718,7 +718,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function getResourcesFromCurrentVars($modulefilter, $options = array()) {
-        
+
         global $pop_resourcemoduledecoratorprocessor_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -748,7 +748,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
         // Get the Handlebars list of resources needed for that pageSection
         $templateResources = $entry_processor->getTemplateResourcesMergedmoduletree($entryModule, $entry_model_props);
-        
+
         // We also need to get the dynamic-templates and save it on the vars cache.
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
         if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryModule, $entry_model_props)) {
@@ -757,7 +757,7 @@ class PoP_ResourceLoaderProcessorUtils {
         }
 
         // Get the initial methods only if doing "loading-site"
-        // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed 
+        // Get the list of methods that will be called in that pageSection, to obtain, later on, what JS resources are needed
         // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
         // and added it when calculating $(non)critical_methods
         $loadingSite = self::isLoadingSite($modulefilter);
@@ -774,7 +774,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function getJsmethodsFromModule($addInitial, $entryModule, $entry_model_props) {
-        
+
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($entryModule);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryModule, $entry_model_props);
@@ -783,7 +783,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial = true) {
-        
+
         global $pop_jsresourceloaderprocessor_manager;
 
         $critical_js_methods = array();
@@ -828,7 +828,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function addPagesectionJsmethods(&$js_methods, $moduleMethods, $priority) {
-        
+
         foreach ($moduleMethods as $module => $priorityGroupMethods) {
             if ($groupMethods = $priorityGroupMethods[$priority]) {
                 foreach ($groupMethods as $group => $methods) {
@@ -841,7 +841,7 @@ class PoP_ResourceLoaderProcessorUtils {
     }
 
     public static function addBlockJsmethods(&$js_methods, $moduleMethods, $priority) {
-        
+
         if ($priorityGroupMethods = $moduleMethods[GD_JS_METHODS]) {
             if ($groupMethods = $priorityGroupMethods[$priority]) {
                 foreach ($groupMethods as $group => $methods) {

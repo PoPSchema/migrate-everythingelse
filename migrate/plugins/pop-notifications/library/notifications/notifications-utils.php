@@ -25,7 +25,7 @@ class PoP_Notifications_Utils
 
     public static function logPostAction($post_id, $action, $user_id = null)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         if (!$user_id) {
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
@@ -36,18 +36,18 @@ class PoP_Notifications_Utils
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Post',
-                'object_subtype' => $cmspostsapi->getPostType($post_id),
+                'object_subtype' => $postTypeAPI->getPostType($post_id),
                 'object_id' => $post_id,
-                'object_name' => $cmspostsapi->getTitle($post_id),
+                'object_name' => $postTypeAPI->getTitle($post_id),
             )
         );
     }
 
     public static function notifyAllUsers($post_id, $notification)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $post = $cmspostsapi->getPost($post_id);
-        if ($cmspostsapi->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $post = $postTypeAPI->getPost($post_id);
+        if ($postTypeAPI->getPostStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)
             PoP_Notifications_API::deleteLog(
                 array(
@@ -56,14 +56,14 @@ class PoP_Notifications_Utils
                     'object_id' => $post_id,
                 )
             );
-    
+
             // Insert into the Activity Log
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
             PoP_Notifications_Utils::insertLog(
                 array(
                     'action'      => AAL_POP_ACTION_POST_NOTIFIEDALLUSERS,
                     'object_type' => 'Post',
-                    'object_subtype' => $cmspostsapi->getPostType($post_id),
+                    'object_subtype' => $postTypeAPI->getPostType($post_id),
                     'user_id'     => $cmspostsresolver->getPostAuthor($post), //POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
                     'object_id'   => $post_id,
                     'object_name' => stripslashes($notification),

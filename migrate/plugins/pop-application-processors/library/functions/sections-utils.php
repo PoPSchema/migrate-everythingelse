@@ -61,9 +61,9 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function getSingleTitle()
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $ret = $cmspostsapi->getTitle($post_id);
+        $ret = $postTypeAPI->getTitle($post_id);
 
         $route = $vars['route'];
         if ($route != RoutingRoutes::$MAIN) {
@@ -81,12 +81,12 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        if (in_array($cmspostsapi->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+        if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_SINGLE];
         }
-        
+
         return null;
     }
 
@@ -115,7 +115,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $tag_id = $vars['routing-state']['queried-object-id'];
-        
+
         $ret['meta-query'][] = [
             'key' => \PoP\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS),
             'value' => $tag_id,
@@ -129,7 +129,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
-        
+
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
@@ -145,7 +145,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
-        
+
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
@@ -159,7 +159,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $author = $vars['routing-state']['queried-object-id'];
-        
+
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
         // And the Organization must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
@@ -176,7 +176,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
-        
+
         // Find all recommended posts by this author
         $ret['meta-query'][] = [
             'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_RECOMMENDEDBY),
@@ -190,7 +190,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        
+
         // Include only the authors of the current post
         $ret['include'] = gdGetPostauthors($post_id);
     }

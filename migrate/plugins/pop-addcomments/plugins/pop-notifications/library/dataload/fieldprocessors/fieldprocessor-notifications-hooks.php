@@ -68,7 +68,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -122,7 +122,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         return sprintf(
                             $messages[$notification->action],
                             gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $cmspostsapi->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
@@ -150,7 +150,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                             $message,
                             $cmsusersapi->getUserDisplayName($notification->user_id),
                             gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $cmspostsapi->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
                         );
                 }
                 return null;
@@ -169,6 +169,6 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_AddComments_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

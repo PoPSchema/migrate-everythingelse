@@ -87,8 +87,8 @@ function popMediaViewSettingsDefaultthumb($settings)
 //         $orderby = 'none';
 
 //     if ( !empty($include) ) {
-            // $cmspostsapi = PostTypeAPIFacade::getInstance();
-//         $_attachments = $cmspostsapi->getPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+            // $postTypeAPI = PostTypeAPIFacade::getInstance();
+//         $_attachments = $postTypeAPI->getPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
 
 //         $attachments = array();
 //         foreach ( $_attachments as $key => $val ) {
@@ -137,7 +137,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 //      * @param bool $print Whether to print default gallery styles.
 //      *                    Defaults to false if the theme supports HTML5 galleries.
 //      *                    Otherwise, defaults to true.
-     
+
 //     // Change PoP: commented all code below, no need to override anything
 //     // Instead, use the following gallery_div:
 //     $size_class = sanitize_html_class( $size );

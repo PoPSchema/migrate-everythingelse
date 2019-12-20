@@ -8,22 +8,22 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 //     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
 //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 //     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-//     $cmspostsapi = PostTypeAPIFacade::getInstance();
+//     $postTypeAPI = PostTypeAPIFacade::getInstance();
 //     $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
 //     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
 //     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-    
+
 //     $site_name = $cmsapplicationapi->getSiteName();
 //     $separator = '|';
-    
+
 //     if ($vars['routing-state']['is-post']) {
 //         $post = $vars['routing-state']['queried-object'];
-//         $content = $cmspostsapi->getSinglePostTitle($post);
+//         $content = $postTypeAPI->getSinglePostTitle($post);
 //     } elseif ($vars['routing-state']['is-home']/* || $vars['routing-state']['is-front-page']*/) {
 //         $content = $cmsapplicationapi->getSiteDescription();
 //     } elseif ($vars['routing-state']['is-page']) {
 //         $post = $vars['routing-state']['queried-object'];
-//         $content = $cmspostsapi->getSinglePostTitle($post);
+//         $content = $postTypeAPI->getSinglePostTitle($post);
 //     } /*elseif ($vars['routing-state']['is-search']) {
 //         $content = TranslationAPIFacade::getInstance()->__('Search:', 'pop-engine');
 //         $content .= ' ' . $cmsapplicationhelpers->escapeHTML(stripslashes($cmsengineapi->getSearchQuery()), true);
@@ -72,7 +72,7 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 //     } else {
 //         $doctitle = $elements;
 //     }
-    
+
 //     return HooksAPIFacade::getInstance()->applyFilters('gdGetDocumentTitle', $doctitle);
 // }
 

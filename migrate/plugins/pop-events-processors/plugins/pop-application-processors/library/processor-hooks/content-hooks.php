@@ -23,10 +23,10 @@ class PoPTheme_Wassup_EM_ContentHooks
     public function getTopSidebar($sidebar, $post_id)
     {
         $pluginapi = PoP_Events_APIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {
-            return $pluginapi->isFutureEvent($post_id) ? 
-                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT] : 
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        if ($postTypeAPI->getPostType($post_id) == $pluginapi->getEventPostType()) {
+            return $pluginapi->isFutureEvent($post_id) ?
+                [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_EVENT] :
                 [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT];
         }
 
@@ -36,8 +36,8 @@ class PoPTheme_Wassup_EM_ContentHooks
     public function getBottomSidebar($sidebar, $post_id)
     {
         $pluginapi = PoP_Events_APIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        if ($cmspostsapi->getPostType($post_id) == $pluginapi->getEventPostType()) {
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        if ($postTypeAPI->getPostType($post_id) == $pluginapi->getEventPostType()) {
             return [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
         }
 

@@ -81,7 +81,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     //                 self::MODULE_LAYOUT_PAGETABS_AUTHOR => UserRouteNatures::USER,
     //                 self::MODULE_LAYOUT_PAGETABS_SINGLE => PostRouteNatures::POST,
     //             );
-                
+
     //             // For the default page add the thumbnail. For the others, add the pretitle
     //             $page_id = \PoP\ComponentModel\Utils::getRoute();
     //             if ($page_id != \PoP\ComponentModel\Utils::getNatureDefaultPage($natures[$module[1]])) {
@@ -95,7 +95,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     protected function getTitle(array $module, array &$props)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
@@ -115,8 +115,8 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $cmspostsapi->getTitle($post_id);
-        
+                return $postTypeAPI->getTitle($post_id);
+
             case self::MODULE_LAYOUT_PAGETABS_TAG:
                 $tag_id = $vars['routing-state']['queried-object-id'];
                 return $taxonomyapi->getTagSymbolName($tag_id);

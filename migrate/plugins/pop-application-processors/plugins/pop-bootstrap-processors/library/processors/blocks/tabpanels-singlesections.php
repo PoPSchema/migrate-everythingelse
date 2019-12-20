@@ -43,11 +43,11 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
-        
+
          // Single Authors has no filter, so show only the Share control
             case self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
-                
+
             case self::MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY:
             case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
             case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
@@ -68,7 +68,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
             case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
         }
-        
+
         return parent::getDelegatorfilterSubmodule($module);
     }
 
@@ -76,7 +76,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
     public function initRequestProps(array $module, array &$props)
     {
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT:
             case self::MODULE_BLOCK_TABPANEL_SINGLEAUTHORS:
@@ -84,7 +84,7 @@ class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Proces
             case self::MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY:
             case self::MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($cmspostsapi->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getPostStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;

@@ -116,8 +116,8 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
             $post = $post_or_post_id;
             $post_id = $cmspostsresolver->getPostId($post);
         }
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        return $cmspostsapi->getPostType($post_id) == $this->getEventPostType();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        return $postTypeAPI->getPostType($post_id) == $this->getEventPostType();
     }
 
     public function getPostId($EM_Event)
@@ -162,12 +162,12 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
 
     public function isAllDay($EM_Event)
     {
-        
+
         // This returns a string. Return a bool instead
         $value = $EM_Event->output('#_EVENTALLDAY');
         return $value ? true : false;
     }
-        
+
     public function getGooglecalendarUrl($EM_Event)
     {
         return $EM_Event->output('#_EVENTGCALURL');
@@ -196,7 +196,7 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
         // $EM_Event->event_rsvp_date = null;
         $EM_Event->event_rsvp_time = null;
         $EM_Event->recurrence_days = null;
-        
+
         // Comment Leo 04/01/2018: this line is MANDATORY! Since EM 5.8.1.1, if we don't add this line, we get the following PHP error when
         // executing getPostType($EM_Event) (in file `wp-content/plugins/poptheme-wassup/plugins/events-manager/pop-library/dataload/fieldresolvers/typeResolver-posts-hook.php`) after creating an event:
         // <b>Warning</b>:  array_map(): Argument #2 should be an array in <b>/Users/leo/Sites/PoP/wp-includes/post.php</b> on line <b>1980</b><br />
@@ -206,7 +206,7 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
         if ($status = $post_data['post-status']) {
             $EM_Event->force_status = $status;
         }
-        
+
         // Copied from function get_post_meta($validate = true) in events-manager/classes/em-event.php
         // Start/End date and time
         $EM_Event->event_start_date = $post_data['when']['from'];
@@ -221,7 +221,7 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
         else {
             $EM_Event->location_id = 0;
         }
-        
+
         // TODO: Fix this: the "All Day" status should be selected in the Bootstrap daterange picker
         // Right now horrible fix: if fromtime and totime are both '00:00' then it's all day
         $EM_Event->event_all_day = ($post_data['when']['fromtime'] == '00:00' && $post_data['when']['totime'] == '00:00') ? 1 : 0;
@@ -231,7 +231,7 @@ class EM_PoP_Events_API extends PoP_Events_API_Base implements PoP_Events_API
         //Start/End times should be available as timestamp
         $EM_Event->start = strtotime($EM_Event->event_start_date." ".$EM_Event->event_start_time);
         $EM_Event->end = strtotime($EM_Event->event_end_date." ".$EM_Event->event_end_time);
-        
+
         //Set Blog ID
         if (is_multisite()) {
             $EM_Event->blog_id = get_current_blog_id();

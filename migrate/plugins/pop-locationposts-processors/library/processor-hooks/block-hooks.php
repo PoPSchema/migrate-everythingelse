@@ -16,8 +16,8 @@ class PoP_LocationPosts_BlockHooks
 
     public function getTopSidebar($sidebar, $post_id)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        if ($cmspostsapi->getPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        if ($postTypeAPI->getPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
             return [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST];
         }
 

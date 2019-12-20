@@ -23,7 +23,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
 
     protected function getDescription(array $module, array &$props)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
                 $pid = $_REQUEST[POP_INPUTNAME_POSTID];
@@ -33,13 +33,13 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
                         TranslationAPIFacade::getInstance()->__('Here we send you this special %s:', 'pop-commonautomatedemails-processors'),
                         gdGetPostname($pid, 'lc')
                     ),
-                    $cmspostsapi->getTitle($pid)
+                    $postTypeAPI->getTitle($pid)
                 );
         }
 
         return parent::getDescription($module, $props);
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
                 $ret[] = [PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::class, PoPTheme_Wassup_AE_Module_Processor_ContentDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST];
                 break;
         }
-    
+
         return $ret;
     }
 }

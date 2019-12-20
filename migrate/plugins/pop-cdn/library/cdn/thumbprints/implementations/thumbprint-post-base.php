@@ -16,17 +16,17 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
-        return $cmspostsapi->getPosts($query, $options);
+        return $postTypeAPI->getPosts($query, $options);
     }
-    
+
     public function getTimestamp($post_id)
     {
         // Doing it the manual way
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-        $post = $cmspostsapi->getPost($post_id);
+        $post = $postTypeAPI->getPost($post_id);
         return mysql2date('U', $cmspostsresolver->getPostModified($post));
     }
 }

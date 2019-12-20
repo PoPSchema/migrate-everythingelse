@@ -58,7 +58,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -66,13 +66,13 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
                     AAL_POP_ACTION_POST_REFERENCEDPOST => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
                 );
                 return getRouteIcon($routes[$notification->action], false);
-            
+
             case 'url':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_POST_REFERENCEDPOST:
                         // Can't point to the posted article since we don't have the information (object_id is the original, referenced post, not the referencing one),
                         // so the best next thing is to point to the tab of all related content of the original post
-                        $value = $cmspostsapi->getPermalink($notification->object_id);
+                        $value = $postTypeAPI->getPermalink($notification->object_id);
                         if (POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT) {
                             $value = \PoP\ComponentModel\Utils::addRoute($value, POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT);
                         }
@@ -95,6 +95,6 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

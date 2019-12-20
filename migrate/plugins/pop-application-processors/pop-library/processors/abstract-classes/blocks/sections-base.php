@@ -40,7 +40,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu();
         }
         // }
-        
+
         return parent::getSubmenuSubmodule($module);
     }
 
@@ -61,7 +61,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
         // }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $vars = \PoP\ComponentModel\Engine_Vars::getVars();
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-            $cmspostsapi = PostTypeAPIFacade::getInstance();
+            $postTypeAPI = PostTypeAPIFacade::getInstance();
             $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     return \PoP\ComponentModel\Utils::addRoute($url, $route);
 
                 case PostRouteNatures::POST:
-                    $url = $cmspostsapi->getPermalink($vars['routing-state']['queried-object-id']);
+                    $url = $postTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                     return \PoP\ComponentModel\Utils::addRoute($url, $route);
 
                 case RouteNatures::HOME:
@@ -119,7 +119,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         if ($inner_module = $this->getInnerSubmodule($module)) {
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             if ($moduleprocessor_manager->getProcessor($inner_module) instanceof DataloadingModuleInterface) {
-                
+
                 $skip_data_load = $this->getProp($module, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
                     $this->setProp([$inner_module], $props, 'skip-data-load', $skip_data_load);
@@ -138,7 +138,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 POP_FORMAT_DETAILS => 'feed',
                 POP_FORMAT_THUMBNAIL => 'feed',
                 POP_FORMAT_LIST => 'feed',
-                
+
                 // Needed for restraining to 600px together with class pop-outerblock
                 POP_FORMAT_TABLE => 'tableblock',
                 POP_FORMAT_CAROUSEL => 'block-carousel',
@@ -176,7 +176,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
 
         parent::initModelProps($module, $props);
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
@@ -184,7 +184,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         if ($sectionfilter_module = $this->getSectionfilterModule($module)) {
             $ret[] = $sectionfilter_module;
         }
-                
+
         if ($inner_module = $this->getInnerSubmodule($module)) {
             $ret[] = $inner_module;
         }
@@ -218,7 +218,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 return $module_propagation_current_path;
             }
         }
-    
+
         return parent::getDataFeedbackInterreferencedModulepath($module, $props);
     }
 }

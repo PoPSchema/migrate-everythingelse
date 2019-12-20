@@ -6,8 +6,8 @@ class GD_UpvoteUndoUpvotePost extends GD_UpdateUserMetaValue_Post
 {
     protected function eligible($post)
     {
-        $cmspostsapi = PostTypeAPIFacade::getInstance();
-        $eligible = in_array($cmspostsapi->getPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
+        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $eligible = in_array($postTypeAPI->getPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
         return HooksAPIFacade::getInstance()->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 
