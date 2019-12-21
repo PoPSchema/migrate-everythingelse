@@ -1,7 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
-use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
+use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
 
 class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -134,7 +133,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST:
-                return PostUnionTypeResolver::class;
+                return ContentEntityUnionTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

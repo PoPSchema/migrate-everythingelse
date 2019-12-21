@@ -1,10 +1,7 @@
 <?php
 
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
+use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
@@ -388,7 +385,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
-                return PostUnionTypeResolver::class;
+                return ContentEntityUnionTypeResolver::class;
 
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW:

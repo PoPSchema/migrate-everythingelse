@@ -1,12 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Routing\RouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Posts\TypeResolvers\PostUnionTypeResolver;
+use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
@@ -761,7 +757,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST:
-                return PostUnionTypeResolver::class;
+                return ContentEntityUnionTypeResolver::class;
 
             case self::MODULE_DATALOAD_SEARCHUSERS_TYPEAHEAD:
             case self::MODULE_DATALOAD_USERS_TYPEAHEAD:
