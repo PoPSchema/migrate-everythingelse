@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 
@@ -35,6 +36,6 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
 
     public function getTypeResolverClass(array $module): ?string
     {
-        return ContentEntityUnionTypeResolver::class;
+        return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
     }
 }

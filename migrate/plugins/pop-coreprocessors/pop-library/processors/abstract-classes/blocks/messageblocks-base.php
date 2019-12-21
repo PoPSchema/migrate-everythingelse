@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
@@ -29,7 +30,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
 
     public function getTypeResolverClass(array $module): ?string
     {
-        return ContentEntityUnionTypeResolver::class;
+        return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
     }
 
     // function initModelProps(array $module, array &$props) {

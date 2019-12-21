@@ -1,10 +1,11 @@
 <?php
-use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
-use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 
 class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
@@ -44,7 +45,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_AUTHORCONTENTLIST_FIELDS:
             case self::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS:
-                return ContentEntityUnionTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_DATAQUERY_USERLIST_FIELDS:
                 return UserTypeResolver::class;

@@ -1,6 +1,7 @@
 <?php
-use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -70,7 +71,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
-                return ContentEntityUnionTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

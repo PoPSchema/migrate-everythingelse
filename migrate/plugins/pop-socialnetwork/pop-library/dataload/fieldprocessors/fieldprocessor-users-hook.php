@@ -1,12 +1,13 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -80,7 +81,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     {
         switch ($fieldName) {
             case 'recommendsposts':
-                return ContentEntityUnionTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
 
             case 'followers':
             case 'following':

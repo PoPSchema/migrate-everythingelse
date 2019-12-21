@@ -1,10 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\Pages\TypeResolvers\PageTypeResolver;
-use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -145,7 +146,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
-                return ContentEntityUnionTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_PAGE_CONTENT:
                 return PageTypeResolver::class;
