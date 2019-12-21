@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {

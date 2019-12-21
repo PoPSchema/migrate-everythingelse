@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 
 class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {

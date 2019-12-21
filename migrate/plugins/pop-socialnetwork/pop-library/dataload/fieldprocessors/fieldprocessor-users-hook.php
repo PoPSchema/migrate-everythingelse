@@ -4,7 +4,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 

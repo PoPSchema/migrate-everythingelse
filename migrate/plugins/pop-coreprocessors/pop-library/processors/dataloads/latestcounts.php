@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\Posts\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
