@@ -8,7 +8,7 @@ interface PoP_Locations_API
     public function getErrors($location);
     public function getLocation($location_id/* = false, $search_by = 'location_id'*/);
     public function getLocationByPostId($post_id);
-    public function get($args = array(), array $options = []);
+    public function getLocations($args = array(), array $options = []);
     public function getLatitude($location);
     public function getLongitude($location);
     public function getName($location);

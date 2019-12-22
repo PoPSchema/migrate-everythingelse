@@ -32,7 +32,7 @@ class EM_PoP_Locations_API extends PoP_Locations_API_Base implements PoP_Locatio
         return em_get_location($post_id, 'post_id');
     }
 
-    public function get($args = array(), array $options = [])
+    public function getLocations($args = array(), array $options = [])
     {
         // To bring all results, limit is 0, not -1
         if ($args['limit'] == -1) {

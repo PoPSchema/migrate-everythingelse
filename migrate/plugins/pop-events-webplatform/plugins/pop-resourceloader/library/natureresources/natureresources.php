@@ -37,7 +37,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         // Hook in POP_EVENTLINKS_CAT_EVENTLINKS
         // To exclude category, simply make the ID negative
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        if ($results = $eventTypeAPI->get(
+        if ($results = $eventTypeAPI->getLocations(
             array_merge(
                 $query,
                 $independent_cats ?
@@ -64,7 +64,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         }
         // Get Event Links
         foreach ($independent_cats as $independent_cat) {
-            if ($results = $eventTypeAPI->get(
+            if ($results = $eventTypeAPI->getLocations(
                 array_merge(
                     $query,
                     array(
