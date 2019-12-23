@@ -1,7 +1,6 @@
 <?php
 
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -9,13 +8,14 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
 
 class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
         return array(
-            PostTypeResolver::class,
+            ContentEntityFieldInterfaceResolver::class,
         );
     }
 

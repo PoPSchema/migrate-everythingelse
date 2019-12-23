@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -7,13 +7,14 @@ use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
 
 class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
         return array(
-            PostTypeResolver::class,
+            ContentEntityFieldInterfaceResolver::class,
         );
     }
 

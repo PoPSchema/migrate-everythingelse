@@ -1,22 +1,22 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Media\Misc\MediaHelpers;
-use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
-use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\GeneralUtils;
+use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
         return array(
-            PostTypeResolver::class,
+            ContentEntityFieldInterfaceResolver::class,
         );
     }
 
