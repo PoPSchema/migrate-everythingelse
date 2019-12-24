@@ -1,8 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -34,14 +34,14 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
-    
+
     protected function validateCaptcha(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
                 return true;
         }
-        
+
         return parent::validateCaptcha($module, $props);
     }
 
@@ -76,7 +76,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
                 $ret[] = [PoP_ContentCreation_Module_Processor_GFForms::class, PoP_ContentCreation_Module_Processor_GFForms::MODULE_FORM_FLAG];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -88,7 +88,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -114,7 +114,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return PostTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);;
         }
 
         return parent::getTypeResolverClass($module);

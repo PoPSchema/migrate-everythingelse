@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
+use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -76,10 +77,10 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     }
 
     // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
-        
+
     //     // The actionexecution is triggered when clicking on the link, not when submitting a form
     //     switch ($module[1]) {
-                    
+
     //         case self::MODULE_DATALOADACTION_FOLLOWUSER:
     //         case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
     //         case self::MODULE_DATALOADACTION_RECOMMENDPOST:
@@ -199,7 +200,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         if ($layout = $layouts[$module[1]]) {
             $ret[] = $layout;
         }
-    
+
         return $ret;
     }
 
@@ -254,16 +255,16 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return PostTypeResolver::class;
+                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(ContentEntityUnionTypeResolver::class);
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
                 return TagTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         $towhats = array(
@@ -285,7 +286,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         // Remove the success/error headers
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'error-header', '');
         $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EMPTY], $props, 'success-header', '');
-    
+
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_FOLLOWUSER:
             case self::MODULE_DATALOADACTION_UNFOLLOWUSER:
@@ -300,7 +301,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
