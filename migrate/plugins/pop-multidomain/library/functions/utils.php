@@ -6,12 +6,11 @@ class PoP_MultiDomain_Utils
 {
     public static function transformUrl($url, $domain, $website_name, $options = array())
     {
-        
         // Must add the version (request will be routed through CDN)
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $url = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'], 
+            'ver' => $vars['version'],
         ], $url);
         $subpath = substr($url, strlen($cmsengineapi->getSiteURL()));
 
@@ -44,16 +43,15 @@ class PoP_MultiDomain_Utils
 
     public static function getMultidomainWebsites()
     {
-
         // Also add the theme and thememode properties for the resourceLoader, to get the corresponding resourceloader-config.js file
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
+        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $domain = $cmsengineapi->getSiteURL();
         $domain_properties = array(
             $domain => array(
                 'name' => $cmsapplicationapi->getSiteName(),
                 'description' => $cmsapplicationapi->getSiteDescription(),
-                'handle' => POP_WEBSITE,
+                'handle' => \POP_WEBSITE,
             ),
         );
         if (defined('POP_THEME_INITIALIZED')) {
