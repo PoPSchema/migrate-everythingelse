@@ -167,23 +167,6 @@ class PoP_ResourceLoaderProcessorUtils {
                         $ids = array(
                             $route,
                         );
-
-                        // Special case: if the page is one of those that accepts to change its modules through $_REQUEST['layouts'], then add all these layouts to $vars,
-                        // to generate the configuration stating to need all potential resources
-                        // These pages are: POP_POSTS_ROUTE_LOADERS_POSTS_LAYOUTS, POP_PAGES_ROUTE_LOADERS_PAGES_LAYOUTS, POP_USERS_ROUTE_LOADERS_USERS_LAYOUTS, POP_COMMENTS_ROUTE_LOADERS_COMMENTS_LAYOUTS, POP_TAXONOMIES_ROUTE_LOADERS_TAGS_LAYOUTS
-                        $dataquery_manager = \PoP\ComponentModel\DataQueryManagerFactory::getInstance();
-                        if (in_array($route, $dataquery_manager->getCacheableRoutes())) {
-
-                            // Save the original layouts value
-                            $original_layouts = $vars['layouts'];
-
-                            // Get all possible layouts values, and add all of them to $vars
-                            // Convert from module to moduleOutputName
-                            $vars['layouts'] = array_map(
-                                [ModuleUtils::class, 'getModuleOutputName'],
-                                $dataquery_manager->getAllowedLayouts()
-                            );
-                        }
                     }
                     if ($add_tabs) {
 

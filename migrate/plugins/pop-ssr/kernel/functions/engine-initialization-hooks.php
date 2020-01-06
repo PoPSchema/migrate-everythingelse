@@ -178,7 +178,6 @@ class PoP_SSR_EngineInitialization_Hooks
     {
         if ($data_properties['data-fields']) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            $dataquery_manager = \PoP\ComponentModel\DataQueryManagerFactory::getInstance();
 
             // Data to be copied can come from either the database or the userstatedatabase
             $databases = $data['dbData'];

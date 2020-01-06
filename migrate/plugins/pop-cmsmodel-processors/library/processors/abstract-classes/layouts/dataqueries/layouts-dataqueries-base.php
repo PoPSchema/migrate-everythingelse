@@ -1,6 +1,5 @@
 <?php
 
-use PoP\Engine\Modules\Constants;
 use PoP\ComponentModel\Modules\ModuleUtils;
 
 abstract class PoP_Module_Processor_LayoutsDataQueriesBase extends PoP_Module_Processor_MultiplesBase
@@ -11,14 +10,10 @@ abstract class PoP_Module_Processor_LayoutsDataQueriesBase extends PoP_Module_Pr
         $layouts = isset($vars['layouts']) ? $vars['layouts'] : array();
 
         // Convert from moduleFullName back to module
-        $layouts = array_map(
+        return array_map(
             [ModuleUtils::class, 'getModuleFromOutputName'],
             $layouts
         );
-
-        // Only allow from a specific list of fields. Precaution against hackers.
-        $dataquery_manager = \PoP\ComponentModel\DataQueryManagerFactory::getInstance();
-        return $dataquery_manager->filterAllowedlayouts($layouts);
     }
 
     public function getSubmodules(array $module): array

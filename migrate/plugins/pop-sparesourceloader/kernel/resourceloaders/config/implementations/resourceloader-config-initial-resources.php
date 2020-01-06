@@ -16,8 +16,6 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
 
     protected function matchPaths()
     {
-        $dataquery_manager = \PoP\ComponentModel\DataQueryManagerFactory::getInstance();
-        
         // This shall provide an array with the following pages:
         // 1. getBackgroundloadRouteConfigurations:
         // POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES
@@ -35,10 +33,8 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
         // POP_TAGS_ROUTE_LOADERS_TAGS_LAYOUTS
         $routes = array_merge(
             array_keys(PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations()),
-            $dataquery_manager->getCacheableRoutes(),
-            $dataquery_manager->getNonCacheableRoutes()
         );
-        
+
         // Added through hooks:
         // 4. Logged-in User data page
         // Allow to hook in page POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA
@@ -50,7 +46,7 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
                 )
             )
         );
-        
+
         // Get the paths for all those routes
         $paths = array();
         foreach ($routes as $route) {
@@ -59,4 +55,3 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
         return $paths;
     }
 }
-   
