@@ -30,7 +30,6 @@ const POP_TEMPLATE_LAYOUT_AUTHOR_CONTACT = 'layout-author-contact';
 const POP_TEMPLATE_LAYOUT_AUTHORCONTENT = 'layout-authorcontent';
 const POP_TEMPLATE_LAYOUT_CATEGORIES = 'layout-categories';
 const POP_TEMPLATE_LAYOUT_COMMENT = 'layout-comment';
-const POP_TEMPLATE_LAYOUT_DATAQUERY_UPDATEDATA = 'layout-dataquery-updatedata';
 const POP_TEMPLATE_LAYOUT_EMBEDPREVIEW = 'layout-embedpreview';
 const POP_TEMPLATE_LAYOUT_INITJSDELAY = 'layout-initjs-delay';
 const POP_TEMPLATE_LAYOUT_FULLOBJECTTITLE = 'layout-fullobjecttitle';

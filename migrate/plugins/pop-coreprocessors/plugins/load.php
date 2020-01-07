@@ -16,10 +16,6 @@ if (defined('POP_USERPLATFORM_INITIALIZED')) {
     include_once 'pop-userplatform/load.php';
 }
 
-if (defined('POP_CMSMODELPROCESSORS_INITIALIZED')) {
-    include_once 'pop-cmsmodel-processors/load.php';
-}
-
 if (defined('POP_AVATARFOUNDATION_INITIALIZED')) {
     include_once 'pop-avatar-foundation/load.php';
 }

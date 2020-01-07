@@ -31,7 +31,6 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
     public const RESOURCE_LAYOUT_AUTHORCONTENT = 'layout_authorcontent';
     public const RESOURCE_LAYOUT_CATEGORIES = 'layout_categories';
     public const RESOURCE_LAYOUT_COMMENT = 'layout_comment';
-    public const RESOURCE_LAYOUT_DATAQUERY_UPDATEDATA = 'layout_dataquery_updatedata';
     public const RESOURCE_LAYOUT_EMBEDPREVIEW = 'layout_embedpreview';
     public const RESOURCE_LAYOUT_INITJSDELAY = 'layout_initjsdelay';
     public const RESOURCE_LAYOUT_FULLOBJECTTITLE = 'layout_fullobjecttitle';
@@ -126,7 +125,6 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
             [self::class, self::RESOURCE_LAYOUT_AUTHORCONTENT],
             [self::class, self::RESOURCE_LAYOUT_CATEGORIES],
             [self::class, self::RESOURCE_LAYOUT_COMMENT],
-            [self::class, self::RESOURCE_LAYOUT_DATAQUERY_UPDATEDATA],
             [self::class, self::RESOURCE_LAYOUT_EMBEDPREVIEW],
             [self::class, self::RESOURCE_LAYOUT_INITJSDELAY],
             [self::class, self::RESOURCE_LAYOUT_FULLOBJECTTITLE],
@@ -193,7 +191,7 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
             [self::class, self::RESOURCE_WIDGET],
         );
     }
-    
+
     public function getTemplate(array $resource)
     {
         $templates = array(
@@ -227,7 +225,6 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
             self::RESOURCE_LAYOUT_AUTHORCONTENT => POP_TEMPLATE_LAYOUT_AUTHORCONTENT,
             self::RESOURCE_LAYOUT_CATEGORIES => POP_TEMPLATE_LAYOUT_CATEGORIES,
             self::RESOURCE_LAYOUT_COMMENT => POP_TEMPLATE_LAYOUT_COMMENT,
-            self::RESOURCE_LAYOUT_DATAQUERY_UPDATEDATA => POP_TEMPLATE_LAYOUT_DATAQUERY_UPDATEDATA,
             self::RESOURCE_LAYOUT_EMBEDPREVIEW => POP_TEMPLATE_LAYOUT_EMBEDPREVIEW,
             self::RESOURCE_LAYOUT_INITJSDELAY => POP_TEMPLATE_LAYOUT_INITJSDELAY,
             self::RESOURCE_LAYOUT_FULLOBJECTTITLE => POP_TEMPLATE_LAYOUT_FULLOBJECTTITLE,
@@ -293,22 +290,22 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
         );
         return $templates[$resource[1]];
     }
-    
+
     public function getVersion(array $resource)
     {
         return POP_MASTERCOLLECTIONWEBPLATFORM_VERSION;
     }
-    
+
     public function getPath(array $resource)
     {
         return POP_MASTERCOLLECTIONWEBPLATFORM_URL.'/js/dist/templates';
     }
-    
+
     public function getDir(array $resource)
     {
         return POP_MASTERCOLLECTIONWEBPLATFORM_DIR.'/js/dist/templates';
     }
-    
+
     public function getGlobalscopeMethodCalls(array $resource)
     {
         switch ($resource[1]) {
@@ -322,11 +319,11 @@ class PoP_CoreProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateRes
 
         return parent::getGlobalscopeMethodCalls($resource);
     }
-    
+
     public function getDependencies(array $resource)
     {
         $dependencies = parent::getDependencies($resource);
-    
+
         switch ($resource[1]) {
             case self::RESOURCE_LAYOUT_LATESTCOUNTSCRIPT:
                 $dependencies[] = [PoP_CoreProcessors_HandlebarsHelpersJSResourceLoaderProcessor::class, PoP_CoreProcessors_HandlebarsHelpersJSResourceLoaderProcessor::RESOURCE_HANDLEBARSHELPERS_LATESTCOUNT];

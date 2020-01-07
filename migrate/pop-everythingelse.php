@@ -83,7 +83,6 @@ class Plugins
             'pop-cdn-foundation',
             'pop-cdn-foundation-wp',
             'pop-cdn-wp',
-            'pop-cmsmodel-processors',
             'pop-coauthors',
             'pop-coauthors-processors',
             'pop-commonautomatedemails',

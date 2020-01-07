@@ -49,7 +49,7 @@ class PoP_MasterCollectionWebPlatform_Initialization
             // Register Bootstrap only after registering all other .js files which depend on jquery-ui, so bootstrap goes last in the Javascript stack
             // If before, it produces an error with $('btn').button('loading')
             // http://stackoverflow.com/questions/13235578/bootstrap-radio-buttons-toggle-issue
-            
+
             if (PoP_WebPlatform_ServerUtils::accessExternalcdnResources()) {
 
                 // CDN
@@ -67,22 +67,22 @@ class PoP_MasterCollectionWebPlatform_Initialization
 
                 // https://github.com/hpneo/gmaps/releases
                 $cmswebplatformapi->registerScript('gmaps', 'https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js', array('googlemaps'), null);
-                
+
                 // Important: add dependency 'jquery-ui-dialog' to bootstrap. If not, when loading library 'fileupload' in pop-useravatar plug-in, it produces a JS error
                 // Uncaught Error: cannot call methods on button prior to initialization; attempted to call method 'loading'
 
                 // https://getbootstrap.com/getting-started/#download
                 // $cmswebplatformapi->registerScript('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js', array('jquery', 'jquery-ui-dialog'), null);
-                
+
                 // https://github.com/carhartl/jquery-cookie/releases
                 $cmswebplatformapi->registerScript('jquery.cookie', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js', array('jquery'), null);
-                
+
                 // https://github.com/imakewebthings/waypoints/releases
                 $cmswebplatformapi->registerScript('waypoints', 'https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js', array('jquery'), null);
 
                 // https://github.com/twitter/typeahead.js/releases
                 $cmswebplatformapi->registerScript('typeahead', 'https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js', array('bootstrap'), null);
-                
+
                 $cmswebplatformapi->registerScript('fullscreen', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-fullscreen-plugin/1.1.4/jquery.fullscreen-min.js', null, null);
             } else {
 
@@ -93,13 +93,13 @@ class PoP_MasterCollectionWebPlatform_Initialization
                 // $cmswebplatformapi->registerScript('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.10.min.js', null, null);
                 // // $cmswebplatformapi->registerScript('handlebars', $cdn_js_folder . '/handlebars.runtime.4.0.5.min.js', null, null);
                 $cmswebplatformapi->registerScript('gmaps', $cdn_js_folder . '/gmaps.0.4.24.min.js', array('googlemaps'), null);
-                
+
                 // $cmswebplatformapi->registerScript('bootstrap', $cdn_js_folder . '/bootstrap.3.3.7.min.js', array('jquery', 'jquery-ui-dialog'), null);
                 $cmswebplatformapi->registerScript('jquery.cookie', $cdn_js_folder . '/jquery.cookie.1.4.1.min.js', array('jquery'), null);
                 $cmswebplatformapi->registerScript('waypoints', $cdn_js_folder . '/jquery.waypoints.4.0.1.min.js', array('jquery'), null);
 
                 $cmswebplatformapi->registerScript('typeahead', $cdn_js_folder . '/typeahead.bundle.0.11.1.min.js', array('bootstrap'), null);
-            
+
                 $cmswebplatformapi->registerScript('fullscreen', $cdn_js_folder . '/jquery.fullscreen-min.js', null);
             }
 
@@ -168,7 +168,7 @@ class PoP_MasterCollectionWebPlatform_Initialization
 
                 $cmswebplatformapi->registerScript('popcore-helpers-handlebars-feedbackmessage', $libraries_js_folder.'/handlebars-helpers/feedbackmessage'.$suffix.'.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
                 $cmswebplatformapi->enqueueScript('popcore-helpers-handlebars-feedbackmessage');
-                
+
                 /** Libraries not under CDN */
                 $cmswebplatformapi->registerScript('jquery-dynamic-max-height', $includes_js_folder . '/jquery.dynamicmaxheight.min.js', array('jquery'));
                 $cmswebplatformapi->enqueueScript('jquery-dynamic-max-height');
@@ -366,7 +366,6 @@ class PoP_MasterCollectionWebPlatform_Initialization
         $cmswebplatformapi->enqueueScript('layout-author-contact-tmpl', $folder.'layout-author-contact.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
         $cmswebplatformapi->enqueueScript('layout-comment-tmpl', $folder.'layout-comment.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
         $cmswebplatformapi->enqueueScript('layout-scriptframe-tmpl', $folder.'layout-scriptframe.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
-        $cmswebplatformapi->enqueueScript('layout-dataquery-updatedata-tmpl', $folder.'layout-dataquery-updatedata.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
         $cmswebplatformapi->enqueueScript('layout-categories-tmpl', $folder.'layout-categories.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
         $cmswebplatformapi->enqueueScript('layout-embedpreview-tmpl', $folder.'layout-embedpreview.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
         $cmswebplatformapi->enqueueScript('layout-initjs-delay-tmpl', $folder.'layout-initjs-delay.tmpl.js', array('handlebars'), POP_MASTERCOLLECTIONWEBPLATFORM_VERSION, true);
@@ -462,7 +461,7 @@ class PoP_MasterCollectionWebPlatform_Initialization
             $suffix = PoP_WebPlatform_ServerUtils::useMinifiedResources() ? '.min' : '';
 
             if (PoP_WebPlatform_ServerUtils::accessExternalcdnResources()) {
-                
+
                 // CDN
                 $htmlcssplatformapi->registerStyle('perfect-scrollbar', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.5/css/perfect-scrollbar.min.css', null, null);
             } else {

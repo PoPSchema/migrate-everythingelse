@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
         }
         return $ret;
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -73,9 +73,6 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
                 $ret['textfield-close'] = $textfield_close;
             }
             if ($classs = $this->getProp($module, $props, 'textfield-class')) {
-                // This class will very likely be "pop-show-notempty". We add it here so that in file
-                // layout-dataquery-updatedata.tmpl we can ask if (target.hasClass('pop-show-notempty'))
-                // and only then check for all ancestors, thus avoiding extra DOM traversing when not needed (aka when that class is not set)
                 $ret[GD_JS_CLASSES]['text-field'] = $classs;
             }
         }
@@ -86,7 +83,7 @@ abstract class PoP_Module_Processor_ButtonInnersBase extends PoPEngine_QueryData
         if ($fontawesome = $this->getFontawesome($module, $props)) {
             $ret[GD_JS_FONTAWESOME] = $fontawesome;
         }
-        
+
         return $ret;
     }
 
