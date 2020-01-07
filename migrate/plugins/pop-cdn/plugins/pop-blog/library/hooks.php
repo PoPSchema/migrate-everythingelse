@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
- 
+
 class PoP_CDN_Blog_CDNHooks
 {
     public function __construct()
@@ -25,7 +25,7 @@ class PoP_CDN_Blog_CDNHooks
 
         // Trending Tags: added also dependency on POST and COMMENT (apart from TAG),
         // because a trending tag may not be newly created to become trending, so TAG alone doesn't work
-        
+
         $routes = array();
         if ($thumbprint == POP_CDN_THUMBPRINT_USER) {
             $routes = array_filter(
@@ -62,7 +62,7 @@ class PoP_CDN_Blog_CDNHooks
         foreach ($routes as $route) {
             $paths[] = $route.'/';
         }
-        
+
         return $paths;
     }
 
@@ -82,19 +82,12 @@ class PoP_CDN_Blog_CDNHooks
                     $route
                 );
             }
-
-            // Fetch the comments through lazy-load when calling POP_POSTS_ROUTE_LOADERS_POSTS_FIELDS, such as Articles in the Details view
-            // eg: https://www.mesym.com/en/loaders/posts/data/?pid[0]=21566&pid[1]=21542&pid[2]=21537&pid[3]=21523&pid[4]=21521&pid[5]=21472&pid[6]=21471&pid[7]=21470&pid[8]=21469&pid[9]=21468&pid[10]=21465&pid[11]=21464&fields[0]=recommendpost-count&fields[1]=recommendpost-count-plus1&fields[2]=comments-count&format=updatedata&target=main&module=settingsdata&output=json&theme=wassup&thememode=sliding&themestyle=swift
-            $paramvalues[] = array(
-                GD_URLPARAM_FIELDS,
-                'comments-count'
-            );
         }
-        
+
         return $paramvalues;
     }
 }
-    
+
 /**
  * Initialize
  */

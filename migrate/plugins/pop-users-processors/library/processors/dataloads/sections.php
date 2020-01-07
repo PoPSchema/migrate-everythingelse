@@ -17,15 +17,6 @@ class PoP_Users_Module_Processor_UsersDataloads extends PoP_Module_Processor_Dat
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
-    {
-        $routes = array(
-            self::MODULE_DATALOAD_DATAQUERY_USERS_REQUESTLAYOUTS => POP_USERS_ROUTE_LOADERS_USERS_LAYOUTS,
-            self::MODULE_DATALOAD_DATAQUERY_USERS_UPDATEDATA => POP_USERS_ROUTE_LOADERS_USERS_FIELDS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
-    }
-
     protected function getInnerSubmodules(array $module): array
     {
         if ($inner_module = $this->getInnerSubmodule($module)) {
@@ -104,7 +95,7 @@ class PoP_Users_Module_Processor_UsersDataloads extends PoP_Module_Processor_Dat
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

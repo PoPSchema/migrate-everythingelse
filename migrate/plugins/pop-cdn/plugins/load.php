@@ -10,18 +10,6 @@ if (defined('POP_SYSTEM_INITIALIZED')) {
 if (defined('POP_BLOG_INITIALIZED')) {
     include_once 'pop-blog/load.php';
 }
-if (defined('POP_POSTS_INITIALIZED')) {
-    include_once 'pop-posts/load.php';
-}
-if (defined('POP_USERS_INITIALIZED')) {
-    include_once 'pop-users/load.php';
-}
-if (defined('POP_TAXONOMIES_INITIALIZED')) {
-    include_once 'pop-taxonomies/load.php';
-}
-if (defined('POP_COMMENTS_INITIALIZED')) {
-    include_once 'pop-comments/load.php';
-}
 if (defined('POP_TRENDINGTAGS_INITIALIZED')) {
     include_once 'pop-trendingtags/load.php';
 }

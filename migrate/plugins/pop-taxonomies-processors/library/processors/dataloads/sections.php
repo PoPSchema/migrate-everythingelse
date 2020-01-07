@@ -17,15 +17,6 @@ class PoP_Taxonomies_Module_Processor_TaxonomiesDataloads extends PoP_Module_Pro
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
-    {
-        $routes = array(
-            self::MODULE_DATALOAD_DATAQUERY_TAGS_REQUESTLAYOUTS => POP_TAXONOMIES_ROUTE_LOADERS_TAGS_LAYOUTS,
-            self::MODULE_DATALOAD_DATAQUERY_TAGS_UPDATEDATA => POP_TAXONOMIES_ROUTE_LOADERS_TAGS_FIELDS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
-    }
-
     protected function getInnerSubmodules(array $module): array
     {
         if ($inner_module = $this->getInnerSubmodule($module)) {
@@ -104,7 +95,7 @@ class PoP_Taxonomies_Module_Processor_TaxonomiesDataloads extends PoP_Module_Pro
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -14,15 +14,6 @@ class PoP_Pages_Module_Processor_PagesDataloads extends PoP_Module_Processor_Dat
         );
     }
 
-    public function getRelevantRoute(array $module, array &$props): ?string
-    {
-        $routes = array(
-            self::MODULE_DATALOAD_DATAQUERY_PAGECONTENT_REQUESTLAYOUTS => POP_PAGES_ROUTE_LOADERS_PAGES_LAYOUTS,
-            self::MODULE_DATALOAD_DATAQUERY_PAGECONTENT_UPDATEDATA => POP_PAGES_ROUTE_LOADERS_PAGES_FIELDS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
-    }
-
     protected function getInnerSubmodules(array $module): array
     {
         if ($inner_module = $this->getInnerSubmodule($module)) {
@@ -81,7 +72,7 @@ class PoP_Pages_Module_Processor_PagesDataloads extends PoP_Module_Processor_Dat
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

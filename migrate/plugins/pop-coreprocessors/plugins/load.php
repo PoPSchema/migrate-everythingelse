@@ -12,10 +12,6 @@ if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
     include_once 'pop-engine-webplatform/load.php';
 }
 
-if (defined('POP_CDN_INITIALIZED')) {
-    include_once 'pop-cdn/load.php';
-}
-
 if (defined('POP_USERPLATFORM_INITIALIZED')) {
     include_once 'pop-userplatform/load.php';
 }

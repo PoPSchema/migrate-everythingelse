@@ -44,9 +44,6 @@ if (defined('POP_APPLICATION_INITIALIZED')) {
 if (defined('POP_BLOGPROCESSORS_INITIALIZED')) {
     include_once 'pop-blog-processors/load.php';
 }
-if (defined('POP_CMSMODELPROCESSORS_INITIALIZED')) {
-    include_once 'pop-cmsmodel-processors/load.php';
-}
 if (defined('POP_CONTENTCREATIONPROCESSORS_INITIALIZED')) {
     include_once 'pop-contentcreation-processors/load.php';
 }

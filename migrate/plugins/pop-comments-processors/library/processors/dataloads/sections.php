@@ -5,7 +5,7 @@ use PoP\Comments\TypeResolvers\CommentTypeResolver;
 class PoP_Comments_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use DBObjectIDsFromURLParamModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_DATAQUERY_COMMENTS_UPDATEDATA = 'dataload-dataquery-comments-updatedata';
     public const MODULE_DATALOAD_DATAQUERY_COMMENTS_REQUESTLAYOUTS = 'dataload-dataquery-comments-requestlayouts';
 
@@ -15,15 +15,6 @@ class PoP_Comments_Module_Processor_CommentsDataloads extends PoP_Module_Process
             [self::class, self::MODULE_DATALOAD_DATAQUERY_COMMENTS_UPDATEDATA],
             [self::class, self::MODULE_DATALOAD_DATAQUERY_COMMENTS_REQUESTLAYOUTS],
         );
-    }
-
-    public function getRelevantRoute(array $module, array &$props): ?string
-    {
-        $routes = array(
-            self::MODULE_DATALOAD_DATAQUERY_COMMENTS_REQUESTLAYOUTS => POP_COMMENTS_ROUTE_LOADERS_COMMENTS_LAYOUTS,
-            self::MODULE_DATALOAD_DATAQUERY_COMMENTS_UPDATEDATA => POP_COMMENTS_ROUTE_LOADERS_COMMENTS_FIELDS,
-        );
-        return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
     protected function getInnerSubmodules(array $module): array
@@ -104,7 +95,7 @@ class PoP_Comments_Module_Processor_CommentsDataloads extends PoP_Module_Process
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
