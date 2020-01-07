@@ -31,9 +31,7 @@ class PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig extends PoP_
         // POP_USERS_ROUTE_LOADERS_USERS_LAYOUTS
         // POP_COMMENTS_ROUTE_LOADERS_COMMENTS_LAYOUTS
         // POP_TAGS_ROUTE_LOADERS_TAGS_LAYOUTS
-        $routes = array_merge(
-            array_keys(PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations()),
-        );
+        $routes = array_keys(PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations());
 
         // Added through hooks:
         // 4. Logged-in User data page
