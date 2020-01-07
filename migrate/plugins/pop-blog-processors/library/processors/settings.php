@@ -6,29 +6,29 @@ $moduleprocessor_manager->overrideProcessorClass(
     PoP_Posts_Module_Processor_FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_POSTLIST_FIELDS,
+        PoP_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
     PoP_Users_Module_Processor_FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Users_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_USERLIST_FIELDS,
+        PoP_Users_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
     PoP_Users_Posts_Module_Processor_FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Users_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_AUTHORPOSTLIST_FIELDS,
+        PoP_Users_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
     PoP_Taxonomies_Module_Processor_FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Taxonomies_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_TAGLIST_FIELDS,
-        PoP_Taxonomies_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_TAGPOSTLIST_FIELDS,
+        PoP_Taxonomies_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        PoP_Taxonomies_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );
 

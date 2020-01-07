@@ -16,7 +16,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
     //     if (!\PoP\API\Environment::disableAPI()) {
     //         // Home
     //         $ret[RouteNatures::HOME][] = [
-    //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS],
+    //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
     //             'conditions' => [
     //                 'scheme' => POP_SCHEME_API,
     //             ],
@@ -37,7 +37,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // Page
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RouteNatures::STANDARD][$route][] = [
@@ -50,7 +50,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // REST API Page
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_CONTENTLIST_FIELDS],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RouteNatures::STANDARD][$route][] = [
@@ -64,7 +64,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // Author
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_AUTHORCONTENTLIST_FIELDS],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[UserRouteNatures::USER][$route][] = [
@@ -77,7 +77,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // Tag
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_TAGCONTENTLIST_FIELDS],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[TaxonomyRouteNatures::TAG][$route][] = [
@@ -90,7 +90,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // Single
             $routemodules = array(
-                POP_ROUTE_AUTHORS => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_DATAQUERY_SINGLEAUTHORLIST_FIELDS],
+                POP_ROUTE_AUTHORS => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[PostRouteNatures::POST][$route][] = [
