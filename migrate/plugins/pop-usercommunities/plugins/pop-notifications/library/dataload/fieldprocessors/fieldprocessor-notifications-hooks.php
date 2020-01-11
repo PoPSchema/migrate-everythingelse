@@ -1,14 +1,17 @@
 <?php
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
 
 class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
+    use EnumTypeSchemaDefinitionResolverTrait;
+
     public static function getClassesToAttachTo(): array
     {
         return array(NotificationTypeResolver::class);
@@ -68,7 +71,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {
             case 'memberstatus':
@@ -80,9 +83,9 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                     'membertags' => GD_URE_FormInput_FilterMemberTags::class,
                 ];
                 $class = $input_classes[$fieldName];
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new $class())->getAllValues());
-                break;
+                return array_keys((new $class())->getAllValues());
         }
+        return null;
     }
 
     public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool

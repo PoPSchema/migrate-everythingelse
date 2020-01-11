@@ -5,9 +5,12 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
+use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
 
 class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
+    use EnumTypeSchemaDefinitionResolverTrait;
+
     public static function getClassesToAttachTo(): array
     {
         return [
@@ -60,7 +63,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {
             case 'linkaccess':
@@ -70,9 +73,9 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                     'linkcategories' => GD_FormInput_LinkCategories::class,
                 ];
                 $class = $input_classes[$fieldName];
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new $class())->getAllValues());
-                break;
+                return array_keys((new $class())->getAllValues());
         }
+        return null;
     }
 
     public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool

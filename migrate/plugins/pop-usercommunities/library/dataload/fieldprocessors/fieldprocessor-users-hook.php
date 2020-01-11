@@ -1,13 +1,16 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
+use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
 
 class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
+    use EnumTypeSchemaDefinitionResolverTrait;
+
     public static function getClassesToAttachTo(): array
     {
         return array(UserTypeResolver::class);
@@ -55,7 +58,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function addSchemaDefinitionForField(array &$schemaDefinition, TypeResolverInterface $typeResolver, string $fieldName): void
+    protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {
             case 'memberstatus':
@@ -67,9 +70,9 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
                     'membertags' => GD_URE_FormInput_FilterMemberTags::class,
                 ];
                 $class = $input_classes[$fieldName];
-                $schemaDefinition[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new $class())->getAllValues());
-                break;
+                return array_keys((new $class())->getAllValues());
         }
+        return null;
     }
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
