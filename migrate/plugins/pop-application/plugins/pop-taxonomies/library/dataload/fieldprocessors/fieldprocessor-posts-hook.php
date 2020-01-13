@@ -23,8 +23,9 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
+        // TODO: After implementing the resolver for categories change the type to ID. In the meantime, simply use MIXED
         $types = [
-			'cat' => SchemaDefinition::TYPE_ID,
+			'cat' => SchemaDefinition::TYPE_MIXED/*SchemaDefinition::TYPE_ID*/,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
