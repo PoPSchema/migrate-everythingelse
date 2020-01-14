@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 
 class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -118,13 +119,19 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     {
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new GD_URE_FormInput_FilterMemberPrivileges())->getAllValues());
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    array_keys((new GD_URE_FormInput_FilterMemberPrivileges())->getAllValues())
+                );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new GD_URE_FormInput_FilterMemberTags())->getAllValues());
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    array_keys((new GD_URE_FormInput_FilterMemberTags())->getAllValues())
+                );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new GD_URE_FormInput_MultiMemberStatus())->getAllValues());
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    array_keys((new GD_URE_FormInput_MultiMemberStatus())->getAllValues())
+                );
                 break;
         }
     }

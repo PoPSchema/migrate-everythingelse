@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
+use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
 
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
@@ -100,10 +101,14 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new GD_FormInput_ModeratedStatus())->getAllValues());
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    array_keys((new GD_FormInput_ModeratedStatus())->getAllValues())
+                );
                 break;
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = array_keys((new GD_FormInput_UnmoderatedStatus())->getAllValues());
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                    array_keys((new GD_FormInput_UnmoderatedStatus())->getAllValues())
+                );
                 break;
         }
     }
