@@ -31,7 +31,7 @@ abstract class PoP_AddPostLinks_Module_Processor_LinkFrameLayoutsBase extends Po
         $ret = parent::getDataFields($module, $props);
 
         $ret[] = 'link';
-        $ret[] = 'is-link-embeddable';
+        $ret[] = 'isLinkEmbeddable';
 
         return $ret;
     }

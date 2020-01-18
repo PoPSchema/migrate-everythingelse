@@ -17,16 +17,16 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'followuser-url',
-            'unfollowuser-url',
+            'followUserURL',
+            'unfollowUserURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'followuser-url' => SchemaDefinition::TYPE_URL,
-            'unfollowuser-url' => SchemaDefinition::TYPE_URL,
+            'followUserURL' => SchemaDefinition::TYPE_URL,
+            'unfollowUserURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,8 +35,8 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'followuser-url' => $translationAPI->__('', ''),
-            'unfollowuser-url' => $translationAPI->__('', ''),
+            'followUserURL' => $translationAPI->__('', ''),
+            'unfollowUserURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,12 +45,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalUsers extends AbstractFu
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'followuser-url':
+            case 'followUserURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_USERID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_FOLLOWUSER));
 
-            case 'unfollowuser-url':
+            case 'unfollowUserURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_USERID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNFOLLOWUSER));

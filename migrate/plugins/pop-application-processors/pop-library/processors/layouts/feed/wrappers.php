@@ -28,7 +28,7 @@ class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowI
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY:
-                return 'has-userpostactivity';
+                return 'hasUserpostactivity';
         }
 
         return null;

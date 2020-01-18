@@ -27,7 +27,7 @@ class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_KEEPASDRAFT:
-                return FieldQueryInterpreterFacade::getInstance()->getField('is-status', ['status' => \POP_POSTSTATUS_DRAFT], 'is-draft');
+                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => \POP_POSTSTATUS_DRAFT], 'is-draft');
         }
 
         return parent::getDbobjectField($module);

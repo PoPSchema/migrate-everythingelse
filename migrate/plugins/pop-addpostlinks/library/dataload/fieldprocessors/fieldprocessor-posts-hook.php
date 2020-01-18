@@ -19,7 +19,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         return [
 			'link',
-            'has-link',
+            'hasLink',
         ];
     }
 
@@ -27,7 +27,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         $types = [
 			'link' => SchemaDefinition::TYPE_URL,
-            'has-link' => SchemaDefinition::TYPE_BOOL,
+            'hasLink' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,7 +37,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'link' => $translationAPI->__('', ''),
-            'has-link' => $translationAPI->__('', ''),
+            'hasLink' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -49,7 +49,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             case 'link':
                 return PoP_AddPostLinks_Utils::getLink($typeResolver->getID($post));
 
-            case 'has-link':
+            case 'hasLink':
                 $link = $typeResolver->resolveValue($post, 'link', $variables, $expressions, $options);
                 if (GeneralUtils::isError($link)) {
                     return $link;

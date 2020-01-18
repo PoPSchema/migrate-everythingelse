@@ -19,30 +19,30 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'recommendpost-url',
-            'unrecommendpost-url',
-            'recommendpost-count-plus1',
-            'upvotepost-url',
-            'undoupvotepost-url',
-            'upvotepost-count-plus1',
-            'downvotepost-url',
-            'undodownvotepost-url',
-            'downvotepost-count-plus1',
+            'recommendPostURL',
+            'unrecommendPostURL',
+            'recommendPostCountPlus1',
+            'upvotePostURL',
+            'undoUpvotePostURL',
+            'upvotePostCountPlus1',
+            'downvotePostURL',
+            'undoDownvotePostURL',
+            'downvotePostCountPlus1',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'recommendpost-url' => SchemaDefinition::TYPE_URL,
-            'unrecommendpost-url' => SchemaDefinition::TYPE_URL,
-            'recommendpost-count-plus1' => SchemaDefinition::TYPE_INT,
-            'upvotepost-url' => SchemaDefinition::TYPE_URL,
-            'undoupvotepost-url' => SchemaDefinition::TYPE_URL,
-            'upvotepost-count-plus1' => SchemaDefinition::TYPE_INT,
-            'downvotepost-url' => SchemaDefinition::TYPE_URL,
-            'undodownvotepost-url' => SchemaDefinition::TYPE_URL,
-            'downvotepost-count-plus1' => SchemaDefinition::TYPE_INT,
+			'recommendPostURL' => SchemaDefinition::TYPE_URL,
+            'unrecommendPostURL' => SchemaDefinition::TYPE_URL,
+            'recommendPostCountPlus1' => SchemaDefinition::TYPE_INT,
+            'upvotePostURL' => SchemaDefinition::TYPE_URL,
+            'undoUpvotePostURL' => SchemaDefinition::TYPE_URL,
+            'upvotePostCountPlus1' => SchemaDefinition::TYPE_INT,
+            'downvotePostURL' => SchemaDefinition::TYPE_URL,
+            'undoDownvotePostURL' => SchemaDefinition::TYPE_URL,
+            'downvotePostCountPlus1' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -51,15 +51,15 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'recommendpost-url' => $translationAPI->__('', ''),
-            'unrecommendpost-url' => $translationAPI->__('', ''),
-            'recommendpost-count-plus1' => $translationAPI->__('', ''),
-            'upvotepost-url' => $translationAPI->__('', ''),
-            'undoupvotepost-url' => $translationAPI->__('', ''),
-            'upvotepost-count-plus1' => $translationAPI->__('', ''),
-            'downvotepost-url' => $translationAPI->__('', ''),
-            'undodownvotepost-url' => $translationAPI->__('', ''),
-            'downvotepost-count-plus1' => $translationAPI->__('', ''),
+			'recommendPostURL' => $translationAPI->__('', ''),
+            'unrecommendPostURL' => $translationAPI->__('', ''),
+            'recommendPostCountPlus1' => $translationAPI->__('', ''),
+            'upvotePostURL' => $translationAPI->__('', ''),
+            'undoUpvotePostURL' => $translationAPI->__('', ''),
+            'upvotePostCountPlus1' => $translationAPI->__('', ''),
+            'downvotePostURL' => $translationAPI->__('', ''),
+            'undoDownvotePostURL' => $translationAPI->__('', ''),
+            'downvotePostCountPlus1' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -68,50 +68,50 @@ class GD_SocialNetwork_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'recommendpost-url':
+            case 'recommendPostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST));
 
-            case 'unrecommendpost-url':
+            case 'unrecommendPostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST));
 
-            case 'recommendpost-count-plus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'recommendpost-count', $variables, $expressions, $options)) {
+            case 'recommendPostCountPlus1':
+                if ($count = $typeResolver->resolveValue($resultItem, 'recommendPostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
 
-            case 'upvotepost-url':
+            case 'upvotePostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UPVOTEPOST));
 
-            case 'undoupvotepost-url':
+            case 'undoUpvotePostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDOUPVOTEPOST));
 
-            case 'upvotepost-count-plus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'upvotepost-count', $variables, $expressions, $options)) {
+            case 'upvotePostCountPlus1':
+                if ($count = $typeResolver->resolveValue($resultItem, 'upvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;
 
-            case 'downvotepost-url':
+            case 'downvotePostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST));
 
-            case 'undodownvotepost-url':
+            case 'undoDownvotePostURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_POSTID => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST));
 
-            case 'downvotepost-count-plus1':
-                if ($count = $typeResolver->resolveValue($resultItem, 'downvotepost-count', $variables, $expressions, $options)) {
+            case 'downvotePostCountPlus1':
+                if ($count = $typeResolver->resolveValue($resultItem, 'downvotePostCount', $variables, $expressions, $options)) {
                     return $count+1;
                 }
                 return 1;

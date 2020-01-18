@@ -16,14 +16,14 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'mention-queryby',
+			'mentionQueryby',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'mention-queryby' => SchemaDefinition::TYPE_STRING,
+			'mentionQueryby' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -32,7 +32,7 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'mention-queryby' => $translationAPI->__('', ''),
+			'mentionQueryby' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,7 +42,7 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
         $tag = $resultItem;
         switch ($fieldName) {
              // Needed for tinyMCE-mention plug-in
-            case 'mention-queryby':
+            case 'mentionQueryby':
                 return $typeResolver->resolveValue($tag, 'name', $variables, $expressions, $options);
         }
 

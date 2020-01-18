@@ -18,22 +18,22 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'contact-person',
-            'contact-number',
+            'contactPerson',
+            'contactNumber',
             'organizationtypes',
             'organizationcategories',
-            'has-organization-details',
+            'hasOrganizationDetails',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'contact-person' => SchemaDefinition::TYPE_STRING,
-            'contact-number' => SchemaDefinition::TYPE_STRING,
+			'contactPerson' => SchemaDefinition::TYPE_STRING,
+            'contactNumber' => SchemaDefinition::TYPE_STRING,
             'organizationtypes' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'organizationcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'has-organization-details' => SchemaDefinition::TYPE_BOOL,
+            'hasOrganizationDetails' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -42,11 +42,11 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'contact-person' => $translationAPI->__('', ''),
-            'contact-number' => $translationAPI->__('', ''),
+			'contactPerson' => $translationAPI->__('', ''),
+            'contactNumber' => $translationAPI->__('', ''),
             'organizationtypes' => $translationAPI->__('', ''),
             'organizationcategories' => $translationAPI->__('', ''),
-            'has-organization-details' => $translationAPI->__('', ''),
+            'hasOrganizationDetails' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -55,10 +55,10 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'contact-person':
+            case 'contactPerson':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_CONTACTPERSON, true);
 
-            case 'contact-number':
+            case 'contactNumber':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_CONTACTNUMBER, true);
 
             case 'organizationtypes':
@@ -67,12 +67,12 @@ class FieldResolver_OrganizationUsers extends AbstractDBDataFieldResolver
             case 'organizationcategories':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES);
 
-            case 'has-organization-details':
+            case 'hasOrganizationDetails':
                 return
                     $typeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $options) ||
                     $typeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $options) ||
-                    $typeResolver->resolveValue($user, 'contact-person', $variables, $expressions, $options) ||
-                    $typeResolver->resolveValue($user, 'contact-number', $variables, $expressions, $options);
+                    $typeResolver->resolveValue($user, 'contactPerson', $variables, $expressions, $options) ||
+                    $typeResolver->resolveValue($user, 'contactNumber', $variables, $expressions, $options);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

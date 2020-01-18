@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
 
     public function getConditionField(array $module): ?string
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField('is-status', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
+        return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
     }
 
     public function initModelProps(array $module, array &$props)

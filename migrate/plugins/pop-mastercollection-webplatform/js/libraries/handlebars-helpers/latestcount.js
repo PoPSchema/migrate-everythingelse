@@ -6,12 +6,12 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
     var selector = '.pop-block.'+pop.c.JS_INITIALIZED+' > .blocksection-latestcount > .pop-latestcount';
 
     // By Sections (post type + categories)
-    var trigger_values = dbObject['latestcounts-trigger-values'] || [];
+    var trigger_values = dbObject['latestcountsTriggerValues'] || [];
 
     // By Post Type + Categories
     jQuery.each(trigger_values, function(index, trigger_value) {
 
-        // trigger_value will be translated to 'post-type'+'cat' attribute
+        // trigger_value will be translated to 'postType'+'cat' attribute
         targets.push(selector+'.'+trigger_value);
     });
 

@@ -39,10 +39,10 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_STANCEEDIT => 'edit-url',
-            self::MODULE_BUTTON_POSTSTANCES_PRO => 'poststances-pro-url',
-            self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => 'poststances-neutral-url',
-            self::MODULE_BUTTON_POSTSTANCES_AGAINST => 'poststances-against-url',
+            self::MODULE_BUTTON_STANCEEDIT => 'editURL',
+            self::MODULE_BUTTON_POSTSTANCES_PRO => 'postStancesProURL',
+            self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
+            self::MODULE_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

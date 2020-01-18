@@ -18,14 +18,14 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'fileupload-picture-url',
+			'fileUploadPictureURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'fileupload-picture-url' => SchemaDefinition::TYPE_URL,
+			'fileUploadPictureURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -34,7 +34,7 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'fileupload-picture-url' => $translationAPI->__('', ''),
+			'fileUploadPictureURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -43,7 +43,7 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'fileupload-picture-url':
+            case 'fileUploadPictureURL':
                 // URL which will upload the images for the user
                 return GD_FileUpload_Picture_Utils::getFileuploadUrl($typeResolver->resolveValue($resultItem, 'id', $variables, $expressions, $options));
         }

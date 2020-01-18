@@ -54,10 +54,10 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
                 return 'lastname';
 
             case self::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON:
-                return 'contact-person';
+                return 'contactPerson';
 
             case self::MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER:
-                return 'contact-number';
+                return 'contactNumber';
         }
         
         return parent::getDbobjectField($module);

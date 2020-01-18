@@ -9,7 +9,7 @@ abstract class GD_URE_Module_Processor_MemberStatusLayoutsBase extends PoPEngine
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('memberstatus-byname');
+        return array('memberStatusByName');
     }
 
     public function getDescription(array $module, array &$props)

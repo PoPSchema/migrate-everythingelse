@@ -64,7 +64,7 @@ class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTa
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_POST_CREATE => 'addpost-url',
+            self::MODULE_BUTTON_POST_CREATE => 'addpostURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

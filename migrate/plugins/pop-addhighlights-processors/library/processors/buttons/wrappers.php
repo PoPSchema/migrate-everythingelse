@@ -28,7 +28,7 @@ class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('is-status', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
+                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
         }
 
         return null;

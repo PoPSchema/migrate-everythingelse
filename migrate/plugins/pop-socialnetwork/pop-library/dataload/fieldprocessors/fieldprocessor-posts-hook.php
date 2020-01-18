@@ -22,9 +22,9 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return [
 			'taggedusers',
             'recommendedby',
-            'recommendpost-count',
-            'upvotepost-count',
-            'downvotepost-count',
+            'recommendPostCount',
+            'upvotePostCount',
+            'downvotePostCount',
         ];
     }
 
@@ -33,9 +33,9 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $types = [
 			'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'recommendedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'recommendpost-count' => SchemaDefinition::TYPE_INT,
-            'upvotepost-count' => SchemaDefinition::TYPE_INT,
-            'downvotepost-count' => SchemaDefinition::TYPE_INT,
+            'recommendPostCount' => SchemaDefinition::TYPE_INT,
+            'upvotePostCount' => SchemaDefinition::TYPE_INT,
+            'downvotePostCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -46,9 +46,9 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $descriptions = [
 			'taggedusers' => $translationAPI->__('', ''),
             'recommendedby' => $translationAPI->__('', ''),
-            'recommendpost-count' => $translationAPI->__('', ''),
-            'upvotepost-count' => $translationAPI->__('', ''),
-            'downvotepost-count' => $translationAPI->__('', ''),
+            'recommendPostCount' => $translationAPI->__('', ''),
+            'upvotePostCount' => $translationAPI->__('', ''),
+            'downvotePostCount' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -68,13 +68,13 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($query, $typeResolver->getID($post));
                 return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
-            case 'recommendpost-count':
+            case 'recommendPostCount':
                 return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_RECOMMENDCOUNT, true);
 
-            case 'upvotepost-count':
+            case 'upvotePostCount':
                 return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_UPVOTECOUNT, true);
 
-            case 'downvotepost-count':
+            case 'downvotePostCount':
                 return (int) \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_DOWNVOTECOUNT, true);
         }
 

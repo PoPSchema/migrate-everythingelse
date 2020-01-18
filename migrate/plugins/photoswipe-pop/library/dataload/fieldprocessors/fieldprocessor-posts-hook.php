@@ -19,14 +19,14 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'thumb-full-dimensions',
+			'thumbFullDimensions',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'thumb-full-dimensions' => SchemaDefinition::TYPE_STRING,
+			'thumbFullDimensions' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'thumb-full-dimensions' => $translationAPI->__('', ''),
+			'thumbFullDimensions' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,7 +45,7 @@ class PS_POP_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
         $post = $resultItem;
 
         switch ($fieldName) {
-            case 'thumb-full-dimensions':
+            case 'thumbFullDimensions':
                 // This is the format needed by PhotoSwipe under attr data-size
                 $thumb = $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
                 if (GeneralUtils::isError($thumb)) {

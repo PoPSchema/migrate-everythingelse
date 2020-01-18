@@ -87,7 +87,7 @@ class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Proc
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
-                return 'has-featuredimage';
+                return 'hasFeaturedimage';
         }
 
         return null;

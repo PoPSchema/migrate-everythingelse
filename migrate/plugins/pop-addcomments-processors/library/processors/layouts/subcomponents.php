@@ -41,10 +41,10 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
                 return 'comments';
 
             case self::MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS:
-                return 'comments-lazy';
+                return 'commentsLazy';
 
             case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
-                return 'noheadercomments-lazy';
+                return 'noheadercommentsLazy';
         }
 
         return parent::getSubcomponentField($module);

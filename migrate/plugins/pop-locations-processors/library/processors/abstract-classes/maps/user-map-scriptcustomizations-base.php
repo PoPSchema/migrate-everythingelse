@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
 
     public function getDataFields(array $module, array &$props): array
     {
-        $data_fields = array('id', 'display-name', 'url', 'short-description-formatted');
+        $data_fields = array('id', 'displayName', 'url', 'shortDescriptionFormatted');
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             $avatar_size_sm = $this->getAvatarMarker($module);

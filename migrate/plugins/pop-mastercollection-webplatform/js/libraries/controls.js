@@ -52,7 +52,7 @@ window.pop.Controls = {
 
 			var provider = control.data('provider');
 			var settings = pop.c.SOCIALMEDIA[provider];
-			var shareUrl = settings['share-url'].replace(new RegExp('%url%', 'g'), encodeURIComponent(url)).replace(new RegExp('%title%', 'g'), encodeURIComponent(title));
+			var shareUrl = settings['shareURL'].replace(new RegExp('%url%', 'g'), encodeURIComponent(url)).replace(new RegExp('%title%', 'g'), encodeURIComponent(title));
 
 			pop.Links.openSocialMedia(shareUrl);
 		});

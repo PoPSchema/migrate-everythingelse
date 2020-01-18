@@ -53,13 +53,13 @@ class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_Bu
                 return 'url';
 
             case self::MODULE_AAL_BUTTON_USERVIEW:
-                return 'website-url';
+                return 'websiteURL';
 
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD:
-                return 'mark-as-read-url';
+                return 'markAsReadURL';
 
             case self::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD:
-                return 'mark-as-unread-url';
+                return 'markAsUnreadURL';
         }
 
         return parent::getUrlField($module);

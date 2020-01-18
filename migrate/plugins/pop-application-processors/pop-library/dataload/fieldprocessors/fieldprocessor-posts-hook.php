@@ -19,16 +19,16 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'highlights-lazy',
-            'referencedby-lazy',
+			'highlightsLazy',
+            'referencedbyLazy',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'highlights-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'referencedby-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+			'highlightsLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'referencedbyLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,8 +37,8 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'highlights-lazy' => $translationAPI->__('', ''),
-            'referencedby-lazy' => $translationAPI->__('', ''),
+			'highlightsLazy' => $translationAPI->__('', ''),
+            'referencedbyLazy' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -47,8 +47,8 @@ class GD_ApplicationProcessors_DataLoad_FieldResolver_Posts extends AbstractDBDa
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'highlights-lazy':
-            case 'referencedby-lazy':
+            case 'highlightsLazy':
+            case 'referencedbyLazy':
                 return array();
         }
 

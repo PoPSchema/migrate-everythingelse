@@ -65,7 +65,7 @@ class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Prel
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_LOCATIONPOSTLINK_CREATE => 'addlocationpostlink-url',
+            self::MODULE_BUTTON_LOCATIONPOSTLINK_CREATE => 'addLocationPostLinkURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

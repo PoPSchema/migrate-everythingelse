@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_CommentCardLayoutsBase extends PoPEngine_Que
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('content-clipped');
+        return array('contentClipped');
     }
 }

@@ -17,14 +17,14 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'volunteers-needed',
+            'volunteersNeeded',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'volunteers-needed' => SchemaDefinition::TYPE_BOOL,
+            'volunteersNeeded' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -33,7 +33,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'volunteers-needed' => $translationAPI->__('', ''),
+            'volunteersNeeded' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,7 +42,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'volunteers-needed':
+            case 'volunteersNeeded':
                 return (bool)\PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
         }
 

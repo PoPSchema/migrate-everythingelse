@@ -22,7 +22,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
             'recommendsposts',
             'followers',
             'following',
-            'followers-count',
+            'followersCount',
         ];
     }
 
@@ -32,7 +32,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
 			'recommendsposts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'following' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'followers-count' => SchemaDefinition::TYPE_INT,
+            'followersCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -44,7 +44,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
 			'recommendsposts' => $translationAPI->__('', ''),
             'followers' => $translationAPI->__('', ''),
             'following' => $translationAPI->__('', ''),
-            'followers-count' => $translationAPI->__('', ''),
+            'followersCount' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -70,7 +70,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorfollowingusers($query, $typeResolver->getID($user));
                 return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
 
-            case 'followers-count':
+            case 'followersCount':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
         }
 

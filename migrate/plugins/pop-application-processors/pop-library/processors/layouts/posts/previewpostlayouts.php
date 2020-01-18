@@ -55,7 +55,7 @@ class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor
             case self::MODULE_LAYOUT_PREVIEWPOST_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_POST_EDIT:
-                return 'edit-url';
+                return 'editURL';
         }
 
         return parent::getUrlField($module);

@@ -51,7 +51,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
-                return 'short-description';
+                return 'shortDescription';
 
             case self::MODULE_FORMINPUT_CUP_FACEBOOK:
                 return 'facebook';

@@ -87,7 +87,7 @@ class PoP_Module_Processor_AddCommentPostViewComponentButtons extends PoP_Module
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT_BIG:
-                return 'addcomment-url';
+                return 'addCommentURL';
         }
         
         return parent::getUrlField($module);

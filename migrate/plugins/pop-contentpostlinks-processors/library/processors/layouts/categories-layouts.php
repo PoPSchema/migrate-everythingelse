@@ -15,7 +15,7 @@ class PoP_ContentPostLinks_Module_Processor_CategoriesLayouts extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_LINK_CATEGORIES:
-                return 'linkcategories-byname';
+                return 'linkCategoriesByName';
         }
         
         return parent::getCategoriesField($module, $props);

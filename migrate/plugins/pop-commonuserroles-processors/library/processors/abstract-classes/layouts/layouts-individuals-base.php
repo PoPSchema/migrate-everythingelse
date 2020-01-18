@@ -10,7 +10,7 @@ abstract class GD_URE_Custom_Module_Processor_ProfileIndividualLayoutsBase exten
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('individualinterests-byname');
+        return array('individualInterestsByName');
     }
 
     public function getLabelClass(array $module, array &$props)

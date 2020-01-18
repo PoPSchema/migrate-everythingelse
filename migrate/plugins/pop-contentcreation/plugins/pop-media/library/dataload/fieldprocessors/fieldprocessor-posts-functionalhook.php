@@ -18,14 +18,14 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'featuredimage-attrs',
+			'featuredImageAttrs',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'featuredimage-attrs' => SchemaDefinition::TYPE_OBJECT,
+			'featuredImageAttrs' => SchemaDefinition::TYPE_OBJECT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -34,7 +34,7 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'featuredimage-attrs' => $translationAPI->__('', ''),
+			'featuredImageAttrs' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,7 +44,7 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         $cmsmediapostsapi = \PoP\Media\PostsFunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
-            case 'featuredimage-attrs':
+            case 'featuredImageAttrs':
                 if ($featuredimage = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getID($post))) {
                     return MediaHelpers::getAttachmentImageProperties($featuredimage, 'thumb-md');
                 }

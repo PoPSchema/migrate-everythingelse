@@ -28,7 +28,7 @@ class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Mo
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY:
-                return 'is-community';
+                return 'isCommunity';
         }
 
         return null;

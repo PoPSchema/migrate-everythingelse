@@ -86,43 +86,43 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         switch ($module[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
-                return 'followuser-url';
+                return 'followUserURL';
 
             case self::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
-                return 'unfollowuser-url';
+                return 'unfollowUserURL';
                     
             case self::MODULE_BUTTON_RECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
-                return 'recommendpost-url';
+                return 'recommendPostURL';
 
             case self::MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTON_UNRECOMMENDPOST_FULL:
-                return 'unrecommendpost-url';
+                return 'unrecommendPostURL';
                     
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW:
             case self::MODULE_BUTTON_SUBSCRIBETOTAG_FULL:
-                return 'subscribetotag-url';
+                return 'subscribeToTagURL';
 
             case self::MODULE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW:
             case self::MODULE_BUTTON_UNSUBSCRIBEFROMTAG_FULL:
-                return 'unsubscribefromtag-url';
+                return 'unsubscribeFromTagURL';
 
             case self::MODULE_BUTTON_UPVOTEPOST_PREVIEW:
             case self::MODULE_BUTTON_UPVOTEPOST_FULL:
-                return 'upvotepost-url';
+                return 'upvotePostURL';
 
             case self::MODULE_BUTTON_UNDOUPVOTEPOST_PREVIEW:
             case self::MODULE_BUTTON_UNDOUPVOTEPOST_FULL:
-                return 'undoupvotepost-url';
+                return 'undoUpvotePostURL';
 
             case self::MODULE_BUTTON_DOWNVOTEPOST_PREVIEW:
             case self::MODULE_BUTTON_DOWNVOTEPOST_FULL:
-                return 'downvotepost-url';
+                return 'downvotePostURL';
 
             case self::MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
             case self::MODULE_BUTTON_UNDODOWNVOTEPOST_FULL:
-                return 'undodownvotepost-url';
+                return 'undoDownvotePostURL';
         }
 
         return parent::getUrlField($module);

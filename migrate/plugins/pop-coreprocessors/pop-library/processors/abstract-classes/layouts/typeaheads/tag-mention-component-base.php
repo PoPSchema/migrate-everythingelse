@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_TagMentionComponentLayoutsBase extends PoPEn
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('mention-queryby', 'namedescription', 'symbolnamedescription');
+        return array('mentionQueryby', 'namedescription', 'symbolnamedescription');
     }
 }

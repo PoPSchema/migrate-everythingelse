@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);
-        $ret[] = 'volunteers-needed';
+        $ret[] = 'volunteersNeeded';
         $ret[] = 'url';
         if ($this->getProp($module, $props, 'show-title')) {
             $ret[] = 'title';

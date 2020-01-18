@@ -149,27 +149,27 @@ class PoP_SocialNetwork_Module_Processor_ButtonInners extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_RECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_RECOMMENDPOST_FULL:
-                return 'recommendpost-count';
+                return 'recommendPostCount';
 
             case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_UNRECOMMENDPOST_FULL:
-                return 'recommendpost-count-plus1';
+                return 'recommendPostCountPlus1';
 
             case self::MODULE_BUTTONINNER_UPVOTEPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_UPVOTEPOST_FULL:
-                return 'upvotepost-count';
+                return 'upvotePostCount';
 
             case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_UNDOUPVOTEPOST_FULL:
-                return 'upvotepost-count-plus1';
+                return 'upvotePostCountPlus1';
 
             case self::MODULE_BUTTONINNER_DOWNVOTEPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_DOWNVOTEPOST_FULL:
-                return 'downvotepost-count';
+                return 'downvotePostCount';
 
             case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW:
             case self::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL:
-                return 'downvotepost-count-plus1';
+                return 'downvotePostCountPlus1';
         }
         
         return parent::getTextField($module, $props);

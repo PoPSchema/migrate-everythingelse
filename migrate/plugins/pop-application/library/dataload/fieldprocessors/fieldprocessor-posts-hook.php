@@ -41,14 +41,14 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         return [
             'favicon',
             'thumb',
-            'thumb-full-src',
+            'thumbFullSrc',
             'authors',
             'topics',
-            'has-topics',
+            'hasTopics',
             'appliesto',
-            'has-appliesto',
-            'has-userpostactivity',
-            'userpostactivity-count',
+            'hasAppliesto',
+            'hasUserpostactivity',
+            'userPostActivityCount',
         ];
     }
 
@@ -57,14 +57,14 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         $types = [
 			'favicon' => SchemaDefinition::TYPE_OBJECT,
             'thumb' => SchemaDefinition::TYPE_OBJECT,
-            'thumb-full-src' => SchemaDefinition::TYPE_URL,
+            'thumbFullSrc' => SchemaDefinition::TYPE_URL,
             'authors' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'topics' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'has-topics' => SchemaDefinition::TYPE_BOOL,
+            'hasTopics' => SchemaDefinition::TYPE_BOOL,
             'appliesto' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'has-appliesto' => SchemaDefinition::TYPE_BOOL,
-            'has-userpostactivity' => SchemaDefinition::TYPE_BOOL,
-            'userpostactivity-count' => SchemaDefinition::TYPE_INT,
+            'hasAppliesto' => SchemaDefinition::TYPE_BOOL,
+            'hasUserpostactivity' => SchemaDefinition::TYPE_BOOL,
+            'userPostActivityCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -75,14 +75,14 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         $descriptions = [
 			'favicon' => $translationAPI->__('', ''),
             'thumb' => $translationAPI->__('', ''),
-            'thumb-full-src' => $translationAPI->__('', ''),
+            'thumbFullSrc' => $translationAPI->__('', ''),
             'authors' => $translationAPI->__('', ''),
             'topics' => $translationAPI->__('', ''),
-            'has-topics' => $translationAPI->__('', ''),
+            'hasTopics' => $translationAPI->__('', ''),
             'appliesto' => $translationAPI->__('', ''),
-            'has-appliesto' => $translationAPI->__('', ''),
-            'has-userpostactivity' => $translationAPI->__('', ''),
-            'userpostactivity-count' => $translationAPI->__('', ''),
+            'hasAppliesto' => $translationAPI->__('', ''),
+            'hasUserpostactivity' => $translationAPI->__('', ''),
+            'userPostActivityCount' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -128,7 +128,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 $add_description = isset($fieldArgs['addDescription']) ? $fieldArgs['addDescription'] : false;
                 return $this->getThumb($post, $typeResolver, $size, $add_description);
 
-            case 'thumb-full-src':
+            case 'thumbFullSrc':
                 $thumb = $typeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
                 if (GeneralUtils::isError($thumb)) {
                     return $thumb;
@@ -141,7 +141,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             case 'topics':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
-            case 'has-topics':
+            case 'hasTopics':
                 $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
                 if (GeneralUtils::isError($topics)) {
                     return $topics;
@@ -153,7 +153,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
             case 'appliesto':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
-            case 'has-appliesto':
+            case 'hasAppliesto':
                 $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
                 if (GeneralUtils::isError($appliesto)) {
                     return $appliesto;
@@ -162,33 +162,33 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 }
                 return false;
 
-            case 'has-userpostactivity':
+            case 'hasUserpostactivity':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $hasComments = $typeResolver->resolveValue($resultItem, 'has-comments', $variables, $expressions, $options);
+                $hasComments = $typeResolver->resolveValue($resultItem, 'hasComments', $variables, $expressions, $options);
                 if ($hasComments) {
                     return $hasComments;
                 }
-                $hasReferencedBy = $typeResolver->resolveValue($resultItem, 'has-referencedby', $variables, $expressions, $options);
+                $hasReferencedBy = $typeResolver->resolveValue($resultItem, 'hasReferencedBy', $variables, $expressions, $options);
                 if ($hasReferencedBy) {
                     return $hasReferencedBy;
                 }
-                $hasHighlights = $typeResolver->resolveValue($resultItem, 'has-highlights', $variables, $expressions, $options);
+                $hasHighlights = $typeResolver->resolveValue($resultItem, 'hasHighlights', $variables, $expressions, $options);
                 if ($hasHighlights) {
                     return $hasHighlights;
                 }
                 return $hasComments || $hasReferencedBy || $hasHighlights;
 
-            case 'userpostactivity-count':
+            case 'userPostActivityCount':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $commentsCount = $typeResolver->resolveValue($resultItem, 'comments-count', $variables, $expressions, $options);
+                $commentsCount = $typeResolver->resolveValue($resultItem, 'commentsCount', $variables, $expressions, $options);
                 if ($commentsCount) {
                     return $commentsCount;
                 }
-                $referencedByCount = $typeResolver->resolveValue($resultItem, 'referencedby-count', $variables, $expressions, $options);
+                $referencedByCount = $typeResolver->resolveValue($resultItem, 'referencedByCount', $variables, $expressions, $options);
                 if ($referencedByCount) {
                     return $referencedByCount;
                 }
-                $highlightsCount = $typeResolver->resolveValue($resultItem, 'highlights-count', $variables, $expressions, $options);
+                $highlightsCount = $typeResolver->resolveValue($resultItem, 'highlightsCount', $variables, $expressions, $options);
                 if ($highlightsCount) {
                     return $highlightsCount;
                 }

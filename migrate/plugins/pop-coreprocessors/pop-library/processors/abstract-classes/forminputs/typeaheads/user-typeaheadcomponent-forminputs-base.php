@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     // }
     protected function getValueKey(array $module, array &$props)
     {
-        return 'display-name';
+        return 'displayName';
     }
     protected function getComponentTemplateResource(array $module)
     {
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     // }
     protected function getTokenizerKeys(array $module, array &$props)
     {
-        return array('display-name');
+        return array('displayName');
     }
 
 

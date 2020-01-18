@@ -9377,7 +9377,7 @@ fcViews.basicDay = {
 
 setDefaults({
 	allDaySlot: true,
-	allDayText: 'all-day',
+	allDayText: 'allDay',
 	scrollTime: '06:00:00',
 	slotDuration: '00:30:00',
 	minTime: '00:00:00',

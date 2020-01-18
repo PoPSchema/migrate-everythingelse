@@ -16,7 +16,7 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     {
         return array_merge(
             parent::getDataFields($module, $props),
-            array('cat-slugs')
+            array('catSlugs')
         );
     }
 

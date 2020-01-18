@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_Quer
         $avatar_size = $this->getAvatarSize($module);
         $avatar_field = PoP_AvatarFoundationManagerFactory::getInstance()->getAvatarField($avatar_size);
 
-        $ret = array('display-name', $avatar_field);
+        $ret = array('displayName', $avatar_field);
         $ret[] = $this->getUrlField($module);
         
         return $ret;

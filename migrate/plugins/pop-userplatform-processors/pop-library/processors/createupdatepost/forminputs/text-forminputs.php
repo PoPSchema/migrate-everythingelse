@@ -42,10 +42,10 @@ class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Pro
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_TITLE:
-                return 'title-edit';
+                return 'titleEdit';
 
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK:
-                return 'content-edit';
+                return 'contentEdit';
 
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS:
                 return 'linkaccess';

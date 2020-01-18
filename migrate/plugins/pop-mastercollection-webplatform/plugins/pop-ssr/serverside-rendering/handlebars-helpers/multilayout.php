@@ -53,7 +53,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
 
         $label = '';
-        foreach ($dbObject['multilayout-keys'] as $key) {
+        foreach ($dbObject['multilayoutKeys'] as $key) {
             $label = $multilayout_labels[$dbObject[$key]];
             if ($label) {
                 break;

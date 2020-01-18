@@ -70,13 +70,13 @@ class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_Butt
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_POSTSTANCE_PRO:
-                return 'stance-pro-count';
+                return 'stanceProCount';
 
             case self::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL:
-                return 'stance-neutral-count';
+                return 'stanceNeutralCount';
 
             case self::MODULE_BUTTONINNER_POSTSTANCE_AGAINST:
-                return 'stance-against-count';
+                return 'stanceAgainstCount';
         }
         
         return parent::getTextField($module, $props);

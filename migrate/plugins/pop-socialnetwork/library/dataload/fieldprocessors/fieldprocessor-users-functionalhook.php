@@ -17,14 +17,14 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'contact-url',
+			'contactURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'contact-url' => SchemaDefinition::TYPE_URL,
+			'contactURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -33,7 +33,7 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'contact-url' => $translationAPI->__('', ''),
+			'contactURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,7 +42,7 @@ class PoPGenericForms_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'contact-url':
+            case 'contactURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_USERID => $typeResolver->getID($user),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_CONTACTUSER));

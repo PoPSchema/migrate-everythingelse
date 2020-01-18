@@ -19,14 +19,14 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'addpost-url',
+			'addpostURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'addpost-url' => SchemaDefinition::TYPE_URL,
+			'addpostURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'addpost-url' => $translationAPI->__('', ''),
+			'addpostURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,9 +44,9 @@ class GD_PostsCreation_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'addpost-url':
+            case 'addpostURL':
                 $routes = array(
-                    'addpost-url' => POP_POSTSCREATION_ROUTE_ADDPOST,
+                    'addpostURL' => POP_POSTSCREATION_ROUTE_ADDPOST,
                 );
                 $route = $routes[$fieldName];
 

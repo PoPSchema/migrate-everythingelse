@@ -30,8 +30,8 @@ class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_ADDONSPOSTEDIT => 'edit-url',
-            self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => 'edit-url',
+            self::MODULE_BUTTON_ADDONSPOSTEDIT => 'editURL',
+            self::MODULE_BUTTON_ADDONSORMAINPOSTEDIT => 'editURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

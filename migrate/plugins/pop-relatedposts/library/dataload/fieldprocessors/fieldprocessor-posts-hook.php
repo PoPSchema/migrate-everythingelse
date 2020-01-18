@@ -22,10 +22,10 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         return [
 			'references',
-            'has-references',
+            'hasReferences',
             'referencedby',
-            'has-referencedby',
-            'referencedby-count',
+            'hasReferencedBy',
+            'referencedByCount',
         ];
     }
 
@@ -33,10 +33,10 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     {
         $types = [
             'references' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'has-references' => SchemaDefinition::TYPE_BOOL,
+            'hasReferences' => SchemaDefinition::TYPE_BOOL,
             'referencedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'has-referencedby' => SchemaDefinition::TYPE_BOOL,
-            'referencedby-count' => SchemaDefinition::TYPE_INT,
+            'hasReferencedBy' => SchemaDefinition::TYPE_BOOL,
+            'referencedByCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -46,10 +46,10 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
             'references' => $translationAPI->__('', ''),
-            'has-references' => $translationAPI->__('', ''),
+            'hasReferences' => $translationAPI->__('', ''),
             'referencedby' => $translationAPI->__('', ''),
-            'has-referencedby' => $translationAPI->__('', ''),
-            'referencedby-count' => $translationAPI->__('', ''),
+            'hasReferencedBy' => $translationAPI->__('', ''),
+            'referencedByCount' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -61,18 +61,18 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             case 'references':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_REFERENCES);
 
-            case 'has-references':
+            case 'hasReferences':
                 $references = $typeResolver->resolveValue($resultItem, 'references', $variables, $expressions, $options);
                 return !empty($references);
 
             case 'referencedby':
                 return PoP_RelatedPosts_SectionUtils::getReferencedby($typeResolver->getID($post));
 
-            case 'has-referencedby':
+            case 'hasReferencedBy':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'referencedby', $variables, $expressions, $options);
                 return !empty($referencedby);
 
-            case 'referencedby-count':
+            case 'referencedByCount':
                 $referencedby = $typeResolver->resolveValue($resultItem, 'referencedby', $variables, $expressions, $options);
                 return count($referencedby);
         }

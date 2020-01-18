@@ -30,8 +30,8 @@ class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_Bu
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_HIGHLIGHTEDIT => 'edit-url',
-            // self::MODULE_BUTTON_HIGHLIGHTVIEW => 'highlightedpost-url',
+            self::MODULE_BUTTON_HIGHLIGHTEDIT => 'editURL',
+            // self::MODULE_BUTTON_HIGHLIGHTVIEW => 'highlightedPostURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

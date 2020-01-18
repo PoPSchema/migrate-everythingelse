@@ -81,8 +81,8 @@ class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processo
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_HIGHLIGHT_CREATE => 'addhighlight-url',
-            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlight-url',
+            self::MODULE_BUTTON_HIGHLIGHT_CREATE => 'addhighlightURL',
+            self::MODULE_BUTTON_HIGHLIGHT_CREATEBTN => 'addhighlightURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

@@ -28,7 +28,7 @@ class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_LINK_CATEGORIES:
-                return 'has-linkcategories';
+                return 'hasLinkCategories';
         }
 
         return null;

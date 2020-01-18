@@ -149,7 +149,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
                             $from_email = trim($content);
                         }
                         break;
-                    case 'content-type':
+                    case 'contentType':
                         if (strpos($content, ';') !== false) {
                             list($type, $charset_content) = explode(';', $content);
                             $content_type = trim($type);
@@ -171,7 +171,7 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
                     case 'bcc':
                         $bcc = array_merge((array) $bcc, explode(',', $content));
                         break;
-                    case 'reply-to':
+                    case 'replyTo':
                         $reply_to = array_merge((array) $reply_to, explode(',', $content));
                         break;
                     default:

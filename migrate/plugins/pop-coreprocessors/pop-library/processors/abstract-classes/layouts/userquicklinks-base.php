@@ -10,7 +10,7 @@ abstract class PoP_Module_Processor_UserQuickLinkLayoutsBase extends PoPEngine_Q
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('contact-small');
+        return array('contactSmall');
     }
 
     public function getNocontactTitle(array $module, array &$props)

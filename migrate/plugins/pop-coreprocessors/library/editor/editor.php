@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 // The editor filters are not initialized when fetching json page. So initialize it below
-// This way, function getValue('content-editor') on typeResolver-posts.php
+// This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 // Code copied from wp-includes/class-wp-editor.php => public static function editor( $content, $editor_id, $settings = array() )
 // Comment Leo 20/06/2017: this cannot be executed on 'init'! If doing so, function `loadingSite` initializes
@@ -30,7 +30,7 @@ function gdEditorInit()
 }
 
 
-// Absolutely always state that the default editor is Visual. This way, function getValue('content-editor') on typeResolver-posts.php
+// Absolutely always state that the default editor is Visual. This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 HooksAPIFacade::getInstance()->addFilter('wp_default_editor', 'gdWpDefaultEditor', 10000000, 1);
 function gdWpDefaultEditor($default_editor)

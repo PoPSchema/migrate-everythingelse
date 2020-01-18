@@ -9,7 +9,7 @@ abstract class GD_URE_Module_Processor_MemberPrivilegesLayoutsBase extends PoPEn
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('memberprivileges-byname');
+        return array('memberPrivilegesByName');
     }
 
     public function getDescription(array $module, array &$props)

@@ -10,7 +10,7 @@ abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_Q
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('cat-name');
+        return array('catName');
     }
 
     public function getStanceTitle(array $module, array &$props)

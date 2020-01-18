@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($modules) {
-            $ret['user-id'] = $modules;
+            $ret['userID'] = $modules;
         }
 
         return $ret;
@@ -85,7 +85,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         $ret = parent::getDataFields($module, $props);
 
         // From the combination of object_type and action, we obtain the layout to use for the notification
-        // $ret[] = 'object-type';
+        // $ret[] = 'objectType';
         // $ret[] = 'action';
 
         // $ret[] = 'url';
@@ -132,7 +132,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             'and',
             [
                 'values' => [
-                    $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('is-comment-notification'),
+                    $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('isCommentNotification'),
                     $fieldQueryInterpreter->getField('var', ['name' => 'loading-latest']),
                 ],
             ],

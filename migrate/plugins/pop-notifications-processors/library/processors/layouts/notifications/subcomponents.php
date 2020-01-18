@@ -29,7 +29,7 @@ class PoP_Module_Processor_NotificationSubcomponentLayouts extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT:
-                return 'comment-object-id';
+                return 'commentObjectID';
         }
 
         return parent::getSubcomponentField($module);

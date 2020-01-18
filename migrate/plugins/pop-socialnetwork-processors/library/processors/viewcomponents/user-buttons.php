@@ -97,7 +97,7 @@ class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Mo
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW:
             case self::MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL:
-                return 'contact-url';
+                return 'contactURL';
         }
 
         return parent::getUrlField($module);

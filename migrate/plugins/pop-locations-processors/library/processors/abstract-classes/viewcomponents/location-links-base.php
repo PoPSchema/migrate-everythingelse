@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_LocationViewComponentLinksBase extends PoP_M
 
     public function getUrlField(array $module)
     {
-        return 'map-url';
+        return 'mapURL';
     }
 
     public function getLinktarget(array $module, array &$props)

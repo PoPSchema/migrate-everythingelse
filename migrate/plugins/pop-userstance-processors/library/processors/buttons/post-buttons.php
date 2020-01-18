@@ -22,7 +22,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
 
         switch ($module[1]) {
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
-                $ret[] = 'createstancebutton-lazy';
+                $ret[] = 'createStanceButtonLazy';
                 break;
         }
         
@@ -117,9 +117,9 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_STANCE_CREATE => 'addstance-url',
-            self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => 'addstance-url',
-            self::MODULE_BUTTON_STANCE_UPDATE => 'editstance-url',
+            self::MODULE_BUTTON_STANCE_CREATE => 'addStanceURL',
+            self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => 'addStanceURL',
+            self::MODULE_BUTTON_STANCE_UPDATE => 'editStanceURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

@@ -101,8 +101,8 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         $ret = parent::getDataFields($module, $props);
 
-        $ret[] = 'post-type';
-        $ret[] = 'cat-slugs';
+        $ret[] = 'postType';
+        $ret[] = 'catSlugs';
         if ($this->showPosttitle($module)) {
             $ret[] = 'title';
         }

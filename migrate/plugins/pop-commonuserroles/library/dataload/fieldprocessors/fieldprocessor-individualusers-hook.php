@@ -19,7 +19,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
     {
         return [
             'individualinterests',
-            'has-individual-details',
+            'hasIndividualDetails',
         ];
     }
 
@@ -27,7 +27,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
     {
         $types = [
 			'individualinterests' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'has-individual-details' => SchemaDefinition::TYPE_BOOL,
+            'hasIndividualDetails' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,7 +37,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'individualinterests' => $translationAPI->__('', ''),
-            'has-individual-details' => $translationAPI->__('', ''),
+            'hasIndividualDetails' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -49,7 +49,7 @@ class FieldResolver_IndividualUsers extends AbstractDBDataFieldResolver
             case 'individualinterests':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS);
 
-            case 'has-individual-details':
+            case 'hasIndividualDetails':
                 return !empty($typeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options));
         }
 

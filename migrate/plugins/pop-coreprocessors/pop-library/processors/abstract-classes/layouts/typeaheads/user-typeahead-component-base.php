@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
     
         /* FIX THIS: 'url' */
         // is-community needed for the Community filter (it will print a checkbox with msg 'include members?')
-        $data_fields = array('display-name', 'url', 'is-community');
+        $data_fields = array('displayName', 'url', 'isCommunity');
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             // Important: the TYPEAHEAD_COMPONENT should not have data-fields, because it doesn't apply to {{blockSettings.dataset}}
             // but it applies to Twitter Typeahead, which doesn't need these parameters, however these, here, upset the whole getDatasetmoduletreeSectionFlattenedDataFields

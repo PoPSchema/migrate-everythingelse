@@ -103,13 +103,13 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     );
                     // Allow parent modules to override the share url and the title (eg: GetPoP Campaign)
                     $this->setProp($module, $props, 'title', $title);
-                    $this->setProp($module, $props, 'share-url', GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
+                    $this->setProp($module, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
                     $this->mergeProp(
                         $module,
                         $props,
                         'params',
                         array(
-                            'data-shareurl' => $this->getProp($module, $props, 'share-url'),
+                            'data-shareurl' => $this->getProp($module, $props, 'shareURL'),
                             'data-sharetitle' => str_replace(array('"', "'"), '', $this->getProp($module, $props, 'title')),
                         )
                     );

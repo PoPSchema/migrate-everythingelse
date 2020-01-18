@@ -20,7 +20,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     public function getConditionalOnDataFieldSubmodules($submodules, $module)
     {
         // Add layout for action "updated_user_membership"
-        $submodules['is-user-notification'] = [
+        $submodules['isUserNotification'] = [
             [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
         ];
         return $submodules;
@@ -29,7 +29,7 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     public function getQuicklinkgroupBottomSubmodule($submodules)
     {
         // Add layout for action "joined_community"
-        $submodules['is-user-notification'] = [
+        $submodules['isUserNotification'] = [
             [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
         ];
         return $submodules;

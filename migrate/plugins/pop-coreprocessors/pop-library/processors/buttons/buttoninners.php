@@ -61,7 +61,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS:
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
-                return 'comments-count';
+                return 'commentsCount';
         }
         
         return parent::getTextField($module, $props);

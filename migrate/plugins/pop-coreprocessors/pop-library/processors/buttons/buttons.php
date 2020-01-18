@@ -47,11 +47,11 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         switch ($module[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
-                return 'print-url';
+                return 'printURL';
 
             case self::MODULE_BUTTON_POSTCOMMENTS:
             case self::MODULE_BUTTON_POSTCOMMENTS_LABEL:
-                return 'comments-url';
+                return 'commentsURL';
         }
 
         return parent::getUrlField($module);

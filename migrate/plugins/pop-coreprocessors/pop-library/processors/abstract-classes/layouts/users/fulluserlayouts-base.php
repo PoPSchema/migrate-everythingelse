@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_FullUserLayoutsBase extends PoP_Module_Proce
     {
         return array_merge(
             parent::getDataFields($module, $props),
-            array('short-description-formatted', 'description-formatted')
+            array('shortDescriptionFormatted', 'descriptionFormatted')
         );
     }
 

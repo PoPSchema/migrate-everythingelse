@@ -87,7 +87,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_POSTSOCIALMEDIA_FB_PREVIEW:
             case self::MODULE_USERSOCIALMEDIA_FB_PREVIEW:
             case self::MODULE_TAGSOCIALMEDIA_FB_PREVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('share-url', ['provider' => 'facebook']);
+                return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'facebook']);
 
             case self::MODULE_USERSOCIALMEDIA_TWITTER:
             case self::MODULE_TAGSOCIALMEDIA_TWITTER:
@@ -95,7 +95,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW:
             case self::MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW:
             case self::MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('share-url', ['provider' => 'twitter']);
+                return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'twitter']);
             
             case self::MODULE_POSTSOCIALMEDIA_LINKEDIN:
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
@@ -103,7 +103,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW:
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW:
             case self::MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW:
-                return FieldQueryInterpreterFacade::getInstance()->getField('share-url', ['provider' => 'linkedin']);
+                return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'linkedin']);
         }
 
         return parent::getTitleField($module);

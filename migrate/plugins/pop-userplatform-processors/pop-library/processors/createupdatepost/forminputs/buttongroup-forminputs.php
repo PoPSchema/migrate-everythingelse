@@ -57,7 +57,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
                 return 'cat';
 
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
-                return 'cats-byname';
+                return 'catsByName';
         }
         
         return parent::getDbobjectField($module);

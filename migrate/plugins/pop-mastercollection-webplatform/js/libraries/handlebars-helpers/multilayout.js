@@ -41,7 +41,7 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, db
 Handlebars.registerHelper('layoutLabel', function(dbKey, dbObject, options) {
 
 	var label = '';
-	jQuery.each(dbObject['multilayout-keys'], function(index, key) {
+	jQuery.each(dbObject['multilayoutKeys'], function(index, key) {
 
 		label = pop.c.MULTILAYOUT_LABELS[dbObject[key]];
 		if (label) {			

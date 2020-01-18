@@ -4,7 +4,7 @@ abstract class PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInpu
 {
     public function getDbobjectField(array $module)
     {
-        return 'user-preferences';
+        return 'userPreferences';
     }
 
     public function isMultiple(array $module)
@@ -14,6 +14,6 @@ abstract class PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInpu
 
     public function getName(array $module)
     {
-        return 'user-preferences';
+        return 'userPreferences';
     }
 }

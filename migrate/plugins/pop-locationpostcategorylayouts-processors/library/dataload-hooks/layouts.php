@@ -28,7 +28,7 @@ class PoP_LocationPostCategoryLayouts_LayoutDataloadHooks
                 }
             }
             if ($add_layout) {
-                // Priority: place it before the 'post-type' layout key
+                // Priority: place it before the 'postType' layout key
                 array_unshift($keys, LocationPostTypeResolver::NAME.'-map');
             }
         }

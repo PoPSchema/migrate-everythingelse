@@ -19,14 +19,14 @@ class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'addcontentpostlink-url',
+			'addContentPostLinkURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'addcontentpostlink-url' => SchemaDefinition::TYPE_URL,
+			'addContentPostLinkURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'addcontentpostlink-url' => $translationAPI->__('', ''),
+			'addContentPostLinkURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,9 +44,9 @@ class GD_ContentPostLinksCreation_DataLoad_FieldResolver_FunctionalPosts extends
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'addcontentpostlink-url':
+            case 'addContentPostLinkURL':
                 $routes = array(
-                    'addcontentpostlink-url' => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
+                    'addContentPostLinkURL' => POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK,
                 );
                 $route = $routes[$fieldName];
                 // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();

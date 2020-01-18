@@ -21,7 +21,7 @@ class PoP_Module_Processor_HighlightReferencedbyLayouts extends PoP_Module_Proce
                 return 'highlights';
 
             case self::MODULE_LAZYSUBCOMPONENT_HIGHLIGHTS:
-                return 'highlights-lazy';
+                return 'highlightsLazy';
         }
     }
 

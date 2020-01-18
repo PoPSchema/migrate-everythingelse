@@ -20,7 +20,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'comment-object-id',
+            'commentObjectID',
             'icon',
             'url',
             'message',
@@ -30,7 +30,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'comment-object-id' => SchemaDefinition::TYPE_ID,
+            'commentObjectID' => SchemaDefinition::TYPE_ID,
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
@@ -42,7 +42,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'comment-object-id' => $translationAPI->__('', ''),
+            'commentObjectID' => $translationAPI->__('', ''),
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
@@ -74,11 +74,11 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         switch ($fieldName) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action
             // Needed to, for instance, load the comment immediately, already from the notification
-            case 'comment-object-id':
+            case 'commentObjectID':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_COMMENT_ADDED:
                         // comment-object-id is the object-id
-                        return $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('object-id', $fieldArgs), $variables, $expressions, $options);
+                        return $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('objectID', $fieldArgs), $variables, $expressions, $options);
                 }
                 return null;
 
@@ -162,7 +162,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
-            case 'comment-object-id':
+            case 'commentObjectID':
                 return CommentTypeResolver::class;
         }
 

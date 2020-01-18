@@ -19,16 +19,16 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'organizationtypes-byname',
-            'organizationcategories-byname',
+			'organizationTypesByName',
+            'organizationCategoriesByName',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'organizationtypes-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'organizationcategories-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+			'organizationTypesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'organizationCategoriesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,8 +37,8 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'organizationtypes-byname' => $translationAPI->__('', ''),
-            'organizationcategories-byname' => $translationAPI->__('', ''),
+			'organizationTypesByName' => $translationAPI->__('', ''),
+            'organizationCategoriesByName' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -47,7 +47,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'organizationtypes-byname':
+            case 'organizationTypesByName':
                 $selected = $typeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -55,7 +55,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
                 $organizationtypes = new GD_FormInput_OrganizationTypes($params);
                 return $organizationtypes->getSelectedValue();
 
-            case 'organizationcategories-byname':
+            case 'organizationCategoriesByName':
                 $selected = $typeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected

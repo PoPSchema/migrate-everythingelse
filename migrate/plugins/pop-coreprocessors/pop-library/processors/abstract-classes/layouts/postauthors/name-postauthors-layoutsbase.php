@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_PostAuthorNameLayoutsBase extends PoPEngine_
         $ret = parent::getDataFields($module, $props);
     
         $ret[] = $this->getUrlField($module, $props);
-        $ret[] = 'display-name';
+        $ret[] = 'displayName';
 
         return $ret;
     }

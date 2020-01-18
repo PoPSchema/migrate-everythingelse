@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_LatestCountScriptsLayoutsBase extends PoPEng
     {
         return array_merge(
             parent::getDataFields($module, $props),
-            array('latestcounts-trigger-values', 'authors', 'tags', 'references')
+            array('latestcountsTriggerValues', 'authors', 'tags', 'references')
         );
     }
 }

@@ -47,7 +47,7 @@ class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Process
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT:
-                return 'edit-url';
+                return 'editURL';
         }
 
         return parent::getUrlField($module);

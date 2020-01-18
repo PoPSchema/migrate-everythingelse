@@ -36,7 +36,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
-                return 'is-community';
+                return 'isCommunity';
         }
         
         return parent::getDbobjectField($module);

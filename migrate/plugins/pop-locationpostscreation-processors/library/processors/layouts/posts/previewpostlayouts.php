@@ -17,7 +17,7 @@ class PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts extend
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT:
-                return 'edit-url';
+                return 'editURL';
         }
 
         return parent::getUrlField($module);

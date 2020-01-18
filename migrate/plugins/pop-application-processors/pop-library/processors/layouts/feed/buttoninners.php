@@ -30,8 +30,8 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
     {
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
-                return 'userpostactivity-count';
-            return 'comments-count';
+                return 'userPostActivityCount';
+            return 'commentsCount';
         }
         
         return parent::getTextField($module, $props);

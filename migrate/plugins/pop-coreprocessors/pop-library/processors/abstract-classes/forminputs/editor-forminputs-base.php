@@ -144,6 +144,6 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
 
     public function getDbobjectField(array $module)
     {
-        return 'content-editor';
+        return 'contentEditor';
     }
 }

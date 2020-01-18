@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
 
     public function getUrlField(array $module)
     {
-        return 'locationsmap-url';
+        return 'locationsmapURL';
     }
 
     public function getUrl(array $module, array &$props)

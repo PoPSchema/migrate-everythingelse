@@ -64,7 +64,7 @@ class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_Preload
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_EVENT_CREATE => 'addevent-url',
+            self::MODULE_BUTTON_EVENT_CREATE => 'addEventURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

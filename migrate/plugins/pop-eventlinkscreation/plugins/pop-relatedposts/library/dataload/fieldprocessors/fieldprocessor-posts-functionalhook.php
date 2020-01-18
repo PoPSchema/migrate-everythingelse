@@ -19,14 +19,14 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'addeventlink-url',
+			'addEventLinkURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'addeventlink-url' => SchemaDefinition::TYPE_URL,
+			'addEventLinkURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'addeventlink-url' => $translationAPI->__('', ''),
+			'addEventLinkURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,9 +44,9 @@ class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFu
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'addeventlink-url':
+            case 'addEventLinkURL':
                 $routes = array(
-                    'addeventlink-url' => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
+                    'addEventLinkURL' => POP_EVENTLINKSCREATION_ROUTE_ADDEVENTLINK,
                 );
                 $route = $routes[$fieldName];
 

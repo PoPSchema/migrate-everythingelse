@@ -80,7 +80,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
-                return 'flag-url';
+                return 'flagURL';
         }
         
         return parent::getUrlField($module);

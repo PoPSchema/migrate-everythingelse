@@ -20,14 +20,14 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'edit-user-membership-url',
-            'community-members-url',
+            'editUserMembershipURL',
+            'communityMembersURL',
             'memberstatus',
-            'memberstatus-byname',
+            'memberStatusByName',
             'memberprivileges',
-            'memberprivileges-byname',
+            'memberPrivilegesByName',
             'membertags',
-            'membertags-byname',
+            'memberTagsByName',
             'icon',
             'url',
             'message',
@@ -37,14 +37,14 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'edit-user-membership-url' => SchemaDefinition::TYPE_URL,
-            'community-members-url' => SchemaDefinition::TYPE_URL,
+            'editUserMembershipURL' => SchemaDefinition::TYPE_URL,
+            'communityMembersURL' => SchemaDefinition::TYPE_URL,
             'memberstatus' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'memberstatus-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberStatusByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'memberprivileges' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'memberprivileges-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberPrivilegesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'membertags' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'membertags-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberTagsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
             'icon' => SchemaDefinition::TYPE_STRING,
             'url' => SchemaDefinition::TYPE_URL,
             'message' => SchemaDefinition::TYPE_STRING,
@@ -56,14 +56,14 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'edit-user-membership-url' => $translationAPI->__('', ''),
-            'community-members-url' => $translationAPI->__('', ''),
+            'editUserMembershipURL' => $translationAPI->__('', ''),
+            'communityMembersURL' => $translationAPI->__('', ''),
             'memberstatus' => $translationAPI->__('', ''),
-            'memberstatus-byname' => $translationAPI->__('', ''),
+            'memberStatusByName' => $translationAPI->__('', ''),
             'memberprivileges' => $translationAPI->__('', ''),
-            'memberprivileges-byname' => $translationAPI->__('', ''),
+            'memberPrivilegesByName' => $translationAPI->__('', ''),
             'membertags' => $translationAPI->__('', ''),
-            'membertags-byname' => $translationAPI->__('', ''),
+            'memberTagsByName' => $translationAPI->__('', ''),
             'icon' => $translationAPI->__('', ''),
             'url' => $translationAPI->__('', ''),
             'message' => $translationAPI->__('', ''),
@@ -115,10 +115,10 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
-            case 'edit-user-membership-url':
+            case 'editUserMembershipURL':
                 return gdUreEditMembershipUrl($notification->user_id);
 
-            case 'community-members-url':
+            case 'communityMembersURL':
                 return \PoP\ComponentModel\Utils::addRoute($cmsusersapi->getUserURL($notification->object_id), POP_USERCOMMUNITIES_ROUTE_MEMBERS);
 
          // ----------------------------------------
@@ -132,7 +132,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
-            case 'memberstatus-byname':
+            case 'memberStatusByName':
                 $selected = $typeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -146,7 +146,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
-            case 'memberprivileges-byname':
+            case 'memberPrivilegesByName':
                 $selected = $typeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -160,7 +160,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
-            case 'membertags-byname':
+            case 'memberTagsByName':
                 $selected = $typeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected

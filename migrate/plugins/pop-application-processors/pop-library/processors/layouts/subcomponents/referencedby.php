@@ -27,7 +27,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 return 'referencedby';
 
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
-                return 'referencedby-lazy';
+                return 'referencedbyLazy';
         }
 
         return parent::getSubcomponentField($module);

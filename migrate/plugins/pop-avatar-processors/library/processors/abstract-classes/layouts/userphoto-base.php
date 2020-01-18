@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_UserPhotoLayoutsBase extends PoPEngine_Query
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('userphoto', 'display-name');
+        return array('userphoto', 'displayName');
     }
 }

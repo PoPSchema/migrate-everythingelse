@@ -18,9 +18,9 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'multilayout-keys',
-            'mention-queryby',
-            'description-formatted',
+            'multilayoutKeys',
+            'mentionQueryby',
+            'descriptionFormatted',
             'excerpt',
         ];
     }
@@ -28,9 +28,9 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'multilayout-keys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'mention-queryby' => SchemaDefinition::TYPE_STRING,
-            'description-formatted' => SchemaDefinition::TYPE_STRING,
+			'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'mentionQueryby' => SchemaDefinition::TYPE_STRING,
+            'descriptionFormatted' => SchemaDefinition::TYPE_STRING,
             'excerpt' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -40,9 +40,9 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'multilayout-keys' => $translationAPI->__('', ''),
-            'mention-queryby' => $translationAPI->__('', ''),
-            'description-formatted' => $translationAPI->__('', ''),
+			'multilayoutKeys' => $translationAPI->__('', ''),
+            'mentionQueryby' => $translationAPI->__('', ''),
+            'descriptionFormatted' => $translationAPI->__('', ''),
             'excerpt' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -54,16 +54,16 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         switch ($fieldName) {
-            case 'multilayout-keys':
+            case 'multilayoutKeys':
                 return array(
                     $typeResolver->resolveValue($user, 'role', $variables, $expressions, $options),
                 );
 
              // Needed for tinyMCE-mention plug-in
-            case 'mention-queryby':
-                return $typeResolver->resolveValue($user, 'display-name', $variables, $expressions, $options);
+            case 'mentionQueryby':
+                return $typeResolver->resolveValue($user, 'displayName', $variables, $expressions, $options);
 
-            case 'description-formatted':
+            case 'descriptionFormatted':
                 $value = $typeResolver->resolveValue($user, 'description', $variables, $expressions, $options);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->convertLinebreaksToHTML(strip_tags($value)));
 

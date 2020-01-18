@@ -19,13 +19,13 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES:
-                return 'organizationcategories-byname';
+                return 'organizationCategoriesByName';
 
             case self::MODULE_LAYOUT_ORGANIZATIONTYPES:
-                return 'organizationtypes-byname';
+                return 'organizationTypesByName';
 
             case self::MODULE_LAYOUT_INDIVIDUALINTERESTS:
-                return 'individualinterests-byname';
+                return 'individualInterestsByName';
         }
         
         return parent::getCategoriesField($module, $props);

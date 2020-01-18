@@ -11,7 +11,7 @@ abstract class PoP_Module_Processor_VolunteerTagLayoutsBase extends PoPEngine_Qu
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('volunteers-needed');
+        return array('volunteersNeeded');
     }
 
     public function getTitle(array $module, array &$props)

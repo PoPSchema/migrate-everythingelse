@@ -42,7 +42,7 @@ class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends 
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY:
-                return 'volunteers-needed';
+                return 'volunteersNeeded';
         }
 
         return null;

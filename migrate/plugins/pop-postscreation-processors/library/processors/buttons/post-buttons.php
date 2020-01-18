@@ -65,7 +65,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_PostButtons extends PoP_Modu
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => 'addcontentpostlink-url',
+            self::MODULE_BUTTON_CONTENTPOSTLINK_CREATE => 'addContentPostLinkURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

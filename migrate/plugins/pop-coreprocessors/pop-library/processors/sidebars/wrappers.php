@@ -72,10 +72,10 @@ class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_REFERENCES:
             case self::MODULE_WIDGETWRAPPER_REFERENCES_LINE:
-                return 'has-references';
+                return 'hasReferences';
 
             case self::MODULE_WIDGETWRAPPER_AUTHOR_CONTACT:
-                return 'has-contact';
+                return 'hasContact';
         }
 
         return null;

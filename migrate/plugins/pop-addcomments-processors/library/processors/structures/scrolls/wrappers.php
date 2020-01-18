@@ -47,7 +47,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
-                return 'has-comments';
+                return 'hasComments';
         }
 
         return null;

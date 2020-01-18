@@ -17,18 +17,18 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'short-description-formatted',
-            'contact-small',
-            'user-preferences',
+            'shortDescriptionFormatted',
+            'contactSmall',
+            'userPreferences',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'short-description-formatted' => SchemaDefinition::TYPE_STRING,
-            'contact-small' => SchemaDefinition::TYPE_STRING,
-            'user-preferences' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'shortDescriptionFormatted' => SchemaDefinition::TYPE_STRING,
+            'contactSmall' => SchemaDefinition::TYPE_STRING,
+            'userPreferences' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,9 +37,9 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'short-description-formatted' => $translationAPI->__('', ''),
-            'contact-small' => $translationAPI->__('', ''),
-            'user-preferences' => $translationAPI->__('', ''),
+            'shortDescriptionFormatted' => $translationAPI->__('', ''),
+            'contactSmall' => $translationAPI->__('', ''),
+            'userPreferences' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -49,12 +49,12 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
         $user = $resultItem;
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         switch ($fieldName) {
-            case 'short-description-formatted':
+            case 'shortDescriptionFormatted':
                 // doing esc_html so that single quotes ("'") do not screw the map output
-                $value = $typeResolver->resolveValue($user, 'short-description', $variables, $expressions, $options);
+                $value = $typeResolver->resolveValue($user, 'shortDescription', $variables, $expressions, $options);
                 return $cmsapplicationhelpers->makeClickable($cmsapplicationhelpers->escapeHTML($value));
 
-            case 'contact-small':
+            case 'contactSmall':
                 $value = array();
                 $contacts = $typeResolver->resolveValue($user, 'contact', $variables, $expressions, $options);
                 // Remove text, replace all icons with their shorter version
@@ -68,7 +68,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_FunctionalUsers extends AbstractFun
                 return $value;
 
          // User preferences
-            case 'user-preferences':
+            case 'userPreferences':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_USERPREFERENCES);
         }
 

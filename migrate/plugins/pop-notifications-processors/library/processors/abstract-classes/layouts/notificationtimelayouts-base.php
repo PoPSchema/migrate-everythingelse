@@ -11,10 +11,10 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
     {
         $ret = parent::getDataFields($module, $props);
 
-        $ret[] = 'hist-time-nogmt';
+        $ret[] = 'histTimeNogmt';
 
         // This one is needed only for the notifications digest, using automated emails
-        $ret[] = 'hist-time-readable';
+        $ret[] = 'histTimeReadable';
         
         return $ret;
     }

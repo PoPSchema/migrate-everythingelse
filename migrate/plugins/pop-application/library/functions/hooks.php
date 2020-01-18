@@ -40,10 +40,10 @@ class PoP_Application_Hooks
 		            // If it has categories, use it. Otherwise, only use the post type
 		            if ($terms = $component['terms']) {
 		                foreach ($terms as $term) {
-		                    $classes[] = $component['post-type'].'-'.$term;
+		                    $classes[] = $component['postType'].'-'.$term;
 		                }
 		            } else {
-		                $classes[] = $component['post-type'];
+		                $classes[] = $component['postType'];
 		            }
 		        }
 		    }

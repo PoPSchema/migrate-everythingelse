@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_AuthorContentLayoutsBase extends PoPEngine_Q
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('display-name', 'description-formatted', 'short-description-formatted');
+        return array('displayName', 'descriptionFormatted', 'shortDescriptionFormatted');
     }
 
     public function getDescriptionMaxlength(array $module, array &$props)

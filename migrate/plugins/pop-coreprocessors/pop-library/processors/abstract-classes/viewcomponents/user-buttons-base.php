@@ -6,7 +6,7 @@ abstract class PoP_Module_Processor_UserViewComponentButtonsBase extends PoP_Mod
     {
         $ret = parent::getDbobjectParams($module);
 
-        $ret['data-target-title'] = 'display-name';
+        $ret['data-target-title'] = 'displayName';
         $ret['data-target-url'] = 'url';
         
         return $ret;

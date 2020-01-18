@@ -9,6 +9,6 @@ abstract class Wassup_Module_Processor_LinkAccessLayoutsBase extends PoPEngine_Q
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('linkaccess-byname');
+        return array('linkAccessByName');
     }
 }

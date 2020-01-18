@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('multilayout-keys');
+        return array('multilayoutKeys');
     }
 
     public function initModelProps(array $module, array &$props)

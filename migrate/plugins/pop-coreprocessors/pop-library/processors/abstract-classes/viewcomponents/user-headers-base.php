@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_UserViewComponentHeadersBase extends PoPEngi
 
     public function getDataFields(array $module, array &$props): array
     {
-        $data_fields = array('id', 'display-name');
+        $data_fields = array('id', 'displayName');
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             $avatar_size = $this->getAvatarSize($module, $props);

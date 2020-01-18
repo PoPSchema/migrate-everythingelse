@@ -20,14 +20,14 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'flag-url',
+			'flagURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'flag-url' => SchemaDefinition::TYPE_URL,
+			'flagURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -36,7 +36,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'flag-url' => $translationAPI->__('', ''),
+			'flagURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,7 +45,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_FunctionalPosts extends Abstract
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'flag-url':
+            case 'flagURL':
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]);
                 return GeneralUtils::addQueryArgs([

@@ -68,7 +68,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
-                return 'replycomment-url';
+                return 'replycommentURL';
         }
 
         return parent::getUrlField($module);

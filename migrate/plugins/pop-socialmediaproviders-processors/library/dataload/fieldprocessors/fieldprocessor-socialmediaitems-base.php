@@ -11,7 +11,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
     protected function getShareUrl($url, $title, $provider)
     {
         $settings = gdSocialmediaProviderSettings();
-        $provider_url = $settings[$provider]['share-url'];
+        $provider_url = $settings[$provider]['shareURL'];
         return str_replace(array('%url%', '%title%'), array(rawurlencode($url), rawurlencode($title)), $provider_url);
     }
 
@@ -23,14 +23,14 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'share-url',
+			'shareURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'share-url' => SchemaDefinition::TYPE_URL,
+			'shareURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -39,7 +39,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'share-url' => $translationAPI->__('', ''),
+			'shareURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -48,7 +48,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
-            case 'share-url':
+            case 'shareURL':
                 return [
                     [
                         SchemaDefinition::ARGNAME_NAME => 'provider',
@@ -76,7 +76,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         switch ($fieldName) {
-            case 'share-url':
+            case 'shareURL':
                 $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
                 if (GeneralUtils::isError($url)) {
                     return $url;

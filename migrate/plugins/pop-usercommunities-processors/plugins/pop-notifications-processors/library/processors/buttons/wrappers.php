@@ -54,7 +54,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
                 return $fieldQueryInterpreter->getField(
                     'equals',
                     [
-                        'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('object-id'),
+                        'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('objectID'),
                         'value2' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('me'),
                     ],
                     'object-id-equals-logged-in-user-id'

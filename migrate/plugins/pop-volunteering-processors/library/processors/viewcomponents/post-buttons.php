@@ -83,7 +83,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
-                return 'volunteer-url';
+                return 'volunteerURL';
         }
         
         return parent::getUrlField($module);

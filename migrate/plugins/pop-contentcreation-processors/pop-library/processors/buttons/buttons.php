@@ -37,10 +37,10 @@ class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_B
     {
         switch ($module[1]) {
             case self::MODULE_BUTTON_POSTEDIT:
-                return 'edit-url';
+                return 'editURL';
         
             case self::MODULE_BUTTON_POSTPREVIEW:
-                return 'preview-url';
+                return 'previewURL';
         }
 
         return parent::getUrlField($module);

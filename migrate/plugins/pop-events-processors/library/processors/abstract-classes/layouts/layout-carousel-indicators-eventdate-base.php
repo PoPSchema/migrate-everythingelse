@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_EventDateCarouselIndicatorLayoutsBase extend
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('start-date-readable');
+        return array('startDateReadable');
     }
 }

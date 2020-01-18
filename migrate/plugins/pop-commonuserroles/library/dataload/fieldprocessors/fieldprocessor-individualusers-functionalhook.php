@@ -19,14 +19,14 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'individualinterests-byname',
+			'individualInterestsByName',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'individualinterests-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+			'individualInterestsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'individualinterests-byname' => $translationAPI->__('', ''),
+			'individualInterestsByName' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,7 +44,7 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalIndividualUsers extends Abs
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'individualinterests-byname':
+            case 'individualInterestsByName':
                 $selected = $typeResolver->resolveValue($user, 'individualinterests', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected

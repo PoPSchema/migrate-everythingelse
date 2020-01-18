@@ -12,9 +12,9 @@ class PoP_ServerSide_LatestCountHelpers
         $selector = '.pop-block.'.GD_JS_INITIALIZED.' > .blocksection-latestcount > .pop-latestcount';
 
         // By Sections (post type . categories)
-        $trigger_values = $dbObject['latestcounts-trigger-values'] ?? array();
+        $trigger_values = $dbObject['latestcountsTriggerValues'] ?? array();
         foreach ($trigger_values as $trigger_value) {
-            // trigger_value will be translated to 'post-type'+'cat' attribute
+            // trigger_value will be translated to 'postType'+'cat' attribute
             $targets[] = $selector.'.'.$trigger_value;
         }
 

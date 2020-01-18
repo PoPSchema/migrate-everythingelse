@@ -42,7 +42,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
-                return FieldQueryInterpreterFacade::getInstance()->getField('is-status', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
+                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
         }
 
         return null;

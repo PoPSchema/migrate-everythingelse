@@ -22,10 +22,10 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
             'memberstatus',
             'memberprivileges',
             'membertags',
-            'is-community',
+            'isCommunity',
             'communities',
-            'active-communities',
-            'has-active-communities',
+            'activeCommunities',
+            'hasActiveCommunities',
         ];
     }
 
@@ -35,10 +35,10 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
 			'memberstatus' => SchemaDefinition::TYPE_ENUM,
             'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'membertags' => SchemaDefinition::TYPE_ENUM,
-            'is-community' => SchemaDefinition::TYPE_BOOL,
+            'isCommunity' => SchemaDefinition::TYPE_BOOL,
             'communities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'active-communities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'has-active-communities' => SchemaDefinition::TYPE_BOOL,
+            'activeCommunities' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'hasActiveCommunities' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -50,10 +50,10 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
 			'memberstatus' => $translationAPI->__('', ''),
             'memberprivileges' => $translationAPI->__('', ''),
             'membertags' => $translationAPI->__('', ''),
-            'is-community' => $translationAPI->__('', ''),
+            'isCommunity' => $translationAPI->__('', ''),
             'communities' => $translationAPI->__('', ''),
-            'active-communities' => $translationAPI->__('', ''),
-            'has-active-communities' => $translationAPI->__('', ''),
+            'activeCommunities' => $translationAPI->__('', ''),
+            'hasActiveCommunities' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -101,19 +101,19 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($tags);
 
-            case 'is-community':
+            case 'isCommunity':
                 return gdUreIsCommunity($typeResolver->getID($user)) ? true : null;
 
             case 'communities':
                 // Return only the communities where the user's been accepted as a member
                 return gdUreGetCommunities($typeResolver->getID($user));
 
-            case 'active-communities':
+            case 'activeCommunities':
                 // Return only the communities where the user's been accepted as a member
                 return gdUreGetCommunitiesStatusActive($typeResolver->getID($user));
 
-            case 'has-active-communities':
-                $communities = $typeResolver->resolveValue($resultItem, 'active-communities', $variables, $expressions, $options);
+            case 'hasActiveCommunities':
+                $communities = $typeResolver->resolveValue($resultItem, 'activeCommunities', $variables, $expressions, $options);
                 return !empty($communities);
         }
 
@@ -124,7 +124,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
     {
         switch ($fieldName) {
             case 'communities':
-            case 'active-communities':
+            case 'activeCommunities':
                 return UserTypeResolver::class;
         }
 

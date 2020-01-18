@@ -29,7 +29,7 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
     {
         switch ($module[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
-                return 'has-members';
+                return 'hasMembers';
         }
 
         return null;

@@ -4,11 +4,11 @@ abstract class PoP_Module_Processor_FullUserTitleLayoutsBase extends PoP_Module_
 {
     public function getTitleField(array $module, array &$props)
     {
-        return 'display-name';
+        return 'displayName';
     }
     
     public function getTitleConditionField(array $module, array &$props)
     {
-        return 'is-profile';
+        return 'isProfile';
     }
 }

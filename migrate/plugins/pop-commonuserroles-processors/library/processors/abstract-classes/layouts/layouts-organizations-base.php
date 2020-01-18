@@ -11,7 +11,7 @@ abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase ext
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('organizationtypes-byname', 'organizationcategories-byname', 'contact-person', 'contact-number');
+        return array('organizationTypesByName', 'organizationCategoriesByName', 'contactPerson', 'contactNumber');
     }
 
     public function getImmutableConfiguration(array $module, array &$props): array

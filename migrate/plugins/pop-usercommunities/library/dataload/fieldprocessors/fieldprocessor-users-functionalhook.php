@@ -17,22 +17,22 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'edit-membership-url',
-            'edit-memberstatus-inline-url',
-            'memberstatus-byname',
-            'memberprivileges-byname',
-            'membertags-byname',
+            'editMembershipURL',
+            'editMemberStatusInlineURL',
+            'memberStatusByName',
+            'memberPrivilegesByName',
+            'memberTagsByName',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'edit-membership-url' => SchemaDefinition::TYPE_URL,
-            'edit-memberstatus-inline-url' => SchemaDefinition::TYPE_URL,
-            'memberstatus-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'memberprivileges-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'membertags-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+			'editMembershipURL' => SchemaDefinition::TYPE_URL,
+            'editMemberStatusInlineURL' => SchemaDefinition::TYPE_URL,
+            'memberStatusByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberPrivilegesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'memberTagsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -41,11 +41,11 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'edit-membership-url' => $translationAPI->__('', ''),
-            'edit-memberstatus-inline-url' => $translationAPI->__('', ''),
-            'memberstatus-byname' => $translationAPI->__('', ''),
-            'memberprivileges-byname' => $translationAPI->__('', ''),
-            'membertags-byname' => $translationAPI->__('', ''),
+			'editMembershipURL' => $translationAPI->__('', ''),
+            'editMemberStatusInlineURL' => $translationAPI->__('', ''),
+            'memberStatusByName' => $translationAPI->__('', ''),
+            'memberPrivilegesByName' => $translationAPI->__('', ''),
+            'memberTagsByName' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -54,13 +54,13 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
     {
         $user = $resultItem;
         switch ($fieldName) {
-            case 'edit-membership-url':
+            case 'editMembershipURL':
                 return gdUreEditMembershipUrl($typeResolver->getID($user));
 
-            case 'edit-memberstatus-inline-url':
+            case 'editMemberStatusInlineURL':
                 return gdUreEditMembershipUrl($typeResolver->getID($user), true);
 
-            case 'memberstatus-byname':
+            case 'memberStatusByName':
                 $selected = $typeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -68,7 +68,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
                 $status = new GD_URE_FormInput_MultiMemberStatus($params);
                 return $status->getSelectedValue();
 
-            case 'memberprivileges-byname':
+            case 'memberPrivilegesByName':
                 $selected = $typeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -76,7 +76,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_FunctionalUsers extends Abstract
                 $privileges = new GD_URE_FormInput_FilterMemberPrivileges($params);
                 return $privileges->getSelectedValue();
 
-            case 'membertags-byname':
+            case 'memberTagsByName':
                 $selected = $typeResolver->resolveValue($user, 'membertags', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected

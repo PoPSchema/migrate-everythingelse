@@ -43,10 +43,10 @@ class EM_PoP_Locations_API extends PoP_Locations_API_Base implements PoP_Locatio
             // Watch out: $query has the format needed by Events Manager for EM_Locations::get($args)
             $args['array'] = true;
         }
-        if (isset($args['post-id'])) {
+        if (isset($args['postID'])) {
 
-            $args['post_id'] = $args['post-id'];
-            unset($args['post-id']);
+            $args['post_id'] = $args['postID'];
+            unset($args['postID']);
         }
         elseif (isset($args['include'])) {
 

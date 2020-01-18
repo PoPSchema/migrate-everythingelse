@@ -21,7 +21,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
                 return 'stances';
 
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                return 'stances-lazy';
+                return 'stancesLazy';
         }
     }
 

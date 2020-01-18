@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Proces
     
         $ret = array_merge(
             $ret,
-            array('author', 'title', 'start-date', 'end-date', 'all-day')
+            array('author', 'title', 'startDate', 'endDate', 'allDay')
         );
         
         return $ret;

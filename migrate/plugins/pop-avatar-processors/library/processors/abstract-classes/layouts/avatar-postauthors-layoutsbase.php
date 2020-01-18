@@ -31,7 +31,7 @@ abstract class PoP_Module_Processor_PostAuthorAvatarLayoutsBase extends PoPEngin
             array(
                 $avatar_field,
                 $url_field,
-                'display-name'
+                'displayName'
             )
         );
     }

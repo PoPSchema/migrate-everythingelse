@@ -40,7 +40,7 @@ class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Modul
                 return $fieldQueryInterpreter->getField(
                     'equals',
                     [
-                        'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('object-id'),
+                        'value1' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('objectID'),
                         'value2' => $fieldQueryInterpreter->createFieldArgValueAsFieldFromFieldName('me'),
                     ],
                     'object-id-equals-logged-in-user-id'

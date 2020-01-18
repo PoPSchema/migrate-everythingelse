@@ -48,13 +48,13 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
     {
         switch ($module[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
-                return 'has-individual-details';
+                return 'hasIndividualDetails';
 
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS:
-                return 'has-organization-details';
+                return 'hasOrganizationDetails';
         }
 
-        return 'has-organization-details';
+        return 'hasOrganizationDetails';
     }
 }
 

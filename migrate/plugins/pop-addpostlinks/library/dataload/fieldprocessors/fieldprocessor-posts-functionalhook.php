@@ -17,14 +17,14 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'is-link-embeddable',
+			'isLinkEmbeddable',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'is-link-embeddable' => SchemaDefinition::TYPE_BOOL,
+			'isLinkEmbeddable' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -33,7 +33,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'is-link-embeddable' => $translationAPI->__('', ''),
+			'isLinkEmbeddable' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -42,7 +42,7 @@ class PoP_AddPostLinks_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'is-link-embeddable':
+            case 'isLinkEmbeddable':
                 $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
                 $link = PoP_AddPostLinks_Utils::getLink($typeResolver->getID($post));
                 $host = getUrlHost($link);

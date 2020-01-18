@@ -46,7 +46,7 @@ function gdDataloadAllcontentComponents()
     $components = array();
     foreach ($cmsapplicationpostsapi->getAllcontentPostTypes() as $post_type) {
         $component = array(
-            'post-type' => $post_type,
+            'postType' => $post_type,
         );
         if ($taxonomies = $taxonomyapi->getPostTypeTaxonomies($post_type)) {
             foreach ($taxonomies as $taxonomy) {

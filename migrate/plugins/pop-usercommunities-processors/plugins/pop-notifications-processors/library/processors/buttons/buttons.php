@@ -31,10 +31,10 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
-                return 'edit-user-membership-url';
+                return 'editUserMembershipURL';
         
             case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
-                return 'community-members-url';
+                return 'communityMembersURL';
         }
 
         return parent::getUrlField($module);

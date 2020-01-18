@@ -57,7 +57,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
-                return 'content-edit';
+                return 'contentEdit';
         }
         
         return parent::getDbobjectField($module);

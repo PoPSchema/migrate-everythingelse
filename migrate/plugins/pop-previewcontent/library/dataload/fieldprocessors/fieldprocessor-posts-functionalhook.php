@@ -17,14 +17,14 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'preview-url',
+			'previewURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'preview-url' => SchemaDefinition::TYPE_URL,
+			'previewURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -33,7 +33,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'preview-url' => $translationAPI->__('', ''),
+			'previewURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -43,7 +43,7 @@ class PPPPoP_DataLoad_FieldResolver_FunctionalProfiles extends AbstractFunctiona
         $pluginapi = PoP_PreviewContent_FunctionsAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
-            case 'preview-url':
+            case 'previewURL':
                 // Use function getID to also cater for events (whose ID is $event->post_id)
                 return $pluginapi->getPreviewLink($typeResolver->getID($post));
         }

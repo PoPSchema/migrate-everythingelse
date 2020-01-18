@@ -63,7 +63,7 @@ class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Proc
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_LOCATIONPOST_CREATE => 'addlocationpost-url',
+            self::MODULE_BUTTON_LOCATIONPOST_CREATE => 'addLocationPostURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

@@ -26,7 +26,7 @@ class PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs extends PoP_Mod
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_DISPLAYEMAIL:
-                return 'display-email';
+                return 'displayEmail';
         }
 
         return parent::getDbobjectField($module);

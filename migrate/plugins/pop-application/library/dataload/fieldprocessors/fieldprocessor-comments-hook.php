@@ -18,16 +18,16 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'content-clipped',
-            'replycomment-url',
+			'contentClipped',
+            'replycommentURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'content-clipped' => SchemaDefinition::TYPE_STRING,
-            'replycomment-url' => SchemaDefinition::TYPE_URL,
+			'contentClipped' => SchemaDefinition::TYPE_STRING,
+            'replycommentURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -36,8 +36,8 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'content-clipped' => $translationAPI->__('', ''),
-            'replycomment-url' => $translationAPI->__('', ''),
+			'contentClipped' => $translationAPI->__('', ''),
+            'replycommentURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -46,15 +46,15 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
     {
         $comment = $resultItem;
         switch ($fieldName) {
-            case 'content-clipped':
+            case 'contentClipped':
                 $content = $typeResolver->resolveValue($resultItem, 'content', $variables, $expressions, $options);
                 if (GeneralUtils::isError($content)) {
                     return $content;
                 }
                 return limitString(strip_tags($content), 250);
 
-            case 'replycomment-url':
-                $postID = $typeResolver->resolveValue($resultItem, 'post-id', $variables, $expressions, $options);
+            case 'replycommentURL':
+                $postID = $typeResolver->resolveValue($resultItem, 'postID', $variables, $expressions, $options);
                 if (GeneralUtils::isError($postID)) {
                     return $postID;
                 }

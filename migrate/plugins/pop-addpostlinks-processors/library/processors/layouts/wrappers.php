@@ -35,7 +35,7 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         switch ($module[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
-                return 'has-link';
+                return 'hasLink';
         }
 
         return null;

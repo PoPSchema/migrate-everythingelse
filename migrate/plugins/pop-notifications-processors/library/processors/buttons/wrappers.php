@@ -44,7 +44,7 @@ class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_Condit
     {
         switch ($module[1]) {
             case self::MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD:
-                return 'is-status-not-read';
+                return 'isStatusNotRead';
         }
 
         return null;

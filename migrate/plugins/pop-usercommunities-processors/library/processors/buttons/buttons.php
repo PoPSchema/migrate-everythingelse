@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     {
         switch ($module[1]) {
             case self::MODULE_URE_BUTTON_EDITMEMBERSHIP:
-                return 'edit-membership-url';
+                return 'editMembershipURL';
         }
 
         return parent::getUrlField($module);

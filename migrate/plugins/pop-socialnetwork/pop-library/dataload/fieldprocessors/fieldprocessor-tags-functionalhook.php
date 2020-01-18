@@ -17,16 +17,16 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'subscribetotag-url',
-            'unsubscribefromtag-url',
+			'subscribeToTagURL',
+            'unsubscribeFromTagURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'subscribetotag-url' => SchemaDefinition::TYPE_URL,
-            'unsubscribefromtag-url' => SchemaDefinition::TYPE_URL,
+			'subscribeToTagURL' => SchemaDefinition::TYPE_URL,
+            'unsubscribeFromTagURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,8 +35,8 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'subscribetotag-url' => $translationAPI->__('', ''),
-            'unsubscribefromtag-url' => $translationAPI->__('', ''),
+            'subscribeToTagURL' => $translationAPI->__('', ''),
+            'unsubscribeFromTagURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,12 +45,12 @@ class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
     {
         $tag = $resultItem;
         switch ($fieldName) {
-            case 'subscribetotag-url':
+            case 'subscribeToTagURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_SUBSCRIBETOTAG));
 
-            case 'unsubscribefromtag-url':
+            case 'unsubscribeFromTagURL':
                 return GeneralUtils::addQueryArgs([
                     POP_INPUTNAME_TAGID => $typeResolver->getID($tag),
                 ], RouteUtils::getRouteURL(POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG));

@@ -22,28 +22,28 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'multilayout-keys',
-            'latestcounts-trigger-values',
-            'cats-byname',
-            'comments-lazy',
-            'noheadercomments-lazy',
-            'addcomment-url',
-            'topics-byname',
-            'appliesto-byname',
+            'multilayoutKeys',
+            'latestcountsTriggerValues',
+            'catsByName',
+            'commentsLazy',
+            'noheadercommentsLazy',
+            'addCommentURL',
+            'topicsByName',
+            'appliestoByName',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'multilayout-keys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'latestcounts-trigger-values' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'cats-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'comments-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'noheadercomments-lazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'addcomment-url' => SchemaDefinition::TYPE_URL,
-            'topics-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'appliesto-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+			'multilayoutKeys' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'latestcountsTriggerValues' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'catsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'commentsLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'noheadercommentsLazy' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'addCommentURL' => SchemaDefinition::TYPE_URL,
+            'topicsByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'appliestoByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -52,14 +52,14 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'multilayout-keys' => $translationAPI->__('', ''),
-            'latestcounts-trigger-values' => $translationAPI->__('', ''),
-            'cats-byname' => $translationAPI->__('', ''),
-            'comments-lazy' => $translationAPI->__('', ''),
-            'noheadercomments-lazy' => $translationAPI->__('', ''),
-            'addcomment-url' => $translationAPI->__('', ''),
-            'topics-byname' => $translationAPI->__('', ''),
-            'appliesto-byname' => $translationAPI->__('', ''),
+			'multilayoutKeys' => $translationAPI->__('', ''),
+            'latestcountsTriggerValues' => $translationAPI->__('', ''),
+            'catsByName' => $translationAPI->__('', ''),
+            'commentsLazy' => $translationAPI->__('', ''),
+            'noheadercommentsLazy' => $translationAPI->__('', ''),
+            'addCommentURL' => $translationAPI->__('', ''),
+            'topicsByName' => $translationAPI->__('', ''),
+            'appliestoByName' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -68,7 +68,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'multilayout-keys':
+            case 'multilayoutKeys':
                 // Allow pop-categorypostlayouts to add more layouts
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'PoP_Application:TypeResolver_Posts:multilayout-keys',
@@ -79,7 +79,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                     $typeResolver
                 );
 
-            case 'latestcounts-trigger-values':
+            case 'latestcountsTriggerValues':
                 $value = array();
                 $type = strtolower($typeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
@@ -93,7 +93,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 return $value;
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
-            case 'cats-byname':
+            case 'catsByName':
                 $cats = $typeResolver->resolveValue($post, 'cats', $variables, $expressions, $options);
                 $value = array();
                 foreach ($cats as $cat) {
@@ -101,18 +101,18 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 }
                 return $value;
 
-            case 'comments-lazy':
-            case 'noheadercomments-lazy':
+            case 'commentsLazy':
+            case 'noheadercommentsLazy':
                 return array();
 
-            case 'addcomment-url':
+            case 'addCommentURL':
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);
                 return GeneralUtils::addQueryArgs([
                     $post_name => $typeResolver->getID($post),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
 
-            case 'topics-byname':
+            case 'topicsByName':
                 $selected = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -120,7 +120,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 $categories = new GD_FormInput_Categories($params);
                 return $categories->getSelectedValue();
 
-            case 'appliesto-byname':
+            case 'appliestoByName':
                 $selected = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected

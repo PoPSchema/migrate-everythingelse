@@ -19,14 +19,14 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'addlocationpost-url',
+			'addLocationPostURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'addlocationpost-url' => SchemaDefinition::TYPE_URL,
+			'addLocationPostURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -35,7 +35,7 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'addlocationpost-url' => $translationAPI->__('', ''),
+			'addLocationPostURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,9 +44,9 @@ class PoP_LocationPostsCreation_DataLoad_FieldResolver_FunctionalPosts extends A
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'addlocationpost-url':
+            case 'addLocationPostURL':
                 $routes = array(
-                    'addlocationpost-url' => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
+                    'addLocationPostURL' => POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST,
                 );
                 $route = $routes[$fieldName];
 

@@ -34,7 +34,7 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORPROPERTIES:
                 $ret = array_merge(
                     $ret,
-                    array('display-name', 'description', 'url')
+                    array('displayName', 'description', 'url')
                 );
                 break;
 

@@ -84,10 +84,10 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
-                return 'thumb-full-src';
+                return 'thumbFullSrc';
             
             case self::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT:
-                return 'edit-url';
+                return 'editURL';
         }
 
         return parent::getUrlField($module);
@@ -163,7 +163,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
                 return array(
-                    'data-size' => 'thumb-full-dimensions',
+                    'data-size' => 'thumbFullDimensions',
                 );
         }
 

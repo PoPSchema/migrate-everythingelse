@@ -95,7 +95,7 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
     public function getDataFields(array $module, array &$props): array
     {
         return array(
-            'fileupload-picture-url',
+            'fileUploadPictureURL',
         );
     }
 }

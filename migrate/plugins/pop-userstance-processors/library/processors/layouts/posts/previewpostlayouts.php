@@ -26,7 +26,7 @@ class UserStance_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_STANCE_EDIT:
-                return 'edit-url';
+                return 'editURL';
         }
 
         return parent::getUrlField($module);

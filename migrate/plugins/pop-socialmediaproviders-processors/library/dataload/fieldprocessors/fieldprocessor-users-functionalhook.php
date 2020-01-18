@@ -12,7 +12,7 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_UserSocialMediaI
 
     protected function getTitleField()
     {
-        return 'display-name';
+        return 'displayName';
     }
 }
     

@@ -19,7 +19,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
     {
         return [
             'members',
-            'has-members',
+            'hasMembers',
         ];
     }
 
@@ -27,7 +27,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
     {
         $types = [
 			'members' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
-            'has-members' => SchemaDefinition::TYPE_BOOL,
+            'hasMembers' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -37,7 +37,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
 			'members' => $translationAPI->__('', ''),
-            'has-members' => $translationAPI->__('', ''),
+            'hasMembers' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -49,7 +49,7 @@ class FieldResolver_CommunityUsers extends AbstractDBDataFieldResolver
             case 'members':
                 return URE_CommunityUtils::getCommunityMembers($typeResolver->getID($user));
 
-            case 'has-members':
+            case 'hasMembers':
                 return !empty($typeResolver->resolveValue($user, 'members', $variables, $expressions, $options));
         }
 

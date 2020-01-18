@@ -20,14 +20,14 @@ class PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'volunteer-url',
+            'volunteerURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'volunteer-url' => SchemaDefinition::TYPE_URL,
+            'volunteerURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -36,7 +36,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'volunteer-url' => $translationAPI->__('', ''),
+            'volunteerURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -45,7 +45,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_FunctionalPosts extends AbstractFu
     {
         $post = $resultItem;
         switch ($fieldName) {
-            case 'volunteer-url':
+            case 'volunteerURL':
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST]);
                 return GeneralUtils::addQueryArgs([

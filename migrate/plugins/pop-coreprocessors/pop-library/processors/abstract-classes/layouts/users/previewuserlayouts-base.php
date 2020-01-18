@@ -13,14 +13,14 @@ abstract class PoP_Module_Processor_PreviewUserLayoutsBase extends PoP_Module_Pr
     {
         $ret = array_merge(
             parent::getDataFields($module, $props),
-            array('display-name', 'is-profile')
+            array('displayName', 'isProfile')
         );
 
         if ($this->showTitle($module)) {
             $ret[] = 'title';
         }
         if ($this->showShortDescription($module)) {
-            $ret[] = 'short-description-formatted';
+            $ret[] = 'shortDescriptionFormatted';
         }
 
         return $ret;

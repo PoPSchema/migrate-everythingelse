@@ -17,10 +17,10 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUT_CATEGORIES:
-                return 'topics-byname';
+                return 'topicsByName';
 
             case self::MODULE_LAYOUT_APPLIESTO:
-                return 'appliesto-byname';
+                return 'appliestoByName';
         }
         
         return parent::getCategoriesField($module, $props);

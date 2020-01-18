@@ -9,6 +9,6 @@ abstract class PoP_Module_Processor_CommentClippedViewComponentHeadersBase exten
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('content-clipped');
+        return array('contentClipped');
     }
 }

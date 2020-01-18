@@ -155,10 +155,10 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
     {
         switch ($module[1]) {
             case self::MODULE_LAYOUTWRAPPER_CATEGORIES:
-                return 'has-topics';
+                return 'hasTopics';
 
             case self::MODULE_LAYOUTWRAPPER_APPLIESTO:
-                return 'has-appliesto';
+                return 'hasAppliesto';
 
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW:
@@ -166,7 +166,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS:
-                return 'has-highlights';
+                return 'hasHighlights';
 
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS:
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW:
@@ -174,7 +174,7 @@ class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Condit
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW:
-                return 'has-referencedby';
+                return 'hasReferencedBy';
         }
 
         return null;

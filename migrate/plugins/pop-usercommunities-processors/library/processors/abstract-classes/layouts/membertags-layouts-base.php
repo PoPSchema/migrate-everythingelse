@@ -9,7 +9,7 @@ abstract class GD_URE_Module_Processor_MemberTagsLayoutsBase extends PoPEngine_Q
 
     public function getDataFields(array $module, array &$props): array
     {
-        return array('membertags-byname');
+        return array('memberTagsByName');
     }
 
     public function getDescription(array $module, array &$props)

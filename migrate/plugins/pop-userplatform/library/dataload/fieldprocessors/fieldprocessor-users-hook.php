@@ -15,34 +15,34 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'short-description',
+            'shortDescription',
             'title',
-            'display-email',
+            'displayEmail',
             'contact',
-            'has-contact',
+            'hasContact',
             'facebook',
             'twitter',
             'linkedin',
             'youtube',
             'instagram',
-            'is-profile',
+            'isProfile',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'short-description' => SchemaDefinition::TYPE_STRING,
+            'shortDescription' => SchemaDefinition::TYPE_STRING,
             'title' => SchemaDefinition::TYPE_STRING,
-            'display-email' => SchemaDefinition::TYPE_EMAIL,
+            'displayEmail' => SchemaDefinition::TYPE_EMAIL,
             'contact' => SchemaDefinition::TYPE_STRING,
-            'has-contact' => SchemaDefinition::TYPE_BOOL,
+            'hasContact' => SchemaDefinition::TYPE_BOOL,
             'facebook' => SchemaDefinition::TYPE_URL,
             'twitter' => SchemaDefinition::TYPE_URL,
             'linkedin' => SchemaDefinition::TYPE_URL,
             'youtube' => SchemaDefinition::TYPE_URL,
             'instagram' => SchemaDefinition::TYPE_URL,
-            'is-profile' => SchemaDefinition::TYPE_BOOL,
+            'isProfile' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -51,17 +51,17 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'short-description' => $translationAPI->__('', ''),
+            'shortDescription' => $translationAPI->__('', ''),
             'title' => $translationAPI->__('', ''),
-            'display-email' => $translationAPI->__('', ''),
+            'displayEmail' => $translationAPI->__('', ''),
             'contact' => $translationAPI->__('', ''),
-            'has-contact' => $translationAPI->__('', ''),
+            'hasContact' => $translationAPI->__('', ''),
             'facebook' => $translationAPI->__('', ''),
             'twitter' => $translationAPI->__('', ''),
             'linkedin' => $translationAPI->__('', ''),
             'youtube' => $translationAPI->__('', ''),
             'instagram' => $translationAPI->__('', ''),
-            'is-profile' => $translationAPI->__('', ''),
+            'isProfile' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -71,20 +71,20 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
         $user = $resultItem;
 
         switch ($fieldName) {
-            case 'short-description':
+            case 'shortDescription':
                 return gdGetUserShortdescription($typeResolver->getID($user));
 
             case 'title':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_TITLE, true);
 
-            case 'display-email':
+            case 'displayEmail':
                 return (bool)\PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_DISPLAYEMAIL, true);
 
          // Override
             case 'contact':
                 $value = array();
                 // This one is a quasi copy/paste from the typeResolver
-                if ($user_url = $typeResolver->resolveValue($user, 'website-url', $variables, $expressions, $options)) {
+                if ($user_url = $typeResolver->resolveValue($user, 'websiteURL', $variables, $expressions, $options)) {
                     $value[] = array(
                         'tooltip' => TranslationAPIFacade::getInstance()->__('Website', 'pop-coreprocessors'),
                         'url' => maybeAddHttp($user_url),
@@ -93,7 +93,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                         'fontawesome' => 'fa-home',
                     );
                 }
-                if ($typeResolver->resolveValue($user, 'display-email', $variables, $expressions, $options)) {
+                if ($typeResolver->resolveValue($user, 'displayEmail', $variables, $expressions, $options)) {
                     if ($email = $typeResolver->resolveValue($user, 'email', $variables, $expressions, $options)) {
                         $value[] = array(
                             'fontawesome' => 'fa-envelope',
@@ -160,7 +160,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
                 }
                 return $value;
 
-            case 'has-contact':
+            case 'hasContact':
                 $contact = $typeResolver->resolveValue($resultItem, 'contact', $variables, $expressions, $options);
                 return !empty($contact);
 
@@ -179,7 +179,7 @@ class GD_UserPlatform_DataLoad_FieldResolver_Users extends AbstractDBDataFieldRe
             case 'instagram':
                 return \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_METAKEY_PROFILE_INSTAGRAM, true);
 
-            case 'is-profile':
+            case 'isProfile':
                 return isProfile($typeResolver->getID($user));
         }
 

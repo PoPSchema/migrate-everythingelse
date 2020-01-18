@@ -58,7 +58,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
                 return 'title';
 
             case self::MODULE_FORMINPUT_USERNICENAME:
-                return 'display-name';
+                return 'displayName';
 
             case self::MODULE_FORMINPUT_TARGETURL:
                 return 'url';

@@ -35,7 +35,7 @@ class GD_URE_Module_Processor_SidebarComponentsWrappers extends PoP_Module_Proce
         switch ($module[1]) {
             case self::MODULE_URE_WIDGETWRAPPER_COMMUNITIES:
             case self::MODULE_URE_WIDGETCOMPACTWRAPPER_COMMUNITIES:
-                return 'has-active-communities';
+                return 'hasActiveCommunities';
         }
 
         return null;

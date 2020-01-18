@@ -47,7 +47,7 @@ function gdMentionsBeforeInit($mceInit)
         'mentions_insert',
         'mentions_render',
         8,
-        'mention-queryby'
+        'mentionQueryby'
     );
 
     return $mceInit;

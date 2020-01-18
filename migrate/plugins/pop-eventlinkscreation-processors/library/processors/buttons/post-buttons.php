@@ -64,7 +64,7 @@ class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Process
     public function getUrlField(array $module)
     {
         $fields = array(
-            self::MODULE_BUTTON_EVENTLINK_CREATE => 'addeventlink-url',
+            self::MODULE_BUTTON_EVENTLINK_CREATE => 'addEventLinkURL',
         );
         if ($field = $fields[$module[1]]) {
             return $field;

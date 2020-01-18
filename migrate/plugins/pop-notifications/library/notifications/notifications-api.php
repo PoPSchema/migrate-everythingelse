@@ -11,11 +11,11 @@ class PoP_Notifications_API
     //     // Convert the args from PoP Notifications to AAL format
     //     $keys = array(
     //         'action' => 'action',
-    //         'object-type' => 'object_type',
-    //         'object-subtype' => 'object_subtype',
-    //         'user-id' => 'user_id',
-    //         'object-id' => 'object_id',
-    //         'object-name' => 'object_name',
+    //         'objectType' => 'object_type',
+    //         'objectSubtype' => 'object_subtype',
+    //         'userID' => 'user_id',
+    //         'objectID' => 'object_id',
+    //         'objectName' => 'object_name',
     //     );
     //     $converted_args = array();
     //     foreach ($args as $key => $value) {

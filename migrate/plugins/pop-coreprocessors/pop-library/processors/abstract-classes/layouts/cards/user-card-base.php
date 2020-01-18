@@ -50,7 +50,7 @@ abstract class PoP_Module_Processor_UserCardLayoutsBase extends PoPEngine_QueryD
         return array_merge(
             $ret,
             $avatar_field ? array($avatar_field) : array(),
-            array('display-name', 'url', 'is-community')
+            array('displayName', 'url', 'isCommunity')
         );
     }
     

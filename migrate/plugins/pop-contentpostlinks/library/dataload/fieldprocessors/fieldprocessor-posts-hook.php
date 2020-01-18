@@ -25,10 +25,10 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             'content',
             'linkcontent',
             'linkaccess',
-            'linkaccess-byname',
+            'linkAccessByName',
             'linkcategories',
-            'linkcategories-byname',
-            'has-linkcategories',
+            'linkCategoriesByName',
+            'hasLinkCategories',
         ];
     }
 
@@ -39,10 +39,10 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             'content' => SchemaDefinition::TYPE_STRING,
             'linkcontent' => SchemaDefinition::TYPE_STRING,
             'linkaccess' => SchemaDefinition::TYPE_ENUM,
-            'linkaccess-byname' => SchemaDefinition::TYPE_STRING,
+            'linkAccessByName' => SchemaDefinition::TYPE_STRING,
             'linkcategories' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ENUM),
-            'linkcategories-byname' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
-            'has-linkcategories' => SchemaDefinition::TYPE_BOOL,
+            'linkCategoriesByName' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_STRING),
+            'hasLinkCategories' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -55,10 +55,10 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             'content' => $translationAPI->__('', ''),
             'linkcontent' => $translationAPI->__('', ''),
             'linkaccess' => $translationAPI->__('', ''),
-            'linkaccess-byname' => $translationAPI->__('', ''),
+            'linkAccessByName' => $translationAPI->__('', ''),
             'linkcategories' => $translationAPI->__('', ''),
-            'linkcategories-byname' => $translationAPI->__('', ''),
-            'has-linkcategories' => $translationAPI->__('', ''),
+            'linkCategoriesByName' => $translationAPI->__('', ''),
+            'hasLinkCategories' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -109,7 +109,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             case 'linkaccess':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
-            case 'linkaccess-byname':
+            case 'linkAccessByName':
                 $selected = $typeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -120,7 +120,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             case 'linkcategories':
                 return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
-            case 'linkcategories-byname':
+            case 'linkCategoriesByName':
                 $selected = $typeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options);
                 $params = array(
                     'selected' => $selected
@@ -128,7 +128,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                 $linkcategories = new GD_FormInput_LinkCategories($params);
                 return $linkcategories->getSelectedValue();
 
-            case 'has-linkcategories':
+            case 'hasLinkCategories':
                 if ($typeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options)) {
                     return true;
                 }

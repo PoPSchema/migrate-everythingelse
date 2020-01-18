@@ -5,6 +5,6 @@ abstract class GD_URE_Module_Processor_UserCommunityLayoutsBase extends PoP_Modu
 {
     public function getSubcomponentField(array $module)
     {
-        return 'active-communities';
+        return 'activeCommunities';
     }
 }

@@ -22,11 +22,11 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'title-edit',
-            'content-editor',
-            'content-edit',
-            'edit-url',
-            'delete-url',
+            'titleEdit',
+            'contentEditor',
+            'contentEdit',
+            'editURL',
+            'deleteURL',
             'coauthors',
         ];
     }
@@ -34,11 +34,11 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'title-edit' => SchemaDefinition::TYPE_STRING,
-            'content-editor' => SchemaDefinition::TYPE_STRING,
-            'content-edit' => SchemaDefinition::TYPE_STRING,
-            'edit-url' => SchemaDefinition::TYPE_URL,
-            'delete-url' => SchemaDefinition::TYPE_URL,
+            'titleEdit' => SchemaDefinition::TYPE_STRING,
+            'contentEditor' => SchemaDefinition::TYPE_STRING,
+            'contentEdit' => SchemaDefinition::TYPE_STRING,
+            'editURL' => SchemaDefinition::TYPE_URL,
+            'deleteURL' => SchemaDefinition::TYPE_URL,
             'coauthors' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
@@ -48,11 +48,11 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'title-edit' => $translationAPI->__('', ''),
-            'content-editor' => $translationAPI->__('', ''),
-            'content-edit' => $translationAPI->__('', ''),
-            'edit-url' => $translationAPI->__('', ''),
-            'delete-url' => $translationAPI->__('', ''),
+            'titleEdit' => $translationAPI->__('', ''),
+            'contentEditor' => $translationAPI->__('', ''),
+            'contentEdit' => $translationAPI->__('', ''),
+            'editURL' => $translationAPI->__('', ''),
+            'deleteURL' => $translationAPI->__('', ''),
             'coauthors' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -65,28 +65,28 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
         $post = $resultItem;
         switch ($fieldName) {
 
-            case 'title-edit':
+            case 'titleEdit':
                 if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
                     return $postTypeAPI->getTitle($post);
                 }
                 return '';
 
-            case 'content-editor':
+            case 'contentEditor':
                 if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
                    return $cmseditpostsapi->getPostEditorContent($typeResolver->getID($post));
                 }
                 return '';
 
-            case 'content-edit':
+            case 'contentEdit':
                 if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
                     return $postTypeAPI->getContent($post);
                 }
                 return '';
 
-            case 'edit-url':
+            case 'editURL':
                 return urldecode($cmseditpostsapi->getEditPostLink($typeResolver->getID($post)));
 
-            case 'delete-url':
+            case 'deleteURL':
                 return $cmseditpostsapi->getDeletePostLink($typeResolver->getID($post));
 
             case 'coauthors':

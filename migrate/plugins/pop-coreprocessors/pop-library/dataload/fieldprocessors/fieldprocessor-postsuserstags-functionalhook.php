@@ -21,16 +21,16 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'print-url',
-            'embed-url',
+			'printURL',
+            'embedURL',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'print-url' => SchemaDefinition::TYPE_URL,
-            'embed-url' => SchemaDefinition::TYPE_URL,
+			'printURL' => SchemaDefinition::TYPE_URL,
+            'embedURL' => SchemaDefinition::TYPE_URL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -39,8 +39,8 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'print-url' => $translationAPI->__('', ''),
-            'embed-url' => $translationAPI->__('', ''),
+			'printURL' => $translationAPI->__('', ''),
+            'embedURL' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -48,11 +48,11 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         switch ($fieldName) {
-            case 'print-url':
+            case 'printURL':
                 $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getPrintUrl($url);
 
-            case 'embed-url':
+            case 'embedURL':
                 $url = $typeResolver->resolveValue($resultItem, 'url', $variables, $expressions, $options);
                 return PoP_Application_Engine_Utils::getEmbedUrl($url);
         }

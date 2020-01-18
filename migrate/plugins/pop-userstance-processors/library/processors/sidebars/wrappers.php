@@ -125,18 +125,18 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
     {
         switch ($module[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:
-                return 'has-stancetarget';
+                return 'hasStanceTarget';
 
             case self::MODULE_WIDGETWRAPPER_STANCES:
             case self::MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT:
-                return 'has-stances';
+                return 'hasStances';
 
             case self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE:
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
-                return 'has-loggedinuser-stances';
+                return 'hasLoggedInUserStances';
         }
 
         return null;

@@ -105,7 +105,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
                 return 'firstname';
 
             case self::MODULE_FORMINPUT_CUU_USERWEBSITEURL:
-                return 'website-url';
+                return 'websiteURL';
         }
         
         return parent::getDbobjectField($module);
