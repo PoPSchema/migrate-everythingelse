@@ -105,7 +105,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                         SchemaDefinition::ARGNAME_NAME => 'addDescription',
                         SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
                         SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Add description on the thumb', 'pop-posts'),
-                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => 'false',
+                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
                     ],
                 ];
         }
