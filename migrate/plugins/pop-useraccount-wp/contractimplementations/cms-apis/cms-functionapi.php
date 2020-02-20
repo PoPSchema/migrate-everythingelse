@@ -20,16 +20,16 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
             // Same param name, so do nothing
         }
         $result = wp_signon($credentials);
-        
+
         // Set the current user already, so that it already says "user logged in" for the toplevel feedback
         if (!$this->isError($result)) {
             $user = $result;
             wp_set_current_user($user->ID);
         }
-        
+
         return \PoP\Application\Utils::returnResultOrConvertError($result);
     }
-    
+
     public function logout()
     {
         wp_logout();
@@ -38,19 +38,6 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
         global $current_user;
         $current_user = null;
         wp_set_current_user(0);
-    }
-
-    public function isUserLoggedIn()
-    {
-        return is_user_logged_in();
-    }
-    public function getCurrentUser()
-    {
-        return wp_get_current_user();
-    }
-    public function getCurrentUserId()
-    {
-        return get_current_user_id();
     }
 
     public function getPasswordResetKey($user_data)
@@ -99,7 +86,7 @@ class FunctionAPI extends \PoP\UserAccount\FunctionAPI_Base
             // Same param name, so do nothing
         }
         if (isset($query['url'])) {
-            
+
             $query['user_url'] = $query['url'];
             unset($query['url']);
         }
