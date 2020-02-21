@@ -2,12 +2,13 @@
 namespace PoP\UserRoles;
 
 use PoP\ComponentModel\GeneralUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Schema\SchemaDefinition;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 
 class FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -63,11 +64,11 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $cmsuserrolesapi = FunctionAPIFactory::getInstance();
+        $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
             case 'role':
-                $user_roles = $cmsuserrolesapi->getUserRoles($typeResolver->getID($user));
+                $user_roles = $userRoleTypeDataResolver->getUserRoles($typeResolver->getID($user));
                 // Allow to hook for URE: Make sure we always get the most specific role
                 // Otherwise, users like Leo get role 'administrator'
                 return HooksAPIFacade::getInstance()->applyFilters(

@@ -17,11 +17,6 @@ class FunctionAPI extends \PoP\UserRoles\FunctionAPI_Base
         $user = get_user_by('id', $user_id);
         $user->remove_role($role);
     }
-    public function getUserRoles($user_id)
-    {
-        $user = get_user_by('id', $user_id);
-        return $user->roles;
-    }
     public function getTheUserRole($user_id)
     {
         return get_the_user_role($user_id);
