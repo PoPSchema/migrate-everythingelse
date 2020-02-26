@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
         $ret[GD_JS_CLASSES]['set-btn'] = $this->getProp($module, $props, 'setbtn-class');
         $ret[GD_JS_CLASSES]['remove-btn'] = $this->getProp($module, $props, 'removebtn-class');
         $ret[GD_JS_CLASSES]['options'] = $this->getProp($module, $props, 'options-class');
-                
+
         $ret['fields'] = array(
             'featuredImageAttrs' => 'featuredImageAttrs',
         );
@@ -52,7 +52,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
 
     public function getDbobjectField(array $module)
     {
-        return 'featuredimage';
+        return 'featuredImage';
     }
 
     public function getDataFields(array $module, array &$props): array
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_FeaturedImageInnerFormInputsBase extends PoP
 
         // Send the dbObject structure to the webplatform, to recreate it with dynamic data
         $datum_placeholder = array(
-            'featuredimage' => '{0}',
+            'featuredImage' => '{0}',
             'featuredImageAttrs' => array(
                 'src' => '{1}',
                 'width' => '{2}',
