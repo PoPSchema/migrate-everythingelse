@@ -6,9 +6,9 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
      *
      * @return void
      */
-    public static function boot()
+    public static function prematureBoot()
     {
-        parent::boot();
+        parent::prematureBoot();
 
         // Initialize code
         require_once 'migrate/pop-everythingelse.php';
