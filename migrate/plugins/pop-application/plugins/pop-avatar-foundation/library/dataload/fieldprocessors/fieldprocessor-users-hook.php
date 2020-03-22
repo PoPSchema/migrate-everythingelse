@@ -39,20 +39,24 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'avatar':
-                return [
+                return array_merge(
+                    $schemaFieldArgs,
                     [
-                        SchemaDefinition::ARGNAME_NAME => 'size',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Avatar size, in pixels', ''),
-                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => GD_AVATAR_SIZE_60,
-                    ],
-                ];
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'size',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_INT,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Avatar size, in pixels', ''),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => GD_AVATAR_SIZE_60,
+                        ],
+                    ]
+                );
         }
 
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return $schemaFieldArgs;
     }
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])

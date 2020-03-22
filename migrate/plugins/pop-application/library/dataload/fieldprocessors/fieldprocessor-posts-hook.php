@@ -89,28 +89,32 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
-                return [
+                return array_merge(
+                    $schemaFieldArgs,
                     [
-                        SchemaDefinition::ARGNAME_NAME => 'size',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Thumbnail size', 'pop-posts'),
-                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultThumbSize(),
-                    ],
-                    [
-                        SchemaDefinition::ARGNAME_NAME => 'addDescription',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Add description on the thumb', 'pop-posts'),
-                        SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
-                    ],
-                ];
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'size',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_STRING,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Thumbnail size', 'pop-posts'),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => $this->getDefaultThumbSize(),
+                        ],
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'addDescription',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_BOOL,
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('Add description on the thumb', 'pop-posts'),
+                            SchemaDefinition::ARGNAME_DEFAULT_VALUE => false,
+                        ],
+                    ]
+                );
         }
 
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return $schemaFieldArgs;
     }
 
     protected function getDefaultThumbSize(): string

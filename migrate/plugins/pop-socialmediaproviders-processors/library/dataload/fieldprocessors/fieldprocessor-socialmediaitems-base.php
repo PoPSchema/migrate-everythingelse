@@ -46,23 +46,27 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
 
     public function getSchemaFieldArgs(TypeResolverInterface $typeResolver, string $fieldName): array
     {
+        $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($fieldName) {
             case 'shareURL':
-                return [
+                return array_merge(
+                    $schemaFieldArgs,
                     [
-                        SchemaDefinition::ARGNAME_NAME => 'provider',
-                        SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
-                        SchemaDefinition::ARGNAME_ENUMVALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                            array_keys($this->getProviderURLs())
-                        ),
-                        SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('What provider service to get the URL from', ''),
-                        SchemaDefinition::ARGNAME_MANDATORY => true,
-                    ],
-                ];
+                        [
+                            SchemaDefinition::ARGNAME_NAME => 'provider',
+                            SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
+                            SchemaDefinition::ARGNAME_ENUMVALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                                array_keys($this->getProviderURLs())
+                            ),
+                            SchemaDefinition::ARGNAME_DESCRIPTION => $translationAPI->__('What provider service to get the URL from', ''),
+                            SchemaDefinition::ARGNAME_MANDATORY => true,
+                        ],
+                    ]
+                );
         }
 
-        return parent::getSchemaFieldArgs($typeResolver, $fieldName);
+        return $schemaFieldArgs;
     }
 
     protected function getProviderURLs() {
