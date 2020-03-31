@@ -1,5 +1,7 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoP_WebPlatformEngineOptimizations_ServerUtils
 {
@@ -10,7 +12,7 @@ class PoP_WebPlatformEngineOptimizations_ServerUtils
         }
 
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('runtime-js');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('runtime-js');
         if (!is_null($override)) {
             return $override;
         }

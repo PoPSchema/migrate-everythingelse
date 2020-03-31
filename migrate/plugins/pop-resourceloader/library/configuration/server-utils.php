@@ -1,12 +1,14 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoP_ResourceLoader_ServerUtils
 {
     public static function useCodeSplitting()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('code-splitting');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('code-splitting');
         if (!is_null($override)) {
             return $override;
         }
@@ -45,18 +47,18 @@ class PoP_ResourceLoader_ServerUtils
             return 'header';
         }
 
-        // Comment Leo 23/05/2018: we can't use the override_configuration for the include-type, because resources.js will be generated differently depending on this value being 'header' or 'body':
+        // Comment Leo 23/05/2018: we can't use the overrideConfiguration for the include-type, because resources.js will be generated differently depending on this value being 'header' or 'body':
         // generating resources.js with 'header' will not include the dynamic-module-resources needed for 'body', so loading resources dynamically in the body will fail
         // // Allow to override the configuration
-        // if (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('resources-header') === true) {
+        // if (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-header') === true) {
             
         //     return 'header';
         // }
-        // elseif (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('resources-body') === true) {
+        // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body') === true) {
             
         //     return 'body';
         // }
-        // elseif (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('resources-body-inline') === true) {
+        // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body-inline') === true) {
             
         //     return 'body-inline';
         // }
@@ -175,11 +177,11 @@ class PoP_ResourceLoader_ServerUtils
     public static function getEnqueuefileType($disable_hooks = false)
     {
         // Allow to override the configuration
-        if (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('load-bundlegroups') === true) {
+        if (ComponentModelComponentConfiguration::getOverrideConfiguration('load-bundlegroups') === true) {
             return 'bundlegroup';
-        } elseif (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('load-bundles') === true) {
+        } elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('load-bundles') === true) {
             return 'bundle';
-        } elseif (\PoP\ComponentModel\Server\Utils::getOverrideConfiguration('load-resources') === true) {
+        } elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('load-resources') === true) {
             return 'resource';
         }
 
@@ -217,7 +219,7 @@ class PoP_ResourceLoader_ServerUtils
     public static function loadframeResources()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('load-frame-resources');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('load-frame-resources');
         if (!is_null($override)) {
             return $override;
         }

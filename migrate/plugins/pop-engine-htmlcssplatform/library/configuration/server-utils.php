@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+
 class PoP_HTMLCSSPlatform_ServerUtils
 {
     public static function loadDynamicallyGeneratedResourceFiles()
@@ -15,7 +17,7 @@ class PoP_HTMLCSSPlatform_ServerUtils
     public static function accessExternalcdnResources()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('externalcdn');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('externalcdn');
         if (!is_null($override)) {
             return $override;
         }
@@ -31,7 +33,7 @@ class PoP_HTMLCSSPlatform_ServerUtils
     public static function useBundledResources()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('app-bundle');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('app-bundle');
         if (!is_null($override)) {
             return $override;
         }

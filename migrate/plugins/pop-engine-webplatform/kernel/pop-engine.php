@@ -1,9 +1,11 @@
 <?php
+
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -45,7 +47,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
 
-        if ($useCache = \PoP\ComponentModel\Server\Utils::useCache()) {
+        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
             $useCache = !is_null($cachemanager);
         }

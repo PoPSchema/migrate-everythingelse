@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+
 class PoP_WebPlatform_ServerUtils
 {
     public static function loadDynamicallyGeneratedResourceFiles()
@@ -25,7 +27,7 @@ class PoP_WebPlatform_ServerUtils
     public static function useLocalStorage()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('localstorage');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('localstorage');
         if (!is_null($override)) {
             return $override;
         }
@@ -40,7 +42,7 @@ class PoP_WebPlatform_ServerUtils
         }
 
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('appshell');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('appshell');
         if (!is_null($override)) {
             return $override;
         }
@@ -51,7 +53,7 @@ class PoP_WebPlatform_ServerUtils
     public static function useProgressiveBooting()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('progressive-booting');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('progressive-booting');
         if (!is_null($override)) {
             return $override;
         }
@@ -62,7 +64,7 @@ class PoP_WebPlatform_ServerUtils
     public static function disableJs()
     {
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('disable-js');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-js');
         if (!is_null($override)) {
             return $override;
         }

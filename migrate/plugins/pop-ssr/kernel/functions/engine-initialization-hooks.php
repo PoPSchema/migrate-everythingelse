@@ -1,4 +1,5 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\DataloadUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
@@ -7,6 +8,7 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
@@ -133,7 +135,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
         // Get the static data properties
         // First check if there's a cache stored
-        if ($useCache = \PoP\ComponentModel\Server\Utils::useCache()) {
+        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
             $useCache = !is_null($cachemanager);
         }

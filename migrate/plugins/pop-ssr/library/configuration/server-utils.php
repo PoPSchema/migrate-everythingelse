@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+
 class PoP_SSR_ServerUtils
 {
     public static function disableServerSideRendering()
@@ -10,7 +12,7 @@ class PoP_SSR_ServerUtils
         }
 
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('disable-serverside-rendering');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-serverside-rendering');
         if (!is_null($override)) {
             return $override;
         }
@@ -36,7 +38,7 @@ class PoP_SSR_ServerUtils
         }
 
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('scripts-end');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('scripts-end');
         if (!is_null($override)) {
             return $override;
         }

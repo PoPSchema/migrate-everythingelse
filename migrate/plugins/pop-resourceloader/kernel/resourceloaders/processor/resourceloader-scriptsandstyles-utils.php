@@ -1,10 +1,12 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
@@ -16,7 +18,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 		// Check if the list of scripts has been cached in pop-cache/ first
 		// If so, just return it from there directly
 		global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
-		if ($useCache = \PoP\ComponentModel\Server\Utils::useCache()) {
+		if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
             $useCache = !is_null($cachemanager);
         }
@@ -601,7 +603,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 					// Lazy load the object
 					if (is_null(self::$dynamic_module_resources)) {
 
-						if ($useCache = \PoP\ComponentModel\Server\Utils::useCache()) {
+						if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
 				            $cachemanager = PersistentCacheFacade::getInstance();
 				            $useCache = !is_null($cachemanager);
 				        }

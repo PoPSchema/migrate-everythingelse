@@ -1,5 +1,7 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 class PoP_CoreProcessors_ResourceLoaderProcessor_Hooks
 {
@@ -20,7 +22,7 @@ class PoP_CoreProcessors_ResourceLoaderProcessor_Hooks
         $dependencies[] = [PoP_CoreProcessors_ResourceLoaderProcessor::class, PoP_CoreProcessors_ResourceLoaderProcessor::RESOURCE_MENTIONS];
 
         // Comment Leo 19/11/2017: load the appshell file if either: enabling the config, using the appshell, or allowing for Service Workers, which use the appshell to load content when offline
-        if (\PoP\ComponentModel\Server\Utils::enableConfigByParams() || PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
+        if (ComponentModelComponentConfiguration::enableConfigByParams() || PoP_WebPlatform_ServerUtils::useAppshell() || (defined('POP_SERVICEWORKERS_INITIALIZED') && !PoP_ServiceWorkers_ServerUtils::disableServiceworkers())) {
             $dependencies[] = [PoP_CoreProcessors_ResourceLoaderProcessor::class, PoP_CoreProcessors_ResourceLoaderProcessor::RESOURCE_APPSHELL];
         }
         

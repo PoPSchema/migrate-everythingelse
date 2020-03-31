@@ -1,5 +1,8 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+
 class PoP_WebPlatformEngineOptimizations_Initialization
 {
     public function initialize()
@@ -46,7 +49,7 @@ class PoP_WebPlatformEngineOptimizations_Initialization
                 // Comment Leo 19/11/2017: if we enable the "config" param, then add this resource always
                 // (Otherwise it fails because the configuration is cached but the list of modules to load is different)
                 // If not, then add it if we are generating the resources on runtime
-                if (\PoP\ComponentModel\Server\Utils::enableConfigByParams() || PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
+                if (ComponentModelComponentConfiguration::enableConfigByParams() || PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
                     $cmswebplatformapi->registerScript('pop-initializedata', $libraries_js_folder.'/initializedata'.$suffix.'.js', array(), POP_ENGINEWEBPLATFORMOPTIMIZATIONS_VERSION, true);
                     $cmswebplatformapi->enqueueScript('pop-initializedata');
                 }

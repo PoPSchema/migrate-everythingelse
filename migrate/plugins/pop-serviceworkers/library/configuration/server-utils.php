@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+
 class PoP_ServiceWorkers_ServerUtils
 {
     public static function disableServiceworkers()
@@ -9,7 +11,7 @@ class PoP_ServiceWorkers_ServerUtils
         }
 
         // Allow to override the configuration
-        $override = \PoP\ComponentModel\Server\Utils::getOverrideConfiguration('disable-sw');
+        $override = ComponentModelComponentConfiguration::getOverrideConfiguration('disable-sw');
         if (!is_null($override)) {
             return $override;
         }
