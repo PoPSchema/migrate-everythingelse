@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Misc\GeneralUtils;
+
 abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Processor_MultipleInputsFormInputsBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
@@ -25,10 +27,10 @@ abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Pro
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Generate a random number for this captcha
-        $captcha = \PoP\ComponentModel\GeneralUtils::generateRandomString(4, false, '0123456789');
+        $captcha = GeneralUtils::generateRandomString(4, false, '0123456789');
 
         // Also generate a random string to add more security
-        $random = \PoP\ComponentModel\GeneralUtils::generateRandomString();
+        $random = GeneralUtils::generateRandomString();
 
         // Calculate the encoded string
         $encoded = PoP_CaptchaEncodeDecode::encode($captcha, $random);

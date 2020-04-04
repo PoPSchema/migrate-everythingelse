@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class GD_DataLoad_FormActionExecuterBase implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -12,7 +13,7 @@ abstract class GD_DataLoad_FormActionExecuterBase implements \PoP\ComponentModel
             // Before submitting the form, validate the captcha (otherwise, the form is submitted independently of the result of this validation)
             if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
                 $captcha_validation = $this->validateCaptcha($data_properties);
-                if (\PoP\ComponentModel\GeneralUtils::isError($captcha_validation)) {
+                if (GeneralUtils::isError($captcha_validation)) {
                     return $this->getCaptchaError($captcha_validation);
                 }
             }

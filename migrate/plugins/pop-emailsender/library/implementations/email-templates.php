@@ -4,7 +4,7 @@ define('POP_EMAILTEMPLATE_BUTTON', 'button.html');
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\PostMedia\Misc\MediaHelpers;
 use PoP\Taxonomies\Misc\TagHelpers;

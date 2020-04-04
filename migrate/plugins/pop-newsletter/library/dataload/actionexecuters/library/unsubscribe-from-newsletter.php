@@ -110,7 +110,7 @@ class PoP_UnsubscribeFromNewsletter
         }
 
         $result = $this->execute($newsletter_data);
-        // if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;
         //     }

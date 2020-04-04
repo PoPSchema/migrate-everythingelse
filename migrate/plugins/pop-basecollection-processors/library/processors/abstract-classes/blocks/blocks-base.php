@@ -2,6 +2,7 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase
 {
@@ -116,7 +117,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         $ret = parent::getJsdataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
         if ($this->showDisabledLayer($module, $props) && $this->showDisabledLayerIfCheckpointFailed($module, $props)) {
-            $ret['blockHandleDisabledLayer']['checkpoint-failed'] = \PoP\ComponentModel\GeneralUtils::isError($dataaccess_checkpoint_validation) || \PoP\ComponentModel\GeneralUtils::isError($actionexecution_checkpoint_validation);
+            $ret['blockHandleDisabledLayer']['checkpoint-failed'] = GeneralUtils::isError($dataaccess_checkpoint_validation) || GeneralUtils::isError($actionexecution_checkpoint_validation);
         }
 
         return $ret;
@@ -260,7 +261,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        if (\PoP\ComponentModel\GeneralUtils::isError($dataaccess_checkpoint_validation) || \PoP\ComponentModel\GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if (GeneralUtils::isError($dataaccess_checkpoint_validation) || GeneralUtils::isError($actionexecution_checkpoint_validation)) {
             $ret['checkpoint-failed'] = true;
         }
         

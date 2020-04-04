@@ -1,6 +1,6 @@
 <?php
 use PoP\FileStore\File\AbstractFile;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SPAResourceLoader_ConfigAddResources_FileRenderer extends \PoP\FileStore\Renderer\FileRenderer

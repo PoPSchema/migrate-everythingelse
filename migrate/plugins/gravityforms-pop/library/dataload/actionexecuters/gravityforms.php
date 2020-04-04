@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExecuterBase
 {
@@ -170,7 +171,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
                     if ($captcha = $_POST[$captcha_name]) {
                         // Validate the captcha. If it fails, remove the attr "gform_submit" from $_POST
                         $captcha_validation = GD_Captcha::validate($captcha);
-                        if (\PoP\ComponentModel\GeneralUtils::isError($captcha_validation)) {
+                        if (GeneralUtils::isError($captcha_validation)) {
                             // By unsetting this value in the $_POST, the email won't be processed by function RGForms::maybe_process_form
                             unset($_POST["gform_submit"]);
                         }

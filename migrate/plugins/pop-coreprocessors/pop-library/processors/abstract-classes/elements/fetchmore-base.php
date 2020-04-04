@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Application\QueryInputOutputHandlers\Utils;
 use PoP\ComponentModel\State\ApplicationState;
 

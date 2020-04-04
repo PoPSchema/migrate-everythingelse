@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase
 {
@@ -16,7 +17,7 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
         
         // Show error message if no items, but only if the checkpoint did not fail
         // Do not show the message when doing loadLatest
-        $checkpoint_failed = \PoP\ComponentModel\GeneralUtils::isError($dataaccess_checkpoint_validation);
+        $checkpoint_failed = GeneralUtils::isError($dataaccess_checkpoint_validation);
         if (!$checkpoint_failed && empty($dbobjectids) && !$vars['loading-latest']) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
             $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];

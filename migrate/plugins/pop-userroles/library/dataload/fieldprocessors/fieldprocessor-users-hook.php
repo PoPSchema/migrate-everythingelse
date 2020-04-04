@@ -1,7 +1,7 @@
 <?php
 namespace PoP\UserRoles;
 
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;

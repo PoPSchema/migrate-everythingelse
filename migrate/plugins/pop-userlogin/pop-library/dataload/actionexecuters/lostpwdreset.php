@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -26,7 +27,7 @@ class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentMode
                     $errorcodes[] = 'error-wrongcode';
                 } else {
                     $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
-                    if (!$user || \PoP\ComponentModel\GeneralUtils::isError($user)) {
+                    if (!$user || GeneralUtils::isError($user)) {
                         $errorcodes[] = 'error-invalidkey';
                     }
                 }

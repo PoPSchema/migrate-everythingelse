@@ -73,7 +73,7 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter
         }
 
         $result = $this->execute($form_data);
-        // if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;
         //     }

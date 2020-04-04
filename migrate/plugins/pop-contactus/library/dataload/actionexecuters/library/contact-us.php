@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoP_ActionExecuterInstance_ContactUs
 {
@@ -91,7 +92,7 @@ class PoP_ActionExecuterInstance_ContactUs
         }
 
         $result = $this->execute($form_data);
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             foreach ($result->getErrorMessages() as $error_msg) {
                 $errors[] = $error_msg;
             }

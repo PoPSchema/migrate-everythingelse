@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleFilters\ModuleFilterManager;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 

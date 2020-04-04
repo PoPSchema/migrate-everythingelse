@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoP_ResourceLoaderProcessorManager {
 

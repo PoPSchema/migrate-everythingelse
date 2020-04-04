@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase
 {
@@ -14,7 +15,7 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
         
         // Feedback comes from the Action Execution response
         // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
-        if ($data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] && \PoP\ComponentModel\GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if ($data_properties[GD_DATALOAD_ACTIONEXECUTIONCHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
                     $actionexecution_checkpoint_validation->getErrorCode()

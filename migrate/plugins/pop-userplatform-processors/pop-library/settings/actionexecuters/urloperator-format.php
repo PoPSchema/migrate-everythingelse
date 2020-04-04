@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_Settings_UrlOperator_Format extends GD_Settings_UrlOperator
 {

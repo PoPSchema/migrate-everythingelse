@@ -2,7 +2,7 @@
 define('POP_EMAILFRAME_NEWSLETTER', 'newsletter');
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 
 class PoP_EmailSender_Templates_Newsletter extends PoP_EmailSender_Templates_Simple

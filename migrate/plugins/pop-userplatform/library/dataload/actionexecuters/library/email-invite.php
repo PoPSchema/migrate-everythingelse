@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_EmailInvite
 {
@@ -83,7 +84,7 @@ class GD_EmailInvite
             $captcha = $form_data['captcha'];
             
             $captcha_validation = GD_Captcha::validate($captcha);
-            if (\PoP\ComponentModel\GeneralUtils::isError($captcha_validation)) {
+            if (GeneralUtils::isError($captcha_validation)) {
                 $errors[] = $captcha_validation->getErrorMessage();
             }
         }

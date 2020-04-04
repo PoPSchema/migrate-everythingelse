@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoP_ResourceLoaderProcessorState {
 
@@ -181,7 +182,7 @@ class PoP_ResourceLoaderProcessorState {
         // Needed only for when generating the bundlefiles on runtime, not needed for when generating resources.js with the list of resources to fetch for each route
         if ($addRandom) {
             
-            $set_id .= '-'.\PoP\ComponentModel\GeneralUtils::generateRandomString(8, false);
+            $set_id .= '-'.GeneralUtils::generateRandomString(8, false);
         }
 
         $set_ids[$encoded] = $set_id;

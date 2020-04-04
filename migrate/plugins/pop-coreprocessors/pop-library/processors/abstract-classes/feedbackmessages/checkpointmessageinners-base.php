@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Misc\GeneralUtils;
+
 abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase /*PoP_Module_Processor_StructureInnersBase*/
 {
 
@@ -18,7 +20,7 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         
         // Checkpoint validation required?
-        if ($data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS] && \PoP\ComponentModel\GeneralUtils::isError($dataaccess_checkpoint_validation)) {
+        if ($data_properties[GD_DATALOAD_DATAACCESSCHECKPOINTS] && GeneralUtils::isError($dataaccess_checkpoint_validation)) {
             $msg = array(
                 'codes' => array(
                     $dataaccess_checkpoint_validation->getErrorCode()

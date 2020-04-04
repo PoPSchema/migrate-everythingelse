@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_ChangePassword_User
 {
@@ -72,7 +73,7 @@ class GD_ChangePassword_User
         $user_data = $this->getChangepasswordData($form_data);
         $result = $this->executeChangepassword($user_data);
 
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
                 TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()

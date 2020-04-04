@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 define('POP_EMAILTEMPLATE_EMAIL', 'email.html');
 define('POP_EMAILTEMPLATE_EMAILBODY', 'emailbody.html');

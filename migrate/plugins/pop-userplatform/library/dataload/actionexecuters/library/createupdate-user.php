@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_CreateUpdate_User
 {
@@ -74,7 +75,7 @@ class GD_CreateUpdate_User
             $captcha = $form_data['captcha'];
             
             $captcha_validation = GD_Captcha::validate($captcha);
-            if (\PoP\ComponentModel\GeneralUtils::isError($captcha_validation)) {
+            if (GeneralUtils::isError($captcha_validation)) {
                 $errors[] = $captcha_validation->getErrorMessage();
             }
         }
@@ -225,7 +226,7 @@ class GD_CreateUpdate_User
         
         $result = $this->executeUpdateuser($user_data);
 
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
                 TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()
@@ -249,7 +250,7 @@ class GD_CreateUpdate_User
         $user_data = $this->getCreateuserData($form_data);
         $result = $this->executeCreateuser($user_data);
 
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
                 TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()

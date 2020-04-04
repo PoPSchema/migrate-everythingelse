@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataModuleProcessorBase

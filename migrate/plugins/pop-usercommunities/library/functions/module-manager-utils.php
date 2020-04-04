@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoP_URE_ModuleManager_Utils
 {

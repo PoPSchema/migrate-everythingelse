@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class PoP_CDN_Thumbprint_Utils
 {

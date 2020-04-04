@@ -3,8 +3,8 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -123,7 +123,7 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
         // Generate something random for a password reset key.
         $key = $cmsuseraccountapi->getPasswordResetKey($user);
 
-        if (\PoP\ComponentModel\GeneralUtils::isError($key)) {
+        if (GeneralUtils::isError($key)) {
             $errors[] = $key->getErrorCode();
             return;
         }
@@ -143,7 +143,7 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
 
         $user_email = $cmsusersresolver->getUserEmail($user);
         $result = PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             $errors[] = $result->getErrorCode();
             return;
         }

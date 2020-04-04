@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;

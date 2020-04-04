@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_DataLoad_ActionExecuter_Volunteer extends GD_DataLoad_FormActionExecuterBase
 {
@@ -12,7 +13,7 @@ class GD_DataLoad_ActionExecuter_Volunteer extends GD_DataLoad_FormActionExecute
     {
         $instance = $this->getInstance();
         $result = $instance->volunteer($data_properties);
-        if (\PoP\ComponentModel\GeneralUtils::isError($result)) {
+        if (GeneralUtils::isError($result)) {
             return array(
                 ResponseConstants::ERRORSTRINGS => $result->getErrorMessages()
             );

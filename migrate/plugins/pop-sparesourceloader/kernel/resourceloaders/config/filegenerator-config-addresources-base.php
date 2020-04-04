@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_SPAResourceLoader_ConfigAddResourcesFileBase extends PoP_SPAResourceLoader_ConfigFileBase
 {

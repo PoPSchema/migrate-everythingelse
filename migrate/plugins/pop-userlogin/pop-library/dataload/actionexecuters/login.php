@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -53,7 +54,7 @@ class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExec
                         );
                         $loginResult = $cmsuseraccountapi->login($credentials);
 
-                        if (\PoP\ComponentModel\GeneralUtils::isError($loginResult)) {
+                        if (GeneralUtils::isError($loginResult)) {
                             $error = $loginResult->getErrorMessage();
                         }
                     }
