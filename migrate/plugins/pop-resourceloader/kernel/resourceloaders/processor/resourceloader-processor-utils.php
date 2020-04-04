@@ -229,7 +229,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // keep the $model_instance_id, we don't know what non-critical resources belong to which generation process
         if ($noncritical_resources) {
             $memorymanager = MemoryManagerFacade::getInstance();
-            $memorymanager->storeCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, $noncritical_resources);
+            $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES, $noncritical_resources);
         }
 
         $resources = array_values(
@@ -736,7 +736,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
         if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryModule, $entry_model_props)) {
             $memorymanager = MemoryManagerFacade::getInstance();
-            $memorymanager->storeCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
+            $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
         }
 
         // Get the initial methods only if doing "loading-site"

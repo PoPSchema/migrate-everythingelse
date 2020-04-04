@@ -65,7 +65,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 				$template_bundlegroups = $pop_resourceloader_generatedfilesmanager->getJsBundlegroupIds($model_instance_id, POP_RESOURCELOADER_RESOURCESUBTYPE_TEMPLATE);
 			}
 			elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-				
+
 				$vendor_bundles = $pop_resourceloader_generatedfilesmanager->getCssBundleIds($model_instance_id, POP_RESOURCELOADER_RESOURCESUBTYPE_VENDOR);
 				$normal_bundles = $pop_resourceloader_generatedfilesmanager->getCssBundleIds($model_instance_id, POP_RESOURCELOADER_RESOURCESUBTYPE_NORMAL);
 				$dynamic_bundles = $pop_resourceloader_generatedfilesmanager->getCssBundleIds($model_instance_id, POP_RESOURCELOADER_RESOURCESUBTYPE_DYNAMIC);
@@ -93,16 +93,16 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
-					$normal_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_NORMAL);
-					$vendor_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_VENDOR);
-					$dynamic_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_DYNAMIC);
-					$template_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_TEMPLATE);
+					$normal_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_NORMAL);
+					$vendor_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_VENDOR);
+					$dynamic_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_DYNAMIC);
+					$template_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_TEMPLATE);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
 
-					$normal_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_NORMAL);
-					$vendor_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_VENDOR);
-					$dynamic_resources = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_DYNAMIC);
+					$normal_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_NORMAL);
+					$vendor_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_VENDOR);
+					$dynamic_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_DYNAMIC);
 				}
 
 				// If the cache does not exists, each of these variables will be "false", and not an empty array, so the array_merge below would fail
@@ -124,26 +124,26 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 			if ($resources) {
 
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-					
-					$normal_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_NORMAL);
-					$vendor_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_VENDOR);
-					$dynamic_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_DYNAMIC);
-					$template_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_TEMPLATE);
 
-					$normal_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_NORMAL);
-					$vendor_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_VENDOR);
-					$dynamic_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_DYNAMIC);
-					$template_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_TEMPLATE);
+					$normal_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_NORMAL);
+					$vendor_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_VENDOR);
+					$dynamic_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_DYNAMIC);
+					$template_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_TEMPLATE);
+
+					$normal_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_NORMAL);
+					$vendor_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_VENDOR);
+					$dynamic_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_DYNAMIC);
+					$template_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_TEMPLATE);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-					
-					$normal_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_NORMAL);
-					$vendor_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_VENDOR);
-					$dynamic_bundles = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_DYNAMIC);
 
-					$normal_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_NORMAL);
-					$vendor_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_VENDOR);
-					$dynamic_bundlegroups = $cachemanager->getCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_DYNAMIC);
+					$normal_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_NORMAL);
+					$vendor_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_VENDOR);
+					$dynamic_bundles = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_DYNAMIC);
+
+					$normal_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_NORMAL);
+					$vendor_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_VENDOR);
+					$dynamic_bundlegroups = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_DYNAMIC);
 				}
 				$bundles = array_merge(
 					$vendor_bundles ?? array(),
@@ -166,12 +166,12 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
 				// We have here both .cs and .jss resources. Split them into these, and calculate the bundle(group)s for each
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-					
+
 					$resources = $pop_resourceloaderprocessor_manager->filterJs($resources);
 					$template_resources = $pop_resourceloaderprocessor_manager->filterTemplate($resources);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-					
+
 					$resources = $pop_resourceloaderprocessor_manager->filterCss($resources);
 				}
 
@@ -196,7 +196,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 				$vendor_bundlegroups = $vendor_generatedfiles['bundle-groups'];
 				$normal_bundlegroups = $normal_generatedfiles['bundle-groups'];
 				$dynamic_bundlegroups = $dynamic_generatedfiles['bundle-groups'];
-				
+
 				if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
 
 					$template_generatedfiles = self::calculateBundles($template_resources, true);
@@ -220,7 +220,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 					);
 				}
 				elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-					
+
 					$bundles = array_merge(
 						$vendor_bundles,
 						$normal_bundles,
@@ -232,36 +232,36 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 						$dynamic_bundlegroups
 					);
 				}
-		
+
 				// Save them in the pop-cache/
 				if ($useCache) {
 
 					if ($type == POP_RESOURCELOADER_RESOURCETYPE_JS) {
-					
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_NORMAL, $normal_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_VENDOR, $vendor_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_DYNAMIC, $dynamic_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_TEMPLATE, $template_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_NORMAL, $normal_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_VENDOR, $vendor_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_DYNAMIC, $dynamic_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_TEMPLATE, $template_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_NORMAL, $normal_bundlegroups);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_VENDOR, $vendor_bundlegroups);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_DYNAMIC, $dynamic_bundlegroups);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_TEMPLATE, $template_bundlegroups);
+
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_NORMAL, $normal_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_VENDOR, $vendor_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_DYNAMIC, $dynamic_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSRESOURCES_TEMPLATE, $template_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_NORMAL, $normal_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_VENDOR, $vendor_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_DYNAMIC, $dynamic_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLES_TEMPLATE, $template_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_NORMAL, $normal_bundlegroups);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_VENDOR, $vendor_bundlegroups);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_DYNAMIC, $dynamic_bundlegroups);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_JSBUNDLEGROUPS_TEMPLATE, $template_bundlegroups);
 					}
 					elseif ($type == POP_RESOURCELOADER_RESOURCETYPE_CSS) {
-						
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_NORMAL, $normal_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_VENDOR, $vendor_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_DYNAMIC, $dynamic_resources);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_NORMAL, $normal_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_VENDOR, $vendor_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_DYNAMIC, $dynamic_bundles);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_NORMAL, $normal_bundlegroups);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_VENDOR, $vendor_bundlegroups);
-						$cachemanager->storeCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_DYNAMIC, $dynamic_bundlegroups);
+
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_NORMAL, $normal_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_VENDOR, $vendor_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_DYNAMIC, $dynamic_resources);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_NORMAL, $normal_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_VENDOR, $vendor_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLES_DYNAMIC, $dynamic_bundles);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_NORMAL, $normal_bundlegroups);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_VENDOR, $vendor_bundlegroups);
+						$cachemanager->storeComponentModelCache($model_instance_id, POP_CACHETYPE_CSSBUNDLEGROUPS_DYNAMIC, $dynamic_bundlegroups);
 					}
 				}
 			}
@@ -269,7 +269,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
 		$pack = array(
 			'resources' => array(
-				'all' => $resources, 
+				'all' => $resources,
 				'by-subtype' => array(
 					POP_RESOURCELOADER_RESOURCESUBTYPE_NORMAL => $normal_resources ?? array(),
 					POP_RESOURCELOADER_RESOURCESUBTYPE_VENDOR => $vendor_resources ?? array(),
@@ -277,7 +277,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 				),
 			),
 			'bundles' => array(
-				'all' => $bundles, 
+				'all' => $bundles,
 				'by-subtype' => array(
 					POP_RESOURCELOADER_RESOURCESUBTYPE_NORMAL => $normal_bundles ?? array(),
 					POP_RESOURCELOADER_RESOURCESUBTYPE_VENDOR => $vendor_bundles ?? array(),
@@ -309,7 +309,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
     	// Check if the list of scripts has been cached in pop-cache/ first
 		// If so, just return it from there directly
-		global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;		
+		global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
         $memorymanager = MemoryManagerFacade::getInstance();
 
         if (!$model_instance_id) {
@@ -333,19 +333,19 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 		else {
 			// If there is no cached one, check if it was generated and cached on runtime
 			$filename = $model_instance_id.'-'.$subtype;
-			$immediate_resources = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSRESOURCES_IMMEDIATE);
-			$async_resources = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSRESOURCES_ASYNC);
-			$defer_resources = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSRESOURCES_DEFER);
+			$immediate_resources = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_IMMEDIATE);
+			$async_resources = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_ASYNC);
+			$defer_resources = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_DEFER);
 
 			// If there is cached resources, there will also be bundles and bundlegroups
 			if (!empty($immediate_resources) || !empty($async_resources) || !empty($defer_resources)) {
 
-				$immediate_bundles = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLES_IMMEDIATE);
-				$async_bundles = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLES_ASYNC);
-				$defer_bundles = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLES_DEFER);
-				$immediate_bundleGroupId = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_IMMEDIATE);
-				$async_bundleGroupId = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_ASYNC);
-				$defer_bundleGroupId = $memorymanager->getCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_DEFER);
+				$immediate_bundles = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_IMMEDIATE);
+				$async_bundles = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_ASYNC);
+				$defer_bundles = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_DEFER);
+				$immediate_bundleGroupId = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_IMMEDIATE);
+				$async_bundleGroupId = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_ASYNC);
+				$defer_bundleGroupId = $memorymanager->getComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_DEFER);
 			}
 			// If there is no cached one, generate the resources and cache it
 			else {
@@ -377,7 +377,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
 					$resources = $pop_resourceloaderprocessor_manager->filterTemplate($resources);
 				}
-					
+
 				$resources_by_loading_type = self::splitJsResourcesByLoadingType($resources, $model_instance_id);
 				$immediate_resources = $resources_by_loading_type['immediate']['resources'];
 				$async_resources = $resources_by_loading_type['async']['resources'];
@@ -390,15 +390,15 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 				$defer_bundleGroupId = $resources_by_loading_type['defer']['bundlegroup'];
 
 				// Save them in the pop-cache/
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSRESOURCES_IMMEDIATE, $immediate_resources);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSRESOURCES_ASYNC, $async_resources);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSRESOURCES_DEFER, $defer_resources);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLES_IMMEDIATE, $immediate_bundles);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLES_ASYNC, $async_bundles);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLES_DEFER, $defer_bundles);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_IMMEDIATE, $immediate_bundleGroupId);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_ASYNC, $async_bundleGroupId);
-				$memorymanager->storeCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_DEFER, $defer_bundleGroupId);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_IMMEDIATE, $immediate_resources);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_ASYNC, $async_resources);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSRESOURCES_DEFER, $defer_resources);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_IMMEDIATE, $immediate_bundles);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_ASYNC, $async_bundles);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLES_DEFER, $defer_bundles);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_IMMEDIATE, $immediate_bundleGroupId);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_ASYNC, $async_bundleGroupId);
+				$memorymanager->storeComponentModelCache($filename, POP_MEMORYTYPE_JSBUNDLEGROUP_DEFER, $defer_bundleGroupId);
 			}
 		}
 
@@ -430,13 +430,13 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         global $pop_jsresourceloaderprocessor_manager;
         $async_resources = $pop_jsresourceloaderprocessor_manager->filterAsync($resources);
         $defer_resources = $pop_jsresourceloaderprocessor_manager->filterDefer($resources, $model_instance_id);
-        
+
         // Only valid for Progressive Booting...
         if (PoP_WebPlatform_ServerUtils::useProgressiveBooting()) {
 
             // If these resources have been marked as 'noncritical', then defer loading them
             $memorymanager = MemoryManagerFacade::getInstance();
-            if ($noncritical_resources = $memorymanager->getCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES)) {
+            if ($noncritical_resources = $memorymanager->getComponentModelCache($model_instance_id, POP_MEMORYTYPE_NONCRITICALRESOURCES)) {
 
                 $defer_resources = array_values(
                 	array_unique(
@@ -610,7 +610,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
 						// Check if results are already on the cache
 						if ($useCache) {
-							self::$dynamic_module_resources = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
+							self::$dynamic_module_resources = $cachemanager->getComponentModelCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES);
 						}
 						if (!self::$dynamic_module_resources) {
 
@@ -624,10 +624,10 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 							$processor = $moduleprocessor_manager->getProcessor($entryModule);
 							$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessordecorator($processor);
 							self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, $props);
-							
+
 							// And store them on the cache
-							if ($useCache) {							
-								$cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_module_resources);
+							if ($useCache) {
+								$cachemanager->storeComponentModelCacheByModelInstance(POP_CACHETYPE_DYNAMICMODULERESOURCES, self::$dynamic_module_resources);
 							}
 						}
 					}
