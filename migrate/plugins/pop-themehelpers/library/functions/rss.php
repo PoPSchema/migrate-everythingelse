@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\PostMedia\Misc\MediaHelpers;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Add the Featured Image to the feed
@@ -21,7 +22,7 @@ function gdRssNamespace()
 HooksAPIFacade::getInstance()->addAction('rss2_item', 'gdRssFeaturedImage');
 function gdRssFeaturedImage()
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $post_id = $vars['routing-state']['queried-object-id'];
     gdRssPrintFeaturedImage($post_id);
 }

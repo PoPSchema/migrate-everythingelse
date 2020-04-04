@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ContentPostLinks_ContentHooks
 {
@@ -15,7 +16,7 @@ class PoP_ContentPostLinks_ContentHooks
 
     public function contentInner($inner, array $module)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         

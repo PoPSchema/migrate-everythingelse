@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
     
@@ -12,7 +14,7 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
         if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
             if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
                 if ($this->validateCaptcha($module, $props)) {
-                    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                    $vars = ApplicationState::getVars();
                     if (!(PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in'])) {
                         $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA] = true;
                     }

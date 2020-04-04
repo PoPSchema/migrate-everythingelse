@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Engine_Vars;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Application\Constants\Actions;
 
 class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
     {
         $ret = parent::getFooterSubmodules($module);
 
-        $vars = Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $loadingLazy = in_array(Actions::LOADLAZY, $vars['actions']);
         switch ($module[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_POST:

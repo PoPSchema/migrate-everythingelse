@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 function gdUserAttributes()
 {
@@ -18,7 +19,7 @@ function gdGetUserattributes($user_id)
 function userHasAccess($capability, $user_id = null)
 {
     if (is_null($user_id)) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
     }
     $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();

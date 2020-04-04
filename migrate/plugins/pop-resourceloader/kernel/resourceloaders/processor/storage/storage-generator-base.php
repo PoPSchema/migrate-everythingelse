@@ -1,5 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\File\AbstractFile {
 
 	protected function acrossThememodes() {
@@ -28,7 +30,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 				return '/shared';
 			}
 			
-			$vars = \PoP\ComponentModel\Engine_Vars::getVars();
+			$vars = ApplicationState::getVars();
 			return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
 		}
 

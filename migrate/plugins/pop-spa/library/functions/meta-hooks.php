@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Configuration\Request;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SPA_RequestMeta_Hooks
 {
@@ -40,7 +41,7 @@ class PoP_SPA_RequestMeta_Hooks
             $pushurlprops = [];
 
             // Platform: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             if ($vars['stratum'] && !$vars['stratum-isdefault']) {
                 $pushurlprops[GD_URLPARAM_STRATUM] = $vars['stratum'];
             }

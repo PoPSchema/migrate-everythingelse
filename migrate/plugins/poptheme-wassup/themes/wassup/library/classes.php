@@ -1,10 +1,11 @@
 <?php
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdWassupThemeBodyClass');
 function gdWassupThemeBodyClass($body_classes)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['theme'] == GD_THEME_WASSUP) {
         $thememode = $vars['thememode'];
 

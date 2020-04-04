@@ -1,5 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -339,7 +340,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $routes = array(

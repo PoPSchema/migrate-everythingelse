@@ -20,7 +20,7 @@ use PoP\ComponentModel\GeneralUtils;
 //         $url = $pop_sparesourceloader_configfile->getFileurl();
 
 //         // Must add the version (request will be routed through CDN)
-        // //		   $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        // //		   $vars = ApplicationState::getVars();
 //         $url = GeneralUtils::addQueryArgs(['ver', $vars['version']], $url);
 
 //         // Replace the domain with "{0}" for the external domain to be injected in javascript

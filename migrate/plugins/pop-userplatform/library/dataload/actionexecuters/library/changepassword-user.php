@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_ChangePassword_User
 {
@@ -38,7 +39,7 @@ class GD_ChangePassword_User
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $form_data = array(
             'user_id' => $user_id,

@@ -1,10 +1,12 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class PoP_Module_Processor_SectionLatestCountsBase extends PoP_Module_Processor_LatestCountsBase
 {
     public function getClasses(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $ret = parent::getClasses($module, $props);
         if ($section_classes = $this->getSectionClasses($module, $props)) {
             $pre = '';

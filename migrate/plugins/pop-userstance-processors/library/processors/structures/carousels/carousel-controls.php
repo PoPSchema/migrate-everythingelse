@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -54,7 +55,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     }
     public function getTitle(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -88,7 +89,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {

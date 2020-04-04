@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_ServerSideRendering
 {
     private $enabled;
@@ -190,7 +192,7 @@ class PoP_ServerSideRendering
 
         // If the target was provided, then check that the current page has that target to render the html
         // Eg: addons pageSection must have target "addons", if not do nothing
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!is_null($target) && $target != $vars['target']) {
             return '';
         }

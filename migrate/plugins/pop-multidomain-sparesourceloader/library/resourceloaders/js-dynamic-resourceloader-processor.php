@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
     public const RESOURCE_MULTIDOMAIN_RESOURCELOADERCONFIG = 'multidomain-resourceloader-config';
@@ -70,7 +72,7 @@ class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends 
             case self::RESOURCE_RESOURCELOADERCONFIG_EXTERNALRESOURCES:
                 // When we load the External Page, obtain the resources for the requested domain
                 // Eg: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if ($external_url_domain = $vars['external-url-domain']) {
                      // Comment Leo 06/11/2017: we don't know what nature will be needed for the external domain
                     // (eg: this URL needs the single nature, to process an event: https://sukipop.com/en/external/?url=https%3A%2F%2Fwww.mesym.com%2Fen%2Fevents%2Fmindset-public-talk-maintaining-peopled-forests-by-joe-fragoso-and-kamal-s-fadzil%2F)

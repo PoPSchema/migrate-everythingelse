@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\FileStore\Facades\FileRendererFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPWebPlatform_Installation
 {
@@ -33,7 +34,7 @@ class PoPWebPlatform_Installation
 
     public function systemGenerateTheme()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $acrossThememodes = $vars['thememode-isdefault'];
         $acrossThememodes = HooksAPIFacade::getInstance()->applyFilters('PoPWebPlatform_Installation:systemGenerateTheme:delete-across-thememodes', $acrossThememodes);
         $this->generateResources($acrossThememodes);

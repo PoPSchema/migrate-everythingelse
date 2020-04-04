@@ -6,6 +6,7 @@ use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engine
 {
@@ -39,7 +40,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $ret = parent::getModuleSettings($module, $model_props, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $ret;
         }
@@ -53,7 +54,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         // From the state we know if to process static/staful content or both
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $datasources = $vars['datasources'];
         $dataoutputmode = $vars['dataoutputmode'];
         $dataoutputitems = $vars['dataoutputitems'];
@@ -130,7 +131,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         // Only add the extra information if the entry-module is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataModuleProcessorBase) {
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $dataoutputmode = $vars['dataoutputmode'];
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -170,7 +171,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         parent::processAndAddModuleData($module_path, $module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDs);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return;
         }
@@ -215,7 +216,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $meta = parent::getRequestMeta();
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $meta;
         }
@@ -268,7 +269,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $data = parent::getEncodedDataObject($data);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $data;
         }
@@ -305,7 +306,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     public function enqueueScripts()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $version = $vars['version'];
         $cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
 

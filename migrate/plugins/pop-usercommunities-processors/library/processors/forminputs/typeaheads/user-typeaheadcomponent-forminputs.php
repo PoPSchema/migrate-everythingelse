@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputs
 {
@@ -30,7 +31,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 $url = $cmsusersapi->getUserURL($author);
                 return \PoP\ComponentModel\Utils::addRoute($url, POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS);

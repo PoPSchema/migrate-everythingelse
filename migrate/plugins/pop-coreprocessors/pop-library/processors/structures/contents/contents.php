@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
 {
     public const MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-postconclusionsidebar-horizontal';
@@ -31,7 +33,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
 
     public function initModelProps(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
 
         switch ($module[1]) {
             case self::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL:

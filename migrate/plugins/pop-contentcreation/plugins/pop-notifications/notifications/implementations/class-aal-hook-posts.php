@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -148,7 +149,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Enable if the current logged in user is the System Notification's defined user
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
             return;
         }

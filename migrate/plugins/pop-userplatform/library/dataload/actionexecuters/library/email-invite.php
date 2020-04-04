@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_EmailInvite
 {
@@ -45,7 +46,7 @@ class GD_EmailInvite
             }
         }
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         if (PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
@@ -77,7 +78,7 @@ class GD_EmailInvite
     {
 
         // Validate the captcha
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!PoP_FormUtils::useLoggedinuserData() || !$vars['global-userstate']['is-user-logged-in']) {
             $captcha = $form_data['captcha'];
             

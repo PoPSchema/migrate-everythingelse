@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
@@ -41,7 +43,7 @@ abstract class PoP_Module_Processor_PageTabPageSectionsBase extends PoP_Module_P
     {
 
         // Do not open the tab for 404s
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         return !$vars['routing-state']['is-404'];
     }
 

@@ -1,11 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_NotificationMarkAllAsRead
 {
     protected function getFormData(&$data_properties)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $form_data = array(
             'user_id' => $vars['global-userstate']['current-user-id'],
         );

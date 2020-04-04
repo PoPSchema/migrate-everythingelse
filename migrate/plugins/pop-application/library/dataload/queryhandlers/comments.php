@@ -2,6 +2,7 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutputHandler
 {
@@ -10,7 +11,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
         parent::prepareQueryArgs($query_args);
 
         if (!isset($query_args[GD_URLPARAM_COMMENTPOSTID])) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
 
             // By default, select the global $post ID;
             $query_args[GD_URLPARAM_COMMENTPOSTID] = $vars['routing-state']['queried-object-id'];

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {
@@ -16,7 +17,7 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 
     public function getMessage($message, $notification)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         
         // If the user has been tagged in this post, this action has higher priority than creating a post, then show that message

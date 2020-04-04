@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AutomatedEmails_Operator
 {
@@ -14,7 +15,7 @@ class PoP_AutomatedEmails_Operator
     public function maybeSendAutomatedemail()
     {
         global $pop_automatedemails_manager;
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
 
         if ($vars['routing-state']['is-standard']) {

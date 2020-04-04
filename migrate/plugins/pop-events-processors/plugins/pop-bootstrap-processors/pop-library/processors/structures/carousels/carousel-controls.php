@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -57,7 +58,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {

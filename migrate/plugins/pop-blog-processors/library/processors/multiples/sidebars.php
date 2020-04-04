@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
@@ -31,7 +32,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             case self::MODULE_MULTIPLE_AUTHORCONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHOR_SIDEBAR => null,

@@ -1,10 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 function getSocialloginProvider($user_id = null)
 {
     if (is_null($user_id)) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
     }
 

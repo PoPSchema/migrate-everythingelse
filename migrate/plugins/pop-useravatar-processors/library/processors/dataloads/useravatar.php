@@ -3,6 +3,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -25,7 +26,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
 
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
                 return $vars['global-userstate']['current-user-id'];

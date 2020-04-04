@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_UserStance_ModuleHooks
 {
@@ -16,7 +17,7 @@ class PoPTheme_UserStance_ModuleHooks
     {
 
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

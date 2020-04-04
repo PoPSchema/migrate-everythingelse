@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -50,7 +51,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     }
     public function getHref(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {

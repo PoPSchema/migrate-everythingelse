@@ -1,5 +1,6 @@
 <?php
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
@@ -38,7 +39,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
 
     public function initRequestProps(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:

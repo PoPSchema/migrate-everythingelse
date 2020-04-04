@@ -5,6 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBDataFieldResolver
 {
@@ -57,7 +58,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $notification = $resultItem;
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
 
         switch ($fieldName) {

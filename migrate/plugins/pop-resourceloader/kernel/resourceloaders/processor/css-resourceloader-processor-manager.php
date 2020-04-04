@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_CSSResourceLoaderProcessorManager {
 
@@ -84,7 +85,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 		$bundlestyles_properties = array();
 		if ($loading_bundle) {
 
-			$vars = \PoP\ComponentModel\Engine_Vars::getVars();
+			$vars = ApplicationState::getVars();
 			$version = $vars['version'];
 			$file = $this->getFile($enqueuefile_type, $acrossThememodes);
 			

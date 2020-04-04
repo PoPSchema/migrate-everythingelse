@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_UserStance_SubmenuHooks
 {
@@ -23,7 +24,7 @@ class PoPTheme_UserStance_SubmenuHooks
 
     public function addRoutes($routes)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $route = $vars['route'];
 
         if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {

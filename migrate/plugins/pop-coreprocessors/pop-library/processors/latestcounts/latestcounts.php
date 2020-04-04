@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCountsBase
 {
     public const MODULE_LATESTCOUNT_TAG_CONTENT = 'latestcount-tag-content';
@@ -19,7 +21,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
 
     public function getClasses(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CONTENT:
                 return array(

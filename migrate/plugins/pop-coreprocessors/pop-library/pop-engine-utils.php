@@ -2,6 +2,7 @@
 use PoP\ComponentModel\ModuleFilters\ModuleFilterManager;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPCore_ModuleManager_Utils
 {
@@ -9,7 +10,7 @@ class PoPCore_ModuleManager_Utils
     {
 
         // Retrieve the dataload-source that will produce the data. Add the params to the URL
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $args = [
             GD_URLPARAM_VERSION => $vars['version'], 
             GD_URLPARAM_OUTPUT => GD_URLPARAM_OUTPUT_JSON, 

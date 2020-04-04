@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Add the filtercomponents to all filters
@@ -97,7 +98,7 @@ function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
     if (in_array($module, [
         [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINNER_AUTHORCONTENT],
     ])) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // Check if the user is showing the community. If showing user, then no need for this
@@ -126,7 +127,7 @@ function gdUreAddSimpleFiltercomponentCommunityusers($filterinputs, array $modul
     if (in_array($module, [
         [PoP_Module_Processor_CustomSimpleFilterInners::class, PoP_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINNER_AUTHORCONTENT],
     ])) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // Check if the user is showing the community. If showing user, then no need for this

@@ -1,12 +1,13 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInputOutputHandler
 {
     public function getHistTime(&$query_args)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             return $query_args[GD_URLPARAM_TIMESTAMP];
         }
@@ -23,7 +24,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
 
     public function getHistTimeCompare(&$query_args)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             return '>';
         }

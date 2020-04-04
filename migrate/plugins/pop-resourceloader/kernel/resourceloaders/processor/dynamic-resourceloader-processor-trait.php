@@ -1,5 +1,6 @@
 <?php
 use PoP\Resources\DefinitionGroups;
+use PoP\ComponentModel\State\ApplicationState;
 
 trait PoP_DynamicResourceLoaderProcessorTrait {
 
@@ -11,7 +12,7 @@ trait PoP_DynamicResourceLoaderProcessorTrait {
 	function getVersion(array $resource) {
 
 		// This script file is dynamically generated getting data from all over the website, so its version depend on the website version
-		$vars = \PoP\ComponentModel\Engine_Vars::getVars();
+		$vars = ApplicationState::getVars();
 		return $vars['version'];
 	}
 	

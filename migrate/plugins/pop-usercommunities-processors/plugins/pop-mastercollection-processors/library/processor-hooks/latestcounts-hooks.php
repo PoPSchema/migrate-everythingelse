@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UREPoP_RoleProcessors_LatestCounts_Hooks
 {
@@ -13,11 +14,11 @@ class UREPoP_RoleProcessors_LatestCounts_Hooks
 
     public function getClasses($classes)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // Add all the members of the community, if the author is a community, and we're on the Community+Members page
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (gdUreIsCommunity($author) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
             if ($members = gdUreGetActivecontributingcontentcommunitymembers($author)) {
                 foreach ($members as $member) {

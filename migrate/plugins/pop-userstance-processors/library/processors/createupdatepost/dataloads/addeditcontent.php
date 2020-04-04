@@ -1,6 +1,7 @@
 <?php
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -124,7 +125,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if (!$vars['global-userstate']['is-user-logged-in']) {
                     return [];
                 }

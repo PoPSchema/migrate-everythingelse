@@ -4,6 +4,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -26,7 +27,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        // $vars = ApplicationState::getVars();
         $routes = array(
             // The Page Content block uses whichever is the current page
             self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
@@ -41,7 +42,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 $url = $cmsusersapi->getUserURL($author);
                 return sprintf(
@@ -56,7 +57,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
@@ -130,7 +131,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = $vars['routing-state']['queried-object-id'];

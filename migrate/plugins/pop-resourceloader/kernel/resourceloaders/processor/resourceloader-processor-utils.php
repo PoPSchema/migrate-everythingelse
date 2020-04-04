@@ -15,6 +15,7 @@ use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -142,7 +143,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
-        $vars = &\PoP\ComponentModel\Engine_Vars::$vars;
+        $vars = &ApplicationState::$vars;
 
         // Iterate through all the pages added as configuration for this nature,
         // and all the resources for each
@@ -266,7 +267,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // $pop_module_processor_runtimecache->setUseVarsIdentifier(true);
 
         // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
-        $vars = &\PoP\ComponentModel\Engine_Vars::$vars;
+        $vars = &ApplicationState::$vars;
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
@@ -388,7 +389,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars['route'] = $route;
         $vars['target'] = $target;
         // $vars['routing-state'] = array();
-        // \PoP\ComponentModel\Engine_Vars::setNatureInGlobalState();
+        // ApplicationState::setNatureInGlobalState();
 
         // Save the list of all the paths. It will be needed later, to add the resources for the default tabs for 'single'
         $paths = array();
@@ -407,7 +408,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $cmspagesapi->getPage($page_id);
                 $vars['routing-state']['queried-object-id'] = $page_id;
-                \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+                ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -428,7 +429,7 @@ class PoP_ResourceLoaderProcessorUtils {
         } elseif ($nature == RouteNatures::STANDARD) {
 
             $vars['routing-state'] = [];
-            \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+            ApplicationState::augmentVarsProperties();
 
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
@@ -473,7 +474,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $postTypeAPI->getPost($post_id);
                 $vars['routing-state']['queried-object-id'] = $post_id;
-                \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+                ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -504,7 +505,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $cmsusersapi->getUserById($author);
                 $vars['routing-state']['queried-object-id'] = $author;
-                \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+                ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -530,7 +531,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $vars['routing-state'] = [];
                 $vars['routing-state']['queried-object'] = $taxonomyapi->getTag($tag_id);
                 $vars['routing-state']['queried-object-id'] = $tag_id;
-                \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+                ApplicationState::augmentVarsProperties();
 
                 // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -547,7 +548,7 @@ class PoP_ResourceLoaderProcessorUtils {
         } elseif ($nature == RouteNatures::HOME) {
 
             $vars['routing-state'] = [];
-            \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+            ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
             // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -564,7 +565,7 @@ class PoP_ResourceLoaderProcessorUtils {
         } elseif ($nature == RouteNatures::NOTFOUND) {
 
             $vars['routing-state'] = [];
-            \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+            ApplicationState::augmentVarsProperties();
 
             // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
             // Then, resources for author => Individual/Organization must NOT be bundled together
@@ -673,7 +674,7 @@ class PoP_ResourceLoaderProcessorUtils {
         foreach ($vars_keys as $vars_key) {
             $vars[$vars_key] = $original_vars[$vars_key];
         }
-        \PoP\ComponentModel\Engine_Vars::augmentVarsProperties();
+        ApplicationState::augmentVarsProperties();
 
         // // Set the runtimecache once again to operate with $request
         // $pop_module_processor_runtimecache->setUseVarsIdentifier(false);

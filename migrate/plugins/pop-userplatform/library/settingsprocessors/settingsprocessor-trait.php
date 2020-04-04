@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoP\ComponentModel\State\ApplicationState;
 
 trait PoP_UserPlatform_Module_SettingsProcessor_Trait
 {
@@ -38,7 +39,7 @@ trait PoP_UserPlatform_Module_SettingsProcessor_Trait
         $ret = array();
 
         // Only add the configuration if we are on the corresponding page
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['routing-state']['is-standard'] && $vars['global-userstate']['is-user-logged-in']) {
             $route = $vars['route'];
             if ($route == POP_USERPLATFORM_ROUTE_EDITPROFILE) {

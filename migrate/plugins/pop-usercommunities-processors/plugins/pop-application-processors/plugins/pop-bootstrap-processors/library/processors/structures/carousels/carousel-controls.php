@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -45,7 +46,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 $url = $cmsusersapi->getUserURL($author);
                 $routes = array(

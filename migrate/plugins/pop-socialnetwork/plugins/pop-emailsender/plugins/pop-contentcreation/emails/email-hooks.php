@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -184,7 +185,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $postTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this post.', 'pop-emailsender'));
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
                 if ($tag_subscribers = \PoP\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
@@ -315,7 +316,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $post_title = $postTypeAPI->getTitle($post_id);
             $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for having subscribed to tags/topics added in this comment/post.', 'pop-emailsender'));
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
                 if ($tag_subscribers = \PoP\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
@@ -365,7 +366,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     }
     public function emailnotificationsNetworkSubscribedtotopic($tag_id)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Application_SectionUtils
 {
@@ -30,7 +31,7 @@ class PoP_Application_SectionUtils
 
     public static function addDataloadqueryargsAllcontentBysingletag(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $tag_id = $vars['routing-state']['queried-object-id'];
         $ret['tag-ids'] = [$tag_id];

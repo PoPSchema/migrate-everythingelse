@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_MultiDomain_Utils
 {
@@ -8,7 +9,7 @@ class PoP_MultiDomain_Utils
     {
         // Must add the version (request will be routed through CDN)
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $url = GeneralUtils::addQueryArgs([
             'ver' => $vars['version'],
         ], $url);
@@ -19,7 +20,7 @@ class PoP_MultiDomain_Utils
             $theme = $options['theme'];
             $thememode = $options['thememode'];
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             if ($theme && $vars['theme'] != $theme) {
                 $subpath = str_replace('/'.$vars['theme'].'/', '/'.$theme.'/', $subpath);
             }

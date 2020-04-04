@@ -1,7 +1,9 @@
 <?php
 namespace PoP\Theme;
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Theme_Meta_Hooks
 {
@@ -16,7 +18,7 @@ class PoP_Theme_Meta_Hooks
     public function getSiteMeta($meta)
     {
         if (\PoP\ComponentModel\Utils::fetchingSite()) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
 
             // Send the current selected theme back
             if ($vars['theme']) {

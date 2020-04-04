@@ -4,6 +4,7 @@ define('POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER', 'hook-dataloadingsbase
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
 {
@@ -12,7 +13,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
@@ -30,7 +31,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     public function initModelProps(array $module, array &$props)
     {
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
 
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
@@ -64,7 +65,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
     public function initRequestProps(array $module, array &$props)
     {
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();

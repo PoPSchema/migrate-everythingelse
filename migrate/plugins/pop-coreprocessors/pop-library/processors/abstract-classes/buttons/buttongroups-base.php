@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -44,7 +45,7 @@ abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryData
     {
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         
         // Using runtimeconfiguration, because the URL can vary for Single, it must not be cached in the configuration
         if ($header_type = $this->getHeaderType($module, $props)) {

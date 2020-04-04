@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_UserState_Utils
 {
     public static function currentRouteRequiresUserState()
@@ -7,7 +9,7 @@ class PoP_UserState_Utils
 
         // We can force loading the userstate by passing param ?action=loaduserstate
         // Then, for this case, we can assume that the current page requires user state
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_ACTION_LOADUSERSTATE, $vars['actions'])) {
             return true;
         }

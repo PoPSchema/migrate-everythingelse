@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('POP_EMAIL_FOLLOWSUSER', 'followsuser');
 define('POP_EMAIL_RECOMMENDSPOST', 'recommendspost');
@@ -42,7 +43,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
 
     public function emailnotificationsNetworkFolloweduser($target_id)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
         // Get the current user's network's users (followers + members of same communities)
@@ -86,7 +87,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     }
     public function emailnotificationsNetworkRecommendedpost($post_id)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
         // Get the current user's network's users (followers + members of same communities)
@@ -140,7 +141,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     }
     protected function emailnotificationsNetworkUpdownvotedpost($post_id, $upvote)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
         // Get the current user's network's users (followers + members of same communities)
@@ -197,7 +198,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     {
         if (!in_array($target_id, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_FOLLOWSUSER))) {
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
             $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
 
@@ -228,7 +229,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     public function recommendpost($post_id)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GetPoPDemo_URE_GroupHooks
 {
@@ -16,7 +17,7 @@ class GetPoPDemo_URE_GroupHooks
     {
 
         // Add the members only for communities
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
         if (gdUreIsCommunity($author)) {
             if (defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {

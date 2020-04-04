@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Allow communities to include its members' content in the community Profile
@@ -7,7 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('pop_module:dataload_query_args:authors', 'gdUreProfileCommunityDataloadqueryAddmembers');
 function gdUreProfileCommunityDataloadqueryAddmembers($authors)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $author = $vars['routing-state']['queried-object-id'];
 
     // Check if the user is showing the community. If showing user, then no need for this
@@ -25,7 +26,7 @@ HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CustomSectionBloc
 function gdUreAddSourceParam($url, $user_id)
 {
     if (gdUreIsCommunity($user_id)) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $source = $vars['source'];
         $url = PoP_URE_ModuleManager_Utils::addSource($url, $source);
     }
@@ -39,7 +40,7 @@ function gdUreAddSourceParam($url, $user_id)
 HooksAPIFacade::getInstance()->addFilter('PoP_Module_Processor_CustomSubMenus:author:routes', 'gdUreProfileCommunityAddMembersTab');
 function gdUreProfileCommunityAddMembersTab($routes)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $author = $vars['routing-state']['queried-object-id'];
     if (gdUreIsCommunity($author) && defined('POP_USERCOMMUNITIES_ROUTE_MEMBERS') && POP_USERCOMMUNITIES_ROUTE_MEMBERS) {
         // Place the Members tab before the Followers tab

@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -26,7 +27,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements \PoP\
             // For the update, gotta return the success string
             if ($action == 'update') {
                 // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $success_string = sprintf(
                     TranslationAPIFacade::getInstance()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                     getAuthorProfileUrl($vars['global-userstate']['current-user-id']),

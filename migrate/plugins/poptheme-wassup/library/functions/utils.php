@@ -3,6 +3,7 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPThemeWassup_Utils
 {
@@ -11,7 +12,7 @@ class PoPThemeWassup_Utils
     {
         if (is_null(self::$checkLoadingPagesectionModule)) {
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = HooksAPIFacade::getInstance()->applyFilters(

@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -33,7 +34,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];
@@ -211,7 +212,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $post_id = $vars['routing-state']['queried-object-id'];
                 if ($postTypeAPI->getStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
@@ -258,7 +259,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         switch ($module[1]) {

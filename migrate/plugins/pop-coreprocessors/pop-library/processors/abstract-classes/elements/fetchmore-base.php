@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Application\QueryInputOutputHandlers\Utils;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -68,7 +69,7 @@ abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataMod
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         
         // If it is lazy load, no need to calculate stop-fetching
         // If loading static data, then that's it

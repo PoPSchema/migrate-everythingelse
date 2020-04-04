@@ -7,6 +7,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -71,7 +72,7 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 {
@@ -16,7 +17,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
 
     public function getMessage($message, $notification)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

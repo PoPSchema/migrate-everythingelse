@@ -1,5 +1,6 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -63,7 +64,7 @@ abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataModu
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Pages can vary with the URL: /u/mesym/ has tab "Members", but /u/leo/ does not, then place this logic under "mutableonrequest"
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $route = $vars['route'];
         $headers = array();
         foreach ($this->getRoutes($module, $props) as $header_route => $subheader_routes) {

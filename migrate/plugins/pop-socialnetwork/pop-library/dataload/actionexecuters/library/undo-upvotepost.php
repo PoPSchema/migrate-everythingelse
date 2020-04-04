@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 {
@@ -10,7 +11,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
         parent::validate($errors, $form_data);
 
         if (!$errors) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
@@ -37,7 +38,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 
     protected function update($form_data)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $target_id = $form_data['target_id'];
 

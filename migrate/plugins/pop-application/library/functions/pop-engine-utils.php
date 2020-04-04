@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class PoP_Application_Engine_Vars
+class PoP_Application_ApplicationState
 {
     public static function addVars($vars_in_array)
     {
@@ -29,4 +29,4 @@ class PoP_Application_Engine_Vars
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('\PoP\ComponentModel\Engine_Vars:addVars', array(PoP_Application_Engine_Vars::class, 'addVars'), 10, 1);
+HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_Application_ApplicationState::class, 'addVars'), 10, 1);

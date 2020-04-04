@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
 {
@@ -229,7 +230,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
@@ -266,7 +267,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             return $ret;
         }
@@ -363,7 +364,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     public function initModelProps(array $module, array &$props)
     {
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
 
             if ($dbobject_params = $this->getDbobjectParams($module)) {
@@ -389,7 +390,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
     public function initRequestProps(array $module, array &$props)
     {
         // Validate that the strata includes the required stratum
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_HTMLCSS, $vars['strata'])) {
             $this->initHTMLCSSPlatformRequestProps($module, $props);
         }

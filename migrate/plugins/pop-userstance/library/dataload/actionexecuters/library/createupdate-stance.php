@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 {
@@ -118,7 +119,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         $referenced_id = $form_data['stancetarget'];
 
         // Check if there is already an existing stance
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $query = array(
             'post-status' => array(POP_POSTSTATUS_PUBLISHED, POP_POSTSTATUS_DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],

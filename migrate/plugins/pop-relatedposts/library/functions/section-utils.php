@@ -1,5 +1,6 @@
 <?php
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_RelatedPosts_SectionUtils
 {
@@ -10,7 +11,7 @@ class PoP_RelatedPosts_SectionUtils
         PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
 
         if (is_null($post_id)) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $post_id = $vars['routing-state']['queried-object-id'];
         }
 

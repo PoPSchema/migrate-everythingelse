@@ -5,6 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -79,7 +80,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();

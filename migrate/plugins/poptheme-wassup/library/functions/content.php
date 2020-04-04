@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\PostMedia\Misc\MediaHelpers;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
 // to order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
@@ -36,7 +37,7 @@ function wassupMediaSendToEditor($html, $id, $attachment)
 
 function gdGetPostDescription()
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
     $postTypeAPI = PostTypeAPIFacade::getInstance();
     $post_id = $vars['routing-state']['queried-object-id'];
@@ -53,7 +54,7 @@ function gdGetPostDescription()
 
 function gdHeaderRouteDescription()
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $route = $vars['route'];
     return HooksAPIFacade::getInstance()->applyFilters('gdHeaderRouteDescription', '', $route);
 }
@@ -70,7 +71,7 @@ function gdGetThemeColor()
 
 function gdGetDocumentThumb($size = 'large')
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
     if ($vars['routing-state']['is-post'] || $vars['routing-state']['is-page']) {
         $post_id = $vars['routing-state']['queried-object-id'];

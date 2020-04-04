@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_DATALOAD_GETUSERINFO', 'getuserinfo');
 
@@ -24,7 +25,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
 
         // Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
         if (PoP_UserLogin_Utils::getUserInfo()) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
             $user_id = '';
             $user_name = '';

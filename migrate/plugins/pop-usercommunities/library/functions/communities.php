@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 function gdUreGetCommunities($user_id)
 {
@@ -48,7 +49,7 @@ function gdUreGetCommunityMetavalueContributecontent($user_id)
 
 function gdUreGetCommunityMetavalueCurrentcommunity($value)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $community = $vars['global-userstate']['current-user-id'];
     return gdUreGetCommunityMetavalue($community, $value);
 }
@@ -152,7 +153,7 @@ function gdUreGetCommunitiesStatusActiveFilter($value)
 
 function gdUreCommunityMembershipstatusFilterbycurrentcommunity($values)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     return gdUreCommunityMembershipstatusFilterbycommunity($values, $vars['global-userstate']['current-user-id']);
 }
 

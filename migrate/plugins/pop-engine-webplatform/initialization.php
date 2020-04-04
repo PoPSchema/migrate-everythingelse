@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\Configuration\Request;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');
 
@@ -166,7 +167,7 @@ class PoPWebPlatform_Initialization
         $locale = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:locale', get_locale());
         
         // Default one: do not send, so that it doesn't show up in the Embed URL
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $keepopentabs = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
         $multilayout_labels = PoP_HTMLCSSPlatform_ConfigurationUtils::getMultilayoutLabels();
         // $multilayout_keyfields = PoP_WebPlatform_ConfigurationUtils::get_multilayout_keyfields();

@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Configuration\Request;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 {
@@ -23,7 +24,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     {
         $configuration = parent::getSwConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
 
         // Add a string before the version, since starting with a number makes trouble
         $configuration['${cacheNamePrefix}'] = 'PoP';

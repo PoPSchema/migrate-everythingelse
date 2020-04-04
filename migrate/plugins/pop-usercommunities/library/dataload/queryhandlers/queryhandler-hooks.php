@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_DATALOAD_USER_ROLES', 'roles');
 
@@ -17,7 +18,7 @@ class PoP_UserCommunities_UserStance_Hooks
     public function getUserFeedback($user_feedback)
     {
         $user_roles = array();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
             $userID = $vars['global-userstate']['current-user-id'];
 

@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\FileStore\Facades\FileRendererFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserLoginWebPlatform_Initialization
 {
@@ -74,7 +75,7 @@ class PoP_UserLoginWebPlatform_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $popcore_userloggedinstyles_file;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $htmlcssplatformapi->registerStyle('pop-userlogin-webplatform-userloggedin', $popcore_userloggedinstyles_file->getFileurl(), array(), $vars['version']);
                 $htmlcssplatformapi->enqueueStyle('pop-userlogin-webplatform-userloggedin');
             }

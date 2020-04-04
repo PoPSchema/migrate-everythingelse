@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -14,7 +15,7 @@ class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExec
             $error = '';
 
             // If the user is already logged in, then return the error
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
             $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
             $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
@@ -71,7 +72,7 @@ class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExec
             $user = $loginResult;
 
             // Modify the routing-state with the newly logged in user info
-            PoP_UserLogin_Engine_Utils::calculateAndSetVarsUserState(\PoP\ComponentModel\Engine_Vars::$vars);
+            PoP_UserLogin_Engine_Utils::calculateAndSetVarsUserState(ApplicationState::$vars);
 
             HooksAPIFacade::getInstance()->doAction('gd:user:loggedin', $cmsusersresolver->getUserId($user));
 

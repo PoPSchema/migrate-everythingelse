@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_MultiDomain_Engine_Utils
 {
@@ -19,7 +20,7 @@ class PoP_MultiDomain_Engine_Utils
 
     public static function addModuleInstanceComponents($components)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($domain = $vars['domain']) {
             $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').\PoP\ComponentModel\Utils::getDomainId($domain);
         }
@@ -36,5 +37,5 @@ class PoP_MultiDomain_Engine_Utils
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('\PoP\ComponentModel\Engine_Vars:addVars', array(PoP_MultiDomain_Engine_Utils::class, 'addVars'), 10, 1);
+HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_MultiDomain_Engine_Utils::class, 'addVars'), 10, 1);
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, array(PoP_MultiDomain_Engine_Utils::class, 'addModuleInstanceComponents'));

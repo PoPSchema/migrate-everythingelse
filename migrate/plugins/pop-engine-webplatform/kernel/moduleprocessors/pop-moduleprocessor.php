@@ -2,6 +2,7 @@
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD', 'processorbase-pagesectionjsmethod');
 define('POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD', 'processorbase-blockjsmethod');
@@ -28,7 +29,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getImmutableSettings($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $ret;
         }
@@ -229,7 +230,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $ret;
         }
@@ -266,7 +267,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
         $ret = parent::getImmutableConfiguration($module, $props);
 
         // Validate that the platform level includes this one
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!in_array(POP_STRATUM_WEB, $vars['strata'])) {
             return $ret;
         }
@@ -376,7 +377,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function initModelProps(array $module, array &$props)
     {
         // Validate that the platform level includes this one
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
             
             $this->initWebPlatformModelProps($module, $props);
@@ -398,7 +399,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
     public function initRequestProps(array $module, array &$props)
     {
         // Validate that the platform level includes this one
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
         
             $this->initWebPlatformRequestProps($module, $props);

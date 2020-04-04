@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_DATALOAD_USER_AVATAR', 'avatar');
 
@@ -17,7 +18,7 @@ class PoP_UserAvatar_UserStance_Hooks
     {
         $avatar_user_id = POP_AVATAR_GENERICAVATARUSER;
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
         if ($user_logged_in) {
             $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();

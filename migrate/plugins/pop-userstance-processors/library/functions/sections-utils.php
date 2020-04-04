@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class UserStance_Module_Processor_CustomSectionBlocksUtils
 {
     public static function addDataloadqueryargsStancesaboutpost(&$ret, $referenced_post_id)
@@ -37,7 +39,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsSinglestances(&$ret, $referenced_post_id = null)
     {
         if (!$referenced_post_id) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $referenced_post_id = $vars['routing-state']['queried-object-id'];
         }
 

@@ -5,6 +5,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
@@ -33,7 +34,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
         // API
         if (!\PoP\API\Environment::disableAPI()) {
             
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
 
             // Page
             $routemodules = array(

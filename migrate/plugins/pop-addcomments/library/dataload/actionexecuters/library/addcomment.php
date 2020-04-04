@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_AddComment
 {
@@ -41,7 +42,7 @@ class GD_AddComment
     {
         // TODO: Integrate with `mustHaveUserAccountToAddComment`
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $author_url = $cmsusersapi->getUserURL($user_id);
         $comment_data = array(

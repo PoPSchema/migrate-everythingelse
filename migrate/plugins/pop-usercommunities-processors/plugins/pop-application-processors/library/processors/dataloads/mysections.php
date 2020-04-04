@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -95,7 +96,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
         
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT:

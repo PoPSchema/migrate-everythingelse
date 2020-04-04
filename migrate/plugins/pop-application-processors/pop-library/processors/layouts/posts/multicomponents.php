@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Engine_Vars;
+use PoP\ComponentModel\State\ApplicationState;
 use PoP\Application\Constants\Actions;
 
 class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
@@ -18,7 +18,7 @@ class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Proces
 
     protected function getUserpostinteractionLayoutSubmodules(array $module)
     {
-        $vars = Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $loadingLazy = in_array(Actions::LOADLAZY, $vars['actions']);
         switch ($module[1]) {
          // Highlights: it has a different set-up

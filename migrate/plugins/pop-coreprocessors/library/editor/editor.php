@@ -7,7 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
 // Code copied from wp-includes/class-wp-editor.php => public static function editor( $content, $editor_id, $settings = array() )
 // Comment Leo 20/06/2017: this cannot be executed on 'init'! If doing so, function `loadingSite` initializes
-// \PoP\ComponentModel\Engine_Vars::getVars() before the WordPress query vars are set, which means that
+// ApplicationState::getVars() before the WordPress query vars are set, which means that
 // function is_home, isAuthor, isPage, etc, they all fail, returning always false
 // For that, instead execute when we have initialized PoP
 // HooksAPIFacade::getInstance()->addFilter('init', 'gdEditorInit');

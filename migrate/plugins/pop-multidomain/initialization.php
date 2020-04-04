@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\FileStore\Facades\FileRendererFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_MultiDomain_Initialization
 {
@@ -61,7 +62,7 @@ class PoP_MultiDomain_Initialization
             // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
             global $pop_multidomain_initdomainscripts_configfile;
             if (PoP_WebPlatform_ServerUtils::loadDynamicallyGeneratedResourceFiles()) {
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $cmswebplatformapi->registerScript('pop-multidomain-domainscripts', $pop_multidomain_initdomainscripts_configfile->getFileurl(), array(), $vars['version']);
                 $cmswebplatformapi->enqueueScript('pop-multidomain-domainscripts');
             }
@@ -75,7 +76,7 @@ class PoP_MultiDomain_Initialization
         //     // This file is generated dynamically, so it can't be added to any bundle or minified
         //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
         //     global $pop_multidomain_resourceloader_configfile;
-        //     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        //     $vars = ApplicationState::getVars();
         //     $cmswebplatformapi->registerScript('pop-multidomain-sparesourceloader-config', $pop_multidomain_resourceloader_configfile->getFileurl(), array(PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName([PoP_MultiDomain_JSResourceLoaderProcessor::class, PoP_MultiDomain_JSResourceLoaderProcessor::RESOURCE_MULTIDOMAIN])), $vars['version'], true);
         //     $cmswebplatformapi->enqueueScript('pop-multidomain-sparesourceloader-config');
         // }

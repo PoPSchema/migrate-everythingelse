@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'popthemeWassupJqueryConstants');
 function popthemeWassupJqueryConstants($jqueryConstants)
@@ -10,7 +11,7 @@ function popthemeWassupJqueryConstants($jqueryConstants)
     $jqueryConstants['THEMEMODE_WASSUP_EMBED'] = GD_THEMEMODE_WASSUP_EMBED;
     $jqueryConstants['THEMEMODE_WASSUP_PRINT'] = GD_THEMEMODE_WASSUP_PRINT;
 
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $jqueryConstants['THEMESTYLE'] = $vars['themestyle-isdefault'] ? '' : $vars['themestyle'];
     return $jqueryConstants;
 }

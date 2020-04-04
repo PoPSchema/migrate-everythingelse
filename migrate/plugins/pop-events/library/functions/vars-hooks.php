@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Events\Facades\EventTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 // Event and Past Event have different configurations, so we must differentiate among them
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popEmModuleInstanceComponents');
@@ -9,7 +10,7 @@ function popEmModuleInstanceComponents($components)
 {
 
     // Add source param for Organizations: view their profile as Community or Organization
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['routing-state']['is-post']) {
         $post_id = $vars['routing-state']['queried-object-id'];
         $eventTypeAPI = EventTypeAPIFacade::getInstance();

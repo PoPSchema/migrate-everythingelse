@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Add Co-authors to Events Manager
@@ -9,7 +10,7 @@ function gdUserEventPostIds($authors = null)
 
     // Allow to specify for which users (used by Events Map profile filtering)
     if (is_null($authors)) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $authors = $vars['global-userstate']['current-user-id'];
     }
 
@@ -86,7 +87,7 @@ function gdEmCapCanManage($event, $owner_capability = false, $admin_capability =
         }
     }
 
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $pluginapi = PoP_Coauthors_APIFactory::getInstance();
 
     $authors = $pluginapi->getCoauthors($event->post_id, ['return-type' => POP_RETURNTYPE_IDS]);

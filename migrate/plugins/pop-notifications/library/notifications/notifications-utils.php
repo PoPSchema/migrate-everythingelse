@@ -1,5 +1,6 @@
 <?php
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Notifications_Utils
 {
@@ -27,7 +28,7 @@ class PoP_Notifications_Utils
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         if (!$user_id) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
         }
 

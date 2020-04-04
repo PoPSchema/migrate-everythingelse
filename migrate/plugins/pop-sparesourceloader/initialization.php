@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+
 class PoP_SPAResourceLoader_Initialization
 {
     public function initialize()
@@ -68,7 +69,7 @@ class PoP_SPAResourceLoader_Initialization
     //     //     // This file is generated dynamically, so it can't be added to any bundle or minified
     //     //     // That's why we use popVersion() as its version, so upgrading the website will fetch again this file
     //     //     global $pop_sparesourceloader_configfile;
-    //     //     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    //     //     $vars = ApplicationState::getVars();
     //     //     $cmswebplatformapi->registerScript('pop-sparesourceloader-config', $pop_sparesourceloader_configfile->getFileurl(), array(PoP_SPAResourceLoaderProcessorUtils::getNoconflictResourceName(POP_SPARESOURCELOADER_SPARESOURCELOADER)), $vars['version'], true);
     //     //     $cmswebplatformapi->enqueueScript('pop-sparesourceloader-config');
     //     // }

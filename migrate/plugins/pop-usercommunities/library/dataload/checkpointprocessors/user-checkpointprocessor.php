@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
 {
     public const CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY = 'checkpoint-loggedinuser-iscommunity';
@@ -17,7 +19,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\Componen
 
     public function process(array $checkpoint)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $current_user_id = $vars['global-userstate']['current-user-id'];
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY:
@@ -28,7 +30,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\Componen
 
             case self::CHECKPOINT_EDITINGCOMMUNITYMEMBER:
                 // Validate the user being edited is member of the community
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $user_id = $_REQUEST[POP_INPUTNAME_USERID];
                 $community = $current_user_id;
                 $status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);

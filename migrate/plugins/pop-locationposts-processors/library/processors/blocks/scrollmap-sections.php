@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
@@ -51,7 +52,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
 
     public function getTitle(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {

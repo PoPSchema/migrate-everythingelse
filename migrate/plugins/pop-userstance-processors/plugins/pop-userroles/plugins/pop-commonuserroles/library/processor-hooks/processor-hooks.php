@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_URE_ProcessorHooks
 {
@@ -13,7 +14,7 @@ class UserStance_URE_ProcessorHooks
 
     public function getInnerSubmodules($modules)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
         if (gdUreIsOrganization($author)) {
             $modules[] = [GD_URE_Module_Processor_CustomSidebarDataloads::class, GD_URE_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION];

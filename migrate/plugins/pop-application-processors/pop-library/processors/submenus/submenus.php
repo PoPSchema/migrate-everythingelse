@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusBase
 {
@@ -56,7 +57,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $ret = parent::getRoutes($module, $props);
 
         // Potentially, add an extra header level if the current page is one of the subheaders
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $route = $vars['route'];
 
         switch ($module[1]) {
@@ -112,7 +113,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
 
     public function getUrl(array $module, $route, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();

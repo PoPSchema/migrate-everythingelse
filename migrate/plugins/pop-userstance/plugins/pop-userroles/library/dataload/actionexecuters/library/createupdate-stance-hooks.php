@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_DataLoad_CreateUpdateStanceHooks
 {
@@ -17,7 +18,7 @@ class UserStance_DataLoad_CreateUpdateStanceHooks
         // Redundancy on who has created the Stance: an individual or an organization
         // This way we can show the slider in the Homepage "Latest thoughts about TPP" and split them into "By people" / "By organizations"
         // This works because the Stance has only 1 author
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         \PoP\PostMeta\Utils::addPostMeta($post_id, GD_URE_METAKEY_POST_AUTHORROLE, gdUreGetuserrole($vars['global-userstate']['current-user-id']), true);
     }
 }

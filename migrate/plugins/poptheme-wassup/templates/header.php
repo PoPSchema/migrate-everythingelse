@@ -1,4 +1,5 @@
 <?php use PoP\Translation\Facades\TranslationAPIFacade; ?>
+<?php use PoP\ComponentModel\State\ApplicationState; ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11" prefix="og: http://ogp.me/ns#">
@@ -14,7 +15,7 @@
         <?php /* Avoid insecure HTTP requests over HTTPS. Taken from https://developers.google.com/web/fundamentals/security/prevent-mixed-content/fixing-mixed-content */ ?>
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <?php endif; ?>
-    <?php $vars = \PoP\ComponentModel\Engine_Vars::getVars(); ?>
+    <?php $vars = ApplicationState::getVars(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance(); ?>
     <?php $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance(); ?>

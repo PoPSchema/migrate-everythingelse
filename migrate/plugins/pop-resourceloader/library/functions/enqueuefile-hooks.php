@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ResourceLoader_EnqueueFileHooks
 {
@@ -22,7 +23,7 @@ class PoP_ResourceLoader_EnqueueFileHooks
 
     protected function isForInternalUse()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['routing-state']['is-standard']) {
             $route = $vars['route'];
         

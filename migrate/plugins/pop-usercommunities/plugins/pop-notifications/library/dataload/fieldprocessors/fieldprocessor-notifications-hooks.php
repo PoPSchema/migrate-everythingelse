@@ -7,6 +7,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\State\ApplicationState;
 
 class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -111,7 +112,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $notification = $resultItem;
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {

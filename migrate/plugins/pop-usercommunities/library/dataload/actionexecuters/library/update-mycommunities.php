@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_Update_MyCommunities
 {
@@ -21,7 +22,7 @@ class GD_Update_MyCommunities
     protected function getFormData(&$data_properties)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
         $inputs = GD_UserCommunities_MyCommunitiesUtils::getFormInputs();
         $communities = $moduleprocessor_manager->getProcessor($inputs['communities'])->getValue($inputs['communities']);

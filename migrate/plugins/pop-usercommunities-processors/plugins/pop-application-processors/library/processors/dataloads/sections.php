@@ -4,6 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -180,7 +181,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
         
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
              // Members of the Community
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
@@ -207,7 +208,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
                 // Also include the current author
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 array_unshift($ret, $author);
                 break;
@@ -269,7 +270,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {

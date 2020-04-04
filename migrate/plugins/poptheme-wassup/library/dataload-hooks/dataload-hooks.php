@@ -1,10 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 HooksAPIFacade::getInstance()->addFilter('PoPWebPlatform_Engine:request-meta', 'addToplevelVarsSilent');
 function addToplevelVarsSilent($meta)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
         
     // Silent document? (Opposite to Update the browser URL and Title?)
     $silent_targets = array(

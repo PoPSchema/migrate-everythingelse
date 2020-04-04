@@ -107,7 +107,7 @@ function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 /**
  * Targets
  */
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Engine_Vars:targets', 'getCustomTargets');
+HooksAPIFacade::getInstance()->addFilter('ApplicationState:targets', 'getCustomTargets');
 function getCustomTargets($targets)
 {
     return array_merge(

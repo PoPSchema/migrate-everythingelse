@@ -8,6 +8,7 @@ use PoP\Pages\TypeResolvers\PageTypeResolver;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {
@@ -96,7 +97,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [$vars['routing-state']['queried-object-id']];

@@ -13,7 +13,7 @@ abstract class PoP_SPAResourceLoader_ConfigAddResourcesFileBase extends PoP_SPAR
     //     $renderer_filereproductions = $renderer->get();
 
     //     // Add the version param to the URL
-    //         //     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    //         //     $vars = ApplicationState::getVars();
     //     $fileurl = GeneralUtils::addQueryArgs([
     //         'ver' => $vars['version'], 
     //     ], $this->getFileurl());

@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Notifications_API
 {
@@ -107,7 +108,7 @@ class PoP_Notifications_API
         // $user_id: if none has been passed in the params, then check if the user is logged in, and use that
         if (!$user_id) {
             if (PoP_UserState_Utils::currentRouteRequiresUserState()) {
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if ($vars['global-userstate']['is-user-logged-in']) {
                     $user_id = $vars['global-userstate']['current-user-id'];
                 }

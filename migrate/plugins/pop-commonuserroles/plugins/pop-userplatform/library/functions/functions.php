@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * login.php
@@ -8,7 +9,7 @@ use PoP\Engine\Route\RouteUtils;
 HooksAPIFacade::getInstance()->addFilter('UserPlatform:redirect_url:edit_profile', 'getCommonuserrolesEditprofileRedirectUrl');
 function getCommonuserrolesEditprofileRedirectUrl($redirect_url)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['global-userstate']['is-user-logged-in']) {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $current_user_id = $vars['global-userstate']['current-user-id'];

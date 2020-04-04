@@ -7,7 +7,7 @@ class PoP_URE_Engine_Hooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addAction(
-            '\PoP\ComponentModel\Engine_Vars:addVars', 
+            'ApplicationState:addVars', 
             [$this, 'addVars'], 
             10,
             1

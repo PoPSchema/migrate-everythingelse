@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_FormInput_SettingsFormat extends \PoP\Engine\GD_FormInput_Select
 {
@@ -36,7 +37,7 @@ class GD_FormInput_SettingsFormat extends \PoP\Engine\GD_FormInput_Select
     
     public function getDefaultValue()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($selected = $vars['settingsformat']) {
             $allvalues = array(
                 POP_FORMAT_SIMPLEVIEW,

@@ -1,5 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
+
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -30,7 +32,7 @@ class PoP_SocialNetwork_Notifications_Hook_Users /* extends AAL_Hook_Base*/
 
     public function followunfollowsUser($user_id, $action)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(

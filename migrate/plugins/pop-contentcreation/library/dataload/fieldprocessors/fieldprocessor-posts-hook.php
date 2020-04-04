@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -93,7 +94,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
                 $authors = $typeResolver->resolveValue($resultItem, FieldQueryInterpreterFacade::getInstance()->getField('authors', $fieldArgs), $variables, $expressions, $options);
 
                 // This function only makes sense when the user is logged in
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if ($vars['global-userstate']['is-user-logged-in']) {
                     $pos = array_search($vars['global-userstate']['current-user-id'], $authors);
                     if ($pos !== false) {

@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -10,7 +11,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     {
         $ret = parent::getDataloadSource($module, $props);
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         // if ($vars['nature'] == $this->getNature($module)) {
         if ($vars['nature'] == UserRouteNatures::USER) {
             // Allow URE to add the Organization/Community content source attribute

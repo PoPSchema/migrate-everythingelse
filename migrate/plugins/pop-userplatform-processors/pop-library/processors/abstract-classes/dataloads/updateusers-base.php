@@ -1,11 +1,12 @@
 <?php
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_UpdateUserDataloadsBase extends PoP_Module_Processor_CreateUpdateUserDataloadsBase
 {
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         return $vars['global-userstate']['current-user-id'];
     }
 

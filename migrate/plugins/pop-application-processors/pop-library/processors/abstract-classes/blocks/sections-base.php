@@ -9,6 +9,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
@@ -27,7 +28,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         // if ($vars['nature'] == $this->getNature($module)) {
         switch ($vars['nature']) {
             case UserRouteNatures::USER:
@@ -48,7 +49,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
 
         // Add only if the current nature is the one expected by the block
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         // if ($vars['nature'] == $this->getNature($module)) {
         switch ($vars['nature']) {
             case UserRouteNatures::USER:
@@ -68,7 +69,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     protected function getTitleLink(array $module, array &$props)
     {
         if ($route = $this->getRelevantRoute($module, $props)) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
             $postTypeAPI = PostTypeAPIFacade::getInstance();

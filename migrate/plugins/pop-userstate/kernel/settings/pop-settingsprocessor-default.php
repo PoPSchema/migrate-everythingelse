@@ -1,6 +1,8 @@
 <?php
 namespace PoP\UserState\Settings;
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase
 {
     public function init()
@@ -12,7 +14,7 @@ abstract class DefaultSettingsProcessorBase extends SettingsProcessorBase
 
     public function requiresUserState()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $route = $vars['route'];
 
         // Check if the page has checkpoints. If so, assume it requires user state

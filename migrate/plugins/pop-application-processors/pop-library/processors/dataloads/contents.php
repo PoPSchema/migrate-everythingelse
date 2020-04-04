@@ -6,6 +6,7 @@ use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\Content\TypeResolvers\ContentEntityUnionTypeResolver;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -32,7 +33,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 
     public function getRelevantRoute(array $module, array &$props): ?string
     {
-        // $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        // $vars = ApplicationState::getVars();
         $routes = array(
             // The Page Content block uses whichever is the current page
             self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//$vars['route'],
@@ -46,7 +47,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:

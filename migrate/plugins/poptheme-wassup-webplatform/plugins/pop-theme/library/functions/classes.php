@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /*
  * Add extra classes to the body: Theme
@@ -7,7 +8,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdClassesBodyThemeImpl');
 function gdClassesBodyThemeImpl($body_classes)
 {
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     $body_classes[] = $vars['theme'];
     $body_classes[] = $vars['thememode'];
     $body_classes[] = $vars['themestyle'];

@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UpdateMyPreferences
 {
@@ -20,7 +21,7 @@ class GD_UpdateMyPreferences
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
         $form_data = array(
             'user_id' => $user_id,

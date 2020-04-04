@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -141,7 +142,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return $this->getDBObjectIDFromURLParam($module, $props, $data_properties);
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 return $vars['global-userstate']['current-user-id'];
         }
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);

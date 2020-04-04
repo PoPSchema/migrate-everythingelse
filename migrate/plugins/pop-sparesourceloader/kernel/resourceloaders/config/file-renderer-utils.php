@@ -1,13 +1,14 @@
 <?php
 use PoP\FileStore\File\AbstractFile;
 use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SPAResourceLoader_ConfigAddResources_FileRenderer extends \PoP\FileStore\Renderer\FileRenderer
 {
     public function renderAndSave(AbstractFile $file): void
     {
         // Add the version param to the URL
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $fileurl = GeneralUtils::addQueryArgs([
             'ver' => $vars['version'], 
         ], $file->getFileurl());

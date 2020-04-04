@@ -1,6 +1,8 @@
 <?php
 namespace PoP\UserRoles;
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class FunctionAPI_Base implements FunctionAPI
 {
     public function __construct()
@@ -10,7 +12,7 @@ abstract class FunctionAPI_Base implements FunctionAPI
 
     public function currentUserCan($capability)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         return $this->userCan($vars['global-userstate']['current-user-id'], $capability);
     }
 }

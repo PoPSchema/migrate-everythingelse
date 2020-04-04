@@ -1,12 +1,13 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_Module_Processor_ButtonUtils
 {
     public static function getSinglepostAddstanceTitle()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
     
         // Allow Events to have a different title

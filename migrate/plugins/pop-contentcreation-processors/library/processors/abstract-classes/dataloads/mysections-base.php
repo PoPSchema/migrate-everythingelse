@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {
 
@@ -45,7 +47,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
         
         // Logged-in author
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $ret['authors'] = [$vars['global-userstate']['current-user-id']];
 
         return $ret;

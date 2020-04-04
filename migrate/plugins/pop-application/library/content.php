@@ -5,7 +5,7 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // function gdGetDocumentTitle()
 // {
-//     $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+//     $vars = ApplicationState::getVars();
 //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 //     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 //     $postTypeAPI = PostTypeAPIFacade::getInstance();

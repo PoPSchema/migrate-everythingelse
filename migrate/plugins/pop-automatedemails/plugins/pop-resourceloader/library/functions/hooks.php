@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 {
@@ -21,7 +22,7 @@ class PoP_AutomatedEmails_WebPlatform_ResourceLoader_Hooks
 
     protected function isAutomatedEmailRoute()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['routing-state']['is-standard']) {
             $route = $vars['route'];
             $automatedemail_routes = PoP_AutomatedEmails_WebPlatform_ResourceLoader_Utils::getAutomatedEmailRoutes();

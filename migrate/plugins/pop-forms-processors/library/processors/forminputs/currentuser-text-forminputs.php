@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
@@ -44,7 +45,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
     
         // When submitting the form, if user is logged in, then use these values.
         // Otherwise, use the values sent in the form
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && $vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();

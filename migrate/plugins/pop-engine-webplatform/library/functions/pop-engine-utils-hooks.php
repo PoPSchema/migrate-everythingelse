@@ -50,6 +50,6 @@ class PoP_WebPlatformEngine_UtilsHooks
 /**
  * Initialization
  */
-HooksAPIFacade::getInstance()->addAction('\PoP\ComponentModel\Engine_Vars:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Engine_Vars:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));
+HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
+HooksAPIFacade::getInstance()->addFilter('ApplicationState:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));
 // HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:getCurrentUrl', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getCurrentUrl'));

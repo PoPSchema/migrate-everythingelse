@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -64,7 +65,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();

@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UserLogin_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
 {
@@ -14,7 +15,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\
 
     public function process(array $checkpoint)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $translationAPI = TranslationAPIFacade::getInstance();
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:

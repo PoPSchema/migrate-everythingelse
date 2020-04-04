@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_CreateUpdate_User
 {
@@ -131,7 +132,7 @@ class GD_CreateUpdate_User
 
         $cmseditusershelpers = \PoP\EditUsers\HelperAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
         $inputs = $this->getFormInputs();
         $form_data = array(
@@ -269,7 +270,7 @@ class GD_CreateUpdate_User
         // If user is logged in => It's Update
         // Otherwise => It's Create
         
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
             $this->update($errors, $data_properties);
             return 'update';

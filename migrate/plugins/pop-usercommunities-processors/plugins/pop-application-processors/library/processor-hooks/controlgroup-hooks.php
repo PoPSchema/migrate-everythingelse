@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class UREPoP_RoleProcessors_ControlGroup_Hooks
 {
@@ -13,7 +14,7 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
 
     public function getLayoutSubmodules($layouts)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // Add the Switch Community/Community+Members if the author is a community

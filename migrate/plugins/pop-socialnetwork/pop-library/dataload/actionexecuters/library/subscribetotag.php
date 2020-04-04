@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
 {
@@ -9,7 +10,7 @@ class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
         parent::validate($errors, $form_data);
 
         if (!$errors) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -38,7 +39,7 @@ class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
 
     protected function update($form_data)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $target_id = $form_data['target_id'];
 

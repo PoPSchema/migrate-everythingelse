@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 HooksAPIFacade::getInstance()->addFilter(\PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 'popUserstanceModuleInstanceComponents');
 function popUserstanceModuleInstanceComponents($components)
@@ -9,7 +10,7 @@ function popUserstanceModuleInstanceComponents($components)
 
     // Add the origin, as it is needed to decide between blocks PoP_Module_Processor_MainBlocks::MODULE_BLOCK_SINGLEPOSTOPINIONATEDVOTE_CREATEORUPDATE and self::MODULE_BLOCK_OPINIONATEDVOTE_CREATEORUPDATE
     // The difference is, is there parameter "tid"?
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['routing-state']['is-standard']) {
         $route = $vars['route'];
 

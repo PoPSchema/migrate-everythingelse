@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -21,7 +22,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
 
         // Domain
         $configuration['$domain'] = $cmsengineapi->getSiteURL();

@@ -5,6 +5,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\PostMedia\Misc\MediaHelpers;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
 {
@@ -44,7 +45,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     protected function getThumb(array $module, array &$props)
     {
         $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
@@ -97,7 +98,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 
         switch ($module[1]) {

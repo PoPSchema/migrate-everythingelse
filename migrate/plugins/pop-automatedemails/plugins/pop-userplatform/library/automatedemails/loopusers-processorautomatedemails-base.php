@@ -3,6 +3,8 @@ use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEmailsBase
 {
     use PoP_ProcessorAutomatedEmails_UserPreferencesTrait;
@@ -30,7 +32,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $block_settings_id = ModuleUtils::getModuleOutputName($block_module);
             
             // Set the recipient as the "current-user-id", pretending this user is logged in
-            $vars = &\PoP\ComponentModel\Engine_Vars::$vars;
+            $vars = &ApplicationState::$vars;
             // First, save the old values, to restore them later
             $keys = [
                 'is-user-logged-in',

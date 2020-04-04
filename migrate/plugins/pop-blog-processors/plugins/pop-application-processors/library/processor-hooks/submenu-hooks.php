@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Blog_SubmenuHooks
 {
@@ -24,7 +25,7 @@ class PoP_Blog_SubmenuHooks
                 'PoP_Blog_SubmenuHooks:mainsubheaders',
                 array()
             );
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $route = $vars['route'];
             if (in_array($route, $routes[POP_POSTS_ROUTE_POSTS])) {
                 $routes[$route] = array();

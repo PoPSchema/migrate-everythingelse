@@ -1,11 +1,13 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class PoP_AddHighlights_Module_Processor_SectionBlocksUtils
 {
     public static function addDataloadqueryargsSinglehighlights(&$ret, $post_id = null)
     {
         if (is_null($post_id)) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $post_id = $vars['routing-state']['queried-object-id'];
         }
 

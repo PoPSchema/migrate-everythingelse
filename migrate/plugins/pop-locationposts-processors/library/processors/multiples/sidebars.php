@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
@@ -24,7 +25,7 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
 
         switch ($module[1]) {
             case self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 $author = $vars['routing-state']['queried-object-id'];
                 $filters = array(
                     self::MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR => [GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::class, GD_Custom_EM_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR],

@@ -1,13 +1,15 @@
 <?php
 namespace PoP\UserRoles;
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\ComponentModel\State\ApplicationState;
 
 HooksAPIFacade::getInstance()->addFilter(
     \PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 
     function ($components) {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($vars['nature']) {
             case UserRouteNatures::USER:
                 $user_id = $vars['routing-state']['queried-object-id'];

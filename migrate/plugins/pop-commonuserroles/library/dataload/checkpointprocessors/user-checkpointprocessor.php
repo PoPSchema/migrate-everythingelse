@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class GD_URE_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
 {
     public const CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION = 'checkpoint-loggedinuser-isprofileorganization';
@@ -15,7 +17,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\Checkp
 
     public function process(array $checkpoint)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $current_user_id = $vars['global-userstate']['current-user-id'];
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION:

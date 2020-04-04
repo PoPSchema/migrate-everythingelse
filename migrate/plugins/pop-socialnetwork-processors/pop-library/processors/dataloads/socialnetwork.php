@@ -4,6 +4,7 @@ use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -51,7 +52,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
                 // If the user is not logged in, then do not load the data
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if (!PoP_UserState_Utils::currentRouteRequiresUserState() || !$vars['global-userstate']['is-user-logged-in']) {
                     $ret[DataloadingConstants::SKIPDATALOAD] = true;
                 }
@@ -99,7 +100,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)
     {
         // All of these modules require the user to be logged in
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!$vars['global-userstate']['is-user-logged-in']) {
             return [];
         }

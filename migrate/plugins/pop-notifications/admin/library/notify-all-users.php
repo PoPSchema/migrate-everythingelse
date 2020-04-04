@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Object type: 'Post'
@@ -18,7 +19,7 @@ function aalPopNotifyallusersAddMetaBox()
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
@@ -42,7 +43,7 @@ function aalPopNotifyallusersMetaBoxContent()
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
@@ -72,7 +73,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
 {
 
     // Enable if the current logged in user is the System Notification's defined user
-    $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+    $vars = ApplicationState::getVars();
     if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }

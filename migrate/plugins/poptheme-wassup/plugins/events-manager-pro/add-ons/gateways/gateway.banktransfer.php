@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 /**
  * Extension of the Offline Gateway to provide for Bank Details
@@ -32,7 +33,7 @@ if (class_exists("EM_Gateway_Offline")) {
         public function emWpLocalizeScript($em_localized_js)
         {
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             if ($vars['global-userstate']['is-user-logged-in'] && $cmsengineapi->getOption('dbem_rsvp_enabled')) {
                 $em_localized_js[$this->gateway . '_confirm'] = TranslationAPIFacade::getInstance()->__('Be aware that by approving a booking awaiting payment, a full payment transaction will be registered against this booking, meaning that it will be considered as paid.', 'dbem');
             }

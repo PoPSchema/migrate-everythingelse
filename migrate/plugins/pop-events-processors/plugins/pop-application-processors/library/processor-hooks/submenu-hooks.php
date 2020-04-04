@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class Wassup_EM_BP_SubmenuHooks
 {
@@ -30,7 +31,7 @@ class Wassup_EM_BP_SubmenuHooks
                 ),
                 $event_subheaders
             );
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $route = $vars['route'];
             if (in_array($route, $event_subheaders)) {
                 $routes[$route] = array();

@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
     public const MODULE_BLOCK_TABPANEL_AUTHOREVENTS = 'block-tabpanel-authorevents';
@@ -20,7 +22,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         $ret = parent::getInnerSubmodules($module);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $author = $vars['routing-state']['queried-object-id'];
             if (gdUreIsCommunity($author)) {
                 switch ($module[1]) {

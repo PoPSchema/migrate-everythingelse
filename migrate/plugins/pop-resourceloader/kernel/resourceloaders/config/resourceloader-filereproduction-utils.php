@@ -6,6 +6,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\ComponentModel\State\ApplicationState;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
 define ('POP_RESOURCELOADERIDENTIFIER_ROUTE', 't:');
@@ -60,7 +61,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $options['use-engine-entrymodule-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $nature = $vars['nature'];
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();

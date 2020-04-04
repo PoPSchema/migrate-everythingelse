@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
     public const MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR = 'block-stances-scroll-navigator';
@@ -374,7 +376,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL:
             case self::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
                 // For the quickview we return something different
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 if ($vars['target'] == POP_TARGET_QUICKVIEW) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST];
                 }

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Application_DataloaderHooks
 {
@@ -27,7 +28,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeGetLoadinglatestPagenumber($pagenumber)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             return 1;
         }
@@ -37,7 +38,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeGetLoadinglatestLimit($limit)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             return 0;
         }
@@ -48,7 +49,7 @@ class PoP_Application_DataloaderHooks
     public function maybeGetLoadinglatestLimitForPost($limit)
     {
         // No-limit for posts is -1, not 0
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             return -1;
         }
@@ -58,7 +59,7 @@ class PoP_Application_DataloaderHooks
 
     public function maybeAddLoadinglatestTimestamp($query, $query_args)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['loading-latest']) {
             // Return the posts created after the given timestamp
             $timestamp = $query_args[GD_URLPARAM_TIMESTAMP];

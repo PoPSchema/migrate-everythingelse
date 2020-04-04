@@ -1,10 +1,12 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class GD_DataLoad_QueryInputOutputHandler_LatestNotificationList extends GD_DataLoad_QueryInputOutputHandler_NotificationList
 {
     public function getHistTime(&$query_args)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
             // Since the last time the user logged in
             $lastaccess = \PoP\UserMeta\Utils::getUserMeta($vars['global-userstate']['current-user-id'], POP_METAKEY_USER_LASTACCESS, true);

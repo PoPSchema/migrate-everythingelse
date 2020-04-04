@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -77,7 +78,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+                $vars = ApplicationState::getVars();
                 return $vars['global-userstate']['current-user-id'];
         }
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
@@ -141,7 +142,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
 
     public function initModelProps(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 if ($extra_checkpoint_msgs = HooksAPIFacade::getInstance()->applyFilters(

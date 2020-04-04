@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
     public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 = 'block-tabpanel-authorcategoryposts00';
@@ -81,7 +83,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
         $ret = parent::getInnerSubmodules($module);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $author = $vars['routing-state']['queried-object-id'];
             if (gdUreIsCommunity($author)) {
                 switch ($module[1]) {

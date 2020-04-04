@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_UserStance_LayoutHooks
 {
@@ -32,7 +33,7 @@ class PoPTheme_UserStance_LayoutHooks
 
         // Only if it is not single. In that case, we add the block to directly add the Thought
         // Add the "What do you think about TPP?" before the userpostinteraction layouts
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (!$vars['routing-state']['is-post']) {
             array_unshift(
                 $layouts, 

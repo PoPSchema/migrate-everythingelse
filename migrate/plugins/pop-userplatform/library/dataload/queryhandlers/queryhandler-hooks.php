@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_DATALOAD_USER_ATTRIBUTES', 'userattributes');
 
@@ -15,7 +16,7 @@ class PoP_UserPlatform_UserStance_Hooks
 
     public function getUserFeedback($user_feedback)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $user_attributes = array();
         $user_logged_in = $vars['global-userstate']['is-user-logged-in'];
         if ($user_logged_in) {

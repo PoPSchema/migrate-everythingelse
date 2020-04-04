@@ -1,12 +1,13 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
 {
     public function isSubmoduleActivePanel(array $module, $submodule)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         return $vars['format'] == $this->getSubmoduleFormat($module, $submodule);
     }
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 define('GD_THEMEMODE_WASSUP_EMBED', 'embed');
 
@@ -17,7 +18,7 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
         HooksAPIFacade::getInstance()->addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_true');
 
         HooksAPIFacade::getInstance()->addAction('popcms:boot', function() {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             if (in_array(POP_STRATUM_WEB, $vars['strata'])) {
                 HooksAPIFacade::getInstance()->addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
             }

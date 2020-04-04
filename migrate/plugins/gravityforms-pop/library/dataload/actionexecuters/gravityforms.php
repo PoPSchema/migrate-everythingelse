@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExecuterBase
 {
@@ -112,7 +113,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // These are needed since implementing PoP where the user is always logged in, so we can't print the name/email
         // on the front-end anymore, instead fields PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME and PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL are
         // not visible when the user is logged in
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         if (PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in']) {
             if ($form_id = $_POST["gform_submit"]) {
                 // Hook the fieldnames from the configuration
@@ -160,7 +161,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // this is done now because GF sends the email at the beginning, this can't be postponed
         // Check only if the user is not logged in. When logged in, we never use the captcha
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             if (!(PoP_FormUtils::useLoggedinuserData() && $vars['global-userstate']['is-user-logged-in'])) {
                 if ($form_id = $_POST["gform_submit"]) {
                     // Check if there's a captcha sent along

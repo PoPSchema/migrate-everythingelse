@@ -4,12 +4,13 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomSectionBlocksUtils
 {
     public static function getAuthorTitle()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $author = $vars['routing-state']['queried-object-id'];
         $ret = $cmsusersapi->getUserDisplayName($author);
@@ -27,7 +28,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function getTagTitle($add_description = true, $add_sublevel = true)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $tag_id = $vars['routing-state']['queried-object-id'];
@@ -60,7 +61,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function getSingleTitle()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post_id = $vars['routing-state']['queried-object-id'];
         $ret = $postTypeAPI->getTitle($post_id);
@@ -79,7 +80,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function getSingleSubmenu()
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
@@ -92,7 +93,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsAuthorcontent(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // Allow to override with User Role Editor: for organizations: Find all the members of this community, and filter all posts accordingly
@@ -106,14 +107,14 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsTagcontent(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $tag_id = $vars['routing-state']['queried-object-id'];
         $ret['tag-ids'] = [$tag_id];
     }
 
     public static function addDataloadqueryargsTagsubscribers(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $tag_id = $vars['routing-state']['queried-object-id'];
 
         $ret['meta-query'][] = [
@@ -126,7 +127,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsAuthorfollowers(&$ret, $author = null)
     {
         if (!$author) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
 
@@ -142,7 +143,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsAuthorfollowingusers(&$ret, $author = null)
     {
         if (!$author) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
 
@@ -157,7 +158,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsAuthorsubscribedtotags(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $author = $vars['routing-state']['queried-object-id'];
 
         // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
@@ -173,7 +174,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     {
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (!$author) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $author = $vars['routing-state']['queried-object-id'];
         }
 
@@ -188,7 +189,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsSingleauthors(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
 
         // Include only the authors of the current post
@@ -198,7 +199,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function addDataloadqueryargsRecommendedby(&$ret, $post_id = null)
     {
         if (!$post_id) {
-            $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+            $vars = ApplicationState::getVars();
             $post_id = $vars['routing-state']['queried-object-id'];
         }
 
@@ -212,7 +213,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsUpvotedby(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
 
         // Find all related posts
@@ -225,7 +226,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
     public static function addDataloadqueryargsDownvotedby(&$ret)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
 
         // Find all related posts

@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\State\ApplicationState;
+
 class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 {
     public const MODULE_CODE_APPSHELL = 'code-appshell';
@@ -27,7 +29,7 @@ class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesB
 
     public function initModelProps(array $module, array &$props)
     {
-        $vars = \PoP\ComponentModel\Engine_Vars::getVars();
+        $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_CODE_APPSHELL:
                 // Make it invisible, nothing to show
