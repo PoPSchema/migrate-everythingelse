@@ -105,7 +105,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 					$dynamic_resources = $cachemanager->getComponentModelCache($model_instance_id, POP_CACHETYPE_CSSRESOURCES_DYNAMIC);
 				}
 
-				// If the cache does not exists, each of these variables will be "false", and not an empty array, so the array_merge below would fail
+				// If the cache does not exists, each of these variables will be `null`, and not an empty array, so the array_merge below would fail
 				if ($normal_resources || $vendor_resources || $dynamic_resources || $template_resources) {
 
 					// Enqueuing order: 1. Vendor, 2. Normal, 3. Dynamic, 4. Template
