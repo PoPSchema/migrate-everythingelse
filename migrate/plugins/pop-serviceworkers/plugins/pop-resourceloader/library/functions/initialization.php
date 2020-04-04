@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
 {
@@ -42,7 +43,7 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
         // Register the scripts from the Resource Loader on the current request
         // Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+        if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
             global $pop_serviceworkers_webplatform_resourceloader_scriptsandstyles_registration;
             $pop_serviceworkers_webplatform_resourceloader_scriptsandstyles_registration->registerScripts();
         }
@@ -54,7 +55,7 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
         // Register the scripts from the Resource Loader on the current request
         // Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+        if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
             global $pop_serviceworkers_webplatform_resourceloader_scriptsandstyles_registration;
             $pop_serviceworkers_webplatform_resourceloader_scriptsandstyles_registration->registerStyles();
         }

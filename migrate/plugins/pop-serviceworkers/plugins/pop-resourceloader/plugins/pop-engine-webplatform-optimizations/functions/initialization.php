@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ServiceWorkers_WebPlatformEngineOptimization_ResourceLoader_Initialization
 {
@@ -17,7 +18,7 @@ class PoP_ServiceWorkers_WebPlatformEngineOptimization_ResourceLoader_Initializa
         // Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
-        if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+        if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
             // Dequeue unwanted scripts. Eg: the /settings/ runtime generated files, which correspond to the /generate/ page and will not be needed by anyone else
             if (PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {
                 $properties = array(

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {
@@ -110,7 +111,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 // 1. After the user clicks on reset password, will be redirected
                 // 2. After the user clicks on the link on the sent email
                 // For these 2 cases, the message is different
-                if (\PoP\ComponentModel\Utils::loadingSite()) {
+                if (RequestUtils::loadingSite()) {
                     $body = TranslationAPIFacade::getInstance()->__('Please choose your new password.', 'pop-coreprocessors');
                 } else {
                     $body = sprintf(
@@ -130,7 +131,7 @@ class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_Forms
                 // // Do not show if user already logged out
                 // // Notice that it works for the domain from wherever this block is being fetched from!
                 // $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-                // $this->appendProp($module, $props, 'class', 'visible-loggedin-'.\PoP\ComponentModel\Utils::getDomainId($cmsengineapi->getSiteURL()));
+                // $this->appendProp($module, $props, 'class', 'visible-loggedin-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()));
                 $this->appendProp($module, $props, 'class', 'visible-loggedin');
 
                 // Add the description

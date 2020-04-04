@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Utils;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -74,7 +74,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
                         // so the best next thing is to point to the tab of all related content of the original post
                         $value = $postTypeAPI->getPermalink($notification->object_id);
                         if (POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT) {
-                            $value = \PoP\ComponentModel\Utils::addRoute($value, POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT);
+                            $value = RequestUtils::addRoute($value, POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT);
                         }
                         return $value;
                 }

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 // The editor filters are not initialized when fetching json page. So initialize it below
 // This way, function getValue('contentEditor') on typeResolver-posts.php
@@ -14,7 +15,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Engine:beginning', 'gdEditorInit');
 function gdEditorInit()
 {
-    if (is_admin() || \PoP\ComponentModel\Utils::loadingSite()) {
+    if (is_admin() || RequestUtils::loadingSite()) {
         return;
     }
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ServiceWorkers_WebPlatformEngine_Hooks
 {
@@ -14,8 +15,8 @@ class PoP_ServiceWorkers_WebPlatformEngine_Hooks
         // Indicate for what pages we can't do extractResponseIntoJsfilesOnRuntime
         // Eg: the AppShell, or otherwise we must also cache the corresponding /settings/ .js files,
         // which we can't obtain when generating the service-worker.js file
-        // if (\PoP\ComponentModel\Utils::isPage(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
-        if (\PoP\ComponentModel\Utils::isRoute(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
+        // if (RequestUtils::isPage(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
+        if (RequestUtils::isRoute(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
             return true;
         }
 

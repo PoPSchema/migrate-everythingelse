@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Processor_ButtonGroupsBase
 {
@@ -162,6 +163,6 @@ abstract class PoP_Module_Processor_CustomButtonGroupsBase extends PoP_Module_Pr
     }
     protected function getHeadersdataUrl(array $module, array &$props)
     {
-        return \PoP\ComponentModel\Utils::getCurrentUrl();
+        return RequestUtils::getCurrentUrl();
     }
 }

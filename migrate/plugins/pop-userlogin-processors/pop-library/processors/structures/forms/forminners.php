@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInnersBase
 {
@@ -90,7 +91,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
             case self::MODULE_FORMINNER_LOSTPWDRESET:
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
-                if (\PoP\ComponentModel\Utils::loadingSite()) {
+                if (RequestUtils::loadingSite()) {
                     if ($value = $_REQUEST[POP_INPUTNAME_CODE]) {
                         $this->setProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, 'default-value'/*'selected-value'*/, $value);
                         $this->appendProp([PoP_Module_Processor_LoginFormGroups::class, PoP_Module_Processor_LoginFormGroups::MODULE_FORMINPUTGROUP_LOSTPWDRESET_CODE], $props, 'class', 'hidden');
@@ -112,7 +113,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
 
     //             // If loading the page straight, then set the value on the input directly
     //             // Otherwise, use Javascript to fill in the value
-    //             // if (!\PoP\ComponentModel\Utils::loadingSite()) {
+    //             // if (!RequestUtils::loadingSite()) {
 
     //             //     // This also works for replicable
     //             //     $this->mergeJsmethodsProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, array('fillURLParamInput'));

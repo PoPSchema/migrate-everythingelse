@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 /**
  * Return the author of the post (to be overriden by Co-Authors plus)
@@ -19,7 +20,7 @@ function getAuthorProfileUrl($author)
 {
     $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
     $url = $cmsusersapi->getUserURL($author);
-    return \PoP\ComponentModel\Utils::addRoute($url, POP_ROUTE_DESCRIPTION);
+    return RequestUtils::addRoute($url, POP_ROUTE_DESCRIPTION);
 }
 
 /**

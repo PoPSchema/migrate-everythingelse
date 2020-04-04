@@ -17,7 +17,7 @@ function popthemeWassupExtraRoutes($extra_routes)
                 $extra_routes = array_unique(
                     array_merge(
                         $extra_routes,
-                        // array_map(array(\PoP\ComponentModel\Utils::class, 'getPageUri'), $routes)
+                        // array_map(array(RequestUtils::class, 'getPageUri'), $routes)
                         $routes
                     )
                 );

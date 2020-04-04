@@ -24,7 +24,7 @@ class PoP_UserState_Utils
         $settingsmanager = \PoP\UserState\Settings\SettingsManagerFactory::getInstance();
         return $settingsmanager->requiresUserState($route);
 
-        // $checkpoint_configuration = \PoP\ComponentModel\Utils::getCheckpointConfiguration($page_id);
+        // $checkpoint_configuration = RequestUtils::getCheckpointConfiguration($page_id);
 
         // return self::checkpointConfigurationRequiresUserState($checkpoint_configuration);
     }
@@ -40,6 +40,6 @@ class PoP_UserState_Utils
     //         return $checkpoint_configuration['requires-user-state'];
     //     }
         
-    //     return \PoP\ComponentModel\Utils::checkpointValidationRequired($checkpoint_configuration);
+    //     return RequestUtils::checkpointValidationRequired($checkpoint_configuration);
     // }
 }

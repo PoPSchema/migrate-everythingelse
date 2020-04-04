@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Misc\RequestUtils;
+
 abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
@@ -46,7 +48,7 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
         if (defined('POP_SSR_INITIALIZED')) {
             // If doing Server-side rendering, then already add "active" to the tabPane, to not depend on javascript
             // (Otherwise, the page will look empty!)
-            if (\PoP\ComponentModel\Utils::loadingSite() && !PoP_SSR_ServerUtils::disableServerSideRendering()) {
+            if (RequestUtils::loadingSite() && !PoP_SSR_ServerUtils::disableServerSideRendering()) {
                 $this->appendProp($module, $props, 'class', 'active');
             }
         }

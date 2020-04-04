@@ -84,8 +84,8 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     //             );
 
     //             // For the default page add the thumbnail. For the others, add the pretitle
-    //             $page_id = \PoP\ComponentModel\Utils::getRoute();
-    //             if ($page_id != \PoP\ComponentModel\Utils::getNatureDefaultPage($natures[$module[1]])) {
+    //             $page_id = RequestUtils::getRoute();
+    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$module[1]])) {
     //                 return $cmsengineapi->getTitle($page_id);
     //             }
     //             break;

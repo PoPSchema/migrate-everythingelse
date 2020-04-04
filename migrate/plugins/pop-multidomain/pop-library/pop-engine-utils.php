@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_MultiDomain_Engine_Utils
 {
@@ -22,12 +23,12 @@ class PoP_MultiDomain_Engine_Utils
     {
         $vars = ApplicationState::getVars();
         if ($domain = $vars['domain']) {
-            $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').\PoP\ComponentModel\Utils::getDomainId($domain);
+            $components[] = TranslationAPIFacade::getInstance()->__('domain:', 'pop-multidomain').RequestUtils::getDomainId($domain);
         }
         // External domain different configuration: needed for the resourceLoader config.js file to load, cached in the list under pop-cache/resources/,
         // which is different for different domains
         if ($external_url_domain = $vars['external-url-domain']) {
-            $components[] = TranslationAPIFacade::getInstance()->__('external url domain:', 'pop-multidomain').\PoP\ComponentModel\Utils::getDomainId($external_url_domain);
+            $components[] = TranslationAPIFacade::getInstance()->__('external url domain:', 'pop-multidomain').RequestUtils::getDomainId($external_url_domain);
         }
 
         return $components;

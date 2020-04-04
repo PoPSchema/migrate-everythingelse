@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_SPA_RequestMeta_Hooks
 {
@@ -19,7 +20,7 @@ class PoP_SPA_RequestMeta_Hooks
         // Comment Leo 05/04/2017: Create the params array only in the fetchingSite()
         // Before it was outside, and calling the initial-frames page brought params=[],
         // and this was overriding the params in the topLevelFeedback removing all info there
-        if (\PoP\ComponentModel\Utils::fetchingSite()) {
+        if (RequestUtils::fetchingSite()) {
             // Send params back to the server
             $meta[ParamConstants::PARAMS] = array();
             $elemKeys = [

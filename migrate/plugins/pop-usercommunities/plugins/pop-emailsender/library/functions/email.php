@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 /**
  * Create / Update Post
@@ -37,7 +38,7 @@ function gdUreSendemailCommunityNewmember($user_id, $communities)
     
         $content = sprintf(
             TranslationAPIFacade::getInstance()->__('<p>Congratulations! <a href="%s">Your community has a new member</a>:</p>', 'ure-pop'),
-            \PoP\ComponentModel\Utils::addRoute($community_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
+            RequestUtils::addRoute($community_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
         );
         $content .= $user_html;
         $content .= '<br/>';

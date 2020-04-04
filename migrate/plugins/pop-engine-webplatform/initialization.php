@@ -5,6 +5,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');
 
@@ -43,7 +44,7 @@ class PoPWebPlatform_Initialization
         
         // If it is a search engine, there's no need to output the scripts or initialize pop.Manager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        if (!$cmsapplicationapi->isAdminPanel()/* && !\PoP\ComponentModel\Utils::isSearchEngine()*/) {
+        if (!$cmsapplicationapi->isAdminPanel()/* && !RequestUtils::isSearchEngine()*/) {
             HooksAPIFacade::getInstance()->addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
 
             // Print all jQuery functions, execute after all the plugin scripts have loaded
@@ -184,7 +185,7 @@ class PoPWebPlatform_Initialization
         ));
 
         $jqueryConstants = array(
-            'INITIAL_URL' => \PoP\ComponentModel\Utils::getCurrentUrl(), // Needed to always identify which was the first URL loaded
+            'INITIAL_URL' => RequestUtils::getCurrentUrl(), // Needed to always identify which was the first URL loaded
             'HOME_DOMAIN' => $homeurl,
             'ALLOWED_DOMAINS' => $allowed_domains,
             'VERSION' => $vars['version'],

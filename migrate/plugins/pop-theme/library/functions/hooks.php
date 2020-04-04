@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:current_url:remove_params', 'popThemeRemoveUrlparams');
+HooksAPIFacade::getInstance()->addFilter('RequestUtils:current_url:remove_params', 'popThemeRemoveUrlparams');
 function popThemeRemoveUrlparams($remove_params)
 {
     $remove_params[] = GD_URLPARAM_THEME;

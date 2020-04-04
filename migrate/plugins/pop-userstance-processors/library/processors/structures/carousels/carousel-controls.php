@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -106,7 +107,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 // Allow URE to override adding "+Members" param
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink',
-                    \PoP\ComponentModel\Utils::addRoute($url, $routes[$module[1]])
+                    RequestUtils::addRoute($url, $routes[$module[1]])
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
@@ -117,7 +118,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:tagstances:titlelink',
-                    \PoP\ComponentModel\Utils::addRoute($url, $routes[$module[1]])
+                    RequestUtils::addRoute($url, $routes[$module[1]])
                 );
         }
 

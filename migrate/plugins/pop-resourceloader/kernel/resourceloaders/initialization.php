@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoPWebPlatform_ResourceLoader_Initialization {
 
@@ -18,7 +19,7 @@ class PoPWebPlatform_ResourceLoader_Initialization {
 		// Register the scripts from the Resource Loader on the current request
 		// Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-		if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+		if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			global $popwebplatform_resourceloader_scriptsandstyles_registration;
 			$popwebplatform_resourceloader_scriptsandstyles_registration->registerScripts();
@@ -30,7 +31,7 @@ class PoPWebPlatform_ResourceLoader_Initialization {
 		// Register the scripts from the Resource Loader on the current request
 		// Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-		if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+		if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			global $popwebplatform_resourceloader_scriptsandstyles_registration;
 			$popwebplatform_resourceloader_scriptsandstyles_registration->registerStyles();
@@ -41,7 +42,7 @@ class PoPWebPlatform_ResourceLoader_Initialization {
 
 		// Only if loading the frame, and it is configured to use code splitting
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-		if (!$cmsapplicationapi->isAdminPanel() && \PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+		if (!$cmsapplicationapi->isAdminPanel() && RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			// Also localize the scripts
 			global $pop_jsresourceloaderprocessor_manager;

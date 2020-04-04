@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\SPA\Modules\PageInterface;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageInterface
 {
@@ -89,7 +90,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
                 // Load initial frame components
                 $ret = array_merge(
                     $ret,
-                    \PoP\ComponentModel\Utils::getFramecomponentModules()
+                    RequestUtils::getFramecomponentModules()
                 );
                 break;
         }
@@ -175,7 +176,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         switch ($module[1]) {
          // Make the frame components have a unique ID
             case self::MODULE_PAGE_FRAMECOMPONENTS:
-                foreach (\PoP\ComponentModel\Utils::getFramecomponentModules() as $submodule) {
+                foreach (RequestUtils::getFramecomponentModules() as $submodule) {
                     $this->setProp([$submodule], $props, 'unique-frontend-id', true);
                 }
                 break;

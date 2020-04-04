@@ -174,7 +174,7 @@ class PoP_ResourceLoaderProcessorUtils {
                         $components['route'] = $route;
 
                         // If this tab is the default one, an entry with no tab must also be created
-                        // if ($route == \PoP\ComponentModel\Utils::getNatureDefaultPage($nature)) {
+                        // if ($route == RequestUtils::getNatureDefaultPage($nature)) {
                         if ($format == POP_VALUES_DEFAULT) {
                             $item_options['is-default-route'] = true;
                         }

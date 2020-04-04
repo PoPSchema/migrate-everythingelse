@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusBase
 {
@@ -121,18 +122,18 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
             case self::MODULE_SUBMENU_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
                 $url = $cmsusersapi->getUserURL($author);
-                $url = \PoP\ComponentModel\Utils::addRoute($url, $route);
+                $url = RequestUtils::addRoute($url, $route);
 
                 // Allow URE to add the Organization/Community content source attribute
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
                 $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
-                return \PoP\ComponentModel\Utils::addRoute($url, $route);
+                return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:
                 $url = $postTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
-                return \PoP\ComponentModel\Utils::addRoute($url, $route);
+                return RequestUtils::addRoute($url, $route);
         }
 
         return parent::getUrl($module, $route, $props);

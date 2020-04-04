@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Hooks
 {
@@ -13,8 +14,8 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Hooks
 
         // The AppShell, it must always use 'resource', or otherwise it will need to load extra bundle(group) files,
         // making the initial SW pre-fetch heavy, and not allowing to easily create the AppShell for the different thememodes (embed, print)
-        // if (\PoP\ComponentModel\Utils::isPage(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
-        if (\PoP\ComponentModel\Utils::isRoute(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
+        // if (RequestUtils::isPage(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
+        if (RequestUtils::isRoute(POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL)) {
             return 'resource';
         }
 

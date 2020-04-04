@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ResourceLoader_EngineInitialization_Hooks {
 
@@ -42,7 +43,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 
 	function generateHelperCalculations($helper_calculations_in_array, array $module, $props_in_array) {
 
-		if (\PoP\ComponentModel\Utils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
+		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			global $pop_resourcemoduledecoratorprocessor_manager;
 			$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();

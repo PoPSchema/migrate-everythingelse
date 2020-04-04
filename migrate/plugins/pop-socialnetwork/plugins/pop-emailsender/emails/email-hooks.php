@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 define('POP_EMAIL_FOLLOWSUSER', 'followsuser');
 define('POP_EMAIL_RECOMMENDSPOST', 'recommendspost');
@@ -208,7 +209,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
 
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p>Congratulations! <a href="%s">You have a new follower</a>:</p>', 'pop-emailsender'),
-                \PoP\ComponentModel\Utils::addRoute($target_url, POP_SOCIALNETWORK_ROUTE_FOLLOWERS)
+                RequestUtils::addRoute($target_url, POP_SOCIALNETWORK_ROUTE_FOLLOWERS)
             );
             $content .= $user_html;
 

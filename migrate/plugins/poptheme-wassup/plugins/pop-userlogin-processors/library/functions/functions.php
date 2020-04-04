@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 /**
  * Uniqueblocks
  */
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:getFramecomponentModules', 'getUserloginFramecomponentModules');
+HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getUserloginFramecomponentModules');
 function getUserloginFramecomponentModules($modules)
 {
 

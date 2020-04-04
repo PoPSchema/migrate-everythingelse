@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Misc\RequestUtils;
+
 class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSSFileReproductionBase
 {
     protected $domain;
@@ -32,7 +34,7 @@ class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSS
 
         $domain = $this->getDomain();
         $domain_bgcolors = PoPTheme_Wassup_MultiDomain_Utils::getMultidomainBgcolors();
-        $configuration['{{$domainId}}'] = \PoP\ComponentModel\Utils::getDomainId($domain);
+        $configuration['{{$domainId}}'] = RequestUtils::getDomainId($domain);
         $configuration['{{$backgroundColor}}'] = $domain_bgcolors[$domain];
 
         return $configuration;

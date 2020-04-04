@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 /**
  * Copied from plugin `hashtagger` (https://wordpress.org/plugins/hashtagger/)
@@ -248,7 +249,7 @@ class PoP_Mentions
             // Allow for the popover by adding data-popover-id
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-'.\PoP\ComponentModel\Utils::getDomainId($cmsengineapi->getSiteURL()).'-'.UserTypeResolver::NAME.'-'.$cmsusersresolver->getUserId($user),
+                '#popover-'.RequestUtils::getDomainId($cmsengineapi->getSiteURL()).'-'.UserTypeResolver::NAME.'-'.$cmsusersresolver->getUserId($user),
                 $cmsusersapi->getUserURL($cmsusersresolver->getUserId($user)),
                 $cmsusersresolver->getUserDisplayName($user)
             );

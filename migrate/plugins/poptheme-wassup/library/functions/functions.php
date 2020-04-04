@@ -14,7 +14,7 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  * Uniqueblocks
  */
 
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:getFramecomponentModules', 'getWassupFramecomponentModules');
+HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
 function getWassupFramecomponentModules($modules)
 {
     if (HooksAPIFacade::getInstance()->applyFilters('poptheme_wassup_loadlatest', true)) {

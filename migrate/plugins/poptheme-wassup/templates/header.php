@@ -1,5 +1,6 @@
 <?php use PoP\Translation\Facades\TranslationAPIFacade; ?>
 <?php use PoP\ComponentModel\State\ApplicationState; ?>
+<?php use PoP\ComponentModel\Misc\RequestUtils; ?>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11" prefix="og: http://ogp.me/ns#">
@@ -40,7 +41,7 @@
     <meta property="og:site_name" content="<?php echo $site_name ?>">
     <meta property="og:title" content="<?php echo $encoded_title ?>">
     <meta name="twitter:title" content="<?php echo $encoded_title ?>">
-    <?php $url = \PoP\ComponentModel\Utils::getCurrentUrl(); ?>
+    <?php $url = RequestUtils::getCurrentUrl(); ?>
     <?php if ($url != urldecode(fullUrl())) : ?>
         <link rel="canonical" href="<?php echo $url ?>">
     <?php endif; ?>

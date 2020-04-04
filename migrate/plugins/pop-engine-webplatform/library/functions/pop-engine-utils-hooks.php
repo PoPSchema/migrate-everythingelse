@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_WebPlatformEngine_UtilsHooks
 {
@@ -9,7 +10,7 @@ class PoP_WebPlatformEngine_UtilsHooks
     {
         // Comment Leo 19/11/2017: when first loading the website, ask if we are using the AppShell before anything else,
         // in which case it will always be 'page' and the $post->ID set to the corresponding AppShell page ID
-        if (\PoP\ComponentModel\Utils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
+        if (RequestUtils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
             
             // Comment Leo 19/11/2017: page ID POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
@@ -22,7 +23,7 @@ class PoP_WebPlatformEngine_UtilsHooks
     {
         // Comment Leo 19/11/2017: when first loading the website, ask if we are using the AppShell before anything else,
         // in which case it will always be 'page' and the $post->ID set to the corresponding AppShell page ID
-        if (\PoP\ComponentModel\Utils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
+        if (RequestUtils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
             
             return [
                 null,
@@ -52,4 +53,4 @@ class PoP_WebPlatformEngine_UtilsHooks
  */
 HooksAPIFacade::getInstance()->addAction('ApplicationState:addVars', array(PoP_WebPlatformEngine_UtilsHooks::class, 'addVars'), 1, 1); // Priority 1: execute immediately after PoP_Application_Engine_Utils, which has priority 0
 HooksAPIFacade::getInstance()->addFilter('ApplicationState:queried-object', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getQueriedObject'));
-// HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:getCurrentUrl', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getCurrentUrl'));
+// HooksAPIFacade::getInstance()->addFilter('RequestUtils:getCurrentUrl', array(PoP_WebPlatformEngine_UtilsHooks::class, 'getCurrentUrl'));

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_InviteMembers extends GD_EmailInvite
 {
@@ -21,7 +22,7 @@ class GD_InviteMembers extends GD_EmailInvite
             TranslationAPIFacade::getInstance()->__('<p><a href="%s">%s</a> is inviting you to <a href="%s">become their member</a>:</p>', 'ure-pop'),
             $author_url,
             $author_name,
-            \PoP\ComponentModel\Utils::addRoute($author_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
+            RequestUtils::addRoute($author_url, POP_USERCOMMUNITIES_ROUTE_MEMBERS)
         );
         // Optional: Additional Message
         if ($additional_msg = $form_data['additional-msg']) {

@@ -9,6 +9,7 @@ use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
@@ -71,7 +72,7 @@ class PoP_SSR_EngineInitialization_Hooks
     {
 
         // Optimizations to be made when first loading the website
-        if (\PoP\ComponentModel\Utils::loadingSite()) {
+        if (RequestUtils::loadingSite()) {
             // If we are using serverside-rendering, and set the config to remove the database code,
             // then do not send the data to the front-end (most likely there is no need, since the HTML has already been produced)
             if (PoP_SSR_ServerUtils::removeDatabasesFromOutput()) {

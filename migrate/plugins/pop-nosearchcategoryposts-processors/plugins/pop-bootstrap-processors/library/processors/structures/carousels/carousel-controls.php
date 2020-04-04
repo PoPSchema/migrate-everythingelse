@@ -1,6 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -414,10 +415,10 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
         } elseif ($route = $authorroutes[$module[1]]) {
             $author = $vars['routing-state']['queried-object-id'];
             $url = $cmsusersapi->getUserURL($author);
-            return \PoP\ComponentModel\Utils::addRoute($url, $route);
+            return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]]) {
             $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
-            return \PoP\ComponentModel\Utils::addRoute($url, $route);
+            return RequestUtils::addRoute($url, $route);
         }
 
         return parent::getTitleLink($module, $props);

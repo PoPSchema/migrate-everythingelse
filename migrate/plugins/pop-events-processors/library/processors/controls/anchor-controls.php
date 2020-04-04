@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -71,13 +72,13 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 // Allow URE to add the ContentSource
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'GD_EM_Module_Processor_CustomAnchorControls:pastevents:url',
-                    \PoP\ComponentModel\Utils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS),
+                    RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS),
                     $author
                 );
         
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
                 $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
-                return \PoP\ComponentModel\Utils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
+                return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 
         return parent::getHref($module, $props);

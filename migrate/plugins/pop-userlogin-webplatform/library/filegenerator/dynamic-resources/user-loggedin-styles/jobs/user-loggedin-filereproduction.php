@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\Misc\RequestUtils;
+
 class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_CSSFileReproductionBase
 {
     protected $domain;
@@ -30,7 +32,7 @@ class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_
     {
         $configuration = parent::getConfiguration();
 
-        $configuration['{{$domainId}}'] = \PoP\ComponentModel\Utils::getDomainId($this->getDomain());
+        $configuration['{{$domainId}}'] = RequestUtils::getDomainId($this->getDomain());
 
         return $configuration;
     }

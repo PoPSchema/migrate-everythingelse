@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_SSR_ServerUtils
 {
@@ -24,7 +25,7 @@ class PoP_SSR_ServerUtils
     {
         // We only remove the code in the server-side rendering, when first loading the website. If this is not the case,
         // then there is no need for this functionality
-        if (!\PoP\ComponentModel\Utils::loadingSite() || self::disableServerSideRendering()) {
+        if (!RequestUtils::loadingSite() || self::disableServerSideRendering()) {
             return false;
         }
 

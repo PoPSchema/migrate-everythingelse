@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_UserState_EngineHooks
 {
@@ -56,7 +57,7 @@ class PoP_UserState_EngineHooks
                 ],
                 \PoP\ComponentModel\ModuleFilters\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
                 GD_URLPARAM_ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
-            ], \PoP\ComponentModel\Utils::getCurrentUrl());
+            ], RequestUtils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));
         }
     }

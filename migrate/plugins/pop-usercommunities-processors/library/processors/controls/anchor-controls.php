@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
@@ -57,9 +58,9 @@ class GD_URE_Module_Processor_AnchorControls extends PoP_Module_Processor_Anchor
                 );
                 $source = $sources[$module[1]];
 
-                $url = \PoP\ComponentModel\Utils::getCurrentUrl();
+                $url = RequestUtils::getCurrentUrl();
                 // Remove the 'source' param if it exists on the current url
-                        $url = GeneralUtils::removeQueryArgs([GD_URLPARAM_URECONTENTSOURCE], $url);
+                $url = GeneralUtils::removeQueryArgs([GD_URLPARAM_URECONTENTSOURCE], $url);
                 
                 return PoP_URE_ModuleManager_Utils::addSource($url, $source);
         }

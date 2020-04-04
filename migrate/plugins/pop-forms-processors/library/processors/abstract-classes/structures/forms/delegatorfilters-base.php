@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\ModuleFilters\ModuleFilterManager;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
 
@@ -7,9 +8,8 @@ abstract class PoP_Module_Processor_DelegatorFiltersBase extends PoP_Module_Proc
 {
     public function getAction(array $module, array &$props)
     {
-
         // The delegator filter will simply point to the current page, adding ?modulefilter=maincontentmodule so that is the module that gets filtered
-        return \PoP\ComponentModel\Utils::getCurrentUrl();
+        return RequestUtils::getCurrentUrl();
     }
 
     public function initWebPlatformModelProps(array $module, array &$props)

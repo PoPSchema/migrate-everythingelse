@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_CarouselInnersBase extends PoP_Module_Proces
         // // We need JS to execute the logic to add 'active' when filtering/appending items on the carousel,
         // // so that there will always be one with active status (JS knows when it's the case, back-end doesn't know)
         // // that's why we don't add 'active' always here
-        // if (\PoP\ComponentModel\Utils::loadingSite()) {
+        // if (RequestUtils::loadingSite()) {
         //     $ret[GD_JS_CLASSES]['first-item'] = 'active';
         // }
 

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -52,7 +53,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
                 );
-                return \PoP\ComponentModel\Utils::addRoute($url, $routes[$module[1]]);
+                return RequestUtils::addRoute($url, $routes[$module[1]]);
         }
 
         return parent::getTitleLink($module, $props);

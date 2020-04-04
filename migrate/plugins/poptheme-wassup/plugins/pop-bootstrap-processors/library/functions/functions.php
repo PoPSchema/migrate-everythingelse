@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 /**
  * Uniqueblocks
  */
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:getFramecomponentModules', 'getWassupBootstrapFramecomponentModules');
+HooksAPIFacade::getInstance()->addFilter('RequestUtils:getFramecomponentModules', 'getWassupBootstrapFramecomponentModules');
 function getWassupBootstrapFramecomponentModules($modules)
 {
     $modules[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED];

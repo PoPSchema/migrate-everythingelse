@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
 {
@@ -17,7 +18,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
     {
 
         // Optimizations to be made when first loading the website
-        if (\PoP\ComponentModel\Utils::loadingSite()) {
+        if (RequestUtils::loadingSite()) {
             // Do not send the settings to be output as code.
             // Instead, save the settings contents into a javascript file, and enqueue it
             if (PoP_WebPlatformEngineOptimizations_ServerUtils::extractResponseIntoJsfilesOnRuntime()) {

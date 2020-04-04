@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Utils;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -74,7 +74,7 @@ class PoPTheme_Wassup_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abstr
                     case AAL_POP_ACTION_POST_HIGHLIGHTEDFROMPOST:
                         // Can't point to the posted article since we don't have the information (object_id is the original, referenced post, not the referencing one),
                         // so the best next thing is to point to the tab of all related content of the original post
-                        return \PoP\ComponentModel\Utils::addRoute($postTypeAPI->getPermalink($notification->object_id), POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS);
+                        return RequestUtils::addRoute($postTypeAPI->getPermalink($notification->object_id), POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS);
                 }
                 return null;
 

@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -71,14 +72,14 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHOREVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return \PoP\ComponentModel\Utils::addRoute($url, $routes[$module[1]]);
+                return RequestUtils::addRoute($url, $routes[$module[1]]);
 
             case self::MODULE_CAROUSELCONTROLS_TAGEVENTS:
                 $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );
-                return \PoP\ComponentModel\Utils::addRoute($url, $routes[$module[1]]);
+                return RequestUtils::addRoute($url, $routes[$module[1]]);
         }
 
         return parent::getTitleLink($module, $props);

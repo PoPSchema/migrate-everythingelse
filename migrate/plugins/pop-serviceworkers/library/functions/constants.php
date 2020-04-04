@@ -18,7 +18,7 @@ define('GD_URLPARAM_SWNETWORKFIRST', 'sw-networkfirst');
  */
 define('GD_URLPARAM_SWCACHEBUST', 'sw-cachebust');
 
-HooksAPIFacade::getInstance()->addFilter('\PoP\ComponentModel\Utils:current_url:remove_params', 'popSwRemoveUrlparams');
+HooksAPIFacade::getInstance()->addFilter('RequestUtils:current_url:remove_params', 'popSwRemoveUrlparams');
 function popSwRemoveUrlparams($remove_params)
 {
     $remove_params[] = GD_URLPARAM_SWNETWORKFIRST;
