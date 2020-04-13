@@ -11,13 +11,12 @@
 
 Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds support for meta queries
 
-
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require getpop/migrate-everythingelse dev-master
+composer require getpop/migrate-everythingelse dev-master
 ```
 
 **Note:** Your `composer.json` file must have the configuration below to accept minimum stability `"dev"` (there are no releases for PoP yet, and the code is installed directly from the `master` branch):
@@ -45,7 +44,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ## Contributing
