@@ -1,16 +1,5 @@
 # (Temporary package) Migrate code to package: Everything Else
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-<!--
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
--->
-[![Quality Score][ico-code-quality]][link-code-quality]
-<!--
-[![Total Downloads][ico-downloads]][link-downloads]
--->
-
 Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds support for meta queries
 
 ## Install
@@ -20,45 +9,6 @@ Via Composer
 ``` bash
 composer require getpop/migrate-everythingelse
 ```
-
-<!--
-## Usage
-
-``` php
-```
--->
-
-## Standards
-
-[PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
-
-## Change log
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-composer test
-```
-
-## Static Analysis
-
-Execute [phpstan](https://github.com/phpstan/phpstan) with level 8 (strictest mode):
-
-``` bash
-composer analyse
-```
-
-To run checks for level 0 (or any level from 0 to 8):
-
-``` bash
-./vendor/bin/phpstan analyse -l 0 src tests
-```
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
 ## Security
 
