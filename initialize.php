@@ -19,4 +19,4 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
         require_once 'migrate/pop-everythingelse.php';
     }
 });
-$class::init();
+$class::initialize();
