@@ -11,7 +11,7 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
      *
      * @return void
      */
-    public static function beforeBoot()
+    public static function beforeBoot(): void
     {
         parent::beforeBoot();
 
