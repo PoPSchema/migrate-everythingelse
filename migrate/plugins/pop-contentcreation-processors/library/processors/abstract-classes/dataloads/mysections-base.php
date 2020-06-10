@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -31,12 +32,12 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         // Any post status
         $ret['post-status'] = [
-            POP_POSTSTATUS_PUBLISHED, 
-            POP_POSTSTATUS_DRAFT, 
-            POP_POSTSTATUS_PENDING,
+            Status::PUBLISHED,
+            Status::DRAFT,
+            Status::PENDING,
         ];
 
         return $ret;
@@ -45,7 +46,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         // Logged-in author
         $vars = ApplicationState::getVars();
         $ret['authors'] = [$vars['global-userstate']['current-user-id']];

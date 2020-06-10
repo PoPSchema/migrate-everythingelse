@@ -2,6 +2,7 @@
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -130,7 +131,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     return [];
                 }
                 $query = array(
-                    'post-status' => array(POP_POSTSTATUS_PUBLISHED, POP_POSTSTATUS_DRAFT),
+                    'post-status' => array(Status::PUBLISHED, Status::DRAFT),
                     'authors' => [$vars['global-userstate']['current-user-id']],
                 );
                 if ($module[1] == self::MODULE_DATALOAD_STANCE_CREATEORUPDATE) {

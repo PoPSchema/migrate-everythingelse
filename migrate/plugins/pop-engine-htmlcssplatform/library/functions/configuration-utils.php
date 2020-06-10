@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Content\Types\Status;
 
 class PoP_HTMLCSSPlatform_ConfigurationUtils
 {
@@ -21,14 +22,14 @@ class PoP_HTMLCSSPlatform_ConfigurationUtils
     {
         $status = array(
             'class' => array(
-                POP_POSTSTATUS_DRAFT => 'label-info',
-                POP_POSTSTATUS_PENDING => 'label-warning',
-                POP_POSTSTATUS_PUBLISHED => 'label-success'
+                Status::DRAFT => 'label-info',
+                Status::PENDING => 'label-warning',
+                Status::PUBLISHED => 'label-success'
             ),
             'text' => array(
-                POP_POSTSTATUS_DRAFT => TranslationAPIFacade::getInstance()->__('Draft', 'pop-engine-htmlcssplatform'),
-                POP_POSTSTATUS_PENDING => TranslationAPIFacade::getInstance()->__('Pending to be published', 'pop-engine-htmlcssplatform'),
-                POP_POSTSTATUS_PUBLISHED => TranslationAPIFacade::getInstance()->__('Published', 'pop-engine-htmlcssplatform')
+                Status::DRAFT => TranslationAPIFacade::getInstance()->__('Draft', 'pop-engine-htmlcssplatform'),
+                Status::PENDING => TranslationAPIFacade::getInstance()->__('Pending to be published', 'pop-engine-htmlcssplatform'),
+                Status::PUBLISHED => TranslationAPIFacade::getInstance()->__('Published', 'pop-engine-htmlcssplatform')
             )
         );
         // Allow to override: allow URE to add its Member Status

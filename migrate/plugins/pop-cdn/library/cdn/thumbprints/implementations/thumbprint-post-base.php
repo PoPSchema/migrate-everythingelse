@@ -1,6 +1,7 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 {
@@ -10,7 +11,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
             'limit' => 1,
             'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:modified'),
             'order' => 'DESC',
-            'post-status' => POP_POSTSTATUS_PUBLISHED,
+            'post-status' => Status::PUBLISHED,
         );
     }
 

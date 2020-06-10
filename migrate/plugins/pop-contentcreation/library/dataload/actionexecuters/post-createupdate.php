@@ -4,21 +4,22 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ActionExecuterInterface
 {
     public function getSuccessString($post_id, $status)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($status == POP_POSTSTATUS_PUBLISHED) {
+        if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
                 $postTypeAPI->getPermalink($post_id),
                 getReloadurlLinkattrs()
             );
-        } elseif ($status == POP_POSTSTATUS_DRAFT) {
+        } elseif ($status == Status::DRAFT) {
             $success_string = TranslationAPIFacade::getInstance()->__('The status is still “Draft”, so it won\'t be online.', 'pop-application');
-        } elseif ($status == POP_POSTSTATUS_PENDING) {
+        } elseif ($status == Status::PENDING) {
             $success_string = TranslationAPIFacade::getInstance()->__('Now waiting for approval from the admins.', 'pop-application');
         }
 
@@ -69,9 +70,9 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
         // Modify the block-data-settings, saying to select the id of the newly created post
         $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($post_id);
         $data_properties[DataloadingConstants::QUERYARGS]['post-status'] = [
-            POP_POSTSTATUS_PUBLISHED,
-            POP_POSTSTATUS_PENDING,
-            POP_POSTSTATUS_DRAFT,
+            Status::PUBLISHED,
+            Status::PENDING,
+            Status::DRAFT,
         ];
     }
 

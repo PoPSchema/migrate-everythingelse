@@ -1,6 +1,7 @@
 <?php
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 class PoP_Notifications_Utils
 {
@@ -47,7 +48,7 @@ class PoP_Notifications_Utils
     public static function notifyAllUsers($post_id, $notification)
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)
             PoP_Notifications_API::deleteLog(
                 array(

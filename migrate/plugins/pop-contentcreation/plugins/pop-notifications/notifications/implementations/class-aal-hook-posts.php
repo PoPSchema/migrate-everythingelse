@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -61,11 +62,11 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post_status = $postTypeAPI->getStatus($post_id);
-        if ($post_status == POP_POSTSTATUS_PUBLISHED) {
+        if ($post_status == Status::PUBLISHED) {
             $this->logCreatedPost($post_id);
-        } elseif ($post_status == POP_POSTSTATUS_PENDING) {
+        } elseif ($post_status == Status::PENDING) {
             $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_CREATEDPENDINGPOST);
-        } elseif ($post_status == POP_POSTSTATUS_DRAFT) {
+        } elseif ($post_status == Status::DRAFT) {
             $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_CREATEDDRAFTPOST);
         }
     }
@@ -81,15 +82,15 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Simply check the previous status, if it was not published then trigger Create
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $post_status = $postTypeAPI->getStatus($post_id);
-        if ($post_status == POP_POSTSTATUS_PUBLISHED) {
-            if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
+        if ($post_status == Status::PUBLISHED) {
+            if ($log['previous-status'] != Status::PUBLISHED) {
                 $this->logCreatedPost($post_id);
             } else {
                 $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_UPDATEDPOST);
             }
-        } elseif ($post_status == POP_POSTSTATUS_PENDING) {
+        } elseif ($post_status == Status::PENDING) {
             $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_UPDATEDPENDINGPOST);
-        } elseif ($post_status == POP_POSTSTATUS_DRAFT) {
+        } elseif ($post_status == Status::DRAFT) {
             $this->logByPostAuthors($post_id, AAL_POP_ACTION_POST_UPDATEDDRAFTPOST);
         }
     }
@@ -118,7 +119,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function removedPost($new_status, $old_status, $post)
     {
-        if ($old_status == POP_POSTSTATUS_PUBLISHED && $new_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($old_status == Status::PUBLISHED && $new_status != Status::PUBLISHED) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $this->logByPostAuthors($postTypeAPI->getID($post), AAL_POP_ACTION_POST_REMOVEDPOST);
         }
@@ -155,11 +156,11 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         }
 
         $action = null;
-        if ($old_status == POP_POSTSTATUS_PENDING && $new_status == POP_POSTSTATUS_PUBLISHED) {
+        if ($old_status == Status::PENDING && $new_status == Status::PUBLISHED) {
             $action = AAL_POP_ACTION_POST_APPROVEDPOST;
-        } elseif (in_array($old_status, array(POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED)) && $new_status == POP_POSTSTATUS_DRAFT) {
+        } elseif (in_array($old_status, array(Status::PENDING, Status::PUBLISHED)) && $new_status == Status::DRAFT) {
             $action = AAL_POP_ACTION_POST_DRAFTEDPOST;
-        } elseif ($new_status == POP_POSTSTATUS_TRASH) {
+        } elseif ($new_status == Status::TRASH) {
             // Posts trashed, there are 2 different possibilities:
             // 1. the post was just trashed, because, for instance, the user posted it twice
             // 2. the post was trashed because it was spam
@@ -168,9 +169,9 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
             // 1st: mark the post as "draft"
             // 2nd: from there, delete it
             // For #2: just delete it straight from "publish"
-            if (in_array($old_status, array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING))) {
+            if (in_array($old_status, array(Status::DRAFT, Status::PENDING))) {
                 $action = AAL_POP_ACTION_POST_TRASHEDPOST;
-            } elseif (in_array($old_status, array(POP_POSTSTATUS_PUBLISHED))) {
+            } elseif (in_array($old_status, array(Status::PUBLISHED))) {
                 $action = AAL_POP_ACTION_POST_SPAMMEDPOST;
             }
         }

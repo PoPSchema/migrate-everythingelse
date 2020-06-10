@@ -1,6 +1,8 @@
 <?php
+
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
@@ -44,7 +46,7 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($postTypeAPI->getStatus($post_id) !== POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;

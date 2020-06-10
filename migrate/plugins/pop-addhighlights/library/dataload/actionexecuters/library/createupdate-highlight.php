@@ -1,8 +1,10 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
 {
@@ -48,7 +50,7 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
                 $errors[] = TranslationAPIFacade::getInstance()->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($postTypeAPI->getStatus($referenced) != POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = TranslationAPIFacade::getInstance()->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }

@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Content\Types\Status;
 
 class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module_Processor_BooleanCheckboxFormInputsBase
 {
@@ -27,7 +28,7 @@ class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_KEEPASDRAFT:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => \POP_POSTSTATUS_DRAFT], 'is-draft');
+                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::DRAFT], 'is-draft');
         }
 
         return parent::getDbobjectField($module);

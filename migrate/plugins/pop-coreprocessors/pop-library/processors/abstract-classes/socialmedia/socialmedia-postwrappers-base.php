@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Content\Types\Status;
+
 abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {
     public function getSocialmediaModule(array $module)
@@ -18,7 +20,7 @@ abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Modul
 
     public function getConditionField(array $module): ?string
     {
-        return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
+        return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
     }
 
     public function initModelProps(array $module, array &$props)

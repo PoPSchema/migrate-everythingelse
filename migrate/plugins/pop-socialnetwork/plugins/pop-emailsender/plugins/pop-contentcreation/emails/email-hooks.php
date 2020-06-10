@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -60,7 +61,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
     }
@@ -71,7 +72,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailToUsersnetworkFromPost($post_id);
         }
     }
@@ -154,7 +155,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
     }
@@ -162,7 +163,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailToSubscribedtagusersFromPost($post_id);
         }
     }
@@ -435,7 +436,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $postTypeAPI = PostTypeAPIFacade::getInstance();
 
         // Only for published posts
-        if ($postTypeAPI->getStatus($post_id) != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) != Status::PUBLISHED) {
             return;
         }
 

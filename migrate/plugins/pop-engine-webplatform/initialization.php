@@ -6,6 +6,7 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Content\Types\Status;
 
 define('POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS', 'popwebplatform-keepopentabs');
 
@@ -41,7 +42,7 @@ class PoPWebPlatform_Initialization
          * Load the Library first
          */
         require_once 'library/load.php';
-        
+
         // If it is a search engine, there's no need to output the scripts or initialize pop.Manager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()/* && !RequestUtils::isSearchEngine()*/) {
@@ -134,7 +135,7 @@ class PoPWebPlatform_Initialization
                 /** Templates */
                 $this->enqueueTemplatesScripts();
             }
-    
+
             // Print all jQuery functions constants
             $jqueryConstants = $this->getJqueryConstants();
             $cmswebplatformapi->localizeScript($localize_handle, 'pop', array('c' => $jqueryConstants));
@@ -166,7 +167,7 @@ class PoPWebPlatform_Initialization
 
         // Locale is needed to store the Open Tabs under the right language
         $locale = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:locale', get_locale());
-        
+
         // Default one: do not send, so that it doesn't show up in the Embed URL
         $vars = ApplicationState::getVars();
         $keepopentabs = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS, true);
@@ -206,8 +207,8 @@ class PoPWebPlatform_Initialization
             'DBOUTPUTMODE' => $vars['dboutputmode'],
             'ERROR_MESSAGE' => '<div class="alert alert-danger alert-block fade in"><button type="button" class="close" data-dismiss="alert">x</button>{0}</div>',
             'POSTSTATUS' => array(
-                'PUBLISH' => POP_POSTSTATUS_PUBLISHED,
-                'PENDING' => POP_POSTSTATUS_PENDING,
+                'PUBLISH' => Status::PUBLISHED,
+                'PENDING' => Status::PENDING,
             ),
             'STATUS' => PoP_HTMLCSSPlatform_ConfigurationUtils::getStatusSettings(),
             'LABELIZE_CLASSES' => PoP_HTMLCSSPlatform_ConfigurationUtils::getLabelizeClasses(),
@@ -232,7 +233,7 @@ class PoPWebPlatform_Initialization
         if ($homelocaleurl = HooksAPIFacade::getInstance()->applyFilters('pop_modulemanager:homelocale_url', $homeurl)) {
             $jqueryConstants['HOMELOCALE_URL'] = $homelocaleurl;
         }
-        
+
         if ($domcontainer_id) {
             $jqueryConstants['DOMCONTAINER_ID'] = $domcontainer_id;
         }
@@ -251,7 +252,7 @@ class PoPWebPlatform_Initialization
         }
 
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        
+
         // Allow PoP Server-Side Rendering, PoP Resource Loader to add their scripts
         $this->scripts = HooksAPIFacade::getInstance()->applyFilters(
             'PoPWebPlatform_Initialization:init-scripts',

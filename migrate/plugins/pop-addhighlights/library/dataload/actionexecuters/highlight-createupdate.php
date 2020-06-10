@@ -1,7 +1,9 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
 {
@@ -12,7 +14,7 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_Acti
 
     public function getSuccessString($post_id, $status)
     {
-        if ($status == POP_POSTSTATUS_PUBLISHED) {
+        if ($status == Status::PUBLISHED) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             // Give a link to the referenced post to the stance, and force it to get it from the server again
             $highlighted = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);

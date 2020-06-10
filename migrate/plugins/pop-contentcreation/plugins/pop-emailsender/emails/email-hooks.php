@@ -5,6 +5,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -143,7 +144,7 @@ class PoP_ContentCreation_EmailSender_Hooks
 
         $post_name = gdGetPostname($post_id);
         $subject = sprintf(TranslationAPIFacade::getInstance()->__('Your %s was created successfully!', 'pop-emailsender'), $post_name);
-        $content = ($status == POP_POSTSTATUS_PUBLISHED) ?
+        $content = ($status == Status::PUBLISHED) ?
         sprintf(
             '<p>%s</p>',
             sprintf(
@@ -158,9 +159,9 @@ class PoP_ContentCreation_EmailSender_Hooks
             $postTypeAPI->getTitle($post_id)
         );
 
-        if ($status == POP_POSTSTATUS_PUBLISHED) {
+        if ($status == Status::PUBLISHED) {
             $content .= PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
-        } elseif ($status == POP_POSTSTATUS_DRAFT) {
+        } elseif ($status == Status::DRAFT) {
             $content .= sprintf(
                 '<p><em>%s</em></p>',
                 sprintf(
@@ -169,7 +170,7 @@ class PoP_ContentCreation_EmailSender_Hooks
                     $post_name
                 )
             );
-        } elseif ($status == POP_POSTSTATUS_PENDING) {
+        } elseif ($status == Status::PENDING) {
             $content .= TranslationAPIFacade::getInstance()->__('<p>Please wait for our moderators approval. You will receive an email with the confirmation.</p>');
         }
 
@@ -187,7 +188,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
     }
@@ -198,7 +199,7 @@ class PoP_ContentCreation_EmailSender_Hooks
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
     }
@@ -269,7 +270,7 @@ class PoP_ContentCreation_EmailSender_Hooks
 
         // Send email if the updated post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED && $old_status != POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
     }
@@ -277,7 +278,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
         // Send email if the created post has been published
         $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
     }

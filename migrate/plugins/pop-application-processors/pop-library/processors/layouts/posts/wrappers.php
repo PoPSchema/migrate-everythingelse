@@ -1,5 +1,8 @@
 <?php
+
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\Content\Types\Status;
+
 class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
     public const MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'multicomponentwrapper-userhighlightpostinteraction';
@@ -35,7 +38,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         switch ($module[1]) {
             case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
-                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => POP_POSTSTATUS_PUBLISHED], 'published');
+                return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');
         }
 
         return null;

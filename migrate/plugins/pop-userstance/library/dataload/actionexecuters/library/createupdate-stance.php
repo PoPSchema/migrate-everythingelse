@@ -4,6 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Content\Types\Status;
 
 class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 {
@@ -40,7 +41,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
                 $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($postTypeAPI->getStatus($referenced) != POP_POSTSTATUS_PUBLISHED) {
+                if ($postTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -121,7 +122,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         // Check if there is already an existing stance
         $vars = ApplicationState::getVars();
         $query = array(
-            'post-status' => array(POP_POSTSTATUS_PUBLISHED, POP_POSTSTATUS_DRAFT),
+            'post-status' => array(Status::PUBLISHED, Status::DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],
         );
         if ($referenced_id) {

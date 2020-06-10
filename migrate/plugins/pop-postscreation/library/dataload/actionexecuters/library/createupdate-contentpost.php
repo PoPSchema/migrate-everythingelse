@@ -7,6 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 class GD_CreateUpdate_PostBase
 {
@@ -148,7 +149,7 @@ class GD_CreateUpdate_PostBase
         }
 
         // Validate the following conditions only if status = pending/publish
-        if ($form_data['status'] == POP_POSTSTATUS_DRAFT) {
+        if ($form_data['status'] == Status::DRAFT) {
             return;
         }
 
@@ -224,7 +225,7 @@ class GD_CreateUpdate_PostBase
             return;
         }
 
-        if (!in_array($postTypeAPI->getStatus($post_id), array(POP_POSTSTATUS_DRAFT, POP_POSTSTATUS_PENDING, POP_POSTSTATUS_PUBLISHED))) {
+        if (!in_array($postTypeAPI->getStatus($post_id), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -309,7 +310,7 @@ class GD_CreateUpdate_PostBase
             $form_data['status'] = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_FORMINPUT_CUP_STATUS]);
         } else {
             $keepasdraft = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT])->getValue([PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::class, PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs::MODULE_FORMINPUT_CUP_KEEPASDRAFT]);
-            $form_data['status'] = $keepasdraft ? POP_POSTSTATUS_DRAFT : POP_POSTSTATUS_PUBLISHED;
+            $form_data['status'] = $keepasdraft ? Status::DRAFT : Status::PUBLISHED;
         }
 
         if ($this->addReferences()) {

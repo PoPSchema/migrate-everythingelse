@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Content\Types\Status;
 
 abstract class PoP_Module_Processor_PostStatusDateLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -16,13 +17,13 @@ abstract class PoP_Module_Processor_PostStatusDateLayoutsBase extends PoPEngine_
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-    
+
         $ret[GD_JS_TITLES] = array(
-            POP_POSTSTATUS_PUBLISHED => TranslationAPIFacade::getInstance()->__('Published', 'pop-coreprocessors'),
-            POP_POSTSTATUS_PENDING => TranslationAPIFacade::getInstance()->__('Pending', 'pop-coreprocessors'),
-            POP_POSTSTATUS_DRAFT => TranslationAPIFacade::getInstance()->__('Draft', 'pop-coreprocessors'),
+            Status::PUBLISHED => TranslationAPIFacade::getInstance()->__('Published', 'pop-coreprocessors'),
+            Status::PENDING => TranslationAPIFacade::getInstance()->__('Pending', 'pop-coreprocessors'),
+            Status::DRAFT => TranslationAPIFacade::getInstance()->__('Draft', 'pop-coreprocessors'),
         );
-        
+
         return $ret;
     }
 }

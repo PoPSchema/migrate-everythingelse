@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\Content\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -31,7 +32,7 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+            if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
                 // Referenced posts: all of them for the new post
                 $references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
                 $this->relatedToPost($post_id, $references);
@@ -44,10 +45,10 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            if ($postTypeAPI->getStatus($post_id) == POP_POSTSTATUS_PUBLISHED) {
+            if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
                 // Referenced posts: if doing an update, pass only the newly added ones
                 // If doing a create (changed "draft" to "publish"), then add all references
-                if ($log['previous-status'] != POP_POSTSTATUS_PUBLISHED) {
+                if ($log['previous-status'] != Status::PUBLISHED) {
                     // This is a Create post
                     $references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
                 } else {
