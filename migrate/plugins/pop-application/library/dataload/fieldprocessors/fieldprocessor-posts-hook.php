@@ -9,14 +9,14 @@ use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\Content\FieldInterfaces\ContentEntityFieldInterfaceResolver;
+use PoP\Content\FieldInterfaces\CustomPostFieldInterfaceResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
         return array(
-            ContentEntityFieldInterfaceResolver::class,
+            CustomPostFieldInterfaceResolver::class,
         );
     }
 
