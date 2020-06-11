@@ -15,7 +15,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'excerpt',
+            'excerpt',
             'content',
         ];
     }
@@ -23,17 +23,28 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'excerpt' => SchemaDefinition::TYPE_STRING,
+            'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'content',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'excerpt' => $translationAPI->__('', ''),
+            'excerpt' => $translationAPI->__('', ''),
             'content' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);

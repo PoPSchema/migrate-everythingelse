@@ -32,7 +32,7 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'memberstatus' => SchemaDefinition::TYPE_ENUM,
+            'memberstatus' => SchemaDefinition::TYPE_ENUM,
             'memberprivileges' => SchemaDefinition::TYPE_ENUM,
             'membertags' => SchemaDefinition::TYPE_ENUM,
             'isCommunity' => SchemaDefinition::TYPE_BOOL,
@@ -43,11 +43,24 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'communities',
+            'activeCommunities',
+            'hasActiveCommunities',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'memberstatus' => $translationAPI->__('', ''),
+            'memberstatus' => $translationAPI->__('', ''),
             'memberprivileges' => $translationAPI->__('', ''),
             'membertags' => $translationAPI->__('', ''),
             'isCommunity' => $translationAPI->__('', ''),

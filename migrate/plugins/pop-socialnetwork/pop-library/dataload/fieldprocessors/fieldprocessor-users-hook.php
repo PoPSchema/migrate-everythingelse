@@ -29,7 +29,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'recommendsposts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'recommendsposts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'following' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followersCount' => SchemaDefinition::TYPE_INT,
@@ -37,11 +37,25 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'recommendsposts',
+            'followers',
+            'following',
+            'followersCount',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'recommendsposts' => $translationAPI->__('', ''),
+            'recommendsposts' => $translationAPI->__('', ''),
             'followers' => $translationAPI->__('', ''),
             'following' => $translationAPI->__('', ''),
             'followersCount' => $translationAPI->__('', ''),

@@ -2,7 +2,7 @@
 
 class URE_CommunityUtils
 {
-    public static function addDataloadqueryargsCommunitymembers(&$ret, $community_id)
+    public static function addDataloadqueryargsCommunitymembers(&$ret, $community_id): void
     {
         // It must fulfil 2 conditions: the user must've said he/she's a member of this community,
         // And the Community must've accepted it by leaving the Show As Member privilege on
@@ -18,7 +18,7 @@ class URE_CommunityUtils
         ];
     }
 
-    public static function getCommunityMembers($community_id)
+    public static function getCommunityMembers($community_id): array
     {
         $query = array(
             'limit' => -1,/*'number' => '',*/ // Bring all the results

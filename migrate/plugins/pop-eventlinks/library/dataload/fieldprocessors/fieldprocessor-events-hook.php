@@ -17,7 +17,7 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'excerpt',
+            'excerpt',
             'content',
         ];
     }
@@ -25,17 +25,28 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'excerpt' => SchemaDefinition::TYPE_STRING,
+            'excerpt' => SchemaDefinition::TYPE_STRING,
             'content' => SchemaDefinition::TYPE_STRING,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'content',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'excerpt' => $translationAPI->__('', ''),
+            'excerpt' => $translationAPI->__('', ''),
             'content' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
@@ -67,6 +78,6 @@ class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 GD_EM_DataLoad_FieldResolver_Events::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

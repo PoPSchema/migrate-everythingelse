@@ -4,9 +4,9 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
-function gdUreGetCommunities($user_id)
+function gdUreGetCommunities($user_id): array
 {
-    return \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES);
+    return \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 }
 
 function gdUreGetActivecontributingcontentcommunitymembers($community)
@@ -70,7 +70,7 @@ function gdUreUserAddnewcommunities($user_id, $communities)
     $status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
     $privileges = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
     $tags = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
-    
+
     // When creating a new user account, these will be empty, so get the default ones
     if (!$status) {
         $status = $privileges = $tags = array();
@@ -83,7 +83,7 @@ function gdUreUserAddnewcommunities($user_id, $communities)
 
         // Add the default privileges for this one community
         $privileges[] = gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERPRIVILEGES_CONTRIBUTECONTENT);
-        
+
         // Add the default tags for this one community
         $tags[] = gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERTAGS_MEMBER);
     }
@@ -105,7 +105,7 @@ function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = 
     if ($values) {
         foreach ($values as $value) {
             $parts = explode(':', $value);
-                
+
             // Found a record for this community?
             if ($community == $parts[0]) {
                 // Found!
@@ -121,15 +121,14 @@ function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = 
     return $ret;
 }
 
-function gdUreGetCommunitiesStatusActive($user_id)
+function gdUreGetCommunitiesStatusActive($user_id): array
 {
-
     // Filter the community roles where the user is accepted as a member
     if ($community_status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
         $statusactive_communities = array_values(array_filter(array_map('gdUreGetCommunitiesStatusActiveFilter', $community_status)));
-        
+
         // Get the communities the user says he/she belongs to
-        $userchosen_communities = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES);
+        $userchosen_communities = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 
         // Return the intersection of these 2
         return array_values(array_intersect($statusactive_communities, $userchosen_communities));
@@ -175,12 +174,12 @@ function gdUreCommunityMembershipstatusFilterbycommunity($values, $community)
 function gdUreEditMembershipUrl($user_id, $inline = false)
 {
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        
+
     $nonce = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $user_id);
     $url = GeneralUtils::addQueryArgs([
         POP_INPUTNAME_NONCE => $nonce,
-        POP_INPUTNAME_USERID => $user_id, 
+        POP_INPUTNAME_USERID => $user_id,
     ], RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP));
-                
+
     return $url;
 }

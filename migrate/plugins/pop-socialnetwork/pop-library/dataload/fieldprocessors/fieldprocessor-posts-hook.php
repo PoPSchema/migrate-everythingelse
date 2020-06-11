@@ -20,7 +20,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'taggedusers',
+            'taggedusers',
             'recommendedby',
             'recommendPostCount',
             'upvotePostCount',
@@ -31,7 +31,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'taggedusers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'recommendedby' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'recommendPostCount' => SchemaDefinition::TYPE_INT,
             'upvotePostCount' => SchemaDefinition::TYPE_INT,
@@ -40,11 +40,26 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'taggedusers',
+            'recommendedby',
+            'recommendPostCount',
+            'upvotePostCount',
+            'downvotePostCount',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'taggedusers' => $translationAPI->__('', ''),
+            'taggedusers' => $translationAPI->__('', ''),
             'recommendedby' => $translationAPI->__('', ''),
             'recommendPostCount' => $translationAPI->__('', ''),
             'upvotePostCount' => $translationAPI->__('', ''),
@@ -55,13 +70,12 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
             // Users mentioned in the post: @mentions
             case 'taggedusers':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_TAGGEDUSERS);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_TAGGEDUSERS) ?? [];
 
             case 'recommendedby':
                 $query = [];

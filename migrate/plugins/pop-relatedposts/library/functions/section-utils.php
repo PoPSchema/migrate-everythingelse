@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_RelatedPosts_SectionUtils
 {
-    public static function addDataloadqueryargsReferences(&$ret, $post_id = null)
+    public static function addDataloadqueryargsReferences(&$ret, $post_id = null): void
     {
         // Set it for 'All Content' (eg: exclude Highlights, which also use references but are a special case)
         // PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
@@ -23,9 +23,8 @@ class PoP_RelatedPosts_SectionUtils
         ];
     }
 
-    public static function getReferencedby($post_id)
+    public static function getReferencedby($post_id): array
     {
-
         // Build the query args from the Utils
         $query = [
             'limit'/*'posts-per-page'*/ => -1, // Bring all the results

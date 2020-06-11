@@ -47,6 +47,18 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'content',
+            'hasLinkCategories',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
@@ -80,10 +92,15 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
 
     public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
     {
-        if (in_array($fieldName, [
-            'excerpt',
-            'content',
-        ])) {
+        if (
+            in_array(
+                $fieldName,
+                [
+                    'excerpt',
+                    'content',
+                ]
+            )
+        ) {
             $post = $resultItem;
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $taxonomyapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
@@ -94,9 +111,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $post = $resultItem;
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
-
             // Override fields for Links
             case 'excerpt':
                 return PoP_ContentPostLinks_Utils::getLinkExcerpt($post);

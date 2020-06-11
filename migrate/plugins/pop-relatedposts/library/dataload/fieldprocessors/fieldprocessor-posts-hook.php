@@ -21,7 +21,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'references',
+            'references',
             'hasReferences',
             'referencedby',
             'hasReferencedBy',
@@ -39,6 +39,21 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             'referencedByCount' => SchemaDefinition::TYPE_INT,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'references',
+            'hasReferences',
+            'referencedby',
+            'hasReferencedBy',
+            'referencedByCount',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
@@ -59,7 +74,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $post = $resultItem;
         switch ($fieldName) {
             case 'references':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_REFERENCES);
+                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_REFERENCES) ?? [];
 
             case 'hasReferences':
                 $references = $typeResolver->resolveValue($resultItem, 'references', $variables, $expressions, $options);

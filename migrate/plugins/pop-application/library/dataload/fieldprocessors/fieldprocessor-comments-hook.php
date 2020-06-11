@@ -32,6 +32,17 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
 
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'contentClipped',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
+    }
+
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
@@ -56,7 +67,7 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
             case 'replycommentURL':
                 $postID = $typeResolver->resolveValue($resultItem, 'postID', $variables, $expressions, $options);
                 if (GeneralUtils::isError($postID)) {
-                    return $postID;
+                    return null;
                 }
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);

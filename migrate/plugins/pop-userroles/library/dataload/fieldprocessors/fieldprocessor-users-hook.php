@@ -20,26 +20,37 @@ class FieldResolver_Users extends AbstractDBDataFieldResolver
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'role',
-			'hasRole',
+            'role',
+            'hasRole',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-			'role' => SchemaDefinition::TYPE_STRING,
-			'hasRole' => SchemaDefinition::TYPE_BOOL,
+            'role' => SchemaDefinition::TYPE_STRING,
+            'hasRole' => SchemaDefinition::TYPE_BOOL,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
+    }
+
+    public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
+    {
+        $nonNullableFieldNames = [
+            'hasRole',
+        ];
+        if (in_array($fieldName, $nonNullableFieldNames)) {
+            return true;
+        }
+        return parent::isSchemaFieldResponseNonNullable($typeResolver, $fieldName);
     }
 
     public function getSchemaFieldDescription(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'role' => $translationAPI->__('', ''),
-			'hasRole' => $translationAPI->__('', ''),
+            'role' => $translationAPI->__('', ''),
+            'hasRole' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
