@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Utils
 {

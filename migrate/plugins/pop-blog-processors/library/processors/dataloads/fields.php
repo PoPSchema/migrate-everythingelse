@@ -3,7 +3,7 @@ use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\Content\TypeResolvers\CustomPostUnionTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {

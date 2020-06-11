@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {

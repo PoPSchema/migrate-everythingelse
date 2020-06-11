@@ -7,7 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_PostBase
 {

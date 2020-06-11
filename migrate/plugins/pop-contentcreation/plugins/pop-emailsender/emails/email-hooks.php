@@ -5,7 +5,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {

@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ActionExecuterInterface
 {

@@ -3,7 +3,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
 {

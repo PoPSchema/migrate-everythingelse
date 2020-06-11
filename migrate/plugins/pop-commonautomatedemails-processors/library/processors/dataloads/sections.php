@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
-use PoP\Content\TypeResolvers\CustomPostUnionTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {

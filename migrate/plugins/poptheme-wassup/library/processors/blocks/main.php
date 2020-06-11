@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 {

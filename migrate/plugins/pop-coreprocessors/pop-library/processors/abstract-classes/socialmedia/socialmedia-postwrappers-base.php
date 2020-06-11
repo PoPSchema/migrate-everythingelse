@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_SocialMediaPostWrapperBase extends PoP_Module_Processor_ConditionWrapperBase
 {

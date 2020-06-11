@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly

@@ -2,7 +2,7 @@
 
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {

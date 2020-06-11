@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Processor_SectionDataloadsBase
 {

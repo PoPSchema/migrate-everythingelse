@@ -2,7 +2,7 @@
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {

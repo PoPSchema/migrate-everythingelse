@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_ConditionWrapperBase
 {

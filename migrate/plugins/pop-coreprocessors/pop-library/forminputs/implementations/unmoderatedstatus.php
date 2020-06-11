@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 class GD_FormInput_UnmoderatedStatus extends \PoP\Engine\GD_FormInput_MultiSelect
 {

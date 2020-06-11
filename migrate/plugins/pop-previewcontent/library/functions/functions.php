@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\Content\Types\Status;
+use PoP\CustomPosts\Types\Status;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdate-post:execute:successstring', 'gdPppCreateupdateAddPreviewLink', 10, 3);
 function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
