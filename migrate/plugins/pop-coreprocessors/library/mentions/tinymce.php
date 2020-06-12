@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Taxonomies\Misc\TagHelpers;
+use PoP\EverythingElse\Misc\TagHelpers;
 
 class PoP_TinyMCEHashtags
 {
@@ -25,7 +25,7 @@ class PoP_TinyMCEHashtags
         if (!self::configured()) {
             return $buttons;
         }
-  
+
         // Just before the Toggle Toolbar button
         // array_splice($buttons, array_search('wp_adv', $buttons), 0, array('hashtags'));
         // Place it at the beginning

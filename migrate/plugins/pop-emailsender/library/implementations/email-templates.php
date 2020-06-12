@@ -7,7 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\CustomPostMedia\Misc\MediaHelpers;
-use PoP\Taxonomies\Misc\TagHelpers;
+use PoP\EverythingElse\Misc\TagHelpers;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
