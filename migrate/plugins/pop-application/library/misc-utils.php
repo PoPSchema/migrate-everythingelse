@@ -46,7 +46,7 @@ function maybeAddHttp($url)
 //         if ($cats = getTheCategory($post_id)) {
 //             $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 //             foreach ($cats as $cat) {
-//                 $categories[] = $cmstaxonomiesresolver->getCategoryId($cat);
+//                 $categories[] = $cmstaxonomiesresolver->getCategoryID($cat);
 //             }
 //         }
 //     }

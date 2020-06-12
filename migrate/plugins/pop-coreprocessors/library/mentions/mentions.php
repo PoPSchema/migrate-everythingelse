@@ -227,7 +227,7 @@ class PoP_Mentions
         } else {
             $content = sprintf(
                 '<a class="hashtagger-tag" href="%s">%s</a>',
-                $taxonomyapi->getTagLink($cmstaxonomiesresolver->getTagTermId($tag)),
+                $taxonomyapi->getTagLink($cmstaxonomiesresolver->getTagID($tag)),
                 $match[0]
             );
         }
