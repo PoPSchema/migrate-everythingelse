@@ -53,8 +53,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
     public function getTitle(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP:
                 $tag_id = $vars['routing-state']['queried-object-id'];
@@ -63,10 +62,10 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                     sprintf(
                         TranslationAPIFacade::getInstance()->__('%s tagged with “#%s”', 'poptheme-wassup'),
                         PoP_LocationPosts_PostNameUtils::getNamesLc(),
-                        $taxonomyapi->getTagSymbolName($tag_id)
+                        $applicationtaxonomyapi->getTagSymbolName($tag_id)
                     );
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -83,10 +82,10 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
 
             case self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST];
-            
+
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST];
-            
+
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST];
         }
@@ -154,7 +153,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 $this->appendProp($module, $props, 'class', 'block-locationposts-scrollmap');
                 break;
         }
-    
+
         parent::initModelProps($module, $props);
     }
 
@@ -174,7 +173,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 }
                 break;
         }
-    
+
         parent::initWebPlatformModelProps($module, $props);
     }
 }

@@ -48,6 +48,8 @@ class Plugins
             'pop-addrelatedposts-processors',
             'pop-application',
             'pop-application-processors',
+            'pop-application-taxonomies',
+            'pop-application-taxonomies-wp',
             'pop-application-webplatform',
             'pop-application-wp',
             'pop-application-wp-webplatform',

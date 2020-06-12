@@ -82,7 +82,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -203,7 +203,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                     AAL_POP_ACTION_USER_FOLLOWSUSER => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> is now following %s', 'pop-notifications'),
                                     AAL_POP_ACTION_USER_UNFOLLOWSUSER => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> stopped following %s', 'pop-notifications'),
                                 );
-                                
+
                                 // Change the message depending if the logged in user is the object of this action
                                 $recipient = ($vars['global-userstate']['current-user-id'] == $notification->object_id) ? TranslationAPIFacade::getInstance()->__('you', 'pop-notifications') : sprintf('<strong>%s</strong>', $cmsusersapi->getUserDisplayName($notification->object_id));
                                 return sprintf(
@@ -228,7 +228,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                         return sprintf(
                                             $messages[$notification->action],
                                             $cmsusersapi->getUserDisplayName($notification->user_id),
-                                            $cmstaxonomiesresolver->getTagSymbolName($tag)
+                                            $applicationtaxonomyapi->getTagSymbolName($tag)
                                         );
                                 }
                                 return null;
@@ -241,6 +241,6 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_SocialNetwork_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

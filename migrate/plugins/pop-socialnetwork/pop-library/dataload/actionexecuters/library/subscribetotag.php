@@ -18,11 +18,11 @@ class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
             $value = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (in_array($target_id, $value)) {
                 $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-                $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+                $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
                 $tag = $taxonomyapi->getTag($target_id);
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $cmstaxonomiesresolver->getTagSymbolName($tag)
+                    $applicationtaxonomyapi->getTagSymbolName($tag)
                 );
             }
         }

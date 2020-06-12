@@ -99,8 +99,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
@@ -120,7 +119,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
             case self::MODULE_LAYOUT_PAGETABS_TAG:
                 $tag_id = $vars['routing-state']['queried-object-id'];
-                return $taxonomyapi->getTagSymbolName($tag_id);
+                return $applicationtaxonomyapi->getTagSymbolName($tag_id);
         }
 
         $titles = array(

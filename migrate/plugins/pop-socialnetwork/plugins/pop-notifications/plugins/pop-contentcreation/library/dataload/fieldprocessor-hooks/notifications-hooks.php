@@ -27,14 +27,14 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
         } else {
             // If the post has #hashtags the user is subscribed to, then add it as part of the message (the notification may appear only because of the #hashtag)
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-            $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+            $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
             $post_tags = $taxonomyapi->getPostTags($notification->object_id, [], ['return-type' => POP_RETURNTYPE_IDS]);
             $user_hashtags = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if ($intersected_tags = array_values(array_intersect($post_tags, $user_hashtags))) {
                 $tags = array();
                 foreach ($intersected_tags as $tag_id) {
                     $tag = $taxonomyapi->getTag($tag_id);
-                    $tags[] = $cmstaxonomiesresolver->getTagSymbolName($tag);
+                    $tags[] = $applicationtaxonomyapi->getTagSymbolName($tag);
                 }
                 $message = sprintf(
                     TranslationAPIFacade::getInstance()->__('%1$s (<em>tags: <strong>%2$s</strong></em>)', 'pop-notifications'),

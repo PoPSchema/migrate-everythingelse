@@ -20,16 +20,16 @@ class GD_DataLoad_ActionExecuter_UnsubscribeFromTag implements \PoP\ComponentMod
                 ResponseConstants::ERRORSTRINGS => $errors
             );
         }
-        
+
         // Save the result for some module to incorporate it into the query args
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
         $tag = $taxonomyapi->getTag($target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $cmstaxonomiesresolver->getTagSymbolName($tag)
+            $applicationtaxonomyapi->getTagSymbolName($tag)
         );
 
         // No errors => success
@@ -39,4 +39,4 @@ class GD_DataLoad_ActionExecuter_UnsubscribeFromTag implements \PoP\ComponentMod
         );
     }
 }
-    
+

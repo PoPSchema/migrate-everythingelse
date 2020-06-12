@@ -20,7 +20,7 @@
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance(); ?>
     <?php $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance(); ?>
-    <?php $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance(); ?>
+    <?php $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance(); ?>
     <?php $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $title = $cmsapplicationapi->getDocumentTitle(); ?>
@@ -30,7 +30,7 @@
     <title><?php echo $title ?></title>
     <?php if (/*$vars['routing-state']['is-search'] || */$vars['routing-state']['is-user']) : ?>
     <meta name="robots" content="noindex, nofollow" />
-    <?php endif ?>    
+    <?php endif ?>
     <link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf(TranslationAPIFacade::getInstance()->__('%s latest posts', 'poptheme-wassup'), $cmsapplicationhelpers->escapeHTML($site_name, 1)) ?>" />
     <link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf(TranslationAPIFacade::getInstance()->__('%s latest comments', 'poptheme-wassup'), $cmsapplicationhelpers->escapeHTML($site_name, 1)) ?>" />
     <?php /* This outputs site_url( 'xmlrpc.php' ), and because the xmlrpc.php is blocked, no need to add it     */ ?>
@@ -61,7 +61,11 @@
         $description = sprintf(TranslationAPIFacade::getInstance()->__('View %1$s profile and get in touch through %2$s.', 'poptheme-wassup'), $curauth->display_name, $site_name);
     } elseif ($vars['routing-state']['is-tag']) {
         $tag_id = $vars['routing-state']['queried-object-id'];
-        $description = sprintf(TranslationAPIFacade::getInstance()->__('Entries tagged “%1$s” in %2$s.', 'poptheme-wassup'), $taxonomyapi->getTagSymbolName($tag_id), $site_name);
+        $description = sprintf(
+            TranslationAPIFacade::getInstance()->__('Entries tagged “%1$s” in %2$s.', 'poptheme-wassup'),
+            $applicationtaxonomyapi->getTagSymbolName($tag_id),
+            $site_name
+        );
     }
     // If none of the above, always use the Website description
     if (!$description) {
@@ -90,7 +94,7 @@
     <?php foreach (getCompatibilityJsFiles() as $file) : ?>
             <script src="<?php echo $file ?>"></script>
     <?php endforeach; ?>
-    <![endif]-->    
+    <![endif]-->
 </head>
 <body id="body" class="no-js <?php if (!defined('POP_SSR_INITIALIZED') || PoP_SSR_ServerUtils::disableServerSideRendering()) :
     ?>pop-loadingframe<?php
@@ -117,7 +121,7 @@
 
     // Status
     require POPTHEME_WASSUP_TEMPLATES.'/status.php';
-        
+
     // Include the Theme Header
     $theme_header = $vars['theme-path'].'/header.php';
     if (file_exists($theme_header)) {

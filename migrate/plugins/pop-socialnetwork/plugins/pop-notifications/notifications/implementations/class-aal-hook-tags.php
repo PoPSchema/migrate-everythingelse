@@ -33,7 +33,7 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     {
         $vars = ApplicationState::getVars();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $tag = $taxonomyapi->getTag($tag_id);
         PoP_Notifications_Utils::insertLog(
             array(
@@ -42,7 +42,7 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
                 'object_subtype' => 'Tag',
                 'user_id'     => $vars['global-userstate']['current-user-id'],
                 'object_id'   => $tag_id,
-                'object_name' => $cmstaxonomiesresolver->getTagSymbolName($tag),
+                'object_name' => $applicationtaxonomyapi->getTagSymbolName($tag),
             )
         );
     }

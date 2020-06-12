@@ -58,14 +58,14 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteTitle(POP_USERSTANCE_ROUTE_STANCES);
 
             case self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES:
                 $author = $vars['routing-state']['queried-object-id'];
-                
+
                 // Allow URE to override adding "+Members"
                 $name = HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:title',
@@ -73,7 +73,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('%s by %s', 'pop-userstance-processors'),
-                    getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).PoP_UserStanceProcessors_Utils::getLatestvotesTitle(),
+                    getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true) . PoP_UserStanceProcessors_Utils::getLatestvotesTitle(),
                     $name
                 );
 
@@ -81,8 +81,8 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 $tag_id = $vars['routing-state']['queried-object-id'];
                 return sprintf(
                     TranslationAPIFacade::getInstance()->__('%s tagged with “%s”', 'pop-userstance-processors'),
-                    getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true).PoP_UserStanceProcessors_Utils::getLatestvotesTitle(),
-                    $taxonomyapi->getTagSymbolName($tag_id)
+                    getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, true) . PoP_UserStanceProcessors_Utils::getLatestvotesTitle(),
+                    $applicationtaxonomyapi->getTagSymbolName($tag_id)
                 );
         }
 
@@ -103,7 +103,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_AUTHORSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );
-                
+
                 // Allow URE to override adding "+Members" param
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:authorstances:titlelink',
@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );
-                
+
                 return HooksAPIFacade::getInstance()->applyFilters(
                     'UserStance_Module_Processor_CustomCarouselControls:tagstances:titlelink',
                     RequestUtils::addRoute($url, $routes[$module[1]])

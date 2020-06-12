@@ -29,10 +29,9 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function getTagTitle($add_description = true, $add_sublevel = true)
     {
         $vars = ApplicationState::getVars();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $tag_id = $vars['routing-state']['queried-object-id'];
-        $ret = '<i class="fa fa-fw fa-hashtag"></i>'.$taxonomyapi->getTagSymbolName($tag_id);
+        $ret = '<i class="fa fa-fw fa-hashtag"></i>' . $applicationtaxonomyapi->getTagSymbolName($tag_id);
 
         if ($add_description) {
             // tag_description wraps the description in a <p>, remove it
