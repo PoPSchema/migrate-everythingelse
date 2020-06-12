@@ -23,7 +23,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return TranslationAPIFacade::getInstance()->__('Sections', 'poptheme-wassup');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -36,7 +36,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return GD_FormInput_PostSections::class;
         }
-        
+
         return parent::getInputClass($module);
     }
 
@@ -46,7 +46,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return true;
         }
-        
+
         return parent::isMultiple($module);
     }
 
@@ -54,12 +54,12 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION:
-                return 'cat';
+                return 'mainCategory';
 
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTIONS:
                 return 'catsByName';
         }
-        
+
         return parent::getDbobjectField($module);
     }
 }

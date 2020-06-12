@@ -14,7 +14,7 @@ class PoP_ServerSide_LatestCountHelpers
         // By Sections (post type . categories)
         $trigger_values = $dbObject['latestcountsTriggerValues'] ?? array();
         foreach ($trigger_values as $trigger_value) {
-            // trigger_value will be translated to 'postType'+'cat' attribute
+            // trigger_value will be translated to 'postType'+'mainCategory' attribute
             $targets[] = $selector.'.'.$trigger_value;
         }
 
@@ -27,7 +27,7 @@ class PoP_ServerSide_LatestCountHelpers
         // By author pages
         foreach ($dbObject['authors'] as $author) {
             $target = $selector.'.author'.$author;
-        
+
             // ... combined with Categories
             if ($trigger_values) {
                 foreach ($trigger_values as $trigger_value) {
@@ -41,7 +41,7 @@ class PoP_ServerSide_LatestCountHelpers
         // By single relatedto posts
         foreach ($dbObject['references'] as $post_id) {
             $target = $selector.'.single'.$post_id;
-            
+
             // ... combined with Categories
             if ($trigger_values) {
                 foreach ($trigger_values as $trigger_value) {

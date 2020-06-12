@@ -83,7 +83,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
                 $value = array();
                 $type = strtolower($typeResolver->getTypeName());
                 // If it has categories, use it. Otherwise, only use the post type
-                if ($cats = $typeResolver->resolveValue($post, 'cats', $variables, $expressions, $options)) {
+                if ($cats = $typeResolver->resolveValue($post, 'categories', $variables, $expressions, $options)) {
                     foreach ($cats as $cat) {
                         $value[] = $type.'-'.$cat;
                     }
@@ -94,7 +94,7 @@ class PoP_Application_DataLoad_FieldResolver_FunctionalPosts extends AbstractFun
 
          // Needed for using handlebars helper "compare" to compare a category id in a buttongroup, which is taken as a string, inside a list of cats, which must then also be strings
             case 'catsByName':
-                $cats = $typeResolver->resolveValue($post, 'cats', $variables, $expressions, $options);
+                $cats = $typeResolver->resolveValue($post, 'categories', $variables, $expressions, $options);
                 $value = array();
                 foreach ($cats as $cat) {
                     $value[] = strval($cat);

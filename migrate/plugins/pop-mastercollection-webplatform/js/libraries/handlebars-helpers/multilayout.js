@@ -5,9 +5,9 @@ Handlebars.registerHelper('withConditionalOnDataFieldModule', function(dbKey, db
 	var tls = context.tls;
 	var domain = tls.domain;
 
-	// Obtain the key composed as: 'post_type'-'cat'
+	// Obtain the key composed as: 'post_type'-'mainCategory'
 	var dbObject = pop.Manager.getDBObject(domain, dbKey, dbObjectID);
-	
+
 	// Fetch the layout for that particular configuration
 	var layout = '';
 	jQuery.each(conditionDataFieldModules, function(conditionField, moduleOutputName) {
@@ -44,10 +44,10 @@ Handlebars.registerHelper('layoutLabel', function(dbKey, dbObject, options) {
 	jQuery.each(dbObject['multilayoutKeys'], function(index, key) {
 
 		label = pop.c.MULTILAYOUT_LABELS[dbObject[key]];
-		if (label) {			
+		if (label) {
 			return -1;
 		}
 	});
-	
+
 	return label || '';
 });

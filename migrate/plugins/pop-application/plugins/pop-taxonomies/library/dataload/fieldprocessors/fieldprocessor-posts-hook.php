@@ -17,15 +17,14 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
     public static function getFieldNamesToResolve(): array
     {
         return [
-			'cat',
+            'mainCategory',
         ];
     }
 
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
-        // TODO: After implementing the resolver for categories change the type to ID
         $types = [
-			'cat' => SchemaDefinition::TYPE_ID,//SchemaDefinition::TYPE_UNRESOLVED_ID,
+            'mainCategory' => SchemaDefinition::TYPE_ID,
         ];
         return $types[$fieldName] ?? parent::getSchemaFieldType($typeResolver, $fieldName);
     }
@@ -34,7 +33,7 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-			'cat' => $translationAPI->__('', ''),
+            'mainCategory' => $translationAPI->__('', ''),
         ];
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
@@ -44,7 +43,7 @@ class PoP_Application_Taxonomy_DataLoad_FieldResolver_Posts extends AbstractDBDa
         $post = $resultItem;
         switch ($fieldName) {
             // Override to make sure the category comes from the main ones
-            case 'cat':
+            case 'mainCategory':
                 if ($main_cat = getTheMainCategory($typeResolver->getID($post))) {
                     return $main_cat;
                 }

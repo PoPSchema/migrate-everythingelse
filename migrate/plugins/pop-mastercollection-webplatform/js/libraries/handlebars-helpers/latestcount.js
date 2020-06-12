@@ -11,7 +11,7 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
     // By Post Type + Categories
     jQuery.each(trigger_values, function(index, trigger_value) {
 
-        // trigger_value will be translated to 'postType'+'cat' attribute
+        // trigger_value will be translated to 'postType'+'mainCategory' attribute
         targets.push(selector+'.'+trigger_value);
     });
 
@@ -35,7 +35,7 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
             });
         }
         else {
-           targets.push(target); 
+           targets.push(target);
         }
     });
 
@@ -52,7 +52,7 @@ Handlebars.registerHelper('latestCountTargets', function(dbObject, options) {
             });
         }
         else {
-           targets.push(target); 
+           targets.push(target);
         }
     });
 
