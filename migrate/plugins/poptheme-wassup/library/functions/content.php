@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\PostMedia\Misc\MediaHelpers;
+use PoP\CustomPostMedia\Misc\MediaHelpers;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 

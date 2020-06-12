@@ -5,7 +5,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\PostMedia\Misc\MediaHelpers as PostMediaHelpers;
+use PoP\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -22,7 +22,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
     public function getThumb($post, TypeResolverInterface $typeResolver, $size = null, $add_description = false)
     {
-        $thumb_id = PostMediaHelpers::getThumbId($typeResolver->getID($post));
+        $thumb_id = CustomPostMediaHelpers::getThumbId($typeResolver->getID($post));
         $img = MediaHelpers::getAttachmentImageProperties($thumb_id, $size);
 
         // Add the image description

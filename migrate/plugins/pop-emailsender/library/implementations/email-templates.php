@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\PostMedia\Misc\MediaHelpers;
+use PoP\CustomPostMedia\Misc\MediaHelpers;
 use PoP\Taxonomies\Misc\TagHelpers;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 
