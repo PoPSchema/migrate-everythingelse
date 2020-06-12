@@ -184,9 +184,9 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
             case 'userPostActivityCount':
                 // User Post Activity: Comments + Responses/Additionals + Hightlights
-                $commentsCount = $typeResolver->resolveValue($resultItem, 'commentsCount', $variables, $expressions, $options);
-                if ($commentsCount) {
-                    return $commentsCount;
+                $commentCount = $typeResolver->resolveValue($resultItem, 'commentCount', $variables, $expressions, $options);
+                if ($commentCount) {
+                    return $commentCount;
                 }
                 $referencedByCount = $typeResolver->resolveValue($resultItem, 'referencedByCount', $variables, $expressions, $options);
                 if ($referencedByCount) {
@@ -196,7 +196,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 if ($highlightsCount) {
                     return $highlightsCount;
                 }
-                return $commentsCount + $referencedByCount + $highlightsCount;
+                return $commentCount + $referencedByCount + $highlightsCount;
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

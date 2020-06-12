@@ -28,7 +28,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
             case self::MODULE_BUTTONINNER_PRINT_SOCIALMEDIA:
                 return 'fa-fw fa-print fa-lg';
-                        
+
             case self::MODULE_BUTTONINNER_POSTPERMALINK:
                 return 'fa-fw fa-link';
 
@@ -48,7 +48,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
 
             case self::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
-            
+
             case self::MODULE_BUTTONINNER_POSTPERMALINK:
                 return TranslationAPIFacade::getInstance()->__('Permalink', 'pop-coreprocessors');
         }
@@ -61,9 +61,9 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_POSTCOMMENTS:
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
-                return 'commentsCount';
+                return 'commentCount';
         }
-        
+
         return parent::getTextField($module, $props);
     }
 
@@ -73,7 +73,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__('(', 'pop-coreprocessors');
         }
-        
+
         return parent::getTextfieldOpen($module, $props);
     }
 
@@ -83,7 +83,7 @@ class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInner
             case self::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL:
                 return TranslationAPIFacade::getInstance()->__(')', 'pop-coreprocessors');
         }
-        
+
         return parent::getTextfieldClose($module, $props);
     }
 }

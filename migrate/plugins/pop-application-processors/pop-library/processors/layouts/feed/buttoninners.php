@@ -31,9 +31,9 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
         switch ($module[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return 'userPostActivityCount';
-            return 'commentsCount';
+            return 'commentCount';
         }
-        
+
         return parent::getTextField($module, $props);
     }
 
@@ -43,7 +43,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('(', 'poptheme-wassup');
         }
-        
+
         return parent::getTextfieldOpen($module, $props);
     }
     public function getTextfieldClose(array $module, array &$props)
@@ -52,7 +52,7 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__(')', 'poptheme-wassup');
         }
-        
+
         return parent::getTextfieldClose($module, $props);
     }
 
