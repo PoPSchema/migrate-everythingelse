@@ -26,7 +26,7 @@ class GD_CreateUpdate_PostLink extends GD_CreateUpdate_PostBase
         $form_data = parent::getFormData($data_properties);
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        
+
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             $form_data = array_merge(
                 $form_data,
@@ -35,7 +35,7 @@ class GD_CreateUpdate_PostLink extends GD_CreateUpdate_PostBase
                 )
             );
         }
-        
+
         return $form_data;
     }
 
@@ -44,9 +44,9 @@ class GD_CreateUpdate_PostLink extends GD_CreateUpdate_PostBase
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         parent::additionals($post_id, $form_data);
-        
+
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
+            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
         }
     }
 }

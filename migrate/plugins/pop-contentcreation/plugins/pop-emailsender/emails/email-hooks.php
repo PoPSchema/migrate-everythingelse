@@ -299,7 +299,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         }
 
         // Check if the post has references. If so, also send email to the owners of those
-        if ($references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_name = gdGetPostname($post_id);
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             foreach ($references as $reference_post_id) {

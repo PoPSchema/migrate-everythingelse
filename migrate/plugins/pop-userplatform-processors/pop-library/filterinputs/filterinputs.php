@@ -19,12 +19,12 @@ class PoP_Module_Processor_UserPlatformFilterInputProcessor extends \PoP\Compone
         switch ($filterInput[1]) {
             case self::FILTERINPUT_BUTTONGROUP_CATEGORIES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
                 break;
-                
+
             case self::FILTERINPUT_BUTTONGROUP_CONTENTSECTIONS:
                 $query['tax-query'] = $query['tax-query'] ?? ['relation' => 'AND'];
                 $taxonomy_terms = [];

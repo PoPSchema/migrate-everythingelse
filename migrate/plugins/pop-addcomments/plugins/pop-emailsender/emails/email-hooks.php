@@ -79,7 +79,7 @@ class PoP_AddComments_EmailSender_Hooks
             $post_id
         );
         // 2. Owner(s) of referenced posts
-        if ($references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_ids = array_merge(
                 $post_ids,
                 $references

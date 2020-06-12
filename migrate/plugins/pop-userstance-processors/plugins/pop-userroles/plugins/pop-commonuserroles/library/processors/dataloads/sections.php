@@ -78,7 +78,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
             case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_AUTHORROLE];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -116,7 +116,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         // switch ($module[1]) {
 
         //     case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW:
@@ -129,7 +129,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
 
         //     case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
         //     case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
-            
+
         //         $ret['post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
         //         break;
         // }
@@ -164,7 +164,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
                 // It must fulfil 2 conditions: the user must've said he/she's a member of this organization,
                 // And the Organization must've accepted it by leaving the Show As Member privilege on
                 $ret['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
                     'value' => $role,
                 ];
                 break;
@@ -204,7 +204,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', PoP_UserStance_PostNameUtils::getNamesLc());
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

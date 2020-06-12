@@ -51,12 +51,12 @@ class GD_RecommendPost extends GD_RecommendUnrecommendPost
 
         // Update value
         \PoP\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_RECOMMENDSPOSTS, $target_id);
-        \PoP\PostMeta\Utils::addPostMeta($target_id, GD_METAKEY_POST_RECOMMENDEDBY, $user_id);
+        \PoP\CustomPostMeta\Utils::addCustomPostMeta($target_id, GD_METAKEY_POST_RECOMMENDEDBY, $user_id);
 
         // Update the counter
-        $count = \PoP\PostMeta\Utils::getPostMeta($target_id, GD_METAKEY_POST_RECOMMENDCOUNT, true);
+        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_RECOMMENDCOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\PostMeta\Utils::updatePostMeta($target_id, GD_METAKEY_POST_RECOMMENDCOUNT, ($count + 1), true);
+        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_RECOMMENDCOUNT, ($count + 1), true);
 
         return parent::update($form_data);
     }

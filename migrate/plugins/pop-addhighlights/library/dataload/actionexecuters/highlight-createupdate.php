@@ -17,7 +17,7 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_Acti
         if ($status == Status::PUBLISHED) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             // Give a link to the referenced post to the stance, and force it to get it from the server again
-            $highlighted = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+            $highlighted = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
                 $postTypeAPI->getPermalink($highlighted),

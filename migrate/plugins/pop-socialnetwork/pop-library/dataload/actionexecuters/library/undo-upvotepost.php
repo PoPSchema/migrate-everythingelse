@@ -44,12 +44,12 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 
         // Update value
         \PoP\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS, $target_id);
-        \PoP\PostMeta\Utils::deletePostMeta($target_id, GD_METAKEY_POST_UPVOTEDBY, $user_id);
+        \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTEDBY, $user_id);
 
         // Update the count
-        $count = \PoP\PostMeta\Utils::getPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, true);
+        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\PostMeta\Utils::updatePostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
+        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
 
         return parent::update($form_data);
     }

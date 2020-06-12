@@ -30,7 +30,7 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
         $postTypeAPI = PostTypeAPIFacade::getInstance();
         if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
-            $referenced_post_id = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+            $referenced_post_id = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $this->referencedPost($post_id, $referenced_post_id);
         }
     }
@@ -41,7 +41,7 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             // If doing a create (changed "draft" to "publish"), then add all references
             if ($log['previous-status'] != Status::PUBLISHED) {
-                $referenced_post_id = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+                $referenced_post_id = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
                 $this->referencedPost($post_id, $referenced_post_id);
             }
         }

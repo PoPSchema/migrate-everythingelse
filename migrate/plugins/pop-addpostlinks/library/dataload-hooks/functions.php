@@ -43,22 +43,22 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         // Save the link in the post meta
         $link = $form_data['link'];
         if ($link) {
-            \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
+            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
         } else {
-            \PoP\PostMeta\Utils::deletePostMeta($post_id, GD_METAKEY_POST_LINK);
+            \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_LINK);
         }
     }
 
     public function getFormData($form_data)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        
+
         $form_data['link'] = $moduleprocessor_manager->getProcessor([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::MODULE_ADDPOSTLINKS_FORMINPUT_LINK])->getValue([PoP_AddPostLinks_Module_Processor_TextFormInputs::class, PoP_AddPostLinks_Module_Processor_TextFormInputs::MODULE_ADDPOSTLINKS_FORMINPUT_LINK]);
 
         return $form_data;
     }
 }
-    
+
 /**
  * Initialize
  */

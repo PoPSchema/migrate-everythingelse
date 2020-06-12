@@ -253,7 +253,7 @@ class GD_CreateUpdate_PostBase
 
         // Topics
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
-            \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_CATEGORIES, $form_data['topics']);
+            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_CATEGORIES, $form_data['topics']);
         }
 
         // Only if the Volunteering is enabled
@@ -261,13 +261,13 @@ class GD_CreateUpdate_PostBase
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 // Volunteers Needed?
                 if ($this->volunteer()) {
-                    \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data['volunteersneeded'], true, true);
+                    \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data['volunteersneeded'], true, true);
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_APPLIESTO, $form_data['appliesto']);
+            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_APPLIESTO, $form_data['appliesto']);
         }
     }
     /**
@@ -450,7 +450,7 @@ class GD_CreateUpdate_PostBase
         $this->setfeaturedimage($errors, $post_id, $form_data);
 
         if ($this->addReferences()) {
-            \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_REFERENCES, $form_data['references']);
+            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES, $form_data['references']);
         }
     }
 
@@ -462,7 +462,7 @@ class GD_CreateUpdate_PostBase
         );
 
         if ($this->addReferences()) {
-            $previous_references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
+            $previous_references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
             $log['new-references'] = array_diff($form_data['references'], $previous_references);
         }
 

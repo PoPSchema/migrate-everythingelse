@@ -95,10 +95,10 @@ class PoP_Mentions
 
             // Extract all user_nicenames and notify them they were tagged
             // Get the previous ones, as to send an email only to the new ones
-            $previous_taggedusers_ids = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            $previous_taggedusers_ids = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
 
             // First delete all existing users, then add all new ones
-            \PoP\PostMeta\Utils::deletePostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
             if ($user_nicenames = $this->getUserNicenamesFromContent($content)) {
                 $taggedusers_ids = array();
                 foreach ($user_nicenames as $user_nicename) {
@@ -108,7 +108,7 @@ class PoP_Mentions
                 }
 
                 if ($taggedusers_ids) {
-                    \PoP\PostMeta\Utils::updatePostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
+                    \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
 
                     // Send an email to all newly tagged users
                     if ($newly_taggedusers_ids = array_diff($taggedusers_ids, $previous_taggedusers_ids)) {

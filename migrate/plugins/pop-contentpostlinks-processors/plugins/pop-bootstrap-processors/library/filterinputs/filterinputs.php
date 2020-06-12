@@ -17,15 +17,15 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
         switch ($filterInput[1]) {
             case self::FILTERINPUT_LINKCATEGORIES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_LINKCATEGORIES),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_LINKCATEGORIES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
                 break;
-            
+
             case self::FILTERINPUT_LINKACCESS:
                 $query['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_LINKACCESS),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_LINKACCESS),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

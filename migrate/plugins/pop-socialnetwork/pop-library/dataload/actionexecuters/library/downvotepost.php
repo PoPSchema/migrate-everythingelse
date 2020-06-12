@@ -49,12 +49,12 @@ class GD_DownvotePost extends GD_DownvoteUndoDownvotePost
 
         // Update value
         \PoP\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
-        \PoP\PostMeta\Utils::addPostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
+        \PoP\CustomPostMeta\Utils::addCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
 
         // Update the counter
-        $count = \PoP\PostMeta\Utils::getPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
+        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\PostMeta\Utils::updatePostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
+        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
 
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
         $opposite = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS);

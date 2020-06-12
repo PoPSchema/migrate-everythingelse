@@ -249,7 +249,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
             self::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_NAVIGATOR],
             self::MODULE_DATALOAD_STANCES_SCROLL_ADDONS => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_ADDONS],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -309,7 +309,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW],
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_THUMBNAIL],
             self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST => [UserStance_Module_Processor_CustomScrolls::class, UserStance_Module_Processor_CustomScrolls::MODULE_SCROLL_STANCES_LIST],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Author blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -438,7 +438,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -585,14 +585,14 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCES_PRO_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_STANCES_PRO_SCROLL_THUMBNAIL:
@@ -669,7 +669,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_LIST:
                 $ret['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
                     'compare' => 'NOT EXISTS'
                 ];
                 break;
@@ -684,7 +684,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST:
                 $ret['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
                     'compare' => 'EXISTS'
                 ];
                 break;
@@ -741,7 +741,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW:
@@ -952,7 +952,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', PoP_UserStance_PostNameUtils::getNamesLc());
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

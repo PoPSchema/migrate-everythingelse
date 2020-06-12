@@ -143,7 +143,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return gdGetPostauthors($typeResolver->getID($post));
 
             case 'topics':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
+                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'hasTopics':
                 $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
@@ -155,7 +155,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return false;
 
             case 'appliesto':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
+                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'hasAppliesto':
                 $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);

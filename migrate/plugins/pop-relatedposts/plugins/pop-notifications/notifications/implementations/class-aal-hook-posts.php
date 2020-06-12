@@ -34,7 +34,7 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
                 // Referenced posts: all of them for the new post
-                $references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
+                $references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
                 $this->relatedToPost($post_id, $references);
             }
         }
@@ -50,7 +50,7 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                 // If doing a create (changed "draft" to "publish"), then add all references
                 if ($log['previous-status'] != Status::PUBLISHED) {
                     // This is a Create post
-                    $references = \PoP\PostMeta\Utils::getPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
+                    $references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
                 } else {
                     // This is an Update post
                     $references = $log['new-references'];

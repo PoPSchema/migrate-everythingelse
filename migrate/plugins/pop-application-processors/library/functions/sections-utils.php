@@ -180,7 +180,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
 
         // Find all recommended posts by this author
         $ret['meta-query'][] = [
-            'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_RECOMMENDEDBY),
+            'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_RECOMMENDEDBY),
             'value' => array($author),
             'compare' => 'IN'
         ];

@@ -8,9 +8,9 @@ class PoP_SocialNetwork_AddCommentsTinyMCE_Notifications_Utils
         return sprintf(
             '
 				comment_ID in (
-					SELECT 
-						comment_id 
-					FROM 
+					SELECT
+						comment_id
+					FROM
 						%2$s
 					WHERE
 							meta_key = "%3$s"
@@ -29,9 +29,9 @@ class PoP_SocialNetwork_AddCommentsTinyMCE_Notifications_Utils
         global $wpdb;
         return sprintf(
             '
-				SELECT 
-					post_id 
-				FROM 
+				SELECT
+					post_id
+				FROM
 					%2$s
 				WHERE
 						meta_key = "%3$s"
@@ -40,7 +40,7 @@ class PoP_SocialNetwork_AddCommentsTinyMCE_Notifications_Utils
 			',
             $user_id,
             $wpdb->postmeta,
-            \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
+            \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
         );
     }
 }

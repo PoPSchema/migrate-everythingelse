@@ -175,7 +175,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         parent::createadditionals($post_id, $form_data);
 
         if ($target = $form_data['stancetarget']) {
-            \PoP\PostMeta\Utils::addPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
+            \PoP\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value

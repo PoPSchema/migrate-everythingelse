@@ -21,7 +21,7 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
         $user_id = $vars['global-userstate']['current-user-id'];
 
         // If the user has been tagged in this post, this action has higher priority than creating a post, then show that message
-        $taggedusers_ids = \PoP\PostMeta\Utils::getPostMeta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);
+        $taggedusers_ids = \PoP\CustomPostMeta\Utils::getCustomPostMeta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);
         if (in_array($user_id, $taggedusers_ids)) {
             $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> mentioned you in %2$s%3$s <strong>%4$s</strong>', 'pop-notifications');
         } else {

@@ -17,7 +17,7 @@ class PoP_RelatedPosts_SectionUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
+            'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
             'value' => array($post_id),
             'compare' => 'IN'
         ];

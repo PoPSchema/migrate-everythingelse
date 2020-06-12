@@ -122,7 +122,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                 return PoP_ContentPostLinks_Utils::getLinkContent($post, true);
 
             case 'linkaccess':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
+                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkAccessByName':
                 $selected = $typeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $options);
@@ -133,7 +133,7 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
                 return $linkaccess->getSelectedValue();
 
             case 'linkcategories':
-                return \PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
+                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkCategoriesByName':
                 $selected = $typeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options);

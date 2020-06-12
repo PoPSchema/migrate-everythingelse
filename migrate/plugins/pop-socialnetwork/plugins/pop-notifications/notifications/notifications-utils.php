@@ -9,9 +9,9 @@ class PoP_SocialNetwork_Notifications_Utils
         global $wpdb;
         return sprintf(
             '
-				SELECT 
-					object_id 
-				FROM 
+				SELECT
+					object_id
+				FROM
 					%2$s
 				INNER JOIN
 					%3$s
@@ -19,9 +19,9 @@ class PoP_SocialNetwork_Notifications_Utils
 					%2$s.term_taxonomy_id = %3$s.term_taxonomy_id
 				WHERE
 					%3$s.term_id in (
-						SELECT 
-							meta_value 
-						FROM 
+						SELECT
+							meta_value
+						FROM
 							%4$s
 						WHERE
 								user_id = %1$s
@@ -42,9 +42,9 @@ class PoP_SocialNetwork_Notifications_Utils
         global $wpdb;
         return sprintf(
             '
-				SELECT 
-					post_id 
-				FROM 
+				SELECT
+					post_id
+				FROM
 					%2$s
 				WHERE
 						meta_key = "%3$s"
@@ -53,7 +53,7 @@ class PoP_SocialNetwork_Notifications_Utils
 			',
             $user_id,
             $wpdb->postmeta,
-            \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
+            \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
         );
     }
 }

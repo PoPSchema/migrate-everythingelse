@@ -67,20 +67,20 @@ function gd_acf_userfunctionalities_duplicatedata($value, $post_id, $field)
                 $count_metakey = GD_METAKEY_POST_DOWNVOTECOUNT;
             }
             foreach ($additions as $target_id) {
-                \PoP\PostMeta\Utils::addPostMeta($target_id, $value_metakey, $user_id);
+                \PoP\CustomPostMeta\Utils::addCustomPostMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoP\PostMeta\Utils::getPostMeta($target_id, $count_metakey, true);
+                $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoP\PostMeta\Utils::updatePostMeta($target_id, $count_metakey, ($count + 1), true);
+                \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count + 1), true);
             }
             foreach ($deletions as $target_id) {
-                \PoP\PostMeta\Utils::deletePostMeta($target_id, $value_metakey, $user_id);
+                \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, $value_metakey, $user_id);
 
                 // Update the counter
-                $count = \PoP\PostMeta\Utils::getPostMeta($target_id, $count_metakey, true);
+                $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, $count_metakey, true);
                 $count = $count ? $count : 0;
-                \PoP\PostMeta\Utils::updatePostMeta($target_id, $count_metakey, ($count - 1), true);
+                \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, $count_metakey, ($count - 1), true);
             }
         } elseif (in_array($key, $termfunction_keys)) {
             // For each one of this (user/post), add the current $user_id as the one who follows/recommends them

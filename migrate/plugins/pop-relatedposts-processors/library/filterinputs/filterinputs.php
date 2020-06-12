@@ -16,7 +16,7 @@ class PoP_Module_Processor_ReferencesFilterInputProcessor extends \PoP\Component
 
             case self::FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\PostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
+                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

@@ -54,7 +54,7 @@ class PoP_Volunteering_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         $post = $resultItem;
         switch ($fieldName) {
             case 'volunteersNeeded':
-                return (bool)\PoP\PostMeta\Utils::getPostMeta($typeResolver->getID($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
+                return (bool)\PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_VOLUNTEERSNEEDED, true);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

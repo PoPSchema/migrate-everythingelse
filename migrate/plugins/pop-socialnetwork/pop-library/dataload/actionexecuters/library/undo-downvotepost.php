@@ -44,12 +44,12 @@ class GD_UndoDownvotePost extends GD_DownvoteUndoDownvotePost
 
         // Update value
         \PoP\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
-        \PoP\PostMeta\Utils::deletePostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
+        \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
 
         // Update the count
-        $count = \PoP\PostMeta\Utils::getPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
+        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\PostMeta\Utils::updatePostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count - 1), true);
+        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count - 1), true);
 
         return parent::update($form_data);
     }
