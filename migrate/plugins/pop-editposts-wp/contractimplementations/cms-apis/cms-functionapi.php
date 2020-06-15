@@ -1,7 +1,7 @@
 <?php
 namespace PoP\EditPosts\WP;
 
-use PoP\PostsWP\TypeAPIs\PostTypeAPIUtils;
+use PoP\PostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 
 class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
 {
@@ -17,7 +17,7 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
     {
         // Convert the parameters
         if (isset($query['post-status'])) {
-            $query['post_status'] = PostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['post-status']);
+            $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['post-status']);
             unset($query['post-status']);
         }
         if (isset($query['id'])) {
