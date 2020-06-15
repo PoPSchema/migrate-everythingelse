@@ -1,11 +1,12 @@
 <?php
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\CustomPosts\Types\Status;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -220,6 +221,7 @@ class PoP_ContentCreation_EmailSender_Hooks
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
                 $postTypeAPI = PostTypeAPIFacade::getInstance();
+                $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
 
                 $emails = $names = array();
                 foreach ($users as $user) {
@@ -233,7 +235,7 @@ class PoP_ContentCreation_EmailSender_Hooks
                 $post_title = $postTypeAPI->getTitle($post_id);
                 $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are currently receiving notifications for all new content posted on the website.', 'pop-emailsender'));
 
-                $author = $postTypeAPI->getAuthorID($post_id);
+                $author = $customPostUserTypeAPI->getAuthorID($post_id);
                 $author_name = $cmsusersapi->getUserDisplayName($author);
                 $author_url = $cmsusersapi->getUserURL($author);
                 $subject = sprintf(

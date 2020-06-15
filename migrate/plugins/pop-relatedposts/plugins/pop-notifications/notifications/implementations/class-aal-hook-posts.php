@@ -1,7 +1,8 @@
 <?php
+use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\CustomPosts\Types\Status;
+use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -66,10 +67,11 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         // Referenced posts
         if ($references) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
             foreach ($references as $reference_id) {
                 PoP_Notifications_Utils::insertLog(
                     array(
-                        'user_id' => $postTypeAPI->getAuthorID($post_id),
+                        'user_id' => $customPostUserTypeAPI->getAuthorID($post_id),
                         'action' => AAL_POP_ACTION_POST_REFERENCEDPOST,
                         'object_type' => 'Post',
                         'object_subtype' => $postTypeAPI->getPostType($reference_id),

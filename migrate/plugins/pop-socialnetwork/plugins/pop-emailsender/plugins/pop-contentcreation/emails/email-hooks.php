@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\CustomPosts\Types\Status;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -440,10 +441,11 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             return;
         }
 
+        $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
         if ($newly_taggedusers_ids = array_diff($newly_taggedusers_ids, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
 
             $post_name = gdGetPostname($post_id, 'lc');
-            $post_author_id = $postTypeAPI->getAuthorID($post_id);
+            $post_author_id = $customPostUserTypeAPI->getAuthorID($post_id);
 
             $content = sprintf(
                 TranslationAPIFacade::getInstance()->__('<p><a href="%s">%s</a> mentioned you in %s:</p>', 'pop-emailsender'),

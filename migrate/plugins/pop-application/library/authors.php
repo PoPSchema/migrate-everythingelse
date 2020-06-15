@@ -2,16 +2,17 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 /**
  * Return the author of the post (to be overriden by Co-Authors plus)
  */
 function gdGetPostauthors($post_id)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
     return HooksAPIFacade::getInstance()->applyFilters(
     	'gdGetPostauthors',
-    	array($postTypeAPI->getAuthorID($post_id)),
+    	array($customPostUserTypeAPI->getAuthorID($post_id)),
     	$post_id
     );
 }
