@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ContentPostLinks_Utils
 {
@@ -32,19 +33,19 @@ class PoP_ContentPostLinks_Utils
         // Check if the source is embeddable (eg: Facebook is not)
         $nonembeddable = PoP_MediaHostThumbs_Utils::getNonembeddableHosts();
         if (!in_array($host, $nonembeddable) && (!is_ssl() || (is_ssl() && $parse['scheme'] == 'https'))) {
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             // iframe wrapper: setting up width and height in code to fix the iOS Safari problem: https://stackoverflow.com/questions/16937070/iframe-size-with-css-on-ios
             $iframe = sprintf(
                 '<div class="iframe-wrapper content-iframe-wrapper" style="width: %2$s; height: %3$spx;"><iframe src="%1$s" width="%2$s" height="%3$s" frameborder="0"></iframe></div>',
-                $postTypeAPI->getContent($post),
+                $customPostTypeAPI->getContent($post),
                 '100%',
                 '400'
             );
 
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
-                $post_id = $postTypeAPI->getID($post);
-                $collapse_id = $postTypeAPI->getPostType($post_id).$post_id.'-'.POP_CONSTANT_CURRENTTIMESTAMP;
+                $post_id = $customPostTypeAPI->getID($post);
+                $collapse_id = $customPostTypeAPI->getCustomPostType($post_id) . $post_id . '-' . POP_CONSTANT_CURRENTTIMESTAMP;
                 $messages[] = sprintf(
                     '<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',
                     '#'.$collapse_id,
@@ -109,8 +110,8 @@ class PoP_ContentPostLinks_Utils
     public static function getLinkUrl($post)
     {
         // for the Link, its content IS the URL
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->getContent($post);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        return $customPostTypeAPI->getContent($post);
     }
 
     public static function getLinkHost($post_id)

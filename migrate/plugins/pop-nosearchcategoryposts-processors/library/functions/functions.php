@@ -1,12 +1,9 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
-
 // HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'nosearchcategorypostsPostParentpageid', 10, 2);
 // function nosearchcategorypostsPostParentpageid($pageid, $post_id)
 // {
-//     $postTypeAPI = PostTypeAPIFacade::getInstance();
-//     if ($postTypeAPI->getPostType($post_id) == 'post') {
+//     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//     if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
 //         $cats = PoP_NoSearchCategoryPosts_Utils::getCats();
 //         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 //         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);

@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 /**
@@ -39,7 +39,7 @@ class PoP_Mentions
         // So then I took the regex from #1, and applied the negative lookahead: +(?![^<]*>)
         // Comment Leo 20/12/2016: Also added characther \x{A0} (https://unicodelookup.com/# /1) in addition to \s, since it appears sometimes between hashtags and would not be recognized
         $this->regex_general =  '/(?<=\s|\x{A0}|^)#(\w*[A-Za-z_]+\w*)+(?![^<]*>)/';
-        // // Comment Leo 06/03/2019: Changed the regex again, to work inside HTML, so it works after doing wpautop (because this hook is now executing after doing wpautop, can't do before anymore since abstracting the CMS and first calling $postTypeAPI->getContent)
+        // // Comment Leo 06/03/2019: Changed the regex again, to work inside HTML, so it works after doing wpautop (because this hook is now executing after doing wpautop, can't do before anymore since abstracting the CMS and first calling $customPostTypeAPI->getContent)
         // $this->regex_general =  '/(?:\s|^|\x{A0}|>)(#[A-Za-z0-9\-\.\_]+)(?:\s|$)(?=[^>]*(<|$))/';
 
 
@@ -79,11 +79,11 @@ class PoP_Mentions
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            $content = $postTypeAPI->getContent($post_id);
+        if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+            $content = $customPostTypeAPI->getContent($post_id);
 
             // $append = true because we will also add tags to this post extracted from comments posted under this post
             $tags = $this->getHashtagsFromContent($content);
@@ -198,9 +198,9 @@ class PoP_Mentions
 
     public function processContentPost($content, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+        if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $content = $this->work($content);
         }
         return $content;

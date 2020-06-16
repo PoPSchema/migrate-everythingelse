@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addAction('after_setup_theme', 'gdThumbEnable');
 function gdThumbEnable()
@@ -33,8 +33,8 @@ gdCustomThumbSizes();
 HooksAPIFacade::getInstance()->addFilter('getThumbId:default', 'gdThumbDefault', 10, 2);
 function gdThumbDefault($thumb_id, $post_id)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
-    if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT && POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST) {
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+    if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT && POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST) {
         return POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEHIGHLIGHTPOST;
     } elseif (POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEPOST) {
         return POPTHEME_WASSUP_IMAGE_NOFEATUREDIMAGEPOST;

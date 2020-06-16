@@ -1,6 +1,6 @@
 <?php
 use PoP\CustomPosts\Types\Status;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
@@ -28,7 +28,7 @@ class PoP_Notifications_Utils
 
     public static function logPostAction($post_id, $action, $user_id = null)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if (!$user_id) {
             $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
@@ -39,18 +39,18 @@ class PoP_Notifications_Utils
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Post',
-                'object_subtype' => $postTypeAPI->getPostType($post_id),
+                'object_subtype' => $customPostTypeAPI->getCustomPostType($post_id),
                 'object_id' => $post_id,
-                'object_name' => $postTypeAPI->getTitle($post_id),
+                'object_name' => $customPostTypeAPI->getTitle($post_id),
             )
         );
     }
 
     public static function notifyAllUsers($post_id, $notification)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             // Delete a previous entry (only one entry per post is allowed)
             PoP_Notifications_API::deleteLog(
                 array(
@@ -65,7 +65,7 @@ class PoP_Notifications_Utils
                 array(
                     'action'      => AAL_POP_ACTION_POST_NOTIFIEDALLUSERS,
                     'object_type' => 'Post',
-                    'object_subtype' => $postTypeAPI->getPostType($post_id),
+                    'object_subtype' => $customPostTypeAPI->getCustomPostType($post_id),
                     'user_id'     => $customPostUserTypeAPI->getAuthorID($post_id), //POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS,
                     'object_id'   => $post_id,
                     'object_name' => stripslashes($notification),

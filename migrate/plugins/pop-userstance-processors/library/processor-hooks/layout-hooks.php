@@ -1,6 +1,7 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_Application_UserStance_LayoutHooks
 {
@@ -22,8 +23,8 @@ class PoP_Application_UserStance_LayoutHooks
 
     public function getTopSidebar($sidebar, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return [UserStance_Module_Processor_CustomPostLayoutSidebars::class, UserStance_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_STANCE];
         }
 
@@ -32,8 +33,8 @@ class PoP_Application_UserStance_LayoutHooks
 
     public function getBottomSidebar($sidebar, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL];
         }
 

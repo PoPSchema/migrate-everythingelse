@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_CreateUpdate_LocationPost extends GD_CreateUpdate_PostBase
 {
-    protected function getPostType($form_data)
+    protected function getCustomPostType($form_data)
     {
         return POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
     }

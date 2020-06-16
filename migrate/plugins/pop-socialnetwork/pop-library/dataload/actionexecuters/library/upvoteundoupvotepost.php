@@ -1,13 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class GD_UpvoteUndoUpvotePost extends GD_UpdateUserMetaValue_Post
 {
     protected function eligible($post)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $eligible = in_array($postTypeAPI->getPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $eligible = in_array($customPostTypeAPI->getCustomPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
         return HooksAPIFacade::getInstance()->applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 

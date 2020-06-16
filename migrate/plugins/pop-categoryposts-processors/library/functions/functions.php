@@ -1,12 +1,10 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'categorypostsPostParentpageid', 10, 2);
 // function categorypostsPostParentpageid($pageid, $post_id)
 // {
-//     $postTypeAPI = PostTypeAPIFacade::getInstance();
-//     if ($postTypeAPI->getPostType($post_id) == 'post') {
+//     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//     if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
 //         $cats = PoP_CategoryPosts_Utils::getCats();
 //         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 //         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);

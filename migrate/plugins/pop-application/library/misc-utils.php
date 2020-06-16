@@ -41,8 +41,8 @@ function maybeAddHttp($url)
 // function gdGetCategories($post_id)
 // {
 //     $categories = array();
-//     $postTypeAPI = PostTypeAPIFacade::getInstance();
-//     if ($postTypeAPI->getPostType($post_id) == 'post') {
+//     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//     if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
 //         if ($cats = getTheCategory($post_id)) {
 //             $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 //             foreach ($cats as $cat) {

@@ -72,7 +72,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         return true;
     }
 
-    protected function getPostType($form_data)
+    protected function getCustomPostType($form_data)
     {
         return POP_USERSTANCE_POSTTYPE_USERSTANCE;
     }

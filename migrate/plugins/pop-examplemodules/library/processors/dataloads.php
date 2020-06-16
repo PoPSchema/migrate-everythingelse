@@ -138,7 +138,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             self::MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
             self::MODULE_EXAMPLE_AUTHORLATESTPOSTS => array('title', 'content', 'url'),
             self::MODULE_EXAMPLE_TAGLATESTPOSTS => array('title', 'content', 'url'),
-            self::MODULE_EXAMPLE_SINGLE => array('title', 'content', 'excerpt', 'status', 'date', 'commentCount', 'postType', 'catSlugs', 'tagNames'),
+            self::MODULE_EXAMPLE_SINGLE => array('title', 'content', 'excerpt', 'status', 'date', 'commentCount', 'customPostType', 'catSlugs', 'tagNames'),
             self::MODULE_EXAMPLE_PAGE => array('title', 'content', 'date'),
             self::MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );

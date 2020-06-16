@@ -1,12 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'blogPostname', 10, 3);
 function blogPostname($name, $post_id, $format)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
-    if ($postTypeAPI->getPostType($post_id) == 'post') {
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+    if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
         $cats = PoP_CategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
@@ -22,8 +22,8 @@ function blogPostname($name, $post_id, $format)
 HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'blogPosticon', 10, 2);
 function blogPosticon($icon, $post_id)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
-    if ($postTypeAPI->getPostType($post_id) == 'post') {
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+    if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
         $cats = PoP_CategoryPosts_Utils::getCats();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);

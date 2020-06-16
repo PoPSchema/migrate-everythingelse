@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\CustomPosts\Types\Status;
 
@@ -39,9 +39,9 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
+                $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-                if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+                if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
                 }
                 break;
@@ -210,12 +210,12 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
     public function initRequestProps(array $module, array &$props)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $vars = ApplicationState::getVars();
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($postTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
+                if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-submenu', false);
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
@@ -262,14 +262,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_404:
                 return TranslationAPIFacade::getInstance()->__('Ops, this page doesn\'t exist!', 'poptheme-wassup');
 
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $postTypeAPI->getTitle($post_id);
+                return $customPostTypeAPI->getTitle($post_id);
 
             case self::MODULE_BLOCK_AUTHOR:
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:

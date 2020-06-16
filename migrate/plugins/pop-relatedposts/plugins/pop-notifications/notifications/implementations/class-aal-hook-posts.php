@@ -1,7 +1,7 @@
 <?php
 use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
@@ -30,10 +30,10 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function createdPostRelatedToPost($post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+            if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
                 // Referenced posts: all of them for the new post
                 $references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
                 $this->relatedToPost($post_id, $references);
@@ -43,10 +43,10 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function updatedPostRelatedToPost($post_id, $log)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        if (in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
-            if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
+            if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
                 // Referenced posts: if doing an update, pass only the newly added ones
                 // If doing a create (changed "draft" to "publish"), then add all references
                 if ($log['previous-status'] != Status::PUBLISHED) {
@@ -66,7 +66,7 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
         // Referenced posts
         if ($references) {
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
             foreach ($references as $reference_id) {
                 PoP_Notifications_Utils::insertLog(
@@ -74,9 +74,9 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                         'user_id' => $customPostUserTypeAPI->getAuthorID($post_id),
                         'action' => AAL_POP_ACTION_POST_REFERENCEDPOST,
                         'object_type' => 'Post',
-                        'object_subtype' => $postTypeAPI->getPostType($reference_id),
+                        'object_subtype' => $customPostTypeAPI->getCustomPostType($reference_id),
                         'object_id' => $reference_id,
-                        'object_name' => $postTypeAPI->getTitle($reference_id),
+                        'object_name' => $customPostTypeAPI->getTitle($reference_id),
                     )
                 );
             }

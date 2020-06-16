@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ApplicationProcessors_AddHighlights_BlockHooks
 {
@@ -22,8 +22,8 @@ class PoP_ApplicationProcessors_AddHighlights_BlockHooks
 
     public function getTopSidebar($sidebar, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
             return [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT];
         }
 
@@ -32,8 +32,8 @@ class PoP_ApplicationProcessors_AddHighlights_BlockHooks
 
     public function getBottomSidebar($sidebar, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
             return [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL];
         }
 

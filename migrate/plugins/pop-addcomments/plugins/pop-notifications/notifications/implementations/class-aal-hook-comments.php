@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -60,7 +60,7 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
     protected function logComment($comment_id, $user_id, $action)
     {
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($comment_id);
         PoP_Notifications_Utils::insertLog(
@@ -68,9 +68,9 @@ class PoP_AddComments_Notifications_Hook_Comments /* extends AAL_Hook_Base*/
                 'user_id' => $user_id,
                 'action' => $action,
                 'object_type' => 'Comments',
-                'object_subtype' => $postTypeAPI->getPostType($cmscommentsresolver->getCommentPostId($comment)),
+                'object_subtype' => $customPostTypeAPI->getCustomPostType($cmscommentsresolver->getCommentPostId($comment)),
                 'object_id' => $comment_id,
-                'object_name' => $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment)),
+                'object_name' => $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment)),
             )
         );
     }

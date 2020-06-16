@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_LocationPosts_BlockHooks
 {
@@ -16,8 +16,8 @@ class PoP_LocationPosts_BlockHooks
 
     public function getTopSidebar($sidebar, $post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST) {
             return [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST];
         }
 

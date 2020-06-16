@@ -62,7 +62,7 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
         }
     }
 
-    protected function getPostType($form_data)
+    protected function getCustomPostType($form_data)
     {
         return POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_LocationPostLinks_ContentHooks
@@ -19,10 +19,11 @@ class PoPTheme_LocationPostLinks_ContentHooks
     {
         if ($module == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE]) {
             $vars = ApplicationState::getVars();
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
-            if ($postTypeAPI->getPostType($post_id) == 'post'
+            if (
+                $customPostTypeAPI->getCustomPostType($post_id) == 'post'
                 && defined('POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS') && POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS
                 && $taxonomyapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $post_id)
             ) {

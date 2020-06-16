@@ -60,7 +60,7 @@ class GD_CreateUpdate_PostBase
         );
     }
 
-    protected function getPostType($form_data)
+    protected function getCustomPostType($form_data)
     {
         return null;
     }
@@ -378,8 +378,8 @@ class GD_CreateUpdate_PostBase
 
     protected function maybeAddPostType(&$post_data, $form_data)
     {
-        if ($post_type = $this->getPostType($form_data)) {
-            $post_data['postType'] = $post_type;
+        if ($post_type = $this->getCustomPostType($form_data)) {
+            $post_data['post-type'] = $post_type;
         }
     }
 

@@ -21,29 +21,24 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
             unset($query['post-status']);
         }
         if (isset($query['id'])) {
-
             $query['ID'] = $query['id'];
             unset($query['id']);
         }
         if (isset($query['post-content'])) {
-
             $query['post_content'] = $query['post-content'];
             unset($query['post-content']);
         }
         if (isset($query['post-title'])) {
-
             $query['post_title'] = $query['post-title'];
             unset($query['post-title']);
         }
         if (isset($query['post-categories'])) {
-
             $query['post_category'] = $query['post-categories'];
             unset($query['post-categories']);
         }
-        if (isset($query['postType'])) {
-
-            $query['post_type'] = $query['postType'];
-            unset($query['postType']);
+        if (isset($query['post-type'])) {
+            $query['post_type'] = $query['post-type'];
+            unset($query['post-type']);
         }
     }
     public function insertPost($post_data)

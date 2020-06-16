@@ -1,13 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd_postname', 'userstancePostname', 10, 2);
 function userstancePostname($name, $post_id = null)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
-    if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+    if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
         return PoP_UserStance_PostNameUtils::getNameUc();
     }
 
@@ -16,8 +16,8 @@ function userstancePostname($name, $post_id = null)
 HooksAPIFacade::getInstance()->addFilter('gd_format_postname', 'userstanceFormatPostname', 10, 3);
 function userstanceFormatPostname($name, $post_id, $format)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
-    if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+    if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
         if ($format == 'lc') {
             return PoP_UserStance_PostNameUtils::getNameLc();
         } elseif ($format == 'plural-lc') {
@@ -31,8 +31,8 @@ HooksAPIFacade::getInstance()->addFilter('gd_posticon', 'userstancePosticon', 10
 function userstancePosticon($icon, $post_id = null)
 {
     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return getRouteIcon(POP_USERSTANCE_ROUTE_STANCES, false);
         }
     }
@@ -44,8 +44,8 @@ function userstancePosticon($icon, $post_id = null)
 // function userstancePostParentpageid($pageid, $post_id)
 // {
 //     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {
-//         $postTypeAPI = PostTypeAPIFacade::getInstance();
-//         if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+//         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//         if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
 //             return POP_USERSTANCE_ROUTE_STANCES;
 //         }
 //     }
@@ -57,8 +57,8 @@ HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'users
 function userstanceCreateupdateutilsEditUrl($url, $post_id)
 {
     if (defined('POP_USERSTANCE_ROUTE_EDITSTANCE') && POP_USERSTANCE_ROUTE_EDITSTANCE) {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getCustomPostType($post_id) == POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_EDITSTANCE);
         }
     }

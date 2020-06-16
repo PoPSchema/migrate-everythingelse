@@ -3,6 +3,7 @@
 use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
@@ -50,16 +51,16 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     protected function referencedPost($post_id, $referenced_post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'user_id' => $customPostUserTypeAPI->getAuthorID($post_id),
                 'action' => AAL_POP_ACTION_POST_HIGHLIGHTEDFROMPOST,
                 'object_type' => 'Post',
-                'object_subtype' => $postTypeAPI->getPostType($referenced_post_id),
+                'object_subtype' => $customPostTypeAPI->getCustomPostType($referenced_post_id),
                 'object_id' => $referenced_post_id,
-                'object_name' => $postTypeAPI->getTitle($referenced_post_id),
+                'object_name' => $customPostTypeAPI->getTitle($referenced_post_id),
             )
         );
     }

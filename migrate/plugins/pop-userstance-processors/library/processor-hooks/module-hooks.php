@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoPTheme_UserStance_ModuleHooks
@@ -19,9 +19,9 @@ class PoPTheme_UserStance_ModuleHooks
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
         $vars = ApplicationState::getVars();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $add = in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $add = in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
         $add = HooksAPIFacade::getInstance()->applyFilters(
             'PoPTheme_UserStance_ModuleHooks:single-block:add-createorupdate-vote',
             $add,
@@ -33,7 +33,7 @@ class PoPTheme_UserStance_ModuleHooks
                 $modules,
                 array_search(
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
-                    $blocks
+                    $modules
                 )+1,
                 0,
                 array(

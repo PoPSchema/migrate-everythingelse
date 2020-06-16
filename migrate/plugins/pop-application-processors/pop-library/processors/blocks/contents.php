@@ -1,10 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -128,15 +126,15 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     public function initRequestProps(array $module, array &$props)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
                 $vars = ApplicationState::getVars();
 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = $vars['routing-state']['queried-object-id'];
-                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getPostType($post_id).'-'.$post_id);
-                $this->appendProp($module, $props, 'runtime-class', $postTypeAPI->getStatus($post_id));
+                $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);
+                $this->appendProp($module, $props, 'runtime-class', $customPostTypeAPI->getStatus($post_id));
                 break;
         }
 

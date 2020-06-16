@@ -1,9 +1,10 @@
 <?php
+
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
 use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
@@ -12,7 +13,6 @@ class PoP_ContentCreation_EmailSender_Hooks
 {
     public function __construct()
     {
-
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
@@ -63,10 +63,10 @@ class PoP_ContentCreation_EmailSender_Hooks
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
-        $permalink = $postTypeAPI->getPermalink($post_id);
+        $permalink = $customPostTypeAPI->getPermalink($post_id);
         $post_name = gdGetPostname($post_id);
         $post_author_id = get_post_field('post_author', $post_id);
         $author_name = $cmsusersapi->getUserDisplayName($post_author_id);
@@ -109,7 +109,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         ) . "<br/>";
         $msg .= sprintf(
             TranslationAPIFacade::getInstance()->__('<b>Title:</b> %s', 'pop-emailsender'),
-            $postTypeAPI->getTitle($post_id)
+            $customPostTypeAPI->getTitle($post_id)
         ) . "<br/>";
         $msg .= sprintf(
             TranslationAPIFacade::getInstance()->__('<b>Permalink:</b> <a href="%1$s">%1$s</a>', 'pop-emailsender'),
@@ -117,11 +117,11 @@ class PoP_ContentCreation_EmailSender_Hooks
         ) . "<br/>";
         $msg .= sprintf(
             TranslationAPIFacade::getInstance()->__('<b>Edit Link:</b> <a href="%1$s">%1$s</a>', 'pop-emailsender'),
-            admin_url('post.php?action=edit&post='.$post_id)
+            admin_url('post.php?action=edit&post=' . $post_id)
         ) . "<br/>";
         $msg .= sprintf(
             TranslationAPIFacade::getInstance()->__('<b>Status:</b> %s', 'pop-emailsender'),
-            $postTypeAPI->getStatus($post_id)
+            $customPostTypeAPI->getStatus($post_id)
         );
 
         PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
@@ -139,9 +139,9 @@ class PoP_ContentCreation_EmailSender_Hooks
             return;
         }
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
-        $status = $postTypeAPI->getStatus($post_id);
+        $status = $customPostTypeAPI->getStatus($post_id);
 
         $post_name = gdGetPostname($post_id);
         $subject = sprintf(TranslationAPIFacade::getInstance()->__('Your %s was created successfully!', 'pop-emailsender'), $post_name);
@@ -157,7 +157,7 @@ class PoP_ContentCreation_EmailSender_Hooks
             TranslationAPIFacade::getInstance()->__('<p>Your %s <a href="%s">%s</a> was created successfully!</p>', 'pop-emailsender'),
             $post_name,
             $cmseditpostsapi->getEditPostLink($post_id),
-            $postTypeAPI->getTitle($post_id)
+            $customPostTypeAPI->getTitle($post_id)
         );
 
         if ($status == Status::PUBLISHED) {
@@ -188,8 +188,8 @@ class PoP_ContentCreation_EmailSender_Hooks
     public function emailnotificationsGeneralNewpostCreate($post_id)
     {
         // Send email if the created post has been published
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
     }
@@ -199,8 +199,8 @@ class PoP_ContentCreation_EmailSender_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailEmailnotificationsGeneralNewpost($post_id);
         }
     }
@@ -220,7 +220,7 @@ class PoP_ContentCreation_EmailSender_Hooks
             // From those, remove all users who got an email in a previous email function
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
+                $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
 
                 $emails = $names = array();
@@ -232,7 +232,7 @@ class PoP_ContentCreation_EmailSender_Hooks
                 // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
                 $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
                 $post_name = gdGetPostname($post_id);
-                $post_title = $postTypeAPI->getTitle($post_id);
+                $post_title = $customPostTypeAPI->getTitle($post_id);
                 $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are currently receiving notifications for all new content posted on the website.', 'pop-emailsender'));
 
                 $author = $customPostUserTypeAPI->getAuthorID($post_id);
@@ -271,29 +271,29 @@ class PoP_ContentCreation_EmailSender_Hooks
         $old_status = $log['previous-status'];
 
         // Send email if the updated post has been published
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED && $old_status != Status::PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
     }
     public function sendemailToUsersFromPostReferencescreate($post_id)
     {
         // Send email if the created post has been published
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $this->sendemailToUsersFromPostReferences($post_id);
         }
     }
     public function sendemailToUsersFromPostReferencestransition($post)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $this->sendemailToUsersFromPostReferences($postTypeAPI->getID($post));
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $this->sendemailToUsersFromPostReferences($customPostTypeAPI->getID($post));
     }
     protected function sendemailToUsersFromPostReferences($post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $skip = !in_array($postTypeAPI->getPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
+        $skip = !in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes());
 
         // Check if for a given type of post the email must not be sent (eg: Highlights)
         if (HooksAPIFacade::getInstance()->applyFilters('post_references:skip_sendemail', $skip, $post_id)) {
@@ -306,8 +306,8 @@ class PoP_ContentCreation_EmailSender_Hooks
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             foreach ($references as $reference_post_id) {
                 $reference_post_name = gdGetPostname($reference_post_id);
-                $reference_url = $postTypeAPI->getPermalink($reference_post_id);
-                $reference_title = $postTypeAPI->getTitle($reference_post_id);
+                $reference_url = $customPostTypeAPI->getPermalink($reference_post_id);
+                $reference_title = $customPostTypeAPI->getTitle($reference_post_id);
 
                 $reference_subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('A new %s was posted referencing "%s"', 'pop-emailsender'),
@@ -333,8 +333,8 @@ class PoP_ContentCreation_EmailSender_Hooks
 
     public function sendemailToUsersFromPostPostapproved($post)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post_id = $postTypeAPI->getID($post);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $post_id = $customPostTypeAPI->getID($post);
 
         $post_name = gdGetPostname($post_id);
         $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
