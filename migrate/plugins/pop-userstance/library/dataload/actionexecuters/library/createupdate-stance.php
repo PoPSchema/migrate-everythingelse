@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\CustomPosts\Types\Status;
 
@@ -35,13 +35,13 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         if ($form_data['stancetarget']) {
             // Check that the referenced post exists
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $referenced = $postTypeAPI->getPost($form_data['stancetarget']);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $referenced = $customPostTypeAPI->getCustomPost($form_data['stancetarget']);
             if (!$referenced) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($postTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
+                if ($customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = TranslationAPIFacade::getInstance()->__('The referenced post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -86,11 +86,11 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         $feedback_title = PoP_UserStance_PostNameUtils::getNameUc();
         if ($referenced) {
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             return sprintf(
                 TranslationAPIFacade::getInstance()->__('%1$s after reading “%2$s”', 'pop-userstance'),
                 $feedback_title,
-                $postTypeAPI->getTitle($referenced)
+                $customPostTypeAPI->getTitle($referenced)
             );
         }
 
@@ -109,7 +109,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
     {
         parent::validatecreatecontent($errors, $form_data);
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         // For the Stance, there can be at most 1 post for:
         // - Each article: each referenced $post_id
@@ -133,7 +133,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 TranslationAPIFacade::getInstance()->__('You have already added your %s', 'pop-userstance'),
@@ -143,8 +143,8 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
                 $error = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s after reading “<a href="%s">%s</a>”', 'pop-userstance'),
                     $error,
-                    $postTypeAPI->getPermalink($referenced_id),
-                    $postTypeAPI->getTitle($referenced_id)
+                    $customPostTypeAPI->getPermalink($referenced_id),
+                    $customPostTypeAPI->getTitle($referenced_id)
                 );
             }
             $errors[] = sprintf(

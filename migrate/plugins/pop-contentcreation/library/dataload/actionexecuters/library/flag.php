@@ -1,8 +1,9 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ActionExecuterInstance_Flag
 {
@@ -26,8 +27,8 @@ class PoP_ActionExecuterInstance_Flag
             $errors[] = TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $target = $postTypeAPI->getPost($form_data['target-id']);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $target = $customPostTypeAPI->getCustomPost($form_data['target-id']);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms');
             }
@@ -59,38 +60,38 @@ class PoP_ActionExecuterInstance_Flag
     protected function execute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
             TranslationAPIFacade::getInstance()->__('Flag post', 'pop-genericforms')
         );
-        $target = $postTypeAPI->getPost($form_data['target-id']);
+        $target = $customPostTypeAPI->getCustomPost($form_data['target-id']);
         $placeholder = '<p><b>%s:</b> %s</p>';
         $msg = sprintf(
             '<p>%s</p>',
             TranslationAPIFacade::getInstance()->__('New post flagged by user', 'pop-genericforms')
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Name', 'pop-genericforms'),
             $form_data['name']
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Email', 'pop-genericforms'),
             sprintf(
                 '<a href="mailto:%1$s">%1$s</a>',
                 $form_data['email']
             )
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Post ID', 'pop-genericforms'),
             $form_data['target-id']
-        ).sprintf(
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Post title', 'pop-genericforms'),
-            $postTypeAPI->getTitle($form_data['target-id'])
-        ).sprintf(
+            $customPostTypeAPI->getTitle($form_data['target-id'])
+        ) . sprintf(
             $placeholder,
             TranslationAPIFacade::getInstance()->__('Why flag', 'pop-genericforms'),
             $form_data['whyflag']

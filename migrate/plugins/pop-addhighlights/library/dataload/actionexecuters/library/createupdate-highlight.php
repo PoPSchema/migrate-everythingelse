@@ -3,7 +3,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
@@ -27,9 +27,9 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
         $form_data['highlightedpost'] = $moduleprocessor_manager->getProcessor([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST])->getValue([PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST]);
 
         // Highlights have no title input by the user. Instead, produce the title from the referenced post
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $referenced = $postTypeAPI->getPost($form_data['highlightedpost']);
-        $form_data['title'] = $postTypeAPI->getTitle($referenced);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $referenced = $customPostTypeAPI->getCustomPost($form_data['highlightedpost']);
+        $form_data['title'] = $customPostTypeAPI->getTitle($referenced);
 
         return $form_data;
     }
@@ -44,13 +44,13 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
             $errors[] = TranslationAPIFacade::getInstance()->__('No post has been highlighted', 'poptheme-wassup');
         } else {
             // Highlights have no title input by the user. Instead, produce the title from the referenced post
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $referenced = $postTypeAPI->getPost($form_data['highlightedpost']);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $referenced = $customPostTypeAPI->getCustomPost($form_data['highlightedpost']);
             if (!$referenced) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The highlighted post does not exist', 'poptheme-wassup');
             } else {
                 // If the referenced post has not been published yet, then error
-                if ($postTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
+                if ($customPostTypeAPI->getStatus($referenced) != Status::PUBLISHED) {
                     $errors[] = TranslationAPIFacade::getInstance()->__('The highlighted post is not published yet', 'poptheme-wassup');
                 }
             }
@@ -75,10 +75,10 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
     protected function getSuccessTitle($referenced = null)
     {
         if ($referenced) {
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             return sprintf(
                 TranslationAPIFacade::getInstance()->__('Highlight from “%s”', 'poptheme-wassup'),
-                $postTypeAPI->getTitle($referenced)
+                $customPostTypeAPI->getTitle($referenced)
             );
         }
 

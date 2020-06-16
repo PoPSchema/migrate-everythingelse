@@ -1,7 +1,8 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
 {
@@ -18,8 +19,8 @@ class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $target = $postTypeAPI->getPost($target_id);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $target = $customPostTypeAPI->getCustomPost($target_id);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-coreprocessors');
             } else {

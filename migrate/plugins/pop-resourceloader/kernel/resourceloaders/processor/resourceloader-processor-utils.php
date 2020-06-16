@@ -14,7 +14,7 @@ use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ResourceLoaderProcessorUtils {
@@ -270,7 +270,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $vars = &ApplicationState::$vars;
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 
@@ -472,7 +472,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $post_id);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $postTypeAPI->getPost($post_id);
+                $vars['routing-state']['queried-object'] = $customPostTypeAPI->getCustomPost($post_id);
                 $vars['routing-state']['queried-object-id'] = $post_id;
                 ApplicationState::augmentVarsProperties();
 

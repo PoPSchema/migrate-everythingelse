@@ -6,7 +6,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_PostBase
@@ -218,14 +218,14 @@ class GD_CreateUpdate_PostBase
             return;
         }
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $post = $customPostTypeAPI->getCustomPost($post_id);
         if (!$post) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Cheating, huh?', 'pop-application');
             return;
         }
 
-        if (!in_array($postTypeAPI->getStatus($post_id), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
+        if (!in_array($customPostTypeAPI->getStatus($post_id), array(Status::DRAFT, Status::PENDING, Status::PUBLISHED))) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -456,9 +456,9 @@ class GD_CreateUpdate_PostBase
 
     protected function getUpdatepostDataLog($post_id, $form_data)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $log = array(
-            'previous-status' => $postTypeAPI->getStatus($post_id),
+            'previous-status' => $customPostTypeAPI->getStatus($post_id),
         );
 
         if ($this->addReferences()) {

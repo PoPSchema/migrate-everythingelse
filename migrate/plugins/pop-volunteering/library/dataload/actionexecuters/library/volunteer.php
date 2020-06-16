@@ -1,8 +1,9 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ActionExecuterInstance_Volunteer
 {
@@ -22,8 +23,8 @@ class PoP_ActionExecuterInstance_Volunteer
             $errors->add('emptytargetid', TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms'));
         } else {
             // Make sure the post exists
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $target = $postTypeAPI->getPost($form_data['target-id']);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $target = $customPostTypeAPI->getCustomPost($form_data['target-id']);
             if (!$target) {
                 $errors->add('nonexistanttargetid', TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms'));
             }
@@ -60,8 +61,8 @@ class PoP_ActionExecuterInstance_Volunteer
     protected function execute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post_title = $postTypeAPI->getTitle($form_data['target-id']);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $post_title = $customPostTypeAPI->getTitle($form_data['target-id']);
         $subject = sprintf(
             TranslationAPIFacade::getInstance()->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
@@ -80,7 +81,7 @@ class PoP_ActionExecuterInstance_Volunteer
             sprintf(
                 TranslationAPIFacade::getInstance()->__('%s applied to volunteer for: <a href="%s">%s</a>', 'pop-genericforms'),
                 $form_data['name'],
-                $postTypeAPI->getPermalink($form_data['target-id']),
+                $customPostTypeAPI->getPermalink($form_data['target-id']),
                 $post_title
             )
         ).sprintf(

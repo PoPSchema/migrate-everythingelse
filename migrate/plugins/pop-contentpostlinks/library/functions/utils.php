@@ -1,7 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ContentPostLinks_Utils
@@ -19,7 +18,7 @@ class PoP_ContentPostLinks_Utils
     {
         $source = self::getLinkExcerpt($post);
         $url = self::getLinkUrl($post);
-        $host = self::getLinkHost($post_id);
+        $host = self::getLinkHost($post);
         $parse = parse_url($url);
         $nonembeddable_message = '';
         $content = sprintf(
@@ -114,10 +113,10 @@ class PoP_ContentPostLinks_Utils
         return $customPostTypeAPI->getContent($post);
     }
 
-    public static function getLinkHost($post_id)
+    public static function getLinkHost($post)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        $post = $postTypeAPI->getPost($post_id);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        $post = $customPostTypeAPI->getCustomPost($post);
         $url = self::getLinkUrl($post);
         return getUrlHost($url);
     }
