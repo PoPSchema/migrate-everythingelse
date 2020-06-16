@@ -1,6 +1,7 @@
 <?php
+
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\CustomPosts\Types\Status;
 
@@ -144,8 +145,8 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
 
                 // Stances are unique, just 1 per person/article.
                 // Check if there is a Stance for the given post.
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
-                if ($stances = $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+                $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
                     return array($stances[0]);
                 }
                 return [];

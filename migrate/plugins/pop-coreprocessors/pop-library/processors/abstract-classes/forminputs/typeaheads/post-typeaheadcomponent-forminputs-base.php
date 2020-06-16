@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends PoP_Module_Processor_TypeaheadComponentFormInputsBase
 {
@@ -29,8 +29,8 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
     }
     protected function executeThumbprint($query)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 
     protected function getPendingMsg(array $module)

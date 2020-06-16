@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_RelatedPosts_SectionUtils
@@ -31,7 +31,7 @@ class PoP_RelatedPosts_SectionUtils
         ];
         self::addDataloadqueryargsReferences($query, $post_id);
 
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->getPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 }

@@ -144,27 +144,28 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             $all_categories = $taxonomyapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
 
-            // Allow to filter the categories. This is needed so that Articles/Announcements/etc similar-configuration categories can be generated only once,
+            // Allow to filter the categories.
+            // This is needed so that Articles/Announcements/etc similar-configuration categories
+            // can be generated only once
             $categories = HooksAPIFacade::getInstance()->applyFilters(
                 'PoPThemeWassup_ResourceLoader_Hooks:single_resources:categories',
                 $all_categories
             );
             foreach ($categories as $category) {
-                if ($post_ids = $postTypeAPI->getPosts(
-                    array_merge(
-                        $query,
-                        array(
-                            'categories' => [$category],
-                        ),
-                        ['return-type' => POP_RETURNTYPE_IDS]
+                if (
+                    $post_ids = $postTypeAPI->getPosts(
+                        array_merge(
+                            $query,
+                            array(
+                                'categories' => [$category],
+                            ),
+                            ['return-type' => POP_RETURNTYPE_IDS]
+                        )
                     )
-                )
                 ) {
                     $ids[] = $post_ids[0];
                 }
@@ -186,7 +187,6 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Make sure there are no duplicate $ids (eg: a same post having 2 categories, such as "posts" (parent) and "articles" (child))
             $ids = array_unique($ids);
         } else {
-
             $ids = $postTypeAPI->getPosts(
                 $query,
                 ['return-type' => POP_RETURNTYPE_IDS]
