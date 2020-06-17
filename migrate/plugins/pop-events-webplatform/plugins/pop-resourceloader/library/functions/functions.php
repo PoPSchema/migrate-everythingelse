@@ -11,6 +11,6 @@ HooksAPIFacade::getInstance()->addFilter('PoP_ResourceLoader_FileReproduction_Co
 function emPopResourceloaderSinglePaths($paths)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
-    $paths[] = $eventTypeAPI->getEventPostTypeSlug().'/';
+    $paths[] = $eventTypeAPI->getEventCustomPostTypeSlug() . '/';
     return $paths;
 }
