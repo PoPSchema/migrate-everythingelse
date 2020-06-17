@@ -123,6 +123,7 @@ class Plugins
             'pop-engine-webplatform-aws',
             'pop-engine-webplatform-optimizations',
             'pop-engine-webplatform-wp',
+            'pop-events',
             // 'pop-eventlinks',
             // 'pop-eventlinks-processors',
             // 'pop-eventlinks-webplatform',
