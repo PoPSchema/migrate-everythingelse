@@ -8,7 +8,7 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
     public function addLayoutModules(&$layouts, $handle, $format = '')
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $event_post_type = $eventTypeAPI->getEventPostType();
+        $event_post_type = $eventTypeAPI->getEventCustomPostType();
 
         // Only if this post type is shown in All Content
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

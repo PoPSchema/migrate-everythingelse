@@ -62,7 +62,7 @@ class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_Se
         $ret = parent::getSectionClasses($module, $props);
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $event_post_type = $eventTypeAPI->getEventPostType();
+        $event_post_type = $eventTypeAPI->getEventCustomPostType();
         switch ($module[1]) {
             case self::MODULE_LATESTCOUNT_EVENTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_EVENTS:

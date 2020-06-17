@@ -17,7 +17,7 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
     public function addLayoutModules(&$layouts, $handle, $format = '')
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $event_post_type = $eventTypeAPI->getEventPostType();
+        $event_post_type = $eventTypeAPI->getEventCustomPostType();
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
             'isType',

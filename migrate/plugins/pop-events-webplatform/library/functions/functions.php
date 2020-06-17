@@ -7,7 +7,7 @@ HooksAPIFacade::getInstance()->addFilter('pop_modulemanager:multilayout_labels',
 function gdEmCustomMultilayoutLabels($labels)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
-    $event_post_type = $eventTypeAPI->getEventPostType();
+    $event_post_type = $eventTypeAPI->getEventCustomPostType();
     $label = '<span class="label label-%s">%s</span>';
     return array_merge(
         array(

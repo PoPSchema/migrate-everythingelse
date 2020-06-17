@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                         'queried-object-is-past-event' => true,
                     ],
                 ],
@@ -36,7 +36,7 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionRoute
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
-                        'queried-object-post-type' => $eventTypeAPI->getEventPostType(),
+                        'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
                     ],
                 ],
             ];
