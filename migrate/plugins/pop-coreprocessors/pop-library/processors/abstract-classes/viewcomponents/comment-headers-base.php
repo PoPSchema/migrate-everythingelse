@@ -18,7 +18,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     {
         if ($header = $this->getHeaderSubmodule($module)) {
             return array(
-                'post' => array(
+                'customPost' => array(
                     $header,
                 ),
             );

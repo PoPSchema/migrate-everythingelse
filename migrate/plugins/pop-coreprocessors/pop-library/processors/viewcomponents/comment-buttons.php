@@ -28,7 +28,7 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return array(
-                    'post' => array(
+                    'customPost' => array(
                         [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
                     ),
                 );

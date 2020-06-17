@@ -33,7 +33,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
                 return 'self';
 
             case self::MODULE_FORMCOMPONENT_CARD_COMMENTPOST:
-                return 'post';
+                return 'customPost';
         }
 
         return parent::getDbobjectField($module);

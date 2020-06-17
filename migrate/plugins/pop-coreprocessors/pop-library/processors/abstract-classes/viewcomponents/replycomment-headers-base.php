@@ -13,14 +13,14 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
     public function getSubmodules(array $module): array
     {
         $ret = parent::getSubmodules($module);
-    
+
         if ($post_module = $this->getPostSubmodule($module)) {
             $ret[] = $post_module;
         }
         if ($comment_module = $this->getCommentSubmodule($module)) {
             $ret[] = $comment_module;
         }
-        
+
         return $ret;
     }
 
@@ -45,19 +45,17 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
-    
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($module, $props);
 
         if ($post_module = $this->getPostSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = ModuleUtils::getModuleOutputName($post_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = ModuleUtils::getModuleOutputName((array) $post_module);
         }
 
         if ($comment_module = $this->getCommentSubmodule($module)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = ModuleUtils::getModuleOutputName($comment_module);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = ModuleUtils::getModuleOutputName((array) $comment_module);
         }
-        
+
         return $ret;
     }
 }
