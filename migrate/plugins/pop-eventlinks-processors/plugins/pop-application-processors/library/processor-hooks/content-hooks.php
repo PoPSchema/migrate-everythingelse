@@ -22,7 +22,7 @@ class PoPTheme_EM_Processors_ContentHooks
             $post_id = $vars['routing-state']['queried-object-id'];
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
             if ($eventTypeAPI->isEvent($post_id)) {
-                $event = $eventTypeAPI->getEventByPostId($post_id);
+                $event = $eventTypeAPI->getEvent($post_id);
                 if (defined('POP_EVENTLINKS_CAT_EVENTLINKS') && POP_EVENTLINKS_CAT_EVENTLINKS && eventHasCategory($event, POP_EVENTLINKS_CAT_EVENTLINKS)) {
                     return [PoP_ContentPostLinks_Module_Processor_SingleContentInners::class, PoP_ContentPostLinks_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_LINKSINGLE];
                 }

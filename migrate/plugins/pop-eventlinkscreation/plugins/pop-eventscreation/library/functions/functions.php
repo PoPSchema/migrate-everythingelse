@@ -7,7 +7,7 @@ HooksAPIFacade::getInstance()->addFilter('get_event_edit_url', 'maybeGetEventLin
 function maybeGetEventLinkEditUrl($url, $post_id)
 {
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
-    $event = $eventTypeAPI->getEventByPostId($post_id);
+    $event = $eventTypeAPI->getEvent($post_id);
     if (eventHasCategory($event, POP_EVENTLINKS_CAT_EVENTLINKS)) {
         return RouteUtils::getRouteURL(POP_EVENTLINKSCREATION_ROUTE_EDITEVENTLINK);
     }
