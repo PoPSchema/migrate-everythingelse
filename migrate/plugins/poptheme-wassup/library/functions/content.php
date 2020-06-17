@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\CustomPostMedia\Misc\MediaHelpers;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
@@ -39,14 +39,21 @@ function gdGetPostDescription()
 {
     $vars = ApplicationState::getVars();
     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
+    $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     $post_id = $vars['routing-state']['queried-object-id'];
-    $excerpt = $postTypeAPI->getExcerpt($post_id);
+    $excerpt = $customPostTypeAPI->getExcerpt($post_id);
 
     // If the excerpt is empty, return the post content instead
     if (!$excerpt) {
         // 300 characters long is good enough, remove all whitespaces
-        $excerpt = str_replace(array("\n\r", "\n", "\r", "\t"), array(' ', '', '', ' '), limitString($postTypeAPI->getBasicPostContent($post_id), 300));
+        $excerpt = str_replace(
+            array("\n\r", "\n", "\r", "\t"),
+            array(' ', '', '', ' '),
+            limitString(
+                $customPostTypeAPI->getPlainTextContent($post_id),
+                300
+            )
+        );
     }
 
     return $cmsapplicationhelpers->escapeHTML($excerpt);
