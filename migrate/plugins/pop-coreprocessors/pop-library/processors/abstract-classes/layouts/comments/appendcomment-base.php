@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_Q
     {
         $ret = parent::getDataFields($module, $props);
 
-        $ret[] = 'postID';
+        $ret[] = 'customPostID';
         $ret[] = 'parent';
 
         return $ret;

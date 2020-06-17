@@ -65,15 +65,15 @@ class PoPGenericForms_DataLoad_FieldResolver_Comments extends AbstractDBDataFiel
                 return limitString(strip_tags($content), 250);
 
             case 'replycommentURL':
-                $postID = $typeResolver->resolveValue($resultItem, 'postID', $variables, $expressions, $options);
-                if (GeneralUtils::isError($postID)) {
+                $customPostID = $typeResolver->resolveValue($resultItem, 'customPostID', $variables, $expressions, $options);
+                if (GeneralUtils::isError($customPostID)) {
                     return null;
                 }
                 $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                 $post_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getName([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]);
                 $comment_name = $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT])->getName([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT]);
                 return GeneralUtils::addQueryArgs([
-                    $post_name => $postID,
+                    $post_name => $customPostID,
                     $comment_name => $typeResolver->getID($comment),
                 ], RouteUtils::getRouteURL(POP_ADDCOMMENTS_ROUTE_ADDCOMMENT));
         }

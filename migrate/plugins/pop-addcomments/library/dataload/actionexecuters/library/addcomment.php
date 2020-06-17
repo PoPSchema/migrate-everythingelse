@@ -8,7 +8,7 @@ class GD_AddComment
 {
     protected function validate(&$errors, $form_data)
     {
-        if (empty($form_data['postID'])) {
+        if (empty($form_data['customPostID'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('We don\'t know what post the comment is for. Please reload the page and try again.', 'pop-application');
         }
 
@@ -32,9 +32,9 @@ class GD_AddComment
         $form_data = array(
             'comment' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR])->getValue([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR]),
             'parent' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT])->getValue([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT]),
-            'postID' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]),
+            'customPostID' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]),
         );
-        
+
         return $form_data;
     }
 
@@ -54,7 +54,7 @@ class GD_AddComment
             'agent' => $_SERVER['HTTP_USER_AGENT'],
             'content' => $form_data['comment'],
             'parent' => $form_data['parent'],
-            'postID' => $form_data['postID']
+            'customPostID' => $form_data['customPostID']
         );
 
         return $comment_data;

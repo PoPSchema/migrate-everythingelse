@@ -188,13 +188,13 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
                 AAL_POP_ACTION_POST_SPAMMEDPOST,
             );
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $postID = $customPostTypeAPI->getID;
-            // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $postID, $clear_actions);
+            $customPostID = $customPostTypeAPI->getID;
+            // AAL_Main::instance()->api->deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
             $cmspostsresolver = \PoP\Posts\ObjectPropertyResolverFactory::getInstance();
-            PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $postID, $clear_actions);
+            PoP_Notifications_API::deletePostNotifications(POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS, $customPostID, $clear_actions);
 
             // Only after log the action
-            PoP_Notifications_Utils::logPostAction($postID, $action, POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS);
+            PoP_Notifications_Utils::logPostAction($customPostID, $action, POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS);
         }
     }
 }

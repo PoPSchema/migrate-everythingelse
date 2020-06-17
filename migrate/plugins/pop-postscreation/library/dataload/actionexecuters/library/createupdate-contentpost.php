@@ -188,7 +188,7 @@ class GD_CreateUpdate_PostBase
     protected function validateupdatecontent(&$errors, $form_data)
     {
         if ($this->addReferences()) {
-            if (in_array($form_data['postID'], $form_data['references'])) {
+            if (in_array($form_data['customPostID'], $form_data['references'])) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The post cannot be a response to itself', 'pop-postscreation');
             }
         }
@@ -290,7 +290,7 @@ class GD_CreateUpdate_PostBase
 
         $editor = $this->getEditorInput();
         $form_data = array(
-            'postID' => $_REQUEST[POP_INPUTNAME_POSTID],
+            'customPostID' => $_REQUEST[POP_INPUTNAME_POSTID],
             'content' => trim($cmseditpostshelpers->kses(stripslashes($moduleprocessor_manager->getProcessor($editor)->getValue($editor)))),
             'categories' => $this->getCategories(),
         );
@@ -386,7 +386,7 @@ class GD_CreateUpdate_PostBase
     protected function getUpdatepostData($form_data)
     {
         $post_data = array(
-            'id' => $form_data['postID'],
+            'id' => $form_data['customPostID'],
             'post-content' => $form_data['content'],
         );
 
