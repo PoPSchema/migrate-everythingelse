@@ -15,11 +15,11 @@ class PoP_Application_DataloaderHooks
             array($this, 'maybeGetLoadinglatestLimit')
         );
         HooksAPIFacade::getInstance()->addFilter(
-            'PostTypeDataLoader:query:limit',
+            'CustomPostTypeDataLoader:query:limit',
             array($this, 'maybeGetLoadinglatestLimitForPost')
         );
         HooksAPIFacade::getInstance()->addFilter(
-            'PostTypeDataLoader:query',
+            'CustomPostTypeDataLoader:query',
             array($this, 'maybeAddLoadinglatestTimestamp'),
             10,
             2

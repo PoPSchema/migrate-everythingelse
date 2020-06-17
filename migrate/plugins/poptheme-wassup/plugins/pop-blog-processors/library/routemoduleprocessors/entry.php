@@ -17,7 +17,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
     //     if (!\PoP\API\Environment::disableAPI()) {
     //         // Home
     //         $ret[RouteNatures::HOME][] = [
-    //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
+    //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
     //             'conditions' => [
     //                 'scheme' => POP_SCHEME_API,
     //             ],
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // Page
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RouteNatures::STANDARD][$route][] = [
@@ -51,7 +51,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
 
             // REST API Page
             $routemodules = array(
-                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
+                POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RouteNatures::STANDARD][$route][] = [

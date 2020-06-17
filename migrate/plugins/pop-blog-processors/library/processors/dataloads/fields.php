@@ -9,7 +9,7 @@ use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 
 class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    public const MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST = 'blog-dataload-relationalfields-contentlist';
+    public const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST = 'blog-dataload-relationalfields-custompostlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST = 'blog-dataload-relationalfields-postlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_USERLIST = 'blog-dataload-relationalfields-userlist';
     public const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'blog-dataload-relationalfields-taglist';
@@ -22,7 +22,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public function getModulesToProcess(): array
     {
         return array(
-            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST],
+            [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST],
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
@@ -42,7 +42,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
                 return PostTypeResolver::class;
 
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST:
                 return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
@@ -63,7 +63,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public function getQueryInputOutputHandlerClass(array $module): ?string
     {
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
@@ -116,7 +116,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 }
                 break;
 
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST:
                 PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
@@ -129,7 +129,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public function getFilterSubmodule(array $module): ?array
     {
         switch ($module[1]) {
-            case self::MODULE_DATALOAD_RELATIONALFIELDS_CONTENTLIST:
+            case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CONTENT];
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
