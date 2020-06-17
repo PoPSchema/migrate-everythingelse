@@ -19,7 +19,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public static function getFieldNamesToResolve(): array
     {
         return [
-            'recommendsposts',
+            'recommendsCustomPosts',
             'followers',
             'following',
             'followersCount',
@@ -29,7 +29,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function getSchemaFieldType(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
         $types = [
-            'recommendsposts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
+            'recommendsCustomPosts' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followers' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'following' => TypeCastingHelpers::makeArray(SchemaDefinition::TYPE_ID),
             'followersCount' => SchemaDefinition::TYPE_INT,
@@ -40,7 +40,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function isSchemaFieldResponseNonNullable(TypeResolverInterface $typeResolver, string $fieldName): bool
     {
         $nonNullableFieldNames = [
-            'recommendsposts',
+            'recommendsCustomPosts',
             'followers',
             'following',
             'followersCount',
@@ -55,7 +55,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         $descriptions = [
-            'recommendsposts' => $translationAPI->__('', ''),
+            'recommendsCustomPosts' => $translationAPI->__('', ''),
             'followers' => $translationAPI->__('', ''),
             'following' => $translationAPI->__('', ''),
             'followersCount' => $translationAPI->__('', ''),
@@ -69,7 +69,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $user = $resultItem;
         switch ($fieldName) {
-            case 'recommendsposts':
+            case 'recommendsCustomPosts':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorrecommendedposts($query, $typeResolver->getID($user));
                 return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
@@ -94,7 +94,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     public function resolveFieldTypeResolverClass(TypeResolverInterface $typeResolver, string $fieldName, array $fieldArgs = []): ?string
     {
         switch ($fieldName) {
-            case 'recommendsposts':
+            case 'recommendsCustomPosts':
                 return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'followers':
