@@ -51,7 +51,7 @@
     <meta name="twitter:site" content="<?php echo $twitter_user ?>">
     <meta name="twitter:creator" content="<?php echo $twitter_user ?>">
     <?php
-    if ($vars['routing-state']['is-post'] || $vars['routing-state']['is-page']) {
+    if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
         $description = gdGetPostDescription();
     } elseif ($vars['routing-state']['is-standard']) {
         $description = gdHeaderRouteDescription();

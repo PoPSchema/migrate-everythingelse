@@ -14,7 +14,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //     $site_name = $cmsapplicationapi->getSiteName();
 //     $separator = '|';
 
-//     if ($vars['routing-state']['is-post']) {
+//     if ($vars['routing-state']['is-custompost']) {
 //         $post = $vars['routing-state']['queried-object'];
 //         $content = $customPostTypeAPI->getSinglePostTitle($post);
 //     } elseif ($vars['routing-state']['is-home']/* || $vars['routing-state']['is-front-page']*/) {

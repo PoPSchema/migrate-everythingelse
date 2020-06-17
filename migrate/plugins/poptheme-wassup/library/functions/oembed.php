@@ -17,9 +17,9 @@ function popwassupOembedUnsupported($content)
     if (
         defined('POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED') && POPTHEME_WASSUP_PAGEPLACEHOLDER_OEMBED &&
         (
-            $vars['routing-state']['is-home'] || 
+            $vars['routing-state']['is-home'] ||
             $vars['routing-state']['is-user'] ||
-            $vars['routing-state']['is-post'] ||
+            $vars['routing-state']['is-custompost'] ||
             $vars['routing-state']['is-tag'] ||
             $vars['routing-state']['is-404']
         )

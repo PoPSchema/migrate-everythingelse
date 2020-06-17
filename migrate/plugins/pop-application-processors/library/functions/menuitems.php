@@ -17,7 +17,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //             $parentpageid = $post_id;
 //         }
 //         // retrieve the page for the category for the post
-//         elseif ($vars['routing-state']['is-post']) {
+//         elseif ($vars['routing-state']['is-custompost']) {
 //             $post_id = $vars['routing-state']['queried-object-id'];
 //             $parentpageid = gdPostParentpageid($post_id);
 //         }

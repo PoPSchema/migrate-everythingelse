@@ -80,7 +80,7 @@ function gdGetDocumentThumb($size = 'large')
 {
     $vars = ApplicationState::getVars();
     $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
-    if ($vars['routing-state']['is-post'] || $vars['routing-state']['is-page']) {
+    if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
         $post_id = $vars['routing-state']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {
             $thumb = $cmsmediaapi->getMediaSrc($post_thumb_id, $size);
