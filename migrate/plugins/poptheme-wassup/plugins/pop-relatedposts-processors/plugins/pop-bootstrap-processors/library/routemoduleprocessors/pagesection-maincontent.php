@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -13,7 +13,7 @@ class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionRouteModulePr
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

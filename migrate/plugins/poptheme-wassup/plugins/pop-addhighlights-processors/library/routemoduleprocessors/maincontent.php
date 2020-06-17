@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
@@ -185,42 +185,42 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor exten
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionBlocks::class, PoP_AddHighlights_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_highlightfullview as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_FULLVIEW) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_highlightthumbnail = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionBlocks::class, PoP_AddHighlights_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_highlightthumbnail as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_THUMBNAIL) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_highlightlist = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionBlocks::class, PoP_AddHighlights_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST],
         );
         foreach ($routemodules_highlightlist as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_LIST) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoPTheme_Wassup_LocationPosts_RelatedPosts_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -12,7 +12,7 @@ class PoPTheme_Wassup_LocationPosts_RelatedPosts_Module_SideInfoContentPageSecti
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples::class, PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [

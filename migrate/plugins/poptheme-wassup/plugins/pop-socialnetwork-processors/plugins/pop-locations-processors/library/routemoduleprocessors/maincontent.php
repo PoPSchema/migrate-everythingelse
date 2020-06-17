@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -35,14 +35,14 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_MAP) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

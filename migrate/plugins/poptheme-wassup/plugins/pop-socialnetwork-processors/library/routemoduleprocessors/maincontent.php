@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -266,14 +266,14 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_DETAILS],
         );
         foreach ($routemodules_userdetails as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_DETAILS) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_userfullview = array(
@@ -282,14 +282,14 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_userfullview as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_FULLVIEW) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_userthumbnail = array(
@@ -298,14 +298,14 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_THUMBNAIL) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_userlist = array(
@@ -314,14 +314,14 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST],
         );
         foreach ($routemodules_userlist as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_LIST) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

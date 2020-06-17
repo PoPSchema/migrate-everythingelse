@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -57,7 +57,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     // {
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

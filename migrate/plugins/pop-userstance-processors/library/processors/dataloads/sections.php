@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
@@ -583,7 +583,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_AGAINST_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

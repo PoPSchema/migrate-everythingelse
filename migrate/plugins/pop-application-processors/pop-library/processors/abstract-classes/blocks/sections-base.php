@@ -5,7 +5,7 @@ use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             case TaxonomyRouteNatures::TAG:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
 
-            case PostRouteNatures::POST:
+            case CustomPostRouteNatures::CUSTOMPOST:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu();
         }
         // }
@@ -59,7 +59,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             case TaxonomyRouteNatures::TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle();
 
-            case PostRouteNatures::POST:
+            case CustomPostRouteNatures::CUSTOMPOST:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getSingleTitle();
         }
         // }
@@ -89,7 +89,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
-                case PostRouteNatures::POST:
+                case CustomPostRouteNatures::CUSTOMPOST:
                     $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 

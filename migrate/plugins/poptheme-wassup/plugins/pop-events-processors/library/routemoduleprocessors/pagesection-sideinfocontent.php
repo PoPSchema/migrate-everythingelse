@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Events\Facades\EventTypeAPIFacade;
@@ -37,7 +37,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
@@ -53,7 +53,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
@@ -82,7 +82,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
-        $ret[PostRouteNatures::POST][] = [
+        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
             'conditions' => [
                 'routing-state' => [
@@ -93,7 +93,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
         ];
 
         // Future and current single event
-        $ret[PostRouteNatures::POST][] = [
+        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR],
             'conditions' => [
                 'routing-state' => [

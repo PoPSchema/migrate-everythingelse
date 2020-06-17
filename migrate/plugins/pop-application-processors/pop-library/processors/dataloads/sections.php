@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -95,7 +95,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

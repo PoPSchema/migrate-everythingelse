@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -15,7 +15,7 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_USERSTANCE_ROUTE_ADDOREDITSTANCE => [UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         // Default
@@ -330,14 +330,14 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singlevotes == POP_FORMAT_FULLVIEW) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -347,14 +347,14 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singlevotes == POP_FORMAT_THUMBNAIL) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -364,14 +364,14 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singlevotes == POP_FORMAT_LIST) {
-                $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
             }
         }
 

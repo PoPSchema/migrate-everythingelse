@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
 
@@ -57,7 +57,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR:
     //         case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

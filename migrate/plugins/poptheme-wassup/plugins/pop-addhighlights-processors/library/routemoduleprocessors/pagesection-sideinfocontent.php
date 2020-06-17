@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -13,7 +13,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionRouteModule
     {
         $ret = array();
 
-        $ret[PostRouteNatures::POST][] = [
+        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
             'conditions' => [
                 'routing-state' => [

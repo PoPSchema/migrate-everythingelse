@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Pages\Routing\PathUtils;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
@@ -459,7 +459,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == PostRouteNatures::POST) {
+        } elseif ($nature == CustomPostRouteNatures::CUSTOMPOST) {
 
             // // For all the posts passed, get the resources and place them under the path of the post,
             // // without including the post's slug itself (eg: mesym.com/en/posts/this-is-a-post/ will save
@@ -591,7 +591,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 UserRouteNatures::USER,
             );
             $path_natures = array(
-                PostRouteNatures::POST,
+                CustomPostRouteNatures::CUSTOMPOST,
                 PageRouteNatures::PAGE,
                 RouteNatures::STANDARD,
             );
@@ -601,7 +601,7 @@ class PoP_ResourceLoaderProcessorUtils {
             $noroute_natures = array(
                 // Comment Leo 10/04/2019: since switching from page to route, only routes cannot have a tab
                 // UserRouteNatures::USER,
-                // PostRouteNatures::POST,
+                // CustomPostRouteNatures::CUSTOMPOST,
                 // TaxonomyRouteNatures::TAG,
                 RouteNatures::STANDARD,
             );

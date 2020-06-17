@@ -3,7 +3,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Routing\RouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -17,7 +17,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = ['module' => $module];
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -43,7 +43,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         $ret = array();
 
         // Default for Single
-        $ret[PostRouteNatures::POST][] = [
+        $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
             'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
         ];
 

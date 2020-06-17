@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_AddHighlights_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
@@ -16,7 +16,7 @@ class PoPTheme_Wassup_Events_AddHighlights_Module_SideInfoContentPageSectionRout
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_HIGHLIGHTSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_Events_AddHighlights_Module_SideInfoContentPageSectionRout
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_Events_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_HIGHLIGHTSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[PostRouteNatures::POST][$route][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'routing-state' => [

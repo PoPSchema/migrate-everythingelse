@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
@@ -91,7 +91,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         }
 
         if ($ids) {
-            $nature = PostRouteNatures::POST;
+            $nature = CustomPostRouteNatures::CUSTOMPOST;
             $merge = true;
 
             // Add the hook before the execution of the method, and remove it immediately afterwards

@@ -304,7 +304,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

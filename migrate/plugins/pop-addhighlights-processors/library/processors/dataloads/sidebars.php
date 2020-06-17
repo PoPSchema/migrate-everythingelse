@@ -50,7 +50,7 @@ class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     // {
     //     switch ($module[1]) {
     //         case self::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

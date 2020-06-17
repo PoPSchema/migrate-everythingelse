@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
@@ -79,7 +79,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
                 case RouteNatures::STANDARD:
                 case PageRouteNatures::PAGE:
-                case PostRouteNatures::POST:
+                case CustomPostRouteNatures::CUSTOMPOST:
 
                     $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
                     $path_resources[$nature][$path][$key] = $resources;

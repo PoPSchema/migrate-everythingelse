@@ -4,6 +4,6 @@ abstract class PoP_Module_Processor_SingleTabPanelSectionBlocksBase extends PoP_
 {
     // public function getNature(array $module)
     // {
-    //     return PostRouteNatures::POST;
+    //     return CustomPostRouteNatures::CUSTOMPOST;
     // }
 }

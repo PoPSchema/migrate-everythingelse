@@ -3,7 +3,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -134,7 +134,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
 
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
-        $nature = PostRouteNatures::POST;
+        $nature = CustomPostRouteNatures::CUSTOMPOST;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Get one ID per category from the DB

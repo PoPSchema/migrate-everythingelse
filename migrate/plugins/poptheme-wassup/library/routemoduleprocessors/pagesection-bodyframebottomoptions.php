@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_BodyFrameBottomOptionsPageSectionRouteModuleProcessor extends PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessorBase
@@ -18,7 +18,7 @@ class PoP_Module_BodyFrameBottomOptionsPageSectionRouteModuleProcessor extends P
         }
 
         if ($load_module) {
-            $ret[PostRouteNatures::POST][] = [
+            $ret[CustomPostRouteNatures::CUSTOMPOST][] = [
                 'module' => [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG]
             ];
         }

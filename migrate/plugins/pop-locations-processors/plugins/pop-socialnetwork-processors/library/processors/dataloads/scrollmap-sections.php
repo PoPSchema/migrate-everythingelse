@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
@@ -100,7 +100,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:
     //         case self::MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP:
-    //             return PostRouteNatures::POST;
+    //             return CustomPostRouteNatures::CUSTOMPOST;
     //     }
 
     //     return parent::getNature($module);

@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\CustomPostMedia\Misc\MediaHelpers;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -80,7 +80,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     //         case self::MODULE_LAYOUT_PAGETABS_SINGLE:
     //             $natures = array(
     //                 self::MODULE_LAYOUT_PAGETABS_AUTHOR => UserRouteNatures::USER,
-    //                 self::MODULE_LAYOUT_PAGETABS_SINGLE => PostRouteNatures::POST,
+    //                 self::MODULE_LAYOUT_PAGETABS_SINGLE => CustomPostRouteNatures::CUSTOMPOST,
     //             );
 
     //             // For the default page add the thumbnail. For the others, add the pretitle

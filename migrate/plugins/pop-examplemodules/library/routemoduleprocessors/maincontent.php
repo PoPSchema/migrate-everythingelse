@@ -2,7 +2,7 @@
 namespace PoP\ExampleModules;
 use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -31,7 +31,7 @@ class MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainConte
                     'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
                 ],
             ],
-            PostRouteNatures::POST => [
+            CustomPostRouteNatures::CUSTOMPOST => [
                 [
                     'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
                 ],
