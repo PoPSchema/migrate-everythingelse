@@ -4,7 +4,7 @@ use PoP\Engine\Route\RouteUtils;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\CustomPostMedia\Misc\MediaHelpers;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
@@ -96,7 +96,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     protected function getTitle(array $module, array &$props)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
@@ -115,7 +115,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $postTypeAPI->getTitle($post_id);
+                return $customPostTypeAPI->getTitle($post_id);
 
             case self::MODULE_LAYOUT_PAGETABS_TAG:
                 $tag_id = $vars['routing-state']['queried-object-id'];

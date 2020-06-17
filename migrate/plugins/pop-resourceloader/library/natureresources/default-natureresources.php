@@ -6,7 +6,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -135,7 +135,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
     public function addSingleResources(&$resources, $modulefilter, $options)
     {
         $nature = PostRouteNatures::POST;
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Get one ID per category from the DB
         $ids = array();
@@ -157,7 +157,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             );
             foreach ($categories as $category) {
                 if (
-                    $post_ids = $postTypeAPI->getPosts(
+                    $post_ids = $customPostTypeAPI->getPosts(
                         array_merge(
                             $query,
                             array(
@@ -174,7 +174,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // if (PoP_ResourceLoader_NatureResources_DefaultResources_Utils::add_nocategory_single_resources()) {
 
             //     // Also, add the configuration for one post without any category
-            //     if ($post_ids = $postTypeAPI->getPosts(array_merge(
+            //     if ($post_ids = $customPostTypeAPI->getPosts(array_merge(
             //         $query,
             //         array(
             //             'category__not_in' => $all_categories,
@@ -187,7 +187,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Make sure there are no duplicate $ids (eg: a same post having 2 categories, such as "posts" (parent) and "articles" (child))
             $ids = array_unique($ids);
         } else {
-            $ids = $postTypeAPI->getPosts(
+            $ids = $customPostTypeAPI->getPosts(
                 $query,
                 ['return-type' => POP_RETURNTYPE_IDS]
             );

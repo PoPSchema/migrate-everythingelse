@@ -1,6 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\CustomPosts\Types\Status;
 
 class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
@@ -17,16 +17,16 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
-        return $postTypeAPI->getPosts($query, $options);
+        return $customPostTypeAPI->getPosts($query, $options);
     }
 
     public function getTimestamp($post_id)
     {
         // Doing it the manual way
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsengineapi->getDate('U', $postTypeAPI->getModifiedDate($post_id));
+        $cmsengineapi->getDate('U', $customPostTypeAPI->getModifiedDate($post_id));
     }
 }

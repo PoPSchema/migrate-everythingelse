@@ -1,7 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // // Override what sizes can be chosen for the Gallery: this was added using a Change PoP
 // HooksAPIFacade::getInstance()->addFilter('popGalleryimageSizeNamesChoose', 'popGalleryimageSizeNamesChoose');
@@ -87,8 +86,8 @@ function popMediaViewSettingsDefaultthumb($settings)
 //         $orderby = 'none';
 
 //     if ( !empty($include) ) {
-            // $postTypeAPI = PostTypeAPIFacade::getInstance();
-//         $_attachments = $postTypeAPI->getPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+            // $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//         $_attachments = $customPostTypeAPI->getPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
 
 //         $attachments = array();
 //         foreach ( $_attachments as $key => $val ) {

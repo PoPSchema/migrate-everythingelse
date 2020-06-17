@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
@@ -62,9 +62,9 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
     public static function getSingleTitle()
     {
         $vars = ApplicationState::getVars();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $post_id = $vars['routing-state']['queried-object-id'];
-        $ret = $postTypeAPI->getTitle($post_id);
+        $ret = $customPostTypeAPI->getTitle($post_id);
 
         $route = $vars['route'];
         if ($route != RoutingRoutes::$MAIN) {

@@ -8,7 +8,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
@@ -73,7 +73,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $vars = ApplicationState::getVars();
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {
@@ -90,7 +90,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     return RequestUtils::addRoute($url, $route);
 
                 case PostRouteNatures::POST:
-                    $url = $postTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                    $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case RouteNatures::HOME:

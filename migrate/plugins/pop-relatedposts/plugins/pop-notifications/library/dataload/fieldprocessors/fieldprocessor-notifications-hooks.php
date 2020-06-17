@@ -5,7 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -58,7 +58,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -72,7 +72,7 @@ class PoP_RelatedPosts_AAL_PoP_DataLoad_FieldResolver_Notifications extends Abst
                     case AAL_POP_ACTION_POST_REFERENCEDPOST:
                         // Can't point to the posted article since we don't have the information (object_id is the original, referenced post, not the referencing one),
                         // so the best next thing is to point to the tab of all related content of the original post
-                        $value = $postTypeAPI->getPermalink($notification->object_id);
+                        $value = $customPostTypeAPI->getPermalink($notification->object_id);
                         if (POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT) {
                             $value = RequestUtils::addRoute($value, POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT);
                         }

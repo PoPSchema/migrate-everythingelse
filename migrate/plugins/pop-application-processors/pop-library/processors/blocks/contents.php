@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -57,7 +57,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHOR_CONTENT:
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
@@ -67,7 +67,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
             case self::MODULE_BLOCK_SINGLE_CONTENT:
             case self::MODULE_BLOCK_PAGE_CONTENT:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                return $postTypeAPI->getTitle($post_id);
+                return $customPostTypeAPI->getTitle($post_id);
         }
 
         return parent::getTitle($module, $props);

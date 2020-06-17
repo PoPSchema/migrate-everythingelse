@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
@@ -61,14 +61,14 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $post = $resultItem;
         switch ($fieldName) {
 
             case 'titleEdit':
                 if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
-                    return $postTypeAPI->getTitle($post);
+                    return $customPostTypeAPI->getTitle($post);
                 }
                 return '';
 
@@ -80,7 +80,7 @@ class GD_ContentCreation_DataLoad_FieldResolver_Posts extends AbstractDBDataFiel
 
             case 'contentEdit':
                 if (gdCurrentUserCanEdit($typeResolver->getID($post))) {
-                    return $postTypeAPI->getContent($post);
+                    return $customPostTypeAPI->getContent($post);
                 }
                 return '';
 

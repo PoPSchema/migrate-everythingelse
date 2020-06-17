@@ -3,7 +3,7 @@ define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_AddComments_EmailSender_Hooks
 {
@@ -39,16 +39,16 @@ class PoP_AddComments_EmailSender_Hooks
         }
 
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
-        $title = $postTypeAPI->getTitle($post_id);
+        $title = $customPostTypeAPI->getTitle($post_id);
         $intro = $cmscommentsresolver->getCommentParent($comment) ?
             TranslationAPIFacade::getInstance()->__('<p>There is a response to a comment from <a href="%s">%s</a>:</p>', 'pop-emailsender') :
             TranslationAPIFacade::getInstance()->__('<p>A new comment has been added to <a href="%s">%s</a>:</p>', 'pop-emailsender');
         $content = sprintf(
             $intro,
-            $postTypeAPI->getPermalink($post_id),
+            $customPostTypeAPI->getPermalink($post_id),
             $title
         );
         $content .= PoP_EmailTemplatesFactory::getInstance()->getCommentcontenthtml($comment);

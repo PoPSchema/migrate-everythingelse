@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutomatedEmails_Module_Processor_ContentBlocksBase
 {
@@ -23,7 +23,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
 
     protected function getDescription(array $module, array &$props)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST:
                 $pid = $_REQUEST[POP_INPUTNAME_POSTID];
@@ -33,7 +33,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutoma
                         TranslationAPIFacade::getInstance()->__('Here we send you this special %s:', 'pop-commonautomatedemails-processors'),
                         gdGetPostname($pid, 'lc')
                     ),
-                    $postTypeAPI->getTitle($pid)
+                    $customPostTypeAPI->getTitle($pid)
                 );
         }
 

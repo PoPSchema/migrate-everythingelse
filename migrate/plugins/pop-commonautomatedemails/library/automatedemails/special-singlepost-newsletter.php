@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_NewsletterSpecialSinglePost extends PoPTheme_Wassup_AE_NewsletterRecipientsBase
 {
@@ -12,8 +12,8 @@ class PoPTheme_Wassup_AE_NewsletterSpecialSinglePost extends PoPTheme_Wassup_AE_
     {
 
         // The post id is passed through param pid
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        return $postTypeAPI->getTitle($_REQUEST[POP_INPUTNAME_POSTID]);
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        return $customPostTypeAPI->getTitle($_REQUEST[POP_INPUTNAME_POSTID]);
     }
 }
 

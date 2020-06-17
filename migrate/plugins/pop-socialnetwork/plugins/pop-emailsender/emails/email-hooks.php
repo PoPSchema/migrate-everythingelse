@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
@@ -97,7 +97,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST, $networkusers)) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
+                $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -106,7 +106,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
 
                 $user_url = $cmsusersapi->getUserURL($user_id);
                 $user_name = $cmsusersapi->getUserDisplayName($user_id);
-                $post_title = $postTypeAPI->getTitle($post_id);
+                $post_title = $customPostTypeAPI->getTitle($post_id);
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s has recommended “%s”', 'pop-emailsender'),
                     $user_name,
@@ -151,7 +151,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST, $networkusers)) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $postTypeAPI = PostTypeAPIFacade::getInstance();
+                $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -161,7 +161,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
                 // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
                 $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
                 $post_name = gdGetPostname($post_id);
-                $post_title = $postTypeAPI->getTitle($post_id);
+                $post_title = $customPostTypeAPI->getTitle($post_id);
                 $footer = PoP_UserPlatform_EmailSenderUtils::getPreferencesFooter(TranslationAPIFacade::getInstance()->__('You are receiving this notification for belonging to the user’s network.', 'pop-emailsender'));
 
                 $authors = gdGetPostauthors($post_id);
@@ -229,7 +229,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
      */
     public function recommendpost($post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
@@ -239,8 +239,8 @@ class PoP_SocialNetwork_EmailSender_Hooks
         $content = sprintf(
             TranslationAPIFacade::getInstance()->__('<p>Your %1$s <a href="%2$s">%3$s</a> was recommended by:</p>', 'pop-emailsender'),
             $post_name,
-            $postTypeAPI->getPermalink($post_id),
-            $postTypeAPI->getTitle($post_id)
+            $customPostTypeAPI->getPermalink($post_id),
+            $customPostTypeAPI->getTitle($post_id)
         );
         $content .= $user_html;
 

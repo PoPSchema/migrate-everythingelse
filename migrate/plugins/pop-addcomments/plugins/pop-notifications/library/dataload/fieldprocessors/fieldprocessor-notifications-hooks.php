@@ -7,7 +7,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
@@ -79,7 +79,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -133,7 +133,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                         return sprintf(
                             $messages[$notification->action],
                             gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
@@ -161,7 +161,7 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
                             $message,
                             $cmsusersapi->getUserDisplayName($notification->user_id),
                             gdGetPostname($cmscommentsresolver->getCommentPostId($comment), 'lc'),
-                            $postTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
+                            $customPostTypeAPI->getTitle($cmscommentsresolver->getCommentPostId($comment))
                         );
                 }
                 return null;

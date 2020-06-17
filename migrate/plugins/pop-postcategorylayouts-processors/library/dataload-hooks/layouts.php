@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_PostCategoryLayouts_LayoutDataloadHooks
 {
@@ -19,7 +19,7 @@ class PoP_PostCategoryLayouts_LayoutDataloadHooks
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         if (in_array(POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE, $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]))) {
             // Priority: place it before the 'postType' layout key
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             array_unshift($keys, strtolower($typeResolver->getTypeName()).'-featureimage');
         }
 

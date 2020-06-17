@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
@@ -116,7 +116,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
@@ -132,7 +132,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:
-                $url = $postTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
+                $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
         }
 

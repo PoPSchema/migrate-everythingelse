@@ -3,18 +3,18 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\CustomPosts\Types\Status;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ActionExecuterInterface
 {
     public function getSuccessString($post_id, $status)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         if ($status == Status::PUBLISHED) {
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'pop-application'),
-                $postTypeAPI->getPermalink($post_id),
+                $customPostTypeAPI->getPermalink($post_id),
                 getReloadurlLinkattrs()
             );
         } elseif ($status == Status::DRAFT) {
@@ -46,8 +46,8 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
             $this->modifyDataProperties($data_properties, $post_id);
 
             // Success String: check if the post status is 'publish' or 'pending', and so print the corresponding URL or Preview URL
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
-            $status = $postTypeAPI->getStatus($post_id);
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+            $status = $customPostTypeAPI->getStatus($post_id);
             $success_string = $this->getSuccessString($post_id, $status);
 
             // Save the result for some module to incorporate it into the query args

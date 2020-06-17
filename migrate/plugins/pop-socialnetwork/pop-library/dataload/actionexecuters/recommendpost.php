@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class GD_DataLoad_ActionExecuter_RecommendPost implements \PoP\ComponentModel\ActionExecuterInterface
 {
@@ -23,12 +23,12 @@ class GD_DataLoad_ActionExecuter_RecommendPost implements \PoP\ComponentModel\Ac
         }
 
         // Save the result for some module to incorporate it into the query args
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-            $postTypeAPI->getTitle($target_id)
+            $customPostTypeAPI->getTitle($target_id)
         );
 
         // No errors => success

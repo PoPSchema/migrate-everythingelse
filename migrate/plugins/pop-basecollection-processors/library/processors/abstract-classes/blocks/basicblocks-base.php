@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
 
         // If the title has been set in the $props by a parent, use it
         // Otherwise, use the local module level. This bizarre solution is used, instead of directly
-        // overriding the value of 'title' in the $props, since the title is dynamic (eg: $postTypeAPI->getPermalink($page))
+        // overriding the value of 'title' in the $props, since the title is dynamic (eg: $customPostTypeAPI->getPermalink($page))
         // however it is saved in the static cache. So then the assumption is that, if the title is set
         // from above, then it shall be static, otherwise this same level can be runtime
         return $this->getProp($module, $props, 'title') ?? $this->getTitle($module, $props);

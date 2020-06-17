@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\CustomPosts\Types\Status;
 
@@ -52,7 +52,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
 
     public function initRequestProps(array $module, array &$props)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $vars = ApplicationState::getVars();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
@@ -60,7 +60,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($postTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
+                if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;

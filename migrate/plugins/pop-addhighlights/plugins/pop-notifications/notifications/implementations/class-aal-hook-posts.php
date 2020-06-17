@@ -2,7 +2,7 @@
 
 use PoP\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
@@ -30,8 +30,8 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function createdHighlight($post_id)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             $referenced_post_id = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $this->referencedPost($post_id, $referenced_post_id);
         }
@@ -39,8 +39,8 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 
     public function updatedHighlight($post_id, $form_data, $log)
     {
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
-        if ($postTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+        if ($customPostTypeAPI->getStatus($post_id) == Status::PUBLISHED) {
             // If doing a create (changed "draft" to "publish"), then add all references
             if ($log['previous-status'] != Status::PUBLISHED) {
                 $referenced_post_id = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);

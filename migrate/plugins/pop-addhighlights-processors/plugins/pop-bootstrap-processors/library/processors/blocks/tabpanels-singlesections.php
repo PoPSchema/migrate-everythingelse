@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\CustomPosts\Types\Status;
 
@@ -42,11 +42,11 @@ class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP
     public function initRequestProps(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT:
                 $post_id = $vars['routing-state']['queried-object-id'];
-                if ($postTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
+                if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
                     $this->setProp($module, $props, 'show-controls-bottom', false);
                 }
                 break;

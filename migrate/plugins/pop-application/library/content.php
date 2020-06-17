@@ -1,14 +1,12 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 
 // function gdGetDocumentTitle()
 // {
 //     $vars = ApplicationState::getVars();
 //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 //     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-//     $postTypeAPI = PostTypeAPIFacade::getInstance();
+//     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 //     $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
 //     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
 //     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
@@ -18,12 +16,12 @@ use PoP\Posts\Facades\PostTypeAPIFacade;
 
 //     if ($vars['routing-state']['is-post']) {
 //         $post = $vars['routing-state']['queried-object'];
-//         $content = $postTypeAPI->getSinglePostTitle($post);
+//         $content = $customPostTypeAPI->getSinglePostTitle($post);
 //     } elseif ($vars['routing-state']['is-home']/* || $vars['routing-state']['is-front-page']*/) {
 //         $content = $cmsapplicationapi->getSiteDescription();
 //     } elseif ($vars['routing-state']['is-page']) {
 //         $post = $vars['routing-state']['queried-object'];
-//         $content = $postTypeAPI->getSinglePostTitle($post);
+//         $content = $customPostTypeAPI->getSinglePostTitle($post);
 //     } /*elseif ($vars['routing-state']['is-search']) {
 //         $content = TranslationAPIFacade::getInstance()->__('Search:', 'pop-engine');
 //         $content .= ' ' . $cmsapplicationhelpers->escapeHTML(stripslashes($cmsengineapi->getSearchQuery()), true);

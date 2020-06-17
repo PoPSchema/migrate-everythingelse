@@ -5,7 +5,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -58,7 +58,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $postTypeAPI = PostTypeAPIFacade::getInstance();
+        $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             case 'icon':
@@ -73,7 +73,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
                     case AAL_POP_ACTION_POST_CREATEDSTANCE:
                         // Can't point to the posted article since we don't have the information (object_id is the original, referenced post, not the referencing one),
                         // so the best next thing is to point to the tab of all related content of the original post
-                        return RequestUtils::addRoute($postTypeAPI->getPermalink($notification->object_id), POP_USERSTANCE_ROUTE_STANCES);
+                        return RequestUtils::addRoute($customPostTypeAPI->getPermalink($notification->object_id), POP_USERSTANCE_ROUTE_STANCES);
                 }
                 return null;
 
@@ -84,7 +84,7 @@ class UserStance_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDB
                             TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> posted a %2$s after reading <strong>%3$s</strong>', 'pop-userstance'),
                             $cmsusersapi->getUserDisplayName($notification->user_id),
                             PoP_UserStance_PostNameUtils::getNameLc(),
-                            $postTypeAPI->getTitle($notification->object_id)
+                            $customPostTypeAPI->getTitle($notification->object_id)
                         );
                 }
                 return null;

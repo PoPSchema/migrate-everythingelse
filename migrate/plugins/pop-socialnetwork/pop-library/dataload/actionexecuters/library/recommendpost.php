@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class GD_RecommendPost extends GD_RecommendUnrecommendPost
@@ -12,7 +12,7 @@ class GD_RecommendPost extends GD_RecommendUnrecommendPost
 
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $postTypeAPI = PostTypeAPIFacade::getInstance();
+            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -21,7 +21,7 @@ class GD_RecommendPost extends GD_RecommendUnrecommendPost
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have already recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
-                    $postTypeAPI->getTitle($target_id)
+                    $customPostTypeAPI->getTitle($target_id)
                 );
             }
         }
