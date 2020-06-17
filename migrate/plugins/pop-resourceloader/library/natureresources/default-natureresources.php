@@ -201,7 +201,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Then, because these posts have the same path, their configuration must be merged together
             $paths = array();
             foreach ($ids as $id) {
-                $post_path = \PoP\Posts\Engine_Utils::getPostPath($id, true);
+                $post_path = \PoP\Posts\Engine_Utils::getCustomPostPath($id, true);
                 $paths[$post_path] = $paths[$post_path] ?? array();
                 $paths[$post_path][] = $id;
             }

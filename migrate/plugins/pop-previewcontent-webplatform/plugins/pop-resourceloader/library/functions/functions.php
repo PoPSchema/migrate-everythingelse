@@ -1,4 +1,5 @@
 <?php
+
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
@@ -6,7 +7,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 HooksAPIFacade::getInstance()->addFilter('ppp_preview_link', 'popPppResourceloaderPreviewLink', 10, 3);
 function popPppResourceloaderPreviewLink($link, $post_id, $post)
 {
-        return GeneralUtils::addQueryArgs([
-    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getPostPath($post_id, true)), 
+    return GeneralUtils::addQueryArgs([
+    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($post_id, true)),
     ], $link);
 }

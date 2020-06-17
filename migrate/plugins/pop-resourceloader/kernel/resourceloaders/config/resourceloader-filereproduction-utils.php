@@ -65,7 +65,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             $nature = $vars['nature'];
 
             $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
-            
+
             // Assign it under the appropriate level in the object
             switch ($nature) {
 
@@ -81,7 +81,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 case PageRouteNatures::PAGE:
                 case PostRouteNatures::POST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getPostPath($vars['routing-state']['queried-object-id'], true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }
@@ -95,15 +95,15 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 'author' => $natureresources_manager->getAuthorResources($modulefilter, $options),
                 'tag' => $natureresources_manager->getTagResources($modulefilter, $options),
             );
-            
-            // 404: it only makes sense to compute it for "loading-site". 
+
+            // 404: it only makes sense to compute it for "loading-site".
             // For "fetching-json", it will never be linked to
             $loadingSite = PoP_ResourceLoaderProcessorUtils::isLoadingSite($modulefilter);
             if ($loadingSite) {
 
                 $flat_resources['404'] = $natureresources_manager->get404Resources($modulefilter, $options);
             }
-            
+
             $path_resources = array(
                 'single' => $natureresources_manager->getSingleResources($modulefilter, $options),
                 'page' => $natureresources_manager->getPageResources($modulefilter, $options),
@@ -155,7 +155,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         $matchPaths = $options['match-paths'];
         $matchNature = $options['match-nature'];
         $matchFormat = $options['match-format'];
-        
+
         // Get all the resources, for the different natures
         $app_resources = self::getResources($modulefilter, $options);
         $flat_resources = $app_resources['flat'];
@@ -229,7 +229,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 // Check that it satisfies the $matchFormat to filter elements (eg: all 'default' ones)
                 // If it does not, skip this item
                 if ($matchFormat) {
-                    
+
                     // Obtain the format from the $key
                     $key_parts = explode(GD_SEPARATOR_RESOURCELOADER, $key);
                     $format = substr(explode(GD_SEPARATOR_RESOURCELOADER, $key)[0], strlen(POP_RESOURCELOADERIDENTIFIER_FORMAT));
@@ -281,7 +281,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                             // if (!$resources_item) {
                             //     continue;
                             // }
-                            
+
                             // Calculate the hash from that bundle of resources
                             $bundleId = PoP_ResourceLoaderProcessorUtils::getBundleId($resources_item, $addRandom);
 
@@ -413,7 +413,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                         // if (!$resourcebundles) {
                         //     continue;
                         // }
-                        
+
                         $bundleGroupId = PoP_ResourceLoaderProcessorUtils::getBundlegroupId($resourcebundles, $addRandom);
                         $iterate_item['bundlegroups'][$bundleGroupId] = $resourcebundles;
                         $keyId = PoP_ResourceLoaderProcessorUtils::getKeyId($key);

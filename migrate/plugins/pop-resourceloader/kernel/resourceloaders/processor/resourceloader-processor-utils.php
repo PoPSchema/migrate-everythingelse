@@ -485,7 +485,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // For the single nature, we must save the resources under the category path,
                 // for all the categories in the website
-                $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getPostPath($post_id, true));
+                $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($post_id, true));
                 $paths[] = $path;
 
                 self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);
