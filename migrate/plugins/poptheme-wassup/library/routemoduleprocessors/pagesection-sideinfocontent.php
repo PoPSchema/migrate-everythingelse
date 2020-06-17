@@ -3,7 +3,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -60,7 +60,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         // Default for Home
         // Allow GetPoP website to change the sidebar, since it is changing the homeroute
         $home_module = HooksAPIFacade::getInstance()->applyFilters(
-            'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup', 
+            'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup',
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );
         $ret[RouteNatures::HOME][] = [
@@ -86,7 +86,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);

@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -37,7 +37,7 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -59,14 +59,14 @@ class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionDataloads e
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLLMAP:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsSingleauthors($ret);

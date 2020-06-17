@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -55,7 +55,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
 
     //             return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
     //     }
-        
+
     //     return parent::getFilterSubmodule($module);
     // }
 
@@ -97,14 +97,14 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
     //         case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW:
@@ -140,7 +140,7 @@ class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_S
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

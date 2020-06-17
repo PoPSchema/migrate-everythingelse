@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase

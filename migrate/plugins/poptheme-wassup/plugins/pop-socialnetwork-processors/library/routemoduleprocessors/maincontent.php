@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
         // Tag modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
         $default_format_tagusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGUSERS);
-        
+
         $routemodules_userdetails = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS],
         );
@@ -95,7 +95,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         $default_format_highlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
-        
+
         $routemodules_details = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS],
         );
@@ -259,7 +259,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
         $default_format_singlesection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLESECTION);
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
         $default_format_singlehighlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEHIGHLIGHTS);
-        
+
         $routemodules_userdetails = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_DETAILS],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_DETAILS],
@@ -332,7 +332,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor()
 	);

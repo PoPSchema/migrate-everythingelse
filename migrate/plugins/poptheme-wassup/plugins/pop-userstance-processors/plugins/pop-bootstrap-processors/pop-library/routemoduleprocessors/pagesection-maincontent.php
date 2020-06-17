@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -88,7 +88,7 @@ class UserStance_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends Po
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new UserStance_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -70,7 +70,7 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor()
 	);

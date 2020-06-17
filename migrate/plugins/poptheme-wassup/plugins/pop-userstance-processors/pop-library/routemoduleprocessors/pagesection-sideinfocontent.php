@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -71,7 +71,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModulePro
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);

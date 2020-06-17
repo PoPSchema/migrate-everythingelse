@@ -1,13 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_DataloadsBase
 {
     use QueriedDBObjectModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR = 'dataload-single-event-sidebar';
     public const MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR = 'dataload-single-pastevent-sidebar';
 
@@ -26,18 +26,18 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
         $orientation = HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_BLOCKSIDEBARS_ORIENTATION, 'vertical');
         $vertical = ($orientation == 'vertical');
         $inners = array(
-            self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR => $vertical ? 
-                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_EVENT] : 
+            self::MODULE_DATALOAD_SINGLE_EVENT_SIDEBAR => $vertical ?
+                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_EVENT] :
                 [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_EVENT],
-            self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR => $vertical ? 
-                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT] : 
+            self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR => $vertical ?
+                [GD_EM_Module_Processor_CustomVerticalSingleSidebars::class, GD_EM_Module_Processor_CustomVerticalSingleSidebars::MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT] :
                 [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_PASTEVENT],
         );
 
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -48,7 +48,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
@@ -59,7 +59,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
     //             return PostRouteNatures::POST;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -71,7 +71,7 @@ class PoP_Events_Module_Processor_CustomSidebarDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_SINGLE_PASTEVENT_SIDEBAR:
                 return EventTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
 

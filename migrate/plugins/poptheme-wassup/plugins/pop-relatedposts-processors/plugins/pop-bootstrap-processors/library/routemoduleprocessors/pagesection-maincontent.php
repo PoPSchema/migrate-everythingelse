@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 
 class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -28,7 +28,7 @@ class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionRouteModulePr
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);

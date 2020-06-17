@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
@@ -39,7 +39,7 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor exten
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
-        
+
         $routemodules_highlighttypeahead = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionDataloads::class, PoP_AddHighlights_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD],
         );
@@ -132,7 +132,7 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor exten
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         $default_format_highlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
-        
+
         $routemodules_highlightfullview = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionBlocks::class, PoP_AddHighlights_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW],
         );
@@ -180,7 +180,7 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor exten
         $default_format_singlesection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLESECTION);
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
         $default_format_singlehighlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEHIGHLIGHTS);
-        
+
         $routemodules_highlightfullview = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomSectionBlocks::class, PoP_AddHighlights_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW],
         );
@@ -231,7 +231,7 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor exten
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor()
 	);

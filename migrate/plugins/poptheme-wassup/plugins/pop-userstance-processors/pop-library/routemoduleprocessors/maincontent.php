@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -184,7 +184,7 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
 
         // Author route modules
         $default_format_authorvotes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_AUTHORSTANCES);
-        
+
         $routemodules_fullview = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_SCROLL_FULLVIEW],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
@@ -253,7 +253,7 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
 
         // Tag route modules
         $default_format_votes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_TAGSTANCES);
-        
+
         $routemodules_fullview = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_SCROLL_FULLVIEW],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW],
@@ -322,7 +322,7 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
 
         // Single route modules
         $default_format_singlevotes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_SINGLESTANCES);
-        
+
         $routemodules_fullview = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_CustomSectionBlocks::class, UserStance_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW],
@@ -382,7 +382,7 @@ class UserStance_Module_MainContentRouteModuleProcessor extends \PoP\Application
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new UserStance_Module_MainContentRouteModuleProcessor()
 	);

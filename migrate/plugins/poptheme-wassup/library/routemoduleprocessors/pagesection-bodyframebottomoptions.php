@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_BodyFrameBottomOptionsPageSectionRouteModuleProcessor extends PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessorBase
@@ -30,7 +30,7 @@ class PoP_Module_BodyFrameBottomOptionsPageSectionRouteModuleProcessor extends P
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Module_BodyFrameBottomOptionsPageSectionRouteModuleProcessor()
 	);

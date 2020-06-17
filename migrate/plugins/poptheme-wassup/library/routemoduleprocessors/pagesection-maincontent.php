@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
 
@@ -19,7 +19,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
         foreach ($modules as $route => $module) {
             $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
         }
-        
+
         // Override default module
         $routes = array(
             POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES,
@@ -68,7 +68,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Module_MainPageSectionRouteModuleProcessor()
 	);

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Posts\Routing\RouteNatures as PostRouteNatures;
+use PoP\CustomPosts\Routing\RouteNatures as PostRouteNatures;
 
 class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -10,7 +10,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extend
 
         // Single route modules
         $default_format_singlesection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLESECTION);
-        
+
         $routemodules_details = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::class, PoP_RelatedPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],
         );
@@ -89,7 +89,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extend
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor()
 	);
