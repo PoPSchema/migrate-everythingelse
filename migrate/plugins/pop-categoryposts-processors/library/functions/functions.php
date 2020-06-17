@@ -3,8 +3,9 @@
 // HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'categorypostsPostParentpageid', 10, 2);
 // function categorypostsPostParentpageid($pageid, $post_id)
 // {
-//     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-//     if ($customPostTypeAPI->getCustomPostType($post_id) == 'post') {
+    // $postTypeAPI = PostTypeAPIFacade::getInstance();
+    // $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
+//     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
 //         $cats = PoP_CategoryPosts_Utils::getCats();
 //         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 //         $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
