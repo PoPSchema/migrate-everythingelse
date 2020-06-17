@@ -1,7 +1,8 @@
 <?php
+
 namespace PoP\EditPosts\WP;
 
-use PoP\PostsWP\TypeAPIs\CustomPostTypeAPIUtils;
+use PoP\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
 
 class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
 {

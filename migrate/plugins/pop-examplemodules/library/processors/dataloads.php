@@ -3,7 +3,6 @@ namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoP\Comments\TypeResolvers\CommentTypeResolver;
 use PoP\Pages\TypeResolvers\PageTypeResolver;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
