@@ -1,18 +1,24 @@
 <?php
+
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
 
+function getExcerptMore()
+{
+    return apply_filters('excerpt_more', ' ' . '[&hellip;]');
+}
+function getExcerptLength()
+{
+    return apply_filters('excerpt_length', 55);
+}
 function limitString($string, $length = null, $more = null, $bywords = false)
 {
-    $postTypeAPI = PostTypeAPIFacade::getInstance();
     if (!$length) {
-        $length = $postTypeAPI->getExcerptLength();
+        $length = \getExcerptLength();
     }
-
     // Similar to wp_trim_excerpt in wp-includes/formatting.php
     if (!$more) {
-        $more = $postTypeAPI->getExcerptMore();
+        $more = \getExcerptMore();
     }
     if (!$bywords) {
         // Comment Leo 11/07/2017: it works fine using mb_substr instead, so use that one
