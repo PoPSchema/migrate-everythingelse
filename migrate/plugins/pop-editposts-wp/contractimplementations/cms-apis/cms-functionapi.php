@@ -37,9 +37,9 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
             $query['post_category'] = $query['post-categories'];
             unset($query['post-categories']);
         }
-        if (isset($query['post-type'])) {
-            $query['post_type'] = $query['post-type'];
-            unset($query['post-type']);
+        if (isset($query['custom-post-type'])) {
+            $query['post_type'] = $query['custom-post-type'];
+            unset($query['custom-post-type']);
         }
     }
     public function insertPost($post_data)
