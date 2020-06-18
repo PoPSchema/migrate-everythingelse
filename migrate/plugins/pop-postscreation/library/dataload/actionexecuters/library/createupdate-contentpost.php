@@ -401,7 +401,7 @@ class GD_CreateUpdate_PostBase
 
         // Status: Validate the value is permitted, or get the default value otherwise
         if ($status = GD_CreateUpdate_Utils::getUpdatepostStatus($form_data['status'], $this->moderate())) {
-            $post_data['post-status'] = $status;
+            $post_data['custom-post-status'] = $status;
         }
 
         return $post_data;
@@ -414,7 +414,7 @@ class GD_CreateUpdate_PostBase
         $status = GD_CreateUpdate_Utils::getCreatepostStatus($form_data['status'], $this->moderate());
         $post_data = array(
             'post-content' => $form_data['content'],
-            'post-status' => $status,
+            'custom-post-status' => $status,
         );
 
         if ($this->supportsTitle()) {

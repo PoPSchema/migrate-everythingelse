@@ -17,9 +17,9 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
     protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(&$query)
     {
         // Convert the parameters
-        if (isset($query['post-status'])) {
-            $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['post-status']);
-            unset($query['post-status']);
+        if (isset($query['custom-post-status'])) {
+            $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['custom-post-status']);
+            unset($query['custom-post-status']);
         }
         if (isset($query['id'])) {
             $query['ID'] = $query['id'];

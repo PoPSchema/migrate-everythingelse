@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_MySectionDataloadsBase extends PoP_Module_Pr
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
 
         // Any post status
-        $ret['post-status'] = [
+        $ret['custom-post-status'] = [
             Status::PUBLISHED,
             Status::DRAFT,
             Status::PENDING,

@@ -69,7 +69,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\
 
         // Modify the block-data-settings, saying to select the id of the newly created post
         $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($post_id);
-        $data_properties[DataloadingConstants::QUERYARGS]['post-status'] = [
+        $data_properties[DataloadingConstants::QUERYARGS]['custom-post-status'] = [
             Status::PUBLISHED,
             Status::PENDING,
             Status::DRAFT,

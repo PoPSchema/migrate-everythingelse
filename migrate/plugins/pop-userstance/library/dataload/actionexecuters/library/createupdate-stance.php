@@ -122,7 +122,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         // Check if there is already an existing stance
         $vars = ApplicationState::getVars();
         $query = array(
-            'post-status' => array(Status::PUBLISHED, Status::DRAFT),
+            'custom-post-status' => array(Status::PUBLISHED, Status::DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],
         );
         if ($referenced_id) {

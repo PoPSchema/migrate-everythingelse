@@ -132,7 +132,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                     return [];
                 }
                 $query = array(
-                    'post-status' => array(Status::PUBLISHED, Status::DRAFT),
+                    'custom-post-status' => array(Status::PUBLISHED, Status::DRAFT),
                     'authors' => [$vars['global-userstate']['current-user-id']],
                 );
                 if ($module[1] == self::MODULE_DATALOAD_STANCE_CREATEORUPDATE) {
