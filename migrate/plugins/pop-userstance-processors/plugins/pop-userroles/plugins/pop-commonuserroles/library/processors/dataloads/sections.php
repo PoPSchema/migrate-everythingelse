@@ -130,7 +130,7 @@ class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_
         //     case self::MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL:
         //     case self::MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL:
 
-        //         $ret['post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+        //         $ret['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
         //         break;
         // }
 

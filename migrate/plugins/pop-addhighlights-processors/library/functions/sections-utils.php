@@ -11,7 +11,7 @@ class PoP_AddHighlights_Module_Processor_SectionBlocksUtils
             $post_id = $vars['routing-state']['queried-object-id'];
         }
 
-        // $ret['post-types'] = [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT];
+        // $ret['custom-post-types'] = [POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT];
 
         // Find all related posts
         $ret['meta-query'][] = [

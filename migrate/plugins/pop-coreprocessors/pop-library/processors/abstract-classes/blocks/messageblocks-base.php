@@ -21,7 +21,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
             $ret['load'] = false;
         }
 
-        $ret['post-types'] = $this->getPostTypes($module);
+        $ret['custom-post-types'] = $this->getPostTypes($module);
         // $ret['limit'] = 1;
         $ret['include'] = [$sticky];
 

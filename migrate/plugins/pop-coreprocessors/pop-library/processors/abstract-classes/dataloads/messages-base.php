@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         if ($sticky = $cmsengineapi->getOption('sticky_posts')) {
             $ret['include'] = [$sticky];
-            $ret['post-types'] = $this->getPostTypes($module);
+            $ret['custom-post-types'] = $this->getPostTypes($module);
         }
 
         return $ret;

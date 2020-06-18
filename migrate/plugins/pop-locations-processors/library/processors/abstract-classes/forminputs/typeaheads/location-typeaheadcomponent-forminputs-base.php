@@ -8,11 +8,11 @@ abstract class PoP_Module_Processor_LocationTypeaheadComponentFormInputsBase ext
         $ret = parent::getThumbprintQuery($module, $props);
 
         $pluginapi = PoP_Locations_APIFactory::getInstance();
-        $ret['post-types'] = [$pluginapi->getLocationPostType()];
-        
+        $ret['custom-post-types'] = [$pluginapi->getLocationPostType()];
+
         return $ret;
     }
-    
+
     public function getComponentTemplateResource(array $module)
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT];

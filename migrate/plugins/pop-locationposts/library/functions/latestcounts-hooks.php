@@ -19,7 +19,7 @@ class PoP_LocationPosts_LatestCounts_Hooks
         if (!in_array(POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST, $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $query = &$query_in_array[0];
 
-            $query['post-types'][] = POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
+            $query['custom-post-types'][] = POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
 
             // If not enabled, we don't query by taxonomy
             if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy()) {

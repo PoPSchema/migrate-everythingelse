@@ -184,7 +184,7 @@ class PoP_Module_Processor_CustomSectionBlocksUtils
             'value' => array($author),
             'compare' => 'IN'
         ];
-        $ret['post-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes(); // Allow also Events post types, so these can be fetched from Stories (field references)
+        $ret['custom-post-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes(); // Allow also Events post types, so these can be fetched from Stories (field references)
     }
 
     public static function addDataloadqueryargsSingleauthors(&$ret)
