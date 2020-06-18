@@ -74,13 +74,8 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
             $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {
-                case PageRouteNatures::PAGE:
-                    $url = $cmspagesapi->getPageURL($vars['routing-state']['queried-object-id']);
-                    return RequestUtils::addRoute($url, $route);
-
                 case UserRouteNatures::USER:
                     $url = $cmsusersapi->getUserURL($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
@@ -89,6 +84,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
+                case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
                     $url = $customPostTypeAPI->getPermalink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);

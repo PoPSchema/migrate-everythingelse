@@ -1,13 +1,14 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
-use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\Pages\TypeResolvers\PageTypeResolver;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {
@@ -62,8 +63,8 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
                 return $this->getQueriedDBObjectID($module, $props, $data_properties);
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
-                $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
-                return $cmspagesapi->getHomeStaticPage();
+                $pageTypeAPI = PageTypeAPIFacade::getInstance();
+                return $pageTypeAPI->getHomeStaticPageID();
         }
 
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);

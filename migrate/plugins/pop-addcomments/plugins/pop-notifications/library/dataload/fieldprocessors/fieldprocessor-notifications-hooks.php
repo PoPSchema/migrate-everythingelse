@@ -78,7 +78,6 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
         $vars = ApplicationState::getVars();
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $notification = $resultItem;

@@ -1,4 +1,5 @@
 <?php
+use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
@@ -15,17 +16,17 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
+        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
-        return $cmspagesapi->getPages($query, $options);
+        return $pageTypeAPI->getPages($query, $options);
     }
 
     public function getTimestamp($page_id)
     {
         // Doing it the manual way
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
+        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $cmspagesresolver = \PoP\Pages\ObjectPropertyResolverFactory::getInstance();
-        $page = $cmspagesapi->getPage($page_id);
+        $page = $pageTypeAPI->getPage($page_id);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsengineapi->getDate('U', $cmspagesresolver->getPageModified($page));
     }

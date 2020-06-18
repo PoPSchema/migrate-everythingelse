@@ -97,7 +97,6 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
@@ -110,12 +109,9 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
                 return RouteUtils::getRouteTitle($route);
 
             case self::MODULE_LAYOUT_PAGETABS_PAGE:
-                $page_id = $vars['routing-state']['queried-object-id'];
-                return $cmspagesapi->getTitle($page_id);
-
             case self::MODULE_LAYOUT_PAGETABS_SINGLE:
-                $post_id = $vars['routing-state']['queried-object-id'];
-                return $customPostTypeAPI->getTitle($post_id);
+                $customPostID = $vars['routing-state']['queried-object-id'];
+                return $customPostTypeAPI->getTitle($customPostID);
 
             case self::MODULE_LAYOUT_PAGETABS_TAG:
                 $tag_id = $vars['routing-state']['queried-object-id'];

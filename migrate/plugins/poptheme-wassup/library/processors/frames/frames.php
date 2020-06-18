@@ -1,12 +1,13 @@
 <?php
 define('POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE', 'pagesections-side-logosize');
 
+use PoP\Engine\Route\RouteUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Engine\Route\RouteUtils;
 
 class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -174,10 +175,9 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
+        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -227,7 +227,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         'title' => $title
                     );
                 }
-                
+
                 $ret['offcanvas-pagetabs-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
                 // $ret['offcanvas-sidenav-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_SIDE;
                 // $ret['offcanvas-navigator-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_NAVIGATOR;
@@ -253,7 +253,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         )
                     );
                 }
-                
+
                 // Allow TPPDebate to override the social media
                 $ret['socialmedias'] = HooksAPIFacade::getInstance()->applyFilters(
                     'PoP_Module_Processor_CustomPageSections:frame-top:socialmedias',
@@ -316,8 +316,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         ),
                         'sponsorus' => sprintf(
                             '<a href="%s">%s</a>',
-                            $cmspagesapi->getPageURL(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS),
-                            $cmspagesapi->getTitle(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS)
+                            $pageTypeAPI->getPermalink(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS),
+                            $pageTypeAPI->getTitle(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS)
                         ),
                         'addcontent' => TranslationAPIFacade::getInstance()->__('Add content', 'poptheme-wassup'),
                         'addcontent-right' => TranslationAPIFacade::getInstance()->__('Add new...', 'poptheme-wassup'),
@@ -364,7 +364,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         'height' => $logo[2],
                     );
                 }
-                
+
                 $ret['offcanvas-pagetabs-target'] = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS;
 
                 $ret['targets'] = array(
@@ -401,7 +401,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                     'height' => $logo[2],
                     'title' => $title
                 );
-                
+
                 $ret['links'] = array(
                     // GeneralUtils::maybeAddTrailingSlash because of qTrans: it will output link https://www.mesym.com/zh and it fails with popURLInterceptors, which expects https://www.mesym.com/zh/
                     'home' => GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()),
@@ -429,7 +429,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 }
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -447,7 +447,7 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                 );
                 break;
         }
-        
+
         return $ret;
     }
 }

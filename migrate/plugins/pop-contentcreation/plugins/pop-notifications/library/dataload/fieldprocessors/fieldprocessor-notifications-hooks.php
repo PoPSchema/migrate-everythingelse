@@ -73,7 +73,6 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        // $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -194,6 +193,6 @@ class PoP_ContentCreation_DataLoad_FieldResolver_Notifications extends AbstractD
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_ContentCreation_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

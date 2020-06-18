@@ -1,4 +1,5 @@
 <?php
+use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
@@ -38,7 +39,7 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
     }
     public function getHref(array $module, array &$props)
     {
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
+        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ:
             case self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ:
@@ -47,7 +48,7 @@ class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Pr
                     self::MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
                 );
                 $page_id = $pages[$module[1]];
-                return $cmspagesapi->getPageURL($page_id);
+                return $pageTypeAPI->getPermalink($page_id);
         }
 
         return parent::getHref($module, $props);

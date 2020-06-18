@@ -1,5 +1,6 @@
 <?php
 namespace PoP\ExampleModules;
+use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 
 class ModuleProcessor_Groups extends AbstractModuleProcessor
@@ -23,8 +24,8 @@ class ModuleProcessor_Groups extends AbstractModuleProcessor
 
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_HOME:
-                $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
-                if ($cmspagesapi->getHomeStaticPage()) {
+                $pageTypeAPI = PageTypeAPIFacade::getInstance();
+                if ($pageTypeAPI->getHomeStaticPageID()) {
                     $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_HOMESTATICPAGE];
                 } else {
                     $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_HOMEWELCOME];

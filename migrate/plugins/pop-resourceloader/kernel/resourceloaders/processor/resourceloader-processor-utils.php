@@ -1,21 +1,22 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
-use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Pages\Routing\PathUtils;
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Pages\Routing\PathUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoP\Users\Routing\RouteNatures as UserRouteNatures;
+use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
+use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
+use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_ResourceLoaderProcessorUtils {
 
@@ -92,7 +93,7 @@ class PoP_ResourceLoaderProcessorUtils {
         return $pop_resourceloaderprocessor_manager->getProcessor($resource)->getHandle($resource);
     }
 
-	public static function chunkResources($resources) {
+    public static function chunkResources($resources) {
 
         // Further divide each array into chunks, to maximize the possibilities of different pages sharing the same bundles
         $chunk_size = PoP_ResourceLoader_ServerUtils::getBundlesChunkSize();
@@ -261,29 +262,35 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function addResourcesFromCurrentVars($modulefilter, &$resources, $nature, $ids = array(), $merge = false, $components = array(), $options = array()) {
 
-        // Use the $vars identifier to store the wrapper cache, so there is no collision with the values saved for the current request
+        // Use the $vars identifier to store the wrapper cache,
+        // so there is no collision with the values saved for the current request
         global /*$pop_module_processor_runtimecache, */$pop_jsresourceloaderprocessor_manager;
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         // $pop_module_processor_runtimecache->setUseVarsIdentifier(true);
 
-        // Keep the original values in the $vars, since they'll need to be changed to pretend we are in a different $request
+        // Keep the original values in the $vars, since they'll need to be changed
+        // to pretend we are in a different $request
         $vars = &ApplicationState::$vars;
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmspagesapi = \PoP\Pages\FunctionAPIFactory::getInstance();
+        $pageTypeAPI = PageTypeAPIFacade::getInstance();
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
 
-        // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json", because we need to bundle all resources for all different cases for the same URL
-        // However, if doing "loading-site", then we can't bundle all the cases together, or we will not be able to get back the specific bundle(group)s for the currently visited request
-        // (this is the case when doing PoP_ResourceLoader_ServerUtils::getEnqueuefileType() == 'bundle' or 'bundlegroup')
+        // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json",
+        // because we need to bundle all resources for all different cases for the same URL
+        // However, if doing "loading-site", then we can't bundle all the cases together,
+        // or we will not be able to get back the specific bundle(group)s for the currently visited request
+        // (this is the case when doing
+        // PoP_ResourceLoader_ServerUtils::getEnqueuefileType() == 'bundle' or 'bundlegroup')
         $loadingSite = self::isLoadingSite($modulefilter);
         if ($loadingSite) {
-
             $merge = false;
         }
 
-        // IMPORTANT: we must pretend it's 'fetching-page' request, so that it doesn't load the frame files once again, which will be already loaded (PRPL is triggered when clicking on any link => will always be doing ?output=json)
+        // IMPORTANT: we must pretend it's 'fetching-page' request,
+        // so that it doesn't load the frame files once again,
+        // which will be already loaded (PRPL is triggered when clicking
+        // on any link => will always be doing ?output=json)
         $original_vars = array();
         $extra_vars = $options['extra-vars'] ?? array();
         $vars_keys = array_merge(
@@ -312,7 +319,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // This code is replicated in function `loadResources` in resourceloader.js
         $params = array();
         $format = $components['format'] ?? ($loadingSite ? '' : POP_VALUES_DEFAULT);
-		$route = $components['route'];
+        $route = $components['route'];
 
         // Targets special cases: certain formats (eg: Navigator) are used only from a corresponding target
         // So if we have that format, use the correponding target, or if not, the default is main
@@ -351,26 +358,25 @@ class PoP_ResourceLoaderProcessorUtils {
         // If doing JSON, then the key is the combination of the format/tab/target
         // Then, resources for author => Individual/Organization must be bundled together
         if (!$loadingSite) {
-
             $params[] = POP_RESOURCELOADERIDENTIFIER_FORMAT.$format;
-    		if ($route) {
-    			$params[] = POP_RESOURCELOADERIDENTIFIER_ROUTE.$route;
-    		}
-    		$params[] = POP_RESOURCELOADERIDENTIFIER_TARGET.$target;
+            if ($route) {
+                $params[] = POP_RESOURCELOADERIDENTIFIER_ROUTE.$route;
+            }
+            $params[] = POP_RESOURCELOADERIDENTIFIER_TARGET.$target;
 
-    		$key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
+            $key = implode(GD_SEPARATOR_RESOURCELOADER, $params);
         }
 
         // Pretend we are in that intended page, by setting the $vars in accordance
         // Comment Leo 07/11/2017: allow to have both $fetching_page and $loadingSite,
-        // the latter one is needed for enqueuing bundles/bundlegroups instead of resources when first loading the website
+        // the latter one is needed for enqueuing bundles/bundlegroups instead of
+        // resources when first loading the website
         if ($loadingSite) {
             $vars['output'] = GD_URLPARAM_OUTPUT_HTML;
             $vars['modulefilter'] = null;
             $vars['loading-site'] = true;
             $vars['fetching-site'] = true;
-        }
-        else {
+        } else {
             $vars['output'] = GD_URLPARAM_OUTPUT_JSON;
             $vars['modulefilter'] = $modulefilter;
             $vars['loading-site'] = false;
@@ -391,29 +397,28 @@ class PoP_ResourceLoaderProcessorUtils {
         // $vars['routing-state'] = array();
         // ApplicationState::setNatureInGlobalState();
 
-        // Save the list of all the paths. It will be needed later, to add the resources for the default tabs for 'single'
+        // Save the list of all the paths. It will be needed later,
+        // to add the resources for the default tabs for 'single'
         $paths = array();
 
         if ($nature == PageRouteNatures::PAGE) {
-
             // $homeUrl = GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL());
 
             // For the page nature, we must save the resources under the page path,
             // for all pages in the website
             foreach ($ids as $page_id) {
-
                 // Allow to set the extra vars
                 self::setExtraVarsProperties($vars, $extra_vars, $page_id);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $cmspagesapi->getPage($page_id);
+                $vars['routing-state']['queried-object'] = $pageTypeAPI->getPage($page_id);
                 $vars['routing-state']['queried-object-id'] = $page_id;
                 ApplicationState::augmentVarsProperties();
 
-                // If doing loadingSite, then the page must only hold its own resources, and be stored under its own, unique key
+                // If doing loadingSite, then the page must only hold its own resources,
+                // and be stored under its own, unique key
                 // Then, resources for author => Individual/Organization must NOT be bundled together
                 if ($loadingSite) {
-
                     $key = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
                 }
 
