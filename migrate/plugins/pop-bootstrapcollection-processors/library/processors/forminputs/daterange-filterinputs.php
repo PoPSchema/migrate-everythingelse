@@ -8,7 +8,7 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Processor_DateRangeFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-    
+
     public const MODULE_FILTERINPUT_POSTDATES = 'filterinput-postdates';
 
     public function getModulesToProcess(): array
@@ -21,7 +21,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_POSTDATES => [\PoP\Posts\FilterInputProcessor::class, \PoP\Posts\FilterInputProcessor::FILTERINPUT_POSTDATES],
+            self::MODULE_FILTERINPUT_POSTDATES => [\PoP\CustomPosts\FilterInputProcessor::class, \PoP\CustomPosts\FilterInputProcessor::FILTERINPUT_POSTDATES],
         ];
         return $filterInputs[$module[1]];
     }
@@ -32,7 +32,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     //         case self::MODULE_FILTERINPUT_POSTDATES:
     //             return true;
     //     }
-        
+
     //     return parent::isFiltercomponent($module);
     // }
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
             case self::MODULE_FILTERINPUT_POSTDATES:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
         }
-        
+
         return parent::getLabelText($module, $props);
     }
 
@@ -56,7 +56,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
                 );
                 return $names[$module[1]];
         }
-        
+
         return parent::getName($module);
     }
 
