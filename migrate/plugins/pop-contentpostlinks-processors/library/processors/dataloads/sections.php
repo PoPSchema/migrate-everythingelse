@@ -1,8 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -97,7 +95,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             self::MODULE_DATALOAD_LINKS_SCROLL_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomScrolls::class, PoP_ContentPostLinks_Module_Processor_CustomScrolls::MODULE_SCROLL_LINKS_FULLVIEW],
             self::MODULE_DATALOAD_LINKS_SCROLL_THUMBNAIL => [PoP_ContentPostLinks_Module_Processor_CustomScrolls::class, PoP_ContentPostLinks_Module_Processor_CustomScrolls::MODULE_SCROLL_LINKS_THUMBNAIL],
             self::MODULE_DATALOAD_LINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomScrolls::class, PoP_ContentPostLinks_Module_Processor_CustomScrolls::MODULE_SCROLL_LINKS_LIST],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
             * Author blocks
             *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -145,7 +143,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
                 return [self::class, self::MODULE_FILTER_TAGLINKS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -224,14 +222,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     //         case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
             case self::MODULE_DATALOAD_LINKS_SCROLL_NAVIGATOR:
@@ -261,7 +259,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_DETAILS:
@@ -305,7 +303,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST:
-                return PostTypeResolver::class;
+                return CustomPostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);
@@ -334,7 +332,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('links', 'poptheme-wassup'));
                 break;
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

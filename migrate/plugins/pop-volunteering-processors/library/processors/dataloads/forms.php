@@ -1,13 +1,12 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 
 class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
     use DBObjectIDFromURLParamModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_VOLUNTEER = 'dataload-volunteer';
 
     public function getModulesToProcess(): array
@@ -34,14 +33,14 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
-    
+
     protected function validateCaptcha(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
                 return true;
         }
-        
+
         return parent::validateCaptcha($module, $props);
     }
 
@@ -76,7 +75,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
                 $ret[] = [PoP_Volunteering_Module_Processor_GFForms::class, PoP_Volunteering_Module_Processor_GFForms::MODULE_FORM_VOLUNTEER];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -88,7 +87,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -114,7 +113,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_VOLUNTEER:
-                return PostTypeResolver::class;
+                return CustomPostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

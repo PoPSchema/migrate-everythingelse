@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
@@ -36,7 +36,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
                 return $this->maybeOverrideCheckpoints(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);//PoP_UserLogin_SettingsProcessor_CheckpointHelper::getCheckpointConfiguration(UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER);
         }
-        
+
         // return parent::getDataaccessCheckpointConfiguration($module, $props);
         return parent::getDataaccessCheckpoints($module, $props);
     }
@@ -63,7 +63,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
     public function getImmutableHeaddatasetmoduleDataProperties(array $module, array &$props): array
     {
         $ret = parent::getImmutableHeaddatasetmoduleDataProperties($module, $props);
-    
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FOLLOWSUSERS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
@@ -75,7 +75,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
                 $ret[DataloadingConstants::QUERYARGS]['limit'] = -1;
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -93,7 +93,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
         if ($layout = $layouts[$module[1]]) {
             $ret[] = $layout;
         }
-    
+
         return $ret;
     }
 
@@ -117,7 +117,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             $userID = $vars['global-userstate']['current-user-id'];
             return \PoP\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
@@ -130,15 +130,15 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
             case self::MODULE_DATALOAD_UPVOTESPOSTS:
             case self::MODULE_DATALOAD_RECOMMENDSPOSTS:
             case self::MODULE_DATALOAD_DOWNVOTESPOSTS:
-                return PostTypeResolver::class;
+                return CustomPostTypeResolver::class;
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
                 return TagTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -150,7 +150,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

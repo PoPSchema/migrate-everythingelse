@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 
 class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
@@ -46,7 +46,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -77,7 +77,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
@@ -97,7 +97,7 @@ class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_P
             case self::MODULE_DATALOAD_MYPOSTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW:
-                return PostTypeResolver::class;
+                return CustomPostTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

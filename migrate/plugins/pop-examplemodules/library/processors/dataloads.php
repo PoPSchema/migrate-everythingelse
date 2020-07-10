@@ -3,7 +3,7 @@ namespace PoP\ExampleModules;
 
 use PoP\Pages\Facades\PageTypeAPIFacade;
 use PoP\Pages\TypeResolvers\PageTypeResolver;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
@@ -77,7 +77,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
             case self::MODULE_EXAMPLE_SINGLE:
-                return PostTypeResolver::class;
+                return CustomPostTypeResolver::class;
 
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
                 return UserTypeResolver::class;
