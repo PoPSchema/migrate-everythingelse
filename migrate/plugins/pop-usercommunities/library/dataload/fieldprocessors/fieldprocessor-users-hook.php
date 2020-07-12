@@ -71,6 +71,22 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
+    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'memberstatus':
+            case 'memberprivileges':
+            case 'membertags':
+                $input_names = [
+                    'memberstatus' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_STATUS,
+                    'memberprivileges' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_PRIVILEGES,
+                    'membertags' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_TAGS,
+                ];
+                return $input_names[$fieldName];
+        }
+        return null;
+    }
+
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {

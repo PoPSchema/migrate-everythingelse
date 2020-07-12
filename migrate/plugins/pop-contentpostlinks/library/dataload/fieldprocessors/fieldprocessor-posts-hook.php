@@ -75,6 +75,20 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
+    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'linkaccess':
+            case 'linkcategories':
+                $input_names = [
+                    'linkaccess' => 'LinkAccess',
+                    'linkcategories' => 'LinkCategory',
+                ];
+                return $input_names[$fieldName];
+        }
+        return null;
+    }
+
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {

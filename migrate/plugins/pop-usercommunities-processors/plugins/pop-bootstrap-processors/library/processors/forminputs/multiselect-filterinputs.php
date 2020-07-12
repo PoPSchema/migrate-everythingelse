@@ -11,6 +11,10 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
+    public const ENUM_MEMBER_PRIVILEGES = 'MemberPrivileges';
+    public const ENUM_MEMBER_TAGS = 'MemberTags';
+    public const ENUM_MEMBER_STATUS = 'MemberStatus';
+
     public const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
     public const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
     public const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
@@ -119,16 +123,19 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
     {
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_MEMBER_PRIVILEGES;
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     array_keys((new GD_URE_FormInput_FilterMemberPrivileges())->getAllValues())
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_MEMBER_TAGS;
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     array_keys((new GD_URE_FormInput_FilterMemberTags())->getAllValues())
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_MEMBER_STATUS;
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     array_keys((new GD_URE_FormInput_MultiMemberStatus())->getAllValues())
                 );

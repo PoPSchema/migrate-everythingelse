@@ -8,6 +8,8 @@ use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems extends AbstractFunctionalFieldResolver
 {
+    public const ENUM_SOCIAL_MEDIA_PROVIDER = 'SocialMediaProvider';
+
     protected function getShareUrl($url, $title, $provider)
     {
         $settings = gdSocialmediaProviderSettings();
@@ -56,6 +58,7 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
                         [
                             SchemaDefinition::ARGNAME_NAME => 'provider',
                             SchemaDefinition::ARGNAME_TYPE => SchemaDefinition::TYPE_ENUM,
+                            SchemaDefinition::ARGNAME_ENUMNAME => self::ENUM_SOCIAL_MEDIA_PROVIDER,
                             SchemaDefinition::ARGNAME_ENUMVALUES => SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                                 array_keys($this->getProviderURLs())
                             ),

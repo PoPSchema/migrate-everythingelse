@@ -73,6 +73,22 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
+    protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
+    {
+        switch ($fieldName) {
+            case 'memberstatus':
+            case 'memberprivileges':
+            case 'membertags':
+                $input_names = [
+                    'memberstatus' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_STATUS,
+                    'memberprivileges' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_PRIVILEGES,
+                    'membertags' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_TAGS,
+                ];
+                return $input_names[$fieldName];
+        }
+        return null;
+    }
+
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
         switch ($fieldName) {

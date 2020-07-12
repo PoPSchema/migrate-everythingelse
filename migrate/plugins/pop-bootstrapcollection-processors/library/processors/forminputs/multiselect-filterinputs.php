@@ -11,6 +11,9 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
+    public const ENUM_MODERATED_CUSTOM_POST_STATUS = 'ModeratedCustomPostStatus';
+    public const ENUM_UNMODERATED_CUSTOM_POST_STATUS = 'UnmoderatedCustomPostStatus';
+
     public const MODULE_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public const MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
 
@@ -101,11 +104,13 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_MODERATED_CUSTOM_POST_STATUS;
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     array_keys((new GD_FormInput_ModeratedStatus())->getAllValues())
                 );
                 break;
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_UNMODERATED_CUSTOM_POST_STATUS;
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     array_keys((new GD_FormInput_UnmoderatedStatus())->getAllValues())
                 );
