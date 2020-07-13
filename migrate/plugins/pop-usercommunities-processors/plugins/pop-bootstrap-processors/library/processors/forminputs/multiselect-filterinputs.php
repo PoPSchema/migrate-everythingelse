@@ -125,22 +125,22 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
         switch ($module[1]) {
             case self::MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES:
                 $memberPrivilegeEnum = $instanceManager->getInstance(MemberPrivilegeEnum::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = $memberPrivilegeEnum->getName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberPrivilegeEnum->getName();
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $memberPrivilegeEnum->getValues()
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERTAGS:
                 $memberTagEnum = $instanceManager->getInstance(MemberTagEnum::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = $memberTagEnum->getName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberTagEnum->getName();
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $memberTagEnum->getValues()
                 );
                 break;
             case self::MODULE_URE_FILTERINPUT_MEMBERSTATUS:
                 $memberStatusEnum = $instanceManager->getInstance(MemberStatusEnum::class);
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = $memberStatusEnum->getName();
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_NAME] = $memberStatusEnum->getName();
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUM_VALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
                     $memberStatusEnum->getValues()
                 );
                 break;
