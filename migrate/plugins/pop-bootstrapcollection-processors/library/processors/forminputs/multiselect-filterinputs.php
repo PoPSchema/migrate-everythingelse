@@ -3,6 +3,9 @@ use PoP\ComponentModel\Schema\SchemaHelpers;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\EverythingElse\Enums\CustomPostModeratedStatusEnum;
+use PoP\EverythingElse\Enums\CustomPostUnmoderatedStatusEnum;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModuleProcessorInterface;
@@ -10,9 +13,6 @@ use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsSchemaFilterInputModule
 class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_MultiSelectFormInputsBase implements DataloadQueryArgsFilterInputModuleProcessorInterface, DataloadQueryArgsSchemaFilterInputModuleProcessorInterface
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
-
-    public const ENUM_MODERATED_CUSTOM_POST_STATUS = 'ModeratedCustomPostStatus';
-    public const ENUM_UNMODERATED_CUSTOM_POST_STATUS = 'UnmoderatedCustomPostStatus';
 
     public const MODULE_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
     public const MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
@@ -102,17 +102,20 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 
     protected function modifyFilterSchemaDefinitionItems(array &$schemaDefinitionItems, array $module)
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_MODERATED_CUSTOM_POST_STATUS;
+                $customPostModeratedStatusEnum = $instanceManager->getInstance(CustomPostModeratedStatusEnum::class);
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = $customPostModeratedStatusEnum->getName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    array_keys((new GD_FormInput_ModeratedStatus())->getAllValues())
+                    $customPostModeratedStatusEnum->getValues()
                 );
                 break;
             case self::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS:
-                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = self::ENUM_UNMODERATED_CUSTOM_POST_STATUS;
+                $customPostUnmoderatedStatusEnum = $instanceManager->getInstance(CustomPostUnmoderatedStatusEnum::class);
+                $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMNAME] = $customPostUnmoderatedStatusEnum->getName();
                 $schemaDefinitionItems[SchemaDefinition::ARGNAME_ENUMVALUES] = SchemaHelpers::convertToSchemaFieldArgEnumValueDefinitions(
-                    array_keys((new GD_FormInput_UnmoderatedStatus())->getAllValues())
+                    $customPostUnmoderatedStatusEnum->getValues()
                 );
                 break;
         }

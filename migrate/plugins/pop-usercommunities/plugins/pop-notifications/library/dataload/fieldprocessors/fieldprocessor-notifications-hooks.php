@@ -1,14 +1,18 @@
 <?php
 
+use PoP\ComponentModel\Misc\RequestUtils;
+use PoP\EverythingElse\Enums\MemberTagEnum;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\EverythingElse\Enums\MemberStatusEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
+use PoP\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
-use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
@@ -75,33 +79,36 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
 
     protected function getSchemaDefinitionEnumName(TypeResolverInterface $typeResolver, string $fieldName): ?string
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'memberstatus':
             case 'memberprivileges':
             case 'membertags':
-                $input_names = [
-                    'memberstatus' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_STATUS,
-                    'memberprivileges' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_PRIVILEGES,
-                    'membertags' => \GD_URE_Module_Processor_ProfileMultiSelectFilterInputs::ENUM_MEMBER_TAGS,
+                $inputEnumClasses = [
+                    'memberstatus' => MemberStatusEnum::class,
+                    'memberprivileges' => MemberPrivilegeEnum::class,
+                    'membertags' => MemberTagEnum::class,
                 ];
-                return $input_names[$fieldName];
+                $enum = $instanceManager->getInstance($inputEnumClasses[$fieldName]);
+                return $enum->getName();
         }
         return null;
     }
 
     protected function getSchemaDefinitionEnumValues(TypeResolverInterface $typeResolver, string $fieldName): ?array
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'memberstatus':
             case 'memberprivileges':
             case 'membertags':
-                $input_classes = [
-                    'memberstatus' => GD_URE_FormInput_MultiMemberStatus::class,
-                    'memberprivileges' => GD_URE_FormInput_FilterMemberPrivileges::class,
-                    'membertags' => GD_URE_FormInput_FilterMemberTags::class,
+                $inputEnumClasses = [
+                    'memberstatus' => MemberStatusEnum::class,
+                    'memberprivileges' => MemberPrivilegeEnum::class,
+                    'membertags' => MemberTagEnum::class,
                 ];
-                $class = $input_classes[$fieldName];
-                return array_keys((new $class())->getAllValues());
+                $enum = $instanceManager->getInstance($inputEnumClasses[$fieldName]);
+                return $enum->getValues();
         }
         return null;
     }
