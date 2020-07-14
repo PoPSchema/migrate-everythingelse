@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
@@ -130,7 +130,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

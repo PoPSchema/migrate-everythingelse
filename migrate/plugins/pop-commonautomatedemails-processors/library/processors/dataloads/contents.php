@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 
@@ -72,7 +72,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Decide on the typeResolver based on the type of the single element
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

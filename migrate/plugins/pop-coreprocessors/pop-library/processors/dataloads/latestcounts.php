@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\State\ApplicationState;
@@ -72,7 +72,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

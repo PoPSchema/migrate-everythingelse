@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
 
     public function getTypeResolverClass(array $module): ?string
     {
-        return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+        return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
     }
 
     // function initModelProps(array $module, array &$props) {

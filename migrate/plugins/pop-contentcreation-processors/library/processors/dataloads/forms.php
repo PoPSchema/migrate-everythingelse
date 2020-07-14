@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 
@@ -114,7 +114,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_FLAG:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);;
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);;
         }
 
         return parent::getTypeResolverClass($module);

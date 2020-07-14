@@ -3,7 +3,7 @@
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -100,7 +100,7 @@ class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
         switch ($fieldName) {
             case 'references':
             case 'referencedby':
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::resolveFieldTypeResolverClass($typeResolver, $fieldName, $fieldArgs);

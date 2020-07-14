@@ -3,7 +3,7 @@
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -386,7 +386,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW:

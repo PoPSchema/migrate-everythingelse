@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -134,7 +134,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Modul
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

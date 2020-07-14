@@ -4,7 +4,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 
 class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -758,7 +758,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOAD_SEARCHUSERS_TYPEAHEAD:
             case self::MODULE_DATALOAD_USERS_TYPEAHEAD:

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -60,7 +60,7 @@ class PoP_AddHighlights_Module_Processor_CustomSidebarDataloads extends PoP_Modu
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
         }
 
         return parent::getTypeResolverClass($module);

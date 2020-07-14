@@ -2,7 +2,7 @@
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
@@ -255,7 +255,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_UNDOUPVOTEPOST:
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:

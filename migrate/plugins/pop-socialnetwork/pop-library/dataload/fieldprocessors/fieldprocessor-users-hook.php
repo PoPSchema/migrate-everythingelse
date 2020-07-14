@@ -4,7 +4,7 @@ use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
@@ -95,7 +95,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Users extends AbstractDBDataFieldR
     {
         switch ($fieldName) {
             case 'recommendsCustomPosts':
-                return UnionTypeHelpers::getUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
+                return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetTypeResolverClass(CustomPostUnionTypeResolver::class);
 
             case 'followers':
             case 'following':
