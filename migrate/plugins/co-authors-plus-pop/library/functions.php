@@ -10,12 +10,12 @@ function emptyArray($anything)
     return array();
 }
 
-HooksAPIFacade::getInstance()->addFilter('CMSAPI:posts:query', 'maybeRemoveSupressFilters');
+HooksAPIFacade::getInstance()->addFilter('CMSAPI:customposts:query', 'maybeRemoveSupressFilters');
 function maybeRemoveSupressFilters($query)
 {
 	// If filtering by author, let it also be a co-author
 	if ($query['author']) {
-		
+
 	    // Allow for co-authors plus plug-in to add "posts_where_filter"
 	    $query['suppress_filters'] = false;
 	}

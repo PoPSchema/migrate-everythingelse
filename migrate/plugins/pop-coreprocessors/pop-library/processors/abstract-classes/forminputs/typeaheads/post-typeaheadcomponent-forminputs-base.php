@@ -23,7 +23,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
         return array(
             // 'fields' => 'ids',
             'limit' => 1,
-            'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:id'),
+            'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:id'),
             'order' => 'DESC',
         );
     }

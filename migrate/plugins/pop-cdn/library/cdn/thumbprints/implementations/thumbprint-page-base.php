@@ -8,7 +8,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
     {
         return array(
             'limit' => 1,
-            'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:modified'),
+            'orderby' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:modified'),
             'order' => 'DESC',
             'page-status' => POP_PAGESTATUS_PUBLISHED,
         );

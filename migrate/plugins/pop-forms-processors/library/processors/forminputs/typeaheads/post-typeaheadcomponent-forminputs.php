@@ -48,7 +48,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         if (defined('POP_COMMENTS_INITIALIZED')) {
             $ret[] = [
                 'module' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
-                'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:posts:comment-count').'|DESC',
+                'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:comment-count').'|DESC',
             ];
         }
 
@@ -57,9 +57,9 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = parent::getRemoteUrl($module, $props);
-        
+
         return \PoP\ComponentModel\DataloadUtils::addFilterParams(
-            $url, 
+            $url,
             [
                 [
                     'module' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
