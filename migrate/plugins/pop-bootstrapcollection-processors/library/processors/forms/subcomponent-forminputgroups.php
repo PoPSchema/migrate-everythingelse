@@ -46,7 +46,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
             case self::MODULE_FILTERINPUTGROUP_POSTDATES:
                 return 'readable';
         }
-        
+
         return parent::getComponentSubname($module);
     }
 
@@ -54,13 +54,13 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER => [PoP_Module_Processor_DateRangeComponentInputs::class, PoP_Module_Processor_DateRangeComponentInputs::MODULE_FORMINPUT_DATERANGETIMEPICKER],
-            self::MODULE_FILTERINPUTGROUP_POSTDATES => [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_POSTDATES],
+            self::MODULE_FILTERINPUTGROUP_POSTDATES => [PoP_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_CUSTOMPOSTDATES],
         );
 
         if ($component = $components[$module[1]]) {
             return $component;
         }
-        
+
         return parent::getComponentSubmodule($module);
     }
 
@@ -71,7 +71,7 @@ class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP
                 $this->setProp($this->getComponentSubmodule($module), $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Click here...', 'pop-coreprocessors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
