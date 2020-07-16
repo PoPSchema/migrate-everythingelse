@@ -48,7 +48,7 @@ function gdDataloadAllcontentComponents()
         $component = array(
             'postType' => $post_type,
         );
-        if ($taxonomies = $taxonomyapi->getPostTypeTaxonomies($post_type)) {
+        if ($taxonomies = $taxonomyapi->getCustomPostTypeTaxonomies($post_type)) {
             foreach ($taxonomies as $taxonomy) {
                 // Only for Category-type taxonomies, not for term-like
                 if ($taxonomyapi->isTaxonomyHierarchical($taxonomy)) {

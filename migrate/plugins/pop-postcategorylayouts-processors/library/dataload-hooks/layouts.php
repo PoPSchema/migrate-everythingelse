@@ -17,7 +17,7 @@ class PoP_PostCategoryLayouts_LayoutDataloadHooks
     public function addMultilayoutKeys($keys, $post_id, $typeResolver)
     {
         $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
-        if (in_array(POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE, $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]))) {
+        if (in_array(POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE, $categoryapi->getCustomPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]))) {
             // Priority: place it before the 'postType' layout key
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             array_unshift($keys, strtolower($typeResolver->getTypeName()).'-featureimage');

@@ -14,7 +14,7 @@ function getTheMainCategory($post_id)
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
-        if ($cats = $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($cats = $categoryapi->getCustomPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
             // If this post has any of the categories set as main, then return the any one of them
             if ($intersected_cats = array_values(array_intersect($cats, getTheMainCategories()))) {
                 return $intersected_cats[0];

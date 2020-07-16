@@ -45,7 +45,7 @@ class GD_ContentCreation_Media_DataLoad_FieldResolver_FunctionalPosts extends Ab
         $post = $resultItem;
         switch ($fieldName) {
             case 'featuredImageAttrs':
-                if ($featuredimage = $cmsmediapostsapi->getPostThumbnailId($typeResolver->getID($post))) {
+                if ($featuredimage = $cmsmediapostsapi->getCustomPostThumbnailID($typeResolver->getID($post))) {
                     return MediaHelpers::getAttachmentImageProperties($featuredimage, 'thumb-md');
                 }
                 return null;
