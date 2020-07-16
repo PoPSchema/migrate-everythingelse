@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -123,70 +123,70 @@ class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Ap
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

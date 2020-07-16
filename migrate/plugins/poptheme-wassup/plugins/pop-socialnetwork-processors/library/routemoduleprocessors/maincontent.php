@@ -3,7 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -36,56 +36,56 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS],
         );
         foreach ($routemodules_userdetails as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_DETAILS) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_userfullview = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_userfullview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_FULLVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_userthumbnail = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_THUMBNAIL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_userlist = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST],
         );
         foreach ($routemodules_userlist as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_LIST) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

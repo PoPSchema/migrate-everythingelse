@@ -5,7 +5,7 @@ use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
@@ -71,7 +71,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
                 case UserRouteNatures::USER:
                 case RouteNatures::HOME:
-                case TaxonomyRouteNatures::TAG:
+                case TagRouteNatures::TAG:
                 case RouteNatures::NOTFOUND:
 
                     $flat_resources[$nature][$key] = $resources;

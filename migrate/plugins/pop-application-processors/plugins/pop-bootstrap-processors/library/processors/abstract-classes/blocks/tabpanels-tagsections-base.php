@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_TagTabPanelSectionBlocksBase extends PoP_Mod
 {
     // public function getNature(array $module)
     // {
-    //     return TaxonomyRouteNatures::TAG;
+    //     return TagRouteNatures::TAG;
     // }
 
     protected function getControlgroupBottomSubmodule(array $module)
@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_TagTabPanelSectionBlocksBase extends PoP_Mod
     public function initModelProps(array $module, array &$props)
     {
         $this->appendProp($module, $props, 'class', 'blockgroup-tagsections');
-        
+
         parent::initModelProps($module, $props);
     }
 }

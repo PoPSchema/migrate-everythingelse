@@ -2,7 +2,7 @@
 
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -52,14 +52,14 @@ class Wassup_EM_SocialNetwork_Module_MainContentRouteModuleProcessor extends \Po
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_MAP) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

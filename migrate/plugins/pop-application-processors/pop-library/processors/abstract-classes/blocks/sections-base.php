@@ -7,7 +7,7 @@ use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             case UserRouteNatures::USER:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
 
-            case TaxonomyRouteNatures::TAG:
+            case TagRouteNatures::TAG:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
 
             case CustomPostRouteNatures::CUSTOMPOST:
@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             case UserRouteNatures::USER:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
 
-            case TaxonomyRouteNatures::TAG:
+            case TagRouteNatures::TAG:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle();
 
             case CustomPostRouteNatures::CUSTOMPOST:
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                     $url = $cmsusersapi->getUserURL($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
-                case TaxonomyRouteNatures::TAG:
+                case TagRouteNatures::TAG:
                     $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 

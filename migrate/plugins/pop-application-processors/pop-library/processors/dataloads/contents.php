@@ -110,7 +110,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //             return UserRouteNatures::USER;
 
     //         case self::MODULE_DATALOAD_TAG_CONTENT:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLE_CONTENT:
     //         case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:

@@ -13,7 +13,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -524,7 +524,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // // Reset the cache
                 // $pop_module_processor_runtimecache->deleteCache();
             }
-        } elseif ($nature == TaxonomyRouteNatures::TAG) {
+        } elseif ($nature == TagRouteNatures::TAG) {
 
             // // Commented, because there is no difference in configuration for any particular tag,
             // // so we never inquire the current tag for obtaining the configuration. So no need for this
@@ -592,7 +592,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
             $flat_natures = array(
                 RouteNatures::HOME,
-                TaxonomyRouteNatures::TAG,
+                TagRouteNatures::TAG,
                 UserRouteNatures::USER,
             );
             $path_natures = array(
@@ -607,7 +607,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 // Comment Leo 10/04/2019: since switching from page to route, only routes cannot have a tab
                 // UserRouteNatures::USER,
                 // CustomPostRouteNatures::CUSTOMPOST,
-                // TaxonomyRouteNatures::TAG,
+                // TagRouteNatures::TAG,
                 RouteNatures::STANDARD,
             );
 

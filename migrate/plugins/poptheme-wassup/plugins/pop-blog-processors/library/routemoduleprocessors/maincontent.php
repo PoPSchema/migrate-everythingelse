@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -415,14 +415,14 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -430,14 +430,14 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -445,14 +445,14 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -460,14 +460,14 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -475,14 +475,14 @@ class PoPTheme_Wassup_Blog_Module_MainContentRouteModuleProcessor extends \PoP\A
             POP_POSTS_ROUTE_POSTS => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

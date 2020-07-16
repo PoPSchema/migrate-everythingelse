@@ -165,7 +165,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
 
     //         case self::MODULE_BLOCK_TAG_CONTENT:
 
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
 
     //         case self::MODULE_BLOCK_SINGLE_CONTENT:
 

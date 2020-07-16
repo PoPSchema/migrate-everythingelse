@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
@@ -140,7 +140,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);

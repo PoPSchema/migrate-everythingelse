@@ -3,7 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -52,7 +52,7 @@ class PoP_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPage
         ];
 
         // Tag
-        $ret[TaxonomyRouteNatures::TAG][] = [
+        $ret[TagRouteNatures::TAG][] = [
             'module' => [PoP_Module_Processor_MainBlocks::class, PoP_Module_Processor_MainBlocks::MODULE_BLOCK_TAG]
         ];
 

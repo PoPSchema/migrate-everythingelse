@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 
 class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -95,7 +95,7 @@ class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloa
     //             return UserRouteNatures::USER;
 
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP:

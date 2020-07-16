@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -100,7 +100,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
 
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);

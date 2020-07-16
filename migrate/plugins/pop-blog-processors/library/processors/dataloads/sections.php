@@ -575,7 +575,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     //         case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);

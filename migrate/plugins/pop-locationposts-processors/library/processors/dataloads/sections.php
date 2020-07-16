@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -174,7 +174,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);

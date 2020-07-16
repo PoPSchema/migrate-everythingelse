@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -98,7 +98,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionRouteModulePro
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

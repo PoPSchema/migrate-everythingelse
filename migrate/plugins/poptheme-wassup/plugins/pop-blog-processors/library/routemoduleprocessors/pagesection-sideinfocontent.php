@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -15,7 +15,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionRouteModuleProcessor
             POP_POSTS_ROUTE_POSTS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_POSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(

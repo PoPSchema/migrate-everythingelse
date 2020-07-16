@@ -4,7 +4,7 @@ use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -24,7 +24,7 @@ class PoP_Module_MainContentRouteModuleProcessor extends \PoP\Application\Abstra
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT],
         );
         foreach ($modules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
         // Single main content

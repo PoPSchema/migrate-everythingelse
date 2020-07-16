@@ -2,7 +2,7 @@
 
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -569,7 +569,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST:
     //         case self::MODULE_DATALOAD_TAGSTANCES_CAROUSEL:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_SINGLERELATEDSTANCECONTENT_PRO_SCROLL_FULLVIEW:

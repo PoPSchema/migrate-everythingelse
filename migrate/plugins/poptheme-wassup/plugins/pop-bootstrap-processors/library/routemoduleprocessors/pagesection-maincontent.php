@@ -3,7 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -37,7 +37,7 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionRouteModuleProcessor exten
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],
         ];
-        $ret[TaxonomyRouteNatures::TAG][] = [
+        $ret[TagRouteNatures::TAG][] = [
             'module' => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

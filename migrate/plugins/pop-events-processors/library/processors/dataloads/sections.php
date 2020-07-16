@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
 
@@ -503,7 +503,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
     //         case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR:
     //         case self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);

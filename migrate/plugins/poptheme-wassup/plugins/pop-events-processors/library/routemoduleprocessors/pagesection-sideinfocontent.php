@@ -3,7 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
@@ -27,7 +27,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();

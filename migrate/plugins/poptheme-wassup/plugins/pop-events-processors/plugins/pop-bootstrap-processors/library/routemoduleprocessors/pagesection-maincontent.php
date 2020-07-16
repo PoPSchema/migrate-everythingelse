@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
@@ -44,7 +44,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelBlocks::class, GD_EM_Module_Processor_TagSectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,

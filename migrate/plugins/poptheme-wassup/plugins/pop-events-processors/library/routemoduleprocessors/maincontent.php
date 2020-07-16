@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -412,14 +412,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -427,14 +427,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -442,14 +442,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -457,14 +457,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -472,14 +472,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_map = array(
@@ -487,28 +487,28 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP],
         );
         foreach ($routemodules_map as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_horizontalmap = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
         foreach ($routemodules_horizontalmap as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 
@@ -516,14 +516,14 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTS_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 
@@ -531,28 +531,28 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDAR],
         );
         foreach ($routemodules_calendar as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_calendarmap = array(
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP],
         );
         foreach ($routemodules_calendarmap as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

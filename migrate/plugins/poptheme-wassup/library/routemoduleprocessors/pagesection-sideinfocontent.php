@@ -5,7 +5,7 @@ use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
@@ -24,7 +24,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
             RoutingRoutes::$MAIN => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+            $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
         $modules = array(
@@ -53,7 +53,7 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         ];
 
         // Default for Tag
-        $ret[TaxonomyRouteNatures::TAG][] = [
+        $ret[TagRouteNatures::TAG][] = [
             'module' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
         ];
 

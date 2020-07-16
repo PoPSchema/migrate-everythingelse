@@ -3,7 +3,7 @@
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -81,7 +81,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST],
             );
             foreach ($routemodules as $route => $module) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = [
+                $ret[TagRouteNatures::TAG][$route][] = [
                     'module' => $module,
                     'conditions' => [
                         'scheme' => POP_SCHEME_API,

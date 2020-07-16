@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -649,14 +649,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_DETAILS],
         );
         foreach ($routemodules_details as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -682,14 +682,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
         );
         foreach ($routemodules_simpleview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -715,14 +715,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEW],
         );
         foreach ($routemodules_fullview as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -748,14 +748,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL],
         );
         foreach ($routemodules_thumbnail as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_list = array(
@@ -781,14 +781,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST],
         );
         foreach ($routemodules_list as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
         $routemodules_line = array(
@@ -814,14 +814,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LINE],
         );
         foreach ($routemodules_line as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LINE,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LINE) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 
@@ -849,14 +849,14 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL],
         );
         foreach ($routemodules_carousels as $route => $module) {
-            $ret[TaxonomyRouteNatures::TAG][$route][] = [
+            $ret[TagRouteNatures::TAG][$route][] = [
                 'module' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[TaxonomyRouteNatures::TAG][$route][] = ['module' => $module];
+                $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
             }
         }
 

@@ -290,7 +290,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
 
     //         case self::MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_DETAILS:

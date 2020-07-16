@@ -5,7 +5,7 @@ use PoP\Routing\RouteNatures;
 use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
@@ -71,7 +71,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         );
         $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
         if ($ids = $taxonomyapi->getTags($query, ['return-type' => POP_RETURNTYPE_IDS])) {
-            $nature = TaxonomyRouteNatures::TAG;
+            $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, false, $options);

@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -3496,7 +3496,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     //         case self::MODULE_DATALOAD_TAGCATEGORYPOSTS17_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT:
     //         case self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT:
-    //             return TaxonomyRouteNatures::TAG;
+    //             return TagRouteNatures::TAG;
     //     }
 
     //     return parent::getNature($module);
