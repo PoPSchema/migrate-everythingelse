@@ -47,10 +47,10 @@ class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_Anc
             case self::MODULE_ANCHORCONTROL_TAGSLINK:
                 $routes = array(
                     self::MODULE_ANCHORCONTROL_ADDPOST => POP_POSTSCREATION_ROUTE_ADDPOST,
-                    self::MODULE_ANCHORCONTROL_TAGSLINK => POP_TAXONOMIES_ROUTE_TAGS,
+                    self::MODULE_ANCHORCONTROL_TAGSLINK => POP_TAGS_ROUTE_TAGS,
                 );
                 $route = $routes[$module[1]];
-                
+
                 return RouteUtils::getRouteURL($route);
         }
 

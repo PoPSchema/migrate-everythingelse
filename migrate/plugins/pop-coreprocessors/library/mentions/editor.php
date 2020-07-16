@@ -58,15 +58,15 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 {
     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         // $filter_manager = \PoP\Engine\FilterManagerFactory::getInstance();
-    
+
     // global $gd_filtercomponent_name, $gd_filtercomponent_orderuser, $gd_filtercomponent_ordertag;
     $query_wildcard = urlencode(GD_JSPLACEHOLDER_QUERY);
 
     // $filter_wildcardusers = $filter_manager->getFilter(POP_FILTER_USERS);
     $users_url = RouteUtils::getRouteURL(POP_USERS_ROUTE_USERS);
     // $filter_wildcardtags = $filter_manager->getFilter(POP_FILTER_TAGS);
-    $tags_url = RouteUtils::getRouteURL(POP_TAXONOMIES_ROUTE_TAGS);
-  
+    $tags_url = RouteUtils::getRouteURL(POP_TAGS_ROUTE_TAGS);
+
     // // Add a hook, so we can use the content CDN
     // $users_url = HooksAPIFacade::getInstance()->applyFilters(
     //   'pop_mentions:url:users',
@@ -105,7 +105,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $users_baselineurl = GeneralUtils::addQueryArgs([
-        GD_URLPARAM_LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10, 
+        GD_URLPARAM_LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $users_baselineurl);
 
     $users_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($users_baselineurl, POP_FORMAT_MENTION);
@@ -139,7 +139,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 
     // Bring 10 times the pre-defined result set
     $tags_baselineurl = GeneralUtils::addQueryArgs([
-        GD_URLPARAM_LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10, 
+        GD_URLPARAM_LIMIT => $cmsengineapi->getOption(NameResolverFacade::getInstance()->getName('popcms:option:limit')) * 10,
     ], $tags_baselineurl);
 
     $tags_baselineurl = PoPCore_ModuleManager_Utils::addJsonoutputResultsParams($tags_baselineurl, POP_FORMAT_MENTION);
@@ -166,6 +166,6 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
             ),
         ),
     );
-      
+
     return $jqueryConstants;
 }

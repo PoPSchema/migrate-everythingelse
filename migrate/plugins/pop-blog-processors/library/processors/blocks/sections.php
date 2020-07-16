@@ -174,8 +174,8 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => POP_POSTS_ROUTE_POSTS,
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => POP_POSTS_ROUTE_POSTS,
             self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => POP_POSTS_ROUTE_POSTS,
-            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => POP_TAXONOMIES_ROUTE_TAGS ,
-            self::MODULE_BLOCK_TAGS_SCROLL_LIST => POP_TAXONOMIES_ROUTE_TAGS ,
+            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => POP_TAGS_ROUTE_TAGS ,
+            self::MODULE_BLOCK_TAGS_SCROLL_LIST => POP_TAGS_ROUTE_TAGS ,
             self::MODULE_BLOCK_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
             self::MODULE_BLOCK_USERS_CAROUSEL => POP_USERS_ROUTE_USERS,
             self::MODULE_BLOCK_USERS_SCROLL_ADDONS => POP_USERS_ROUTE_USERS,
@@ -442,7 +442,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest Content', 'poptheme-wassup');
         }
-        
+
         return parent::getTitle($module, $props);
     }
 
@@ -455,7 +455,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

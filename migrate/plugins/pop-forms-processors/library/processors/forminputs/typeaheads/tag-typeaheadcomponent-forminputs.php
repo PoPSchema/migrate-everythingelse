@@ -17,7 +17,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
-                return getRouteIcon(POP_TAXONOMIES_ROUTE_TAGS, true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
+                return getRouteIcon(POP_TAGS_ROUTE_TAGS, true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
         }
 
         return parent::getLabelText($module, $props);
@@ -28,7 +28,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
-                return RouteUtils::getRouteURL(POP_TAXONOMIES_ROUTE_TAGS);
+                return RouteUtils::getRouteURL(POP_TAGS_ROUTE_TAGS);
         }
 
         return parent::getTypeaheadDataloadSource($module, $props);

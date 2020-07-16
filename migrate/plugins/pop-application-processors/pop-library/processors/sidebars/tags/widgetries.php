@@ -15,7 +15,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_WIDGETCOMPACT_TAGINFO:
                 $ret[] = [PoP_Module_Processor_TagInfoLayouts::class, PoP_Module_Processor_TagInfoLayouts::MODULE_LAYOUT_TAGINFO];
@@ -36,7 +36,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     public function getFontawesome(array $module, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(POP_TAXONOMIES_ROUTE_TAGS, false),
+            self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(POP_TAGS_ROUTE_TAGS, false),
         );
 
         return $fontawesomes[$module[1]];
