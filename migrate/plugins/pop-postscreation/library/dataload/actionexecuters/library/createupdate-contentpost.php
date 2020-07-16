@@ -346,7 +346,7 @@ class GD_CreateUpdate_PostBase
 
     protected function maybeAddParentCategories($categories)
     {
-        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself

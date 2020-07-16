@@ -99,7 +99,7 @@ class PoP_ContentPostLinks_Utils
 
     public static function isLink($post_id)
     {
-        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));

@@ -22,7 +22,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
             $vars = ApplicationState::getVars();
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
             if (
                 $customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()

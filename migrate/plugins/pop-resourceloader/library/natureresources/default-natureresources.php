@@ -145,7 +145,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
             $all_categories = $categoryapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
 
             // Allow to filter the categories.

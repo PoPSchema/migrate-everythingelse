@@ -76,7 +76,7 @@ function gdGetPostname($post_id, $format = 'title')
 
 function gdGetCategoryname($cat_id, $format = 'title')
 {
-    $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+    $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
     $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $categoryapi->getCategoryName($cat_id), $cat_id, $format);
 
     // Lowercase

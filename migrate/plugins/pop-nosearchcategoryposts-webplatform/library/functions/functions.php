@@ -6,7 +6,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 //     $label = '<span class="label label-%s">%s</span>';
 
-//     $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+//     $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
 //     foreach (PoP_NoSearchCategoryPosts_Utils::getCatRoutes() as $cat => $route) {
 
 //         $category = get_category($cat);
