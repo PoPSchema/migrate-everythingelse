@@ -117,7 +117,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $author = $vars['routing-state']['queried-object-id'];
@@ -128,7 +128,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSubMenus:getUrl:author', $url, $route, $author);
 
             case self::MODULE_SUBMENU_TAG:
-                $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, $route);
 
             case self::MODULE_SUBMENU_SINGLE:

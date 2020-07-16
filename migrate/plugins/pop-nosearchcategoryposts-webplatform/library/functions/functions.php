@@ -6,13 +6,13 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 //     $label = '<span class="label label-%s">%s</span>';
 
-//     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+//     $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
 //     foreach (PoP_NoSearchCategoryPosts_Utils::getCatRoutes() as $cat => $route) {
 
 //         $category = get_category($cat);
 //         $labels['post-'.$cat] = sprintf(
 //             $label,
-//             $taxonomyapi->getCategorySlug($cat),
+//             $categoryapi->getCategorySlug($cat),
 //             getRouteIcon($route, true).gdGetCategoryname($cat)
 //         );
 //     }

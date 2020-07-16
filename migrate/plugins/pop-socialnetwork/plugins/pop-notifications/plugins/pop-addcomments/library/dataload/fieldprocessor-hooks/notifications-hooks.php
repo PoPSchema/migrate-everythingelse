@@ -20,7 +20,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($notification->object_id);
@@ -36,7 +36,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
             if ($intersected_tags = array_values(array_intersect($comment_tags, $user_hashtags))) {
                 $tags = array();
                 foreach ($intersected_tags as $tag_id) {
-                    $tag = $taxonomyapi->getTag($tag_id);
+                    $tag = $tagapi->getTag($tag_id);
                     $tags[] = $applicationtaxonomyapi->getTagSymbolName($tag);
                 }
                 $message = sprintf(

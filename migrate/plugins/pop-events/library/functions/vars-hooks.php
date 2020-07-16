@@ -28,7 +28,7 @@ function gdEmModelinstanceGetCategories($cats, $post_id)
     $eventTypeAPI = EventTypeAPIFacade::getInstance();
     if ($eventTypeAPI->isEvent($post_id)) {
         $event = $eventTypeAPI->getEvent($post_id);
-        $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+        $cmscategoryresolver = \PoP\Tags\ObjectPropertyResolverFactory::getInstance();
         foreach ($eventTypeAPI->getCategories($event) as $cat) {
             // Watch out: $cat is of type EM_TAXONOMY_CATEGORY, so to query the slug and ID we may need to use its own function "output",
             // on which case we should place it under the $eventTypeAPI.
@@ -36,7 +36,7 @@ function gdEmModelinstanceGetCategories($cats, $post_id)
             // and access them directly
             // $cat_slug = $cat->output('#_CATEGORYSLUG');
             // $cat_id = $cat->output('#_CATEGORYID');
-            $cats[] = $cmstaxonomiesresolver->getCategorySlug($cat) . $cmstaxonomiesresolver->getCategoryID($cat);
+            $cats[] = $cmscategoryresolver->getCategorySlug($cat) . $cmstaxonomiesresolver->getCategoryID($cat);
         }
     }
 

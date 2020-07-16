@@ -74,14 +74,14 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+            $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {
                 case UserRouteNatures::USER:
                     $url = $cmsusersapi->getUserURL($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case TagRouteNatures::TAG:
-                    $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
+                    $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
                     return RequestUtils::addRoute($url, $route);
 
                 case PageRouteNatures::PAGE:

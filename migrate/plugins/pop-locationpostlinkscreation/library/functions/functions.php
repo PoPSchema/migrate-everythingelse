@@ -6,9 +6,8 @@ HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'popLo
 function popLocationpostlinkscreationCreateupdateutilsEditUrl($url, $post_id)
 {
     if (defined('POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS') && POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && defined('POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK') && POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK) {
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        if ($taxonomyapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $post_id)) {
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        if ($categoryapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $post_id)) {
             return RouteUtils::getRouteURL(POP_LOCATIONPOSTLINKSCREATION_ROUTE_EDITLOCATIONPOSTLINK);
         }
     }

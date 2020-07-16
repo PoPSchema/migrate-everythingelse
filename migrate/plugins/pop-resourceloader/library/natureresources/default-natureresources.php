@@ -69,8 +69,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        if ($ids = $taxonomyapi->getTags($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        if ($ids = $tagapi->getTags($query, ['return-type' => POP_RETURNTYPE_IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
@@ -145,8 +145,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-            $all_categories = $taxonomyapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
+            $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            $all_categories = $categoryapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
 
             // Allow to filter the categories.
             // This is needed so that Articles/Announcements/etc similar-configuration categories

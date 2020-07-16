@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     // {
     //     return POP_FILTER_TAGS;
     // }
-    
+
     protected function getSourceFilterParams(array $module, array &$props)
     {
         $ret = parent::getSourceFilterParams($module, $props);
@@ -38,10 +38,10 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     protected function getRemoteUrl(array $module, array &$props)
     {
         $url = parent::getRemoteUrl($module, $props);
-        
+
         // Add the query from typeahead.js to filter (http://twitter.github.io/typeahead.js/examples/)
         return GeneralUtils::addQueryArgs([
-            PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY, 
+            PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH => GD_JSPLACEHOLDER_QUERY,
         ], $url);
     }
 
@@ -56,8 +56,8 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     }
     protected function executeThumbprint($query)
     {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        return $taxonomyapi->getTags($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        return $tagapi->getTags($query, ['return-type' => POP_RETURNTYPE_IDS]);
     }
 
     protected function getPendingMsg(array $module)

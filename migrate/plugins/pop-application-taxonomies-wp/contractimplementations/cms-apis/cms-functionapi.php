@@ -26,8 +26,8 @@ class FunctionAPI extends \PoP\ApplicationTaxonomies\FunctionAPI_Base
             $tag,
             $tagID,
         ) = $this->getTagObjectAndID($tagObjectOrID);
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        return TagHelpers::getTagSymbol() . $taxonomyapi->getTagName($tagID);
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        return TagHelpers::getTagSymbol() . $tagapi->getTagName($tagID);
     }
 }
 

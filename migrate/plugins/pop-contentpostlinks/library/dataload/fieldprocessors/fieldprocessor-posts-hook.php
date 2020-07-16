@@ -116,8 +116,8 @@ class PoP_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFi
             )
         ) {
             $post = $resultItem;
-            $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-            return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $taxonomyapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
+            $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            return defined('POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS') && POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS && $categoryapi->hasCategory(POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS, $typeResolver->getID($post));
         }
         return true;
     }

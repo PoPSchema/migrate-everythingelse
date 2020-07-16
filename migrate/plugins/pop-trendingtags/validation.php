@@ -29,7 +29,7 @@ class Validation
             HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'providerinitialize_warning'));
             $success = false;
         }
-        
+
         if (!defined('POP_TAXONOMIES_VERSION')) {
             HooksAPIFacade::getInstance()->addAction('admin_notices', array($this, 'installWarning'));
             HooksAPIFacade::getInstance()->addAction('network_admin_notices', array($this, 'installWarning'));
@@ -61,14 +61,14 @@ class Validation
     {
         $this->dependencyInitializationWarning(
             TranslationAPIFacade::getInstance()->__('PoP Trending Tags', 'pop-trendingtags'),
-            TranslationAPIFacade::getInstance()->__('PoP Taxonomies', 'pop-trendingtags')
+            TranslationAPIFacade::getInstance()->__('PoP Tags', 'pop-trendingtags')
         );
     }
     public function installWarning()
     {
         $this->dependencyInstallationWarning(
             TranslationAPIFacade::getInstance()->__('PoP Trending Tags', 'pop-trendingtags'),
-            TranslationAPIFacade::getInstance()->__('PoP Taxonomies', 'pop-trendingtags'),
+            TranslationAPIFacade::getInstance()->__('PoP Tags', 'pop-trendingtags'),
             'https://github.com/leoloso/PoP'
         );
     }
@@ -76,7 +76,7 @@ class Validation
     {
         $this->dependencyVersionWarning(
             TranslationAPIFacade::getInstance()->__('PoP Trending Tags', 'pop-trendingtags'),
-            TranslationAPIFacade::getInstance()->__('PoP Taxonomies', 'pop-trendingtags'),
+            TranslationAPIFacade::getInstance()->__('PoP Tags', 'pop-trendingtags'),
             'https://github.com/leoloso/PoP',
             POP_TRENDINGTAGS_POP_TAXONOMIES_MIN_VERSION
         );

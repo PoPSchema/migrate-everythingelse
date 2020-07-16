@@ -76,8 +76,8 @@ function gdGetPostname($post_id, $format = 'title')
 
 function gdGetCategoryname($cat_id, $format = 'title')
 {
-    $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-    $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $taxonomyapi->getCategoryName($cat_id), $cat_id, $format);
+    $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+    $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $categoryapi->getCategoryName($cat_id), $cat_id, $format);
 
     // Lowercase
     if ($format == 'lc' || $format == 'plural-lc') {

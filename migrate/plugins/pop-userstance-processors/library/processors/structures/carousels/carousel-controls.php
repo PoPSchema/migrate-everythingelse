@@ -92,7 +92,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);
@@ -111,7 +111,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
                 );
 
             case self::MODULE_CAROUSELCONTROLS_TAGSTANCES:
-                $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGSTANCES => POP_USERSTANCE_ROUTE_STANCES,
                 );

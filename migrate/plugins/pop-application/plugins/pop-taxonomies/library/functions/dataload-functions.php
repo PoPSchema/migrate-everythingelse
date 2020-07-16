@@ -14,9 +14,9 @@ function useAllcontentCategories()
 function gdDataloadAllcontentCategories()
 {
     if (useAllcontentCategories()) {
-        
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $all_categories = $taxonomyapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
+
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $all_categories = $categoryapi->getCategories([], ['return-type' => POP_RETURNTYPE_IDS]);
 
         // All Post Categories but the excluded ones
         $excluded_taxonomies = getAllcontentExcludedTaxonomies();

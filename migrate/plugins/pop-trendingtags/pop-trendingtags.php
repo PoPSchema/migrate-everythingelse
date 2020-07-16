@@ -19,8 +19,8 @@ class Plugins
 {
     public function __construct()
     {
-        
-        // Priority: new section, after PoP Taxonomies
+
+        // Priority: new section, after PoP Tags
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 210);
     }
     public function version($version)

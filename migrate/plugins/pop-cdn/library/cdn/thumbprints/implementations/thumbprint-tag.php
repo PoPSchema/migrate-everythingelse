@@ -22,11 +22,11 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
-        return $taxonomyapi->getTags($query, $options);
+        return $tagapi->getTags($query, $options);
     }
-    
+
     public function getTimestamp($tag_id)
     {
 
@@ -35,7 +35,7 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
         return $tag_id;
     }
 }
-    
+
 /**
  * Initialize
  */

@@ -99,11 +99,11 @@ class PoP_ContentPostLinks_Utils
 
     public static function isLink($post_id)
     {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));
-        return !empty(array_intersect($link_cats, $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])));
+        return !empty(array_intersect($link_cats, $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])));
     }
 
     public static function getLinkUrl($post)

@@ -10,8 +10,8 @@ function blogPostname($name, $post_id, $format)
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_CategoryPosts_Utils::getCats();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $post_cats = $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             return gdGetCategoryname($intersected[0], $format);
         }
@@ -28,8 +28,8 @@ function blogPosticon($icon, $post_id)
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
         $cats = PoP_CategoryPosts_Utils::getCats();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        $post_cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $post_cats = $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS]);
         if ($intersected = array_values(array_intersect($cats, $post_cats))) {
             $cat_routes = PoP_CategoryPosts_Utils::getCatRoutes();
             return getRouteIcon($cat_routes[$intersected[0]], false);

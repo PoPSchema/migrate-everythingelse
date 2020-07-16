@@ -54,7 +54,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
@@ -63,9 +63,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
                 $route = $routes[$module[1]];
-                
+
                 return RouteUtils::getRouteURL($route);
-        
+
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
                 $author = $vars['routing-state']['queried-object-id'];
                 $url = $cmsusersapi->getUserURL($author);
@@ -75,9 +75,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS),
                     $author
                 );
-        
+
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 

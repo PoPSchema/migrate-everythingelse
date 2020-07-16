@@ -179,9 +179,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // If the post has tags...
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $taxonomyapi->getPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);
@@ -202,8 +202,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                                 $names[] = $cmsusersapi->getUserDisplayName($subscribeduser);
                             }
 
-                            $tag = $taxonomyapi->getTag($tag_id);
-                            $tag_url = $taxonomyapi->getTagLink($tag_id);
+                            $tag = $tagapi->getTag($tag_id);
+                            $tag_url = $tagapi->getTagLink($tag_id);
                             $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                             $subject = sprintf(
                                 TranslationAPIFacade::getInstance()->__('There is a new %s tagged with “%s”: “%s”', 'pop-emailsender'),
@@ -310,9 +310,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // If the post has tags...
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $taxonomyapi->getPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);
@@ -333,8 +333,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
                                 $names[] = $cmsusersapi->getUserDisplayName($tag_subscriber);
                             }
 
-                            $tag = $taxonomyapi->getTag($tag_id);
-                            $tag_url = $taxonomyapi->getTagLink($tag_id);
+                            $tag = $tagapi->getTag($tag_id);
+                            $tag_url = $tagapi->getTagLink($tag_id);
                             $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                             $subject = sprintf(
                                 TranslationAPIFacade::getInstance()->__('New comment added under %s with topic “%s”', 'pop-emailsender'),
@@ -378,7 +378,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC, $networkusers)) {
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+                $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -387,7 +387,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
                 $user_url = $cmsusersapi->getUserURL($user_id);
                 $user_name = $cmsusersapi->getUserDisplayName($user_id);
-                $tag = $taxonomyapi->getTag($tag_id);
+                $tag = $tagapi->getTag($tag_id);
                 $tag_name = $applicationtaxonomyapi->getTagSymbolName($tag);
                 $subject = sprintf(
                     TranslationAPIFacade::getInstance()->__('%s subscribed to %s', 'pop-emailsender'),

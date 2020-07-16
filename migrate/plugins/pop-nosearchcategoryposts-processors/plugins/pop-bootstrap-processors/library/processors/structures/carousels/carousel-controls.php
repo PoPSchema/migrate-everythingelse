@@ -343,7 +343,7 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $routes = array(
             self::MODULE_CAROUSELCONTROLS_NOSEARCHCATEGORYPOSTS00 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::MODULE_CAROUSELCONTROLS_NOSEARCHCATEGORYPOSTS01 => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01,
@@ -417,7 +417,7 @@ class NSCPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carou
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]]) {
-            $url = $taxonomyapi->getTagLink($vars['routing-state']['queried-object-id']);
+            $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }
 

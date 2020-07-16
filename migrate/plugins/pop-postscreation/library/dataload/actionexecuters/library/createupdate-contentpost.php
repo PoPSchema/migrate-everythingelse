@@ -346,7 +346,7 @@ class GD_CreateUpdate_PostBase
 
     protected function maybeAddParentCategories($categories)
     {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself
@@ -355,7 +355,7 @@ class GD_CreateUpdate_PostBase
                 $cat = $categories[$i];
                 $i++;
 
-                if ($parent_cat = $taxonomyapi->getCategoryParent($cat)) {
+                if ($parent_cat = $categoryapi->getCategoryParent($cat)) {
                     $categories[] = $parent_cat;
                 }
             }

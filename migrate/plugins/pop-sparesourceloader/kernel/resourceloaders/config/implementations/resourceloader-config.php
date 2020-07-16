@@ -15,13 +15,14 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
     {
         return POP_SPARESOURCELOADER_ASSETS_DIR.'/js/jobs/resourceloader-config.js';
     }
-    
+
     public function getConfiguration()
     {
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
 
         // Domain
@@ -29,8 +30,8 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // $configuration['$pathStartPos'] = strlen(GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
 
         // Get the list of all categories, and then their paths
-        $categories = $taxonomyapi->getCategories(['hide-empty' => false], ['return-type' => POP_RETURNTYPE_IDS]);
-        $single_paths = array_map(array($taxonomyapi, 'getCategoryPath'), $categories);
+        $categories = $categoryapi->getCategories(['hide-empty' => false], ['return-type' => POP_RETURNTYPE_IDS]);
+        $single_paths = array_map(array($categoryapi, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths
         $single_paths = HooksAPIFacade::getInstance()->applyFilters(
@@ -41,7 +42,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // Path slugs
         $configuration['$paths'] = array(
             'author' => $cmsusersapi->getAuthorBase().'/',
-            'tag' => $taxonomyapi->getTagBase().'/',
+            'tag' => $tagapi->getTagBase().'/',
             'single' => $single_paths,
         );
 
@@ -51,10 +52,10 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
             .'/'
             .$pop_sparesourceloader_natureformatcombinationresources_configfile->getVariableFilename('{0}', '{1}');
         $configFileURLPlaceholder = GeneralUtils::addQueryArgs([
-            'ver' => $vars['version'], 
+            'ver' => $vars['version'],
         ], $configFileURLPlaceholder);
         $configuration['$configFileURLPlaceholder'] = $configFileURLPlaceholder;
-        
+
         $configuration['$configTypes'] = array(
             POP_RESOURCELOADER_RESOURCETYPE_JS => array(),
             POP_RESOURCELOADER_RESOURCETYPE_CSS => array(),
@@ -63,4 +64,3 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         return $configuration;
     }
 }
-   

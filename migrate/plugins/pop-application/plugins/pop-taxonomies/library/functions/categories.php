@@ -13,8 +13,8 @@ function getTheMainCategory($post_id)
     $postTypeAPI = PostTypeAPIFacade::getInstance();
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
-        if ($cats = $taxonomyapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
+        $categoryapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        if ($cats = $categoryapi->getPostCategories($post_id, ['return-type' => POP_RETURNTYPE_IDS])) {
             // If this post has any of the categories set as main, then return the any one of them
             if ($intersected_cats = array_values(array_intersect($cats, getTheMainCategories()))) {
                 return $intersected_cats[0];
