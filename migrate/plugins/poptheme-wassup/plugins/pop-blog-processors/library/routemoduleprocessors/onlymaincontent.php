@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends PoP_Module_OnlyMainContentRouteModuleProcessorBase
 {
@@ -85,7 +85,7 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends Po
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor()
 	);

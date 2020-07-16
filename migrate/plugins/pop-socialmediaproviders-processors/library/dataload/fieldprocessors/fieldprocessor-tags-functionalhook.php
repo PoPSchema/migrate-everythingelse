@@ -1,5 +1,5 @@
 <?php
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 
 class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
 {
@@ -15,6 +15,6 @@ class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaIt
         return 'name';
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

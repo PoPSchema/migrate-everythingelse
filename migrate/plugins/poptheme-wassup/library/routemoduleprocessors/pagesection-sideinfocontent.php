@@ -5,7 +5,7 @@ use PoP\Routing\Routes as RoutingRoutes;
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

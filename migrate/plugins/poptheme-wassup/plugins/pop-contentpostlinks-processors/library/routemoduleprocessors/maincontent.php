@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -42,7 +42,7 @@ class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Ap
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
-        
+
         $routemodules_thumbnail = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LINKS_SCROLL_THUMBNAIL],
         );
@@ -118,7 +118,7 @@ class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Ap
 
         // Tag modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
-        
+
         $routemodules_details = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLINKS_SCROLL_DETAILS],
         );
@@ -192,7 +192,7 @@ class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Ap
 
         // Author route modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
-        
+
         $routemodules_details = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::class, PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLINKS_SCROLL_DETAILS],
         );
@@ -271,7 +271,7 @@ class PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor extends \PoP\Ap
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_CPL_Module_MainContentRouteModuleProcessor()
 	);

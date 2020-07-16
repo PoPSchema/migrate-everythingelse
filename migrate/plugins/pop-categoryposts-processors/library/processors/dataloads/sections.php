@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 
 class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -1653,7 +1653,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Common blocks (Home/Page/Author/Single)
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -1699,11 +1699,11 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_ADDONS],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_ADDONS],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_ADDONS],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-            
+
             self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
@@ -1724,7 +1724,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
             self::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW],
             self::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW],
@@ -1766,7 +1766,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
@@ -1787,7 +1787,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
-                        
+
             self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_CATEGORYPOSTS02_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
@@ -1829,7 +1829,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Author blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -1854,7 +1854,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW],
@@ -1896,7 +1896,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORPOSTS_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORPOSTS_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORPOSTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
@@ -1917,7 +1917,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
@@ -1938,7 +1938,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
-            
+
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
@@ -1984,7 +1984,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_DETAILS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_Scrolls::class, PoP_CategoryPosts_Module_Processor_Scrolls::MODULE_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW],
@@ -2026,7 +2026,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
@@ -2047,7 +2047,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
@@ -2068,7 +2068,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS17_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS18_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LIST],
-            
+
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
             self::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_LINE => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_LINE],
@@ -2612,7 +2612,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             case self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_SCROLL_LINE:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCATEGORYPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -2767,7 +2767,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             [self::class, self::MODULE_DATALOAD_CATEGORYPOSTS17_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_CATEGORYPOSTS18_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_CATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS01_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS02_SCROLL_FULLVIEW],
@@ -2788,7 +2788,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS17_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS18_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS19_SCROLL_FULLVIEW],
-            
+
             [self::class, self::MODULE_DATALOAD_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
             [self::class, self::MODULE_DATALOAD_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
@@ -3170,7 +3170,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
 
         return $format ?? parent::getFormat($module);
     }
-    
+
     // public function getNature(array $module)
     // {
     //     switch ($module[1]) {
@@ -3498,7 +3498,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     //         case self::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -3506,7 +3506,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD:
             case self::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR:
@@ -4115,7 +4115,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
@@ -5041,7 +5041,7 @@ class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_Section
             $names = gdGetCategoryname($cat, 'plural-lc');
             $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', $names);
         }
-            
+
         parent::initModelProps($module, $props);
     }
 }

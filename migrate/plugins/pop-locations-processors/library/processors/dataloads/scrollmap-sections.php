@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
@@ -95,7 +95,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -142,14 +142,14 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     //         case self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
@@ -171,7 +171,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
@@ -230,7 +230,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('users', 'poptheme-wassup'));
                 break;
         }
-            
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)

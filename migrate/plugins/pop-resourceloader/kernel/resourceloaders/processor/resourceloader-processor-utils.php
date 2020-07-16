@@ -13,7 +13,7 @@ use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;

@@ -2,7 +2,7 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 

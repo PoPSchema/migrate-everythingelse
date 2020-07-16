@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -84,7 +84,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
          *********************************************/
             // Straight to the layout
             self::MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
-            
+
             /*********************************************
          * Post Scrolls
          *********************************************/
@@ -95,17 +95,17 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
 
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_ADDONS],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-            
+
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_DETAILS],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_FULLVIEW],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_THUMBNAIL],
             self::MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_LIST => [PoP_LocationPosts_Module_Processor_CustomScrolls::class, PoP_LocationPosts_Module_Processor_CustomScrolls::MODULE_SCROLL_LOCATIONPOSTS_LIST],
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Author blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -155,10 +155,10 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_TAGLOCATIONPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
-    
+
     // public function getNature(array $module)
     // {
     //     switch ($module[1]) {
@@ -176,7 +176,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
@@ -230,7 +230,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS:
@@ -276,7 +276,7 @@ class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Modu
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST:
                 return LocationPostTypeResolver::class;
         }
-            
+
         return parent::getTypeResolverClass($module);
     }
 

@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {

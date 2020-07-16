@@ -6,7 +6,7 @@ use PoP\Pages\TypeResolvers\PageTypeResolver;
 use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 

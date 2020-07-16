@@ -1,7 +1,7 @@
 <?php
 use PoP\Posts\TypeResolvers\PostTypeResolver;
 use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;

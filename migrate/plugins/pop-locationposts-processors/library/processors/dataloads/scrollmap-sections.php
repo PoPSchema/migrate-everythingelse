@@ -1,6 +1,6 @@
 <?php
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
@@ -66,7 +66,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
             case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoP_LocationPosts_Module_Processor_CustomFilters::class, PoP_LocationPosts_Module_Processor_CustomFilters::MODULE_FILTER_TAGLOCATIONPOSTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -102,14 +102,14 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
     //         case self::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP:
@@ -153,7 +153,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_M
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', PoP_LocationPosts_PostNameUtils::getNamesLc());
                 break;
         }
-    
+
         parent::initModelProps($module, $props);
     }
 }

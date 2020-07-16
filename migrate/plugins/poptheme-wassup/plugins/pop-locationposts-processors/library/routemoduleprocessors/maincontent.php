@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -11,7 +11,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
         $ret = array();
 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
-        
+
         $routemodules_typeahead = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD],
         );
@@ -26,7 +26,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
-        
+
         $routemodules_navigator = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR],
         );
@@ -49,7 +49,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
                 ],
             ];
         }
-        
+
         $routemodules_addons = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS],
         );
@@ -167,7 +167,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
 
         // Author route modules
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
-        
+
         $routemodules_details = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
         );
@@ -269,7 +269,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
 
         // Tag route modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
-        
+
         $routemodules_details = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_CustomSectionBlocks::class, PoP_LocationPosts_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS],
         );
@@ -376,7 +376,7 @@ class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\App
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor()
 	);

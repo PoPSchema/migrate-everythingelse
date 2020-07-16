@@ -2,7 +2,7 @@
 
 use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase

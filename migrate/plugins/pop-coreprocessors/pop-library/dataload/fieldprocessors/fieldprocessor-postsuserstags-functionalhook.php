@@ -1,7 +1,7 @@
 <?php
 use PoP\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\CustomPosts\FieldInterfaces\CustomPostFieldInterfaceResolver;

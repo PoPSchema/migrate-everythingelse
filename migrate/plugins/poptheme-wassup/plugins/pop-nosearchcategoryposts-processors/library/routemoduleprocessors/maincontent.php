@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -12,7 +12,7 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
-        
+
         $routemodules_typeahead = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_TYPEAHEAD],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_TYPEAHEAD],
@@ -390,7 +390,7 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
 
         // Author route modules
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
-        
+
         $routemodules_details = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS],
@@ -825,7 +825,7 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
             }
         }
 
-        
+
         $routemodules_carousels = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS00_CAROUSEL],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_SectionBlocks::class, NSCPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS01_CAROUSEL],
@@ -867,7 +867,7 @@ class PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_NoSearchCategoryPostsProcessors_Module_MainContentRouteModuleProcessor()
 	);

@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -185,7 +185,7 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
-        
+
         $routemodules_calendar = array(
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR],
         );
@@ -250,11 +250,11 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
-        
+
         // Author route modules
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
         $default_format_authorsectioncalendar = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTIONCALENDAR);
-        
+
         $routemodules_details = array(
             POP_EVENTS_ROUTE_EVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS],
             POP_EVENTS_ROUTE_PASTEVENTS => [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLL_DETAILS],
@@ -563,7 +563,7 @@ class PoP_Events_Module_MainContentRouteModuleProcessor extends \PoP\Application
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Events_Module_MainContentRouteModuleProcessor()
 	);

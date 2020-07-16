@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoP\Events\TypeResolvers\EventTypeResolver;
 
@@ -81,7 +81,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_PASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
@@ -94,7 +94,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW],
@@ -107,7 +107,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             [self::class, self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST],
             [self::class, self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP],
             [self::class, self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR],
-            
+
             [self::class, self::MODULE_DATALOAD_EVENTS_CAROUSEL],
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_CAROUSEL],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL],
@@ -205,44 +205,44 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             // Straight to the layout
             self::MODULE_DATALOAD_EVENTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
-            
+
             /*********************************************
          * Scrolls
          *********************************************/
-            
+
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Common blocks (Home/Page/Author/Single)
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_NAVIGATOR],
             self::MODULE_DATALOAD_EVENTS_SCROLL_NAVIGATOR => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_NAVIGATOR],
-            
+
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_NAVIGATOR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_NAVIGATOR],
 
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_ADDONS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_ADDONS],
             self::MODULE_DATALOAD_EVENTS_SCROLL_ADDONS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_ADDONS],
-            
+
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR_ADDONS => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_ADDONS],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
         * Home/Page blocks
         *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-            
+
             self::MODULE_DATALOAD_EVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_DETAILS],
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_SIMPLEVIEW],
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW],
-            
+
             self::MODULE_DATALOAD_EVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_FULLVIEW],
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_EVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_THUMBNAIL],
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_EVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_LIST],
             self::MODULE_DATALOAD_PASTEVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_LIST],
-            
+
             self::MODULE_DATALOAD_EVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -251,19 +251,19 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_DETAILS],
             self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_SIMPLEVIEW],//[self::class, self::MODULE_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
             self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW],//[self::class, self::MODULE_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
-            
+
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHOREVENTS_FULLVIEW],
             self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_THUMBNAIL],
             self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_LIST],
             self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_LIST],
-            
+
             self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
             /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -272,19 +272,19 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
             self::MODULE_DATALOAD_TAGEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_DETAILS],
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_DETAILS],
-            
+
             self::MODULE_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_SIMPLEVIEW],//[self::class, self::MODULE_SCROLL_AUTHOREVENTS_SIMPLEVIEW],
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW],//[self::class, self::MODULE_SCROLL_AUTHORPASTEVENTS_SIMPLEVIEW],
-            
+
             self::MODULE_DATALOAD_TAGEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_FULLVIEW],
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_FULLVIEW => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_FULLVIEW],
-            
+
             self::MODULE_DATALOAD_TAGEVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_THUMBNAIL],
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_THUMBNAIL => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_THUMBNAIL],
-            
+
             self::MODULE_DATALOAD_TAGEVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_EVENTS_LIST],
             self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_LIST => [PoP_Events_Module_Processor_CustomScrolls::class, PoP_Events_Module_Processor_CustomScrolls::MODULE_SCROLL_PASTEVENTS_LIST],
-            
+
             self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR => [GD_EM_Module_Processor_Calendars::class, GD_EM_Module_Processor_Calendars::MODULE_CALENDAR_EVENTS_MAIN],
 
             /*********************************************
@@ -371,7 +371,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDAR:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTSCALENDAR];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -489,7 +489,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDAR:
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_CAROUSEL:
     //             return UserRouteNatures::USER;
-                
+
     //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_TAGEVENTS_SCROLL_SIMPLEVIEW:
@@ -505,14 +505,14 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
     //         case self::MODULE_DATALOAD_TAGEVENTS_CAROUSEL:
     //             return TaxonomyRouteNatures::TAG;
     //     }
-        
+
     //     return parent::getNature($module);
     // }
 
     protected function getMutableonrequestDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getMutableonrequestDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS:
@@ -564,14 +564,14 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP:
                 return GD_DataLoad_QueryInputOutputHandler_Calendar::class;
         }
-        
+
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
     protected function getImmutableDataloadQueryArgs(array $module, array &$props): array
     {
         $ret = parent::getImmutableDataloadQueryArgs($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLL_NAVIGATOR:
@@ -752,7 +752,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
         if ($daterange_class) {
             $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

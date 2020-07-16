@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;

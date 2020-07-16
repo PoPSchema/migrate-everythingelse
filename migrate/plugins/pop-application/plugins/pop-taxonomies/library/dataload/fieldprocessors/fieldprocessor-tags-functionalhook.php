@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Taxonomies\TypeResolvers\TagTypeResolver;
+use PoP\Tags\TypeResolvers\TagTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
@@ -48,6 +48,6 @@ class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldRes
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Application_DataLoad_FieldResolver_Tags::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

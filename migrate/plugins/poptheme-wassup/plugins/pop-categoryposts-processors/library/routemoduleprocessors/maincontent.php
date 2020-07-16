@@ -2,7 +2,7 @@
 
 use PoP\Routing\RouteNatures;
 use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Taxonomies\Routing\RouteNatures as TaxonomyRouteNatures;
+use PoP\Tags\Routing\RouteNatures as TaxonomyRouteNatures;
 
 class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
@@ -13,7 +13,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
         // Page modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
-        
+
         $routemodules_typeahead = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_TYPEAHEAD],
@@ -391,7 +391,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
 
         // Author route modules
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
-        
+
         $routemodules_details = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS],
@@ -826,7 +826,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
             }
         }
 
-        
+
         $routemodules_carousels = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGCATEGORYPOSTS00_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::MODULE_BLOCK_TAGCATEGORYPOSTS01_CAROUSEL],
@@ -868,7 +868,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor extends
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_CategoryPostsProcessors_Module_MainContentRouteModuleProcessor()
 	);
