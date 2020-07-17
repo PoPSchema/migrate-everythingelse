@@ -53,7 +53,7 @@ class PoP_CDN_Blog_CDNHooks
         } elseif ($thumbprint == POP_CDN_THUMBPRINT_TAG) {
             $routes = array_filter(
                 array(
-                    POP_TAGS_ROUTE_TAGS,
+                    POP_POSTTAGS_ROUTE_POSTTAGS,
                 )
             );
         }

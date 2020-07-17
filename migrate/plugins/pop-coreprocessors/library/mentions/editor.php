@@ -65,7 +65,7 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
     // $filter_wildcardusers = $filter_manager->getFilter(POP_FILTER_USERS);
     $users_url = RouteUtils::getRouteURL(POP_USERS_ROUTE_USERS);
     // $filter_wildcardtags = $filter_manager->getFilter(POP_FILTER_TAGS);
-    $tags_url = RouteUtils::getRouteURL(POP_TAGS_ROUTE_TAGS);
+    $tags_url = RouteUtils::getRouteURL(POP_POSTTAGS_ROUTE_POSTTAGS);
 
     // // Add a hook, so we can use the content CDN
     // $users_url = HooksAPIFacade::getInstance()->applyFilters(
