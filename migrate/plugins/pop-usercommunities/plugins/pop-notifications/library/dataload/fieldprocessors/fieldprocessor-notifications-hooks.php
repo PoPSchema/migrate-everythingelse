@@ -12,11 +12,11 @@ use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 
 class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
 {
-    use EnumTypeSchemaDefinitionResolverTrait;
+    use EnumTypeFieldSchemaDefinitionResolverTrait;
 
     public static function getClassesToAttachTo(): array
     {

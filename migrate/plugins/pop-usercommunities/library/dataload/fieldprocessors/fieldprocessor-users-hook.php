@@ -9,11 +9,11 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\ComponentModel\FieldResolvers\EnumTypeSchemaDefinitionResolverTrait;
+use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
 
 class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
-    use EnumTypeSchemaDefinitionResolverTrait;
+    use EnumTypeFieldSchemaDefinitionResolverTrait;
 
     public static function getClassesToAttachTo(): array
     {
