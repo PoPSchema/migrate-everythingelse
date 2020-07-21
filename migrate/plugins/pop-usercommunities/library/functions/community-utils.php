@@ -26,6 +26,6 @@ class URE_CommunityUtils
         self::addDataloadqueryargsCommunitymembers($query, $community_id);
 
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
     }
 }

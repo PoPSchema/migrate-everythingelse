@@ -133,7 +133,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 
         // Stances are unique, just 1 per person/article.
         // Check if there is a Stance for the given post. If there is, it's an error, can't create a second Stance.
-        if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => \POP_RETURNTYPE_IDS])) {
             $stance_id = $stances[0];
             $error = sprintf(
                 TranslationAPIFacade::getInstance()->__('You have already added your %s', 'pop-userstance'),

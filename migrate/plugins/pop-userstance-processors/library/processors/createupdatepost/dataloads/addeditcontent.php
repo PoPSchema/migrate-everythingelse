@@ -146,7 +146,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 // Stances are unique, just 1 per person/article.
                 // Check if there is a Stance for the given post.
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS])) {
+                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => \POP_RETURNTYPE_IDS])) {
                     return array($stances[0]);
                 }
                 return [];

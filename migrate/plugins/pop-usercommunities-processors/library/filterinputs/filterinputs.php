@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS:
                 $query['authors'] = $value;
                 break;
-            
+
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
                 // Return all selected Communities + their Members
                 $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
@@ -53,8 +53,8 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
                                         'compare' => 'IN'
                                     ]
                                 ]
-                            ], 
-                            ['return-type' => POP_RETURNTYPE_IDS]
+                            ],
+                            ['return-type' => \POP_RETURNTYPE_IDS]
                         )
                     );
                 }
@@ -86,7 +86,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
                     'compare' => 'IN',
                 ];
                 break;
-            
+
             case self::URE_FILTERINPUT_MEMBERTAGS:
                 $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
                 $query['meta-query'][] = [
@@ -95,7 +95,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
                     'compare' => 'IN',
                 ];
                 break;
-            
+
             case self::URE_FILTERINPUT_MEMBERSTATUS:
                 $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
                 $query['meta-query'][] = [

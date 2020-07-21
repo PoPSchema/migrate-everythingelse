@@ -45,7 +45,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentFormInputsBase extends
     protected function executeThumbprint($query)
     {
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
     }
 
     protected function getPendingMsg(array $module)

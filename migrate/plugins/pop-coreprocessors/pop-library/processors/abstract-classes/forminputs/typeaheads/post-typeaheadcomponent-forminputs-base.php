@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentFormInputsBase extends
     protected function executeThumbprint($query)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        return $customPostTypeAPI->getCustomPosts($query, ['return-type' => \POP_RETURNTYPE_IDS]);
     }
 
     protected function getPendingMsg(array $module)

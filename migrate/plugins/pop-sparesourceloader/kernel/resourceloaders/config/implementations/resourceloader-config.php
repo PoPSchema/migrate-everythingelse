@@ -30,7 +30,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // $configuration['$pathStartPos'] = strlen(GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
 
         // Get the list of all categories, and then their paths
-        $categories = $categoryapi->getCategories(['hide-empty' => false], ['return-type' => POP_RETURNTYPE_IDS]);
+        $categories = $categoryapi->getCategories(['hide-empty' => false], ['return-type' => \POP_RETURNTYPE_IDS]);
         $single_paths = array_map(array($categoryapi, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths

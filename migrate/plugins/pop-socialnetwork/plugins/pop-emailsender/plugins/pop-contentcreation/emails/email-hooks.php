@@ -181,7 +181,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);
@@ -312,7 +312,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);

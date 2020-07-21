@@ -26,7 +26,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         }
 
         $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $users = $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
+        $users = $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
 
         // Exclude users?
         if ($include && $exclude) {

@@ -39,7 +39,7 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         ]
     );
 
-    return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
+    return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
 }
 
 function gdUreGetCommunityMetavalueContributecontent($user_id)

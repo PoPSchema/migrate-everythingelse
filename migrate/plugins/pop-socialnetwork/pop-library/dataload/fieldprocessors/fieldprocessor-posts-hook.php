@@ -80,7 +80,7 @@ class GD_SocialNetwork_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldR
             case 'recommendedby':
                 $query = [];
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsRecommendedby($query, $typeResolver->getID($post));
-                return $cmsusersapi->getUsers($query, ['return-type' => POP_RETURNTYPE_IDS]);
+                return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
 
             case 'recommendPostCount':
                 return (int) \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_RECOMMENDCOUNT, true);

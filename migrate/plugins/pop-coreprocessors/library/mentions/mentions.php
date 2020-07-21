@@ -135,7 +135,7 @@ class PoP_Mentions
                     // 'fields' => 'ids',
                     'slugs' => $tags,
                 ),
-                ['return-type' => POP_RETURNTYPE_IDS]
+                ['return-type' => \POP_RETURNTYPE_IDS]
             );
             \PoP\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
         }
