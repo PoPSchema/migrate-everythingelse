@@ -1,6 +1,6 @@
 <?php
 
-use PoP\CustomPosts\FieldInterfaces\CustomPostFieldInterfaceResolver;
+use PoP\CustomPosts\FieldInterfaceResolvers\CustomPostFieldInterfaceResolver;
 
 class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_PostSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
 {

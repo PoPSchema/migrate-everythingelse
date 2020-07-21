@@ -7,7 +7,7 @@ use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\CustomPosts\FieldInterfaces\CustomPostFieldInterfaceResolver;
+use PoP\CustomPosts\FieldInterfaceResolvers\CustomPostFieldInterfaceResolver;
 
 class PoP_RelatedPosts_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {

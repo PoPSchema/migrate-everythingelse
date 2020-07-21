@@ -4,7 +4,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\CustomPosts\FieldInterfaces\CustomPostFieldInterfaceResolver;
+use PoP\CustomPosts\FieldInterfaceResolvers\CustomPostFieldInterfaceResolver;
 use PoP\ComponentModel\FieldResolvers\AbstractFunctionalFieldResolver;
 
 class PoP_EventLinksCreation_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolver
