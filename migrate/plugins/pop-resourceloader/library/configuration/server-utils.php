@@ -51,15 +51,15 @@ class PoP_ResourceLoader_ServerUtils
         // generating resources.js with 'header' will not include the dynamic-module-resources needed for 'body', so loading resources dynamically in the body will fail
         // // Allow to override the configuration
         // if (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-header') === true) {
-            
+
         //     return 'header';
         // }
         // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body') === true) {
-            
+
         //     return 'body';
         // }
         // elseif (ComponentModelComponentConfiguration::getOverrideConfiguration('resources-body-inline') === true) {
-            
+
         //     return 'body-inline';
         // }
 
@@ -70,14 +70,15 @@ class PoP_ResourceLoader_ServerUtils
         }
 
         if (isset($_ENV['RESOURCES_INCLUDE_TYPE'])) {
+            $includeType = $_ENV['RESOURCES_INCLUDE_TYPE'];
             // Make sure the defined value is valid
             $values = array(
                 'header',
                 'body',
                 'body-inline',
             );
-            if (in_array($_ENV['RESOURCES_INCLUDE_TYPE'], $values)) {
-                return $_ENV['RESOURCES_INCLUDE_TYPE'];
+            if (in_array($includeType, $values)) {
+                return $includeType;
             }
         }
 
@@ -195,14 +196,15 @@ class PoP_ResourceLoader_ServerUtils
         }
 
         if (isset($_ENV['ENQUEUE_FILES_TYPE'])) {
+            $fileType = $_ENV['ENQUEUE_FILES_TYPE'];
             // Make sure the defined value is valid
             $values = array(
                 'bundlegroup',
                 'bundle',
                 'resource',
             );
-            if (in_array($_ENV['ENQUEUE_FILES_TYPE'], $values)) {
-                return $_ENV['ENQUEUE_FILES_TYPE'];
+            if (in_array($fileType, $values)) {
+                return $fileType;
             }
         }
 
