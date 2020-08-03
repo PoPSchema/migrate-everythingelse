@@ -42,7 +42,7 @@
     <meta property="og:title" content="<?php echo $encoded_title ?>">
     <meta name="twitter:title" content="<?php echo $encoded_title ?>">
     <?php $url = RequestUtils::getCurrentUrl(); ?>
-    <?php if ($url != urldecode(fullUrl())) : ?>
+    <?php if ($url != urldecode(RequestUtils::getRequestedFullURL())) : ?>
         <link rel="canonical" href="<?php echo $url ?>">
     <?php endif; ?>
     <meta property="og:url" content="<?php echo $url ?>">

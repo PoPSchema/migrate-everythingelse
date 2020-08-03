@@ -9,32 +9,32 @@ class PoP_ServerSideRendering
     private $template_paths;
     private $data;
     private $renderers;
-    
+
     public function __construct()
     {
 
         // Add myself as the instance in the factory
         PoP_ServerSideRenderingFactory::setInstance($this);
-    
+
         // Initialize variables
         $this->enabled = !PoP_SSR_ServerUtils::disableServerSideRendering();
         $this->template_paths = array();
         $this->renderers = array();
     }
-    
+
     public function addTemplatePath($path, $templates = array())
     {
         foreach ($templates as $template) {
             $this->template_paths[$template] = $path;
         }
     }
-    
+
     public function initJson()
     {
         if (!$this->enabled) {
             return;
         }
-    
+
         // Obtain the JSON from the Engine
         if (!$this->data) {
             // The JSON is already encoded, as a String, so we must decode it to transformt it into an array
@@ -42,7 +42,7 @@ class PoP_ServerSideRendering
             $this->data = $engine->data;
         }
     }
-    
+
     public function initPopmanager()
     {
         if (!$this->enabled) {
@@ -52,7 +52,7 @@ class PoP_ServerSideRendering
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $domain = $cmsengineapi->getSiteURL();
         $url = RequestUtils::getCurrentUrl();
-    
+
         // Initialize the popManager, so it will get all its private values from $data
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         // Comment Leo: passing extra parameter $data in PHP
@@ -61,13 +61,13 @@ class PoP_ServerSideRendering
         // Because $popManager modified the settings (eg: added the topLevelSettings, etc), then we gotta update the local $data object accordingly
         $this->data['combinedstatedata']['settings'] = $popManager->getCombinedStateData($domain, $url)['settings'];
     }
-    
+
     public function getJson()
     {
         if (!$this->enabled) {
             return array();
         }
-    
+
         // Obtain the JSON from the Engine
         if (!$this->data) {
             // Initialize the JSON
@@ -79,7 +79,7 @@ class PoP_ServerSideRendering
 
         return $this->data;
     }
-    
+
     public function mergeJson($context)
     {
         $this->data = array_merge(
@@ -87,37 +87,37 @@ class PoP_ServerSideRendering
             $context
         );
     }
-    
+
     public function getJsonSettings()
     {
         if (!$this->enabled) {
             return array();
         }
-    
+
         $data = $this->getJson();
         return $data['combinedstatedata']['settings'];
     }
-    
+
     public function getJsonConfiguration()
     {
         if (!$this->enabled) {
             return array();
         }
-    
+
         $settings = $this->getJsonSettings();
         return $settings['configuration'];
     }
-    
+
     public function getJsonTemplates()
     {
         if (!$this->enabled) {
             return array();
         }
-    
+
         $settings = $this->getJsonSettings();
         return $settings['templates'];
     }
-    
+
     protected function getRenderer($filename)
     {
 
@@ -130,7 +130,7 @@ class PoP_ServerSideRendering
         $this->renderers[$filename] = include $filename;
         return $this->renderers[$filename];
     }
-    
+
     public function getTemplateRenderer($template)
     {
         if (!$this->enabled) {
@@ -138,12 +138,19 @@ class PoP_ServerSideRendering
         }
 
         if (!$path = $this->template_paths[$template]) {
-            throw new Exception(sprintf('No path registered for $template \'%s\', for $module \'%s\' (%s)', $template, $module, fullUrl()));
+            throw new Exception(
+                sprintf(
+                    'No path registered for $template \'%s\', for $module \'%s\' (%s)',
+                    $template,
+                    $module,
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
         }
-    
+
         return $this->getRenderer($path.'/'.$template.'.php');
     }
-    
+
     public function renderTemplate($template, $configuration)
     {
         if (!$this->enabled) {
@@ -155,15 +162,20 @@ class PoP_ServerSideRendering
         // Render and return the html
         return $renderer($configuration);
     }
-    
+
     public function renderModule(array $module, $configuration)
     {
         if (!$this->enabled) {
             return '';
         }
-    
+
         if (!$module) {
-            throw new Exception(sprintf('$module cannot be null (%s)', fullUrl()));
+            throw new Exception(
+                sprintf(
+                    '$module cannot be null (%s)',
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
         }
 
         $templates = $this->getJsonTemplates();
@@ -174,12 +186,12 @@ class PoP_ServerSideRendering
         // Render and return the html
         return $this->renderTemplate($template, $configuration);
     }
-    
+
     public function renderPagesection($pagesection_settings_id, $target = null)
     {
         return $this->renderTarget($pagesection_settings_id, null, $target);
     }
-    
+
     public function renderBlock($pagesection_settings_id, $block, $target = null)
     {
         return $this->renderTarget($pagesection_settings_id, $block, $target);
@@ -197,18 +209,30 @@ class PoP_ServerSideRendering
         if (!is_null($target) && $target != $vars['target']) {
             return '';
         }
-    
-        // The pageSection has its configuration right under key $pagesection_settings_id of the global configuration
+
+        // The pageSection has its configuration right under key
+        // $pagesection_settings_id of the global configuration
         $configuration = $this->getJsonConfiguration();
         if (!$pagesection_configuration = $configuration[$pagesection_settings_id]) {
-            throw new Exception(sprintf('No configuration in context for $pagesection_settings_id \'%s\' (%s)', $pagesection_settings_id, fullUrl()));
+            throw new Exception(
+                sprintf(
+                    'No configuration in context for $pagesection_settings_id \'%s\' (%s)',
+                    $pagesection_settings_id,
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
         }
 
         // Expand the JS Keys first, since the template key may be the compacted one
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $popManager->expandJSKeys($pagesection_configuration);
         if (!$pagesection_module = $pagesection_configuration[GD_JS_MODULE]) {
-            throw new Exception(sprintf('No template defined in context (%s)', fullUrl()));
+            throw new Exception(
+                sprintf(
+                    'No template defined in context (%s)',
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
         }
 
         // We can render a block instead of the pageSection
@@ -219,7 +243,7 @@ class PoP_ServerSideRendering
             $render_context = $render_context[GD_JS_SUBMODULES][$block];
             $renderModule = $render_context[GD_JS_MODULE];
         }
-        
+
         return $this->renderModule($renderModule, $render_context);
     }
 }

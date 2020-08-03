@@ -1,16 +1,16 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_JSResourceLoaderProcessorManager {
 
 	var $initialized, $jsobjects, $mapping, /*$enqueued, */$processed, /*$enqueued_resources, */$resources_to_map, $first_script, $scripttag_attributes, $inline_resources;
-	
+
 	function __construct() {
 
 		// parent::__construct();
-	
+
 		$this->initialized = false;
 		$this->jsobjects = array();
 		$this->mapping = array();
@@ -22,7 +22,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 		HooksAPIFacade::getInstance()->addAction('popcms:head', array($this, 'printScripts'));
-		
+
 		HooksAPIFacade::getInstance()->addFilter(
             'PoP_WebPlatform_ResourceLoaderMappingManager:resources',
             array($this, 'addResourcesToMap')
@@ -40,7 +40,7 @@ class PoP_JSResourceLoaderProcessorManager {
     	// Allow to add attributes 'async' or 'defer' to the script tag
 		// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
 		HooksAPIFacade::getInstance()->addFilter(
-			'PoP_HTMLTags_Utils:scripttag_attributes', 
+			'PoP_HTMLTags_Utils:scripttag_attributes',
 			array($this, 'getScripttagAttributes')
 		);
 	}
@@ -55,8 +55,8 @@ class PoP_JSResourceLoaderProcessorManager {
 			$this->mapping = $pop_webplatform_resourceloader_mappingmanager->getMapping();
 
 			// Comment Leo 28/11/2017: for popManager, when it does popJSLibraryManager.execute(..., ...),
-			// do not follow the mapping for a few function calls. That is because there are generic functions, 
-			// such as `initBlockRuntimeMemory`, that must be called over the added element on the DOM, but that 
+			// do not follow the mapping for a few function calls. That is because there are generic functions,
+			// such as `initBlockRuntimeMemory`, that must be called over the added element on the DOM, but that
 			// they do not imply dependency, or otherwise it loads these files ALWAYS, independently if they
 			// are actually needed or not on that page (eg: map.js is loaded always, since it has function `initBlockRuntimeMemory`)
 			// For these cases, we added a 2nd function, called ...Independent, which does not require the dependency in the mapping
@@ -68,7 +68,7 @@ class PoP_JSResourceLoaderProcessorManager {
 					'documentInitializedIndependent',
 				);
 				foreach ($noDependencyMethods as $method) {
-					
+
 					if (isset($this->mapping['publicMethods'][$method])) {
 
 						unset($this->mapping['publicMethods'][$method]);
@@ -83,7 +83,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			// 		/*"initPageSectionRuntimeMemory": */"initPageSectionRuntimeMemory",
 			// 	);
 			// 	foreach ($this->mapping['methodExecutions']['Manager'] as $method => $calledMethods) {
-					
+
 			// 		$this->mapping['methodExecutions']['Manager'][$method] = array_diff(
 			// 			$calledMethods,
 			// 			$removeExecuteMethods
@@ -91,19 +91,19 @@ class PoP_JSResourceLoaderProcessorManager {
 			// 	}
 			// }
 		}
-	
+
 		return $processor;
 	}
-	
+
 	function add($processor, $resources_to_process) {
 
 		// parent::add($processor, $resources_to_process);
-	
+
 		foreach ($resources_to_process as $resource) {
-		
+
 			// Save the references to the resource's javascript objects
 			foreach ($processor->getJsobjects($resource) as $jsobject) {
-				
+
 				// $this->objects[$object] = $this->objects[$object] ?? array();
 				$this->jsobjects[$jsobject] = $resource;
 			}
@@ -120,7 +120,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			// if ($attributes = $processor->getScripttagAttributes($resource)) {
 			// 	$this->scripttag_attributes[PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName($resource)] = $attributes;
 			// }
-		}	
+		}
 	}
 
 	function addResourcesToMap($resources) {
@@ -193,7 +193,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		// $added_scripts = array();
 		$cmswebplatformapi = \PoP\EngineWebPlatform\FunctionAPIFactory::getInstance();
 
-		// We can only enqueue the resources that do NOT go in the body or are inlined. 
+		// We can only enqueue the resources that do NOT go in the body or are inlined.
 		// Those ones will be added when doing $popResourceLoader->includeResources (in the body), or hardcoded (inline, such as utils-inline.js)
 		$resources = $pop_resourceloaderprocessor_manager->getEnqueuableResources($resources);
 
@@ -214,7 +214,7 @@ class PoP_JSResourceLoaderProcessorManager {
 				foreach ($bundlegroup_ids as $bundleGroupId) {
 
 					$file->setFilename($bundleGroupId.'.js');
-					
+
 					// Add 'pop-' before the registered name, to avoid conflicts with external parties (eg: WP also registers script "utils")
 					$script = 'pop-bundlegroup-'.$bundleGroupId;
 					$bundlescripts_properties[] = array(
@@ -224,7 +224,7 @@ class PoP_JSResourceLoaderProcessorManager {
 						'scripttag-attributes' => $scripttag_attributes,
 					);
 				}
-			}	
+			}
 			// Enqueue the bundles
 			elseif ($enqueuefile_type == 'bundle') {
 
@@ -249,7 +249,7 @@ class PoP_JSResourceLoaderProcessorManager {
 				$resources,
 				$canbundle_resources
 			));
-		}	
+		}
 
 		// When enqueuing "vendor", "normal", "dynamic" and "template", this function will be called several times
 		// So just save the first script the first time
@@ -266,7 +266,7 @@ class PoP_JSResourceLoaderProcessorManager {
 				$this->first_script = $bundlescripts_properties[0]['script'];
 			}
 		}
-		
+
 		// Enqueue either all the resources, or those who can not be bundled
 		// Do it first, because these resources are most likely to be depended-by the scripts in the bundle
 		// (including all external resources, when doing ACCESS_EXTERNAL_CDN_RESOURCES = true)
@@ -277,7 +277,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 			// Make sure the file_url is not null (eg: POP_RESOURCELOADER_CDNCONFIG_EXTERNAL, without parameter "url" will return null)
 			if ($file_url = $processor->getFileUrl($resource)) {
-			
+
 				// Comment Leo 13/11/2017: if a dependency in inside the bundle, then the corresponding handle will never be registered and this resource will not be added to the page
 				// Then, check for the dependencies only when loading resources, not bundle(group)s
 				$dependencies = array();
@@ -337,14 +337,14 @@ class PoP_JSResourceLoaderProcessorManager {
 				if ($attributes = $processor->getScripttagAttributes($resource, $model_instance_id)) {
 					// $this->scripttag_attributes[PoP_ResourceLoaderProcessorUtils::getNoconflictResourceName($resource)] = $attributes;
 					$this->scripttag_attributes[$pop_resourceloaderprocessor_manager->getHandle($resource)] = $attributes;
-				}	
+				}
 			}
 		}
 	}
 
 	function localizeScripts() {
 
-		// Also localize the scripts. 
+		// Also localize the scripts.
 		global $PoPWebPlatform_Initialization;
 		$jqueryConstants = $PoPWebPlatform_Initialization->getJqueryConstants();
 		$script = $this->first_script;
@@ -410,7 +410,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		);
 
 		while ($queue) {
-			
+
 			// Get first element in the queue
 			$jsObject_method = array_shift($queue);
 
@@ -422,21 +422,21 @@ class PoP_JSResourceLoaderProcessorManager {
 			// For that object/method, get all of internal and external method calls and add them to the queue
 			$process = array();
 			if ($this->mapping['internalMethodCalls'][$jsObject] && $this->mapping['internalMethodCalls'][$jsObject][$method]) {
-			
+
 				foreach ($this->mapping['internalMethodCalls'][$jsObject][$method] as $calledMethod) {
 
 					$process[] = $jsObject.'::'.$calledMethod;
 				}
 			}
 			if ($this->mapping['externalMethodCalls'][$jsObject] && $this->mapping['externalMethodCalls'][$jsObject][$method]) {
-			
+
 				foreach ($this->mapping['externalMethodCalls'][$jsObject][$method] as $calledJSObject => $calledMethod) {
 
 					$process[] = $calledJSObject.'::'.$calledMethod;
 				}
 			}
 			if ($this->mapping['methodExecutions'][$jsObject] && $this->mapping['methodExecutions'][$jsObject][$method]) {
-			
+
 				foreach ($this->mapping['methodExecutions'][$jsObject][$method] as $calledMethod) {
 
 					if ($calledJSObjects = $this->mapping['publicMethods'][$calledMethod]) {
@@ -474,7 +474,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			$method = $parts[1];
 
 			if ($called_jsmethods = $this->mapping['methodExecutions'][$jsObject][$method]) {
-				
+
 				$jsmethods = array_merge(
 					$jsmethods,
 					$called_jsmethods
@@ -534,7 +534,6 @@ class PoP_JSResourceLoaderProcessorManager {
 
 		$resource = $this->jsobjects[$jsobject];
 		if (!$resource) {
-
 			// Comment Leo 21/10/2017: originally we threw an error, stating that not finding a $resource for a given $jsObject is a problem
 			// However, there is (at least) a situation in which this doesn't work:
 			// - We activate all needed plugins on the STAGING environment
@@ -542,10 +541,10 @@ class PoP_JSResourceLoaderProcessorManager {
 			// - This file contains the configuration for all the $jsObjects corresponding to all activated plugins on STAGING
 			// - We copy resourceloader-mapping.json from STAGING to PROD on the deployment process
 			// - We execute /system/activate-plugins/ on PROD
-			// - In that same page, it will already read the configuration from resourceloader-mapping.json to load all needed resources, 
+			// - In that same page, it will already read the configuration from resourceloader-mapping.json to load all needed resources,
 			// - However, the ResourceLoader class is itself not loaded (the plugin was just activated), so then the line below would fail
 			// Because of this, instead of throwing an Exception, simply skip loading resources for this $jsObject
-			// throw new Exception(sprintf('No Resource for $jsobject \'%s\' (%s)', $jsobject, fullUrl()));
+			// throw new Exception(sprintf('No Resource for $jsobject \'%s\' (%s)', $jsobject, RequestUtils::getRequestedFullURL()));
 			return;
 		}
 
@@ -569,7 +568,7 @@ class PoP_JSResourceLoaderProcessorManager {
 					$jsobject_method = array_shift($queue);
 					$additional_methods = $internalMethodCalls[$jsobject_method] ?? array();
 					if ($additional_methods = array_diff($additional_methods, /*$jsobject_methods*/$processed_methods)) {
-						
+
 						$queue = array_merge(
 							$queue,
 							$additional_methods
@@ -594,27 +593,27 @@ class PoP_JSResourceLoaderProcessorManager {
 
 			// Enqueue the dependencies needed by the methods
 			if ($externalMethodCalls = $this->mapping['externalMethodCalls'][$jsobject]) {
-				
+
 				foreach ($jsobject_methods as $jsobject_method) {
 
 					if ($external_jsobjects_methods = $externalMethodCalls[$jsobject_method]) {
 
 						foreach ($external_jsobjects_methods as $external_jsobject => $external_jsobject_methods) {
-							
+
 							$this->addResourcesFromJsobjects($resources, $external_jsobject, $external_jsobject_methods);
 						}
 					}
 				}
 			}
 		}
-		
+
 		// Enqueue the resource, at the end, after its dependencies have been added
 		$this->addResource($resources, $resource);
 	}
 
 	// Allow to add attributes 'async' or 'defer' to the script tag
 	function getScripttagAttributes($scripttag_attributes) {
-		
+
 		return array_merge(
 			$scripttag_attributes,
 			$this->scripttag_attributes

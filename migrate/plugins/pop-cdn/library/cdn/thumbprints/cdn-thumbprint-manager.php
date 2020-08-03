@@ -1,19 +1,21 @@
 <?php
 
+use PoP\ComponentModel\Misc\RequestUtils;
+
 class PoP_CDN_ThumbprintManager
 {
     public $thumbprints;
-    
+
     public function __construct()
     {
         $this->thumbprints = array();
     }
-    
+
     public function add($thumbprint)
     {
         $this->thumbprints[$thumbprint->getName()] = $thumbprint;
     }
-    
+
     public function getThumbprints()
     {
         return array_keys($this->thumbprints);
@@ -23,10 +25,16 @@ class PoP_CDN_ThumbprintManager
     {
         $thumbprint = $this->thumbprints[$name];
         if (!$thumbprint) {
-            throw new Exception(sprintf('Error: there is no thumbprint with name \'%s\' (%s)', $name, fullUrl()));
+            throw new Exception(
+                sprintf(
+                    'Error: there is no thumbprint with name \'%s\' (%s)',
+                    $name,
+                    RequestUtils::getRequestedFullURL()
+                )
+            );
         }
         $query = $thumbprint->getQuery();
-        
+
         // Get the ID for the last modified object
         if ($results = $thumbprint->executeQuery($query)) {
             $object_id = $results[0];
@@ -44,7 +52,7 @@ class PoP_CDN_ThumbprintManager
         // return $id.$value;
     }
 }
-    
+
 /**
  * Initialize
  */
