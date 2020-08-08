@@ -53,8 +53,8 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public function getHref(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:

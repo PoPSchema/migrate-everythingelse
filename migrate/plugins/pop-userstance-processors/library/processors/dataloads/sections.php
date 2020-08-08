@@ -1,9 +1,9 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\Stances\TypeResolvers\StanceTypeResolver;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 
 class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
@@ -669,7 +669,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_GENERAL_SCROLL_LIST:
                 $ret['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
                     'compare' => 'NOT EXISTS'
                 ];
                 break;
@@ -684,7 +684,7 @@ class UserStance_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_STANCES_NEUTRAL_ARTICLE_SCROLL_LIST:
                 $ret['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
                     'compare' => 'EXISTS'
                 ];
                 break;

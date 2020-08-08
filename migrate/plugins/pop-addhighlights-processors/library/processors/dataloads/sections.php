@@ -1,8 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Highlights\TypeResolvers\HighlightTypeResolver;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

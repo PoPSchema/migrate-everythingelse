@@ -68,7 +68,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
 
     public function initRequestProps(array $module, array &$props)
     {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CONTENTINNER_STANCESINGLE:
                 $vars = ApplicationState::getVars();

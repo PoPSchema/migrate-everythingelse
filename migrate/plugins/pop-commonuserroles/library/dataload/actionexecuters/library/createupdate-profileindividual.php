@@ -16,6 +16,6 @@ class GD_CreateUpdate_ProfileIndividual extends GD_CreateUpdate_Profile
     {
         parent::createupdateuser($user_id, $form_data);
 
-        \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
     }
 }

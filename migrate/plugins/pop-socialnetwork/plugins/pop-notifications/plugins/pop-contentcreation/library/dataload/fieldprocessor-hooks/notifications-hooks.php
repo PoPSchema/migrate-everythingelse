@@ -21,15 +21,15 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
         $user_id = $vars['global-userstate']['current-user-id'];
 
         // If the user has been tagged in this post, this action has higher priority than creating a post, then show that message
-        $taggedusers_ids = \PoP\CustomPostMeta\Utils::getCustomPostMeta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);
+        $taggedusers_ids = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($notification->object_id, GD_METAKEY_POST_TAGGEDUSERS);
         if (in_array($user_id, $taggedusers_ids)) {
             $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> mentioned you in %2$s%3$s <strong>%4$s</strong>', 'pop-notifications');
         } else {
             // If the post has #hashtags the user is subscribed to, then add it as part of the message (the notification may appear only because of the #hashtag)
-            $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
             $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
             $post_tags = $tagapi->getCustomPostTags($notification->object_id, [], ['return-type' => \POP_RETURNTYPE_IDS]);
-            $user_hashtags = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+            $user_hashtags = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if ($intersected_tags = array_values(array_intersect($post_tags, $user_hashtags))) {
                 $tags = array();
                 foreach ($intersected_tags as $tag_id) {

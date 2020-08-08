@@ -310,7 +310,7 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
 
     protected function getDescriptionBottom(array $module, array &$props)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 $vars = ApplicationState::getVars();

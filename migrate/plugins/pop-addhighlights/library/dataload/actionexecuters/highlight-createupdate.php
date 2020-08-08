@@ -2,8 +2,8 @@
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
 {
@@ -17,7 +17,7 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_Acti
         if ($status == Status::PUBLISHED) {
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             // Give a link to the referenced post to the stance, and force it to get it from the server again
-            $highlighted = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
+            $highlighted = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, true);
             $success_string = sprintf(
                 TranslationAPIFacade::getInstance()->__('<a href="%s" %s>Click here to view it</a>.', 'poptheme-wassup'),
                 $customPostTypeAPI->getPermalink($highlighted),

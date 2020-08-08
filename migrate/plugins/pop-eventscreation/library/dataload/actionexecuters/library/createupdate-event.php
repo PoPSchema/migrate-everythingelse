@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\EventMutations\Facades\EventMutationTypeAPIFacade;
+use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
 
 class GD_CreateUpdate_Event extends GD_CreateUpdate_PostBase
 {

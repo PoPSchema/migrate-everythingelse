@@ -57,7 +57,7 @@ class URE_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
 
     protected function logCommunityAction($user_id, $object_id, $action)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => $action,

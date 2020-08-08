@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class GD_EM_DataLoad_FieldResolver_Events extends AbstractDBDataFieldResolver
 {

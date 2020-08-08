@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Pages\Routing\PathUtils;
+use PoPSchema\Pages\Routing\PathUtils;
  
 class PoP_CommonPagesWebPlatform_CDN_Hooks
 {

@@ -40,7 +40,7 @@ trait GD_UserCommunities_CreateUpdate_Profile_Trait
     protected function usercommunitiesCreateuser($user_id, &$errors, $form_data)
     {
         $communities = $form_data['communities'];
-        \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
                 
         // Set the privileges/tags for the new communities
         gdUreUserAddnewcommunities($user_id, $communities);

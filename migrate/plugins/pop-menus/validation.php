@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Menus;
+namespace PoPSchema\Menus;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 

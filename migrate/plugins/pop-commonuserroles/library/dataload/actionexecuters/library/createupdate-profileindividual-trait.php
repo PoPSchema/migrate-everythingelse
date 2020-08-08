@@ -56,7 +56,7 @@ trait GD_CreateUpdate_ProfileIndividual_Trait
     protected function commonuserrolesCreateuser($user_id, &$errors, $form_data)
     {
         // Add the extra User Role
-        $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_INDIVIDUAL);
     }
 
@@ -67,6 +67,6 @@ trait GD_CreateUpdate_ProfileIndividual_Trait
     }
     protected function commonuserrolesCreateupdateuser($user_id, $form_data)
     {
-        \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS, $form_data['individualinterests']);
     }
 }

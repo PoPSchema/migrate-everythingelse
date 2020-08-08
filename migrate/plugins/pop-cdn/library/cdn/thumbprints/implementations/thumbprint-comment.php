@@ -24,17 +24,17 @@ class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
         return $cmscommentsapi->getComments($query, $options);
     }
-    
+
     public function getTimestamp($comment_id)
     {
         return get_comment_date('U', $comment_id);
     }
 }
-    
+
 /**
  * Initialize
  */

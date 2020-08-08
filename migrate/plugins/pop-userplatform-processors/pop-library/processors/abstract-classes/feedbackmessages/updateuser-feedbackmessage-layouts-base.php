@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_UpdateUserFormMesageFeedbackLayoutsBase exte
     {
         $ret = parent::getMessages($module, $props);
             
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         $ret['success-header'] = TranslationAPIFacade::getInstance()->__('User Account updated successfully.', 'pop-coreprocessors');
         $ret['success'] = sprintf(

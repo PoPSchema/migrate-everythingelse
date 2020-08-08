@@ -17,7 +17,7 @@ class PoPThemeWassup_FileReproduction_FeedThumb extends PoP_Engine_CSSFileReprod
     {
         $configuration = parent::getConfiguration();
 
-        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $img = $cmsmediaapi->getMediaSrc(POPTHEME_WASSUP_IMAGE_FEEDBACKGROUND, 'thumb-feed');
         $configuration['{{$backgroundImageURL}}'] = $img[0];
         $configuration['{{$backgroundImageWidth}}'] = $img[1];

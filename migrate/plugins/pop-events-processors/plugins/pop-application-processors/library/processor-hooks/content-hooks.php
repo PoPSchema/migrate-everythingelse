@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_EM_ContentHooks
 {

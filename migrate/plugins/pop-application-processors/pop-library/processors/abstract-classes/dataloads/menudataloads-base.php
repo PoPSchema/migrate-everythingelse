@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Menus\TypeResolvers\MenuTypeResolver;
-use PoP\Menus\Misc\MenuHelpers;
+use PoPSchema\Menus\TypeResolvers\MenuTypeResolver;
+use PoPSchema\Menus\Misc\MenuHelpers;
 
 abstract class PoP_Module_Processor_MenuDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {

@@ -57,7 +57,7 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     public function getTitle(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
@@ -91,8 +91,8 @@ class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Proc
     protected function getTitleLink(array $module, array &$props)
     {
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_STANCES:
                 return RouteUtils::getRouteURL(POP_USERSTANCE_ROUTE_STANCES);

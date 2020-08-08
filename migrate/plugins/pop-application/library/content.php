@@ -7,9 +7,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 //     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
 //     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-//     $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+//     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 //     $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
-//     $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+//     $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
 
 //     $site_name = $cmsapplicationapi->getSiteName();
 //     $separator = '|';

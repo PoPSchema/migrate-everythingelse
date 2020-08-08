@@ -1,8 +1,8 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_CommonPages_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {

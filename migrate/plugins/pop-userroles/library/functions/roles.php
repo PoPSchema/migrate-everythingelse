@@ -1,7 +1,7 @@
 <?php
-namespace PoP\UserRoles;
+namespace PoPSchema\UserRoles;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
 class Utils {
 
@@ -11,7 +11,7 @@ class Utils {
     function hasRole($role, $user_or_user_id)
     {
         if (is_object($user_or_user_id)) {
-            $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+            $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
             $user = $user_or_user_id;
             $userID = $cmsusersresolver->getUserId($user);
         } else {

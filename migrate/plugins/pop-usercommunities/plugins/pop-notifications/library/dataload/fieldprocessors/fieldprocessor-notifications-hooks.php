@@ -1,15 +1,15 @@
 <?php
 
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\EverythingElse\Enums\MemberStatusEnum;
+use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\EverythingElse\Enums\MemberPrivilegeEnum;
+use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\FieldResolvers\EnumTypeFieldSchemaDefinitionResolverTrait;
@@ -137,7 +137,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
     {
         $notification = $resultItem;
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'editUserMembershipURL':
@@ -152,7 +152,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
          // ----------------------------------------
             case 'memberstatus':
                 // object_id is the user whose membership was updated
-                $status = \PoP\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
@@ -166,7 +166,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
-                $privileges = \PoP\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
@@ -180,7 +180,7 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                 return $privileges->getSelectedValue();
 
             case 'membertags':
-                $tags = \PoP\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($notification->object_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter status for the community: user_id
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);

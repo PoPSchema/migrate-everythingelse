@@ -1,6 +1,6 @@
 <?php
 
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 abstract class PoP_Module_Processor_HTMLPageCodesBase extends PoP_Module_Processor_HTMLCodesBase
 {

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPostMedia\Misc\MediaHelpers;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoP\ComponentModel\State\ApplicationState;
 
 /**
@@ -28,7 +28,7 @@ function gdRssFeaturedImage()
 }
 function gdRssPrintFeaturedImage($post_id)
 {
-    $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+    $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
     if ($featuredimage_id = MediaHelpers::getThumbId($post_id)) {
         $featuredimage = $cmsmediaapi->getMediaObject($featuredimage_id);
 

@@ -1,5 +1,5 @@
 <?php
-namespace PoP\UserRoles\WP;
+namespace PoPSchema\UserRoles\WP;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class FunctionAPIHooks {

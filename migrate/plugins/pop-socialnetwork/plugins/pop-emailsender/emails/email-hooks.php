@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
@@ -52,7 +52,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_FOLLOWSUSER))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER, $networkusers)) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -96,7 +96,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_RECOMMENDSPOST))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST, $networkusers)) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
@@ -150,7 +150,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_UPDOWNVOTEDPOST))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST, $networkusers)) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
@@ -198,7 +198,7 @@ class PoP_SocialNetwork_EmailSender_Hooks
     public function followuser($target_id)
     {
         if (!in_array($target_id, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_FOLLOWSUSER))) {
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
             $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);

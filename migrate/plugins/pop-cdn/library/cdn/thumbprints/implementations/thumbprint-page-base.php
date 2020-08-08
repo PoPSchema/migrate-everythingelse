@@ -1,5 +1,5 @@
 <?php
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
@@ -25,7 +25,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
     {
         // Doing it the manual way
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $cmspagesresolver = \PoP\Pages\ObjectPropertyResolverFactory::getInstance();
+        $cmspagesresolver = \PoPSchema\Pages\ObjectPropertyResolverFactory::getInstance();
         $page = $pageTypeAPI->getPage($page_id);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsengineapi->getDate('U', $cmspagesresolver->getPageModified($page));

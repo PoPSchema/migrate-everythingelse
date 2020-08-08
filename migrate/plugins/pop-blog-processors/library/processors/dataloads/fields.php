@@ -1,9 +1,9 @@
 <?php
-use PoP\Posts\TypeResolvers\PostTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\Tags\TypeResolvers\TagTypeResolver;
-use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 

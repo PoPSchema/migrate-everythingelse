@@ -2,7 +2,7 @@
 
 namespace PoP\ApplicationTaxonomies\WP;
 
-use PoP\EverythingElse\Misc\TagHelpers;
+use PoPSchema\EverythingElse\Misc\TagHelpers;
 
 class FunctionAPI extends \PoP\ApplicationTaxonomies\FunctionAPI_Base
 {
@@ -26,7 +26,7 @@ class FunctionAPI extends \PoP\ApplicationTaxonomies\FunctionAPI_Base
             $tag,
             $tagID,
         ) = $this->getTagObjectAndID($tagObjectOrID);
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         return TagHelpers::getTagSymbol() . $tagapi->getTagName($tagID);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Highlights\TypeResolvers\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {

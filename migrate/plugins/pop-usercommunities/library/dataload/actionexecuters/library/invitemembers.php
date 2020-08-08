@@ -7,7 +7,7 @@ class GD_InviteMembers extends GD_EmailInvite
 {
     protected function getEmailContent($form_data)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance();
         // The user must be always logged in, so we will have the user_id
         $user_id = $form_data['user_id'];
@@ -65,7 +65,7 @@ class GD_InviteMembers extends GD_EmailInvite
     {
 
         // The user must be always logged in, so we will have the user_id
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user_id = $form_data['user_id'];
         return sprintf(
             TranslationAPIFacade::getInstance()->__('%s is inviting you to become their member!', 'ure-pop'),

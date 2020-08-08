@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_WebPlatformEngine_UtilsHooks

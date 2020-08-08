@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DownvotePost extends GD_DownvoteUndoDownvotePost
@@ -17,7 +17,7 @@ class GD_DownvotePost extends GD_DownvoteUndoDownvotePost
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user has not already recommended this post
-            $value = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
+            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
             if (in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You have already down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -48,16 +48,16 @@ class GD_DownvotePost extends GD_DownvoteUndoDownvotePost
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoP\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
-        \PoP\CustomPostMeta\Utils::addCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
+        \PoPSchema\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_DOWNVOTESPOSTS, $target_id);
+        \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTEDBY, $user_id);
 
         // Update the counter
-        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
+        $count = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
+        \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_DOWNVOTECOUNT, ($count + 1), true);
 
         // Had the user already executed the opposite (Up-vote => Down-vote, etc), then undo it
-        $opposite = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS);
+        $opposite = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS);
         if (in_array($target_id, $opposite)) {
             $opposite_instance = $this->getOppositeInstance();
             $opposite_instance->undo($form_data);

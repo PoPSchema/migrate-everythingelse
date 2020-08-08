@@ -1,10 +1,10 @@
 <?php
-use PoP\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\EverythingElse\Enums\MemberTagEnum;
 use PoP\ComponentModel\Schema\SchemaHelpers;
-use PoP\EverythingElse\Enums\MemberStatusEnum;
+use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\EverythingElse\Enums\MemberPrivilegeEnum;
+use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;

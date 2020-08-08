@@ -1,5 +1,5 @@
 <?php
-use PoP\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 
 abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase

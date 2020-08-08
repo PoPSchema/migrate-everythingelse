@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Menus;
+namespace PoPSchema\Menus;
 
 abstract class FunctionAPI_Base implements FunctionAPI
 {

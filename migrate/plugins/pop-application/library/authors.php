@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 /**
  * Return the author of the post (to be overriden by Co-Authors plus)
@@ -19,7 +19,7 @@ function gdGetPostauthors($post_id)
 
 function getAuthorProfileUrl($author)
 {
-    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $url = $cmsusersapi->getUserURL($author);
     return RequestUtils::addRoute($url, POP_ROUTE_DESCRIPTION);
 }

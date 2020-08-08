@@ -1,7 +1,7 @@
 <?php
-namespace PoP\Menus\WP;
+namespace PoPSchema\Menus\WP;
 
-class ObjectPropertyResolver extends \PoP\Menus\ObjectPropertyResolver_Base
+class ObjectPropertyResolver extends \PoPSchema\Menus\ObjectPropertyResolver_Base
 {
     public function getMenuObjectTermId($menu_object)
     {

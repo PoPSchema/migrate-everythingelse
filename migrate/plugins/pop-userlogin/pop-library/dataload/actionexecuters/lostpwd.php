@@ -93,9 +93,9 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
     public function retrievePassword(&$errors)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $form_data = $this->getFormData($data_properties);
         $user_login = $form_data['user_login'];
 

@@ -16,7 +16,7 @@ class PoP_AutomatedEmails_Operator
     {
         global $pop_automatedemails_manager;
         $vars = ApplicationState::getVars();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
         if ($vars['routing-state']['is-standard']) {
             $route = $vars['route'];

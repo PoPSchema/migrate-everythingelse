@@ -36,7 +36,7 @@ class PoP_UserPlatform_Preferences
     {
         $preferences_values = $this->getDefaultPreferencesValues();
         foreach ($user_ids as $user_id) {
-            \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $preferences_values);
+            \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $preferences_values);
         }
     }
 }

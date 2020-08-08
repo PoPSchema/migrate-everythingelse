@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
@@ -17,7 +17,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user does currently follow that user
-            $value = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS);
+            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS);
             if (!in_array($target_id, $value)) {
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You had not up-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -43,13 +43,13 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoP\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS, $target_id);
-        \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTEDBY, $user_id);
+        \PoPSchema\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_UPVOTESPOSTS, $target_id);
+        \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTEDBY, $user_id);
 
         // Update the count
-        $count = \PoP\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, true);
+        $count = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
+        \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($target_id, GD_METAKEY_POST_UPVOTECOUNT, ($count - 1), true);
 
         return parent::update($form_data);
     }

@@ -66,7 +66,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
             $form_id = PoP_Newsletter_GFHelpers::getNewsletterFormId();
             $fieldnames = PoP_Newsletter_GFHelpers::getNewsletterFormFieldNames();
 
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $form_values = array(
                 $fieldnames['email'] => $cmsusersapi->getUserEmail($user_id),
                 $fieldnames['name'] => $cmsusersapi->getUserDisplayName($user_id),

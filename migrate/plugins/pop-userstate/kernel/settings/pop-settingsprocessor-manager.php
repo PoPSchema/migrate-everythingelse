@@ -1,5 +1,5 @@
 <?php
-namespace PoP\UserState\Settings;
+namespace PoPSchema\UserState\Settings;
 
 class SettingsProcessorManager extends \PoP\ComponentModel\Settings\AbstractSettingsProcessorManager
 {

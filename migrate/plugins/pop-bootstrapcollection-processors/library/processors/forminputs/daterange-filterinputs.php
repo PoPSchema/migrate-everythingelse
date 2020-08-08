@@ -21,7 +21,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
     public function getFilterInput(array $module): ?array
     {
         $filterInputs = [
-            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [\PoP\CustomPosts\FilterInputProcessor::class, \PoP\CustomPosts\FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
+            self::MODULE_FILTERINPUT_CUSTOMPOSTDATES => [\PoPSchema\CustomPosts\FilterInputProcessor::class, \PoPSchema\CustomPosts\FilterInputProcessor::FILTERINPUT_CUSTOMPOSTDATES],
         ];
         return $filterInputs[$module[1]];
     }

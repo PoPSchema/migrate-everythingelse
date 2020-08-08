@@ -9,7 +9,7 @@ class GD_ChangePassword_User
 {
     protected function validate(&$errors, $form_data)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user

@@ -16,7 +16,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         // Only users make sense here, no recipients, since we are serving personalized content to users on the website
         if ($users = $this->getUsers()) {
             // All the variables needed to operate into the pop-engine.php getData function
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();

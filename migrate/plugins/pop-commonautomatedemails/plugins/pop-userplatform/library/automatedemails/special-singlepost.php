@@ -1,5 +1,5 @@
 <?php
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_SpecialSinglePost extends PoP_UserPreferences_SimpleProcessorAutomatedEmailsBase
 {

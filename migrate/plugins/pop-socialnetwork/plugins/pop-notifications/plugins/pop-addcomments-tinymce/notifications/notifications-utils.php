@@ -20,7 +20,7 @@ class PoP_SocialNetwork_AddCommentsTinyMCE_Notifications_Utils
 			',
             $user_id,
             $wpdb->commentmeta,
-            \PoP\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+            \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
         );
     }
 
@@ -40,7 +40,7 @@ class PoP_SocialNetwork_AddCommentsTinyMCE_Notifications_Utils
 			',
             $user_id,
             $wpdb->postmeta,
-            \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
+            \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
         );
     }
 }

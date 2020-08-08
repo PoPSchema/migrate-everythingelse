@@ -6,7 +6,7 @@ Description: The foundation for a PoP User Roles
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoP\UserRoles;
+namespace PoPSchema\UserRoles;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------

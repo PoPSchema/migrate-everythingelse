@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -104,7 +104,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
                 $current_user = $vars['global-userstate']['current-user-id'];
                 if (gdUreIsCommunity($current_user)) {
                     $ret['meta-query'][] = [
-                        'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
+                        'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
                         'value' => $current_user,
                         'compare' => 'IN',
                     ];

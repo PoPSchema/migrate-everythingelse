@@ -6,13 +6,13 @@ use PoP\ComponentModel\State\ApplicationState;
 
 function gdUreGetCommunities($user_id): array
 {
-    return \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
+    return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 }
 
 function gdUreGetActivecontributingcontentcommunitymembers($community)
 {
 
-    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     // Taken from https://codex.wordpress.org/Class_Reference/WP_Meta_Query
 
     // It must fulfil 2 conditions: the user must've said he/she's a member of this community,
@@ -22,17 +22,17 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         'meta-query' => [
             'relation' => 'AND',
             [
-                'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
+                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
                 'value' => $community,
                 'compare' => 'IN'
             ],
             [
-                'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
+                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
                 'value' => gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERSTATUS_ACTIVE),
                 'compare' => 'IN'
             ],
             [
-                'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
+                'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                 'value' => gdUreGetCommunityMetavalue($community, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERPRIVILEGES_CONTRIBUTECONTENT),
                 'compare' => 'IN'
             ],
@@ -67,9 +67,9 @@ function gdUreUserAddnewcommunities($user_id, $communities)
         return;
     }
 
-    $status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-    $privileges = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
-    $tags = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+    $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+    $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+    $tags = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
     // When creating a new user account, these will be empty, so get the default ones
     if (!$status) {
@@ -89,9 +89,9 @@ function gdUreUserAddnewcommunities($user_id, $communities)
     }
 
     // Update the DB
-    \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $status);
-    \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $privileges);
-    \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
+    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS, $status);
+    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES, $privileges);
+    \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS, $tags);
 
     // Allow ACF to also save the value in the DB
     HooksAPIFacade::getInstance()->doAction('ure:user:add_new_communities', $user_id, $communities);
@@ -124,11 +124,11 @@ function gdUreFindCommunityMetavalues($community, $values, $extract_metavalue = 
 function gdUreGetCommunitiesStatusActive($user_id): array
 {
     // Filter the community roles where the user is accepted as a member
-    if ($community_status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
+    if ($community_status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
         $statusactive_communities = array_values(array_filter(array_map('gdUreGetCommunitiesStatusActiveFilter', $community_status)));
 
         // Get the communities the user says he/she belongs to
-        $userchosen_communities = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
+        $userchosen_communities = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];
 
         // Return the intersection of these 2
         return array_values(array_intersect($statusactive_communities, $userchosen_communities));

@@ -3,8 +3,8 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
 {
@@ -89,7 +89,7 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
     {
         parent::createadditionals($post_id, $form_data);
 
-        \PoP\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
+        \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_HIGHLIGHTEDPOST, $form_data['highlightedpost'], true);
 
         // Allow to create a Notification
         HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Highlight:createadditionals', $post_id, $form_data);

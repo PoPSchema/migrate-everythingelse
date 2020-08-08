@@ -20,7 +20,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\Compo
 
             case self::URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_INDIVIDUALINTERESTS),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -28,7 +28,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\Compo
 
             case self::URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -36,7 +36,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\Compo
 
             case self::URE_FILTERINPUT_ORGANIZATIONTYPES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_ORGANIZATIONTYPES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

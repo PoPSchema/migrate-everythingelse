@@ -15,9 +15,9 @@ class GD_UnsubscribeFromTag extends GD_SubscribeToUnsubscribeFromTag
             $target_id = $form_data['target_id'];
 
             // Check that the logged in user is currently subscribed to that tag
-            $value = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+            $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (!in_array($target_id, $value)) {
-                $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+                $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
                 $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
                 $tag = $tagapi->getTag($target_id);
                 $errors[] = sprintf(
@@ -44,13 +44,13 @@ class GD_UnsubscribeFromTag extends GD_SubscribeToUnsubscribeFromTag
         $target_id = $form_data['target_id'];
 
         // Update value
-        \PoP\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
-        \PoP\TaxonomyMeta\Utils::deleteTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
+        \PoPSchema\UserMeta\Utils::deleteUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS, $target_id);
+        \PoPSchema\TaxonomyMeta\Utils::deleteTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBEDBY, $user_id);
 
         // Update the counter
-        $count = \PoP\TaxonomyMeta\Utils::getTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBERSCOUNT, true);
+        $count = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBERSCOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\TaxonomyMeta\Utils::updateTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count - 1), true);
+        \PoPSchema\TaxonomyMeta\Utils::updateTermMeta($target_id, GD_METAKEY_TERM_SUBSCRIBERSCOUNT, ($count - 1), true);
 
         return parent::update($form_data);
     }

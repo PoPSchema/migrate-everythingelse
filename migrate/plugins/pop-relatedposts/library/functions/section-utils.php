@@ -1,5 +1,5 @@
 <?php
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_RelatedPosts_SectionUtils
@@ -17,7 +17,7 @@ class PoP_RelatedPosts_SectionUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
+            'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_REFERENCES),
             'value' => array($post_id),
             'compare' => 'IN'
         ];

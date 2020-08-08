@@ -1,15 +1,15 @@
 <?php
-use PoP\Media\Misc\MediaHelpers;
+use PoPSchema\Media\Misc\MediaHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers as CustomPostMediaHelpers;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
-use PoP\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
+use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -27,7 +27,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
 
         // Add the image description
         if ($add_description && $img) {
-            $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+            $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
             if ($description = $cmsmediaapi->getMediaDescription($thumb_id)) {
                 $img['description'] = $description;
             }
@@ -143,7 +143,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return gdGetPostauthors($typeResolver->getID($post));
 
             case 'topics':
-                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_CATEGORIES);
 
             case 'hasTopics':
                 $topics = $typeResolver->resolveValue($post, 'topics', $variables, $expressions, $options);
@@ -155,7 +155,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
                 return false;
 
             case 'appliesto':
-                return \PoP\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
+                return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($typeResolver->getID($post), GD_METAKEY_POST_APPLIESTO);
 
             case 'hasAppliesto':
                 $appliesto = $typeResolver->resolveValue($post, 'appliesto', $variables, $expressions, $options);

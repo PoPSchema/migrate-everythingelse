@@ -39,7 +39,7 @@ class WSL_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
             return;
         }
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         PoP_Notifications_Utils::insertLog(
             array(
                 'action'      => WSL_AAL_POP_ACTION_USER_REQUESTCHANGEEMAIL,

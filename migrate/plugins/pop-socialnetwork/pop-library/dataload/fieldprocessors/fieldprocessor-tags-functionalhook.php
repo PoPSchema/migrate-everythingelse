@@ -5,7 +5,7 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
 
 class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {

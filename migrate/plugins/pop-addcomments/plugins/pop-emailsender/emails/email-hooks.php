@@ -3,7 +3,7 @@ define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_AddComments_EmailSender_Hooks
 {
@@ -33,12 +33,12 @@ class PoP_AddComments_EmailSender_Hooks
             'pingback',
             'trackback'
         );
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         if (in_array($cmscommentsresolver->getCommentType($comment), $skip) || !$cmscommentsresolver->isCommentApproved($comment)) {
             return;
         }
 
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
@@ -79,7 +79,7 @@ class PoP_AddComments_EmailSender_Hooks
             $post_id
         );
         // 2. Owner(s) of referenced posts
-        if ($references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_ids = array_merge(
                 $post_ids,
                 $references

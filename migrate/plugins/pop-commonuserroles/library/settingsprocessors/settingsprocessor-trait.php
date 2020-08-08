@@ -1,6 +1,6 @@
 <?php
 
-use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 trait PoP_CommonUserRoles_Module_SettingsProcessor_Trait
 {

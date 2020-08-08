@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
-use PoP\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdateutils:edit-url', 'maybeGetEventEditUrl', 10, 2);
 function maybeGetEventEditUrl($url, $post_id)

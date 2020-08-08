@@ -22,7 +22,7 @@ class GD_DataLoad_ActionExecuter_SubscribeToTag implements \PoP\ComponentModel\A
         }
 
         // Save the result for some module to incorporate it into the query args
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);

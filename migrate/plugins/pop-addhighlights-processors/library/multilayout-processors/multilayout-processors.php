@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
-use PoP\Highlights\TypeResolvers\HighlightTypeResolver;
+use PoPSchema\Highlights\TypeResolvers\HighlightTypeResolver;
 
 class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {

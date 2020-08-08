@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_PostCategoryLayouts_LayoutDataloadHooks
 {
@@ -16,7 +16,7 @@ class PoP_PostCategoryLayouts_LayoutDataloadHooks
 
     public function addMultilayoutKeys($keys, $post_id, $typeResolver)
     {
-        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         if (in_array(POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE, $categoryapi->getCustomPostCategories($post_id, ['return-type' => \POP_RETURNTYPE_IDS]))) {
             // Priority: place it before the 'postType' layout key
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

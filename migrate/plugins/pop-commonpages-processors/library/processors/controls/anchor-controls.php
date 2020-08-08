@@ -1,5 +1,5 @@
 <?php
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 
 class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase

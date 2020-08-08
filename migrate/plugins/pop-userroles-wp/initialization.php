@@ -1,5 +1,5 @@
 <?php
-namespace PoP\UserRoles\WP;
+namespace PoPSchema\UserRoles\WP;
 
 class Initialization
 {

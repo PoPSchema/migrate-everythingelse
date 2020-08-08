@@ -9,7 +9,7 @@ class PoP_CommonUserRoles_Installation
 
     public function installRoles()
     {
-        $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
         $cmsuserrolesapi->addRole(GD_URE_ROLE_INDIVIDUAL, 'GD Individual', array());
         $cmsuserrolesapi->addRole(GD_URE_ROLE_ORGANIZATION, 'GD Organization', array());
     }

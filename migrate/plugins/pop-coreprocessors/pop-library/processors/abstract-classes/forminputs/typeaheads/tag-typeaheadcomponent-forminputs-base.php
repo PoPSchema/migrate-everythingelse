@@ -56,7 +56,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
     }
     protected function executeThumbprint($query)
     {
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         return $tagapi->getTags($query, ['return-type' => \POP_RETURNTYPE_IDS]);
     }
 

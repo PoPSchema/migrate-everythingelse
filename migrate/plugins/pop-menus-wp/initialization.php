@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Menus\WP;
+namespace PoPSchema\Menus\WP;
 
 class Initialization
 {

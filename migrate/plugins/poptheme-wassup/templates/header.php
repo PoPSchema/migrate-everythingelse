@@ -19,7 +19,7 @@
     <?php $vars = ApplicationState::getVars(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>
     <?php $htmlcssplatformapi = \PoP\EngineHTMLCSSPlatform\FunctionAPIFactory::getInstance(); ?>
-    <?php $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance(); ?>
+    <?php $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance(); ?>
     <?php $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance(); ?>
     <?php $cmsapplicationhelpers = \PoP\Application\HelperAPIFactory::getInstance(); ?>
     <?php $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance(); ?>

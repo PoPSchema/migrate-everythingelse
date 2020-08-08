@@ -9,6 +9,6 @@ HooksAPIFacade::getInstance()->addAction('popcomponent:sociallogin:usercreated',
 function gdWslUreHookProcessLoginAfterWpInsertUser($user_id)
 {
     // GD_ROLE_PROFILE alredy added. Now add the Individual role
-    $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+    $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
     $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_INDIVIDUAL);
 }

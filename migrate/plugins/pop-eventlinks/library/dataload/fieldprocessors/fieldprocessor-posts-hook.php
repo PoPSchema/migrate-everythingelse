@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;

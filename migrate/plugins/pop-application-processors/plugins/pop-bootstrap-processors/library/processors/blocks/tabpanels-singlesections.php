@@ -1,8 +1,8 @@
 <?php
 
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {

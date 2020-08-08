@@ -46,7 +46,7 @@ class GD_CreateUpdate_PostLink extends GD_CreateUpdate_PostBase
         parent::additionals($post_id, $form_data);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
         }
     }
 }

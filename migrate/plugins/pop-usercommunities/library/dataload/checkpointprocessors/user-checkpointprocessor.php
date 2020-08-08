@@ -33,7 +33,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\Componen
                 $vars = ApplicationState::getVars();
                 $user_id = $_REQUEST[POP_INPUTNAME_USERID];
                 $community = $current_user_id;
-                $status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
                 $community_status = gdUreFindCommunityMetavalues($community, $status);
 
                 if (empty($community_status)) {

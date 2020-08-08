@@ -36,7 +36,7 @@ class PoP_UserPlatform_EmailSender_Hooks
     protected function sendemailToAdminCreateupdateuser($user_id, $type)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $permalink = $cmsusersapi->getUserURL($user_id);

@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_ContentPostLinks_Utils
 {
@@ -99,7 +99,7 @@ class PoP_ContentPostLinks_Utils
 
     public static function isLink($post_id)
     {
-        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));

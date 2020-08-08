@@ -57,7 +57,7 @@ class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentMode
             // Do the actual password reset
             $cmsuseraccountapi->resetPassword($user, $pwd);
 
-            $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+            $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
             HooksAPIFacade::getInstance()->doAction('gd_lostpasswordreset', $cmsusersresolver->getUserId($user));
 
             return array(

@@ -39,7 +39,7 @@ class GD_UpdateMyPreferences
     protected function executeUpdate(&$errors, $form_data)
     {
         $user_id = $form_data['user_id'];
-        \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $form_data['userPreferences']);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $form_data['userPreferences']);
 
         return true;
     }

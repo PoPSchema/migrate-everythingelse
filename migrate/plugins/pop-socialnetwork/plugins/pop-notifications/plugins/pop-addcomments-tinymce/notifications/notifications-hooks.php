@@ -44,9 +44,9 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
             array(
                 sprintf(
                     '
-						SELECT 
-							%3$s.comment_id 
-						FROM 
+						SELECT
+							%3$s.comment_id
+						FROM
 							%3$s
 						INNER JOIN
 							%2$s
@@ -55,7 +55,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
 						WHERE
 							(
 								%2$s.comment_approved = "1"
-							AND							
+							AND
 								%3$s.meta_key = "%4$s"
 							AND
 								%3$s.meta_value = %1$s
@@ -64,7 +64,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                     $user_id,
                     $wpdb->comments,
                     $wpdb->commentmeta,
-                    \PoP\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                    \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
                 ),
             )
         );
@@ -78,13 +78,13 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
             global $wpdb;
             $select_from_comment_post_id_unions[] = sprintf(
                 '
-					SELECT 
-						%2$s.comment_post_ID 
-					FROM 
+					SELECT
+						%2$s.comment_post_ID
+					FROM
 						%2$s
 					INNER join
 						%3$s
-					ON 
+					ON
 						%2$s.comment_ID = %3$s.comment_id
 					WHERE
 							%3$s.meta_key = "%4$s"
@@ -96,7 +96,7 @@ class PoP_AddCommentsTinyMCE_SocialNetwork_Notifications_NotificationHooks
                 $user_id,
                 $wpdb->comments,
                 $wpdb->commentmeta,
-                \PoP\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
+                \PoPSchema\CommentMeta\Utils::getMetaKey(GD_METAKEY_COMMENT_TAGGEDUSERS)
             );
         }
 

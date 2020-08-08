@@ -54,10 +54,10 @@ function gdUreGetuserroleCommonroles($role, $user_id)
 
 function gdUreIsOrganization($user_id = null)
 {
-    return isProfile($user_id) && \PoP\UserRoles\Utils::hasRole(GD_URE_ROLE_ORGANIZATION, $user_id);
+    return isProfile($user_id) && \PoPSchema\UserRoles\Utils::hasRole(GD_URE_ROLE_ORGANIZATION, $user_id);
 }
 
 function gdUreIsIndividual($user_id = null)
 {
-    return isProfile($user_id) && \PoP\UserRoles\Utils::hasRole(GD_URE_ROLE_INDIVIDUAL, $user_id);
+    return isProfile($user_id) && \PoPSchema\UserRoles\Utils::hasRole(GD_URE_ROLE_INDIVIDUAL, $user_id);
 }

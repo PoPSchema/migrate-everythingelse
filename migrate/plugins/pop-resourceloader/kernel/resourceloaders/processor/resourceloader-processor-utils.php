@@ -1,21 +1,21 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\PathUtils;
+use PoPSchema\Pages\Routing\PathUtils;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\ComponentModel\Facades\Cache\MemoryManagerFacade;
 use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_ResourceLoaderProcessorUtils {
@@ -271,10 +271,10 @@ class PoP_ResourceLoaderProcessorUtils {
         // Keep the original values in the $vars, since they'll need to be changed
         // to pretend we are in a different $request
         $vars = &ApplicationState::$vars;
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
 
         // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json",
         // because we need to bundle all resources for all different cases for the same URL
@@ -490,7 +490,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
                 // For the single nature, we must save the resources under the category path,
                 // for all the categories in the website
-                $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($post_id, true));
+                $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true));
                 $paths[] = $path;
 
                 self::addResourcesFromCurrentLoop($modulefilter, $resources[$path], $key, $merge, $options);

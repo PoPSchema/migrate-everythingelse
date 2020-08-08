@@ -17,8 +17,8 @@ class GD_DataLoad_ActionExecuter_Login implements \PoP\ComponentModel\ActionExec
 
             // If the user is already logged in, then return the error
             $vars = ApplicationState::getVars();
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-            $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
             $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
             if ($vars['global-userstate']['is-user-logged-in']) {
                 $user_id = $vars['global-userstate']['current-user-id'];

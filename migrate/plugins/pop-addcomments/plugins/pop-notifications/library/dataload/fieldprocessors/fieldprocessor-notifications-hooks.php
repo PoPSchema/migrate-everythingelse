@@ -5,9 +5,9 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Comments\TypeResolvers\CommentTypeResolver;
-use PoP\Notifications\TypeResolvers\NotificationTypeResolver;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDataFieldResolver
@@ -76,10 +76,10 @@ class PoP_AddComments_DataLoad_FieldResolver_Notifications extends AbstractDBDat
     public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
     {
         $vars = ApplicationState::getVars();
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
             // Specific fields to be used by the subcomponents, based on a combination of Object Type + Action

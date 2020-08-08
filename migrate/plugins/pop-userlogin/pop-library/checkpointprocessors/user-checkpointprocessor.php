@@ -20,7 +20,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = $vars['global-userstate']['current-user-id'];
-                if (!\PoP\UserRoles\Utils::hasRole('administrator', $user_id)) {
+                if (!\PoPSchema\UserRoles\Utils::hasRole('administrator', $user_id)) {
                     return new \PoP\ComponentModel\Error('userisnotadmin');
                 }
                 break;

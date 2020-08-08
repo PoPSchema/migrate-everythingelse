@@ -21,7 +21,7 @@ class PoP_URE_EmailSender_Hooks
             return;
         }
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         // Get the current user's network's users (followers + members of same communities)
         $networkusers = PoP_SocialNetwork_EmailUtils::getUserNetworkusers($user_id);
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_JOINSCOMMUNITIES))) {

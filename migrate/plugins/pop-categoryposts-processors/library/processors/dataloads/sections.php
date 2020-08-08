@@ -1,7 +1,7 @@
 <?php
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 class CPP_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

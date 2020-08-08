@@ -7,7 +7,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 function getUserFollowers($user_id)
 {
-    if ($followers = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
+    if ($followers = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWEDBY)) {
         return $followers;
     }
 

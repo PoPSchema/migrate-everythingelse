@@ -1,11 +1,11 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {

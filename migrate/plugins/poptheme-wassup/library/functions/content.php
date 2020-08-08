@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPostMedia\Misc\MediaHelpers;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 // Allow posts to have menu_order. This is needed for the TPP Debate website,
@@ -79,7 +79,7 @@ function gdGetThemeColor()
 function gdGetDocumentThumb($size = 'large')
 {
     $vars = ApplicationState::getVars();
-    $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+    $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
     if ($vars['routing-state']['is-custompost'] || $vars['routing-state']['is-page']) {
         $post_id = $vars['routing-state']['queried-object-id'];
         if ($post_thumb_id = MediaHelpers::getThumbId($post_id)) {

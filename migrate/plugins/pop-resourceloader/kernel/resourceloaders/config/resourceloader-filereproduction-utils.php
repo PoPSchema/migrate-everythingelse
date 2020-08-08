@@ -2,10 +2,10 @@
 use PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
 
 define ('POP_RESOURCELOADERIDENTIFIER_FORMAT', 'f:');
@@ -81,7 +81,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
                 case PageRouteNatures::PAGE:
                 case CustomPostRouteNatures::CUSTOMPOST:
 
-                    $path = GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
+                    $path = GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($vars['routing-state']['queried-object-id'], true));
                     $path_resources[$nature][$path][$key] = $resources;
                     break;
             }

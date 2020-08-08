@@ -16,7 +16,7 @@ class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends \PoP\
 
             case self::FILTERINPUT_AUTHORROLE_MULTISELECT:
                 $query['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_URE_METAKEY_POST_AUTHORROLE),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

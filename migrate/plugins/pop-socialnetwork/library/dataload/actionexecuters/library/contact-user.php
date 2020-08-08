@@ -7,7 +7,7 @@ class PoP_ActionExecuterInstance_ContactUser
 {
     protected function validate(&$errors, $form_data)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         if (empty($form_data['name'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms');
         }

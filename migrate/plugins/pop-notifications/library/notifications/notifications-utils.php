@@ -1,8 +1,8 @@
 <?php
-use PoP\CustomPosts\Types\Status;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 class PoP_Notifications_Utils
 {
@@ -14,7 +14,7 @@ class PoP_Notifications_Utils
 
     public static function logUserAction($user_id, $action)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         self::insertLog(
             array(
                 'action'      => $action,

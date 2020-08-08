@@ -7,12 +7,12 @@ class URE_CommunityUtils
         // It must fulfil 2 conditions: the user must've said he/she's a member of this community,
         // And the Community must've accepted it by leaving the Show As Member privilege on
         $ret['meta-query'][] = [
-            'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
+            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES),
             'value' => $community_id,
             'compare' => 'IN'
         ];
         $ret['meta-query'][] = [
-            'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
+            'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
             'value' => gdUreGetCommunityMetavalue($community_id, GD_URE_METAVALUE_PROFILE_COMMUNITIES_MEMBERSTATUS_ACTIVE),
             'compare' => 'IN'
         ];
@@ -25,7 +25,7 @@ class URE_CommunityUtils
         );
         self::addDataloadqueryargsCommunitymembers($query, $community_id);
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
     }
 }

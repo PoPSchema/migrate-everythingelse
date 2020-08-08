@@ -18,17 +18,17 @@ function gdAcfUpdateValue($value, $post_id, $field)
     $key = $field['name'];
     if (in_array($key, gdAcfGetKeysStoreAsArray())) {
         if (is_numeric($post_id)) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, $key, $value);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, $key, $value);
         } elseif (strpos($post_id, 'user_') !== false) {
             $user_id = str_replace('user_', '', $post_id);
-            \PoP\UserMeta\Utils::updateUserMeta($user_id, $key, $value);
+            \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, $key, $value);
         }
     } elseif (in_array($key, gdAcfGetKeysStoreAsSingle())) {
         if (is_numeric($post_id)) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, $key, $value, true);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, $key, $value, true);
         } elseif (strpos($post_id, 'user_') !== false) {
             $user_id = str_replace('user_', '', $post_id);
-            \PoP\UserMeta\Utils::updateUserMeta($user_id, $key, $value, true);
+            \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, $key, $value, true);
         }
     }
 
@@ -42,10 +42,10 @@ function gdAcfLoadValue($value, $post_id, $field, $keys, $single = false)
     if (in_array($key, $keys)) {
         // if $post_id is a string, then it is used in the everything fields and can be found in the options table
         if (is_numeric($post_id)) {
-            return \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, $key, $single);
+            return \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, $key, $single);
         } elseif (strpos($post_id, 'user_') !== false) {
             $user_id = str_replace('user_', '', $post_id);
-            return \PoP\UserMeta\Utils::getUserMeta($user_id, $key, $single);
+            return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, $key, $single);
         }
     }
 

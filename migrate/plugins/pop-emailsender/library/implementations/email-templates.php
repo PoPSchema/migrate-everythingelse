@@ -6,9 +6,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\CustomPostMedia\Misc\MediaHelpers;
-use PoP\EverythingElse\Misc\TagHelpers;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMedia\Misc\MediaHelpers;
+use PoPSchema\EverythingElse\Misc\TagHelpers;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 {
@@ -45,7 +45,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getUserhtml($user_id)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $author_url = $cmsusersapi->getUserURL($user_id);
         $author_name = $cmsusersapi->getUserDisplayName($user_id);
         $avatar = gdGetAvatar($user_id, GD_AVATAR_SIZE_60);
@@ -80,7 +80,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getPosthtml($post_id)
     {
-        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $post_url = $customPostTypeAPI->getPermalink($post_id);
         $post_title = $customPostTypeAPI->getTitle($post_id);
@@ -119,7 +119,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
     public function getCommenthtml($comment)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $avatar = gdGetAvatar($cmscommentsresolver->getCommentUserId($comment), GD_AVATAR_SIZE_40);
         $avatar_html = sprintf(
             '<a href="%1$s"><img src="%2$s" width="%3$s" height="%3$s"></a>',
@@ -150,9 +150,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getCommentcontenthtml($comment)
     {
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
         $url = $customPostTypeAPI->getPermalink($post_id);
         if ($cmscommentsresolver->getCommentParent($comment)) {
@@ -178,7 +178,7 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getTaghtml($tag_id)
     {
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $tag = $tagapi->getTag($tag_id);
         $tag_url = $tagapi->getTagLink($tag_id);
         $tagname_html = sprintf(

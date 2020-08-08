@@ -22,7 +22,7 @@ class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\Actio
         }
         
         // Save the result for some module to incorporate it into the query args
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
         $success_msg = sprintf(

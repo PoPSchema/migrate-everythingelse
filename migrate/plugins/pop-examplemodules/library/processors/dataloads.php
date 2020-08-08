@@ -1,14 +1,14 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\Pages\Facades\PageTypeAPIFacade;
-use PoP\Pages\TypeResolvers\PageTypeResolver;
-use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
-use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
 class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 {

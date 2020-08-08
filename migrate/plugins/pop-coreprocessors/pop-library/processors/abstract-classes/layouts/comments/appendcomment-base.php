@@ -1,5 +1,5 @@
 <?php
-use PoP\Posts\TypeResolvers\PostTypeResolver;
+use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 
 abstract class PoP_Module_Processor_AppendCommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

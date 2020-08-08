@@ -6,7 +6,7 @@ class WSLPoP_SocialLogin_API extends PoP_SocialLogin_API_Base implements PoP_Soc
 {
     public function getProvider($user_id)
     {
-        $usermetaapi = \PoP\UserMeta\FunctionAPIFactory::getInstance();
+        $usermetaapi = \PoPSchema\UserMeta\FunctionAPIFactory::getInstance();
         return $usermetaapi->getUserMeta($user_id, 'wsl_current_provider', true);
     }
 

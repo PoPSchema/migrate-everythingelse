@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Menus\WP;
+namespace PoPSchema\Menus\WP;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 

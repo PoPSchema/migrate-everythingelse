@@ -49,7 +49,7 @@ class GD_Update_MyCommunities
 
     protected function executeUpdate(&$errors, $form_data)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $user_id = $form_data['user_id'];
 
         $previous_communities = gdUreGetCommunities($user_id);
@@ -57,7 +57,7 @@ class GD_Update_MyCommunities
         // $maybe_new_communities = array_diff($communities, $previous_communities);
         $new_communities = $banned_communities = array();
 
-        $status = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+        $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
         
         // Check all the $maybe_new_communities and double check they are not banned
         foreach ($communities as $maybe_new_community) {
@@ -74,7 +74,7 @@ class GD_Update_MyCommunities
         }
 
         // Set the new communities
-        \PoP\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
 
         // Set the privileges/tags for the new communities
         gdUreUserAddnewcommunities($user_id, $new_communities);

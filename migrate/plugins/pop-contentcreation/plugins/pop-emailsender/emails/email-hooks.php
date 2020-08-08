@@ -2,12 +2,12 @@
 
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -62,7 +62,7 @@ class PoP_ContentCreation_EmailSender_Hooks
     protected function sendemailToAdminCreateupdatepost($post_id, $type)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -219,7 +219,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         if ($users) {
             // From those, remove all users who got an email in a previous email function
             if ($users = array_diff($users, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $customPostUserTypeAPI = CustomPostUserTypeAPIFacade::getInstance();
 
@@ -301,7 +301,7 @@ class PoP_ContentCreation_EmailSender_Hooks
         }
 
         // Check if the post has references. If so, also send email to the owners of those
-        if ($references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
+        if ($references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES)) {
             $post_name = gdGetPostname($post_id);
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             foreach ($references as $reference_post_id) {

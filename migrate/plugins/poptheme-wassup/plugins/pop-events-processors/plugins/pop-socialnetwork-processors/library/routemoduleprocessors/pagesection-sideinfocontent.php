@@ -1,7 +1,7 @@
 <?php
 
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 class PoPTheme_Wassup_Events_SocialNetwork_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {

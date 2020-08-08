@@ -30,7 +30,7 @@ function saveUserDisplayName($user_id)
  */
 function calculateBestDisplayName($user_id)
 {
-    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $first_name = $cmsusersapi->getUserFirstname($user_id);
     $last_name = $cmsusersapi->getUserLastname($user_id);
     $user_login = $cmsusersapi->getUserLogin($user_id);

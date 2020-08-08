@@ -1,10 +1,10 @@
 <?php
-use PoP\EverythingElse\Enums\MemberTagEnum;
-use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\EverythingElse\Enums\MemberStatusEnum;
+use PoPSchema\EverythingElse\Enums\MemberTagEnum;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\EverythingElse\Enums\MemberStatusEnum;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\EverythingElse\Enums\MemberPrivilegeEnum;
+use PoPSchema\EverythingElse\Enums\MemberPrivilegeEnum;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
@@ -118,21 +118,21 @@ class GD_UserCommunities_DataLoad_FieldResolver_Users extends AbstractDBDataFiel
         switch ($fieldName) {
             case 'memberstatus':
                 // All status for all communities
-                $status = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $status = \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
 
                 // Filter status for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($status);
 
             case 'memberprivileges':
                 // All privileges for all communities
-                $privileges = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $privileges = \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($privileges);
 
             case 'membertags':
                 // All privileges for all communities
-                $tags = \PoP\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
+                $tags = \PoPSchema\UserMeta\Utils::getUserMeta($typeResolver->getID($user), GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS);
 
                 // Filter privileges for only this community: the logged in user
                 return gdUreCommunityMembershipstatusFilterbycurrentcommunity($tags);

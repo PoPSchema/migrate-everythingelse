@@ -11,7 +11,7 @@ class GD_FollowUser extends GD_FollowUnfollowUser
 
         if (!$errors) {
             $vars = ApplicationState::getVars();
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $user_id = $vars['global-userstate']['current-user-id'];
             $target_id = $form_data['target_id'];
 
@@ -19,7 +19,7 @@ class GD_FollowUser extends GD_FollowUnfollowUser
                 $errors[] = TranslationAPIFacade::getInstance()->__('You can\'t follow yourself!', 'pop-coreprocessors');
             } else {
                 // Check that the logged in user does not currently follow that user
-                $value = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWSUSERS);
+                $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWSUSERS);
                 if (in_array($target_id, $value)) {
                     $errors[] = sprintf(
                         TranslationAPIFacade::getInstance()->__('You are already following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
@@ -55,13 +55,13 @@ class GD_FollowUser extends GD_FollowUnfollowUser
         // Comment Leo 02/10/2015: added redundant values, so that we can query for both "Who are my followers" and "Who I am following"
         // and make both searchable and with pagination
         // Update values
-        \PoP\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
-        \PoP\UserMeta\Utils::addUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWEDBY, $user_id);
+        \PoPSchema\UserMeta\Utils::addUserMeta($user_id, GD_METAKEY_PROFILE_FOLLOWSUSERS, $target_id);
+        \PoPSchema\UserMeta\Utils::addUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWEDBY, $user_id);
 
         // Update the counter
-        $count = \PoP\UserMeta\Utils::getUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
+        $count = \PoPSchema\UserMeta\Utils::getUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWERSCOUNT, true);
         $count = $count ? $count : 0;
-        \PoP\UserMeta\Utils::updateUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count + 1), true);
+        \PoPSchema\UserMeta\Utils::updateUserMeta($target_id, GD_METAKEY_PROFILE_FOLLOWERSCOUNT, ($count + 1), true);
 
         return parent::update($form_data);
     }

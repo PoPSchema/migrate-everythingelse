@@ -1,6 +1,6 @@
 <?php
 namespace PoP\ExampleModules;
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 
 class ModuleProcessor_Groups extends AbstractModuleProcessor

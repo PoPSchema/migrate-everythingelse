@@ -51,7 +51,7 @@ function maybeAddHttp($url)
 //     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 //     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
 //         if ($cats = getTheCategory($post_id)) {
-//             $cmstaxonomiesresolver = \PoP\Taxonomies\ObjectPropertyResolverFactory::getInstance();
+//             $cmstaxonomiesresolver = \PoPSchema\Taxonomies\ObjectPropertyResolverFactory::getInstance();
 //             foreach ($cats as $cat) {
 //                 $categories[] = $cmstaxonomiesresolver->getCategoryID($cat);
 //             }
@@ -76,7 +76,7 @@ function gdGetPostname($post_id, $format = 'title')
 
 function gdGetCategoryname($cat_id, $format = 'title')
 {
-    $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+    $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
     $catname = HooksAPIFacade::getInstance()->applyFilters('gd_catname', $categoryapi->getCategoryName($cat_id), $cat_id, $format);
 
     // Lowercase

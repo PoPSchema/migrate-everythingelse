@@ -22,7 +22,7 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
         return $tagapi->getTags($query, $options);
     }

@@ -29,9 +29,9 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
 
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST:
                 // Return all selected Communities + their Members
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $memberstatus_key = \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-                $memberprivileges_key = \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $memberstatus_key = \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
+                $memberprivileges_key = \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES);
                 $members = [];
                 foreach ($value as $community) {
                     // Taken from https://codex.wordpress.org/Class_Reference/WP_Meta_Query
@@ -72,7 +72,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
                 // Add the 'contributecontent' status to the value for each selected community
                 $value = array_map('gdUreGetCommunityMetavalueContributecontent', $value);
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -81,7 +81,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
             case self::URE_FILTERINPUT_MEMBERPRIVILEGES:
                 $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -90,7 +90,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
             case self::URE_FILTERINPUT_MEMBERTAGS:
                 $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -99,7 +99,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
             case self::URE_FILTERINPUT_MEMBERSTATUS:
                 $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
                 $query['meta-query'][] = [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
                     'value' => $value,
                     'compare' => 'IN',
                 ];

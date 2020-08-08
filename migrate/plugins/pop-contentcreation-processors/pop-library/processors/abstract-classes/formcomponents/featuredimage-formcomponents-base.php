@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 
     public function initModelProps(array $module, array &$props)
     {
-        $cmsmediaapi = \PoP\Media\FunctionAPIFactory::getInstance();
+        $cmsmediaapi = \PoPSchema\Media\FunctionAPIFactory::getInstance();
         $featuredimageinner = $this->getFeaturedimageinnerSubmodule($module);
 
         // Needed for the JS function

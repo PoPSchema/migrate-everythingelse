@@ -20,9 +20,9 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
     {
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
-        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
 
         // Domain

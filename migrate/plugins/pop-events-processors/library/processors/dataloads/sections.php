@@ -1,10 +1,10 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\Events\ModuleProcessors\PastEventModuleProcessorTrait;
-use PoP\Events\TypeResolvers\EventTypeResolver;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {

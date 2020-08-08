@@ -26,7 +26,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
         // Get the user info? (used for pages where user logged in is needed. Generally same as with checkpoints)
         if (PoP_UserLogin_Utils::getUserInfo()) {
             $vars = ApplicationState::getVars();
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $user_id = '';
             $user_name = '';
             $user_url = '';

@@ -20,7 +20,7 @@ function gdUreSendemailCommunityNewmember($user_id, $communities)
         return;
     }
 
-    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $author_name = $cmsusersapi->getUserDisplayName($user_id);
     $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);
     

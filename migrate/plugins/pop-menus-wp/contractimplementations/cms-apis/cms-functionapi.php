@@ -1,7 +1,7 @@
 <?php
-namespace PoP\Menus\WP;
+namespace PoPSchema\Menus\WP;
 
-class FunctionAPI extends \PoP\Menus\FunctionAPI_Base
+class FunctionAPI extends \PoPSchema\Menus\FunctionAPI_Base
 {
     public function getNavigationMenuObject($menu_id)
     {

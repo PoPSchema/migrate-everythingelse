@@ -2,7 +2,7 @@
 
 namespace PoP\Application\WP;
 
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class ApplicationPostsFunctionAPI extends \PoP\Application\PostsFunctionAPI_Base
 {

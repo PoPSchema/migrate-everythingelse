@@ -2,9 +2,9 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
 {
@@ -175,7 +175,7 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         parent::createadditionals($post_id, $form_data);
 
         if ($target = $form_data['stancetarget']) {
-            \PoP\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
+            \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value

@@ -19,20 +19,20 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($notification->object_id);
 
         // If the user has been tagged in this comment, this action has higher priority than commenting, then show that message
-        $taggedusers_ids = \PoP\CommentMeta\Utils::getCommentMeta($cmscommentsresolver->getCommentId($comment), GD_METAKEY_COMMENT_TAGGEDUSERS);
+        $taggedusers_ids = \PoPSchema\CommentMeta\Utils::getCommentMeta($cmscommentsresolver->getCommentId($comment), GD_METAKEY_COMMENT_TAGGEDUSERS);
         if (in_array($user_id, $taggedusers_ids)) {
             $message = TranslationAPIFacade::getInstance()->__('<strong>%1$s</strong> mentioned you in a comment in %2$s <strong>%3$s</strong>', 'pop-notifications');
         }
         // If the comment has #hashtags the user is subscribed to, then add it as part of the message (the notification may appear only because of the #hashtag)
-        elseif ($comment_tags = \PoP\CommentMeta\Utils::getCommentMeta($cmscommentsresolver->getCommentId($comment), GD_METAKEY_COMMENT_TAGS)) {
-            $user_hashtags = \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
+        elseif ($comment_tags = \PoPSchema\CommentMeta\Utils::getCommentMeta($cmscommentsresolver->getCommentId($comment), GD_METAKEY_COMMENT_TAGS)) {
+            $user_hashtags = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if ($intersected_tags = array_values(array_intersect($comment_tags, $user_hashtags))) {
                 $tags = array();
                 foreach ($intersected_tags as $tag_id) {

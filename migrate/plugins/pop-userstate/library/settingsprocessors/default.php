@@ -1,7 +1,7 @@
 <?php
-namespace PoP\UserState\Settings\Impl;
+namespace PoPSchema\UserState\Settings\Impl;
 
-class DefaultSettingsProcessor extends \PoP\UserState\Settings\DefaultSettingsProcessorBase
+class DefaultSettingsProcessor extends \PoPSchema\UserState\Settings\DefaultSettingsProcessorBase
 {
     public function routesToProcess()
     {

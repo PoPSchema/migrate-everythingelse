@@ -1,5 +1,5 @@
 <?php
-namespace PoP\UserRoles;
+namespace PoPSchema\UserRoles;
 
 class Initialization
 {

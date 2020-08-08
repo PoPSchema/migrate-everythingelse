@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_LocationPostLinks_ContentHooks
 {
@@ -22,7 +22,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
             $vars = ApplicationState::getVars();
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
             $post_id = $vars['routing-state']['queried-object-id'];
             if (
                 $customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()

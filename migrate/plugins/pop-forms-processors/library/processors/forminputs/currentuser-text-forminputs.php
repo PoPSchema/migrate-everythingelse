@@ -48,7 +48,7 @@ class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
         $vars = ApplicationState::getVars();
         if (PoP_FormUtils::useLoggedinuserData() && doingPost() && $vars['global-userstate']['is-user-logged-in']) {
             $user_id = $vars['global-userstate']['current-user-id'];
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             switch ($module[1]) {
                 case self::MODULE_FORMINPUT_NAME:
                     $options['selected'] = $cmsusersapi->getUserDisplayName($user_id);

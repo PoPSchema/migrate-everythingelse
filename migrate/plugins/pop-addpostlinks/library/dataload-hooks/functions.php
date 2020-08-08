@@ -43,9 +43,9 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         // Save the link in the post meta
         $link = $form_data['link'];
         if ($link) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINK, $link, true);
         } else {
-            \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_LINK);
+            \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_LINK);
         }
     }
 

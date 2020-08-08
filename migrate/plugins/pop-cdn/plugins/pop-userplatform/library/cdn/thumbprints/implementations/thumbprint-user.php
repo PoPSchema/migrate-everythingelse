@@ -16,7 +16,7 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
             // 'fields' => 'ID',
             'limit' => 1,
             // Moved under WordPress-specific file
-            // 'meta_key' => \PoP\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
+            // 'meta_key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_LASTEDITED),
             // 'orderby' => 'meta_value',
             'orderby' => NameResolverFacade::getInstance()->getName('popcomponent:userplatform:dbcolumn:orderby:users:lastediteddate'),
             'order' => 'DESC',
@@ -26,14 +26,14 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $options['return-type'] = POP_RETURNTYPE_IDS;
         return $cmsusersapi->getUsers($query, $options);
     }
     
     public function getTimestamp($user_id)
     {
-        return \PoP\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
+        return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
     }
 }
     

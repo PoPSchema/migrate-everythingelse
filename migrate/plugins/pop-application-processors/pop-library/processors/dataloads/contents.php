@@ -1,11 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Pages\TypeResolvers\PageTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\Tags\TypeResolvers\TagTypeResolver;
-use PoP\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoP\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
-use PoP\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
+use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase

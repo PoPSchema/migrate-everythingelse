@@ -8,6 +8,6 @@ HooksAPIFacade::getInstance()->addFilter('ppp_preview_link', 'popPppResourceload
 function popPppResourceloaderPreviewLink($link, $post_id, $post)
 {
     return GeneralUtils::addQueryArgs([
-    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoP\Posts\Engine_Utils::getCustomPostPath($post_id, true)),
+    	POP_PARAMS_PATH => GeneralUtils::maybeAddTrailingSlash(\PoPSchema\Posts\Engine_Utils::getCustomPostPath($post_id, true)),
     ], $link);
 }

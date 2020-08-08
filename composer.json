@@ -1,12 +1,12 @@
 {
-    "name": "getpop/migrate-everythingelse",
+    "name": "pop-schema/migrate-everythingelse",
     "type": "library",
     "description": "(Temporary package) All the remaining code to migrate for PoP, which doesn't have a repo of its own",
     "keywords": [
         "PoP",
         "everythingelse"
     ],
-    "homepage": "https://github.com/getpop/migrate-everythingelse",
+    "homepage": "https://github.com/pop-schema/migrate-everythingelse",
     "license": "MIT",
     "authors": [
         {

@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Pages\Facades\PageTypeAPIFacade;
+use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 
 HooksAPIFacade::getInstance()->addAction(
     'popcms:init',

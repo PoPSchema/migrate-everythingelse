@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Users\TypeResolvers\UserTypeResolver;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 /**
@@ -77,11 +77,11 @@ class PoP_Mentions
     // this function extracts the hashtags from content and adds them as tags to the post
     public function generatePostTags($post_id)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $content = $customPostTypeAPI->getContent($post_id);
 
@@ -95,10 +95,10 @@ class PoP_Mentions
 
             // Extract all user_nicenames and notify them they were tagged
             // Get the previous ones, as to send an email only to the new ones
-            $previous_taggedusers_ids = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            $previous_taggedusers_ids = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
 
             // First delete all existing users, then add all new ones
-            \PoP\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
+            \PoPSchema\CustomPostMeta\Utils::deleteCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS);
             if ($user_nicenames = $this->getUserNicenamesFromContent($content)) {
                 $taggedusers_ids = array();
                 foreach ($user_nicenames as $user_nicename) {
@@ -108,7 +108,7 @@ class PoP_Mentions
                 }
 
                 if ($taggedusers_ids) {
-                    \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
+                    \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_TAGGEDUSERS, $taggedusers_ids);
 
                     // Send an email to all newly tagged users
                     if ($newly_taggedusers_ids = array_diff($taggedusers_ids, $previous_taggedusers_ids)) {
@@ -121,10 +121,10 @@ class PoP_Mentions
 
     public function generateCommentTags($comment_id, $comment)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         if ($tags = $this->getHashtagsFromContent($cmscommentsresolver->getCommentContent($comment))) {
             // $append = true because the tags are added to the post from the comment
             $tagapi->setPostTags($cmscommentsresolver->getCommentPostId($comment), $tags, true);
@@ -137,7 +137,7 @@ class PoP_Mentions
                 ),
                 ['return-type' => \POP_RETURNTYPE_IDS]
             );
-            \PoP\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
+            \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGS, $tag_ids);
         }
 
         // Allow Events Manager to also add its own tags with its own taxonomy
@@ -153,7 +153,7 @@ class PoP_Mentions
             }
 
             if ($taggedusers_ids) {
-                \PoP\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGGEDUSERS, $taggedusers_ids);
+                \PoPSchema\CommentMeta\Utils::updateCommentMeta($comment_id, GD_METAKEY_COMMENT_TAGGEDUSERS, $taggedusers_ids);
 
                 // Send an email to all newly tagged users
                 HooksAPIFacade::getInstance()->doAction('PoP_Mentions:comment_tags:tagged_users', $comment_id, $taggedusers_ids);
@@ -219,8 +219,8 @@ class PoP_Mentions
     // function to generate tag link
     private function makeLink($match)
     {
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
-        $cmstagresolver = \PoP\Tags\ObjectPropertyResolverFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $cmstagresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
         $tag = $tagapi->getTagByName($match[1]);
         if (!$tag) {
             $content = $match[0];
@@ -239,8 +239,8 @@ class PoP_Mentions
     private function makeLinkUsers($match)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         // get by nickname or by login name
         $user = $cmsusersapi->getUserBySlug($match[1]);
         if (!$user) {

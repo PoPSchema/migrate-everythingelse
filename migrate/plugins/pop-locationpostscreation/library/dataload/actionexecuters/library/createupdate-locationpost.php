@@ -37,6 +37,6 @@ class GD_CreateUpdate_LocationPost extends GD_CreateUpdate_PostBase
         parent::additionals($post_id, $form_data);
 
         // Locations
-        \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LOCATIONS, $form_data['locations']);
+        \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LOCATIONS, $form_data['locations']);
     }
 }

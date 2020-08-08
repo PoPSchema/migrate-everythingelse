@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 
 // HooksAPIFacade::getInstance()->addFilter('gdPostParentpageid', 'gdEmPostParentpageidImpl', 10, 2);
 // function gdEmPostParentpageidImpl($pageid, $post_id)

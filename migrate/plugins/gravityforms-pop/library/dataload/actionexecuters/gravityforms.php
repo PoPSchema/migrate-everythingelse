@@ -120,7 +120,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
                 // Hook the fieldnames from the configuration
                 if ($fieldnames = $this->getFormFieldnames($form_id)) {
                     $user_id = $vars['global-userstate']['current-user-id'];
-                    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
                     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
                     

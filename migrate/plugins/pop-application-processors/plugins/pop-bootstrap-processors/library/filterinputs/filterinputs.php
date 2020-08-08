@@ -28,7 +28,7 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends \PoP\Comp
 
             case self::FILTERINPUT_CATEGORIES:
                 $query['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_CATEGORIES),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -53,7 +53,7 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends \PoP\Comp
 
             case self::FILTERINPUT_APPLIESTO:
                 $query['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_APPLIESTO),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_APPLIESTO),
                     'value' => $value,
                     'compare' => 'IN',
                 ];
@@ -79,7 +79,7 @@ class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends \PoP\Comp
                 }
 
                 $query['meta-query'][] = [
-                    'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_VOLUNTEERSNEEDED),
+                    'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_VOLUNTEERSNEEDED),
                     'value' => $value,
                     'compare' => $compare,
                 ];

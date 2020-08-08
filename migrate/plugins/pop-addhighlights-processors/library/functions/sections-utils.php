@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_SectionBlocksUtils
 
         // Find all related posts
         $ret['meta-query'][] = [
-            'key' => \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_HIGHLIGHTEDPOST),
+            'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_HIGHLIGHTEDPOST),
             'value' => $post_id,
         ];
     }

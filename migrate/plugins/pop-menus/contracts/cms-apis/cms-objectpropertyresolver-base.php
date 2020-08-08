@@ -1,5 +1,5 @@
 <?php
-namespace PoP\Menus;
+namespace PoPSchema\Menus;
 
 abstract class ObjectPropertyResolver_Base implements ObjectPropertyResolver
 {

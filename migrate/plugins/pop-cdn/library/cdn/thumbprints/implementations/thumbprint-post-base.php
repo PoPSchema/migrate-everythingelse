@@ -1,7 +1,7 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 {

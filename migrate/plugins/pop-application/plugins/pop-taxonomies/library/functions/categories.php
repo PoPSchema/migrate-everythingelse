@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Posts\Facades\PostTypeAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Posts\Facades\PostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 function getTheMainCategories()
 {
@@ -13,7 +13,7 @@ function getTheMainCategory($post_id)
     $postTypeAPI = PostTypeAPIFacade::getInstance();
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if ($customPostTypeAPI->getCustomPostType($post_id) == $postTypeAPI->getPostCustomPostType()) {
-        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         if ($cats = $categoryapi->getCustomPostCategories($post_id, ['return-type' => \POP_RETURNTYPE_IDS])) {
             // If this post has any of the categories set as main, then return the any one of them
             if ($intersected_cats = array_values(array_intersect($cats, getTheMainCategories()))) {

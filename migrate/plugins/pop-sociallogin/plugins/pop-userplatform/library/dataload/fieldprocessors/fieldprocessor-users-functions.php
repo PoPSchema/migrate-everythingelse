@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
 {
@@ -49,7 +49,7 @@ class GD_WSL_FieldResolver_Users extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             case 'url':
                 // Return the user's website url from the connecting network (eg: facebook, twitter)
-                $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+                $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
                 return $cmsusersresolver->getUserWebsiteUrl($user);
         }
 

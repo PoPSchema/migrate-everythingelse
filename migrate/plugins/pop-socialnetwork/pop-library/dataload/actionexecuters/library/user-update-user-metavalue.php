@@ -9,7 +9,7 @@ class GD_UpdateUserMetaValue_User extends GD_UpdateUserMetaValue
         parent::validate($errors, $form_data);
 
         if (!$errors) {
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $target_id = $form_data['target_id'];
             
             // Make sure the user exists

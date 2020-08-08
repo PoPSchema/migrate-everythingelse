@@ -55,7 +55,7 @@ class GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization extends
         $this->commonuserrolesCreateupdateuser($user_id, $form_data);
 
         // Is community?
-        $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
         if ($form_data['is_community']) {
             $cmsuserrolesapi->addRoleToUser($user_id, GD_URE_ROLE_COMMUNITY);
         } else {

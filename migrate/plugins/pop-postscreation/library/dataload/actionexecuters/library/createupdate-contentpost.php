@@ -6,8 +6,8 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 
 class GD_CreateUpdate_PostBase
 {
@@ -199,7 +199,7 @@ class GD_CreateUpdate_PostBase
     {
 
         // Validate user permission
-        $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+        $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
         if (!$cmsuserrolesapi->currentUserCan(NameResolverFacade::getInstance()->getName('popcms:capability:editPosts'))) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Your user doesn\'t have permission for editing.', 'pop-application');
         }
@@ -253,7 +253,7 @@ class GD_CreateUpdate_PostBase
 
         // Topics
         if (PoP_ApplicationProcessors_Utils::addCategories()) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_CATEGORIES, $form_data['topics']);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_CATEGORIES, $form_data['topics']);
         }
 
         // Only if the Volunteering is enabled
@@ -261,13 +261,13 @@ class GD_CreateUpdate_PostBase
             if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
                 // Volunteers Needed?
                 if ($this->volunteer()) {
-                    \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data['volunteersneeded'], true, true);
+                    \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_VOLUNTEERSNEEDED, $form_data['volunteersneeded'], true, true);
                 }
             }
         }
 
         if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_APPLIESTO, $form_data['appliesto']);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_APPLIESTO, $form_data['appliesto']);
         }
     }
     /**
@@ -346,7 +346,7 @@ class GD_CreateUpdate_PostBase
 
     protected function maybeAddParentCategories($categories)
     {
-        $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+        $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         // If the categories are nested under other categories, ask if to add those too
         if ($this->addParentCategories()) {
             // Use a while, to also check if the parent category has a parent itself
@@ -438,7 +438,7 @@ class GD_CreateUpdate_PostBase
     {
 
         // Set category taxonomy for taxonomies other than "category"
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         $taxonomy = $this->getCategoryTaxonomy();
         if ($taxonomy != 'category') {
             if ($cats = $form_data['categories']) {
@@ -450,7 +450,7 @@ class GD_CreateUpdate_PostBase
         $this->setfeaturedimage($errors, $post_id, $form_data);
 
         if ($this->addReferences()) {
-            \PoP\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES, $form_data['references']);
+            \PoPSchema\CustomPostMeta\Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES, $form_data['references']);
         }
     }
 
@@ -462,7 +462,7 @@ class GD_CreateUpdate_PostBase
         );
 
         if ($this->addReferences()) {
-            $previous_references = \PoP\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
+            $previous_references = \PoPSchema\CustomPostMeta\Utils::getCustomPostMeta($post_id, GD_METAKEY_POST_REFERENCES);
             $log['new-references'] = array_diff($form_data['references'], $previous_references);
         }
 

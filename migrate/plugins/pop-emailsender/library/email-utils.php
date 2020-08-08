@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_EmailSender_Utils
 {
@@ -125,7 +125,7 @@ class PoP_EmailSender_Utils
         $authors = array_unique($authors);
 
         // Exclude authors
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $authors = array_diff($authors, $exclude_authors);
         foreach ($authors as $author) {
             $emails[] = $cmsusersapi->getUserEmail($author);
@@ -139,7 +139,7 @@ class PoP_EmailSender_Utils
 
     public static function sendemailToUser($user_id, $subject, $msg)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $email = $cmsusersapi->getUserEmail($user_id);
         $name = $cmsusersapi->getUserDisplayName($user_id);
 

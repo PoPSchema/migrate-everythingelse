@@ -5,7 +5,7 @@ class CAP_PoP_AddCoauthors_API extends PoP_AddCoauthors_API_Base implements PoP_
     public function addCoauthors($post_id, $coauthors)
     {
         global $userdata, $coauthors_plus;
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
         // If passing null, reset to an empty array
         $coauthors = $coauthors ?? array();

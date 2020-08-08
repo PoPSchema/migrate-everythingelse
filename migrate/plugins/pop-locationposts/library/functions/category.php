@@ -37,7 +37,7 @@ function popLocationpostsAddAllCategory($post_id)
 {
     // Only do it if filtering by taxonomy is enabled. Otherwise no need
     if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy()) {
-        $taxonomyapi = \PoP\Taxonomies\FunctionAPIFactory::getInstance();
+        $taxonomyapi = \PoPSchema\Taxonomies\FunctionAPIFactory::getInstance();
         if (POP_LOCATIONPOSTS_CAT_ALL && !$taxonomyapi->hasTerm(POP_LOCATIONPOSTS_CAT_ALL, POP_LOCATIONPOSTS_TAXONOMY_CATEGORY, $post_id)) {
             $taxonomyapi->setPostTerms($post_id, array(POP_LOCATIONPOSTS_CAT_ALL), POP_LOCATIONPOSTS_TAXONOMY_CATEGORY, true);
         }

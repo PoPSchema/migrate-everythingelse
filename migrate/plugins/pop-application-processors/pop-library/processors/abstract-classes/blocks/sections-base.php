@@ -4,11 +4,11 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\RequestUtils;
 
@@ -72,9 +72,9 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         if ($route = $this->getRelevantRoute($module, $props)) {
             $vars = ApplicationState::getVars();
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-            $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+            $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
             switch ($vars['nature']) {
                 case UserRouteNatures::USER:
                     $url = $cmsusersapi->getUserURL($vars['routing-state']['queried-object-id']);

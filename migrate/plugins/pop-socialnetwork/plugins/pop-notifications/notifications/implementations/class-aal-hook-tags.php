@@ -32,7 +32,7 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     public function subscribedtounsubscribedfromTag($tag_id, $action)
     {
         $vars = ApplicationState::getVars();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $tag = $tagapi->getTag($tag_id);
         PoP_Notifications_Utils::insertLog(

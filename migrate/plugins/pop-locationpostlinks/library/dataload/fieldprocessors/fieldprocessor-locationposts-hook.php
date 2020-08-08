@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\LocationPosts\TypeResolvers\LocationPostTypeResolver;
+use PoPSchema\LocationPosts\TypeResolvers\LocationPostTypeResolver;
 
 class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
 {
@@ -57,7 +57,7 @@ class GD_Custom_Locations_ContentPostLinks_DataLoad_FieldResolver_Posts extends 
             'content',
         ])) {
             $locationpost = $resultItem;
-            $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
             return POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS && $categoryapi->hasCategory(POP_LOCATIONPOSTLINKS_CAT_LOCATIONPOSTLINKS, $typeResolver->getID($locationpost));
         }
         return true;

@@ -59,7 +59,7 @@ function gdRssAuthor($output)
     // $vars = ApplicationState::getVars();
     // $authordata = $vars['routing-state']['authordata']/*global $authordata*/;
     global $authordata;
-    $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+    $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $url = $cmsusersapi->getUserURL($authordata->ID);
     
     $output = sprintf(

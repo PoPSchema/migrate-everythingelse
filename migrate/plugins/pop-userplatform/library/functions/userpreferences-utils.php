@@ -9,7 +9,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         $query = array(
             'meta-query' => [
                 [
-                    'key' => \PoP\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_USERPREFERENCES),
+                    'key' => \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_USERPREFERENCES),
                     'value' => $value,
                     'compare' => 'IN',
                 ],
@@ -25,7 +25,7 @@ class PoP_UserPlatform_UserPreferencesUtils
             $query['exclude'] = $exclude;
         }
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $users = $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
 
         // Exclude users?

@@ -44,7 +44,7 @@ class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Mo
     }
     protected function getTitleLink(array $module, array &$props)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_AUTHORMEMBERS:
                 $vars = ApplicationState::getVars();

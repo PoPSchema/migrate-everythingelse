@@ -4,8 +4,8 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Schema\TypeCastingHelpers;
-use PoP\Comments\TypeResolvers\CommentTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\Comments\TypeResolvers\CommentTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 
 class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
 {
@@ -55,7 +55,7 @@ class GD_DataLoad_FieldResolver_Comments extends AbstractDBDataFieldResolver
         switch ($fieldName) {
             // Users mentioned in the comment: @mentions
             case 'taggedusers':
-                return \PoP\CommentMeta\Utils::getCommentMeta($typeResolver->getID($comment), GD_METAKEY_COMMENT_TAGGEDUSERS) ?? [];
+                return \PoPSchema\CommentMeta\Utils::getCommentMeta($typeResolver->getID($comment), GD_METAKEY_COMMENT_TAGGEDUSERS) ?? [];
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

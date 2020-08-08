@@ -53,13 +53,13 @@ class PoP_AddComments_Notifications_NotificationHooks
             array(
                 sprintf(
                     '
-						SELECT 
-							comment_post_ID 
-						FROM 
+						SELECT
+							comment_post_ID
+						FROM
 							%3$s
 						INNER JOIN
 							%2$s
-						ON 
+						ON
 							%3$s.comment_post_ID = %2$s.ID
 						WHERE
 							(
@@ -96,8 +96,8 @@ class PoP_AddComments_Notifications_NotificationHooks
             );
             if (in_array($notification->action, $comment_actions)) {
                 // Only approved comments
-                $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
-                $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
+                $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
+                $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
                 $comment = $cmscommentsapi->getComment($notification->object_id);
                 $actions = $comment_actions;
                 $objectids_sql = sprintf(
@@ -142,9 +142,9 @@ class PoP_AddComments_Notifications_NotificationHooks
             // Notifications about comments added to posts where the user is the author
             sprintf(
                 '
-					SELECT 
-						ID 
-					FROM 
+					SELECT
+						ID
+					FROM
 						%2$s
 					WHERE
 						(
@@ -162,9 +162,9 @@ class PoP_AddComments_Notifications_NotificationHooks
             // Notifications about comments in posts where the user has added a comment
             $select_from_comment_post_id_unions[] = sprintf(
                 '
-					SELECT 
-						comment_post_ID 
-					FROM 
+					SELECT
+						comment_post_ID
+					FROM
 						%2$s
 					WHERE
 						(
@@ -199,9 +199,9 @@ class PoP_AddComments_Notifications_NotificationHooks
             $select_from_comment_id_ors[] = sprintf(
                 '
 					comment_parent in (
-						SELECT 
-							comment_ID 
-						FROM 
+						SELECT
+							comment_ID
+						FROM
 							%2$s
 						WHERE
 							user_id = %1$s
@@ -220,9 +220,9 @@ class PoP_AddComments_Notifications_NotificationHooks
         $useractivitycomments_object_id_unions = array(
             sprintf(
                 '
-					SELECT 
-						comment_ID 
-					FROM 
+					SELECT
+						comment_ID
+					FROM
 						%1$s
 					WHERE
 						(
@@ -240,7 +240,7 @@ class PoP_AddComments_Notifications_NotificationHooks
             $useractivitycomments_object_id_unions,
             $user_id
         );
-        
+
         // Posts which fulfil any of the following conditions:
         // - authored by the user,
         // - where the user has ever added a comment,
@@ -266,9 +266,9 @@ class PoP_AddComments_Notifications_NotificationHooks
         $usercomments_where = sprintf(
             '
 				%3$s.object_id in (
-					SELECT 
-						comment_ID 
-					FROM 
+					SELECT
+						comment_ID
+					FROM
 						%2$s
 					WHERE
 						user_id = %1$s
@@ -279,7 +279,7 @@ class PoP_AddComments_Notifications_NotificationHooks
             $wpdb->pop_notifications
         );
 
-            
+
         // Comment Notifications:
         // Notify the user when:
         // - Someone from the network comments,

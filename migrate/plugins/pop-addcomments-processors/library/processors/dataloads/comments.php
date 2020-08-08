@@ -1,7 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Comments\TypeResolvers\CommentTypeResolver;
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -51,7 +50,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
                 return GD_DataLoad_QueryInputOutputHandler_CommentList::class;
         }
-        
+
         return parent::getQueryInputOutputHandlerClass($module);
     }
 
@@ -61,7 +60,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
                 return [PoP_Module_Processor_CommentFilters::class, PoP_Module_Processor_CommentFilters::MODULE_FILTER_COMMENTS];
         }
-        
+
         return parent::getFilterSubmodule($module);
     }
 
@@ -102,7 +101,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::MODULE_SCROLL_COMMENTS_ADD];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -111,9 +110,9 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         switch ($module[1]) {
             case self::MODULE_DATALOAD_COMMENTS_SCROLL:
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                return \PoP\Comments\CommentTypeResolver::class;
+                return \PoPSchema\Comments\CommentTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
 
@@ -132,7 +131,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 break;
         }
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -148,7 +147,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-coreprocessors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

@@ -22,7 +22,7 @@ function userHasAccess($capability, $user_id = null)
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
     }
-    $cmsuserrolesapi = \PoP\UserRoles\FunctionAPIFactory::getInstance();
+    $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
     return $cmsuserrolesapi->userCan($user_id, $capability);
 }
 

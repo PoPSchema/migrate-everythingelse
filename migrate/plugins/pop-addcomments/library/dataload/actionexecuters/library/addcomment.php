@@ -41,7 +41,7 @@ class GD_AddComment
     protected function getCommentData($form_data)
     {
         // TODO: Integrate with `mustHaveUserAccountToAddComment`
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
         $author_url = $cmsusersapi->getUserURL($user_id);
@@ -62,7 +62,7 @@ class GD_AddComment
 
     protected function execute($comment_data)
     {
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         return $cmscommentsapi->insertComment($comment_data);
     }
 

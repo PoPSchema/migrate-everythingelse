@@ -1,10 +1,10 @@
 <?php
-use PoP\CustomPosts\Types\Status;
+use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -90,7 +90,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             return;
         }
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // No need to check if the post_status is "published", since it's been checked in the previous 2 functions (create/update)
@@ -177,9 +177,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         }
 
         // If the post has tags...
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
@@ -190,7 +190,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
-                if ($tag_subscribers = \PoP\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
+                if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
                     // From those, remove all users who got an email in a previous email function
                     if ($tag_subscribers = array_diff($tag_subscribers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_CREATEDCONTENT))) {
                         // Keep only the users with the corresponding preference on
@@ -237,8 +237,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function emailnotificationsNetworkAddedcomment($comment_id, $comment)
     {
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         $comment = $cmscommentsapi->getComment($comment_id);
 
         // Only for published comments
@@ -251,7 +251,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT, $networkusers)) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
@@ -300,7 +300,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
     {
 
         // Only for published comments
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         if (!$cmscommentsresolver->isCommentApproved($comment)) {
             return;
         }
@@ -308,9 +308,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $post_id = $cmscommentsresolver->getCommentPostId($comment);
 
         // If the post has tags...
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
@@ -321,7 +321,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
             $vars = ApplicationState::getVars();
             foreach ($post_tags as $tag_id) {
                 // Get all the users who subscribed to each tag
-                if ($tag_subscribers = \PoP\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
+                if ($tag_subscribers = \PoPSchema\TaxonomyMeta\Utils::getTermMeta($tag_id, GD_METAKEY_TERM_SUBSCRIBEDBY)) {
                     // From those, remove all users who got an email in a previous email function
                     if ($tag_subscribers = array_diff($tag_subscribers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_ADDEDCOMMENT))) {
                         // Keep only the users with the corresponding preference on
@@ -377,8 +377,8 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         if ($networkusers = array_diff($networkusers, PoP_EmailSender_SentEmailsManager::getSentemailUsers(POP_EMAIL_SUBSCRIBEDTOTOPIC))) {
             // Keep only the users with the corresponding preference on
             if ($networkusers = PoP_UserPlatform_UserPreferencesUtils::getPreferenceonUsers(POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC, $networkusers)) {
-                $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
-                $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+                $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+                $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
                 $emails = $names = array();
                 foreach ($networkusers as $networkuser) {
                     $emails[] = $cmsusersapi->getUserEmail($networkuser);
@@ -420,7 +420,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
      */
     public function sendemailToTaggedusers($taggedusers_ids, $subject, $content)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $emails = array();
         $names = array();
         foreach ($taggedusers_ids as $taggeduser_id) {
@@ -433,7 +433,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function sendemailToUsersTaggedInPost($post_id, $taggedusers_ids, $newly_taggedusers_ids)
     {
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
 
         // Only for published posts
@@ -475,9 +475,9 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
 
     public function sendemailToUsersTaggedInComment($comment_id, $taggedusers_ids)
     {
-        $cmscommentsapi = \PoP\Comments\FunctionAPIFactory::getInstance();
-        $cmscommentsresolver = \PoP\Comments\ObjectPropertyResolverFactory::getInstance();
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
+        $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $comment = $cmscommentsapi->getComment($comment_id);
 
         // Only for published comments

@@ -2,11 +2,11 @@
 
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
-use PoP\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoP\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoP\Users\Routing\RouteNatures as UserRouteNatures;
-use PoP\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoP\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -69,7 +69,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-        $tagapi = \PoP\Tags\FunctionAPIFactory::getInstance();
+        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         if ($ids = $tagapi->getTags($query, ['return-type' => \POP_RETURNTYPE_IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
@@ -81,7 +81,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
     public function addAuthorResources(&$resources, $modulefilter, $options)
     {
 
-        $cmsusersapi = \PoP\Users\FunctionAPIFactory::getInstance();
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         // The author is a special case: different roles will have different configurations
         // However, we can't tell from the URL the role of that author (mesym.com/u/leo/ and mesym.com/u/mesym/)
         // So then, we gotta calculate the resources for both cases, and add them together
@@ -96,7 +96,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         if (empty($roles)) {
             // Being here, GD_ROLE_PROFILE is not defined. Then, simply get any random user from the DB, and use its corresponding configuration (the default layouts for all non-profile users (eg: "subscriber") will be used)
             $user_ids = $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
-            $role = \PoP\UserRoles\Utils::getTheUserRole($user_ids[0]);
+            $role = \PoPSchema\UserRoles\Utils::getTheUserRole($user_ids[0]);
             $roles = array($role);
             $user_role_combinations = array($roles);
         } else {
@@ -145,7 +145,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // 'fields' => 'ids',
         );
         if (defined('POP_TAXONOMIES_INITIALIZED')) {
-            $categoryapi = \PoP\Categories\FunctionAPIFactory::getInstance();
+            $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
             $all_categories = $categoryapi->getCategories([], ['return-type' => \POP_RETURNTYPE_IDS]);
 
             // Allow to filter the categories.
@@ -201,7 +201,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Then, because these posts have the same path, their configuration must be merged together
             $paths = array();
             foreach ($ids as $id) {
-                $post_path = \PoP\Posts\Engine_Utils::getCustomPostPath($id, true);
+                $post_path = \PoPSchema\Posts\Engine_Utils::getCustomPostPath($id, true);
                 $paths[$post_path] = $paths[$post_path] ?? array();
                 $paths[$post_path][] = $id;
             }

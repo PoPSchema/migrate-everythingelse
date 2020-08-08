@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\UserState\CheckpointSets\UserStateCheckpointSets;
-use PoP\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoP\Tags\TypeResolvers\TagTypeResolver;
-use PoP\Users\TypeResolvers\UserTypeResolver;
+use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
@@ -115,7 +115,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
 
         if ($metaKey = $metaKeys[$module[1]]) {
             $userID = $vars['global-userstate']['current-user-id'];
-            return \PoP\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
+            return \PoPSchema\UserMeta\Utils::getUserMeta($userID, $metaKey) ?? [];
         }
 
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);

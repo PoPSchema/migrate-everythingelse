@@ -21,7 +21,7 @@ class PoP_UserLogin_EmailSender_Hooks
     }
     public function retrievePasswordMessage($message, $key, $user_login, $user)
     {
-        $cmsusersresolver = \PoP\Users\ObjectPropertyResolverFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         return PoP_EmailTemplatesFactory::getInstance()->addEmailframe(
             TranslationAPIFacade::getInstance()->__('Retrieve password', 'pop-emailsender'), 
             $message, 

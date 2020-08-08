@@ -6,7 +6,7 @@ Description: The foundation for a PoP Menus
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */
-namespace PoP\Menus;
+namespace PoPSchema\Menus;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 //-------------------------------------------------------------------------------------

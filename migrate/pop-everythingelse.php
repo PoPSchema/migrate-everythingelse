@@ -1,5 +1,5 @@
 <?php
-namespace PoP\EverythingElse;
+namespace PoPSchema\EverythingElse;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
 class Plugins

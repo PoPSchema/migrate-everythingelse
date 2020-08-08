@@ -33,7 +33,7 @@ class PoP_SocialNetwork_Notifications_Utils
             $wpdb->term_relationships,
             $wpdb->term_taxonomy,
             $wpdb->usermeta,
-            \PoP\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS)
+            \PoPSchema\UserMeta\Utils::getMetaKey(GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS)
         );
     }
 
@@ -53,7 +53,7 @@ class PoP_SocialNetwork_Notifications_Utils
 			',
             $user_id,
             $wpdb->postmeta,
-            \PoP\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
+            \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_TAGGEDUSERS)
         );
     }
 }

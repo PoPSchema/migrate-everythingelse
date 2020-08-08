@@ -1,5 +1,5 @@
 <?php
-namespace PoP\UserRoles;
+namespace PoPSchema\UserRoles;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
