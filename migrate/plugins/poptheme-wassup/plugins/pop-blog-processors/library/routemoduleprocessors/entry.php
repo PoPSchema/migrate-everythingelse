@@ -6,6 +6,7 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 use PoP\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\API\Response\Schemes as APISchemes;
 
 class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
@@ -19,7 +20,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
     //         $ret[RouteNatures::HOME][] = [
     //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
     //             'conditions' => [
-    //                 'scheme' => POP_SCHEME_API,
+    //                 'scheme' => APISchemes::API,
     //             ],
     //         ];
     //     }
@@ -44,7 +45,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 $ret[RouteNatures::STANDARD][$route][] = [
                     'module' => $module,
                     'conditions' => [
-                        'scheme' => POP_SCHEME_API,
+                        'scheme' => APISchemes::API,
                     ],
                 ];
             }
@@ -57,7 +58,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 $ret[RouteNatures::STANDARD][$route][] = [
                     'module' => $module,
                     'conditions' => [
-                        'scheme' => POP_SCHEME_API,
+                        'scheme' => APISchemes::API,
                         'datastructure' => RESTDataStructureFormatter::getName(),
                     ],
                 ];
@@ -71,7 +72,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 $ret[UserRouteNatures::USER][$route][] = [
                     'module' => $module,
                     'conditions' => [
-                        'scheme' => POP_SCHEME_API,
+                        'scheme' => APISchemes::API,
                     ],
                 ];
             }
@@ -84,7 +85,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 $ret[TagRouteNatures::TAG][$route][] = [
                     'module' => $module,
                     'conditions' => [
-                        'scheme' => POP_SCHEME_API,
+                        'scheme' => APISchemes::API,
                     ],
                 ];
             }
@@ -97,7 +98,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleR
                 $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
                     'module' => $module,
                     'conditions' => [
-                        'scheme' => POP_SCHEME_API,
+                        'scheme' => APISchemes::API,
                     ],
                 ];
             }

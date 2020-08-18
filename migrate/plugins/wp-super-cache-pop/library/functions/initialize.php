@@ -1,4 +1,5 @@
 <?php
+use PoP\API\Response\Schemes as APISchemes;
 
 // This is needed to set header Content-type: application/json when doing ?output=json
 // IMPORTANT: We can't call doingJson yet, since it would generate $vars before $wp_query is available
@@ -6,7 +7,7 @@
 // if (doingJson()) {
 if (
 	$_REQUEST[GD_URLPARAM_OUTPUT] == GD_URLPARAM_OUTPUT_JSON ||
-	$_REQUEST[GD_URLPARAM_SCHEME] == POP_SCHEME_API
+	$_REQUEST[GD_URLPARAM_SCHEME] == APISchemes::API
 	) {
     define('JSON_REQUEST', true);
 }
