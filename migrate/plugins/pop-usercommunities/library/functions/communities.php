@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 function gdUreGetCommunities($user_id): array
 {
@@ -39,7 +40,7 @@ function gdUreGetActivecontributingcontentcommunitymembers($community)
         ]
     );
 
-    return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
+    return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 }
 
 function gdUreGetCommunityMetavalueContributecontent($user_id)

@@ -4,6 +4,7 @@ use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -146,7 +147,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 // Stances are unique, just 1 per person/article.
                 // Check if there is a Stance for the given post.
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => \POP_RETURNTYPE_IDS])) {
+                if ($stances = $customPostTypeAPI->getCustomPosts($query, ['return-type' => ReturnTypes::IDS])) {
                     return array($stances[0]);
                 }
                 return [];

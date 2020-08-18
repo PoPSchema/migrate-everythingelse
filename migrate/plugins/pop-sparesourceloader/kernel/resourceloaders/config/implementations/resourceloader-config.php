@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {
@@ -30,7 +31,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // $configuration['$pathStartPos'] = strlen(GeneralUtils::maybeAddTrailingSlash($cmsengineapi->getHomeURL()));
 
         // Get the list of all categories, and then their paths
-        $categories = $categoryapi->getCategories(['hide-empty' => false], ['return-type' => \POP_RETURNTYPE_IDS]);
+        $categories = $categoryapi->getCategories(['hide-empty' => false], ['return-type' => ReturnTypes::IDS]);
         $single_paths = array_map(array($categoryapi, 'getCategoryPath'), $categories);
 
         // Allow EM to add their own paths

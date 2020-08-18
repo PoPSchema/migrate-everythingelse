@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
@@ -45,7 +46,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
                     'category' => '-'.implode(',-', $independent_cats)
                 ) : array()
             ),
-            ['return-type' => \POP_RETURNTYPE_IDS]
+            ['return-type' => ReturnTypes::IDS]
         )
         ) {
             // $make_future = true;
@@ -71,7 +72,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
                         'category' => $independent_cat,
                     )
                 ),
-                ['return-type' => \POP_RETURNTYPE_IDS]
+                ['return-type' => ReturnTypes::IDS]
             )
             ) {
                 // $make_future = true;

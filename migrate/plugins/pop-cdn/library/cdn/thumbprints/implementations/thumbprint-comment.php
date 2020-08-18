@@ -1,5 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 define('POP_CDN_THUMBPRINT_COMMENT', 'comment');
 
@@ -25,7 +26,7 @@ class PoP_CDN_Thumbprint_Comment extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
-        $options['return-type'] = POP_RETURNTYPE_IDS;
+        $options['return-type'] = ReturnTypes::IDS;
         return $cmscommentsapi->getComments($query, $options);
     }
 

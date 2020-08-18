@@ -1,4 +1,5 @@
 <?php
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_UserPlatform_UserPreferencesUtils
 {
@@ -26,7 +27,7 @@ class PoP_UserPlatform_UserPreferencesUtils
         }
 
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $users = $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
+        $users = $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
 
         // Exclude users?
         if ($include && $exclude) {

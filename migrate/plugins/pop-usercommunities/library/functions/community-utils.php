@@ -1,4 +1,5 @@
 <?php
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class URE_CommunityUtils
 {
@@ -26,6 +27,6 @@ class URE_CommunityUtils
         self::addDataloadqueryargsCommunitymembers($query, $community_id);
 
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        return $cmsusersapi->getUsers($query, ['return-type' => \POP_RETURNTYPE_IDS]);
+        return $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
     }
 }

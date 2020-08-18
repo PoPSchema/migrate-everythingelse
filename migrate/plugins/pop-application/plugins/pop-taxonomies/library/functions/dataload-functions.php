@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 function getAllcontentExcludedTaxonomies()
 {
@@ -16,7 +17,7 @@ function gdDataloadAllcontentCategories()
     if (useAllcontentCategories()) {
 
         $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
-        $all_categories = $categoryapi->getCategories([], ['return-type' => \POP_RETURNTYPE_IDS]);
+        $all_categories = $categoryapi->getCategories([], ['return-type' => ReturnTypes::IDS]);
 
         // All Post Categories but the excluded ones
         $excluded_taxonomies = getAllcontentExcludedTaxonomies();
@@ -53,7 +54,7 @@ function gdDataloadAllcontentComponents()
                 // Only for Category-type taxonomies, not for term-like
                 if ($taxonomyapi->isTaxonomyHierarchical($taxonomy)) {
                     $component['taxonomy'] = $taxonomy;
-                    if ($terms = $taxonomyapi->getTaxonomyTerms($taxonomy, ['return-type' => \POP_RETURNTYPE_IDS])) {
+                    if ($terms = $taxonomyapi->getTaxonomyTerms($taxonomy, ['return-type' => ReturnTypes::IDS])) {
                         if ($terms = array_diff(
                             $terms,
                             $excluded_terms[$taxonomy] ?? array()

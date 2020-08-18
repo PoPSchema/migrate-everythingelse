@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_ContentPostLinks_Utils
 {
@@ -103,7 +104,7 @@ class PoP_ContentPostLinks_Utils
         $link_cats = self::getLinkCategories();
         // $post_cats = gdGetCategories($post_id);
         // return !empty(array_intersect($link_cats, $post_cats));
-        return !empty(array_intersect($link_cats, $categoryapi->getCustomPostCategories($post_id, ['return-type' => \POP_RETURNTYPE_IDS])));
+        return !empty(array_intersect($link_cats, $categoryapi->getCustomPostCategories($post_id, ['return-type' => ReturnTypes::IDS])));
     }
 
     public static function getLinkUrl($post)

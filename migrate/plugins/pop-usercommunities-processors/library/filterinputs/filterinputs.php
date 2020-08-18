@@ -1,4 +1,6 @@
 <?php
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+
 class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\AbstractFilterInputProcessor
 {
     public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
@@ -54,7 +56,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends \PoP\ComponentModel\A
                                     ]
                                 ]
                             ],
-                            ['return-type' => \POP_RETURNTYPE_IDS]
+                            ['return-type' => ReturnTypes::IDS]
                         )
                     );
                 }

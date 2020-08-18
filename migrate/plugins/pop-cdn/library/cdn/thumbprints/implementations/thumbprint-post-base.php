@@ -2,6 +2,7 @@
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
 {
@@ -18,7 +19,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        $options['return-type'] = POP_RETURNTYPE_IDS;
+        $options['return-type'] = ReturnTypes::IDS;
         return $customPostTypeAPI->getPosts($query, $options);
     }
 

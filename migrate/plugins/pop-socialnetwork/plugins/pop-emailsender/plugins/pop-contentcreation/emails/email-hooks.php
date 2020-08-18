@@ -5,6 +5,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -181,7 +182,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => ReturnTypes::IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);
@@ -312,7 +313,7 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => \POP_RETURNTYPE_IDS])) {
+        if ($post_tags = $tagapi->getCustomPostTags($post_id, [], ['return-type' => ReturnTypes::IDS])) {
             $post_html = PoP_EmailTemplatesFactory::getInstance()->getPosthtml($post_id);
             $post_name = gdGetPostname($post_id);
             $post_title = $customPostTypeAPI->getTitle($post_id);

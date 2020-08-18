@@ -1,6 +1,7 @@
 <?php
 use PoPSchema\Pages\Facades\PageTypeAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
 {
@@ -17,7 +18,7 @@ class PoP_CDN_Thumbprint_PageBase extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $options['return-type'] = POP_RETURNTYPE_IDS;
+        $options['return-type'] = ReturnTypes::IDS;
         return $pageTypeAPI->getPages($query, $options);
     }
 

@@ -1,5 +1,6 @@
 <?php
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 define('POP_CDN_THUMBPRINT_USER', 'user');
 
@@ -27,16 +28,16 @@ class PoP_CDN_Thumbprint_User extends PoP_CDN_ThumbprintBase
     public function executeQuery($query, array $options = [])
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $options['return-type'] = POP_RETURNTYPE_IDS;
+        $options['return-type'] = ReturnTypes::IDS;
         return $cmsusersapi->getUsers($query, $options);
     }
-    
+
     public function getTimestamp($user_id)
     {
         return \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_LASTEDITED, true);
     }
 }
-    
+
 /**
  * Initialize
  */
