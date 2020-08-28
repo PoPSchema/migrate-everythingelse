@@ -20,7 +20,7 @@ class PPP_PoP
             'PoP_PreviewContent_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Preview Content
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 360);
     }
@@ -32,7 +32,7 @@ class PPP_PoP
     public function init()
     {
         define('PPP_POP_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('PPP_POP_INITIALIZED', true);
@@ -41,6 +41,9 @@ class PPP_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('DS_Public_Post_Preview');
         return true;
         // require_once 'validation.php';
         $validation = new PPP_PoP_Validation();

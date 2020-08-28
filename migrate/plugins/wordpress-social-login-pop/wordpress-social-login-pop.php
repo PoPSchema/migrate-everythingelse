@@ -25,7 +25,7 @@ class WSL_PoP
             'PoP_SocialLogin_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Social Login
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 370);
     }
@@ -44,6 +44,9 @@ class WSL_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('wsl_activate');
         return true;
         // require_once 'validation.php';
         $validation = new WSL_PoP_Validation();

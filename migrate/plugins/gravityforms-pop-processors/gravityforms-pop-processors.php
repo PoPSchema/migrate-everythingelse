@@ -36,6 +36,9 @@ class GFPoPProcessors
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('GFForms');
         return true;
         include_once 'validation.php';
         $validation = new GFPoPProcessors_Validation();

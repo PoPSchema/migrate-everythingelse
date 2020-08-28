@@ -31,6 +31,9 @@ class PoP_GSG
     }
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('GoogleSitemapGeneratorLoader');
         return true;
         include_once 'validation.php';
         $validation = new PoP_GSG_Validation();

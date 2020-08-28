@@ -20,7 +20,7 @@ class GADWP_PoP
             'PoP_GoogleAnalytics_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Google Analytics
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 520);
     }
@@ -32,7 +32,7 @@ class GADWP_PoP
     public function init()
     {
         define('GADWP_POP_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('GADWP_POP_INITIALIZED', true);
@@ -41,6 +41,9 @@ class GADWP_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('GADWPManager');
         return true;
         // require_once 'validation.php';
         $validation = new GADWP_PoP_Validation();

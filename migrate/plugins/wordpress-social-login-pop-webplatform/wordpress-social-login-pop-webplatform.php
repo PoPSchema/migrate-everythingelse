@@ -23,7 +23,7 @@ class WSL_PoPWebPlatform
     public function init()
     {
         define('WSL_POPWEBPLATFORM_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('WSL_POPWEBPLATFORM_INITIALIZED', true);
@@ -32,6 +32,9 @@ class WSL_PoPWebPlatform
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('wsl_activate');
         return true;
         include_once 'validation.php';
         $validation = new WSL_PoPWebPlatform_Validation();

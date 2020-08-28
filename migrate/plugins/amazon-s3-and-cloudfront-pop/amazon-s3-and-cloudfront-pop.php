@@ -37,6 +37,9 @@ class AWSS3CFPoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('as3cf_init');
         return true;
         include_once 'validation.php';
         $validation = new AWSS3CFPoP_Validation();

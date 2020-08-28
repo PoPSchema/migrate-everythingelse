@@ -42,6 +42,9 @@ class UserAvatarPoPForkPoP
     }
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('user_avatar_init');
         return true;
         // require_once 'validation.php';
         $validation = new UserAvatarPoPForkPoP_Validation();

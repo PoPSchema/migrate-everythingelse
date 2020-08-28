@@ -24,7 +24,7 @@ class CAP_PoP
             'PoP_AddCoauthors_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP Add Coauthors
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
     }
@@ -36,7 +36,7 @@ class CAP_PoP
     public function init()
     {
         define('CAP_POP_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('CAP_POP_INITIALIZED', true);
@@ -45,6 +45,9 @@ class CAP_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('coauthors_plus');
         return true;
         // require_once 'validation.php';
         $validation = new CAP_PoP_Validation();

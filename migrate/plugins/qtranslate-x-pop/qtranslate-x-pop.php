@@ -20,7 +20,7 @@ class QTX_PoP
             'PoP_Multilingual_Validation:provider-validation-class',
             array($this, 'getProviderValidationClass')
         );
-        
+
         // Priority: after PoP WordPress Application
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 360);
     }
@@ -32,7 +32,7 @@ class QTX_PoP
     public function init()
     {
         define('QTX_POP_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('QTX_POP_INITIALIZED', true);
@@ -41,6 +41,9 @@ class QTX_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('QTX_Translator');
         return true;
         // require_once 'validation.php';
         $validation = new QTX_PoP_Validation();

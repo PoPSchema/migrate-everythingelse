@@ -15,7 +15,7 @@ class WPSC_PoP
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 310);
     }
@@ -23,7 +23,7 @@ class WPSC_PoP
     public function init()
     {
         define('WPSC_POP_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('WPSC_POP_INITIALIZED', true);
@@ -32,6 +32,9 @@ class WPSC_PoP
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('wpsupercache_site_admin');
         return true;
         include_once 'validation.php';
         $validation = new WPSC_PoP_Validation();
