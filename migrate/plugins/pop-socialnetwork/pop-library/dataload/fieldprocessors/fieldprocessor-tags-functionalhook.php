@@ -5,13 +5,13 @@ use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class GD_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(TagTypeResolver::class);
+        return array(PostTagTypeResolver::class);
     }
 
     public static function getFieldNamesToResolve(): array

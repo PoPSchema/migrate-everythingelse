@@ -1,12 +1,12 @@
 <?php
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 
 class PoP_SocialMediaProviders_DataLoad_FunctionalFieldResolver_TagSocialMediaItems extends PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialMediaItems
 {
     public static function getClassesToAttachTo(): array
     {
         return array(
-            TagTypeResolver::class,
+            PostTagTypeResolver::class,
         );
     }
 

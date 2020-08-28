@@ -1,7 +1,7 @@
 <?php
 
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
@@ -379,7 +379,7 @@ class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Modu
         switch ($module[1]) {
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
 
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW:

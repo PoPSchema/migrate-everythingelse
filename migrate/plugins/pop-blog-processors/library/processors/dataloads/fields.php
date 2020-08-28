@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
@@ -51,7 +51,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return UserTypeResolver::class;
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
 
             case self::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST:
                 return UserTypeResolver::class;

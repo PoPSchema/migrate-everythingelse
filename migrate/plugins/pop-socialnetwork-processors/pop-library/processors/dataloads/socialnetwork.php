@@ -2,7 +2,7 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
 
@@ -133,7 +133,7 @@ class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Datal
                 return CustomPostTypeResolver::class;
 
             case self::MODULE_DATALOAD_SUBSCRIBESTOTAGS:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

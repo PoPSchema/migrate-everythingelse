@@ -6,7 +6,7 @@ use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
 
@@ -83,7 +83,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
                 return UserTypeResolver::class;
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
 
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:

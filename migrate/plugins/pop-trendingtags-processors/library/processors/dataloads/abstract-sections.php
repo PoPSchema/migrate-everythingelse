@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 
 abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -20,7 +20,7 @@ abstract class Abstract_PoP_TrendingTags_Module_Processor_SectionDataloads exten
 
     public function getTypeResolverClass(array $module): ?string
     {
-        return TagTypeResolver::class;
+        return PostTagTypeResolver::class;
     }
 }
 

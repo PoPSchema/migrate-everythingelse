@@ -2,7 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\Pages\TypeResolvers\PageTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoPSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
@@ -143,7 +143,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 return UserTypeResolver::class;
 
             case self::MODULE_DATALOAD_TAG_CONTENT:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
 
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:

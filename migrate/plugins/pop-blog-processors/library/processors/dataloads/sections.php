@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Posts\TypeResolvers\PostTypeResolver;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
@@ -726,7 +726,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_TAGS_SCROLL_LIST:
             case self::MODULE_DATALOAD_TAGS_TYPEAHEAD:
             case self::MODULE_DATALOAD_TAGS_MENTIONS:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
 
             case self::MODULE_DATALOAD_CONTENT_TYPEAHEAD:
             case self::MODULE_DATALOAD_CONTENT_SCROLL_NAVIGATOR:

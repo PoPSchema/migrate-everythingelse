@@ -3,13 +3,13 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\FieldResolvers\AbstractDBDataFieldResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\Tags\TypeResolvers\AbstractTagTypeResolver;
 
 class PoP_Application_DataLoad_FieldResolver_Tags extends AbstractDBDataFieldResolver
 {
     public static function getClassesToAttachTo(): array
     {
-        return array(TagTypeResolver::class);
+        return array(AbstractTagTypeResolver::class);
     }
 
     public static function getFieldNamesToResolve(): array

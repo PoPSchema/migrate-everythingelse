@@ -1,6 +1,6 @@
 <?php
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
@@ -259,7 +259,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 
             case self::MODULE_DATALOADACTION_SUBSCRIBETOTAG:
             case self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG:
-                return TagTypeResolver::class;
+                return PostTagTypeResolver::class;
         }
 
         return parent::getTypeResolverClass($module);

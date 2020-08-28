@@ -1,7 +1,7 @@
 <?php
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoPSchema\Tags\TypeResolvers\TagTypeResolver;
+use PoPSchema\PostTags\TypeResolvers\PostTagTypeResolver;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoPSchema\CustomPosts\FieldInterfaceResolvers\IsCustomPostFieldInterfaceResolver;
@@ -14,7 +14,7 @@ class GD_DataLoad_FunctionalFieldResolver extends AbstractFunctionalFieldResolve
         return array(
             IsCustomPostFieldInterfaceResolver::class,
             UserTypeResolver::class,
-            TagTypeResolver::class,
+            PostTagTypeResolver::class,
         );
     }
 
