@@ -26,7 +26,7 @@ class PoPThemeWassup_Utils
 
     public static function getFrontendId($frontend_id, $group)
     {
-    
+
         // As defined in helper generateId in helpers.handlebars.js
         return $frontend_id.POP_CONSTANT_ID_SEPARATOR.$group;
     }
@@ -51,7 +51,7 @@ class PoPThemeWassup_Utils
                     PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER => 'hover',
                 );
                 foreach ($possiblyOpenPageSections as $possiblyOpenPageSection => $class) {
-                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBMODULEOUTPUTNAMES]));
+                    $pageSectionBlocks = arrayFlatten(array_values($configuration[$possiblyOpenPageSection][GD_JS_SUBMODULEOUTPUTNAMES] ?? []));
                     if ($pageSectionBlocks) {
                         // If the pageSection is sideinfo, open it as long as the block is not the EMPTYBLOCK
                         if ($possiblyOpenPageSection == PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO) {
