@@ -30,39 +30,6 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionRouteModuleProcess
             $ret[TagRouteNatures::TAG][$route][] = ['module' => $module];
         }
 
-        $eventTypeAPI = EventTypeAPIFacade::getInstance();
-
-        // Past single event
-        $modules = array(
-            POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_POSTAUTHORSSIDEBAR],
-        );
-        foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
-                'module' => $module,
-                'conditions' => [
-                    'routing-state' => [
-                        'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
-                        'queried-object-is-past-event' => true,
-                    ],
-                ],
-            ];
-        }
-
-        // Future and current single event
-        $modules = array(
-            POP_ROUTE_AUTHORS => [PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::class, PoP_Events_CoAuthors_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_POSTAUTHORSSIDEBAR],
-        );
-        foreach ($modules as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
-                'module' => $module,
-                'conditions' => [
-                    'routing-state' => [
-                        'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
-                    ],
-                ],
-            ];
-        }
-
         $modules = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR],
