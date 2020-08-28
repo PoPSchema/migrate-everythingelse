@@ -5,9 +5,9 @@ require_once 'routes.php';
 
 // High priority: allow the Theme and other plug-ins to set the values in advance.
 HooksAPIFacade::getInstance()->addAction(
-    'popcms:init', 
-    'commonpagesInitConstants', 
-    10000
+    'popcms:init',
+    'commonpagesInitConstants',
+    5000
 );
 function commonpagesInitConstants()
 {
