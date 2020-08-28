@@ -18,7 +18,7 @@ class PoP_Coauthors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 310);
     }
@@ -31,6 +31,9 @@ class PoP_Coauthors
     }
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('coauthors_plus');
         return true;
         include_once 'validation.php';
         $validation = new PoP_Coauthors_Validation();

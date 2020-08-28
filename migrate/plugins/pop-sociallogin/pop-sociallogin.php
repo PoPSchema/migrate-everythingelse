@@ -15,7 +15,7 @@ class PoP_SocialLogin
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Notifications
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
     }
@@ -30,6 +30,9 @@ class PoP_SocialLogin
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('wsl_activate');
         return true;
         include_once 'validation.php';
         $validation = new PoP_SocialLogin_Validation();

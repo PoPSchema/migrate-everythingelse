@@ -15,7 +15,7 @@ class PoP_SocialLoginProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Notifications Processors
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 850);
     }
@@ -23,7 +23,7 @@ class PoP_SocialLoginProcessors
     public function init()
     {
         define('POP_SOCIALLOGINPROCESSORS_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_SOCIALLOGINPROCESSORS_INITIALIZED', true);
@@ -32,6 +32,9 @@ class PoP_SocialLoginProcessors
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return function_exists('wsl_activate');
         return true;
         include_once 'validation.php';
         $validation = new PoP_SocialLoginProcessors_Validation();

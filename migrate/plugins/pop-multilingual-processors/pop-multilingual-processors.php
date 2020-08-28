@@ -18,7 +18,7 @@ class PoP_MultilingualProcessors
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application Processors
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 810);
     }
@@ -31,6 +31,9 @@ class PoP_MultilingualProcessors
     }
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('QTX_Translator');
         return true;
         include_once 'validation.php';
         $validation = new PoP_MultilingualProcessors_Validation();

@@ -15,7 +15,7 @@ class PoP_MultilingualWebPlatform
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Application Web Platform
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 510);
     }
@@ -23,7 +23,7 @@ class PoP_MultilingualWebPlatform
     public function init()
     {
         define('POP_MULTILINGUALWEBPLATFORM_URL', plugins_url('', __FILE__));
-        
+
         if ($this->validate()) {
             $this->initialize();
             define('POP_MULTILINGUALWEBPLATFORM_INITIALIZED', true);
@@ -32,6 +32,9 @@ class PoP_MultilingualWebPlatform
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('QTX_Translator');
         return true;
         include_once 'validation.php';
         $validation = new PoP_MultilingualWebPlatform_Validation();
