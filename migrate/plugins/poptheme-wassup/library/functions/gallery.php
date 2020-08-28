@@ -87,7 +87,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 
 //     if ( !empty($include) ) {
             // $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-//         $_attachments = $customPostTypeAPI->getPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+//         $_attachments = $customPostTypeAPI->getCustomPosts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
 
 //         $attachments = array();
 //         foreach ( $_attachments as $key => $val ) {

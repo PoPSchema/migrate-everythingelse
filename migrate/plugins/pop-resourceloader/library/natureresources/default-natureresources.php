@@ -158,7 +158,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             );
             foreach ($categories as $category) {
                 if (
-                    $post_ids = $customPostTypeAPI->getPosts(
+                    $post_ids = $customPostTypeAPI->getCustomPosts(
                         array_merge(
                             $query,
                             array(
@@ -175,7 +175,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // if (PoP_ResourceLoader_NatureResources_DefaultResources_Utils::add_nocategory_single_resources()) {
 
             //     // Also, add the configuration for one post without any category
-            //     if ($post_ids = $customPostTypeAPI->getPosts(array_merge(
+            //     if ($post_ids = $customPostTypeAPI->getCustomPosts(array_merge(
             //         $query,
             //         array(
             //             'category__not_in' => $all_categories,
@@ -188,7 +188,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             // Make sure there are no duplicate $ids (eg: a same post having 2 categories, such as "posts" (parent) and "articles" (child))
             $ids = array_unique($ids);
         } else {
-            $ids = $customPostTypeAPI->getPosts(
+            $ids = $customPostTypeAPI->getCustomPosts(
                 $query,
                 ['return-type' => ReturnTypes::IDS]
             );

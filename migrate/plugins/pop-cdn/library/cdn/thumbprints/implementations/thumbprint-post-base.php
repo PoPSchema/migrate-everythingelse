@@ -20,7 +20,7 @@ class PoP_CDN_Thumbprint_PostBase extends PoP_CDN_ThumbprintBase
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $options['return-type'] = ReturnTypes::IDS;
-        return $customPostTypeAPI->getPosts($query, $options);
+        return $customPostTypeAPI->getCustomPosts($query, $options);
     }
 
     public function getTimestamp($post_id)
