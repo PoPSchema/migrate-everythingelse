@@ -24,10 +24,10 @@ $moduleprocessor_manager->overrideProcessorClass(
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    PoP_Taxonomies_Module_Processor_FieldDataloads::class,
+    PoP_Tags_Module_Processor_FieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PoP_Taxonomies_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        PoP_Tags_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
         PoP_Taxonomies_Posts_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );
