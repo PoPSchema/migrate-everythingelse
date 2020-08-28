@@ -15,9 +15,9 @@ if (!defined('POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE')) {
 if (!defined('POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS')) {
     define('POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS', $definitionManager->getUniqueDefinition('our-sponsors', DefinitionGroups::ROUTES));
 }
-if (!defined('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS')) {
-    define('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS', $definitionManager->getUniqueDefinition('sponsor-us', DefinitionGroups::ROUTES));
-}
+// if (!defined('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS')) {
+//     define('POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS', $definitionManager->getUniqueDefinition('sponsor-us', DefinitionGroups::ROUTES));
+// }
 
 HooksAPIFacade::getInstance()->addFilter(
     'routes',
@@ -28,7 +28,7 @@ HooksAPIFacade::getInstance()->addFilter(
 				POP_COMMONPAGES_ROUTE_ABOUT,
                 POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
                 POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS,
-                POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS,
+                // POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS,
     		]
     	);
     }

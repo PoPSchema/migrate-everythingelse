@@ -316,8 +316,8 @@ class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleP
                         ),
                         'sponsorus' => sprintf(
                             '<a href="%s">%s</a>',
-                            $pageTypeAPI->getPermalink(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS),
-                            $pageTypeAPI->getTitle(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS)
+                            '#', //$pageTypeAPI->getPermalink(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS),
+                            'Sponsor us'//$pageTypeAPI->getTitle(POP_CLUSTERCOMMONPAGES_PAGE_ABOUT_SPONSORUS)
                         ),
                         'addcontent' => TranslationAPIFacade::getInstance()->__('Add content', 'poptheme-wassup'),
                         'addcontent-right' => TranslationAPIFacade::getInstance()->__('Add new...', 'poptheme-wassup'),
