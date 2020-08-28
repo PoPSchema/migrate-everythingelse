@@ -1,28 +1,12 @@
 <?php
 
 use PoP\Routing\RouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
     public function getModulesVarsPropertiesByNatureAndRoute()
     {
         $ret = array();
-
-        $routemodules_map = array(
-            POP_ROUTE_AUTHORS => [PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEAUTHORS_SCROLLMAP],
-        );
-        foreach ($routemodules_map as $route => $module) {
-            $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = [
-                'module' => $module,
-                'conditions' => [
-                    'format' => POP_FORMAT_MAP,
-                ],
-            ];
-            if ($default_format_singlesection == POP_FORMAT_MAP) {
-                $ret[CustomPostRouteNatures::CUSTOMPOST][$route][] = ['module' => $module];
-            }
-        }
 
         // Page modules
         $routemodules_allothers = array(
@@ -45,7 +29,7 @@ class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\
                     'format' => POP_FORMAT_MODALS,
                 ],
             ];
-            if ($default_format_singlesection == POP_FORMAT_MODALS) {
+            if ($default_format_section == POP_FORMAT_MODALS) {
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
@@ -60,7 +44,7 @@ class Wassup_EM_Module_MainContentRouteModuleProcessor extends \PoP\Application\
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
-            if ($default_format_singlesection == POP_FORMAT_TYPEAHEAD) {
+            if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
                 $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
             }
         }
