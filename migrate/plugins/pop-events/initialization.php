@@ -1,5 +1,5 @@
 <?php
-class PoP_Events_Initialization
+class PoP_Migrate_Events_Initialization
 {
     public function initialize()
     {

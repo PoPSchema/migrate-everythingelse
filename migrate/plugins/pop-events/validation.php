@@ -5,7 +5,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 define('POP_EVENTS_POP_EVENTS_MIN_VERSION', 0.1);
 define('POP_EVENTS_POP_CONTENTPOSTLINKS_MIN_VERSION', 0.1);
 
-class PoP_Events_Validation
+class PoP_Migrate_Events_Validation
 {
     public function validate()
     {

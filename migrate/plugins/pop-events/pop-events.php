@@ -14,7 +14,7 @@ Author: Leonardo Losovizen/u/leo/
 define('POP_EVENTS_VERSION', 0.132);
 define('POP_EVENTS_DIR', dirname(__FILE__));
 
-class PoP_Events
+class PoP_Migrate_Events
 {
     public function __construct()
     {
@@ -35,13 +35,13 @@ class PoP_Events
     {
         return true;
         include_once 'validation.php';
-        $validation = new PoP_Events_Validation();
+        $validation = new PoP_Migrate_Events_Validation();
         return $validation->validate();
     }
     public function initialize()
     {
         include_once 'initialization.php';
-        $initialization = new PoP_Events_Initialization();
+        $initialization = new PoP_Migrate_Events_Initialization();
         return $initialization->initialize();
     }
 }
@@ -49,4 +49,4 @@ class PoP_Events
 /**
  * Initialization
  */
-new PoP_Events();
+new PoP_Migrate_Events();
