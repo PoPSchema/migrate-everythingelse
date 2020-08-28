@@ -3,7 +3,6 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Application\Constants\Actions;
-use PoP\ComponentModel\State\ApplicationState;
 
 define('POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN', 'wassuputils-scrollablemain');
 
@@ -114,7 +113,7 @@ class PoP_ApplicationProcessors_Utils
         // Comment Leo 14/03/2017: The embed must be scrollable, because the fullscreen scrollbar doesn't work! Otherwise, it can't allow fullscreen mode
         // $vars = ApplicationState::getVars();
         // if ($vars['theme'] == GD_THEME_WASSUP && $vars['thememode'] == GD_THEMEMODE_WASSUP_EMBED) {
-            
+
         //     return true;
         // }
         return HooksAPIFacade::getInstance()->applyFilters(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN, false);

@@ -2,7 +2,6 @@
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_BlocksBase
 {
