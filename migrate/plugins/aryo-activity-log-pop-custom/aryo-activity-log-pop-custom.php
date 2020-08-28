@@ -33,6 +33,9 @@ class AAL_PoPCustom
 
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('AAL_Main');
         return true;
         include_once 'validation.php';
         $validation = new AAL_PoPCustom_Validation();
