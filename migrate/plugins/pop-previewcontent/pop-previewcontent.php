@@ -18,7 +18,7 @@ class PoP_PreviewContent
 {
     public function __construct()
     {
-        
+
         // Priority: after PoP Content Creation
         HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 350);
     }
@@ -31,6 +31,9 @@ class PoP_PreviewContent
     }
     public function validate()
     {
+        // This is a different case than the norm!
+        // Only load if plugin is active!
+        return class_exists('DS_Public_Post_Preview');
         return true;
         include_once 'validation.php';
         $validation = new PoP_PreviewContent_Validation();
