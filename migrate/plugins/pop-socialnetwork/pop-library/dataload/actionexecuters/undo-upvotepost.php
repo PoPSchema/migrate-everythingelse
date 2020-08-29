@@ -25,7 +25,7 @@ class GD_DataLoad_ActionExecuter_UndoUpvotePost implements \PoP\ComponentModel\A
         // Save the result for some module to incorporate it into the query args
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
+        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have stopped up-voting <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $customPostTypeAPI->getTitle($target_id)

@@ -19,10 +19,10 @@ class GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead implements \PoP\Compo
                 ResponseConstants::ERRORSTRINGS => $errors
             );
         }
-        
+
         // Save the result for some module to incorporate it into the query args
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(self::class, $hist_ids);
+        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $hist_ids);
 
         // No errors => success
         return array(
@@ -30,4 +30,4 @@ class GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead implements \PoP\Compo
         );
     }
 }
-    
+

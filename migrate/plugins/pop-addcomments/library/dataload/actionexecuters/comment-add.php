@@ -22,10 +22,10 @@ class GD_DataLoad_ActionExecuter_AddComment implements \PoP\ComponentModel\Actio
                     ResponseConstants::ERRORSTRINGS => $errors
                 );
             }
-            
+
             // Save the result for some module to incorporate it into the query args
             $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-            $gd_dataload_actionexecution_manager->setResult(self::class, $comment_id);
+            $gd_dataload_actionexecution_manager->setResult(get_called_class(), $comment_id);
 
             // No errors => success
             return array(
@@ -36,4 +36,4 @@ class GD_DataLoad_ActionExecuter_AddComment implements \PoP\ComponentModel\Actio
         return null;
     }
 }
-    
+

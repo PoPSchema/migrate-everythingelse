@@ -20,11 +20,11 @@ class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\Actio
                 ResponseConstants::ERRORSTRINGS => $errors
             );
         }
-        
+
         // Save the result for some module to incorporate it into the query args
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
+        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You are now following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $cmsusersapi->getUserDisplayName($target_id)
@@ -37,4 +37,4 @@ class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\Actio
         );
     }
 }
-    
+

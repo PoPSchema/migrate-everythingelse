@@ -25,7 +25,7 @@ class GD_DataLoad_ActionExecuter_UnsubscribeFromTag implements \PoP\ComponentMod
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
+        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $target_id);
         $tag = $posttagapi->getTag($target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have unsubscribed from <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
