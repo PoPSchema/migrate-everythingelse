@@ -22,11 +22,11 @@ class GD_DataLoad_ActionExecuter_SubscribeToTag implements \PoP\ComponentModel\A
         }
 
         // Save the result for some module to incorporate it into the query args
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
         $gd_dataload_actionexecution_manager->setResult(self::class, $target_id);
-        $tag = $tagapi->getTag($target_id);
+        $tag = $posttagapi->getTag($target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
             $applicationtaxonomyapi->getTagSymbolName($tag)

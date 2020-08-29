@@ -17,9 +17,9 @@ class GD_UnsubscribeFromTag extends GD_SubscribeToUnsubscribeFromTag
             // Check that the logged in user is currently subscribed to that tag
             $value = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_SUBSCRIBESTOTAGS);
             if (!in_array($target_id, $value)) {
-                $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+                $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
                 $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-                $tag = $tagapi->getTag($target_id);
+                $tag = $posttagapi->getTag($target_id);
                 $errors[] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You had not subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)

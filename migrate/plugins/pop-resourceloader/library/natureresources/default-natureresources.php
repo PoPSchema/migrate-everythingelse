@@ -70,8 +70,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             'limit' => 1,
             // 'fields' => 'ids',
         );
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
-        if ($ids = $tagapi->getTags($query, ['return-type' => ReturnTypes::IDS])) {
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        if ($ids = $posttagapi->getTags($query, ['return-type' => ReturnTypes::IDS])) {
             $nature = TagRouteNatures::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 

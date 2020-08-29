@@ -178,9 +178,9 @@ class PoP_EmailSender_Templates_Simple extends PoP_EmailSender_Templates
 
     public function getTaghtml($tag_id)
     {
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
-        $tag = $tagapi->getTag($tag_id);
-        $tag_url = $tagapi->getTagLink($tag_id);
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+        $tag = $posttagapi->getTag($tag_id);
+        $tag_url = $posttagapi->getTagLink($tag_id);
         $tagname_html = sprintf(
             '<h3 style="display: block;"><a href="%s">%s</a></h3>',
             $tag_url,

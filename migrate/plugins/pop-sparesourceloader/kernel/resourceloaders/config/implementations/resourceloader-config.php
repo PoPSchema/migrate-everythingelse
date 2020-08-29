@@ -22,7 +22,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $categoryapi = \PoPSchema\Categories\FunctionAPIFactory::getInstance();
         $vars = ApplicationState::getVars();
 
@@ -43,7 +43,7 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
         // Path slugs
         $configuration['$paths'] = array(
             'author' => $cmsusersapi->getAuthorBase().'/',
-            'tag' => $tagapi->getTagBase().'/',
+            'tag' => $posttagapi->getTagBase().'/',
             'single' => $single_paths,
         );
 

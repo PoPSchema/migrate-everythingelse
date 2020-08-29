@@ -54,7 +54,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
@@ -77,7 +77,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
 
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 

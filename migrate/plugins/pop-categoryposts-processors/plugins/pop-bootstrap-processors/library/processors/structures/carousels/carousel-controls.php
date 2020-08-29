@@ -343,7 +343,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $routes = array(
             self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
@@ -417,7 +417,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             $url = $cmsusersapi->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
         } elseif ($route = $tagroutes[$module[1]]) {
-            $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
+            $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
             return RequestUtils::addRoute($url, $route);
         }
 

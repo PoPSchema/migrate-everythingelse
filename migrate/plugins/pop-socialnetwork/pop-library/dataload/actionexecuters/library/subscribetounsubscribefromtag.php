@@ -12,8 +12,8 @@ class GD_SubscribeToUnsubscribeFromTag extends GD_UpdateUserMetaValue
             $target_id = $form_data['target_id'];
 
             // Make sure the post exists
-            $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
-            $target = $tagapi->getTag($target_id);
+            $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
+            $target = $posttagapi->getTag($target_id);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }

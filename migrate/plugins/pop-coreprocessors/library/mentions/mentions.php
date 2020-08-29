@@ -82,13 +82,13 @@ class PoP_Mentions
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         if (in_array($customPostTypeAPI->getCustomPostType($post_id), $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $content = $customPostTypeAPI->getContent($post_id);
 
             // $append = true because we will also add tags to this post extracted from comments posted under this post
             $tags = $this->getHashtagsFromContent($content);
-            $tagapi->setPostTags($post_id, $tags, true);
+            $posttagapi->setPostTags($post_id, $tags, true);
 
             // Allow Events Manager to also add its own tags with its own taxonomy
             // This is needed so we can search using parameter 'tag' with events, using the common slug
@@ -124,14 +124,14 @@ class PoP_Mentions
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $cmscommentsresolver = \PoPSchema\Comments\ObjectPropertyResolverFactory::getInstance();
         if ($tags = $this->getHashtagsFromContent($cmscommentsresolver->getCommentContent($comment))) {
             // $append = true because the tags are added to the post from the comment
-            $tagapi->setPostTags($cmscommentsresolver->getCommentPostId($comment), $tags, true);
+            $posttagapi->setPostTags($cmscommentsresolver->getCommentPostId($comment), $tags, true);
 
             // Save the tags as comment meta
-            $tag_ids = $tagapi->getTags(
+            $tag_ids = $posttagapi->getTags(
                 array(
                     // 'fields' => 'ids',
                     'slugs' => $tags,
@@ -220,15 +220,15 @@ class PoP_Mentions
     // function to generate tag link
     private function makeLink($match)
     {
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $cmstagresolver = \PoPSchema\Tags\ObjectPropertyResolverFactory::getInstance();
-        $tag = $tagapi->getTagByName($match[1]);
+        $tag = $posttagapi->getTagByName($match[1]);
         if (!$tag) {
             $content = $match[0];
         } else {
             $content = sprintf(
                 '<a class="hashtagger-tag" href="%s">%s</a>',
-                $tagapi->getTagLink($cmstagresolver->getTagID($tag)),
+                $posttagapi->getTagLink($cmstagresolver->getTagID($tag)),
                 $match[0]
             );
         }

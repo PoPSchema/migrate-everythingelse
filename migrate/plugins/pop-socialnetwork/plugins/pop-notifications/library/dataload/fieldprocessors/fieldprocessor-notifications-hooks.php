@@ -81,7 +81,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
         $notification = $resultItem;
         switch ($fieldName) {
@@ -159,7 +159,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                 switch ($notification->action) {
                                     case AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG:
                                     case AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG:
-                                        return $tagapi->getTagLink($notification->object_id);
+                                        return $posttagapi->getTagLink($notification->object_id);
                                 }
                                 return null;
                         }
@@ -224,7 +224,7 @@ class PoP_SocialNetwork_DataLoad_FieldResolver_Notifications extends AbstractDBD
                                             AAL_POP_ACTION_USER_SUBSCRIBEDTOTAG => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> subscribed to <strong>%s</strong>', 'pop-notifications'),
                                             AAL_POP_ACTION_USER_UNSUBSCRIBEDFROMTAG => TranslationAPIFacade::getInstance()->__('<strong>%s</strong> unsubscribed from <strong>%s</strong>', 'pop-notifications'),
                                         );
-                                        $tag = $tagapi->getTag($notification->object_id);
+                                        $tag = $posttagapi->getTag($notification->object_id);
                                         return sprintf(
                                             $messages[$notification->action],
                                             $cmsusersapi->getUserDisplayName($notification->user_id),

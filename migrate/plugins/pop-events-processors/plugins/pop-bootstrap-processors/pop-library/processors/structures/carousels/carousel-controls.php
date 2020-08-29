@@ -61,7 +61,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
     {
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_EVENTS:
                 return RouteUtils::getRouteURL(POP_EVENTS_ROUTE_EVENTS);
@@ -75,7 +75,7 @@ class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor
                 return RequestUtils::addRoute($url, $routes[$module[1]]);
 
             case self::MODULE_CAROUSELCONTROLS_TAGEVENTS:
-                $url = $tagapi->getTagLink($vars['routing-state']['queried-object-id']);
+                $url = $posttagapi->getTagLink($vars['routing-state']['queried-object-id']);
                 $routes = array(
                     self::MODULE_CAROUSELCONTROLS_TAGEVENTS => POP_EVENTS_ROUTE_EVENTS,
                 );

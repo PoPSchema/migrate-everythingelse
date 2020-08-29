@@ -274,7 +274,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $pageTypeAPI = PageTypeAPIFacade::getInstance();
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
 
         // Comment Leo 11/11/2017: we can only do $merge = true when doing "fetching-json",
         // because we need to bundle all resources for all different cases for the same URL
@@ -534,7 +534,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $tag_id);
 
                 $vars['routing-state'] = [];
-                $vars['routing-state']['queried-object'] = $tagapi->getTag($tag_id);
+                $vars['routing-state']['queried-object'] = $posttagapi->getTag($tag_id);
                 $vars['routing-state']['queried-object-id'] = $tag_id;
                 ApplicationState::augmentVarsProperties();
 

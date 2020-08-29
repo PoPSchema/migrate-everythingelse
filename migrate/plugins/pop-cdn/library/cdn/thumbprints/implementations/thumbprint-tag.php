@@ -23,9 +23,9 @@ class PoP_CDN_Thumbprint_Tag extends PoP_CDN_ThumbprintBase
 
     public function executeQuery($query, array $options = [])
     {
-        $tagapi = \PoPSchema\Tags\FunctionAPIFactory::getInstance();
+        $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $options['return-type'] = ReturnTypes::IDS;
-        return $tagapi->getTags($query, $options);
+        return $posttagapi->getTags($query, $options);
     }
 
     public function getTimestamp($tag_id)
