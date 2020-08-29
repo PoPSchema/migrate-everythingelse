@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\DataloadUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\ComponentModel\Facades\ModuleFilters\ModuleFilterManagerFacade;
+use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 

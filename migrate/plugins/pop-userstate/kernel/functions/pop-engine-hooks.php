@@ -51,11 +51,11 @@ class PoP_UserState_EngineHooks
         if ($helperCalculations['has-userstatedata-load']) {
                 $url = GeneralUtils::addQueryArgs([
                 GD_URLPARAM_DATAOUTPUTITEMS => [
-                    GD_URLPARAM_DATAOUTPUTITEMS_META, 
-                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA, 
+                    GD_URLPARAM_DATAOUTPUTITEMS_META,
+                    GD_URLPARAM_DATAOUTPUTITEMS_MODULEDATA,
                     GD_URLPARAM_DATAOUTPUTITEMS_DATABASES,
                 ],
-                \PoP\ComponentModel\ModuleFilters\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
+                \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => POP_MODULEFILTER_USERSTATE,
                 GD_URLPARAM_ACTIONS.'[]' => POP_ACTION_LOADUSERSTATE,
             ], RequestUtils::getCurrentUrl());
             $engine->addBackgroundUrl($url, array(POP_TARGET_MAIN));

@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleFilters\ModuleFilterManager;
+use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');
