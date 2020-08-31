@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class PoPCore_Dataload_CheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
     public const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';
@@ -34,7 +35,7 @@ class PoPCore_Dataload_CheckpointProcessor extends \PoP\ComponentModel\Checkpoin
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

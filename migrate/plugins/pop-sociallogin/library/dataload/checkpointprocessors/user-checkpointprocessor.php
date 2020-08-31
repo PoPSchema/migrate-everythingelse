@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class GD_WSL_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
 
@@ -20,7 +21,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\Checkp
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

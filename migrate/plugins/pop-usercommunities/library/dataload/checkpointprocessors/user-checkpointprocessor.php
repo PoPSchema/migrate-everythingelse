@@ -1,8 +1,9 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY = 'checkpoint-loggedinuser-iscommunity';
     public const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';
@@ -49,7 +50,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends \PoP\Componen
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

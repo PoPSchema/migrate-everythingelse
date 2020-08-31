@@ -1,8 +1,9 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class GD_URE_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION = 'checkpoint-loggedinuser-isprofileorganization';
     public const CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL = 'checkpoint-loggedinuser-isprofileindividual';
@@ -32,7 +33,7 @@ class GD_URE_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\Checkp
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

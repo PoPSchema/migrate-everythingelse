@@ -1,8 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class GD_UserLogin_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
 
@@ -25,7 +26,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

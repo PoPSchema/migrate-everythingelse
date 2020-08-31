@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class PoP_Domain_Dataload_CheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_DOMAINVALID = 'checkpoint-domainvalid';
 
@@ -22,7 +23,7 @@ class PoP_Domain_Dataload_CheckpointProcessor extends \PoP\ComponentModel\Checkp
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class PoPSystem_Dataload_CheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_SYSTEMACCESSKEYVALID = 'system-checkpoint-systemaccesskeyvalid';
     public const CHECKPOINT_SYSTEMACCESSIPVALID = 'system-checkpoint-systemaccessipvalid';
@@ -52,7 +53,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends \PoP\ComponentModel\Checkpo
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

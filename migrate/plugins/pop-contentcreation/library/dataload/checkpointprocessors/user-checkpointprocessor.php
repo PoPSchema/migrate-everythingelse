@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class GD_ContentCreation_Dataload_UserCheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
     public const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
     public const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';
@@ -32,7 +33,7 @@ class GD_ContentCreation_Dataload_UserCheckpointProcessor extends \PoP\Component
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }

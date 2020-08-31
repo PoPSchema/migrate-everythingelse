@@ -1,6 +1,7 @@
 <?php
+use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
 
-class PoP_MultiDomain_Dataload_CheckpointProcessor extends \PoP\ComponentModel\CheckpointProcessorBase
+class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
     public function getCheckpointsToProcess()
     {
@@ -24,7 +25,7 @@ class PoP_MultiDomain_Dataload_CheckpointProcessor extends \PoP\ComponentModel\C
                 }
                 break;
         }
-    
+
         return parent::process($checkpoint);
     }
 }
