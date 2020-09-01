@@ -1,6 +1,11 @@
 <?php
 $class = (new class() extends \PoP\Root\Component\AbstractComponent
 {
+    /**
+     * Classes from PoP components that must be initialized before this component
+     *
+     * @return string[]
+     */
     public static function getDependedComponentClasses(): array
     {
         return [];
