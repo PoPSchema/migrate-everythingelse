@@ -53,6 +53,9 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
         $instanceManager = InstanceManagerFacade::getInstance();
         switch ($fieldName) {
             case 'shareURL':
+                /**
+                 * @var SocialMediaProviderEnum
+                 */
                 $socialMediaProviderEnum = $instanceManager->getInstance(SocialMediaProviderEnum::class);
                 return array_merge(
                     $schemaFieldArgs,
@@ -101,6 +104,9 @@ abstract class PoP_SocialMediaProviders_DataLoad_FieldResolver_FunctionalSocialM
                 if (GeneralUtils::isError($title)) {
                     return $title;
                 }
+                /**
+                 * @var SocialMediaProviderEnum
+                 */
                 $socialMediaProviderEnum = $instanceManager->getInstance(SocialMediaProviderEnum::class);
                 $providerURLs = $socialMediaProviderEnum->getValues();
                 return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
