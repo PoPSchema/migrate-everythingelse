@@ -6,7 +6,10 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_MultiDomain_Engine_Utils
 {
-    public static function addVars($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public static function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
         $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN];

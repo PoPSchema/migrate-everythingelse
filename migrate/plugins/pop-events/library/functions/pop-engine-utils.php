@@ -15,7 +15,10 @@ class PoP_Events_Engine_Hooks
         );
     }
 
-    public function augmentVarsProperties($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public function augmentVarsProperties(array $vars_in_array): void
     {
 
         // Set additional properties based on the nature: the global $post, $author, or $queried_object

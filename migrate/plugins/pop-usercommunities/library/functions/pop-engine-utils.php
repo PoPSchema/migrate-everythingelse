@@ -7,19 +7,22 @@ class PoP_URE_Engine_Hooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addAction(
-            'ApplicationState:addVars', 
-            [$this, 'addVars'], 
+            'ApplicationState:addVars',
+            [$this, 'addVars'],
             10,
             1
         );
         HooksAPIFacade::getInstance()->addAction(
-            'augmentVarsProperties', 
-            [$this, 'augmentVarsProperties'], 
+            'augmentVarsProperties',
+            [$this, 'augmentVarsProperties'],
             10,
             1
         );
     }
-    public function addVars($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {
@@ -33,13 +36,16 @@ class PoP_URE_Engine_Hooks
                 if (!in_array($source, $sources)) {
                     $source = gdUreGetDefaultContentsource();
                 }
-                
+
                 $vars['source'] = $source;
             }
         }
     }
 
-    public function augmentVarsProperties($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public function augmentVarsProperties(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
         if ($vars['nature'] == UserRouteNatures::USER) {

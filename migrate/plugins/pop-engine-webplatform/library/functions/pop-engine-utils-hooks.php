@@ -6,12 +6,15 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_WebPlatformEngine_UtilsHooks
 {
-    public static function addVars($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public static function addVars(array $vars_in_array): void
     {
         // Comment Leo 19/11/2017: when first loading the website, ask if we are using the AppShell before anything else,
         // in which case it will always be 'page' and the $post->ID set to the corresponding AppShell page ID
         if (RequestUtils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
-            
+
             // Comment Leo 19/11/2017: page ID POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL must be set at this plugin level, not on pop-serviceworkers
             $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
             $vars = &$vars_in_array[0];
@@ -24,7 +27,7 @@ class PoP_WebPlatformEngine_UtilsHooks
         // Comment Leo 19/11/2017: when first loading the website, ask if we are using the AppShell before anything else,
         // in which case it will always be 'page' and the $post->ID set to the corresponding AppShell page ID
         if (RequestUtils::loadingSite() && PoP_WebPlatform_ServerUtils::useAppshell()) {
-            
+
             return [
                 null,
                 null
@@ -40,7 +43,7 @@ class PoP_WebPlatformEngine_UtilsHooks
     // 	// Do it only if the URL does not already contain a '#'. Eg: the user might click 'refresh' on an Add Event page, which already contains such an id
     // 	// it also allows to go down to the marker, as in for comments
     // 	if (PoP_WebPlatform_ConfigurationUtils::isMultipleopen()) {
-            
+
     // 		$url = PoP_WebPlatformEngine_Utils::addUniqueId($url);
     // 	}
 

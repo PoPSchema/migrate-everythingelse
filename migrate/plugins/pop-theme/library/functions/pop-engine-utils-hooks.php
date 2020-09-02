@@ -6,7 +6,10 @@ use PoP\Engine\FieldResolvers\OperatorGlobalFieldResolver;
 
 class PoP_Theme_UtilsHooks
 {
-    public static function addVars($vars_in_array)
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public static function addVars(array $vars_in_array): void
     {
         $thememanager = Themes\ThemeManagerFactory::getInstance();
         $vars = &$vars_in_array[0];
@@ -19,7 +22,11 @@ class PoP_Theme_UtilsHooks
         $vars['themestyle-isdefault'] = $thememanager->isDefaultThemestyle();
         $vars['theme-path'] = $thememanager->getThemePath();
     }
-    public function setSafeVars($vars_in_array)
+
+    /**
+     * @param array<array> $vars_in_array
+     */
+    public function setSafeVars(array $vars_in_array): void
     {
         // Remove the theme path
         $safeVars = &$vars_in_array[0];
