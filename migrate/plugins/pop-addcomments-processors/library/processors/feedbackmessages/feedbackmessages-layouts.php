@@ -32,7 +32,7 @@ class PoP_Module_Processor_CommentsFeedbackMessageLayouts extends PoP_Module_Pro
                 break;
 
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT:
-                $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Ops, there were some problems:', 'pop-coreprocessors');
+                $ret['error-header'] = TranslationAPIFacade::getInstance()->__('Oops, there were some problems:', 'pop-coreprocessors');
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Comment added successfully!', 'pop-coreprocessors');
                 $ret['empty-content'] = TranslationAPIFacade::getInstance()->__('Comment is missing.', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('Your comment was added.', 'pop-coreprocessors');

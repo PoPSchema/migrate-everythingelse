@@ -86,9 +86,9 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                 );
 
             case self::MODULE_CODE_404:
-                return TranslationAPIFacade::getInstance()->__('Ops, page not found.', 'pop-application-processors');
+                return TranslationAPIFacade::getInstance()->__('Oops, page not found.', 'pop-application-processors');
         }
-    
+
         return parent::getCode($module, $props);
     }
 
@@ -99,7 +99,7 @@ class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
                 $this->appendProp($module, $props, 'class', 'block-homewelcome');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

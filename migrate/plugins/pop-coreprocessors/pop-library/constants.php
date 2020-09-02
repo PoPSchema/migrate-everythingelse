@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-define('GD_CONSTANT_ERROR_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('Ops, there was a connection problem.', 'pop-coreprocessors'));
+define('GD_CONSTANT_ERROR_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('Oops, there was a connection problem.', 'pop-coreprocessors'));
 define('GD_CONSTANT_OFFLINE_MSG', '<i class="fa fa-fw fa-warning"></i>'.TranslationAPIFacade::getInstance()->__('It seems you are offline.', 'pop-coreprocessors'));
 define('GD_CONSTANT_RETRY_MSG', TranslationAPIFacade::getInstance()->__('Retry', 'pop-coreprocessors'));
 define('GD_CONSTANT_AUTHORS_SEPARATOR', '<span class="preview-author-sep">|</span>');
@@ -34,7 +34,7 @@ HooksAPIFacade::getInstance()->addFilter('gd_jquery_constants', 'gdPopcoreJquery
 function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
 {
     $jqueryConstants['JSPLACEHOLDER_QUERY'] = GD_JSPLACEHOLDER_QUERY;
-    
+
     // ------------------------------------------
     // Constants from PoP (plugins/pop/kernel/library/constants.php)
     // ------------------------------------------
@@ -50,7 +50,7 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
 
     // wpEditor
     $jqueryConstants['MODULESETTINGS_EDITOR_NAME'] = GD_MODULESETTINGS_EDITOR_NAME;
-    
+
     $jqueryConstants['SEPARATOR'] = GD_SEPARATOR;
 
     // $jqueryConstants['INTERCEPTOR_WITHPARAMS'] = GD_INTERCEPTOR_WITHPARAMS;
@@ -71,9 +71,9 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
         GD_CONSTANT_OFFLINE_MSG,
         GD_CONSTANT_RETRY_MSG
     );
-    $jqueryConstants['ERROR_404'] = TranslationAPIFacade::getInstance()->__('Ops, this is a broken link.', 'pop-coreprocessors');
+    $jqueryConstants['ERROR_404'] = TranslationAPIFacade::getInstance()->__('Oops, this is a broken link.', 'pop-coreprocessors');
     $jqueryConstants['FEEDBACKMSG_MULTIDOMAIN'] = GD_CONSTANT_FEEDBACKMSG_MULTIDOMAIN;
-    
+
     $jqueryConstants['KEYS_THUMBPRINT'] = POP_KEYS_THUMBPRINT;
 
     return $jqueryConstants;
@@ -82,5 +82,5 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
 HooksAPIFacade::getInstance()->addFilter('gd_hack:script_loader:default_error', 'gdWpScriptLoaderDefaultError');
 function gdWpScriptLoaderDefaultError($error)
 {
-    return TranslationAPIFacade::getInstance()->__('Ops, the upload failed. Let\'s fix this: please save your post as \'Draft\', refresh the browser window, and try again.', 'pop-coreprocessors');
+    return TranslationAPIFacade::getInstance()->__('Oops, the upload failed. Let\'s fix this: please save your post as \'Draft\', refresh the browser window, and try again.', 'pop-coreprocessors');
 }

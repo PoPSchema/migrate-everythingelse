@@ -22,7 +22,7 @@ class GD_ChangePassword_User
         } elseif (!$cmsuseraccountapi->checkPassword($form_data['user_id'], $current_password)) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Current password is incorrect.', 'pop-application');
         }
-        
+
         if (!$password) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
@@ -48,7 +48,7 @@ class GD_ChangePassword_User
             'password' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD])->getValue([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD]),
             'repeat_password' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])->getValue([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])
         );
-        
+
         return $form_data;
     }
 
@@ -75,7 +75,7 @@ class GD_ChangePassword_User
 
         if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
+                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()
             );
             return;

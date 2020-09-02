@@ -482,7 +482,7 @@ class GD_CreateUpdate_PostBase
         $result = $this->executeUpdatepost($post_data);
 
         if ($result === 0) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Ops, there was a problem... this is embarrassing, huh?', 'pop-application');
+            $errors[] = TranslationAPIFacade::getInstance()->__('Oops, there was a problem... this is embarrassing, huh?', 'pop-application');
             return;
         }
 
@@ -509,7 +509,7 @@ class GD_CreateUpdate_PostBase
         $post_id = $this->executeCreatepost($post_data);
 
         if ($post_id == 0) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Ops, there was a problem... this is embarrassing, huh?', 'pop-application');
+            $errors[] = TranslationAPIFacade::getInstance()->__('Oops, there was a problem... this is embarrassing, huh?', 'pop-application');
             return;
         }
 

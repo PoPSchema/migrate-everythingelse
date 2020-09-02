@@ -265,7 +265,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         switch ($module[1]) {
             case self::MODULE_BLOCK_404:
-                return TranslationAPIFacade::getInstance()->__('Ops, this page doesn\'t exist!', 'poptheme-wassup');
+                return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = $vars['routing-state']['queried-object-id'];

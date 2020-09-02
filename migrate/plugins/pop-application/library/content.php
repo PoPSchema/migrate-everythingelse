@@ -32,7 +32,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 //         $tag = $vars['routing-state']['queried-object'];
 //         $content = $taxonomyapi->getTagTitle($tag);
 //     } elseif ($vars['routing-state']['is-404']) {
-//         $content = TranslationAPIFacade::getInstance()->__('Ops, nothing found here!', 'pop-engine');
+//         $content = TranslationAPIFacade::getInstance()->__('Oops, nothing found here!', 'pop-engine');
 //     } elseif ($vars['routing-state']['is-user']) {
 //         $author = $vars['routing-state']['queried-object-id'];
 //         $content = $cmsusersapi->getUserDisplayName($author);

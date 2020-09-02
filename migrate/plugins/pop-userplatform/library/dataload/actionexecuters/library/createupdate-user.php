@@ -57,7 +57,7 @@ class GD_CreateUpdate_User
         // Validate Password
         $password = $form_data['password'];
         $repeatpassword =  $form_data['repeat_password'];
-        
+
         if (!$password) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
@@ -73,7 +73,7 @@ class GD_CreateUpdate_User
         // Validate the captcha
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
-            
+
             $captcha_validation = GD_Captcha::validate($captcha);
             if (GeneralUtils::isError($captcha_validation)) {
                 $errors[] = $captcha_validation->getErrorMessage();
@@ -153,7 +153,7 @@ class GD_CreateUpdate_User
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data', $form_data);
-        
+
         return $form_data;
     }
 
@@ -163,7 +163,7 @@ class GD_CreateUpdate_User
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
-        
+
         return $form_data;
     }
 
@@ -173,7 +173,7 @@ class GD_CreateUpdate_User
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
-        
+
         return $form_data;
     }
 
@@ -193,7 +193,7 @@ class GD_CreateUpdate_User
     protected function getCreateuserData($form_data)
     {
         $user_data = $this->getUpdateuserData($form_data);
-        
+
         // ID not needed
         unset($user_data['id']);
 
@@ -223,12 +223,12 @@ class GD_CreateUpdate_User
     {
         $user_data = $this->getUpdateuserData($form_data);
         $user_id = $user_data['id'];
-        
+
         $result = $this->executeUpdateuser($user_data);
 
         if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
+                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()
             );
             return;
@@ -252,14 +252,14 @@ class GD_CreateUpdate_User
 
         if (GeneralUtils::isError($result)) {
             $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Ops, there was a problem: %s', 'pop-application'),
+                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
                 $result->getErrorMessage()
             );
             return;
         }
 
         $user_id = $result;
-        
+
         $this->createupdateuser($user_id, $form_data);
 
         return $user_id;
@@ -270,7 +270,7 @@ class GD_CreateUpdate_User
 
         // If user is logged in => It's Update
         // Otherwise => It's Create
-        
+
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
             $this->update($errors, $data_properties);
@@ -280,7 +280,7 @@ class GD_CreateUpdate_User
         $this->create($errors, $data_properties);
         return 'create';
     }
-    
+
     protected function additionals($user_id, $form_data)
     {
         HooksAPIFacade::getInstance()->doAction('gd_createupdate_user:additionals', $user_id, $form_data);

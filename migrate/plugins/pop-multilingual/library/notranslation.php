@@ -16,7 +16,7 @@ function multilingualUseBlockAltlang($output, $lang, $language_list, $alt_lang, 
     return sprintf(
         '<p class="text-warning bg-warning">%s</p><hr/>%s',
         sprintf(
-            TranslationAPIFacade::getInstance()->__('Ops, it seems this content is not available in <strong>%s</strong>. <a href="%s">Would you like to help us translate it?</a>', 'pop-multilingual'),
+            TranslationAPIFacade::getInstance()->__('Oops, it seems this content is not available in <strong>%s</strong>. <a href="%s">Would you like to help us translate it?</a>', 'pop-multilingual'),
             $pluginapi->getLanguageName($lang),
             RouteUtils::getRouteURL(POP_CONTACTUS_ROUTE_CONTACTUS)
         ),
