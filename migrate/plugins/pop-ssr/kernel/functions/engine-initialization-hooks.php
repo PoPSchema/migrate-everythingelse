@@ -1,15 +1,16 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\DataloadUtils;
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\TypeResolvers\UnionTypeHelpers;
+use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_SSR_EngineInitialization_Hooks
 {
@@ -184,9 +185,11 @@ class PoP_SSR_EngineInitialization_Hooks
 
             // Data to be copied can come from either the database or the userstatedatabase
             $databases = $data['dbData'];
-            $unionDBKeyIDs = $data['unionDBKeyIDs'];
 
             // Obtain the data from the database, copy it to the dynamic database
+            /**
+             * @var TypeResolverInterface
+             */
             $typeResolver = $instanceManager->getInstance($typeResolver_class);
             $database_key = $typeResolver->getTypeOutputName();
 
