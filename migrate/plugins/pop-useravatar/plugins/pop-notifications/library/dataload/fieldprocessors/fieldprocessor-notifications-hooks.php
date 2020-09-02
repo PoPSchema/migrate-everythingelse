@@ -54,8 +54,22 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
         );
     }
 
-    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @param array<string, mixed>|null $variables
+     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $options
+     * @return mixed
+     */
+    public function resolveValue(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = [],
+        ?array $variables = null,
+        ?array $expressions = null,
+        array $options = []
+    ) {
         $notification = $resultItem;
         $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
@@ -67,7 +81,7 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
                         return getRouteIcon(POP_USERAVATAR_ROUTE_EDITAVATAR, false);
                 }
                 return null;
-            
+
             case 'url':
                 switch ($notification->action) {
                     case AAL_POP_ACTION_USER_UPDATEDPHOTO:
@@ -88,6 +102,6 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

@@ -38,8 +38,22 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @param array<string, mixed>|null $variables
+     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $options
+     * @return mixed
+     */
+    public function resolveValue(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = [],
+        ?array $variables = null,
+        ?array $expressions = null,
+        array $options = []
+    ) {
         $user = $resultItem;
         switch ($fieldName) {
             case 'fileUploadPictureURL':
@@ -50,6 +64,6 @@ class PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers extends AbstractFunc
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_UserAvatar_DataLoad_FieldResolver_FunctionalUsers::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS);

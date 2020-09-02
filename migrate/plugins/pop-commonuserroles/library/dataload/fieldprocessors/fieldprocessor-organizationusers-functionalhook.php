@@ -42,8 +42,22 @@ class GD_URE_Custom_DataLoad_FieldResolver_FunctionalOrganizationUsers extends A
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @param array<string, mixed>|null $variables
+     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $options
+     * @return mixed
+     */
+    public function resolveValue(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = [],
+        ?array $variables = null,
+        ?array $expressions = null,
+        array $options = []
+    ) {
         $user = $resultItem;
         switch ($fieldName) {
             case 'organizationTypesByName':

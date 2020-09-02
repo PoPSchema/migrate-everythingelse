@@ -54,8 +54,22 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         );
     }
 
-    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @param array<string, mixed>|null $variables
+     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $options
+     * @return mixed
+     */
+    public function resolveValue(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = [],
+        ?array $variables = null,
+        ?array $expressions = null,
+        array $options = []
+    ) {
         $notification = $resultItem;
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
@@ -67,7 +81,7 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
                         return getRouteIcon(POP_USERPLATFORM_ROUTE_EDITPROFILE, false);
                 }
                 return null;
-            
+
             case 'url':
                 switch ($notification->action) {
                 // Link to the Edit Profile page
@@ -93,6 +107,6 @@ class WSL_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 WSL_AAL_PoP_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);

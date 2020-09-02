@@ -54,8 +54,22 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
         );
     }
 
-    public function resolveValue(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = [], ?array $variables = null, ?array $expressions = null, array $options = [])
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     * @param array<string, mixed>|null $variables
+     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $options
+     * @return mixed
+     */
+    public function resolveValue(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = [],
+        ?array $variables = null,
+        ?array $expressions = null,
+        array $options = []
+    ) {
         $notification = $resultItem;
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
@@ -83,6 +97,6 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);
     }
 }
-    
+
 // Static Initialization: Attach
 PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications::attach(\PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups::FIELDRESOLVERS, 20);
