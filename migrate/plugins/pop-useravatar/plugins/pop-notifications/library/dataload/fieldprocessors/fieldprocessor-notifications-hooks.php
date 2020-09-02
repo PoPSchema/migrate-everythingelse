@@ -43,8 +43,15 @@ class PoP_AAL_UserAvatar_DataLoad_FieldResolver_Notification extends AbstractDBD
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     */
+    public function resolveCanProcessResultItem(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): bool {
         $notification = $resultItem;
         return $notification->object_type == 'User' && in_array(
             $notification->action,

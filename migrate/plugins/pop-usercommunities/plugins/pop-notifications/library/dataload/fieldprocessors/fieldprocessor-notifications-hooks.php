@@ -113,8 +113,15 @@ class URE_AAL_PoP_DataLoad_FieldResolver_Notifications extends AbstractDBDataFie
         return null;
     }
 
-    public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     */
+    public function resolveCanProcessResultItem(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): bool {
         if (in_array($fieldName, [
             'icon',
             'url',

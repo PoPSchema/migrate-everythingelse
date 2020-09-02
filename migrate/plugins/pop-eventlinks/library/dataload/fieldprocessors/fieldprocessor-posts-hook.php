@@ -52,8 +52,15 @@ class GD_EM_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldResolver
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     */
+    public function resolveCanProcessResultItem(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): bool {
         $event = $resultItem;
         if (in_array($fieldName, [
             'excerpt',

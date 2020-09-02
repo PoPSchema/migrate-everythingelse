@@ -42,8 +42,15 @@ class PoP_Notifications_UserLogin_DataLoad_FieldResolver_Notifications extends A
         return $descriptions[$fieldName] ?? parent::getSchemaFieldDescription($typeResolver, $fieldName);
     }
 
-    public function resolveCanProcessResultItem(TypeResolverInterface $typeResolver, $resultItem, string $fieldName, array $fieldArgs = []): bool
-    {
+    /**
+     * @param array<string, mixed> $fieldArgs
+     */
+    public function resolveCanProcessResultItem(
+        TypeResolverInterface $typeResolver,
+        object $resultItem,
+        string $fieldName,
+        array $fieldArgs = []
+    ): bool {
         $notification = $resultItem;
         return $notification->object_type == 'User' && in_array(
             $notification->action,
