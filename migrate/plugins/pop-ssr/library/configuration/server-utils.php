@@ -18,7 +18,7 @@ class PoP_SSR_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['DISABLE_SERVER_SIDE_RENDERING']) ? strtolower($_ENV['DISABLE_SERVER_SIDE_RENDERING']) == "true" : false;
+        return getenv('DISABLE_SERVER_SIDE_RENDERING') !== false ? strtolower(getenv('DISABLE_SERVER_SIDE_RENDERING')) == "true" : false;
     }
 
     public static function removeDatabasesFromOutput()
@@ -29,7 +29,7 @@ class PoP_SSR_ServerUtils
             return false;
         }
 
-        return isset($_ENV['REMOVE_DATABASES_FROM_OUTPUT']) ? strtolower($_ENV['REMOVE_DATABASES_FROM_OUTPUT']) == "true" : false;
+        return getenv('REMOVE_DATABASES_FROM_OUTPUT') !== false ? strtolower(getenv('REMOVE_DATABASES_FROM_OUTPUT')) == "true" : false;
     }
 
     public static function includeScriptsAfterHtml()
@@ -44,6 +44,6 @@ class PoP_SSR_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['INCLUDE_SCRIPTS_AFTER_HTML']) ? strtolower($_ENV['INCLUDE_SCRIPTS_AFTER_HTML']) == "true" : false;
+        return getenv('INCLUDE_SCRIPTS_AFTER_HTML') !== false ? strtolower(getenv('INCLUDE_SCRIPTS_AFTER_HTML')) == "true" : false;
     }
 }

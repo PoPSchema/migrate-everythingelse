@@ -16,6 +16,6 @@ class PoP_ServiceWorkers_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['DISABLE_SERVICE_WORKERS']) ? strtolower($_ENV['DISABLE_SERVICE_WORKERS']) == "true" : false;
+        return getenv('DISABLE_SERVICE_WORKERS') !== false ? strtolower(getenv('DISABLE_SERVICE_WORKERS')) == "true" : false;
     }
 }

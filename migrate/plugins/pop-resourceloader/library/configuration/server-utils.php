@@ -13,7 +13,7 @@ class PoP_ResourceLoader_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['USE_CODE_SPLITTING']) ? strtolower($_ENV['USE_CODE_SPLITTING']) == "true" : false;
+        return getenv('USE_CODE_SPLITTING') !== false ? strtolower(getenv('USE_CODE_SPLITTING')) == "true" : false;
     }
 
     public static function generateCodeSplittingFiles()
@@ -23,7 +23,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return isset($_ENV['GENERATE_CODE_SPLITTING_FILES']) ? strtolower($_ENV['GENERATE_CODE_SPLITTING_FILES']) == "true" : false;
+        return getenv('GENERATE_CODE_SPLITTING_FILES') !== false ? strtolower(getenv('GENERATE_CODE_SPLITTING_FILES')) == "true" : false;
     }
 
     public static function includeResourcesInHeader()
@@ -69,8 +69,8 @@ class PoP_ResourceLoader_ServerUtils
             return $include_type;
         }
 
-        if (isset($_ENV['RESOURCES_INCLUDE_TYPE'])) {
-            $includeType = $_ENV['RESOURCES_INCLUDE_TYPE'];
+        if (getenv('RESOURCES_INCLUDE_TYPE') !== false) {
+            $includeType = getenv('RESOURCES_INCLUDE_TYPE');
             // Make sure the defined value is valid
             $values = array(
                 'header',
@@ -122,7 +122,7 @@ class PoP_ResourceLoader_ServerUtils
             return true;
         }
 
-        return isset($_ENV['GENERATE_LOADING_FRAME_RESOURCE_MAPPING']) ? strtolower($_ENV['GENERATE_LOADING_FRAME_RESOURCE_MAPPING']) == "true" : false;
+        return getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING') !== false ? strtolower(getenv('GENERATE_LOADING_FRAME_RESOURCE_MAPPING')) == "true" : false;
     }
 
     public static function generateBundlefilesOnRuntime()
@@ -141,7 +141,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return isset($_ENV['GENERATE_BUNDLE_FILES_ON_RUNTIME']) ? strtolower($_ENV['GENERATE_BUNDLE_FILES_ON_RUNTIME']) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES_ON_RUNTIME')) == "true" : false;
     }
 
     public static function generateBundleFiles()
@@ -151,7 +151,7 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return isset($_ENV['GENERATE_BUNDLE_FILES']) ? strtolower($_ENV['GENERATE_BUNDLE_FILES']) == "true" : false;
+        return getenv('GENERATE_BUNDLE_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLE_FILES')) == "true" : false;
     }
 
     public static function generateBundlegroupFiles()
@@ -161,12 +161,12 @@ class PoP_ResourceLoader_ServerUtils
             return false;
         }
 
-        return isset($_ENV['GENERATE_BUNDLEGROUP_FILES']) ? strtolower($_ENV['GENERATE_BUNDLEGROUP_FILES']) == "true" : false;
+        return getenv('GENERATE_BUNDLEGROUP_FILES') !== false ? strtolower(getenv('GENERATE_BUNDLEGROUP_FILES')) == "true" : false;
     }
 
     public static function getBundlesChunkSize()
     {
-        return isset($_ENV['BUNDLE_CHUNK_SIZE']) ? (int) $_ENV['BUNDLE_CHUNK_SIZE'] : 4;
+        return getenv('BUNDLE_CHUNK_SIZE') !== false ? (int) getenv('BUNDLE_CHUNK_SIZE') : 4;
     }
 
     public static function bundleExternalFiles()
@@ -195,8 +195,8 @@ class PoP_ResourceLoader_ServerUtils
             }
         }
 
-        if (isset($_ENV['ENQUEUE_FILES_TYPE'])) {
-            $fileType = $_ENV['ENQUEUE_FILES_TYPE'];
+        if (getenv('ENQUEUE_FILES_TYPE') !== false) {
+            $fileType = getenv('ENQUEUE_FILES_TYPE');
             // Make sure the defined value is valid
             $values = array(
                 'bundlegroup',
@@ -226,6 +226,6 @@ class PoP_ResourceLoader_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['LOAD_FRAME_RESOURCES']) ? strtolower($_ENV['LOAD_FRAME_RESOURCES']) == "true" : true;
+        return getenv('LOAD_FRAME_RESOURCES') !== false ? strtolower(getenv('LOAD_FRAME_RESOURCES')) == "true" : true;
     }
 }

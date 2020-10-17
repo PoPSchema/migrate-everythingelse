@@ -24,6 +24,6 @@ class PoP_WebPlatformEngineOptimizations_ServerUtils
             return false;
         }
 
-        return isset($_ENV['EXTRACT_RESPONSE_INTO_JS_FILES_ON_RUNTIME']) ? strtolower($_ENV['EXTRACT_RESPONSE_INTO_JS_FILES_ON_RUNTIME']) == "true" : false;
+        return getenv('EXTRACT_RESPONSE_INTO_JS_FILES_ON_RUNTIME') !== false ? strtolower(getenv('EXTRACT_RESPONSE_INTO_JS_FILES_ON_RUNTIME')) == "true" : false;
     }
 }

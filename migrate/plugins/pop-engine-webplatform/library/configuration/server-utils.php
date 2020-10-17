@@ -32,7 +32,7 @@ class PoP_WebPlatform_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['USE_LOCAL_STORAGE']) ? strtolower($_ENV['USE_LOCAL_STORAGE']) == "true" : false;
+        return getenv('USE_LOCAL_STORAGE') !== false ? strtolower(getenv('USE_LOCAL_STORAGE')) == "true" : false;
     }
 
     public static function useAppshell()
@@ -47,7 +47,7 @@ class PoP_WebPlatform_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['USE_APPSHELL']) ? strtolower($_ENV['USE_APPSHELL']) == "true" : false;
+        return getenv('USE_APPSHELL') !== false ? strtolower(getenv('USE_APPSHELL')) == "true" : false;
     }
 
     public static function useProgressiveBooting()
@@ -58,7 +58,7 @@ class PoP_WebPlatform_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['USE_PROGRESSIVE_BOOTING']) ? strtolower($_ENV['USE_PROGRESSIVE_BOOTING']) == "true" : false;
+        return getenv('USE_PROGRESSIVE_BOOTING') !== false ? strtolower(getenv('USE_PROGRESSIVE_BOOTING')) == "true" : false;
     }
 
     public static function disableJs()
@@ -69,6 +69,6 @@ class PoP_WebPlatform_ServerUtils
             return $override;
         }
 
-        return isset($_ENV['DISABLE_JS']) ? strtolower($_ENV['DISABLE_JS']) == "true" : false;
+        return getenv('DISABLE_JS') !== false ? strtolower(getenv('DISABLE_JS')) == "true" : false;
     }
 }
