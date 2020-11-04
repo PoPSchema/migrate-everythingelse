@@ -4,7 +4,10 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class CMSLooseContracts extends AbstractLooseContractSet
 {
-	public function getRequiredHooks() {
+	/**
+     * @return string[]
+     */
+    public function getRequiredHooks(): array {
 		return [
 			// Actions
 			'popcms:publishToDraft',

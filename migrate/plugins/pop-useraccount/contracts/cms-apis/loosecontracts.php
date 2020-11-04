@@ -4,7 +4,10 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class CMSLooseContracts extends AbstractLooseContractSet
 {
-	public function getRequiredHooks() {
+	/**
+     * @return string[]
+     */
+    public function getRequiredHooks(): array {
 		return [
 			// Filters
 			'popcms:loginUrl',
@@ -16,7 +19,10 @@ class CMSLooseContracts extends AbstractLooseContractSet
 		];
 	}
 
-	public function getRequiredNames() {
+	/**
+     * @return string[]
+     */
+    public function getRequiredNames(): array {
 		return [
 			// Capabilities
 			'popcms:capability:editPosts',

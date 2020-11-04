@@ -3,7 +3,10 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class PoP_Avatar_LooseContracts extends AbstractLooseContractSet
 {
-	public function getRequiredHooks() {
+	/**
+     * @return string[]
+     */
+    public function getRequiredHooks(): array {
 		return [
 			// Filters
 			'popcomponent:avatar:avatarexists',
