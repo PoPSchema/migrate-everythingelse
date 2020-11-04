@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -43,7 +46,7 @@ class PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSe
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);

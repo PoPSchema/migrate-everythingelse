@@ -6,7 +6,10 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_Blog_Module_OnlyMainContentRouteModuleProcessor extends PoP_Module_OnlyMainContentRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 

@@ -2,7 +2,10 @@
 
 class PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor extends PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsProperties()
+    /**
+     * @return array<string, string[]>
+     */
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 
@@ -18,7 +21,7 @@ class PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor extends PoP
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor()
 	);

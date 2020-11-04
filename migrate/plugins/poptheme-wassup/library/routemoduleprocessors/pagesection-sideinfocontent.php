@@ -9,7 +9,10 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -38,7 +41,10 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         return $ret;
     }
 
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 
@@ -70,7 +76,10 @@ class PoP_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Modu
         return $ret;
     }
 
-    public function getModulesVarsProperties()
+    /**
+     * @return array<string, string[]>
+     */
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 

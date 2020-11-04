@@ -5,7 +5,10 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -17,7 +20,7 @@ class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \
         foreach ($routemodules_allothers as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
         }
-        
+
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         $default_format_myusers = PoP_Application_Utils::getDefaultformatByScreen(POP_URE_SCREEN_MYUSERS);
 
@@ -138,7 +141,7 @@ class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \
                 $ret[UserRouteNatures::USER][$route][] = ['module' => $module];
             }
         }
-        
+
         $routemodules_details = array(
             POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_Module_Processor_CustomSectionBlocks::class, PoP_UserCommunities_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS],
         );
@@ -217,7 +220,7 @@ class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor()
 	);

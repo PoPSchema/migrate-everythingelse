@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class MultiDomain_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -14,7 +17,7 @@ class MultiDomain_Module_MainContentRouteModuleProcessor extends \PoP\Applicatio
         foreach ($modules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
         }
-        
+
         return $ret;
     }
 }
@@ -22,7 +25,7 @@ class MultiDomain_Module_MainContentRouteModuleProcessor extends \PoP\Applicatio
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new MultiDomain_Module_MainContentRouteModuleProcessor()
 	);

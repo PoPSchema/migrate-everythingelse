@@ -7,7 +7,10 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -27,7 +30,10 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionRouteModuleProcessor exten
         return $ret;
     }
 
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 

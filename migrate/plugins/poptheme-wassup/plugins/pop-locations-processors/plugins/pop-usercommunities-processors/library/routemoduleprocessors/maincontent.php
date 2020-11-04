@@ -5,7 +5,10 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoP_Locations_CommonUserRoles_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -49,7 +52,7 @@ class PoP_Locations_CommonUserRoles_Module_MainContentRouteModuleProcessor exten
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Locations_CommonUserRoles_Module_MainContentRouteModuleProcessor()
 	);

@@ -4,7 +4,10 @@ use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 class PoPTheme_Wassup_RelatedPosts_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 

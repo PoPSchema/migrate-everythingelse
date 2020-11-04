@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -14,7 +17,7 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor exte
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
         }
-        
+
         return $ret;
     }
 }
@@ -22,7 +25,7 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor exte
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_UserAvatar_Module_MainPageSectionRouteModuleProcessor()
 	);

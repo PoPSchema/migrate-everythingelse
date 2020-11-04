@@ -2,7 +2,10 @@
 
 abstract class PoP_Module_TabsPageSectionTopLevelRouteModuleProcessorBase extends \PoP\ModuleRouting\AbstractRouteModuleProcessor
 {
-    public function getGroups()
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array
     {
         return array(POP_PAGEMODULEGROUP_TOPLEVEL_TABSPAGESECTION);
     }

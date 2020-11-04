@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -71,7 +74,7 @@ class PoP_EventsCreation_Module_MainContentRouteModuleProcessor extends \PoP\App
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_EventsCreation_Module_MainContentRouteModuleProcessor()
 	);

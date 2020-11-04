@@ -4,7 +4,10 @@ use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 
 class PoPTheme_Wassup_CommonPages_ContentCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 

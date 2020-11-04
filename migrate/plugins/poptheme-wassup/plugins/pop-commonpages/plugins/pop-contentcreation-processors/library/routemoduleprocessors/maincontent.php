@@ -4,7 +4,10 @@ use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
 
 class PoP_CommonPages_ContentCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         $ret = array();
 

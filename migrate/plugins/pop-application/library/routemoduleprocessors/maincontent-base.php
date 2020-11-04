@@ -4,7 +4,10 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ModuleRouting\AbstractRouteModuleProcessor
 {
-    public function getGroups()
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array
     {
 
         // If no group specified, then use the "Content Module" one (initially representing the entry module, and overridable)

@@ -2,7 +2,10 @@
 
 class PoP_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
-    public function getModulesVarsProperties()
+    /**
+     * @return array<string, string[]>
+     */
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 
@@ -32,7 +35,7 @@ class PoP_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEn
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
     new PoP_Module_EntryRouteModuleProcessor()
 	);

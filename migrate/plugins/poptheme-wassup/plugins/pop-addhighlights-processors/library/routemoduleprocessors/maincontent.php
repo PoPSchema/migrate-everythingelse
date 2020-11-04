@@ -6,7 +6,10 @@ use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 
 class PoPTheme_Wassup_AddHighlights_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 

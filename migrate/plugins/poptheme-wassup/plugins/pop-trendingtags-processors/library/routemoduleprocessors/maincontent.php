@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoPTheme_Wassup_TrendingTags_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -46,7 +49,7 @@ class PoPTheme_Wassup_TrendingTags_Module_MainContentRouteModuleProcessor extend
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_TrendingTags_Module_MainContentRouteModuleProcessor()
 	);

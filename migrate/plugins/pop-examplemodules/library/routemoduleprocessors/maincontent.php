@@ -8,7 +8,10 @@ use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
 
 class MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNature()
+    /**
+     * @return array<string, array<array>>
+     */
+    public function getModulesVarsPropertiesByNature(): array
     {
         return array(
             RouteNatures::HOME => [

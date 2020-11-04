@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -16,7 +19,7 @@ class Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor extends \P
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
         }
-        
+
         $default_format_notifications = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_NOTIFICATIONS);
 
         $routemodules_details = array(
@@ -55,7 +58,7 @@ class Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor extends \P
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new Wassup_AAL_PoPProcessors_Module_MainContentRouteModuleProcessor()
 	);

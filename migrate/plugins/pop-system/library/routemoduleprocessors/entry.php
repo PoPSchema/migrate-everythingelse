@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoPSystem_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -24,7 +27,7 @@ class PoPSystem_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\Abst
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPSystem_Module_EntryRouteModuleProcessor()
 	);

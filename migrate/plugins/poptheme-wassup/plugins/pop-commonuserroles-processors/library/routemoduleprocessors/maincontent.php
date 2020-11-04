@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -20,7 +23,7 @@ class PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor exten
 
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         $default_format_myusers = PoP_Application_Utils::getDefaultformatByScreen(POP_URE_SCREEN_MYUSERS);
-        
+
         $routemodules_navigator = array(
             POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomSectionBlocks::class, GD_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR],
@@ -145,7 +148,7 @@ class PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor exten
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_CommonUserRolesProcessors_Module_MainContentRouteModuleProcessor()
 	);

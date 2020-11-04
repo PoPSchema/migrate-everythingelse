@@ -2,7 +2,10 @@
 
 class PoP_Module_BackgroundContentPageSectionRouteModuleProcessor extends PoP_Module_BackgroundContentPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsProperties()
+    /**
+     * @return array<string, string[]>
+     */
+    public function getModulesVarsProperties(): array
     {
         $ret = array();
 
@@ -17,7 +20,7 @@ class PoP_Module_BackgroundContentPageSectionRouteModuleProcessor extends PoP_Mo
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_Module_BackgroundContentPageSectionRouteModuleProcessor()
 	);

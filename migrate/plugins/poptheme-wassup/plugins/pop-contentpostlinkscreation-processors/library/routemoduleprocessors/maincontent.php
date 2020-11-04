@@ -4,12 +4,15 @@ use PoP\Routing\RouteNatures;
 
 class PoPTheme_Wassup_CPLC_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
-        
+
         $routemodules = array(
             POP_CONTENTPOSTLINKSCREATION_ROUTE_ADDCONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_CONTENTPOSTLINK_CREATE],
             POP_CONTENTPOSTLINKSCREATION_ROUTE_EDITCONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE],
@@ -17,7 +20,7 @@ class PoPTheme_Wassup_CPLC_Module_MainContentRouteModuleProcessor extends \PoP\A
         foreach ($routemodules as $route => $module) {
             $ret[RouteNatures::STANDARD][$route][] = ['module' => $module];
         }
-        
+
         $routemodules_mycontent = array(
             POP_CONTENTPOSTLINKSCREATION_ROUTE_MYCONTENTPOSTLINKS => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLINKS_TABLE_EDIT],
         );
@@ -68,7 +71,7 @@ class PoPTheme_Wassup_CPLC_Module_MainContentRouteModuleProcessor extends \PoP\A
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_CPLC_Module_MainContentRouteModuleProcessor()
 	);

@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -48,7 +51,7 @@ class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProce
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
 	);

@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -28,7 +31,7 @@ class UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor extends \P
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new UserStance_URE_Bootstrap_Module_MainContentRouteModuleProcessor()
 	);

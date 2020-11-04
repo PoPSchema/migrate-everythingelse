@@ -4,12 +4,15 @@ use PoP\Routing\RouteNatures;
 
 class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
         $default_format_votes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
-        
+
         $routemodules_carousels = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL],
@@ -79,7 +82,7 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new UserStance_URE_Module_MainContentRouteModuleProcessor()
 	);

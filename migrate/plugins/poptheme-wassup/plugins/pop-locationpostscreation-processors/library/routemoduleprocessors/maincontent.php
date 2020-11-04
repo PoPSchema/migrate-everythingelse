@@ -4,7 +4,10 @@ use PoP\Routing\RouteNatures;
 
 class PoP_LocationPostsCreation_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {
-    public function getModulesVarsPropertiesByNatureAndRoute()
+    /**
+     * @return array<string, array<string, array<array>>>
+     */
+    public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -17,7 +20,7 @@ class PoP_LocationPostsCreation_Module_MainContentRouteModuleProcessor extends \
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
-        
+
         $routemodules_mycontent = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::MODULE_BLOCK_MYLOCATIONPOSTS_TABLE_EDIT],
         );
@@ -68,7 +71,7 @@ class PoP_LocationPostsCreation_Module_MainContentRouteModuleProcessor extends \
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_LocationPostsCreation_Module_MainContentRouteModuleProcessor()
 	);
