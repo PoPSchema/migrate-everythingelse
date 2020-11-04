@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Routing\Routes as RoutingRoutes;
- 
+use PoP\Routing\URLParams;
+
 class PoP_Wassup_CDN_Hooks
 {
     public function __construct()
@@ -17,7 +17,7 @@ class PoP_Wassup_CDN_Hooks
     // Comment Leo 31/01/2017: No need to define the thumbprints below, since the author URL (eg: getpop.org/en/u/leo/)
     // has already been set to use thumbprint POST
     // function getThumbprintParamvalues($paramvalues, $thumbprint) {
-        
+
         //     //     if ($thumbprint == POP_CDN_THUMBPRINT_USER) {
 
     //         $routes = array(
@@ -31,7 +31,7 @@ class PoP_Wassup_CDN_Hooks
 
     //             // Array of: elem[0] = URL param, elem[1] = value
     //             $paramvalues[] = array(
-    //                 GD_URLPARAM_ROUTE,
+    //                 URLParams::ROUTE,
     //                 $route.'/'
     //             );
     //         }
@@ -46,18 +46,18 @@ class PoP_Wassup_CDN_Hooks
     //         foreach ($routes as $route) {
 
     //             $paramvalues[] = array(
-    //                 GD_URLPARAM_ROUTE,
+    //                 URLParams::ROUTE,
     //                 $route.'/'
     //             );
     //         }
     //     }
-        
+
     //     return $paramvalues;
     // }
 
     public function getThumbprintNoparamvalues($noparamvalues, $thumbprint)
     {
-        
+
         // Please notice:
         // getpop.org/en/u/leo/ has thumbprints POST + USER, but
         // getpop.org/en/u/leo/?tab=description needs only thumbprint USER
@@ -77,16 +77,16 @@ class PoP_Wassup_CDN_Hooks
             foreach ($routes as $route) {
                 // Array of: elem[0] = URL param, elem[1] = value
                 $noparamvalues[] = array(
-                    GD_URLPARAM_ROUTE,
+                    URLParams::ROUTE,
                     $route
                 );
             }
         }
-        
+
         return $noparamvalues;
     }
 }
-    
+
 /**
  * Initialize
  */

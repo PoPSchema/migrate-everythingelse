@@ -4,22 +4,22 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 class PoP_ServerSideRendering_Utils
 {
     protected static $scripts;
-    
-    public static function init()
+
+    public static function init(): void
     {
         self::$scripts = array();
 
         // Priority 1: after printing 'wp_print_head_scripts' in the footer (priority 1)
         HooksAPIFacade::getInstance()->addAction(
-            'popcms:footer', 
-            array(PoP_ServerSideRendering_Utils::class, 'printScripts'), 
+            'popcms:footer',
+            array(PoP_ServerSideRendering_Utils::class, 'printScripts'),
             2
         );
     }
-    
+
     public static function printScripts()
     {
-    
+
         // Add the script tags once again if we defined to have them after the html
         // If doing disableJs, then do nothing
         if (PoP_SSR_ServerUtils::includeScriptsAfterHtml()) {
@@ -32,7 +32,7 @@ class PoP_ServerSideRendering_Utils
             }
         }
     }
-    
+
     public static function renderPagesection($pagesection_settings_id, $target = null)
     {
         $html = PoP_ServerSideRenderingFactory::getInstance()->renderTarget($pagesection_settings_id, null, $target);

@@ -1,6 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-
+use PoP\Routing\URLParams;
 
 class PoP_CDN_Blog_CDNHooks
 {
@@ -78,7 +78,7 @@ class PoP_CDN_Blog_CDNHooks
             );
             foreach ($routes as $route) {
                 $paramvalues[] = array(
-                    GD_URLPARAM_ROUTE,
+                    URLParams::ROUTE,
                     $route
                 );
             }

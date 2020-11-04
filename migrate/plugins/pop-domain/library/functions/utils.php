@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_Domain_Utils
 {
-    public static function init()
+    public static function init(): void
     {
         HooksAPIFacade::getInstance()->addFilter(
             'PoP_Application_Utils:request-domain',

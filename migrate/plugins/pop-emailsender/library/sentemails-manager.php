@@ -4,7 +4,7 @@ class PoP_EmailSender_SentEmailsManager
 {
     protected static $sentemail_users;
 
-    public static function init()
+    public static function init(): void
     {
         self::$sentemail_users = array();
     }

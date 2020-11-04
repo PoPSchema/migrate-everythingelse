@@ -1,7 +1,8 @@
 <?php
-use PoP\Hooks\Facades\HooksAPIFacade;
 
- 
+use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Routing\URLParams;
+
 class PoP_UserCommunities_CDN_Hooks
 {
     public function __construct()
@@ -32,13 +33,13 @@ class PoP_UserCommunities_CDN_Hooks
                 $paths[] = $route.'/';
             }
         }
-        
+
         return $paths;
     }
 
     public function getThumbprintNoparamvalues($noparamvalues, $thumbprint)
     {
-        
+
         // Please notice:
         // getpop.org/en/u/pop/ has thumbprints POST + USER, but
         // getpop.org/en/u/pop/?tab=members needs only thumbprint USER
@@ -54,12 +55,12 @@ class PoP_UserCommunities_CDN_Hooks
             foreach ($routes as $route) {
                 // Array of: elem[0] = URL param, elem[1] = value
                 $noparamvalues[] = array(
-                    GD_URLPARAM_ROUTE,
+                    URLParams::ROUTE,
                     $route
                 );
             }
         }
-        
+
         return $noparamvalues;
     }
 }

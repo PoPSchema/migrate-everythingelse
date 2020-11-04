@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Routing\URLParams;
 
- 
 class PoP_SocialNetworkWebPlatform_CDN_Hooks
 {
     public function __construct()
@@ -16,7 +16,7 @@ class PoP_SocialNetworkWebPlatform_CDN_Hooks
 
     public function getThumbprintNoparamvalues($noparamvalues, $thumbprint)
     {
-        
+
         // Please notice:
         // getpop.org/en/u/leo/ has thumbprints POST + USER, but
         // getpop.org/en/u/leo/?tab=description needs only thumbprint USER
@@ -39,16 +39,16 @@ class PoP_SocialNetworkWebPlatform_CDN_Hooks
             foreach ($routes as $route) {
                 // Array of: elem[0] = URL param, elem[1] = value
                 $noparamvalues[] = array(
-                    GD_URLPARAM_ROUTE,
+                    URLParams::ROUTE,
                     $route
                 );
             }
         }
-        
+
         return $noparamvalues;
     }
 }
-    
+
 /**
  * Initialize
  */

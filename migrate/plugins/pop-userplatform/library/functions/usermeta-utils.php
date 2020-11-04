@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ModuleManager_UserMetaUtils
 {
-    public static function init()
+    public static function init(): void
     {
         HooksAPIFacade::getInstance()->addAction(
             'popcms:shutdown',

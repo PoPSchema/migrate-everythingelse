@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_EditorUtils
 {
-    public static function init()
+    public static function init(): void
     {
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
             // If no editor has been initialized, just create the main one, always, at the footer

@@ -16,7 +16,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
     protected static $resource_mapping, $resources;
 
-    public static function init() {
+    public static function init(): void {
 
         self::$resource_mapping = array();
         self::$resources = array();
