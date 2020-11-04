@@ -4,7 +4,7 @@ abstract class PoP_SPAResourceLoader_FileReproduction_AddResourcesConfigBase ext
 {
     protected $fileurl;
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return POP_SPARESOURCELOADER_ASSETS_DIR.'/js/jobs/resourceloader-config-addresources.js';
     }
@@ -14,7 +14,10 @@ abstract class PoP_SPAResourceLoader_FileReproduction_AddResourcesConfigBase ext
         return $this->fileurl = $fileurl;
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 

@@ -15,8 +15,8 @@ class PoP_ResourceLoader_FileReproduction_ResourcesMirrorCode extends \PoP\FileS
     //     return $pop_resourceloader_mirrorcode_renderer;
     // }
 
-    public function getAssetsPath() {
-        
+    public function getAssetsPath(): string {
+
         return POP_RESOURCELOADER_ASSETS_DIR.'/js/jobs/mirrorcode.js';
     }
 
@@ -25,8 +25,11 @@ class PoP_ResourceLoader_FileReproduction_ResourcesMirrorCode extends \PoP\FileS
         return false;
     }
 
-    public function getConfiguration() {
-        
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array {
+
         $configuration = parent::getConfiguration();
 
         global $pop_resourceloaderprocessor_manager;
@@ -48,4 +51,4 @@ class PoP_ResourceLoader_FileReproduction_ResourcesMirrorCode extends \PoP\FileS
         return $configuration;
     }
 }
-    
+

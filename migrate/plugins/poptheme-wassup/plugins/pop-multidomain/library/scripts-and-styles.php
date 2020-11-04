@@ -10,19 +10,22 @@ function getMultidomainBgcolorCodestyle($styles, $domain)
 	// Use an anonymous class, since this file will never need be saved to disk
 	$file = (new class() extends \PoP\FileStore\File\AbstractAccessibleRenderableFile
 		{
-		    public function getDir()
+		    public function getDir(): string
 		    {
 		        return '';
 		    }
-		    public function getUrl()
+		    public function getUrl(): string
 		    {
 		        return '';
 		    }
-		    public function getFilename()
+		    public function getFilename(): string
 		    {
 		        return '';
 		    }
-		    protected function getFragmentObjects(): array
+		    /**
+     * @return AbstractRenderableFileFragment[]
+     */
+    protected function getFragmentObjects(): array
 		    {
 		        return [
 		            new PoPTheme_Wassup_Multidomain_FileReproduction_Styles(),

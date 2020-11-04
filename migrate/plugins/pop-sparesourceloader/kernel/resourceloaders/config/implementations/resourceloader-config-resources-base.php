@@ -21,7 +21,10 @@ abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extend
         return $options;
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
@@ -126,8 +129,8 @@ abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extend
         return '';
     }
 
-    // public function getJsonEncodeOptions() {
-        
+    // public function getJsonEncodeOptions(): int {
+
     //     // If there are not results, it must produce {} in the .js file, not []
     //     // Documentation: https://secure.php.net/manual/en/function.json-encode.php
     //     return JSON_FORCE_OBJECT;

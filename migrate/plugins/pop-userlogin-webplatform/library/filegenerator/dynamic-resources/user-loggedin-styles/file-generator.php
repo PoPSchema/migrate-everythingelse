@@ -1,16 +1,16 @@
 <?php
 class PoP_CoreProcessors_UserLoggedInStyles_File extends \PoP\FileStore\File\AbstractAccessibleRenderableFile
 {
-    public function getDir()
+    public function getDir(): string
     {
         return POP_USERLOGIN_ASSETDESTINATION_DIR;
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return POP_USERLOGIN_ASSETDESTINATION_URL;
     }
 
-    public function getFilename()
+    public function getFilename(): string
     {
         return 'user-loggedin.css';
     }
@@ -20,6 +20,9 @@ class PoP_CoreProcessors_UserLoggedInStyles_File extends \PoP\FileStore\File\Abs
     //     global $popcore_userloggedinstyles_filerenderer;
     //     return $popcore_userloggedinstyles_filerenderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [
@@ -27,7 +30,7 @@ class PoP_CoreProcessors_UserLoggedInStyles_File extends \PoP\FileStore\File\Abs
         ];
     }
 }
-    
+
 /**
  * Initialize
  */

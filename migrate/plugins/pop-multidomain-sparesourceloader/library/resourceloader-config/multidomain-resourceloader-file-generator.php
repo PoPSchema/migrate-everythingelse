@@ -1,16 +1,16 @@
 <?php
 class PoP_MultiDomain_ResourceLoader_ConfigFile extends \PoP\FileStore\File\AbstractAccessibleRenderableFile
 {
-    public function getDir()
+    public function getDir(): string
     {
         return POP_MULTIDOMAIN_CONTENT_DIR;
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return POP_MULTIDOMAIN_CONTENT_URL;
     }
 
-    public function getFilename()
+    public function getFilename(): string
     {
         return 'multidomain-resourceloader-config.js';
     }
@@ -20,6 +20,9 @@ class PoP_MultiDomain_ResourceLoader_ConfigFile extends \PoP\FileStore\File\Abst
     //     global $pop_multidomain_resourceloader_filerenderer;
     //     return $pop_multidomain_resourceloader_filerenderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [
@@ -27,7 +30,7 @@ class PoP_MultiDomain_ResourceLoader_ConfigFile extends \PoP\FileStore\File\Abst
         ];
     }
 }
-    
+
 /**
  * Initialize
  */

@@ -9,11 +9,11 @@ class PoP_ServiceWorkersManager
         $this->scope = site_url('/', 'relative');
     }
 
-    public function getDir()
+    public function getDir(): string
     {
         return POP_SERVICEWORKERS_ASSETDESTINATION_DIR;
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return POP_SERVICEWORKERS_ASSETDESTINATION_URL;
     }
@@ -42,7 +42,7 @@ class PoP_ServiceWorkersManager
     private function manifest()
     {
         $json = array();
-        
+
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $blogname = $cmsapplicationapi->getSiteName();
         $description = $cmsapplicationapi->getSiteDescription();
@@ -131,7 +131,7 @@ class PoP_ServiceWorkersManager
 
         // Open the file, write content and close it
         $handle = fopen($file, "wb");
-        
+
         // Possibly because the $contents are an encoded JSON, the line below produces an error, so commented the PHP_EOL bit
         // $numbytes = fwrite($handle, implode(PHP_EOL, $contents));
         $numbytes = fwrite($handle, $contents);
@@ -153,7 +153,7 @@ class PoP_ServiceWorkersManager
             @mkdir($dir, 0777, true);
         }
         // else {
-            
+
         //     // Delete all .js files
         //     foreach(glob("{$dir}/*") as $file) {
         //         if (is_file($file)) {
@@ -169,7 +169,7 @@ class PoP_ServiceWorkersManager
         // // }
     }
 }
-    
+
 /**
  * Initialize
  */

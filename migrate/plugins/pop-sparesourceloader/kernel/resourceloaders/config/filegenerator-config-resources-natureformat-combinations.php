@@ -4,11 +4,11 @@ class PoP_SPAResourceLoader_ConfigNatureFormatCombinationResourcesFile extends P
     protected $current_nature;
     protected $current_format;
 
-    public function getDir()
+    public function getDir(): string
     {
         return parent::getDir().'/partials';
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return parent::getUrl().'/partials';
     }
@@ -28,7 +28,7 @@ class PoP_SPAResourceLoader_ConfigNatureFormatCombinationResourcesFile extends P
     //         foreach ($renderer_filereproductions as $filereproduction) {
     //             $filereproduction->setNature($nature);
     //         }
-        
+
     //         // $route_formats is array of ($route => array($format))
     //         $formats = array_unique(arrayFlatten(array_values($route_formats)));
     //         foreach ($formats as $format) {
@@ -43,7 +43,7 @@ class PoP_SPAResourceLoader_ConfigNatureFormatCombinationResourcesFile extends P
     //     }
     // }
 
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->getVariableFilename($this->current_nature, $this->current_format);
     }
@@ -62,6 +62,9 @@ class PoP_SPAResourceLoader_ConfigNatureFormatCombinationResourcesFile extends P
     //     global $pop_sparesourceloader_natureformatcombinationresources_configfile_renderer;
     //     return $pop_sparesourceloader_natureformatcombinationresources_configfile_renderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [
@@ -69,7 +72,7 @@ class PoP_SPAResourceLoader_ConfigNatureFormatCombinationResourcesFile extends P
         ];
     }
 }
-    
+
 /**
  * Initialize
  */

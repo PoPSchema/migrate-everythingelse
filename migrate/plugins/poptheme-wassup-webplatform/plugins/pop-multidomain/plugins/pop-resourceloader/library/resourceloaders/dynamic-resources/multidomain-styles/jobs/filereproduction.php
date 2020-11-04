@@ -23,12 +23,15 @@ class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSS
     //     return $popthemewassup_multidomainstyles_filerenderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return dirname(__FILE__).'/assets/css/multidomain.css';
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 
@@ -40,4 +43,3 @@ class PoPTheme_Wassup_Multidomain_FileReproduction_Styles extends PoP_Engine_CSS
         return $configuration;
     }
 }
-    

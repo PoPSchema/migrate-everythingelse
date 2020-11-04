@@ -8,12 +8,15 @@ class PoPThemeWassup_FileReproduction_FeedThumb extends PoP_Engine_CSSFileReprod
     //     return $popthemewassup_feedthumb_filerenderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return dirname(__FILE__).'/assets/css/feed-thumb.css';
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 
@@ -26,4 +29,3 @@ class PoPThemeWassup_FileReproduction_FeedThumb extends PoP_Engine_CSSFileReprod
         return $configuration;
     }
 }
-    

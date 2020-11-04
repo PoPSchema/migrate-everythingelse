@@ -23,12 +23,15 @@ class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_
     //     return $popcore_userloggedinstyles_filerenderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return dirname(__FILE__).'/assets/css/user-loggedin.css';
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 
@@ -37,4 +40,3 @@ class PoP_CoreProcessors_FileReproduction_UserLoggedInStyles extends PoP_Engine_
         return $configuration;
     }
 }
-   

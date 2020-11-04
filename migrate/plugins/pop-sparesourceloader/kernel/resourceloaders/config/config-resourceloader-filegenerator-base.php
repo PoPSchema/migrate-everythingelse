@@ -26,11 +26,11 @@ abstract class PoP_SPAResourceLoader_ConfigFileBase extends \PoP\FileStore\File\
         return $subfolder;
     }
 
-    public function getDir()
+    public function getDir(): string
     {
         return $this->getBaseDir().$this->getFolderSubpath();
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->getBaseUrl().$this->getFolderSubpath();
     }

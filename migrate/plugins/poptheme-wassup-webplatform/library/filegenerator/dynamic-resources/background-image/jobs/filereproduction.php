@@ -9,12 +9,15 @@ class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFile
     //     return $popthemewassup_backgroundimage_filerenderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return dirname(__FILE__).'/assets/css/background-image.css';
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 
@@ -36,4 +39,3 @@ class PoPThemeWassup_FileReproduction_BackgroundImage extends PoP_Engine_CSSFile
         return $configuration;
     }
 }
-    

@@ -12,12 +12,15 @@ class PoP_SPAResourceLoader_FileReproduction_Config extends \PoP\FileStore\File\
     //     return $pop_sparesourceloader_configfile_renderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return POP_SPARESOURCELOADER_ASSETS_DIR.'/js/jobs/resourceloader-config.js';
     }
 
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

@@ -9,7 +9,7 @@ abstract class PoP_ResourceLoader_BundleFileFileBase extends PoP_ResourceLoader_
     {
         $this->filename = $filename;
     }
-    public function getFilename()
+    public function getFilename(): string
     {
         return $this->filename;
     }
@@ -78,7 +78,7 @@ abstract class PoP_ResourceLoader_BundleFileFileBase extends PoP_ResourceLoader_
     //                 // if (!file_exists($destination_file)) {
 
     //                 $source_file = getAbsolutePath($source_dir.'/'.$relative_path_to_referenced_file);
-                    
+
     //                 // Copy only works if the destination folder exists
     //                 @mkdir(dirname($destination_file), 0777, true);
     //                 copy($source_file, $destination_file);
@@ -95,6 +95,9 @@ abstract class PoP_ResourceLoader_BundleFileFileBase extends PoP_ResourceLoader_
     //     global $pop_resourceloader_mirrorcode_renderer;
     //     return $pop_resourceloader_mirrorcode_renderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [

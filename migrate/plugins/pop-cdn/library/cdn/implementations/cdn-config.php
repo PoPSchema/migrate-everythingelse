@@ -3,12 +3,15 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproduction
 {
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return POP_CDN_ASSETS_DIR.'/js/jobs/cdn-config.js';
     }
-    
-    public function getConfiguration()
+
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
@@ -95,5 +98,4 @@ class PoP_CDN_FileReproduction_ThumbprintsConfig extends PoP_CDN_FileReproductio
         );
     }
 }
-    
-    
+

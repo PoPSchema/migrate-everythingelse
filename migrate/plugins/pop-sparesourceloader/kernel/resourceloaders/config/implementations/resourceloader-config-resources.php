@@ -2,7 +2,10 @@
 
 class PoP_SPAResourceLoader_FileReproduction_ResourcesConfig extends PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase
 {
-    public function getConfiguration()
+    /**
+     * @return mixed[]
+     */
+    public function getConfiguration(): array
     {
         $configuration = parent::getConfiguration();
 
@@ -13,7 +16,7 @@ class PoP_SPAResourceLoader_FileReproduction_ResourcesConfig extends PoP_SPAReso
             if ($dynamic_module_resources_data = PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils::getDynamicModuleResourcesData()) {
                 $dynamic_module_resourcesources = $dynamic_module_resources_data['sources'];
                 $dynamic_module_resourcetypes = $dynamic_module_resources_data['types'];
-                
+
                 $configuration['$sources'] = array_unique(
                     array_merge(
                         $configuration['$sources'],
@@ -41,9 +44,8 @@ class PoP_SPAResourceLoader_FileReproduction_ResourcesConfig extends PoP_SPAReso
     //     return $pop_sparesourceloader_resources_configfile_renderer;
     // }
 
-    public function getAssetsPath()
+    public function getAssetsPath(): string
     {
         return POP_SPARESOURCELOADER_ASSETS_DIR.'/js/jobs/resourceloader-config-setresources.js';
     }
 }
-   

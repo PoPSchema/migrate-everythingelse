@@ -1,7 +1,7 @@
 <?php
 class PoP_SPAResourceLoader_ConfigInitialResourcesFile extends PoP_SPAResourceLoader_ConfigAddResourcesFileBase
 {
-    public function getFilename()
+    public function getFilename(): string
     {
         return 'initialresources.js';
     }
@@ -11,6 +11,9 @@ class PoP_SPAResourceLoader_ConfigInitialResourcesFile extends PoP_SPAResourceLo
     //     global $pop_sparesourceloader_initialresources_configfile_renderer;
     //     return $pop_sparesourceloader_initialresources_configfile_renderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [
@@ -18,7 +21,7 @@ class PoP_SPAResourceLoader_ConfigInitialResourcesFile extends PoP_SPAResourceLo
         ];
     }
 }
-    
+
 /**
  * Initialize
  */

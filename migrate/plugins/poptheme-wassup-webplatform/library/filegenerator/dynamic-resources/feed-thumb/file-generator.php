@@ -1,16 +1,16 @@
 <?php
 class PoPThemeWassup_FeedThumb_File extends \PoP\FileStore\File\AbstractAccessibleRenderableFile
 {
-    public function getDir()
+    public function getDir(): string
     {
         return POPTHEME_WASSUPWEBPLATFORM_THEMECUSTOMIZATION_ASSETDESTINATION_DIR;
     }
-    public function getUrl()
+    public function getUrl(): string
     {
         return POPTHEME_WASSUPWEBPLATFORM_THEMECUSTOMIZATION_ASSETDESTINATION_URL;
     }
 
-    public function getFilename()
+    public function getFilename(): string
     {
         return 'feed-thumb.css';
     }
@@ -20,6 +20,9 @@ class PoPThemeWassup_FeedThumb_File extends \PoP\FileStore\File\AbstractAccessib
     //     global $popthemewassup_feedthumb_filerenderer;
     //     return $popthemewassup_feedthumb_filerenderer;
     // }
+    /**
+     * @return AbstractRenderableFileFragment[]
+     */
     protected function getFragmentObjects(): array
     {
         return [
@@ -27,7 +30,7 @@ class PoPThemeWassup_FeedThumb_File extends \PoP\FileStore\File\AbstractAccessib
         ];
     }
 }
-    
+
 /**
  * Initialize
  */
