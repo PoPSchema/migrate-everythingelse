@@ -36,7 +36,7 @@ class PoPTheme_Wassup_ClusterCommonPages_Module_SideInfoContentPageSectionRouteM
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoPTheme_Wassup_ClusterCommonPages_Module_SideInfoContentPageSectionRouteModuleProcessor()
 	);

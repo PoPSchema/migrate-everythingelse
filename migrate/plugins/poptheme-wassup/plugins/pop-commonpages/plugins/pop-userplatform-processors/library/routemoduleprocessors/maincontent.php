@@ -32,7 +32,7 @@ class PoP_CommonPages_UserPlatform_Module_MainContentRouteModuleProcessor extend
 /**
  * Initialization
  */
-add_action('init', function() { 
+add_action('init', function() {
 	\PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->add(
 		new PoP_CommonPages_UserPlatform_Module_MainContentRouteModuleProcessor()
 	);
