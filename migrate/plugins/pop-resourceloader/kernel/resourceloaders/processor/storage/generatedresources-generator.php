@@ -1,12 +1,12 @@
 <?php
 class PoP_ResourceLoader_GeneratedResourcesFileLocation extends PoP_Engine_ResourceLoaderFileObjectBase {
 
-	function getFilename() {
+	public function getFilename(): string {
 
 		return 'resourceloader-generatedfiles.json';
 	}
 }
-	
+
 /**
  * Initialize
  */

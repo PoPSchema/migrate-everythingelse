@@ -9,7 +9,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 		return false;
 	}
 
-	protected function getBaseDir() {
+	protected function getBaseDir(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
 		return HooksAPIFacade::getInstance()->applyFilters(
@@ -18,7 +18,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 			defined('POP_THEME_INITIALIZED') && $this->acrossThememodes()
 		);
 	}
-	
+
 	protected function getFolderSubpath() {
 
 		// We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
@@ -29,7 +29,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 
 				return '/shared';
 			}
-			
+
 			$vars = ApplicationState::getVars();
 			return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
 		}
@@ -37,7 +37,7 @@ abstract class PoP_Engine_ResourceLoaderFileObjectBase  extends \PoP\FileStore\F
 		return $subfolder;
 	}
 
-	function getDir() {
+	public function getDir(): string {
 
 		return $this->getBaseDir().'/resourceloader'.$this->getFolderSubpath();
 	}

@@ -1,11 +1,11 @@
 <?php
 abstract class PoP_ResourceLoader_JSBundleGroupFileBase extends PoP_ResourceLoader_BundleFileFileBase {
 
-	function getDir() {
+	public function getDir(): string {
 
 		return parent::getDir().'/bundlegroups';
 	}
-	function getUrl() {
+	public function getUrl(): string {
 
 		return parent::getUrl().'/bundlegroups';
 	}

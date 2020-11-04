@@ -1,7 +1,7 @@
 <?php
 class PoP_ResourceLoader_BundleVersionStorageFileLocation extends PoP_Engine_ResourceLoaderFileObjectBase {
 
-	function getFilename() {
+	public function getFilename(): string {
 
 		return 'bundle-versions.json';
 	}
@@ -11,7 +11,7 @@ class PoP_ResourceLoader_BundleVersionStorageFileLocation extends PoP_Engine_Res
 		return true;
 	}
 }
-	
+
 /**
  * Initialize
  */

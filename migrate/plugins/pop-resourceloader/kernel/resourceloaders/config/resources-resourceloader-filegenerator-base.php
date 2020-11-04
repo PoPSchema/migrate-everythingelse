@@ -20,7 +20,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 
 	// 	return parent::skipIfFileExists();
 	// }
-	
+
 	protected function getFolderSubpath() {
 
 		// We must create different mapping files depending on if we're adding the CDN resources inside the bundles or not
@@ -31,7 +31,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 
 				return '/shared';
 			}
-			
+
 			$vars = ApplicationState::getVars();
 			return '/'.$vars['theme'].'/'.$vars['thememode'].'/'.$subfolder;
 		}
@@ -39,16 +39,16 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 		return $subfolder;
 	}
 
-	function getDir() {
+	public function getDir(): string {
 
 		return $this->getBaseDir().$this->getFolderSubpath();
 	}
-	function getUrl() {
+	public function getUrl(): string {
 
 		return $this->getBaseUrl().$this->getFolderSubpath();
 	}
 
-	protected function getBaseDir() {
+	protected function getBaseDir(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
 		return HooksAPIFacade::getInstance()->applyFilters(
@@ -57,7 +57,7 @@ abstract class PoP_ResourceLoader_ResourcesFileBase extends \PoP\FileStore\File\
 			defined('POP_THEME_INITIALIZED') && $this->acrossThememodes()
 		);
 	}
-	protected function getBaseUrl() {
+	protected function getBaseUrl(): string {
 
 		// Allow pop-cluster-resourceloader to change the dir to pop-cluster-generatecache/
 		return HooksAPIFacade::getInstance()->applyFilters(

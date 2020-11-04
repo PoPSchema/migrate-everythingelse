@@ -1,7 +1,7 @@
 <?php
 class PoP_ResourceLoader_BundleMappingStorageFileLocation extends PoP_Engine_ResourceLoaderFileObjectBase {
 
-	function getFilename() {
+	public function getFilename(): string {
 
 		return 'bundle-resourceloader-mapping.json';
 	}
@@ -11,7 +11,7 @@ class PoP_ResourceLoader_BundleMappingStorageFileLocation extends PoP_Engine_Res
 		return true;
 	}
 }
-	
+
 /**
  * Initialize
  */

@@ -1,12 +1,12 @@
 <?php
 class PoP_ResourceLoader_KeyMappingStorageFileLocation extends PoP_Engine_ResourceLoaderFileObjectBase {
 
-	function getFilename() {
+	public function getFilename(): string {
 
 		return 'key-resourceloader-mapping.json';
 	}
 }
-	
+
 /**
  * Initialize
  */

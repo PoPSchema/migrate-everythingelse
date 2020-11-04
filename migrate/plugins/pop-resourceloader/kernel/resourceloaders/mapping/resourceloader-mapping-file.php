@@ -1,17 +1,17 @@
 <?php
 class PoP_WebPlatform_ResourceLoaderMappingFile extends \PoP\FileStore\File\AbstractFile {
 
-	function getDir() {
+	public function getDir(): string {
 
 		return POP_RESOURCELOADER_BUILD_DIR;
 	}
 
-	function getFilename() {
+	public function getFilename(): string {
 
 		return 'resourceloader-mapping.json';
 	}
 }
-	
+
 /**
  * Initialize
  */

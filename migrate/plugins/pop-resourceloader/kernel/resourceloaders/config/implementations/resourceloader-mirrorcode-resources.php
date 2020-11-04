@@ -20,7 +20,7 @@ class PoP_ResourceLoader_FileReproduction_ResourcesMirrorCode extends \PoP\FileS
         return POP_RESOURCELOADER_ASSETS_DIR.'/js/jobs/mirrorcode.js';
     }
 
-    function isJsonReplacement() {
+    public function isJsonReplacement(): bool {
 
         return false;
     }
