@@ -11,9 +11,9 @@ use PoP\API\Response\Schemes as APISchemes;
 class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends \PoP\ModuleRouting\AbstractEntryRouteModuleProcessor
 {
     // /**
-     * @return array<string, array<array>>
-     */
-    public function getModulesVarsPropertiesByNature(): array
+    //  * @return array<string, array<array>>
+    //  */
+    // public function getModulesVarsPropertiesByNature(): array
     // {
     //     $ret = array();
 

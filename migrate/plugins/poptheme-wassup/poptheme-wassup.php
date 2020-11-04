@@ -27,9 +27,9 @@ class PoPTheme_Wassup
          * WP Overrides
          */
         include_once dirname(__FILE__).'/wp-includes/load.php';
-        
+
         // Priority: new section, after PoP Application Processors section
-        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 1000);
+        HooksAPIFacade::getInstance()->addAction('plugins_loaded', array($this, 'init'), 850);
     }
 
     public function init()
