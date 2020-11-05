@@ -8,11 +8,6 @@ use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationRe
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getMutationResolverClass(): string
-    {
-        return GD_CreateUpdate_Highlight::class;
-    }
-
     public function getSuccessString($post_id, $status)
     {
         if ($status == Status::PUBLISHED) {

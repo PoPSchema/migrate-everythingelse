@@ -1,6 +1,6 @@
 <?php
 
-class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_LocationPost
+abstract class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_LocationPost
 {
     protected function getCategories()
     {
@@ -22,7 +22,7 @@ class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_LocationPost
         parent::validatecontent($errors, $form_data);
         Wassup_CreateUpdate_Link_Utils::validatecontent($errors, $form_data);
     }
-    
+
     /**
      *
      * --------------------------------------------------

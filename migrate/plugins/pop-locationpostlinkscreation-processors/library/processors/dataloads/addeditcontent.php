@@ -44,7 +44,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
         if ($block_inner = $block_inners[$module[1]]) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -81,7 +81,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Submitting...', 'pop-locationpostlinkscreation-processors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -89,8 +89,9 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE:
+                return GD_DataLoad_ActionExecuter_Create_LocationPostLink::class;
             case self::MODULE_DATALOAD_LOCATIONPOSTLINK_UPDATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_LocationPostLink::class;
+                return GD_DataLoad_ActionExecuter_Update_LocationPostLink::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
