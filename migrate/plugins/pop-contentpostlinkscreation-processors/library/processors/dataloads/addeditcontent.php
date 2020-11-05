@@ -44,7 +44,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
         if ($block_inner = $block_inners[$module[1]]) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -80,7 +80,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
@@ -88,8 +88,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
+                return GD_DataLoad_ActionExecuter_Create_ContentPostLink::class;
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_ContentPostLink::class;
+                return GD_DataLoad_ActionExecuter_Update_ContentPostLink::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

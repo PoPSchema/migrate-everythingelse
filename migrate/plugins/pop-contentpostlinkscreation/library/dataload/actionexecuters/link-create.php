@@ -1,11 +1,11 @@
 <?php
 use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_ContentPostLink extends AbstractCreateUpdatePostMutationResolverBridge
+class GD_DataLoad_ActionExecuter_Create_ContentPostLink extends AbstractCreateUpdatePostMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {
-        return GD_CreateUpdate_PostLink::class;
+        return GD_Create_PostLink::class;
     }
 }
 
