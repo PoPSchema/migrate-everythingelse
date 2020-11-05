@@ -24,7 +24,11 @@ class GD_DataLoad_ActionExecuter_Settings implements ComponentMutationResolverBr
 
 
 
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
 
         // If the post has been submitted, execute the Gravity Forms shortcode

@@ -7,7 +7,11 @@ use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterfac
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements ComponentMutationResolverBridgeInterface
 {
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $createupdate = $this->getCreateupdate();

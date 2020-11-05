@@ -11,7 +11,11 @@ class GD_DataLoad_ActionExecuter_RecommendPost implements ComponentMutationResol
         return new GD_RecommendPost();
     }
 
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
         $errors = array();
         $instance = $this->getInstance();

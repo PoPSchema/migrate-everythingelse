@@ -10,7 +10,11 @@ class GD_DataLoad_ActionExecuter_SystemActivatePlugins implements ComponentMutat
         return new GD_ActivatePlugins();
     }
 
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
         $instance = $this->getInstance();
         $activated = $instance->activateplugins();

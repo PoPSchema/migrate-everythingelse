@@ -14,7 +14,11 @@ abstract class GD_DataLoad_ActionExecuter_EmailInviteBase implements ComponentMu
         return null;
     }
 
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
         if ('POST' == $_SERVER['REQUEST_METHOD']) {
             $errors = array();

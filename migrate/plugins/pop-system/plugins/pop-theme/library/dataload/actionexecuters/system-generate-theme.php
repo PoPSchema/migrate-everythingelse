@@ -6,7 +6,11 @@ use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterfac
 
 class GD_DataLoad_ActionExecuter_SystemGenerateTheme implements ComponentMutationResolverBridgeInterface
 {
-    public function execute(&$data_properties)
+    /**
+     * @param array $data_properties
+     * @return array<string, mixed>|null
+     */
+    public function execute(array &$data_properties): ?array
     {
         HooksAPIFacade::getInstance()->doAction('PoP:system-generate:theme');
 
