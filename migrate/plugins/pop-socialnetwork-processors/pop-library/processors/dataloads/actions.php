@@ -99,7 +99,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     //     return parent::getActionexecutionCheckpointConfiguration($module, $props);
     // }
 
-    public function executeAction(array $module, array &$props)
+    public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // The actionexecution is triggered when clicking on the link, not when submitting a form
         switch ($module[1]) {
@@ -116,7 +116,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
                 return true;
         }
 
-        return parent::executeAction($module, $props);
+        return parent::shouldExecuteMutation($module, $props);
     }
 
     protected function getCheckpointmessageModule(array $module)

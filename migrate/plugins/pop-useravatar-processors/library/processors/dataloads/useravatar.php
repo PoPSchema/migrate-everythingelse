@@ -125,7 +125,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
         return parent::getComponentMutationResolverBridgeClass($module);
     }
 
-    public function executeAction(array $module, array &$props)
+    public function shouldExecuteMutation(array $module, array &$props): bool
     {
         // Always execute this action
         switch ($module[1]) {
@@ -137,7 +137,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 break;
         }
 
-        return parent::executeAction($module, $props);
+        return parent::shouldExecuteMutation($module, $props);
     }
 
     public function initModelProps(array $module, array &$props)

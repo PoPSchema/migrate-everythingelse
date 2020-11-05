@@ -12,7 +12,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadMod
         );
     }
 
-    public function executeAction(array $module, array &$props)
+    public function shouldExecuteMutation(array $module, array &$props): bool
     {
 
         // The actionexecution is triggered directly
@@ -21,7 +21,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadMod
                 return true;
         }
 
-        return parent::executeAction($module, $props);
+        return parent::shouldExecuteMutation($module, $props);
     }
 
     public function getComponentMutationResolverBridgeClass(array $module): ?string

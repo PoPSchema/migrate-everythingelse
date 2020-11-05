@@ -102,7 +102,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     //     parent::getActionexecutionCheckpointConfiguration($module, $props);
     // }
 
-    public function executeAction(array $module, array &$props)
+    public function shouldExecuteMutation(array $module, array &$props): bool
     {
 
         // The actionexecuter is invoked directly through GET, no ?actionpath required
@@ -113,7 +113,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
                 return true;
         }
 
-        return parent::executeAction($module, $props);
+        return parent::shouldExecuteMutation($module, $props);
     }
 
     public function getComponentMutationResolverBridgeClass(array $module): ?string
