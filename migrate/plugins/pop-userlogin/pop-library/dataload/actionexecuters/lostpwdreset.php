@@ -3,8 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_LostPasswordReset implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

@@ -3,8 +3,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_Logout implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

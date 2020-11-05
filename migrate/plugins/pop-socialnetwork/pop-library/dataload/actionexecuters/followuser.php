@@ -1,8 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_FollowUser implements ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {

@@ -1,8 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-abstract class GD_DataLoad_ActionExecuter_EmailInviteBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+abstract class GD_DataLoad_ActionExecuter_EmailInviteBase implements ComponentMutationResolverBridgeInterface
 {
 
     /**

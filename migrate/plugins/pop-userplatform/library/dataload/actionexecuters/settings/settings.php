@@ -1,8 +1,9 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_Settings implements ComponentMutationResolverBridgeInterface
 {
     public $fieldoperators;
 

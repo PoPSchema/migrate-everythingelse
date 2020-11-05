@@ -1,7 +1,8 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_UserAvatar_Update implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_UserAvatar_Update implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

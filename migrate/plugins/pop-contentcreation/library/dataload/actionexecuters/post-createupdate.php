@@ -5,8 +5,9 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements ComponentMutationResolverBridgeInterface
 {
     public function getSuccessString($post_id, $status)
     {

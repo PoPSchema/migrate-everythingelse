@@ -5,8 +5,9 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_LostPassword implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

@@ -2,8 +2,9 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-abstract class GD_DataLoad_FormActionExecuterBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+abstract class GD_DataLoad_FormActionExecuterBase implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

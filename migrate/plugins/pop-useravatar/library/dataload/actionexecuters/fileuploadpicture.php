@@ -1,8 +1,9 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_FileUploadPicture implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_FileUploadPicture implements ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

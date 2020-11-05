@@ -2,8 +2,9 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_DownvotePost implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_DownvotePost implements ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {

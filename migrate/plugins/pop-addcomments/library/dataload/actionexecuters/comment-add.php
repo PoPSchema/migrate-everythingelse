@@ -1,7 +1,8 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_AddComment implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_AddComment implements ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
