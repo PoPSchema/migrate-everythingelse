@@ -60,7 +60,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
         return parent::getFeedbackmessageModule($module);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
@@ -70,7 +70,7 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 return PoP_UserStance_DataLoad_ActionExecuter_CreateUpdate_Stance::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getInnerSubmodules(array $module): array

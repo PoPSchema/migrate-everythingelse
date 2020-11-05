@@ -31,7 +31,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
                 return $vars['global-userstate']['current-user-id'];
         }
-        
+
         return parent::getDBObjectIDOrIDs($module, $props, $data_properties);
     }
 
@@ -41,7 +41,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
                 return UserTypeResolver::class;
         }
-    
+
         return parent::getTypeResolverClass($module);
     }
 
@@ -74,21 +74,21 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 $ret[] = [PoP_UserAvatarProcessors_Module_Processor_UserForms::class, PoP_UserAvatarProcessors_Module_Processor_UserForms::MODULE_FORM_USERAVATAR_UPDATE];
                 break;
         }
-    
+
         return $ret;
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedIn');
                 break;
         }
-        
+
         return $ret;
     }
 
@@ -103,11 +103,11 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                     GD_URLPARAM_ACTIONS.'[]' => POP_ACTION_USERAVATAR_EXECUTEUPDATE,
                 ], parent::getDataloadSource($module, $props));
         }
-    
+
         return parent::getDataloadSource($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USERAVATAR_UPDATE:
@@ -119,10 +119,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                     return GD_DataLoad_ActionExecuter_UserAvatar_Update::class;
                 }
 
-                return                	GD_DataLoad_ActionExecuter_FileUploadPicture::class;                
+                return                	GD_DataLoad_ActionExecuter_FileUploadPicture::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function executeAction(array $module, array &$props)
@@ -148,7 +148,7 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Saving...', 'pop-useravatar-processors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

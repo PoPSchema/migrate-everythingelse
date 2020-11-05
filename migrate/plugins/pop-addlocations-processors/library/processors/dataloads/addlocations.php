@@ -34,14 +34,14 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
                 return GD_DataLoad_ActionExecuter_CreateLocation::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function prepareDataPropertiesAfterActionexecution(array $module, array &$props, &$data_properties)
@@ -83,7 +83,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
                 $ret[] = [PoP_Module_Processor_LocationContents::class, PoP_Module_Processor_LocationContents::MODULE_TRIGGERTYPEAHEADSELECT_LOCATION];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -119,7 +119,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Adding Location...', 'em-popprocessors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

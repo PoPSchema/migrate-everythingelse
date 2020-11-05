@@ -36,7 +36,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-                if ($hist_ids = $gd_dataload_actionexecution_manager->getResult($this->getActionexecuterClass($module))) {
+                if ($hist_ids = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = $hist_ids;
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
@@ -57,7 +57,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         if ($layout = $layouts[$module[1]]) {
             $ret[] = $layout;
         }
-    
+
         return $ret;
     }
 
@@ -69,10 +69,10 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
                 return NotificationTypeResolver::class;
         }
-        
+
         return parent::getTypeResolverClass($module);
     }
-    
+
     public function initModelProps(array $module, array &$props)
     {
         switch ($module[1]) {
@@ -82,14 +82,14 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
                 $this->appendProp($module, $props, 'class', 'hidden');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
     // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
 
     //     switch ($module[1]) {
-                
+
     //         case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
     //         case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
     //         case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
@@ -97,13 +97,13 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     //             // The actionexecuter is invoked directly through GET, no ?actionpath required
     //             return null;
     //     }
-        
+
     //     parent::getActionexecutionCheckpointConfiguration($module, $props);
     // }
 
     public function executeAction(array $module, array &$props)
     {
-        
+
         // The actionexecuter is invoked directly through GET, no ?actionpath required
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
@@ -115,7 +115,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
         return parent::executeAction($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $executers = array(
             self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead::class,
@@ -126,7 +126,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             return $executer;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

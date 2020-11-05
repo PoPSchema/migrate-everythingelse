@@ -40,7 +40,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
@@ -53,13 +53,13 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 return GD_DataLoad_ActionExecuter_InviteUsers::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
@@ -90,7 +90,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
             case self::MODULE_DATALOAD_MYPREFERENCES:
                 return UserTypeResolver::class;
         }
-    
+
         return parent::getTypeResolverClass($module);
     }
 
@@ -107,7 +107,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         if ($inner = $inner_modules[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -166,7 +166,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-coreprocessors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

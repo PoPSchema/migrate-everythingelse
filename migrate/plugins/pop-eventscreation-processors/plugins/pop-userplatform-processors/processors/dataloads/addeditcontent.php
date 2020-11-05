@@ -6,7 +6,7 @@ use PoPSchema\Events\TypeResolvers\EventTypeResolver;
 class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
     use DBObjectIDFromURLParamModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
     public const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
 
@@ -48,7 +48,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -83,11 +83,11 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_CREATE:
@@ -95,7 +95,7 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
                 return GD_DataLoad_ActionExecuter_CreateUpdate_Event::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)

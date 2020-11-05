@@ -84,7 +84,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
         parent::initModelProps($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
@@ -92,7 +92,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
                 return GD_DataLoad_ActionExecuter_CreateUpdate_ContentPostLink::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

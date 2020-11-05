@@ -14,7 +14,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
 
     public function executeAction(array $module, array &$props)
     {
-        
+
         // The actionexecution is triggered directly
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
@@ -24,14 +24,14 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
         return parent::executeAction($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
                 return GD_DataLoad_ActionExecuter_SystemBuildServer::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

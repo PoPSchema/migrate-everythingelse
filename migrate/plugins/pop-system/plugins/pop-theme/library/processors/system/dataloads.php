@@ -14,7 +14,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadMo
 
     public function executeAction(array $module, array &$props)
     {
-        
+
         // The actionexecution is triggered directly
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
@@ -24,14 +24,14 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadMo
         return parent::executeAction($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
                 return GD_DataLoad_ActionExecuter_SystemGenerateTheme::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

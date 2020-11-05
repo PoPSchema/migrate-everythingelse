@@ -30,18 +30,18 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
-    
+
     protected function validateCaptcha(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUS:
                 return true;
         }
-        
+
         return parent::validateCaptcha($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_CONTACTUS => GD_DataLoad_ActionExecuter_ContactUs::class,
@@ -50,7 +50,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
             return $actionexecuter;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getFeedbackmessageModule(array $module)
@@ -72,7 +72,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
                 $ret[] = [PoP_ContactUs_Module_Processor_GFForms::class, PoP_ContactUs_Module_Processor_GFForms::MODULE_FORM_CONTACTUS];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -84,7 +84,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

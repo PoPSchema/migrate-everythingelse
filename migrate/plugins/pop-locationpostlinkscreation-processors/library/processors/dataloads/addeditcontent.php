@@ -85,7 +85,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
         parent::initModelProps($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE:
@@ -93,7 +93,7 @@ class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads e
                 return GD_DataLoad_ActionExecuter_CreateUpdate_LocationPostLink::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

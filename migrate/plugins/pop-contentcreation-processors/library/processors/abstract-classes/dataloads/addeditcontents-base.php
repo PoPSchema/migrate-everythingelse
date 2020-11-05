@@ -60,7 +60,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
 
         if ($this->isCreate($module)) {
             $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-            if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getActionexecuterClass($module))) {
+            if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
                 $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
             } else {
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

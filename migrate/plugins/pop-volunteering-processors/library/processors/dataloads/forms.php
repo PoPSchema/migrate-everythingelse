@@ -44,7 +44,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
         return parent::validateCaptcha($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_VOLUNTEER => GD_DataLoad_ActionExecuter_Volunteer::class,
@@ -53,7 +53,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
             return $actionexecuter;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getFeedbackmessageModule(array $module)

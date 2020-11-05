@@ -34,14 +34,14 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
                 return GD_DataLoad_ActionExecuter_AddComment::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

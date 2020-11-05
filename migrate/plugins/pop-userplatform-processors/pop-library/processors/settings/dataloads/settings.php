@@ -30,14 +30,14 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
                 return GD_DataLoad_ActionExecuter_Settings::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function getQueryInputOutputHandlerClass(array $module): ?string

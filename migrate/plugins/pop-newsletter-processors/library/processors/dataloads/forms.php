@@ -35,7 +35,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_NEWSLETTER => GD_DataLoad_ActionExecuter_NewsletterSubscription::class,
@@ -45,7 +45,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
             return $actionexecuter;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getFeedbackmessageModule(array $module)
@@ -74,7 +74,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
                 $ret[] = [PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTERUNSUBSCRIPTION];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -87,7 +87,7 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

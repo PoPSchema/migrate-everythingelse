@@ -44,7 +44,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
         if ($block_inner = $block_inners[$module[1]]) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -81,11 +81,11 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Submitting...', 'pop-locationpostscreation-processors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOST_CREATE:
@@ -93,7 +93,7 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
                 return GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

@@ -7,7 +7,7 @@ use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
     use DBObjectIDFromURLParamModuleProcessorTrait;
-    
+
     public const MODULE_DATALOAD_CONTACTUSER = 'dataload-contactuser';
 
     public function getModulesToProcess(): array
@@ -34,18 +34,18 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
 
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
-    
+
     protected function validateCaptcha(array $module, array &$props)
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTACTUSER:
                 return true;
         }
-        
+
         return parent::validateCaptcha($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
             self::MODULE_DATALOAD_CONTACTUSER => GD_DataLoad_ActionExecuter_ContactUser::class,
@@ -54,7 +54,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
             return $actionexecuter;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getFeedbackmessageModule(array $module)
@@ -76,7 +76,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
                 $ret[] = [PoP_SocialNetwork_Module_Processor_GFForms::class, PoP_SocialNetwork_Module_Processor_GFForms::MODULE_FORM_CONTACTUSER];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -88,7 +88,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 

@@ -48,7 +48,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
         if ($inner = $inners[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -83,11 +83,11 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENTLINK_CREATE:
@@ -95,7 +95,7 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
                 return GD_DataLoad_ActionExecuter_CreateUpdate_EventLink::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function getDBObjectIDOrIDs(array $module, array &$props, &$data_properties)

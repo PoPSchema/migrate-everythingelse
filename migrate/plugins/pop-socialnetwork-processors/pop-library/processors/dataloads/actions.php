@@ -55,7 +55,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
         return $routes[$module[1]] ?? parent::getRelevantRoute($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $executers = array(
             self::MODULE_DATALOADACTION_FOLLOWUSER => GD_DataLoad_ActionExecuter_FollowUser::class,
@@ -73,7 +73,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             return $executer;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     // function getActionexecutionCheckpointConfiguration(array $module, array &$props) {
@@ -172,7 +172,7 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             case self::MODULE_DATALOADACTION_DOWNVOTEPOST:
             case self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST:
                 $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
-                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getActionexecuterClass($module))) {
+                if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {
                     $data_properties[DataloadingConstants::SKIPDATALOAD] = true;

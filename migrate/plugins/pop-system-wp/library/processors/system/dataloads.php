@@ -14,7 +14,7 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadMod
 
     public function executeAction(array $module, array &$props)
     {
-        
+
         // The actionexecution is triggered directly
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
@@ -24,14 +24,14 @@ class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadMod
         return parent::executeAction($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS:
                 return GD_DataLoad_ActionExecuter_SystemActivatePlugins::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 

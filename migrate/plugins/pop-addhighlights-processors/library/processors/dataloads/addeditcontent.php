@@ -44,7 +44,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         if ($block_inner = $block_inners[$module[1]]) {
             $ret[] = $block_inner;
         }
-    
+
         return $ret;
     }
 
@@ -67,7 +67,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
         return parent::isUpdate($module);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
@@ -75,7 +75,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
                 return GD_DataLoad_ActionExecuter_CreateUpdate_Highlight::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     public function initModelProps(array $module, array &$props)
@@ -91,7 +91,7 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
                 }
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

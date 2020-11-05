@@ -41,7 +41,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
         return parent::getRelevantRouteCheckpointTarget($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
@@ -54,7 +54,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 return GD_DataLoad_ActionExecuter_Update_MyCommunities::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 
     protected function getInnerSubmodules(array $module): array

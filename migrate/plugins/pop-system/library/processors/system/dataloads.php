@@ -18,7 +18,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
 
     public function executeAction(array $module, array &$props)
     {
-        
+
         // The actionexecution is triggered directly
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
@@ -30,7 +30,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
         return parent::executeAction($module, $props);
     }
 
-    public function getActionexecuterClass(array $module): ?string
+    public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
@@ -43,7 +43,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
                 return GD_DataLoad_ActionExecuter_SystemInstall::class;
         }
 
-        return parent::getActionexecuterClass($module);
+        return parent::getComponentMutationResolverBridgeClass($module);
     }
 }
 
