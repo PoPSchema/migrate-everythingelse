@@ -6,6 +6,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements ComponentMutationResolverBridgeInterface
 {
@@ -56,7 +57,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements Compo
             $success_string = $this->getSuccessString($post_id, $status);
 
             // Save the result for some module to incorporate it into the query args
-            $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+            $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
             $gd_dataload_actionexecution_manager->setResult(get_called_class(), $post_id);
 
             // No errors => success

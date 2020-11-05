@@ -3,6 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
@@ -59,7 +60,7 @@ abstract class PoP_Module_Processor_AddEditContentDataloadsBase extends PoP_Modu
         parent::prepareDataPropertiesAfterActionexecution($module, $props, $data_properties);
 
         if ($this->isCreate($module)) {
-            $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+            $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
             if ($target_id = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
                 $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
             } else {

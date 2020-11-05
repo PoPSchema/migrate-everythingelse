@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_DataLoad_ActionExecuter_UnfollowUser implements ComponentMutationResolverBridgeInterface
 {
@@ -28,7 +29,7 @@ class GD_DataLoad_ActionExecuter_UnfollowUser implements ComponentMutationResolv
 
         // Save the result for some module to incorporate it into the query args
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
         $gd_dataload_actionexecution_manager->setResult(get_called_class(), $target_id);
         $success_msg = sprintf(
             TranslationAPIFacade::getInstance()->__('You have stopped following <em><strong>%s</strong></em>.', 'pop-coreprocessors'),

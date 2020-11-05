@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_DataLoad_ActionExecuter_SubscribeToTag implements ComponentMutationResolverBridgeInterface
 {
@@ -29,7 +30,7 @@ class GD_DataLoad_ActionExecuter_SubscribeToTag implements ComponentMutationReso
         // Save the result for some module to incorporate it into the query args
         $posttagapi = \PoPSchema\PostTags\FunctionAPIFactory::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
         $gd_dataload_actionexecution_manager->setResult(get_called_class(), $target_id);
         $tag = $posttagapi->getTag($target_id);
         $success_msg = sprintf(

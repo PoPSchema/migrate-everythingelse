@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -35,7 +36,7 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
             case self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD:
             case self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD:
-                $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+                $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
                 if ($hist_ids = $gd_dataload_actionexecution_manager->getResult($this->getComponentMutationResolverBridgeClass($module))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = $hist_ids;
                 } else {

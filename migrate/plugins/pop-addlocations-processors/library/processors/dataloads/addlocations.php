@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\Locations\TypeResolvers\LocationTypeResolver;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -50,7 +51,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
-                $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+                $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
                 if ($target_id = $gd_dataload_actionexecution_manager->getResult(GD_DataLoad_ActionExecuter_CreateLocation::class)) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
                 } else {

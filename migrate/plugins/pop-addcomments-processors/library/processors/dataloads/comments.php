@@ -1,6 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -122,7 +123,7 @@ class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_Datalo
 
         switch ($module[1]) {
             case self::MODULE_DATALOAD_ADDCOMMENT:
-                $gd_dataload_actionexecution_manager = \PoP\ComponentModel\ActionExecutionManagerFactory::getInstance();
+                $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
                 if ($comment_id = $gd_dataload_actionexecution_manager->getResult(GD_DataLoad_ActionExecuter_AddComment::class)) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($comment_id);
                 } else {
