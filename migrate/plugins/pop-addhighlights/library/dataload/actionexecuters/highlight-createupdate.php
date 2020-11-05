@@ -4,12 +4,13 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
+class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getCreateupdate()
+    public function getMutationResolverClass(): string
     {
-        return new GD_CreateUpdate_Highlight();
+        return GD_CreateUpdate_Highlight::class;
     }
 
     public function getSuccessString($post_id, $status)

@@ -1,10 +1,11 @@
 <?php
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
+class GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getCreateupdate()
+    public function getMutationResolverClass(): string
     {
-        return new GD_CreateUpdate_LocationPost();
+        return GD_CreateUpdate_LocationPost::class;
     }
 }
-    
+

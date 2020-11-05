@@ -5,9 +5,25 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 
-class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
+class GD_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolver
 {
+    public function execute(array &$errors)
+    {
+        // If there's post_id => It's Update
+        // Otherwise => It's Create
+        $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
+
+        if ($post_id) {
+            $this->update($errors);
+        } else {
+            $post_id = $this->create($errors);
+        }
+
+        return $post_id;
+    }
+
     protected function supportsTitle()
     {
         return false;
@@ -18,9 +34,9 @@ class GD_CreateUpdate_Highlight extends GD_CreateUpdate_PostBase
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
-        $form_data = parent::getFormData($data_properties);
+        $form_data = parent::getFormData();
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

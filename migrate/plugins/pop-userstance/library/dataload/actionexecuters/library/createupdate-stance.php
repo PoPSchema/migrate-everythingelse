@@ -6,9 +6,25 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 
-class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
+class GD_CreateUpdate_Stance extends AbstractCreateUpdatePostMutationResolver
 {
+    public function execute(array &$errors)
+    {
+        // If there's post_id => It's Update
+        // Otherwise => It's Create
+        $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
+
+        if ($post_id) {
+            $this->update($errors);
+        } else {
+            $post_id = $this->create($errors);
+        }
+
+        return $post_id;
+    }
+
     protected function supportsTitle()
     {
         return false;
@@ -19,9 +35,9 @@ class GD_CreateUpdate_Stance extends GD_CreateUpdate_PostBase
         return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
-        $form_data = parent::getFormData($data_properties);
+        $form_data = parent::getFormData();
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 

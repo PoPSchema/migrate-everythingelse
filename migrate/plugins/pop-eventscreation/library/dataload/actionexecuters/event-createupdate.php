@@ -1,11 +1,12 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends GD_DataLoad_ActionExecuter_CreateUpdate_PostBase
+class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends AbstractCreateUpdatePostMutationResolverBridge
 {
-    public function getCreateupdate()
+    public function getMutationResolverClass(): string
     {
-        return new GD_CreateUpdate_Event();
+        return GD_CreateUpdate_Event::class;
     }
 
     public function modifyDataProperties(&$data_properties, $post_id)
@@ -16,4 +17,4 @@ class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends GD_DataLoad_ActionEx
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = array('pending', 'draft', 'published');
     }
 }
-    
+

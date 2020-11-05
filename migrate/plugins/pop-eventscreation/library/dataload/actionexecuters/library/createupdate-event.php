@@ -2,9 +2,25 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
+use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
 
-class GD_CreateUpdate_Event extends GD_CreateUpdate_PostBase
+class GD_CreateUpdate_Event extends AbstractCreateUpdatePostMutationResolver
 {
+    public function execute(array &$errors)
+    {
+        // If there's post_id => It's Update
+        // Otherwise => It's Create
+        $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
+
+        if ($post_id) {
+            $this->update($errors);
+        } else {
+            $post_id = $this->create($errors);
+        }
+
+        return $post_id;
+    }
+
     protected function volunteer()
     {
         return true;
@@ -21,9 +37,9 @@ class GD_CreateUpdate_Event extends GD_CreateUpdate_PostBase
         }
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
-        $form_data = parent::getFormData($data_properties);
+        $form_data = parent::getFormData();
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
