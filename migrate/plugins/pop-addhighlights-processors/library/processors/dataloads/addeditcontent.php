@@ -71,8 +71,9 @@ class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_M
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHT_CREATE:
+                return GD_DataLoad_ActionExecuter_Create_Highlight::class;
             case self::MODULE_DATALOAD_HIGHLIGHT_UPDATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_Highlight::class;
+                return GD_DataLoad_ActionExecuter_Update_Highlight::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

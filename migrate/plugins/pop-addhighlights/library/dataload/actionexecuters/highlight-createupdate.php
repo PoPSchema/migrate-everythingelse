@@ -6,7 +6,7 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolverBridge
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {
