@@ -1,11 +1,11 @@
 <?php
 use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
 
-class PoP_UserStance_DataLoad_ActionExecuter_CreateUpdate_Stance extends AbstractCreateUpdatePostMutationResolverBridge
+class PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends AbstractCreateUpdatePostMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {
-        return GD_CreateUpdate_Stance::class;
+        return GD_CreateOrUpdate_Stance::class;
     }
 }
 

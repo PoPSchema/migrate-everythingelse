@@ -64,10 +64,12 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
+                return PoP_UserStance_DataLoad_ActionExecuter_Create_Stance::class;
             case self::MODULE_DATALOAD_STANCE_UPDATE:
+                return PoP_UserStance_DataLoad_ActionExecuter_Update_Stance::class;
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                return PoP_UserStance_DataLoad_ActionExecuter_CreateUpdate_Stance::class;
+                return PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
