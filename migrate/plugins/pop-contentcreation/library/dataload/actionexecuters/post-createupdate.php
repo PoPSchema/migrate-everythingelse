@@ -6,7 +6,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
 
-abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ActionExecuterInterface
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_PostBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function getSuccessString($post_id, $status)
     {

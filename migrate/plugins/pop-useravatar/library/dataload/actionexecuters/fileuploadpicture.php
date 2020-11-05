@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\State\ApplicationState;
 
-class GD_DataLoad_ActionExecuter_FileUploadPicture implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_FileUploadPicture implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -16,4 +16,4 @@ class GD_DataLoad_ActionExecuter_FileUploadPicture implements \PoP\ComponentMode
         return null;
     }
 }
-    
+

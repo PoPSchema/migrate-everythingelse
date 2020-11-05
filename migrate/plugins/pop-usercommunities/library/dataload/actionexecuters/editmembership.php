@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_EditMembership implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_EditMembership implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
@@ -20,7 +20,7 @@ class GD_DataLoad_ActionExecuter_EditMembership implements \PoP\ComponentModel\A
                     ResponseConstants::ERRORSTRINGS => $errors
                 );
             }
-            
+
             return array(
                 ResponseConstants::SUCCESS => true
             );
@@ -29,4 +29,4 @@ class GD_DataLoad_ActionExecuter_EditMembership implements \PoP\ComponentModel\A
         return null;
     }
 }
-    
+

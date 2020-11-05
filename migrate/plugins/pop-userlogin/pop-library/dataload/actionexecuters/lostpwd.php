@@ -6,7 +6,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -43,7 +43,7 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
         // $input_name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]);
         $input_name = POP_INPUTNAME_CODE;
         $link = GeneralUtils::addQueryArgs([
-            $input_name => $code, 
+            $input_name => $code,
         ], RouteUtils::getRouteURL(POP_USERLOGIN_ROUTE_LOSTPWDRESET));
 
         $message = sprintf(
@@ -86,7 +86,7 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
         $form_data = array(
             'user_login' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
         );
-        
+
         return $form_data;
     }
 
@@ -150,4 +150,4 @@ class GD_DataLoad_ActionExecuter_LostPassword implements \PoP\ComponentModel\Act
         return $result;
     }
 }
-    
+

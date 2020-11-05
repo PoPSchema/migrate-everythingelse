@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_UpdateMyPreferences implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_UpdateMyPreferences implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
@@ -19,11 +19,11 @@ class GD_DataLoad_ActionExecuter_UpdateMyPreferences implements \PoP\ComponentMo
                 ResponseConstants::ERRORSTRINGS => $errors
             );
         }
-        
+
         // No errors => success
         return array(
             ResponseConstants::SUCCESS => true,
         );
     }
 }
-    
+

@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_SystemInstall implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_SystemInstall implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -21,4 +21,4 @@ class GD_DataLoad_ActionExecuter_SystemInstall implements \PoP\ComponentModel\Ac
         );
     }
 }
-    
+

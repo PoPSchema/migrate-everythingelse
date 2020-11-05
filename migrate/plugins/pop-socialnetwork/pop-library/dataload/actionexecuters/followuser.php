@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_FollowUser implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {

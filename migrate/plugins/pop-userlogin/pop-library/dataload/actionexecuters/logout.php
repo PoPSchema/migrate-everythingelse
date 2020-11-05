@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
 
-class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -15,7 +15,7 @@ class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ActionExe
             $vars = ApplicationState::getVars();
             if (!$vars['global-userstate']['is-user-logged-in']) {
                 $error = TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-application');
-            
+
                 // Return error string
                 return array(
                     ResponseConstants::ERRORSTRINGS => array($error)
@@ -23,7 +23,7 @@ class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ActionExe
             }
 
             $user_id = $vars['global-userstate']['current-user-id'];
-            
+
             $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
             $cmsuseraccountapi->logout();
 
@@ -40,4 +40,4 @@ class GD_DataLoad_ActionExecuter_Logout implements \PoP\ComponentModel\ActionExe
         return null;
     }
 }
-    
+

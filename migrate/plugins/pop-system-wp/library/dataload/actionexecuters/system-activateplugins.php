@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_SystemActivatePlugins implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_SystemActivatePlugins implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
@@ -17,11 +17,11 @@ class GD_DataLoad_ActionExecuter_SystemActivatePlugins implements \PoP\Component
             TranslationAPIFacade::getInstance()->__('Successfully activated plugins: %s.', 'pop-system-wp'),
             implode(TranslationAPIFacade::getInstance()->__(', ', 'pop-system-wp'), $activated)
         ) : TranslationAPIFacade::getInstance()->__('There were no plugins to activate.', 'pop-system-wp');
-        
+
         return array(
             ResponseConstants::SUCCESSSTRINGS => array($success_msg),
             ResponseConstants::SUCCESS => true
         );
     }
 }
-    
+

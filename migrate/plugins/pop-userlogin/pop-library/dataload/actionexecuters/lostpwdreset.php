@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
-class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -68,4 +68,4 @@ class GD_DataLoad_ActionExecuter_LostPasswordReset implements \PoP\ComponentMode
         return null;
     }
 }
-    
+

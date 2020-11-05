@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_UnsubscribeFromTag implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_UnsubscribeFromTag implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {

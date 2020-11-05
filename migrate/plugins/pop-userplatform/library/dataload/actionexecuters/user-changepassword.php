@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_ChangePassword_User implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_ChangePassword_User implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {

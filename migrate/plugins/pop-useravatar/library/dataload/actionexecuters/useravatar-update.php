@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_UserAvatar_Update implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_UserAvatar_Update implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_Update_MyCommunities implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_Update_MyCommunities implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
@@ -30,4 +30,4 @@ class GD_DataLoad_ActionExecuter_Update_MyCommunities implements \PoP\ComponentM
         return null;
     }
 }
-    
+

@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_SystemGenerate implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_SystemGenerate implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {
@@ -16,4 +16,4 @@ class GD_DataLoad_ActionExecuter_SystemGenerate implements \PoP\ComponentModel\A
         );
     }
 }
-    
+

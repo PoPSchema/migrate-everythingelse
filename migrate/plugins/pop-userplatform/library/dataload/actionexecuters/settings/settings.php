@@ -2,18 +2,18 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public $fieldoperators;
-    
+
     public function __construct()
     {
         return $this->fieldoperators = array();
     }
-    
+
     // These values must be injected from outside
     public function add($field, $operator)
-    {    
+    {
         // each operator must be of class GD_Settings_UrlOperator
         $this->fieldoperators[] = [
             'field' => $field,
@@ -21,7 +21,7 @@ class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ActionE
         ];
     }
 
-    
+
 
     public function execute(&$data_properties)
     {
@@ -34,7 +34,7 @@ class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ActionE
             // Return the redirect. Use Hard redirect
             // $redirect_to = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_BROWSERURL]);
             // if (!$redirect_to) {
-                
+
             //     $redirect_to = $cmsengineapi->getHomeURL();
             // }
             // Comment Leo 22/05/2015: If we forward to the same URL but with different lang, it will always go to https://www.mesym.com/ms/settings/
@@ -57,4 +57,4 @@ class GD_DataLoad_ActionExecuter_Settings implements \PoP\ComponentModel\ActionE
         return null;
     }
 }
-    
+

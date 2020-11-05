@@ -2,7 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-abstract class GD_DataLoad_ActionExecuter_EmailInviteBase implements \PoP\ComponentModel\ActionExecuterInterface
+abstract class GD_DataLoad_ActionExecuter_EmailInviteBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
 
     /**

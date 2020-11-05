@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
 
-abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements \PoP\ComponentModel\ActionExecuterInterface
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     public function execute(&$data_properties)
     {

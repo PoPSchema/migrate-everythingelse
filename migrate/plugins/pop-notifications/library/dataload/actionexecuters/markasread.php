@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
-class GD_DataLoad_ActionExecuter_NotificationMarkAsRead implements \PoP\ComponentModel\ActionExecuterInterface
+class GD_DataLoad_ActionExecuter_NotificationMarkAsRead implements \PoP\ComponentModel\ComponentMutationResolverBridgeInterface
 {
     protected function getInstance()
     {
