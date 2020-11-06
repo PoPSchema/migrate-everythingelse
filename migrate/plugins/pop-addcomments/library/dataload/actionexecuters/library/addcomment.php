@@ -3,7 +3,6 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_AddComment implements MutationResolverInterface
 {
@@ -24,19 +23,6 @@ class GD_AddComment implements MutationResolverInterface
     protected function additionals($comment_id, $form_data)
     {
         HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
-    }
-
-    protected function getFormData()
-    {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $form_data = array(
-            'comment' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR])->getValue([PoP_Module_Processor_CommentEditorFormInputs::class, PoP_Module_Processor_CommentEditorFormInputs::MODULE_FORMINPUT_COMMENTEDITOR]),
-            'parent' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT])->getValue([PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT]),
-            'customPostID' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST])->getValue([PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST]),
-        );
-
-        return $form_data;
     }
 
     protected function getCommentData($form_data)
@@ -71,10 +57,8 @@ class GD_AddComment implements MutationResolverInterface
      * @param string[] $errors
      * @return mixed|null
      */
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

@@ -25,7 +25,7 @@ class GD_ActivatePlugins implements MutationResolverInterface
         return false;
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin

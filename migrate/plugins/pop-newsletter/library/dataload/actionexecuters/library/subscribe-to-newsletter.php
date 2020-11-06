@@ -2,7 +2,6 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolverInterface
 {
@@ -21,18 +20,6 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolv
     protected function additionals($form_data)
     {
         HooksAPIFacade::getInstance()->doAction('pop_subscribetonewsletter', $form_data);
-    }
-
-    protected function getFormData()
-    {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $form_data = array(
-            'email' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAIL])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAIL]),
-            'name' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTERNAME])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTERNAME]),
-        );
-
-        return $form_data;
     }
 
     protected function doExecute($form_data)
@@ -64,10 +51,8 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolv
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

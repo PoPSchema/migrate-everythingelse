@@ -1,6 +1,30 @@
 <?php
+use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_UserCommunities_CreateUpdate_Profile extends GD_CreateUpdate_Profile
 {
-    use GD_UserCommunities_CreateUpdate_Profile_Trait;
+    protected function additionalsCreate($user_id, $form_data)
+    {
+        parent::additionalsCreate($user_id, $form_data);
+        $this->usercommunitiesAdditionalsCreate($user_id, $form_data);
+    }
+    protected function usercommunitiesAdditionalsCreate($user_id, $form_data)
+    {
+        HooksAPIFacade::getInstance()->doAction('gd_custom_createupdate_profile:additionalsCreate', $user_id, $form_data);
+    }
+
+    protected function createuser(&$errors, $form_data)
+    {
+        $user_id = parent::createuser($errors, $form_data);
+        $this->usercommunitiesCreateuser($user_id, $errors, $form_data);
+        return $user_id;
+    }
+    protected function usercommunitiesCreateuser($user_id, &$errors, $form_data)
+    {
+        $communities = $form_data['communities'];
+        \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
+
+        // Set the privileges/tags for the new communities
+        gdUreUserAddnewcommunities($user_id, $communities);
+    }
 }

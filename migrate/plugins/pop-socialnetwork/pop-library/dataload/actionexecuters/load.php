@@ -1,5 +1,9 @@
 <?php
 
+require_once 'update-user-metavalue.php';
+require_once 'post-update-user-metavalue.php';
+require_once 'user-update-user-metavalue.php';
+require_once 'tag-update-user-metavalue.php';
 require_once 'followuser.php';
 require_once 'unfollowuser.php';
 require_once 'recommendpost.php';

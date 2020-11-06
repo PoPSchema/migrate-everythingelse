@@ -5,7 +5,7 @@ use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 
 class GD_SystemInstall implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         // Save the new version on the DB
         update_option('PoP:version', ApplicationInfoFacade::getInstance()->getVersion());

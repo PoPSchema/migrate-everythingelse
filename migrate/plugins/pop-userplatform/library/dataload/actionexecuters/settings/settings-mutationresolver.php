@@ -18,7 +18,7 @@ class GD_Settings implements MutationResolverInterface
         ];
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

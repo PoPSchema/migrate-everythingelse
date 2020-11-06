@@ -22,28 +22,8 @@ class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationRes
         return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK];
     }
 
-    protected function getFormData()
-    {
-        $form_data = parent::getFormData();
-
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
-            $form_data = array_merge(
-                $form_data,
-                array(
-                    'linkaccess' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS])->getValue([PoP_Module_Processor_CreateUpdatePostSelectFormInputs::class, PoP_Module_Processor_CreateUpdatePostSelectFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS]),
-                )
-            );
-        }
-
-        return $form_data;
-    }
-
     protected function additionals($post_id, $form_data)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
         parent::additionals($post_id, $form_data);
 
         if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {

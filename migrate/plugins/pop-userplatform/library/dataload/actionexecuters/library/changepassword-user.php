@@ -1,10 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_ChangePassword_User implements MutationResolverInterface
 {
@@ -34,22 +32,6 @@ class GD_ChangePassword_User implements MutationResolverInterface
                 $errors[] = TranslationAPIFacade::getInstance()->__('Passwords do not match.', 'pop-application');
             }
         }
-    }
-
-    protected function getFormData()
-    {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['current-user-id'];
-        $form_data = array(
-            'user_id' => $user_id,
-            'current_password' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD])->getValue([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_CURRENTPASSWORD]),
-            'password' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD])->getValue([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORD]),
-            'repeat_password' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])->getValue([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT])
-        );
-
-        return $form_data;
     }
 
     protected function executeChangepassword($user_data)
@@ -88,10 +70,8 @@ class GD_ChangePassword_User implements MutationResolverInterface
         return $user_id;
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

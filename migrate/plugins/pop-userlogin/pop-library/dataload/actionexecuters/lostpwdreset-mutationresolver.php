@@ -6,7 +6,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 class GD_LostPwdReset implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $code = trim($moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]));

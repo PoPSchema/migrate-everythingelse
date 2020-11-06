@@ -2,7 +2,6 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
 {
@@ -47,18 +46,6 @@ class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
         HooksAPIFacade::getInstance()->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
 
-    protected function getFormData()
-    {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $form_data = array(
-            'email' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL]),
-            'verificationcode' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE]),
-        );
-
-        return $form_data;
-    }
-
     /**
      * Function to override by Gravity Forms
      */
@@ -95,10 +82,8 @@ class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

@@ -53,8 +53,9 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MutationResolverInterface */
         $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
-        $errors = array();
-        $execution_response = $mutationResolver->execute($errors);
+        $errors = $errorcodes = array();
+        $form_data = $this->getFormData();
+        $execution_response = $mutationResolver->execute($errors, $errorcodes, $form_data);
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
@@ -95,6 +96,18 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         }
 
         return $executed;
+    }
+
+    public function getFormData(): array
+    {
+        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+
+        $formid_processor = $moduleprocessor_manager->getProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
+        $form_data = array(
+            'form_id' => $formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]),
+        );
+
+        return $form_data;
     }
 
     public function setup()

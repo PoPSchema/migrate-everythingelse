@@ -20,11 +20,6 @@ class GD_SubscribeToUnsubscribeFromTag extends GD_UpdateUserMetaValue
         }
     }
 
-    protected function getRequestKey()
-    {
-        return POP_INPUTNAME_TAGID;
-    }
-
     protected function additionals($target_id, $form_data)
     {
         HooksAPIFacade::getInstance()->doAction('gd_subscritetounsubscribefrom_tag', $target_id, $form_data);

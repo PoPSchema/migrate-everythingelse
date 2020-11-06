@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_SystemBuild implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         HooksAPIFacade::getInstance()->doAction('PoP:system-build');
     }

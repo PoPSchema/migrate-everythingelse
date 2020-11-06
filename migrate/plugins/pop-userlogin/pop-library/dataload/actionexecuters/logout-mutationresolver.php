@@ -6,7 +6,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 class GD_Logout implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         // If the user is not logged in, then return the error
         $vars = ApplicationState::getVars();

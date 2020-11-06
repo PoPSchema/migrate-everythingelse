@@ -21,30 +21,14 @@ class GD_UpdateUserMetaValue implements MutationResolverInterface
         HooksAPIFacade::getInstance()->doAction('gd_updateusermetavalue', $target_id, $form_data);
     }
 
-    protected function getRequestKey()
-    {
-        return '';
-    }
-
-    protected function getFormData()
-    {
-        $form_data = array(
-            'target_id' => $_REQUEST[$this->getRequestKey()],
-        );
-
-        return $form_data;
-    }
-
     protected function update($form_data)
     {
         $target_id = $form_data['target_id'];
         return $target_id;
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

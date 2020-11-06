@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_FileUploadPicture implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         // Copy the images to the fileupload-userphoto upload folder
         $vars = ApplicationState::getVars();

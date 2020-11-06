@@ -2,6 +2,8 @@
 
 class GD_DataLoad_ActionExecuter_CreateUpdate_ProfileIndividual extends GD_DataLoad_ActionExecuter_CreateUpdate_Profile
 {
+    use GD_DataLoad_ActionExecuter_CreateUpdate_ProfileIndividual_Trait;
+
     public function getMutationResolverClass(): string
     {
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {

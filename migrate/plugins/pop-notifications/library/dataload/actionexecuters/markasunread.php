@@ -1,7 +1,6 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_NotificationMarkAsUnread extends AbstractComponentMutationResolverBridge
+class GD_DataLoad_ActionExecuter_NotificationMarkAsUnread extends GD_DataLoad_ActionExecuter_NotificationMarkAsReadUnread
 {
     public function getMutationResolverClass(): string
     {

@@ -1,27 +1,10 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 class GD_NotificationMarkAsReadUnread implements MutationResolverInterface
 {
-    protected function getFormData()
-    {
-        $vars = ApplicationState::getVars();
-        $form_data = array(
-            'histid' => $_REQUEST[$this->getRequestKey()],
-            'user_id' => $vars['global-userstate']['current-user-id'],
-        );
-
-        return $form_data;
-    }
-
-    protected function getRequestKey()
-    {
-        return 'nid';
-    }
-
     protected function validate(&$errors, $form_data)
     {
         $histid = $form_data['histid'];
@@ -58,10 +41,8 @@ class GD_NotificationMarkAsReadUnread implements MutationResolverInterface
         return PoP_Notifications_API::setStatus($form_data['histid'], $form_data['user_id'], $this->getStatus());
     }
 
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validate($errors, $form_data);
         if ($errors) {
             return;

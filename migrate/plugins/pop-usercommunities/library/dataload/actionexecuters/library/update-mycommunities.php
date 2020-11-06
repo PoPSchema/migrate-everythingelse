@@ -1,16 +1,12 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_Update_MyCommunities implements MutationResolverInterface
 {
-    public function execute(array &$errors, array &$errorcodes)
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $form_data = $this->getFormData();
-
         $this->validateupdatecontent($errors, $form_data);
         if ($errors) {
             return;
@@ -18,24 +14,6 @@ class GD_Update_MyCommunities implements MutationResolverInterface
 
         // Do the Post update
         return $this->executeUpdate($errors, $form_data);
-    }
-
-    protected function getFormData()
-    {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $vars = ApplicationState::getVars();
-        $user_id = $vars['global-userstate']['is-user-logged-in'] ? $vars['global-userstate']['current-user-id'] : '';
-        $inputs = GD_UserCommunities_MyCommunitiesUtils::getFormInputs();
-        $communities = $moduleprocessor_manager->getProcessor($inputs['communities'])->getValue($inputs['communities']);
-        $form_data = array(
-            'user_id' => $user_id,
-            'communities' => $communities ?? array(),
-        );
-
-        // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
-
-        return $form_data;
     }
 
     protected function validateupdatecontent(&$errors, $form_data)
