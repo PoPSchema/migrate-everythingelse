@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_SubscribeToNewsletter
+class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -22,7 +23,7 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter
         HooksAPIFacade::getInstance()->doAction('pop_subscribetonewsletter', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -30,11 +31,11 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter
             'email' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAIL])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAIL]),
             'name' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTERNAME])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTERNAME]),
         );
-        
+
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -63,16 +64,16 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    public function subscribe(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
             return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;

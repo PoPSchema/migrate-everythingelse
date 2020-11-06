@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class GD_AddComment
+class GD_AddComment implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -25,7 +26,7 @@ class GD_AddComment
         HooksAPIFacade::getInstance()->doAction('gd_addcomment', $comment_id, $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -60,15 +61,19 @@ class GD_AddComment
         return $comment_data;
     }
 
-    protected function execute($comment_data)
+    protected function insertComment($comment_data)
     {
         $cmscommentsapi = \PoPSchema\Comments\FunctionAPIFactory::getInstance();
         return $cmscommentsapi->insertComment($comment_data);
     }
 
-    public function addcomment(&$errors, &$data_properties)
+    /**
+     * @param string[] $errors
+     * @return mixed|null
+     */
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
@@ -76,7 +81,7 @@ class GD_AddComment
         }
 
         $comment_data = $this->getCommentData($form_data);
-        $comment_id = $this->execute($comment_data);
+        $comment_id = $this->insertComment($comment_data);
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($comment_id, $form_data);

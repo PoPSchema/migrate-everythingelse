@@ -1,12 +1,13 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class GD_UpdateMyPreferences
+class GD_UpdateMyPreferences implements MutationResolverInterface
 {
-    public function execute(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
 
@@ -17,7 +18,7 @@ class GD_UpdateMyPreferences
         return $this->executeUpdate($errors, $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -28,7 +29,7 @@ class GD_UpdateMyPreferences
             // We can just get the value for any one forminput from the My Preferences form, since they all have the same name (and even if the forminput was actually removed from the form!)
             'userPreferences' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST])->getValue([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST]),
         );
-        
+
         return $form_data;
     }
 

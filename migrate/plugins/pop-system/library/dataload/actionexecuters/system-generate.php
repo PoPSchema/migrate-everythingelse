@@ -1,24 +1,18 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_SystemGenerate implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_SystemGenerate extends AbstractSystemComponentMutationResolverBridge
 {
-    /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
-     */
-    public function execute(array &$data_properties): ?array
+    public function getMutationResolverClass(): string
     {
-        HooksAPIFacade::getInstance()->doAction('PoP:system-generate');
-
-        $success_msg = TranslationAPIFacade::getInstance()->__('System action "generate" executed successfully.', 'pop-system');
-        return array(
-            ResponseConstants::SUCCESSSTRINGS => array($success_msg),
-            ResponseConstants::SUCCESS => true
-        );
+        return GD_SystemGenerate::class;
+    }
+    /**
+     * @param mixed $result_id Maybe an int, maybe a string
+     */
+    public function getSuccessString($result_id): ?string
+    {
+        return TranslationAPIFacade::getInstance()->__('System action "generate" executed successfully.', 'pop-system');
     }
 }
 

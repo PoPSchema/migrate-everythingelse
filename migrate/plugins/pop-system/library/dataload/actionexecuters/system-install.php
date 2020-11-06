@@ -1,29 +1,18 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_SystemInstall implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_SystemInstall extends AbstractSystemComponentMutationResolverBridge
 {
-    /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
-     */
-    public function execute(array &$data_properties): ?array
+    public function getMutationResolverClass(): string
     {
-        // Save the new version on the DB
-        update_option('PoP:version', ApplicationInfoFacade::getInstance()->getVersion());
-
-        // Execute install everywhere
-        HooksAPIFacade::getInstance()->doAction('PoP:system-install');
-
-        $success_msg = TranslationAPIFacade::getInstance()->__('System action "install" executed successfully.', 'pop-system');
-        return array(
-            ResponseConstants::SUCCESSSTRINGS => array($success_msg),
-            ResponseConstants::SUCCESS => true
-        );
+        return GD_SystemInstall::class;
+    }
+    /**
+     * @param mixed $result_id Maybe an int, maybe a string
+     */
+    public function getSuccessString($result_id): ?string
+    {
+        return TranslationAPIFacade::getInstance()->__('System action "install" executed successfully.', 'pop-system');
     }
 }
 

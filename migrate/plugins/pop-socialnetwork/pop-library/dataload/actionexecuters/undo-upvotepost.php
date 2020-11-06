@@ -2,14 +2,19 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
-class GD_DataLoad_ActionExecuter_UndoUpvotePost implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_UndoUpvotePost extends AbstractComponentMutationResolverBridge
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_UndoUpvotePost();
+        return GD_UndoUpvotePost::class;
+    }
+
+    protected function onlyExecuteWhenDoingPost(): bool
+    {
+        return false;
     }
 
     /**

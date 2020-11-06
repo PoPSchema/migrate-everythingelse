@@ -28,10 +28,10 @@ trait GD_CreateUpdate_ProfileIndividual_Trait
         return $inputs;
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         return array_merge(
-            parent::getFormData($data_properties),
+            parent::getFormData(),
             $this->getCommonuserrolesFormData()
         );
     }

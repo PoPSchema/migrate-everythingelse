@@ -50,9 +50,9 @@ class GD_CreateUpdate_Profile extends GD_CreateUpdate_User
         return $inputs;
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
-        $form_data = parent::getFormData($data_properties);
+        $form_data = parent::getFormData();
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -73,7 +73,7 @@ class GD_CreateUpdate_Profile extends GD_CreateUpdate_User
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_profile:form_data', $form_data);
-        
+
         return $form_data;
     }
 

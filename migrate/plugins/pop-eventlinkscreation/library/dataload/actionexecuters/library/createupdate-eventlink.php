@@ -1,6 +1,6 @@
 <?php
 
-class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
+abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
 {
     protected function populate(&$EM_Event, $post_data)
     {
@@ -24,7 +24,7 @@ class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
         parent::validatecontent($errors, $form_data);
         Wassup_CreateUpdate_Link_Utils::validatecontent($errors, $form_data);
     }
-    
+
     /**
      *
      * --------------------------------------------------

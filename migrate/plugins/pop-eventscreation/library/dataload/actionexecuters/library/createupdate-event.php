@@ -2,9 +2,9 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-class GD_CreateUpdate_Event extends AbstractCreateUpdatePostMutationResolver
+abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected function volunteer()
     {

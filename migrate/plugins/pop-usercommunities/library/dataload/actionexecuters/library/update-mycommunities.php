@@ -1,14 +1,15 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class GD_Update_MyCommunities
+class GD_Update_MyCommunities implements MutationResolverInterface
 {
-    public function update(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validateupdatecontent($errors, $form_data);
         if ($errors) {
@@ -19,7 +20,7 @@ class GD_Update_MyCommunities
         return $this->executeUpdate($errors, $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $vars = ApplicationState::getVars();
@@ -33,7 +34,7 @@ class GD_Update_MyCommunities
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_mycommunities:form_data', $form_data);
-        
+
         return $form_data;
     }
 
@@ -58,7 +59,7 @@ class GD_Update_MyCommunities
         $new_communities = $banned_communities = array();
 
         $status = \PoPSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS);
-        
+
         // Check all the $maybe_new_communities and double check they are not banned
         foreach ($communities as $maybe_new_community) {
             // Empty metavalue => it's new
@@ -101,7 +102,7 @@ class GD_Update_MyCommunities
             'new-communities' => $new_communities,
             'communities' => $communities,
         );
-        
+
         // Allow to send an email before the update: get the current communities, so we know which ones are new
         HooksAPIFacade::getInstance()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
 

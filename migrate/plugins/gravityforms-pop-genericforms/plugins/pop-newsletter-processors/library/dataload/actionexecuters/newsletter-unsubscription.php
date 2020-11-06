@@ -2,9 +2,9 @@
 
 class GD_GF_DataLoad_ActionExecuter_NewsletterUnsubscription extends GD_DataLoad_ActionExecuter_NewsletterUnsubscription
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new PoP_GF_UnsubscribeFromNewsletter();
+        return PoP_GF_UnsubscribeFromNewsletter::class;
     }
 }
-    
+

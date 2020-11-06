@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_ContactUs
+class PoP_ActionExecuterInstance_ContactUs implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -31,7 +32,7 @@ class PoP_ActionExecuterInstance_ContactUs
         HooksAPIFacade::getInstance()->doAction('pop_contactus', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -41,11 +42,11 @@ class PoP_ActionExecuterInstance_ContactUs
             'subject' => $moduleprocessor_manager->getProcessor([PoP_ContactUs_Module_Processor_TextFormInputs::class, PoP_ContactUs_Module_Processor_TextFormInputs::MODULE_FORMINPUT_SUBJECT])->getValue([PoP_ContactUs_Module_Processor_TextFormInputs::class, PoP_ContactUs_Module_Processor_TextFormInputs::MODULE_FORMINPUT_SUBJECT]),
             'message' => $moduleprocessor_manager->getProcessor([PoP_ContactUs_Module_Processor_TextareaFormInputs::class, PoP_ContactUs_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGE])->getValue([PoP_ContactUs_Module_Processor_TextareaFormInputs::class, PoP_ContactUs_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGE]),
         );
-        
+
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -82,16 +83,16 @@ class PoP_ActionExecuterInstance_ContactUs
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    public function contactus(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
             return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         if (GeneralUtils::isError($result)) {
             foreach ($result->getErrorMessages() as $error_msg) {
                 $errors[] = $error_msg;

@@ -4,10 +4,10 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 trait GD_UserCommunities_CreateUpdate_Profile_Trait
 {
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         return array_merge(
-            parent::getFormData($data_properties),
+            parent::getFormData(),
             $this->getUsercommunitiesFormData()
         );
     }
@@ -41,7 +41,7 @@ trait GD_UserCommunities_CreateUpdate_Profile_Trait
     {
         $communities = $form_data['communities'];
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES, $communities);
-                
+
         // Set the privileges/tags for the new communities
         gdUreUserAddnewcommunities($user_id, $communities);
     }

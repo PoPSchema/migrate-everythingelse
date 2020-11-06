@@ -1,38 +1,17 @@
 <?php
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_Update_MyCommunities implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_Update_MyCommunities extends AbstractComponentMutationResolverBridge
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_Update_MyCommunities();
+        return GD_Update_MyCommunities::class;
     }
 
-    /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
-     */
-    public function execute(array &$data_properties): ?array
+    protected function returnIfError(): bool
     {
-        if ('POST' == $_SERVER['REQUEST_METHOD']) {
-            $errors = array();
-            $instance = $this->getInstance();
-            $updated = $instance->update($errors, $data_properties);
-
-            // Allow for both success and errors (eg: some communities added, others not since they banned the user)
-            $ret = array();
-            if ($errors) {
-                $ret[ResponseConstants::ERRORSTRINGS] = $errors;
-            }
-            if ($updated) {
-                $ret[ResponseConstants::SUCCESS] = true;
-            }
-
-            return $ret;
-        }
-
-        return null;
+        // Allow for both success and errors (eg: some communities added, others not since they banned the user)
+        return false;
     }
 }
 

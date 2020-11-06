@@ -2,13 +2,13 @@
 
 class GD_DataLoad_ActionExecuter_CreateUpdate_ProfileOrganization extends GD_DataLoad_ActionExecuter_CreateUpdate_Profile
 {
-    public function getCreateupdate()
+    public function getMutationResolverClass(): string
     {
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
-            return new GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization();
+            return GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization::class;
         }
 
-        return new GD_CreateUpdate_ProfileOrganization();
+        return GD_CreateUpdate_ProfileOrganization::class;
     }
 }
-    
+

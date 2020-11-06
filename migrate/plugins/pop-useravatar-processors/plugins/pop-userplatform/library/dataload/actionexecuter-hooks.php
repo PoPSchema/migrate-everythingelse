@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 
 class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
 {
@@ -15,9 +16,10 @@ class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
 
     public function additionalsCreate($user_id, $form_data)
     {
-
         // Save the user avatar
-        $gd_useravatar_update = GD_UserAvatar_UpdateFactory::getInstance();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GD_UserAvatar_Update */
+        $gd_useravatar_update = $instanceManager->getInstance(GD_UserAvatar_Update::class);
         $gd_useravatar_update->savePicture($user_id, true);
     }
 }

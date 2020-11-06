@@ -2,9 +2,9 @@
 
 class GD_DataLoad_ActionExecuter_InviteMembers extends GD_DataLoad_ActionExecuter_EmailInviteBase
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_InviteMembers();
+        return GD_InviteMembers::class;
     }
 }
-    
+

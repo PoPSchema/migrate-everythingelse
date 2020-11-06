@@ -6,9 +6,9 @@ use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdatePostMutationResolver
+abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected function supportsTitle()
     {

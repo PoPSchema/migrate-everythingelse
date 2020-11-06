@@ -1,32 +1,22 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
 
-class GD_DataLoad_ActionExecuter_SystemActivatePlugins implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_SystemActivatePlugins extends AbstractSystemComponentMutationResolverBridge
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_ActivatePlugins();
+        return GD_ActivatePlugins::class;
     }
 
     /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
+     * @param mixed $result_ids Maybe an int, maybe a string
      */
-    public function execute(array &$data_properties): ?array
+    public function getSuccessString($result_ids): ?string
     {
-        $instance = $this->getInstance();
-        $activated = $instance->activateplugins();
-        $success_msg = $activated ? sprintf(
+        return $result_ids ? sprintf(
             TranslationAPIFacade::getInstance()->__('Successfully activated plugins: %s.', 'pop-system-wp'),
-            implode(TranslationAPIFacade::getInstance()->__(', ', 'pop-system-wp'), $activated)
+            implode(TranslationAPIFacade::getInstance()->__(', ', 'pop-system-wp'), (array) $result_ids)
         ) : TranslationAPIFacade::getInstance()->__('There were no plugins to activate.', 'pop-system-wp');
-
-        return array(
-            ResponseConstants::SUCCESSSTRINGS => array($success_msg),
-            ResponseConstants::SUCCESS => true
-        );
     }
 }
 

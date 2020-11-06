@@ -1,7 +1,9 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-class GD_ActivatePlugins
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+
+class GD_ActivatePlugins implements MutationResolverInterface
 {
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)
@@ -23,9 +25,8 @@ class GD_ActivatePlugins
         return false;
     }
 
-    protected function execute()
+    public function execute(array &$errors, array &$errorcodes)
     {
-
         // Plugins needed by the website. Check the website version, if it's the one indicated,
         // then proceed to install the required plugin
         $plugin_version = HooksAPIFacade::getInstance()->applyFilters(
@@ -45,10 +46,5 @@ class GD_ActivatePlugins
         }
 
         return $activated;
-    }
-
-    public function activateplugins()
-    {
-        return $this->execute();
     }
 }

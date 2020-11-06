@@ -1,39 +1,16 @@
 <?php
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
-use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead extends AbstractComponentMutationResolverBridge
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_NotificationMarkAllAsRead();
+        return GD_NotificationMarkAllAsRead::class;
     }
 
-    /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
-     */
-    public function execute(array &$data_properties): ?array
+    protected function onlyExecuteWhenDoingPost(): bool
     {
-        $errors = array();
-        $instance = $this->getInstance();
-        $hist_ids = $instance->execute($errors, $data_properties);
-
-        if ($errors) {
-            return array(
-                ResponseConstants::ERRORSTRINGS => $errors
-            );
-        }
-
-        // Save the result for some module to incorporate it into the query args
-        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
-        $gd_dataload_actionexecution_manager->setResult(get_called_class(), $hist_ids);
-
-        // No errors => success
-        return array(
-            ResponseConstants::SUCCESS => true
-        );
+        return false;
     }
 }
 

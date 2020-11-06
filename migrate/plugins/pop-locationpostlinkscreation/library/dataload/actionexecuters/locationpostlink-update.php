@@ -5,7 +5,7 @@ class GD_DataLoad_ActionExecuter_Update_LocationPostLink extends AbstractCreateU
 {
     public function getMutationResolverClass(): string
     {
-        return GD_UpdateLocationPostLink::class;
+        return GD_Update_LocationPostLink::class;
     }
 }
 

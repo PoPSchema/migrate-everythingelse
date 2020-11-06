@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_UnsubscribeFromNewsletter
+class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -46,7 +47,7 @@ class PoP_UnsubscribeFromNewsletter
         HooksAPIFacade::getInstance()->doAction('pop_unsubscribe_from_newsletter', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -54,7 +55,7 @@ class PoP_UnsubscribeFromNewsletter
             'email' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL]),
             'verificationcode' => $moduleprocessor_manager->getProcessor([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE])->getValue([PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE]),
         );
-        
+
         return $form_data;
     }
 
@@ -72,7 +73,7 @@ class PoP_UnsubscribeFromNewsletter
     {
     }
 
-    protected function execute($newsletter_data)
+    protected function doExecute($newsletter_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
@@ -94,9 +95,9 @@ class PoP_UnsubscribeFromNewsletter
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 
-    public function unsubscribe(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
@@ -109,7 +110,7 @@ class PoP_UnsubscribeFromNewsletter
             return;
         }
 
-        $result = $this->execute($newsletter_data);
+        $result = $this->doExecute($newsletter_data);
         // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;

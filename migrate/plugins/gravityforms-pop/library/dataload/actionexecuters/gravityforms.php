@@ -1,9 +1,11 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExecuterBase
 {
@@ -12,39 +14,47 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // Execute before HooksAPIFacade::getInstance()->addAction('wp',  array('RGForms', 'maybe_process_form'), 9);
         if (doingPost()) {
             HooksAPIFacade::getInstance()->addAction(
-                'popcms:boot', 
-                array($this, 'setup'), 
+                'popcms:boot',
+                array($this, 'setup'),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
             HooksAPIFacade::getInstance()->addAction(
-                'popcms:boot', 
-                array($this, 'renameFields'), 
+                'popcms:boot',
+                array($this, 'renameFields'),
                 6
             );
             HooksAPIFacade::getInstance()->addAction(
-                'popcms:boot', 
-                array($this, 'maybeFillFields'), 
+                'popcms:boot',
+                array($this, 'maybeFillFields'),
                 7
             );
             HooksAPIFacade::getInstance()->addAction(
-                'popcms:boot', 
-                array($this, 'maybeValidateCaptcha'), 
+                'popcms:boot',
+                array($this, 'maybeValidateCaptcha'),
                 8
             );
         }
     }
 
-    protected function executeForm(&$data_properties)
+    public function getMutationResolverClass(): string
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        return GD_GravityForms::class;
+    }
 
-        $formid_processor = $moduleprocessor_manager->getProcessor([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
-        $form_id = $formid_processor->getValue([GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID]);
-
-        // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');
-        $execution_response = RGForms::get_form($form_id, false, false);
+    /**
+     * @param array<string, mixed> $data_properties
+     * @return array<string, mixed>
+     */
+    protected function executeForm(array &$data_properties): array
+    {
+        $mutationResolverClass = $this->getMutationResolverClass();
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var MutationResolverInterface */
+        $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+        $errors = array();
+        $execution_response = $mutationResolver->execute($errors);
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
@@ -53,7 +63,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // $softredirect = "{{gd:sr:%s}}";
         // $hardredirect = "{{gd:hr:%s}}";
         // $success = "{{gd:success}}";
-    
+
         // Error codes
         preg_match_all("/\{\{gd\:ec\:(.*?)\}\}/", $execution_response, $errorcodes);
 
@@ -123,7 +133,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
                     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
 
                     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                    
+
                     // Fill the user name
                     $name = $moduleprocessor_manager->getProcessor([PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME])->getName([PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME]);
                     if (isset($fieldnames[$name])) {
@@ -181,4 +191,4 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         }
     }
 }
-    
+

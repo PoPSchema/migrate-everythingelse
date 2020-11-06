@@ -1,14 +1,19 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
-class GD_DataLoad_ActionExecuter_UnfollowUser implements ComponentMutationResolverBridgeInterface
+class GD_DataLoad_ActionExecuter_UnfollowUser extends AbstractComponentMutationResolverBridge
 {
-    protected function getInstance()
+    public function getMutationResolverClass(): string
     {
-        return new GD_UnfollowUser();
+        return GD_UnfollowUser::class;
+    }
+
+    protected function onlyExecuteWhenDoingPost(): bool
+    {
+        return false;
     }
 
     /**

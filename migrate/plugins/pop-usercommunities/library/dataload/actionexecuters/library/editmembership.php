@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 /**
  * Data Load Library
@@ -10,11 +11,11 @@ use PoP\ComponentModel\State\ApplicationState;
  * Nonce and user_id taken from the REQUEST so that it gets the value when the user is not logged in and then logs in and refreshes the block.
  * Otherwise, these 2 values are never printed, since checkpoint will stop the execution
  */
-class GD_EditMembership
+class GD_EditMembership implements MutationResolverInterface
 {
-    public function execute(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
@@ -24,7 +25,7 @@ class GD_EditMembership
         return $this->update($errors, $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -80,7 +81,7 @@ class GD_EditMembership
         // Update these values with the changes for this one community
         // The community will already be there, since it was added when the user updated My Communities.
         // And even if the user selected no privileges or tags, then GD_METAVALUE_NONE will be set, so the db metavalue entry should always exist
-        
+
         // Remove existing ones
         $current_community_status = gdUreFindCommunityMetavalues($community, $status, false);
         $current_community_privileges = gdUreFindCommunityMetavalues($community, $privileges, false);

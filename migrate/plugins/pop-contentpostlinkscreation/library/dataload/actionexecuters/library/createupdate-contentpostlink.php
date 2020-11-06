@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-class GD_CreateUpdate_PostLink extends AbstractCreateUpdatePostMutationResolver
+class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected function getCategories()
     {

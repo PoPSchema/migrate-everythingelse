@@ -1,9 +1,10 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_ContactUser
+class PoP_ActionExecuterInstance_ContactUser implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -40,7 +41,7 @@ class PoP_ActionExecuterInstance_ContactUser
         HooksAPIFacade::getInstance()->doAction('pop_contactuser', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -51,11 +52,11 @@ class PoP_ActionExecuterInstance_ContactUser
             'message' => $moduleprocessor_manager->getProcessor([PoP_SocialNetwork_Module_Processor_TextareaFormInputs::class, PoP_SocialNetwork_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGETOUSER])->getValue([PoP_SocialNetwork_Module_Processor_TextareaFormInputs::class, PoP_SocialNetwork_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGETOUSER]),
             'target-id' => $moduleprocessor_manager->getProcessor([PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_USER])->getValue([PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_USER]),
         );
-        
+
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $websitename = $cmsapplicationapi->getSiteName();
@@ -98,16 +99,16 @@ class PoP_ActionExecuterInstance_ContactUser
         return PoP_EmailSender_Utils::sendemailToUser($form_data['target-id'], $subject, $msg);
     }
 
-    public function contactuser(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
             return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;

@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class GD_UpdateUserMetaValue
+class GD_UpdateUserMetaValue implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -25,12 +26,12 @@ class GD_UpdateUserMetaValue
         return '';
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $form_data = array(
             'target_id' => $_REQUEST[$this->getRequestKey()],
         );
-        
+
         return $form_data;
     }
 
@@ -40,9 +41,9 @@ class GD_UpdateUserMetaValue
         return $target_id;
     }
 
-    public function execute(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {

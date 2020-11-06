@@ -36,12 +36,12 @@ class GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization extends
         return $inputs;
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $inputs = $this->getFormInputs();
         return array_merge(
-            parent::getFormData($data_properties),
+            parent::getFormData(),
             $this->getCommonuserrolesFormData(),
             array(
                 'is_community' => (bool)$moduleprocessor_manager->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),

@@ -1,16 +1,17 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class GD_NotificationMarkAllAsRead
+class GD_NotificationMarkAllAsRead implements MutationResolverInterface
 {
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $vars = ApplicationState::getVars();
         $form_data = array(
             'user_id' => $vars['global-userstate']['current-user-id'],
         );
-        
+
         return $form_data;
     }
 
@@ -26,9 +27,9 @@ class GD_NotificationMarkAllAsRead
         return PoP_Notifications_API::setStatusMultipleNotifications($form_data['user_id'], AAL_POP_STATUS_READ);
     }
 
-    public function execute(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $hist_ids = $this->markAllAsRead($form_data);
         $this->additionals($form_data);

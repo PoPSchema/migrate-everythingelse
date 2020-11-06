@@ -1,58 +1,26 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\MutationResolvers\ComponentMutationResolverBridgeInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
 
-abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase implements ComponentMutationResolverBridgeInterface
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase extends AbstractComponentMutationResolverBridge
 {
     /**
-     * @param array $data_properties
-     * @return array<string, mixed>|null
+     * @param mixed $result_id Maybe an int, maybe a string
      */
-    public function execute(array &$data_properties): ?array
+    public function getSuccessString($result_id): ?string
     {
-        if ('POST' == $_SERVER['REQUEST_METHOD']) {
-            $createupdate = $this->getCreateupdate();
-            $errors = array();
-            $action = $createupdate->createOrUpdate($errors, $data_properties);
-
-            if ($errors) {
-                return array(
-                    ResponseConstants::ERRORSTRINGS => $errors
-                );
-            }
-
-            // No errors => success
-            $ret = array(
-                ResponseConstants::SUCCESS => true
+        // For the update, gotta return the success string
+        if ($result_id == 'update') {
+            // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
+            $vars = ApplicationState::getVars();
+            return sprintf(
+                TranslationAPIFacade::getInstance()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
+                getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
+                PoP_Application_Utils::getPreviewTarget(),
+                HooksAPIFacade::getInstance()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
-
-            // For the update, gotta return the success string
-            if ($action == 'update') {
-                // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
-                $vars = ApplicationState::getVars();
-                $success_string = sprintf(
-                    TranslationAPIFacade::getInstance()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
-                    getAuthorProfileUrl($vars['global-userstate']['current-user-id']),
-                    PoP_Application_Utils::getPreviewTarget(),
-                    HooksAPIFacade::getInstance()->applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
-                );
-                $ret[ResponseConstants::SUCCESSSTRINGS] = array($success_string);
-            }
-
-            return $ret;
         }
-
-        return null;
-    }
-
-    /**
-     * Function to override
-     */
-    public function getCreateupdate()
-    {
-        return null;
     }
 }

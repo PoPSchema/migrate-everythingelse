@@ -1,37 +1,38 @@
 <?php
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_Volunteer
+class PoP_ActionExecuterInstance_Volunteer implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
         if (empty($form_data['name'])) {
-            $errors->add('emptyname', TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms'));
+            $errors[] = TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms');
         }
 
         if (empty($form_data['email'])) {
-            $errors->add('emptyemail', TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms'));
+            $errors[] = TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors->add('emailformatincorrect', TranslationAPIFacade::getInstance()->__('Email format is incorrect.', 'pop-genericforms'));
+            $errors[] = TranslationAPIFacade::getInstance()->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         if (empty($form_data['target-id'])) {
-            $errors->add('emptytargetid', TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms'));
+            $errors[] = TranslationAPIFacade::getInstance()->__('The requested post cannot be empty.', 'pop-genericforms');
         } else {
             // Make sure the post exists
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $target = $customPostTypeAPI->getCustomPost($form_data['target-id']);
             if (!$target) {
-                $errors->add('nonexistanttargetid', TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms'));
+                $errors[] = TranslationAPIFacade::getInstance()->__('The requested post does not exist.', 'pop-genericforms');
             }
         }
 
         if (empty($form_data['whyvolunteer'])) {
-            $errors->add('emptywhyvolunteer', TranslationAPIFacade::getInstance()->__('Why volunteer cannot be empty.', 'pop-genericforms'));
+            $errors[] = TranslationAPIFacade::getInstance()->__('Why volunteer cannot be empty.', 'pop-genericforms');
         }
     }
 
@@ -43,7 +44,7 @@ class PoP_ActionExecuterInstance_Volunteer
         HooksAPIFacade::getInstance()->doAction('pop_volunteer', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -58,7 +59,7 @@ class PoP_ActionExecuterInstance_Volunteer
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -104,17 +105,16 @@ class PoP_ActionExecuterInstance_Volunteer
         return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($form_data['target-id']), $subject, $msg);
     }
 
-    public function volunteer(&$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
-        $errors = new \PoP\ComponentModel\Error();
         $this->validate($errors, $form_data);
-        if ($errors->getErrorCodes()) {
-            return $errors;
+        if ($errors) {
+            return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;

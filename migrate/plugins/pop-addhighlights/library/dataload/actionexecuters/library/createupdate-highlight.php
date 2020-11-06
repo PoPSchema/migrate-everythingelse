@@ -5,9 +5,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-abstract class GD_CreateUpdate_Highlight extends AbstractCreateUpdatePostMutationResolver
+abstract class GD_CreateUpdate_Highlight extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected function supportsTitle()
     {

@@ -1,11 +1,12 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class GD_CreateUpdate_User
+class GD_CreateUpdate_User implements MutationResolverInterface
 {
     protected function getRole()
     {
@@ -127,7 +128,7 @@ class GD_CreateUpdate_User
         return $inputs;
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -157,9 +158,9 @@ class GD_CreateUpdate_User
         return $form_data;
     }
 
-    protected function getCreateuserFormData(&$data_properties)
+    protected function getCreateuserFormData()
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
@@ -167,9 +168,9 @@ class GD_CreateUpdate_User
         return $form_data;
     }
 
-    protected function getUpdateuserFormData(&$data_properties)
+    protected function getUpdateuserFormData()
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
@@ -265,19 +266,18 @@ class GD_CreateUpdate_User
         return $user_id;
     }
 
-    public function createOrUpdate(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-
         // If user is logged in => It's Update
         // Otherwise => It's Create
 
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $this->update($errors, $data_properties);
+            $this->update($errors);
             return 'update';
         }
 
-        $this->create($errors, $data_properties);
+        $this->create($errors);
         return 'create';
     }
 
@@ -294,9 +294,9 @@ class GD_CreateUpdate_User
         HooksAPIFacade::getInstance()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
-    protected function update(&$errors, &$data_properties)
+    protected function update(&$errors)
     {
-        $form_data = $this->getUpdateuserFormData($data_properties);
+        $form_data = $this->getUpdateuserFormData();
 
         $this->validatecontent($errors, $form_data);
         $this->validateupdatecontent($errors, $form_data);
@@ -315,9 +315,9 @@ class GD_CreateUpdate_User
         userNameUpdated($user_id);
     }
 
-    protected function create(&$errors, &$data_properties)
+    protected function create(&$errors)
     {
-        $form_data = $this->getCreateuserFormData($data_properties);
+        $form_data = $this->getCreateuserFormData();
 
         $this->validatecontent($errors, $form_data);
         $this->validatecreatecontent($errors, $form_data);

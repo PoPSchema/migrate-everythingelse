@@ -1,14 +1,15 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class GD_EmailInvite
+class GD_EmailInvite implements MutationResolverInterface
 {
-    public function execute(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
         $this->validateCaptcha($errors, $form_data);
@@ -28,7 +29,7 @@ class GD_EmailInvite
         return $this->sendInvite($errors, $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -71,7 +72,7 @@ class GD_EmailInvite
         if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_data['captcha'] = $captcha;
         }
-        
+
         return $form_data;
     }
 
@@ -82,7 +83,7 @@ class GD_EmailInvite
         $vars = ApplicationState::getVars();
         if (!PoP_FormUtils::useLoggedinuserData() || !$vars['global-userstate']['is-user-logged-in']) {
             $captcha = $form_data['captcha'];
-            
+
             $captcha_validation = GD_Captcha::validate($captcha);
             if (GeneralUtils::isError($captcha_validation)) {
                 $errors[] = $captcha_validation->getErrorMessage();

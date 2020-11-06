@@ -1,11 +1,12 @@
 <?php
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_Flag
+class PoP_ActionExecuterInstance_Flag implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -43,7 +44,7 @@ class PoP_ActionExecuterInstance_Flag
         HooksAPIFacade::getInstance()->doAction('pop_flag', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -57,7 +58,7 @@ class PoP_ActionExecuterInstance_Flag
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -100,16 +101,16 @@ class PoP_ActionExecuterInstance_Flag
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    public function flag(&$errors, &$data_properties)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
             return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         // if (GeneralUtils::isError($result)) {
         //     foreach ($result->getErrorMessages() as $error_msg) {
         //         $errors[] = $error_msg;

@@ -3,7 +3,7 @@
 
 class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
 {
-    public function execute(array &$errors)
+    public function execute(array &$errors, array &$errorcodes)
     {
         // If there's post_id => It's Update
         // Otherwise => It's Create

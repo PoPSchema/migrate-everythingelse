@@ -1,10 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
-class PoP_ActionExecuterInstance_ShareByEmail
+class PoP_ActionExecuterInstance_ShareByEmail implements MutationResolverInterface
 {
     protected function validate(&$errors, $form_data)
     {
@@ -35,7 +36,7 @@ class PoP_ActionExecuterInstance_ShareByEmail
         HooksAPIFacade::getInstance()->doAction('pop_sharebyemail', $form_data);
     }
 
-    protected function getFormData(&$data_properties)
+    protected function getFormData()
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
@@ -46,11 +47,11 @@ class PoP_ActionExecuterInstance_ShareByEmail
             'target-url' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETURL])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETURL]),
             'target-title' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETTITLE])->getValue([PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETTITLE]),
         );
-        
+
         return $form_data;
     }
 
-    protected function execute($form_data)
+    protected function doExecute($form_data)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $subject = sprintf(
@@ -80,16 +81,16 @@ class PoP_ActionExecuterInstance_ShareByEmail
         return PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
     }
 
-    public function share(&$errors)
+    public function execute(array &$errors, array &$errorcodes)
     {
-        $form_data = $this->getFormData($data_properties);
+        $form_data = $this->getFormData();
 
         $this->validate($errors, $form_data);
         if ($errors) {
             return;
         }
 
-        $result = $this->execute($form_data);
+        $result = $this->doExecute($form_data);
         if (GeneralUtils::isError($result)) {
             foreach ($result->getErrorMessages() as $error_msg) {
                 $errors[] = $error_msg;

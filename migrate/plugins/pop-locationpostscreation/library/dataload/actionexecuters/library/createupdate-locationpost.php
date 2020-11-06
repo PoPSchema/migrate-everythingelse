@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
-abstract class GD_CreateUpdate_LocationPost extends AbstractCreateUpdatePostMutationResolver
+abstract class GD_CreateUpdate_LocationPost extends AbstractCreateUpdateCustomPostMutationResolver
 {
     protected function getCustomPostType($form_data)
     {
