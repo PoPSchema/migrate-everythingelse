@@ -7,7 +7,7 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends AbstractCre
     /**
      * @param mixed $result_id Maybe an int, maybe a string
      */
-    public function modifyDataProperties(array &$data_properties, $result_id): void
+    protected function modifyDataProperties(array &$data_properties, $result_id): void
     {
         parent::modifyDataProperties($data_properties, $result_id);
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = array('pending', 'draft', 'published');
