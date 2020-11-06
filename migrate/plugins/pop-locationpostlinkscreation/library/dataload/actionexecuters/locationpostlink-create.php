@@ -1,7 +1,7 @@
 <?php
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_Create_LocationPostLink extends AbstractCreateUpdatePostMutationResolverBridge
+class GD_DataLoad_ActionExecuter_Create_LocationPostLink extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {

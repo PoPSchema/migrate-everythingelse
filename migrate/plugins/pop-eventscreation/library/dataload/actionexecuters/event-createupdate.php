@@ -1,13 +1,15 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoPSchema\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolverBridge;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
-abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends AbstractCreateUpdatePostMutationResolverBridge
+abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
-    public function modifyDataProperties(&$data_properties, $post_id)
+    /**
+     * @param mixed $result_id Maybe an int, maybe a string
+     */
+    public function modifyDataProperties(array &$data_properties, $result_id): void
     {
-        // Modify the block-data-settings, saying to select the id of the newly created post
-        $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($post_id);
+        parent::modifyDataProperties($data_properties, $result_id);
         $data_properties[DataloadingConstants::QUERYARGS]['status'] = array('pending', 'draft', 'published');
     }
 }
