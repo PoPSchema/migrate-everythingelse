@@ -11,10 +11,9 @@ class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
         return true;
     }
 
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $target_id = $form_data['target_id'];
 
@@ -31,6 +30,7 @@ class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
                 }
             }
         }
+        return $errors;
     }
 
     protected function getRequestKey()

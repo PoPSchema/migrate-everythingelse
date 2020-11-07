@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_GravityForms implements MutationResolverInterface
+class GD_GravityForms extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {

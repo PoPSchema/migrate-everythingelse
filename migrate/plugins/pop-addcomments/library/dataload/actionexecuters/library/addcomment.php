@@ -2,19 +2,20 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_AddComment implements MutationResolverInterface
+class GD_AddComment extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         if (empty($form_data['customPostID'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('We don\'t know what post the comment is for. Please reload the page and try again.', 'pop-application');
         }
-
         if (empty($form_data['comment'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The comment is empty.', 'pop-application');
         }
+        return $errors;
     }
 
     /**
@@ -59,11 +60,6 @@ class GD_AddComment implements MutationResolverInterface
      */
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);
 

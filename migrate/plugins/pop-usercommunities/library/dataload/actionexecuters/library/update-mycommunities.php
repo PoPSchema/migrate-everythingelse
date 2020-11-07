@@ -1,29 +1,26 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_Update_MyCommunities implements MutationResolverInterface
+class GD_Update_MyCommunities extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validateupdatecontent($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         // Do the Post update
         return $this->executeUpdate($errors, $form_data);
     }
 
-    protected function validateupdatecontent(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $user_id = $form_data['user_id'];
 
         // Validate the Community doesn't belong to itself as a member
         if (in_array($user_id, $form_data['communities'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('You are not allowed to be a member of yourself!', 'ure-pop');
         }
+        return $errors;
     }
 
     protected function executeUpdate(&$errors, $form_data)

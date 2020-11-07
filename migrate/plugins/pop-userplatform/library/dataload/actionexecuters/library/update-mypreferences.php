@@ -1,21 +1,11 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_UpdateMyPreferences implements MutationResolverInterface
+class GD_UpdateMyPreferences extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-
-        if ($errors) {
-            return;
-        }
-
         return $this->executeUpdate($errors, $form_data);
-    }
-
-    protected function validate(&$errors, &$form_data)
-    {
     }
 
     protected function executeUpdate(&$errors, $form_data)

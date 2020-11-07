@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class GD_SaveDefinitionFile implements MutationResolverInterface
+class GD_SaveDefinitionFile extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {

@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_NotificationMarkAsReadUnread implements MutationResolverInterface
+class GD_NotificationMarkAsReadUnread extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $histid = $form_data['histid'];
         if (!$histid) {
             $errors[] = TranslationAPIFacade::getInstance()->__('This URL is incorrect.', 'pop-notifications');
@@ -17,6 +18,7 @@ class GD_NotificationMarkAsReadUnread implements MutationResolverInterface
                 $errors[] = TranslationAPIFacade::getInstance()->__('This notification does not exist.', 'pop-notifications');
             }
         }
+        return $errors;
     }
 
     protected function additionals($histid, $form_data)
@@ -43,11 +45,6 @@ class GD_NotificationMarkAsReadUnread implements MutationResolverInterface
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $hist_ids = $this->setStatus($form_data);
         $this->additionals($form_data['histid'], $form_data);
 

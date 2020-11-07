@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Hooks\Facades\HooksAPIFacade;
 
-class GD_SystemBuild implements MutationResolverInterface
+class GD_SystemBuild extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {

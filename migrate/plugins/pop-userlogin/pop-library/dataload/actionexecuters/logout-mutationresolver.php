@@ -2,22 +2,24 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_Logout implements MutationResolverInterface
+class GD_Logout extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         // If the user is not logged in, then return the error
         $vars = ApplicationState::getVars();
         if (!$vars['global-userstate']['is-user-logged-in']) {
             $error = TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-application');
-
-            // Return error string
             $errors[] = $error;
-            return;
         }
-
+        return $errors;
+    }
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    {
+        $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

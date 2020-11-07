@@ -2,12 +2,13 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class PoP_ActionExecuterInstance_ShareByEmail implements MutationResolverInterface
+class PoP_ActionExecuterInstance_ShareByEmail extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         if (empty($form_data['name'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms');
         }
@@ -25,6 +26,7 @@ class PoP_ActionExecuterInstance_ShareByEmail implements MutationResolverInterfa
         if (empty($form_data['target-title'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The shared-page title cannot be empty.', 'pop-genericforms');
         }
+        return $errors;
     }
 
     /**
@@ -67,11 +69,6 @@ class PoP_ActionExecuterInstance_ShareByEmail implements MutationResolverInterfa
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $result = $this->doExecute($form_data);
         if (GeneralUtils::isError($result)) {
             foreach ($result->getErrorMessages() as $error_msg) {

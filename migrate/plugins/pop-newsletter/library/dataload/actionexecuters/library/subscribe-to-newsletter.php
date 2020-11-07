@@ -1,17 +1,19 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolverInterface
+class PoP_ActionExecuterInstance_SubscribeToNewsletter extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         if (empty($form_data['email'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Email format is incorrect.', 'pop-genericforms');
         }
+        return $errors;
     }
 
     /**
@@ -53,18 +55,7 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter implements MutationResolv
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $result = $this->doExecute($form_data);
-        // if (GeneralUtils::isError($result)) {
-        //     foreach ($result->getErrorMessages() as $error_msg) {
-        //         $errors[] = $error_msg;
-        //     }
-        //     return;
-        // }
 
         // Allow for additional operations
         $this->additionals($form_data);

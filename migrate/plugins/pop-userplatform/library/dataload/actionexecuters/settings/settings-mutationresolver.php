@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_Settings implements MutationResolverInterface
+class GD_Settings extends AbstractMutationResolver
 {
     /**
      * @var array<array>

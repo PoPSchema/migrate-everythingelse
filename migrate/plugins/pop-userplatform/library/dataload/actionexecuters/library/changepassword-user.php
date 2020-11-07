@@ -2,12 +2,13 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_ChangePassword_User implements MutationResolverInterface
+class GD_ChangePassword_User extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         // Validate Password
         // Check current password really belongs to the user
@@ -32,6 +33,7 @@ class GD_ChangePassword_User implements MutationResolverInterface
                 $errors[] = TranslationAPIFacade::getInstance()->__('Passwords do not match.', 'pop-application');
             }
         }
+        return $errors;
     }
 
     protected function executeChangepassword($user_data)
@@ -72,11 +74,6 @@ class GD_ChangePassword_User implements MutationResolverInterface
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         // Do the password change
         return $this->changepassworduser($errors, $form_data);
     }

@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_UserAvatar_Update implements MutationResolverInterface
+class GD_UserAvatar_Update extends AbstractMutationResolver
 {
     public function savePicture($user_id, $delete_source = false)
     {

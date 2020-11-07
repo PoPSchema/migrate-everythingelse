@@ -4,10 +4,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_SubscribeToUnsubscribeFromTag extends GD_UpdateUserMetaValue
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $target_id = $form_data['target_id'];
 
@@ -18,6 +17,7 @@ class GD_SubscribeToUnsubscribeFromTag extends GD_UpdateUserMetaValue
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }
         }
+        return $errors;
     }
 
     protected function additionals($target_id, $form_data)

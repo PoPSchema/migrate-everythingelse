@@ -3,12 +3,13 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class PoP_ActionExecuterInstance_Volunteer implements MutationResolverInterface
+class PoP_ActionExecuterInstance_Volunteer extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         if (empty($form_data['name'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Your name cannot be empty.', 'pop-genericforms');
         }
@@ -33,6 +34,7 @@ class PoP_ActionExecuterInstance_Volunteer implements MutationResolverInterface
         if (empty($form_data['whyvolunteer'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Why volunteer cannot be empty.', 'pop-genericforms');
         }
+        return $errors;
     }
 
     /**
@@ -91,18 +93,7 @@ class PoP_ActionExecuterInstance_Volunteer implements MutationResolverInterface
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $result = $this->doExecute($form_data);
-        // if (GeneralUtils::isError($result)) {
-        //     foreach ($result->getErrorMessages() as $error_msg) {
-        //         $errors[] = $error_msg;
-        //     }
-        //     return;
-        // }
 
         // Allow for additional operations
         $this->additionals($form_data);

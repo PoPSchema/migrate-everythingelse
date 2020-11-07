@@ -3,9 +3,9 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_CreateUpdate_User implements MutationResolverInterface
+class GD_CreateUpdate_User extends AbstractMutationResolver
 {
     protected function getRole()
     {
@@ -90,22 +90,6 @@ class GD_CreateUpdate_User implements MutationResolverInterface
         if ($email_user_id && $email_user_id !== $user_id) {
             $errors[] = TranslationAPIFacade::getInstance()->__('That email address already exists in our system!', 'pop-application');
         }
-    }
-
-    protected function getCreateuserFormData(array $form_data)
-    {
-        // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
-
-        return $form_data;
-    }
-
-    protected function getUpdateuserFormData(array $form_data)
-    {
-        // Allow to add extra inputs
-        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
-
-        return $form_data;
     }
 
     protected function getUpdateuserData($form_data)
@@ -224,16 +208,21 @@ class GD_CreateUpdate_User implements MutationResolverInterface
         HooksAPIFacade::getInstance()->doAction('gd_createupdate_user:additionalsCreate', $user_id, $form_data);
     }
 
+    public function validate(array $form_data): ?array
+    {
+        $errors = [];
+        $this->validatecontent($errors, $form_data);
+        $vars = ApplicationState::getVars();
+        if ($vars['global-userstate']['is-user-logged-in']) {
+            $this->validateupdatecontent($errors, $form_data);
+        } else {
+            $this->validatecreatecontent($errors, $form_data);
+        }
+        return $errors;
+    }
+
     protected function update(array &$errors, array $form_data)
     {
-        $form_data = $this->getUpdateuserFormData($form_data);
-
-        $this->validatecontent($errors, $form_data);
-        $this->validateupdatecontent($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         // Do the Post update
         $user_id = $this->updateuser($errors, $form_data);
 
@@ -247,14 +236,6 @@ class GD_CreateUpdate_User implements MutationResolverInterface
 
     protected function create(array &$errors, array $form_data)
     {
-        $form_data = $this->getCreateuserFormData($form_data);
-
-        $this->validatecontent($errors, $form_data);
-        $this->validatecreatecontent($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $user_id = $this->createuser($errors, $form_data);
 
         // Allow for additional operations (eg: set Action categories)

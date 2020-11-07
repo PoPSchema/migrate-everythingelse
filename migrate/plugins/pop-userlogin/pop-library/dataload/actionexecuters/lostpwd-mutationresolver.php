@@ -3,9 +3,9 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_LostPwd implements MutationResolverInterface
+class GD_LostPwd extends AbstractMutationResolver
 {
     public function retrievePasswordMessage($key, $user_login, $user_id)
     {
@@ -53,11 +53,10 @@ class GD_LostPwd implements MutationResolverInterface
         return $message;
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $user_login = $form_data['user_login'];
 
         // Code copied from file wp-login.php (We can't invoke it directly, since wp-login.php has not been loaded, and we can't do it since it executes a lot of unwanted code producing and output)
@@ -77,8 +76,21 @@ class GD_LostPwd implements MutationResolverInterface
             $errors[] = TranslationAPIFacade::getInstance()->__('Invalid username or e-mail.');
         }
 
-        if ($errors) {
-            return;
+        return $errors;
+    }
+
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    {
+        $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
+        $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
+        $user_login = $form_data['user_login'];
+
+        if (strpos($user_login, '@')) {
+            $user = $cmsusersapi->getUserByEmail(trim($user_login));
+        } else {
+            $login = trim($user_login);
+            $user = $cmsusersapi->getUserByLogin($login);
         }
 
         // Generate something random for a password reset key.

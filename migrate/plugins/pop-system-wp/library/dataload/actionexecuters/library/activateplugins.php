@@ -1,9 +1,9 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_ActivatePlugins implements MutationResolverInterface
+class GD_ActivatePlugins extends AbstractMutationResolver
 {
     // Taken from https://wordpress.stackexchange.com/questions/4041/how-to-activate-plugins-via-code
     private function runActivatePlugin($plugin)

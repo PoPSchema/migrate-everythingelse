@@ -58,15 +58,19 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MutationResolverInterface */
         $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
-        $errors = $errorcodes = array();
         $form_data = $this->getFormData();
-        $mutationResolver->execute($errors, $errorcodes, $form_data);
-
-        if ($errors) {
-            return array(
-                ResponseConstants::ERRORSTRINGS => $errors
-            );
+        if ($errors = $mutationResolver->validate($form_data)) {
+            $errorType = $mutationResolver->getErrorType();
+            $errorTypeKeys = [
+                ErrorTypes::STRINGS => ResponseConstants::ERRORSTRINGS,
+                ErrorTypes::CODES => ResponseConstants::ERRORCODES,
+            ];
+            return [
+                $errorTypeKeys[$errorType] => $errors,
+            ];
         }
+        $errors = $errorcodes = [];
+        $mutationResolver->execute($errors, $errorcodes, $form_data);
 
         // No errors => success
         return array(

@@ -1,7 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 /**
  * Data Load Library
@@ -9,24 +9,20 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
  * Nonce and user_id taken from the REQUEST so that it gets the value when the user is not logged in and then logs in and refreshes the block.
  * Otherwise, these 2 values are never printed, since checkpoint will stop the execution
  */
-class GD_EditMembership implements MutationResolverInterface
+class GD_EditMembership extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         return $this->update($errors, $form_data);
     }
 
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $user_id = $form_data['user_id'];
         if (!$user_id) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The user is missing', 'ure-pop');
-            return;
+            return $errors;
         }
 
         // $nonce = $form_data['nonce'];
@@ -39,6 +35,7 @@ class GD_EditMembership implements MutationResolverInterface
         if (!$status) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The status has not been set', 'ure-pop');
         }
+        return $errors;
     }
 
     protected function update(&$errors, $form_data)

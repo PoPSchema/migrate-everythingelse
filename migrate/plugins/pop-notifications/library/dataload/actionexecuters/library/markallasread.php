@@ -1,8 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_NotificationMarkAllAsRead implements MutationResolverInterface
+class GD_NotificationMarkAllAsRead extends AbstractMutationResolver
 {
     protected function additionals($form_data)
     {

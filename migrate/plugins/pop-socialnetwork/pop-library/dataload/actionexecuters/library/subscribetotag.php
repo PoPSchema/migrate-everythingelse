@@ -5,10 +5,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
             $user_id = $vars['global-userstate']['current-user-id'];
@@ -26,6 +25,7 @@ class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
                 );
             }
         }
+        return $errors;
     }
 
     /**

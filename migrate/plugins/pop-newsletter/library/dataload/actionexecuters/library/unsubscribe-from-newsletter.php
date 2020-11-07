@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
+class PoP_UnsubscribeFromNewsletter extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         if (empty($form_data['email'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -24,7 +25,7 @@ class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
         }
 
         if ($errors) {
-            return;
+            return $errors;
         }
 
         // Verify that the verification code corresponds to the email
@@ -36,6 +37,14 @@ class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
                 $makesure_string
             );
         }
+        if ($errors) {
+            return $errors;
+        }
+
+        $newsletter_data = $this->getNewsletterData($form_data);
+        $this->validateData($errors, $newsletter_data);
+        return $errors;
+
     }
 
     /**
@@ -84,24 +93,8 @@ class PoP_UnsubscribeFromNewsletter implements MutationResolverInterface
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $newsletter_data = $this->getNewsletterData($form_data);
-        $this->validateData($errors, $newsletter_data);
-        if ($errors) {
-            return;
-        }
-
         $result = $this->doExecute($newsletter_data);
-        // if (GeneralUtils::isError($result)) {
-        //     foreach ($result->getErrorMessages() as $error_msg) {
-        //         $errors[] = $error_msg;
-        //     }
-        //     return;
-        // }
 
         // Allow for additional operations
         $this->additionals($form_data);

@@ -1,16 +1,18 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_UpdateUserMetaValue implements MutationResolverInterface
+class GD_UpdateUserMetaValue extends AbstractMutationResolver
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
         $target_id = $form_data['target_id'];
         if (!$target_id) {
             $errors[] = TranslationAPIFacade::getInstance()->__('This URL is incorrect.', 'pop-coreprocessors');
         }
+        return $errors;
     }
 
     /**
@@ -29,11 +31,6 @@ class GD_UpdateUserMetaValue implements MutationResolverInterface
 
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        $this->validate($errors, $form_data);
-        if ($errors) {
-            return;
-        }
-
         $target_id = $this->update($form_data);
         $this->additionals($target_id, $form_data);
 

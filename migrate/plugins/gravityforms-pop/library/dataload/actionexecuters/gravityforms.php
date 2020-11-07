@@ -2,6 +2,7 @@
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -53,9 +54,17 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var MutationResolverInterface */
         $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
-        $errors = $errorcodes = array();
         $form_data = $this->getFormData();
-        $execution_response = $mutationResolver->execute($errors, $errorcodes, $form_data);
+        $errorstrings = $errorcodes = array();
+        if ($errors = $mutationResolver->validate($form_data)) {
+            $errorType = $mutationResolver->getErrorType();
+            if ($errorType == ErrorTypes::STRINGS) {
+                $errorstrings = $errors;
+            } elseif ($errorType == ErrorTypes::CODES) {
+                $errorcodes = $errors;
+            }
+        }
+        $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)

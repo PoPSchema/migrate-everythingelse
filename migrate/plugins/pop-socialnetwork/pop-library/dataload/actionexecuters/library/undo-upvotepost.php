@@ -6,10 +6,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -25,6 +24,7 @@ class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
                 );
             }
         }
+        return $errors;
     }
 
     /**

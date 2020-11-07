@@ -1,35 +1,26 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\ErrorTypes;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_LostPwdReset implements MutationResolverInterface
+class GD_LostPwdReset extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function getErrorType(): int
     {
+        return ErrorTypes::CODES;
+    }
+
+    public function validate(array $form_data): ?array
+    {
+        $errorcodes = array();
         $code = $form_data['code'];
         $pwd = $form_data['pwd'];
         $repeatpwd = $form_data['repeatpwd'];
 
-        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $errorcodes = array();
-        if ($code) {
-            $decoded = GD_LostPasswordUtils::decodeCode($code);
-            $rp_key = $decoded['key'];
-            $rp_login = $decoded['login'];
-
-            if (!$rp_key || !$rp_login) {
-                $errorcodes[] = 'error-wrongcode';
-            } else {
-                $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
-                if (!$user || GeneralUtils::isError($user)) {
-                    $errorcodes[] = 'error-invalidkey';
-                }
-            }
-        } else {
+        if (!$code) {
             $errorcodes[] = 'error-nocode';
         }
-
         if (!$pwd) {
             $errorcodes[] = 'error-nopwd';
         } elseif (strlen($pwd) < 8) {
@@ -40,6 +31,27 @@ class GD_LostPwdReset implements MutationResolverInterface
         }
         if ($pwd != $repeatpwd) {
             $errorcodes[] = 'error-pwdnomatch';
+        }
+        return $errorcodes;
+    }
+    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    {
+        $code = $form_data['code'];
+        $pwd = $form_data['pwd'];
+
+        $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
+        $errorcodes = array();
+        $decoded = GD_LostPasswordUtils::decodeCode($code);
+        $rp_key = $decoded['key'];
+        $rp_login = $decoded['login'];
+
+        if (!$rp_key || !$rp_login) {
+            $errorcodes[] = 'error-wrongcode';
+        } else {
+            $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
+            if (!$user || GeneralUtils::isError($user)) {
+                $errorcodes[] = 'error-invalidkey';
+            }
         }
 
         // Return error string

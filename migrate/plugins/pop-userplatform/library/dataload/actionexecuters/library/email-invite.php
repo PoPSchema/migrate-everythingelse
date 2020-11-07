@@ -2,33 +2,17 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
-class GD_EmailInvite implements MutationResolverInterface
+class GD_EmailInvite extends AbstractMutationResolver
 {
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
-        // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
-        $this->validateCaptcha($errors, $form_data);
-
-        if ($errors) {
-            return;
-        }
-
-        $this->validate($errors, $form_data);
-
-        // No need to validate for errors, because the email will be sent to all valid emails anyway,
-        // so sending might fail for some emails but not others, and we give a message to the user about these
-        // if ($errors) {
-        //     return;
-        // }
-
         return $this->sendInvite($errors, $form_data);
     }
 
     protected function validateCaptcha(&$errors, &$form_data)
     {
-
         // Validate the captcha
         $vars = ApplicationState::getVars();
         if (!PoP_FormUtils::useLoggedinuserData() || !$vars['global-userstate']['is-user-logged-in']) {
@@ -41,8 +25,16 @@ class GD_EmailInvite implements MutationResolverInterface
         }
     }
 
-    protected function validate(&$errors, &$form_data)
+    public function validate(array $form_data): ?array
     {
+        $errors = [];
+        // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)
+        $this->validateCaptcha($errors, $form_data);
+
+        if ($errors) {
+            return $errors;
+        }
+
         $emails = $form_data['emails'];
         $invalid_emails = array();
         foreach ($emails as $email) {
@@ -63,6 +55,7 @@ class GD_EmailInvite implements MutationResolverInterface
 
         // Re-assign the non-invalid emails to the form_data
         $form_data['emails'] = array_diff($emails, $invalid_emails);
+        return $errors;
     }
 
     /**

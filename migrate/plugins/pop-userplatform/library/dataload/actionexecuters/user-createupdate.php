@@ -52,6 +52,28 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase extends Abstract
         // Allow to add extra inputs
         $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data', $form_data);
 
+        if ($user_id) {
+            $form_data = $this->getUpdateuserFormData($form_data);
+        } else {
+            $form_data = $this->getCreateuserFormData($form_data);
+        }
+
+        return $form_data;
+    }
+
+    protected function getCreateuserFormData(array $form_data)
+    {
+        // Allow to add extra inputs
+        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:create', $form_data);
+
+        return $form_data;
+    }
+
+    protected function getUpdateuserFormData(array $form_data)
+    {
+        // Allow to add extra inputs
+        $form_data = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_user:form_data:update', $form_data);
+
         return $form_data;
     }
 

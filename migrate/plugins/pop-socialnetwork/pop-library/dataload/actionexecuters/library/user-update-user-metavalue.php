@@ -4,20 +4,20 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_UpdateUserMetaValue_User extends GD_UpdateUserMetaValue
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
             $target_id = $form_data['target_id'];
-            
+
             // Make sure the user exists
             $target = $cmsusersapi->getUserById($target_id);
             if (!$target) {
                 $errors[] = TranslationAPIFacade::getInstance()->__('The requested user does not exist.', 'pop-coreprocessors');
             }
         }
+        return $errors;
     }
 
     protected function getRequestKey()

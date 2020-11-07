@@ -5,10 +5,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_FollowUser extends GD_FollowUnfollowUser
 {
-    protected function validate(&$errors, $form_data)
+    public function validate(array $form_data): ?array
     {
-        parent::validate($errors, $form_data);
-
+        $errors = parent::validate($form_data);
         if (!$errors) {
             $vars = ApplicationState::getVars();
             $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
@@ -28,6 +27,7 @@ class GD_FollowUser extends GD_FollowUnfollowUser
                 }
             }
         }
+        return $errors;
     }
 
     /**
