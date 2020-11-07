@@ -2,8 +2,6 @@
 
 namespace PoP\EditPosts\WP;
 
-use PoPSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPIUtils;
-
 class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
 {
     public function getEditPostLink($post_id)
@@ -13,46 +11,6 @@ class FunctionAPI extends \PoP\EditPosts\FunctionAPI_Base
     public function getDeletePostLink($post_id)
     {
         return get_delete_post_link($post_id);
-    }
-    protected function convertQueryArgsFromPoPToCMSForInsertUpdatePost(&$query)
-    {
-        // Convert the parameters
-        if (isset($query['custom-post-status'])) {
-            $query['post_status'] = CustomPostTypeAPIUtils::convertPostStatusFromPoPToCMS($query['custom-post-status']);
-            unset($query['custom-post-status']);
-        }
-        if (isset($query['id'])) {
-            $query['ID'] = $query['id'];
-            unset($query['id']);
-        }
-        if (isset($query['post-content'])) {
-            $query['post_content'] = $query['post-content'];
-            unset($query['post-content']);
-        }
-        if (isset($query['post-title'])) {
-            $query['post_title'] = $query['post-title'];
-            unset($query['post-title']);
-        }
-        if (isset($query['post-categories'])) {
-            $query['post_category'] = $query['post-categories'];
-            unset($query['post-categories']);
-        }
-        if (isset($query['custom-post-type'])) {
-            $query['post_type'] = $query['custom-post-type'];
-            unset($query['custom-post-type']);
-        }
-    }
-    public function insertPost($post_data)
-    {
-        // Convert the parameters
-        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($post_data);
-        return wp_insert_post($post_data);
-    }
-    public function updatePost($post_data)
-    {
-        // Convert the parameters
-        $this->convertQueryArgsFromPoPToCMSForInsertUpdatePost($post_data);
-        return wp_update_post($post_data);
     }
     public function getPostEditorContent($post_id)
     {
