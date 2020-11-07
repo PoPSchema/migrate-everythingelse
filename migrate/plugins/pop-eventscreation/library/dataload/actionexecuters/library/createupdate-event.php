@@ -66,13 +66,13 @@ abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutat
         return $EM_Event->post_id;
     }
 
-    protected function executeUpdatepost($post_data)
+    protected function executeUpdateCustomPost($post_data)
     {
         $EM_Event = new EM_Event($post_data['id'], 'post_id');
         return $this->save($EM_Event, $post_data);
     }
 
-    protected function executeCreatepost($post_data)
+    protected function executeCreateCustomPost($post_data)
     {
         $EM_Event = new EM_Event();
         return $this->save($EM_Event, $post_data);
