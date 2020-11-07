@@ -10,6 +10,11 @@ class GD_DataLoad_ActionExecuter_Settings extends AbstractComponentMutationResol
         return GD_Settings::class;
     }
 
+    public function getFormData(): array
+    {
+        return [];
+    }
+
     /**
      * @param array $data_properties
      * @return array<string, mixed>|null

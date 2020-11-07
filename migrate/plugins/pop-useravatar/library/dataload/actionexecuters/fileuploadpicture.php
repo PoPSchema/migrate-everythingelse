@@ -1,6 +1,7 @@
 <?php
 
 use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_ActionExecuter_FileUploadPicture extends AbstractComponentMutationResolverBridge
 {
@@ -11,6 +12,14 @@ class GD_DataLoad_ActionExecuter_FileUploadPicture extends AbstractComponentMuta
     protected function onlyExecuteWhenDoingPost(): bool
     {
         return false;
+    }
+
+    public function getFormData(): array
+    {
+        $vars = ApplicationState::getVars();
+        return [
+            'user_id' => $vars['global-userstate']['current-user-id'],
+        ];
     }
     /**
      * @param array $data_properties

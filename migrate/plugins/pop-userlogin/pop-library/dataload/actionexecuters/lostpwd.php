@@ -14,12 +14,9 @@ class GD_DataLoad_ActionExecuter_LostPassword extends AbstractComponentMutationR
     public function getFormData(): array
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-
-        $form_data = array(
+        return [
             'user_login' => $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME])->getValue([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWD_USERNAME]),
-        );
-
-        return $form_data;
+        ];
     }
 
     /**

@@ -7,5 +7,10 @@ class GD_DataLoad_ActionExecuter_Logout extends AbstractComponentMutationResolve
     {
         return GD_Logout::class;
     }
+
+    public function getFormData(): array
+    {
+        return [];
+    }
 }
 

@@ -10,5 +10,10 @@ abstract class AbstractSystemComponentMutationResolverBridge extends AbstractCom
     {
         return false;
     }
+
+    public function getFormData(): array
+    {
+        return [];
+    }
 }
 
