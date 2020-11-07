@@ -39,10 +39,6 @@ abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutat
 
     protected function getCreateupdatepostData($post_data, $form_data)
     {
-
-        // Unset the cat, not needed with events
-        unset($post_data['post-categories']);
-
         $post_data['when'] = $form_data['when'];
         $post_data['location'] = $form_data['location'];
 

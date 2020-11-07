@@ -51,7 +51,7 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
         return parent::getCategoriesModule();
     }
 
-    protected function getCategoryTaxonomy()
+    protected function getCategoryTaxonomy(): ?string
     {
         return POP_USERSTANCE_TAXONOMY_STANCE;
     }
