@@ -45,7 +45,7 @@ abstract class GD_CreateUpdate_Highlight extends AbstractCreateUpdateCustomPostM
         }
     }
 
-    protected function getCustomPostType()
+    public function getCustomPostType(): string
     {
         return POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }

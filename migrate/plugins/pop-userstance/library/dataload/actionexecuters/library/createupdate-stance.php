@@ -61,7 +61,7 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
         return true;
     }
 
-    protected function getCustomPostType()
+    public function getCustomPostType(): string
     {
         return POP_USERSTANCE_POSTTYPE_USERSTANCE;
     }

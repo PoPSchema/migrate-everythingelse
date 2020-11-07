@@ -1,10 +1,16 @@
 <?php
+use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutationResolver
 {
+    public function getCustomPostType(): string
+    {
+        $eventTypeAPI = EventTypeAPIFacade::getInstance();
+        return $eventTypeAPI->getEventCustomPostType();
+    }
     protected function volunteer()
     {
         return true;
