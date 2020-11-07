@@ -3,7 +3,7 @@ use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPo
 
 abstract class GD_CreateUpdate_LocationPost extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    protected function getCustomPostType($form_data)
+    protected function getCustomPostType()
     {
         return POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST;
     }
