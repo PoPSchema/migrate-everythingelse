@@ -5,6 +5,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\Error;
 
 abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutationResolverBridge
 {
@@ -26,7 +27,8 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
             }
         }
 
-        return $this->executeForm($data_properties);
+        // return $this->executeForm($data_properties);
+        return parent::execute($data_properties);
     }
 
     protected function validateCaptcha($data_properties)
@@ -48,33 +50,47 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
         );
     }
 
-    /**
-     * @param array<string, mixed> $data_properties
-     * @return array<string, mixed>
-     */
-    protected function executeForm(array &$data_properties): array
-    {
-        $mutationResolverClass = $this->getMutationResolverClass();
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var MutationResolverInterface */
-        $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
-        $form_data = $this->getFormData();
-        if ($errors = $mutationResolver->validate($form_data)) {
-            $errorType = $mutationResolver->getErrorType();
-            $errorTypeKeys = [
-                ErrorTypes::STRINGS => ResponseConstants::ERRORSTRINGS,
-                ErrorTypes::CODES => ResponseConstants::ERRORCODES,
-            ];
-            return [
-                $errorTypeKeys[$errorType] => $errors,
-            ];
-        }
-        $errors = $errorcodes = [];
-        $mutationResolver->execute($errors, $errorcodes, $form_data);
+    // /**
+    //  * @param array<string, mixed> $data_properties
+    //  * @return array<string, mixed>
+    //  */
+    // protected function executeForm(array &$data_properties): array
+    // {
+    //     $mutationResolverClass = $this->getMutationResolverClass();
+    //     $instanceManager = InstanceManagerFacade::getInstance();
+    //     /** @var MutationResolverInterface */
+    //     $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+    //     $form_data = $this->getFormData();
+    //     $errorType = $mutationResolver->getErrorType();
+    //     $errorTypeKeys = [
+    //         ErrorTypes::STRINGS => ResponseConstants::ERRORSTRINGS,
+    //         ErrorTypes::CODES => ResponseConstants::ERRORCODES,
+    //     ];
+    //     $errorTypeKey = $errorTypeKeys[$errorType];
+    //     if ($errors = $mutationResolver->validate($form_data)) {
+    //         return [
+    //             $errorTypeKey => $errors,
+    //         ];
+    //     }
+    //     $errors = $errorcodes = [];
+    //     $result = $mutationResolver->execute($errors, $errorcodes, $form_data);
+    //     if (GeneralUtils::isError($result)) {
+    //         /** @var Error */
+    //         $error = $result;
+    //         $errors = [];
+    //         if ($errorTypeKey == ErrorTypes::STRINGS) {
+    //             $errors = $error->getErrorMessages();
+    //         } elseif ($errorTypeKey == ErrorTypes::CODES) {
+    //             $errors = $error->getErrorCodes();
+    //         }
+    //         return [
+    //             $errorTypeKey => $errors,
+    //         ];
+    //     }
 
-        // No errors => success
-        return array(
-            ResponseConstants::SUCCESS => true
-        );
-    }
+    //     // No errors => success
+    //     return array(
+    //         ResponseConstants::SUCCESS => true
+    //     );
+    // }
 }

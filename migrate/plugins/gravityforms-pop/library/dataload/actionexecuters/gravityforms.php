@@ -7,6 +7,7 @@ use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExecuterBase
 {
@@ -48,23 +49,27 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
      * @param array<string, mixed> $data_properties
      * @return array<string, mixed>
      */
-    protected function executeForm(array &$data_properties): array
+    public function execute(array &$data_properties): ?array
     {
-        $mutationResolverClass = $this->getMutationResolverClass();
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var MutationResolverInterface */
-        $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
-        $form_data = $this->getFormData();
-        $errorstrings = $errorcodes = array();
-        if ($errors = $mutationResolver->validate($form_data)) {
-            $errorType = $mutationResolver->getErrorType();
-            if ($errorType == ErrorTypes::STRINGS) {
-                $errorstrings = $errors;
-            } elseif ($errorType == ErrorTypes::CODES) {
-                $errorcodes = $errors;
-            }
-        }
-        $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
+        // $mutationResolverClass = $this->getMutationResolverClass();
+        // $instanceManager = InstanceManagerFacade::getInstance();
+        // /** @var MutationResolverInterface */
+        // $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
+        // $form_data = $this->getFormData();
+        // $errorstrings = $errorcodes = array();
+        // if ($errors = $mutationResolver->validate($form_data)) {
+        //     $errorType = $mutationResolver->getErrorType();
+        //     if ($errorType == ErrorTypes::STRINGS) {
+        //         $errorstrings = $errors;
+        //     } elseif ($errorType == ErrorTypes::CODES) {
+        //         $errorcodes = $errors;
+        //     }
+        // }
+        // $execution_response = $mutationResolver->execute($errorstrings, $errorcodes, $form_data);
+        $executed = parent::execute($data_properties);
+
+        $gd_dataload_actionexecution_manager = MutationResolutionManagerFacade::getInstance();
+        $execution_response = $gd_dataload_actionexecution_manager->getResult(get_called_class());
 
         // These are the Strings to use to return the errors: This is how they must be used to return errors / success
         // (Eg: in Gravity Forms confirmations)
@@ -89,7 +94,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // Success
         preg_match_all("/\{\{gd\:success\}\}/", $execution_response, $success);
 
-        $executed = array();
+        // $executed = array();
         if (!empty($success[0])) {
             $executed[ResponseConstants::SUCCESS] = true;
         } elseif (!empty($errorstrings[1]) || !empty($errorcodes[1])) {
@@ -121,7 +126,6 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
 
     public function setup()
     {
-
         // Since GF 1.9.44, they setup field $_POST[ 'is_submit_' . $form['id'] ] )
         // (in file plugins/gravityforms/form_display.php function validate)
         // So here re-create that field
@@ -189,7 +193,6 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
 
     public function maybeValidateCaptcha()
     {
-
         // This is a workaround to validate the form which takes place in advance based on if the captcha is present or not
         // this is done now because GF sends the email at the beginning, this can't be postponed
         // Check only if the user is not logged in. When logged in, we never use the captcha
