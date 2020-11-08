@@ -134,7 +134,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
     {
     }
 
-    protected function updateuser(&$errors, $form_data)
+    protected function updateuser($form_data)
     {
         $user_data = $this->getUpdateuserData($form_data);
         $user_id = $user_data['id'];
@@ -142,11 +142,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         $result = $this->executeUpdateuser($user_data);
 
         if (GeneralUtils::isError($result)) {
-            $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
-                $result->getErrorMessage()
-            );
-            return;
+            return $result;
         }
 
         $this->createupdateuser($user_id, $form_data);
@@ -160,17 +156,13 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return $cmseditusersapi->insertUser($user_data);
     }
 
-    protected function createuser(&$errors, $form_data)
+    protected function createuser($form_data)
     {
         $user_data = $this->getCreateuserData($form_data);
         $result = $this->executeCreateuser($user_data);
 
         if (GeneralUtils::isError($result)) {
-            $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
-                $result->getErrorMessage()
-            );
-            return;
+            return $result;
         }
 
         $user_id = $result;
@@ -180,18 +172,18 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
 
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $this->update($errors, $form_data);
+            $this->update($form_data);
             return 'update';
         }
 
-        $this->create($errors, $form_data);
+        $this->create($form_data);
         return 'create';
     }
 
@@ -221,10 +213,13 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function update(array &$errors, array $form_data)
+    protected function update(array $form_data)
     {
         // Do the Post update
-        $user_id = $this->updateuser($errors, $form_data);
+        $user_id = $this->updateuser($form_data);
+        if (GeneralUtils::isError($user_id)) {
+            return $user_id;
+        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsUpdate($user_id, $form_data);
@@ -234,9 +229,12 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         userNameUpdated($user_id);
     }
 
-    protected function create(array &$errors, array $form_data)
+    protected function create(array $form_data)
     {
-        $user_id = $this->createuser($errors, $form_data);
+        $user_id = $this->createuser($form_data);
+        if (GeneralUtils::isError($user_id)) {
+            return $user_id;
+        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsCreate($user_id, $form_data);

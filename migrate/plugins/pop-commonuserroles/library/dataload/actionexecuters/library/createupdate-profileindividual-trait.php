@@ -2,13 +2,13 @@
 
 trait GD_CreateUpdate_ProfileIndividual_Trait
 {
-    protected function createuser(&$errors, $form_data)
+    protected function createuser($form_data)
     {
-        $user_id = parent::createuser($errors, $form_data);
-        $this->commonuserrolesCreateuser($user_id, $errors, $form_data);
+        $user_id = parent::createuser($form_data);
+        $this->commonuserrolesCreateuser($user_id, $form_data);
         return $user_id;
     }
-    protected function commonuserrolesCreateuser($user_id, &$errors, $form_data)
+    protected function commonuserrolesCreateuser($user_id, $form_data)
     {
         // Add the extra User Role
         $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();

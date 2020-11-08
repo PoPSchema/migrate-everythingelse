@@ -35,7 +35,7 @@ class GD_LostPwdReset extends AbstractMutationResolver
         }
         return $errorcodes;
     }
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $code = $form_data['code'];
         $pwd = $form_data['pwd'];

@@ -79,7 +79,7 @@ class GD_LostPwd extends AbstractMutationResolver
         return $errors;
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

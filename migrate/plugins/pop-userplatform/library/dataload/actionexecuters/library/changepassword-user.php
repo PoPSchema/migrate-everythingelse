@@ -52,17 +52,13 @@ class GD_ChangePassword_User extends AbstractMutationResolver
         return $user_data;
     }
 
-    protected function changepassworduser(&$errors, $form_data)
+    protected function changepassworduser($form_data)
     {
         $user_data = $this->getChangepasswordData($form_data);
         $result = $this->executeChangepassword($user_data);
 
         if (GeneralUtils::isError($result)) {
-            $errors[] = sprintf(
-                TranslationAPIFacade::getInstance()->__('Oops, there was a problem: %s', 'pop-application'),
-                $result->getErrorMessage()
-            );
-            return;
+            return $result;
         }
 
         $user_id = $user_data['ID'];
@@ -72,9 +68,9 @@ class GD_ChangePassword_User extends AbstractMutationResolver
         return $user_id;
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         // Do the password change
-        return $this->changepassworduser($errors, $form_data);
+        return $this->changepassworduser($form_data);
     }
 }

@@ -53,7 +53,7 @@ class PoP_ActionExecuterInstance_SubscribeToNewsletter extends AbstractMutationR
         return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $result = $this->doExecute($form_data);
 

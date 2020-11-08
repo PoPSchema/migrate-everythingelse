@@ -5,9 +5,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_Update_MyCommunities extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         // Do the Post update
+        $errors = [];
         return $this->executeUpdate($errors, $form_data);
     }
 

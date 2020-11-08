@@ -18,7 +18,7 @@ class GD_Settings extends AbstractMutationResolver
         ];
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();

@@ -11,9 +11,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
  */
 class GD_EditMembership extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
-        return $this->update($errors, $form_data);
+        return $this->update($form_data);
     }
 
     public function validate(array $form_data): ?array
@@ -38,7 +38,7 @@ class GD_EditMembership extends AbstractMutationResolver
         return $errors;
     }
 
-    protected function update(&$errors, $form_data)
+    protected function update($form_data)
     {
         $user_id = $form_data['user_id'];
         $community = $form_data['community'];

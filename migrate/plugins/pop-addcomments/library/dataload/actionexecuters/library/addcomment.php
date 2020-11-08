@@ -58,7 +58,7 @@ class GD_AddComment extends AbstractMutationResolver
      * @param string[] $errors
      * @return mixed|null
      */
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);

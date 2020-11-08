@@ -3,7 +3,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_FileUploadPicture extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         // Copy the images to the fileupload-userphoto upload folder
         $user_id = $form_data['user_id'];

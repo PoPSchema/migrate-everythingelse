@@ -17,7 +17,7 @@ class GD_Logout extends AbstractMutationResolver
         }
         return $errors;
     }
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $vars = ApplicationState::getVars();
         $user_id = $vars['global-userstate']['current-user-id'];

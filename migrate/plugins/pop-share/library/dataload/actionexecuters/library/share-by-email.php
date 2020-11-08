@@ -67,7 +67,7 @@ class PoP_ActionExecuterInstance_ShareByEmail extends AbstractMutationResolver
         return PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
     }
 
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
         $result = $this->doExecute($form_data);
 

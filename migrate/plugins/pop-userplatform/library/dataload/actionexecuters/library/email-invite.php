@@ -6,9 +6,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_EmailInvite extends AbstractMutationResolver
 {
-    public function execute(array &$errors, array &$errorcodes, array $form_data)
+    public function execute(array $form_data)
     {
-        return $this->sendInvite($errors, $form_data);
+        return $this->sendInvite($form_data);
     }
 
     protected function validateCaptcha(&$errors, &$form_data)
@@ -73,7 +73,7 @@ class GD_EmailInvite extends AbstractMutationResolver
         return '';
     }
 
-    protected function sendInvite(&$errors, $form_data)
+    protected function sendInvite($form_data)
     {
         $emails = $form_data['emails'];
         if (!empty($emails)) {
