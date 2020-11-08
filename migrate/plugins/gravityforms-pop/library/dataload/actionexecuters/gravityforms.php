@@ -59,7 +59,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // $errorstrings = $errorcodes = array();
         // if ($errors = $mutationResolver->validate($form_data)) {
         //     $errorType = $mutationResolver->getErrorType();
-        //     if ($errorType == ErrorTypes::STRINGS) {
+        //     if ($errorType == ErrorTypes::DESCRIPTIONS) {
         //         $errorstrings = $errors;
         //     } elseif ($errorType == ErrorTypes::CODES) {
         //         $errorcodes = $errors;

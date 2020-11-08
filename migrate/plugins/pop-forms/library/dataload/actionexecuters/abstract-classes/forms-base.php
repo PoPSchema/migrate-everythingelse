@@ -63,7 +63,7 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
     //     $form_data = $this->getFormData();
     //     $errorType = $mutationResolver->getErrorType();
     //     $errorTypeKeys = [
-    //         ErrorTypes::STRINGS => ResponseConstants::ERRORSTRINGS,
+    //         ErrorTypes::DESCRIPTIONS => ResponseConstants::ERRORSTRINGS,
     //         ErrorTypes::CODES => ResponseConstants::ERRORCODES,
     //     ];
     //     $errorTypeKey = $errorTypeKeys[$errorType];
@@ -78,7 +78,7 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
     //         /** @var Error */
     //         $error = $result;
     //         $errors = [];
-    //         if ($errorTypeKey == ErrorTypes::STRINGS) {
+    //         if ($errorTypeKey == ErrorTypes::DESCRIPTIONS) {
     //             $errors = $error->getErrorMessages();
     //         } elseif ($errorTypeKey == ErrorTypes::CODES) {
     //             $errors = $error->getErrorCodes();
