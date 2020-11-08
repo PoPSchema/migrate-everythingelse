@@ -3,6 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\ComponentModel\Error;
 
 class GD_LostPwdReset extends AbstractMutationResolver
 {
@@ -40,23 +41,24 @@ class GD_LostPwdReset extends AbstractMutationResolver
         $pwd = $form_data['pwd'];
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        $errorcodes = array();
         $decoded = GD_LostPasswordUtils::decodeCode($code);
         $rp_key = $decoded['key'];
         $rp_login = $decoded['login'];
 
         if (!$rp_key || !$rp_login) {
-            $errorcodes[] = 'error-wrongcode';
+            return new Error(
+                'error-wrongcode'
+            );
         } else {
             $user = $cmsuseraccountapi->checkPasswordResetKey($rp_key, $rp_login);
-            if (!$user || GeneralUtils::isError($user)) {
-                $errorcodes[] = 'error-invalidkey';
+            if (!$user) {
+                return new Error(
+                    'error-invalidkey'
+                );
             }
-        }
-
-        // Return error string
-        if ($errorcodes) {
-            return;
+            if (GeneralUtils::isError($user)) {
+                return $user;
+            }
         }
 
         // Do the actual password reset

@@ -97,8 +97,7 @@ class GD_LostPwd extends AbstractMutationResolver
         $key = $cmsuseraccountapi->getPasswordResetKey($user);
 
         if (GeneralUtils::isError($key)) {
-            $errors[] = $key->getErrorCode();
-            return;
+            return $key;
         }
 
         /*
@@ -115,11 +114,6 @@ class GD_LostPwd extends AbstractMutationResolver
         $message = HooksAPIFacade::getInstance()->applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $cmsusersresolver->getUserEmail($user);
-        $result = PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
-        if (GeneralUtils::isError($result)) {
-            $errors[] = $result->getErrorCode();
-            return;
-        }
-        return $result;
+        return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
     }
 }
