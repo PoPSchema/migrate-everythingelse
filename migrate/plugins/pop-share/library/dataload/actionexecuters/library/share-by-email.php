@@ -70,12 +70,6 @@ class PoP_ActionExecuterInstance_ShareByEmail extends AbstractMutationResolver
     public function execute(array &$errors, array &$errorcodes, array $form_data)
     {
         $result = $this->doExecute($form_data);
-        if (GeneralUtils::isError($result)) {
-            foreach ($result->getErrorMessages() as $error_msg) {
-                $errors[] = $error_msg;
-            }
-            return;
-        }
 
         // Allow for additional operations
         $this->additionals($form_data);
