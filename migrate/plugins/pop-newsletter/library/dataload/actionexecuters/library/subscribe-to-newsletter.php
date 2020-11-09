@@ -5,7 +5,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class PoP_ActionExecuterInstance_SubscribeToNewsletter extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         if (empty($form_data['email'])) {

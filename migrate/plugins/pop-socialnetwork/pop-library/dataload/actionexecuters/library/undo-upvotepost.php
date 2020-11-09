@@ -6,7 +6,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_UndoUpvotePost extends GD_UpvoteUndoUpvotePost
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validate($form_data);
         if (!$errors) {

@@ -3,7 +3,7 @@
 
 class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         // If there's post_id => It's Update

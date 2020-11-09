@@ -53,7 +53,7 @@ class GD_LostPwd extends AbstractMutationResolver
         return $message;
     }
 
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();

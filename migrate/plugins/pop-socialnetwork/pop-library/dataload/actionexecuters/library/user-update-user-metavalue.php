@@ -4,7 +4,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 
 class GD_UpdateUserMetaValue_User extends GD_UpdateUserMetaValue
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validate($form_data);
         if (!$errors) {

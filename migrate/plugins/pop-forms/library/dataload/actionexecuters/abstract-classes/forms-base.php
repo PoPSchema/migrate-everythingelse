@@ -67,7 +67,7 @@ abstract class GD_DataLoad_FormActionExecuterBase extends AbstractComponentMutat
     //         ErrorTypes::CODES => ResponseConstants::ERRORCODES,
     //     ];
     //     $errorTypeKey = $errorTypeKeys[$errorType];
-    //     if ($errors = $mutationResolver->validate($form_data)) {
+    //     if ($errors = $mutationResolver->validateErrors($form_data)) {
     //         return [
     //             $errorTypeKey => $errors,
     //         ];

@@ -25,7 +25,7 @@ class GD_EmailInvite extends AbstractMutationResolver
         }
     }
 
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         // We validate the captcha apart, since if it fails, then we must not send any invite to anyone (see below: email is sent even if validation fails)

@@ -8,7 +8,7 @@ use PoP\ComponentModel\Error;
 
 class GD_Login extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $username_or_email = $form_data['username_or_email'];

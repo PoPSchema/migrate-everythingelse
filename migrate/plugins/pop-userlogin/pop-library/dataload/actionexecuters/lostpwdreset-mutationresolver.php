@@ -12,7 +12,7 @@ class GD_LostPwdReset extends AbstractMutationResolver
         return ErrorTypes::CODES;
     }
 
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errorcodes = array();
         $code = $form_data['code'];

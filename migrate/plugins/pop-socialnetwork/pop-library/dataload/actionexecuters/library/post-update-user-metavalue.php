@@ -11,7 +11,7 @@ class GD_UpdateUserMetaValue_Post extends GD_UpdateUserMetaValue
         return true;
     }
 
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validate($form_data);
         if (!$errors) {

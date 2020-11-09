@@ -57,7 +57,7 @@ class GD_DataLoad_ActionExecuter_GravityForms extends GD_DataLoad_FormActionExec
         // $mutationResolver = $instanceManager->getInstance($mutationResolverClass);
         // $form_data = $this->getFormData();
         // $errorstrings = $errorcodes = array();
-        // if ($errors = $mutationResolver->validate($form_data)) {
+        // if ($errors = $mutationResolver->validateErrors($form_data)) {
         //     $errorType = $mutationResolver->getErrorType();
         //     if ($errorType == ErrorTypes::DESCRIPTIONS) {
         //         $errorstrings = $errors;

@@ -5,7 +5,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_UpdateUserMetaValue extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $target_id = $form_data['target_id'];

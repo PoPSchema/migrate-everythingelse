@@ -16,7 +16,7 @@ class GD_EditMembership extends AbstractMutationResolver
         return $this->update($form_data);
     }
 
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $user_id = $form_data['user_id'];

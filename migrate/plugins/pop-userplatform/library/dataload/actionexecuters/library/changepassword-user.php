@@ -6,7 +6,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_ChangePassword_User extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

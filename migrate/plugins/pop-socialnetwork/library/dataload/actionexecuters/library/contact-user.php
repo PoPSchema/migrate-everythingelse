@@ -5,7 +5,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class PoP_ActionExecuterInstance_ContactUser extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();

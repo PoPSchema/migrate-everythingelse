@@ -5,7 +5,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_SubscribeToTag extends GD_SubscribeToUnsubscribeFromTag
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validate($form_data);
         if (!$errors) {

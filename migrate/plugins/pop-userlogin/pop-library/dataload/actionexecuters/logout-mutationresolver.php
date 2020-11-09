@@ -6,7 +6,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_Logout extends AbstractMutationResolver
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = [];
         // If the user is not logged in, then return the error

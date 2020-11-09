@@ -5,7 +5,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_FollowUser extends GD_FollowUnfollowUser
 {
-    public function validate(array $form_data): ?array
+    public function validateErrors(array $form_data): ?array
     {
         $errors = parent::validate($form_data);
         if (!$errors) {
