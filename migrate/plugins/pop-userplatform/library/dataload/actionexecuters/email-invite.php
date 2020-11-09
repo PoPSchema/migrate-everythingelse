@@ -17,11 +17,6 @@ abstract class GD_DataLoad_ActionExecuter_EmailInviteBase extends AbstractCompon
         );
     }
 
-    protected function returnIfError(): bool
-    {
-        return false;
-    }
-
     public function getFormData(): array
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
