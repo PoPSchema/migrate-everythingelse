@@ -9,6 +9,11 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_Highlight extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
+    protected function supportsTitle()
+    {
+        return false;
+    }
+
     public function getSuccessString($result_id): ?string
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

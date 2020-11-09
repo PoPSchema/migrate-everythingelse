@@ -176,7 +176,6 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
     {
         // If user is logged in => It's Update
         // Otherwise => It's Create
-
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
             return $this->update($form_data);

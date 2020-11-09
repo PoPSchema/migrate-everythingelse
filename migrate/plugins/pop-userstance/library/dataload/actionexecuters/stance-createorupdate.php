@@ -4,6 +4,11 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends AbstractCreateUpdateCustomPostMutationResolverBridge
 {
+    protected function supportsTitle()
+    {
+        return false;
+    }
+
     public function getMutationResolverClass(): string
     {
         return GD_CreateOrUpdate_Stance::class;
