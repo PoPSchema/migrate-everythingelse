@@ -8,7 +8,16 @@ class GD_EmailInvite extends AbstractMutationResolver
 {
     public function execute(array $form_data)
     {
-        return $this->sendInvite($form_data);
+        $emails = $form_data['emails'];
+        // Remove the invalid emails
+        $emails = array_diff($emails, $this->getInvalidEmails($emails));
+        if (!empty($emails)) {
+            $subject = $this->getEmailSubject($form_data);
+            $content = $this->getEmailContent($form_data);
+            PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
+            return true;
+        }
+        return false;
     }
 
     protected function validateCaptcha(&$errors, &$form_data)
@@ -36,26 +45,36 @@ class GD_EmailInvite extends AbstractMutationResolver
         }
 
         $emails = $form_data['emails'];
-        $invalid_emails = array();
-        foreach ($emails as $email) {
-            if (!is_email($email)) {
-                $invalid_emails[] = $email;
-            }
+        if (empty($emails)) {
+            $errors[] = TranslationAPIFacade::getInstance()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
         }
-        if (!empty($invalid_emails)) {
-            $errors[] = sprintf(
+
+        return $errors;
+    }
+
+    protected function getInvalidEmails(array $emails): array
+    {
+        return array_filter(
+            $emails,
+            function (string $email): bool {
+                return !is_email($email);
+            }
+        );
+    }
+
+    public function validateWarnings(array $form_data): ?array
+    {
+        $warnings = [];
+
+        $emails = $form_data['emails'];
+        if ($invalid_emails = $this->getInvalidEmails($emails)) {
+            $warnings[] = sprintf(
                 TranslationAPIFacade::getInstance()->__('The following emails are invalid: <strong>%s</strong>', 'pop-coreprocessors'),
                 implode(', ', $invalid_emails)
             );
         }
 
-        if (empty($emails)) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('Email(s) cannot be empty.', 'pop-coreprocessors');
-        }
-
-        // Re-assign the non-invalid emails to the form_data
-        $form_data['emails'] = array_diff($emails, $invalid_emails);
-        return $errors;
+        return $warnings;
     }
 
     /**
@@ -71,17 +90,5 @@ class GD_EmailInvite extends AbstractMutationResolver
     protected function getEmailSubject($form_data)
     {
         return '';
-    }
-
-    protected function sendInvite($form_data)
-    {
-        $emails = $form_data['emails'];
-        if (!empty($emails)) {
-            $subject = $this->getEmailSubject($form_data);
-            $content = $this->getEmailContent($form_data);
-            PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
-        }
-
-        return $emails;
     }
 }
