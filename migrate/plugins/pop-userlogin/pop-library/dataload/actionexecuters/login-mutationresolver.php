@@ -20,28 +20,28 @@ class GD_Login extends AbstractMutationResolver
         if (!$pwd) {
             $errors[] = TranslationAPIFacade::getInstance()->__('Please supply your password', 'ure-pop');
         }
+
+        $vars = ApplicationState::getVars();
+        if ($vars['global-userstate']['is-user-logged-in']) {
+            $user_id = $vars['global-userstate']['current-user-id'];
+            $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
+            $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
+            $errors[] = sprintf(
+                TranslationAPIFacade::getInstance()->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'pop-application'),
+                $cmsusersapi->getUserURL($user_id),
+                $cmsusersapi->getUserDisplayName($user_id),
+                $cmsuseraccountapi->getLogoutURL()
+            );
+        }
         return $errors;
     }
 
     public function execute(array $form_data)
     {
         // If the user is already logged in, then return the error
-        $vars = ApplicationState::getVars();
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
         $cmsusersresolver = \PoPSchema\Users\ObjectPropertyResolverFactory::getInstance();
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        if ($vars['global-userstate']['is-user-logged-in']) {
-            $user_id = $vars['global-userstate']['current-user-id'];
-            return new Error(
-                'already-logged-in',
-                sprintf(
-                    TranslationAPIFacade::getInstance()->__('You are already logged in as <a href="%s">%s</a>, <a href="%s">logout</a>?', 'pop-application'),
-                    $cmsusersapi->getUserURL($user_id),
-                    $cmsusersapi->getUserDisplayName($user_id),
-                    $cmsuseraccountapi->getLogoutURL()
-                )
-            );
-        }
 
         $username_or_email = $form_data['username_or_email'];
         $pwd = $form_data['pwd'];

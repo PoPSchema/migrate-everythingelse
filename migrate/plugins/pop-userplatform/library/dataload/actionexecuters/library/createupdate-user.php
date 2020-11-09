@@ -179,12 +179,10 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
 
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $this->update($form_data);
-            return 'update';
+            return $this->update($form_data);
         }
 
-        $this->create($form_data);
-        return 'create';
+        return $this->create($form_data);
     }
 
     protected function additionals($user_id, $form_data)

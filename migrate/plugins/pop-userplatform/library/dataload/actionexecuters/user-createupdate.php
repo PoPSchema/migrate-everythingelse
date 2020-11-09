@@ -13,9 +13,11 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_UserBase extends Abstract
     public function getSuccessString($result_id): ?string
     {
         // For the update, gotta return the success string
-        if ($result_id == 'update') {
+        // If user is logged in => It's Update
+        // Otherwise => It's Create
+        $vars = ApplicationState::getVars();
+        if ($vars['global-userstate']['is-user-logged-in']) {
             // Allow PoP Service Workers to add the attr to avoid the link being served from the browser cache
-            $vars = ApplicationState::getVars();
             return sprintf(
                 TranslationAPIFacade::getInstance()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl($vars['global-userstate']['current-user-id']),

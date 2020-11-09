@@ -13,33 +13,6 @@ class GD_EditMembership extends AbstractMutationResolver
 {
     public function execute(array $form_data)
     {
-        return $this->update($form_data);
-    }
-
-    public function validateErrors(array $form_data): ?array
-    {
-        $errors = [];
-        $user_id = $form_data['user_id'];
-        if (!$user_id) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The user is missing', 'ure-pop');
-            return $errors;
-        }
-
-        // $nonce = $form_data['nonce'];
-        // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
-        //     $errors[] = TranslationAPIFacade::getInstance()->__('Incorrect URL', 'ure-pop');
-        //     return;
-        // }
-
-        $status = $form_data['status'];
-        if (!$status) {
-            $errors[] = TranslationAPIFacade::getInstance()->__('The status has not been set', 'ure-pop');
-        }
-        return $errors;
-    }
-
-    protected function update($form_data)
-    {
         $user_id = $form_data['user_id'];
         $community = $form_data['community'];
         $new_community_status = $form_data['status'];
@@ -101,6 +74,28 @@ class GD_EditMembership extends AbstractMutationResolver
         HooksAPIFacade::getInstance()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
 
         return true;
+    }
+
+    public function validateErrors(array $form_data): ?array
+    {
+        $errors = [];
+        $user_id = $form_data['user_id'];
+        if (!$user_id) {
+            $errors[] = TranslationAPIFacade::getInstance()->__('The user is missing', 'ure-pop');
+            return $errors;
+        }
+
+        // $nonce = $form_data['nonce'];
+        // if (!gdVerifyNonce( $nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
+        //     $errors[] = TranslationAPIFacade::getInstance()->__('Incorrect URL', 'ure-pop');
+        //     return;
+        // }
+
+        $status = $form_data['status'];
+        if (!$status) {
+            $errors[] = TranslationAPIFacade::getInstance()->__('The status has not been set', 'ure-pop');
+        }
+        return $errors;
     }
 }
 

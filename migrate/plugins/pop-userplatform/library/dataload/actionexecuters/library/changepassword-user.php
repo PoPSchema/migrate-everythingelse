@@ -52,7 +52,7 @@ class GD_ChangePassword_User extends AbstractMutationResolver
         return $user_data;
     }
 
-    protected function changepassworduser($form_data)
+    public function execute(array $form_data)
     {
         $user_data = $this->getChangepasswordData($form_data);
         $result = $this->executeChangepassword($user_data);
@@ -66,11 +66,5 @@ class GD_ChangePassword_User extends AbstractMutationResolver
         HooksAPIFacade::getInstance()->doAction('gd_changepassword_user', $user_id, $form_data);
 
         return $user_id;
-    }
-
-    public function execute(array $form_data)
-    {
-        // Do the password change
-        return $this->changepassworduser($form_data);
     }
 }

@@ -34,13 +34,9 @@ class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
         // If there's post_id => It's Update
         // Otherwise => It's Create
         $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
-
         if ($post_id) {
-            $post_id = $this->update($form_data);
-        } else {
-            $post_id = $this->create($form_data);
+            return $this->update($form_data);
         }
-
-        return $post_id;
+        return $this->create($form_data);
     }
 }

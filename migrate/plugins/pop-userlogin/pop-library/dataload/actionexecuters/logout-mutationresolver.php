@@ -12,8 +12,7 @@ class GD_Logout extends AbstractMutationResolver
         // If the user is not logged in, then return the error
         $vars = ApplicationState::getVars();
         if (!$vars['global-userstate']['is-user-logged-in']) {
-            $error = TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-application');
-            $errors[] = $error;
+            $errors[] = TranslationAPIFacade::getInstance()->__('You are not logged in.', 'pop-application');
         }
         return $errors;
     }
