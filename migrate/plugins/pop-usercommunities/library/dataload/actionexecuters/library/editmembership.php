@@ -73,7 +73,7 @@ class GD_EditMembership extends AbstractMutationResolver
         // Allow ACF to also save the value in the DB
         HooksAPIFacade::getInstance()->doAction('GD_EditMembership:update', $user_id, $community, $new_community_status, $new_community_privileges, $new_community_tags);
 
-        return true;
+        return $user_id;
     }
 
     public function validateErrors(array $form_data): ?array

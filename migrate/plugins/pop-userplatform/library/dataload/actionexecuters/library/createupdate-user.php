@@ -224,6 +224,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
 
         // Trigger to update the display_name and nickname
         userNameUpdated($user_id);
+        return $user_id;
     }
 
     protected function create(array $form_data)
@@ -237,6 +238,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         $this->additionalsCreate($user_id, $form_data);
         $this->additionals($user_id, $form_data);
 
+        return $user_id;
         // Comment Leo 21/09/2015: we don't use this function anymore to send the notifications to the admin/user. Instead, use our own hooks.
         // Send notification of new user
         // wpNewUserNotification( $user_id, $form_data['password'] );

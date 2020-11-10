@@ -7,8 +7,7 @@ class GD_UpdateMyPreferences extends AbstractMutationResolver
     {
         $user_id = $form_data['user_id'];
         \PoPSchema\UserMeta\Utils::updateUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES, $form_data['userPreferences']);
-
-        return true;
+        return $user_id;
     }
 }
 

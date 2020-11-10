@@ -10,6 +10,6 @@ class GD_FileUploadPicture extends AbstractMutationResolver
         $gd_fileupload_userphoto = GD_FileUpload_UserPhotoFactory::getInstance();
         $gd_fileupload_userphoto->copyPicture($user_id);
 
-        return null;
+        return $user_id;
     }
 }

@@ -12,5 +12,6 @@ class GD_SystemInstall extends AbstractMutationResolver
 
         // Execute install everywhere
         HooksAPIFacade::getInstance()->doAction('PoP:system-install');
+        return true;
     }
 }

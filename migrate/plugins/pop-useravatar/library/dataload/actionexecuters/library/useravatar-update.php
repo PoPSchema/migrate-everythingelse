@@ -17,7 +17,7 @@ class GD_UserAvatar_Update extends AbstractMutationResolver
         $this->savePicture($user_id);
         $this->additionals($user_id, $form_data);
 
-        return true;
+        return $user_id;
     }
 
     protected function additionals($user_id, $form_data)

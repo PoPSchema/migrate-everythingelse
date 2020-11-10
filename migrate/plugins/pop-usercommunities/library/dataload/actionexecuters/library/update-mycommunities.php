@@ -41,7 +41,7 @@ class GD_Update_MyCommunities extends AbstractMutationResolver
         // Allow to send an email before the update: get the current communities, so we know which ones are new
         HooksAPIFacade::getInstance()->doAction('gd_update_mycommunities:update', $user_id, $form_data, $operationlog);
 
-        return true;
+        return $user_id;
         // Update: either updated or no banned communities (even if nothing changed, tell the user update was successful)
         // return $update || empty($banned_communities);
     }
