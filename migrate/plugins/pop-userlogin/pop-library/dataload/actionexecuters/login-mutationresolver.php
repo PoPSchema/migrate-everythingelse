@@ -36,6 +36,9 @@ class GD_Login extends AbstractMutationResolver
         return $errors;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // If the user is already logged in, then return the error

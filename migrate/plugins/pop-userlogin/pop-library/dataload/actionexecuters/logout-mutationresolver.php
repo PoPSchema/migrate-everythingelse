@@ -16,6 +16,9 @@ class GD_Logout extends AbstractMutationResolver
         }
         return $errors;
     }
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $vars = ApplicationState::getVars();

@@ -85,6 +85,9 @@ class PoP_ActionExecuterInstance_ContactUser extends AbstractMutationResolver
         return PoP_EmailSender_Utils::sendemailToUser($form_data['target-id'], $subject, $msg);
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $result = $this->doExecute($form_data);

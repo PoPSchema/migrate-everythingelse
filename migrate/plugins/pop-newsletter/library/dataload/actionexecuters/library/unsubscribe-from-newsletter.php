@@ -91,6 +91,9 @@ class PoP_UnsubscribeFromNewsletter extends AbstractMutationResolver
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $newsletter_data = $this->getNewsletterData($form_data);

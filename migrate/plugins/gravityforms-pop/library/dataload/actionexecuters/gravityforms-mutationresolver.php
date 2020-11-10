@@ -3,6 +3,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_GravityForms extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // $execution_response = do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="false"]');

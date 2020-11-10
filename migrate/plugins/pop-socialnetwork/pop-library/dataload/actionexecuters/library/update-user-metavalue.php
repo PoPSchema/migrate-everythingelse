@@ -29,6 +29,9 @@ class GD_UpdateUserMetaValue extends AbstractMutationResolver
         return $target_id;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $target_id = $this->update($form_data);

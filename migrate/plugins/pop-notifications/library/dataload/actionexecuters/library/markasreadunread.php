@@ -43,6 +43,9 @@ class GD_NotificationMarkAsReadUnread extends AbstractMutationResolver
         return PoP_Notifications_API::setStatus($form_data['histid'], $form_data['user_id'], $this->getStatus());
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $hist_ids = $this->setStatus($form_data);

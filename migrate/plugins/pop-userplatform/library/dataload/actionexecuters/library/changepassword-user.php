@@ -52,6 +52,9 @@ class GD_ChangePassword_User extends AbstractMutationResolver
         return $user_data;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $user_data = $this->getChangepasswordData($form_data);

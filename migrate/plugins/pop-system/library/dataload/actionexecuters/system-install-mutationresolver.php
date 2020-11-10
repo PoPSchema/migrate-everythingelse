@@ -5,6 +5,9 @@ use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 
 class GD_SystemInstall extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // Save the new version on the DB

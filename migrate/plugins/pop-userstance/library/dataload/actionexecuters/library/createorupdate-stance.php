@@ -29,6 +29,9 @@ class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
         return $errors;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // If there's post_id => It's Update

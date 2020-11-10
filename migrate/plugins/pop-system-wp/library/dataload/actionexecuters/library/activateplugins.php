@@ -25,6 +25,9 @@ class GD_ActivatePlugins extends AbstractMutationResolver
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // Plugins needed by the website. Check the website version, if it's the one indicated,

@@ -11,6 +11,9 @@ class GD_UserAvatar_Update extends AbstractMutationResolver
         $gd_fileupload_userphoto->savePicture($user_id, $delete_source);
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $user_id = $form_data['user_id'];

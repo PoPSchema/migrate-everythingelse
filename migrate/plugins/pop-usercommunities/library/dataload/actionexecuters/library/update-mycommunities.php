@@ -5,6 +5,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_Update_MyCommunities extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $user_id = $form_data['user_id'];

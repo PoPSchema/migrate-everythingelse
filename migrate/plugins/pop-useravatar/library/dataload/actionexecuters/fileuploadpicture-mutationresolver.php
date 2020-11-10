@@ -3,6 +3,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_FileUploadPicture extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // Copy the images to the fileupload-userphoto upload folder

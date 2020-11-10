@@ -172,6 +172,9 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return $user_id;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         // If user is logged in => It's Update

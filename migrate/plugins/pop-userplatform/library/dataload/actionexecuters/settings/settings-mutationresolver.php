@@ -18,6 +18,9 @@ class GD_Settings extends AbstractMutationResolver
         ];
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();

@@ -11,6 +11,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
  */
 class GD_EditMembership extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $user_id = $form_data['user_id'];

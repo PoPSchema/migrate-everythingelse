@@ -79,6 +79,9 @@ class GD_LostPwd extends AbstractMutationResolver
         return $errors;
     }
 
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();

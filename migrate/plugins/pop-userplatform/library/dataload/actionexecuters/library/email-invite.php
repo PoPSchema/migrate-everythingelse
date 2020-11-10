@@ -6,6 +6,9 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 
 class GD_EmailInvite extends AbstractMutationResolver
 {
+    /**
+     * @return mixed
+     */
     public function execute(array $form_data)
     {
         $emails = $form_data['emails'];
