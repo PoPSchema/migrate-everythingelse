@@ -78,8 +78,7 @@ class PoP_Application_UserAvatar_DataLoad_FieldResolver_Users extends AbstractDB
         switch ($fieldName) {
             case 'avatar':
                 // The avatar size is set through fieldArgs
-                $size = $fieldArgs['size'] ? (int) $fieldArgs['size'] : GD_AVATAR_SIZE_60;
-                return gdGetAvatar($typeResolver->getID($user), $size);
+                return gdGetAvatar($typeResolver->getID($user), (int) $fieldArgs['size']);
         }
 
         return parent::resolveValue($typeResolver, $resultItem, $fieldName, $fieldArgs, $variables, $expressions, $options);

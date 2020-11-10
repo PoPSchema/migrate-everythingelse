@@ -91,7 +91,6 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
     {
         $schemaFieldArgs = parent::getSchemaFieldArgs($typeResolver, $fieldName);
         $translationAPI = TranslationAPIFacade::getInstance();
-        $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
@@ -142,9 +141,7 @@ class PoP_Application_DataLoad_FieldResolver_Posts extends AbstractDBDataFieldRe
         switch ($fieldName) {
             case 'favicon':
             case 'thumb':
-                $size = $fieldArgs['size'] ?? $this->getDefaultThumbSize();
-                $add_description = isset($fieldArgs['addDescription']) ? $fieldArgs['addDescription'] : false;
-                return $this->getThumb($post, $typeResolver, $size, $add_description);
+                return $this->getThumb($post, $typeResolver, $fieldArgs['size'], $fieldArgs['addDescription']);
 
             case 'thumbFullSrc':
                 $thumb = $typeResolver->resolveValue($post, FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'full', 'addDescription' => true]), $variables, $expressions, $options);
