@@ -115,7 +115,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                      // Query all the General thoughts about TPP: add query args
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsPoststances($query);
                 } elseif (in_array($module, $combined)) {
-                    $query['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+                    $query['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
                 }
 
                 // Override the category

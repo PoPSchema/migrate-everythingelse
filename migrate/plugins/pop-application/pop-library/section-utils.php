@@ -19,7 +19,7 @@ class PoP_Application_SectionUtils
     {
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         if ($post_types = $cmsapplicationpostsapi->getAllcontentPostTypes()) {
-            $ret['custom-post-types'] = $post_types;
+            $ret['custompost-types'] = $post_types;
         }
 
         // Allow WordPress to add the 'tax-query' items
@@ -35,7 +35,7 @@ class PoP_Application_SectionUtils
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();
         $tag_id = $vars['routing-state']['queried-object-id'];
         $ret['tag-ids'] = [$tag_id];
-        $ret['custom-post-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes();
+        $ret['custompost-types'] = $cmsapplicationpostsapi->getAllcontentPostTypes();
 
         // Allow WordPress to add the 'tax-query' items
         HooksAPIFacade::getInstance()->doAction(

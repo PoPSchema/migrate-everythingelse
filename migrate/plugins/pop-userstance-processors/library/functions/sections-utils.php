@@ -10,7 +10,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
             'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
             'value' => $referenced_post_id,
         ];
-        $ret['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+        $ret['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
         // $ret['fields'] = 'ids';
     }
 
@@ -20,7 +20,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
             'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
             'compare' => 'NOT EXISTS',
         ];
-        $ret['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+        $ret['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
         // $ret['fields'] = 'ids';
     }
 
@@ -32,7 +32,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
             'key' => \PoPSchema\CustomPostMeta\Utils::getMetaKey(GD_METAKEY_POST_STANCETARGET),
             'compare' => 'EXISTS',
         ];
-        $ret['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+        $ret['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
         // $ret['fields'] = 'ids';
     }
 
@@ -43,7 +43,7 @@ class UserStance_Module_Processor_CustomSectionBlocksUtils
             $referenced_post_id = $vars['routing-state']['queried-object-id'];
         }
 
-        $ret['custom-post-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
+        $ret['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
 
         // Find all related posts
         $ret['meta-query'][] = [

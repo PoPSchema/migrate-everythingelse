@@ -9,7 +9,7 @@ abstract class PoP_EventsCreation_Module_Processor_MySectionDataloadsBase extend
 
         // Any post status
         $ret['status'] = 'all';
-        unset($ret['custom-post-status']);
+        // unset($ret['custom-post-status']);
 
         return $ret;
     }

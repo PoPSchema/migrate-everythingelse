@@ -17,7 +17,7 @@ class PoP_Module_Processor_MultiSelectFilterInputProcessor extends \PoP\Componen
         switch ($filterInput[1]) {
             case self::FILTERINPUT_MODERATEDPOSTSTATUS:
             case self::FILTERINPUT_UNMODERATEDPOSTSTATUS:
-                $query['custom-post-status'] = $value;
+                $query['status'] = $value;
                 break;
         }
     }

@@ -15,7 +15,7 @@ class PoP_CDN_Thumbprint_Post extends PoP_CDN_Thumbprint_PostBase
         return array_merge(
             parent::getQuery(),
             array(
-                'custom-post-types' => $cmsapplicationpostsapi->getAllcontentPostTypes(),
+                'custompost-types' => $cmsapplicationpostsapi->getAllcontentPostTypes(),
             )
         );
     }

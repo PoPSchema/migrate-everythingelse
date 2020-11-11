@@ -15,7 +15,7 @@ class PoP_EM_CDN_Thumbprint_Location extends PoP_CDN_Thumbprint_PostBase
         return array_merge(
             parent::getQuery(),
             array(
-                'custom-post-types' => array($pluginapi->getLocationPostType()),
+                'custompost-types' => array($pluginapi->getLocationPostType()),
             )
         );
     }

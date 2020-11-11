@@ -111,7 +111,7 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
         // Check if there is already an existing stance
         $vars = ApplicationState::getVars();
         $query = array(
-            'custom-post-status' => array(Status::PUBLISHED, Status::DRAFT),
+            'status' => array(Status::PUBLISHED, Status::DRAFT),
             'authors' => [$vars['global-userstate']['current-user-id']],
         );
         if ($referenced_id) {

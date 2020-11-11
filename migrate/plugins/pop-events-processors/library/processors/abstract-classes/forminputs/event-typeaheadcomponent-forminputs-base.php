@@ -9,7 +9,7 @@ abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extend
         $ret = parent::getThumbprintQuery($module, $props);
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
-        $ret['custom-post-types'] = [$eventTypeAPI->getEventCustomPostType()];
+        $ret['custompost-types'] = [$eventTypeAPI->getEventCustomPostType()];
 
         return $ret;
     }

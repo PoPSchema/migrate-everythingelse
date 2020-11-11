@@ -19,7 +19,7 @@ class PoP_UserStance_LatestCounts_Hooks
         if (!in_array(POP_USERSTANCE_POSTTYPE_USERSTANCE, $cmsapplicationpostsapi->getAllcontentPostTypes())) {
             $query = &$query_in_array[0];
 
-            $query['custom-post-types'][] = POP_USERSTANCE_POSTTYPE_USERSTANCE;
+            $query['custompost-types'][] = POP_USERSTANCE_POSTTYPE_USERSTANCE;
 
             // If not enabled, we don't query by taxonomy
             if (defined('POP_TAXONOMYQUERY_INITIALIZED') && PoP_Application_TaxonomyQuery_ConfigurationUtils::enableFilterAllcontentByTaxonomy()) {
