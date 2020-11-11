@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 abstract class GD_DataLoad_ActionExecuter_CreateUpdate_LocationPost extends AbstractCreateUpdateCustomPostMutationResolverBridge

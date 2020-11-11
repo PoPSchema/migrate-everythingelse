@@ -2,7 +2,7 @@
 use PoPSchema\Events\Facades\EventTypeAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\EventMutations\Facades\EventMutationTypeAPIFacade;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutationResolver
 {

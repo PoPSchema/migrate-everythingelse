@@ -1,5 +1,5 @@
 <?php
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 abstract class GD_CreateUpdate_LocationPost extends AbstractCreateUpdateCustomPostMutationResolver
 {

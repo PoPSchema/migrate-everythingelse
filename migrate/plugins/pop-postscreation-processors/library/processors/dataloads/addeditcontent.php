@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolverBridge;
-use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolverBridge;
+use PoPSitesWassup\PostMutations\MutationResolvers\CreatePostMutationResolverBridge;
+use PoPSitesWassup\PostMutations\MutationResolvers\UpdatePostMutationResolverBridge;
 
 class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
