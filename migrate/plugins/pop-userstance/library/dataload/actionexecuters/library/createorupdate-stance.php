@@ -8,7 +8,7 @@ class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
         $errors = [];
         // If there's post_id => It's Update
         // Otherwise => It's Create
-        $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
+        $post_id = $this->getUpdateCustomPostID();
 
         if ($post_id) {
             // If already exists any of these errors above, return errors
@@ -36,7 +36,7 @@ class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
     {
         // If there's post_id => It's Update
         // Otherwise => It's Create
-        $post_id = $_REQUEST[POP_INPUTNAME_POSTID];
+        $post_id = $this->getUpdateCustomPostID();
         if ($post_id) {
             return $this->update($form_data);
         }
