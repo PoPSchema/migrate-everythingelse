@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {

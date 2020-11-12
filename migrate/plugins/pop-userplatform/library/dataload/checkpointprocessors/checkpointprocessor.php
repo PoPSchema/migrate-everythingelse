@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 
 class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {

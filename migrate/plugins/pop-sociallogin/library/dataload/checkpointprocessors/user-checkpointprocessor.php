@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\CheckpointProcessors\AbstractCheckpointProcessor;
+use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 
 class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
