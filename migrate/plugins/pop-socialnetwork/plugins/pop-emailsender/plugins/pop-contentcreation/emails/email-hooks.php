@@ -1,11 +1,12 @@
 <?php
-use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 define('POP_EMAIL_SUBSCRIBEDTOTOPIC', 'subscribedtotopic');
@@ -29,11 +30,11 @@ class PoP_SocialNetwork_EmailSender_ContentCreation_Hooks
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostCreate'), 10, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsSubscribedtopicCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsNetworkCreatedpostCreate'), 10, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsNetworkCreatedpostUpdate'), 10, 2);
         // EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT:
         HooksAPIFacade::getInstance()->addAction(
             'popcms:insertComment',

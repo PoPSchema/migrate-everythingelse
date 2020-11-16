@@ -1,8 +1,9 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
 use PoPSchema\CustomPosts\Types\Status;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -16,8 +17,8 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Created/Updated/Removed Post
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'createdPost'));
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'updatedPost'), 10, 2);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
         HooksAPIFacade::getInstance()->addAction(
             'popcms:transitionPostStatus',
             array($this, 'removedPost'),

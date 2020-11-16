@@ -2,12 +2,13 @@
 
 define('POP_EMAIL_CREATEDCONTENT', 'created-content');
 
-use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class PoP_ContentCreation_EmailSender_Hooks
 {
@@ -16,29 +17,29 @@ class PoP_ContentCreation_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'sendemailToAdminUpdatepost'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'sendemailToAdminCreatepost'), 100, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // Late priority, so they send the email if PoP SocialNetwork has not done so before
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
 
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
         // Post created/updated/approved
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
         HooksAPIFacade::getInstance()->addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostPostapproved'),
             10,
             1
         );
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:create', array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
-        HooksAPIFacade::getInstance()->addAction('gd_createupdate_post:update', array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
+        HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
         HooksAPIFacade::getInstance()->addAction(
             'popcms:pendingToPublish',
             array($this, 'sendemailToUsersFromPostReferencestransition'),

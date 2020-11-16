@@ -1,8 +1,9 @@
 <?php
-use PoPSchema\CustomPosts\Types\Status;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSchema\CustomPosts\Types\Status;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\Users\Conditional\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -14,14 +15,13 @@ class PoP_RelatedPosts_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
 {
     public function __construct()
     {
-
         // Referenced Post
         HooksAPIFacade::getInstance()->addAction(
-            'gd_createupdate_post:create',
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE,
             array($this, 'createdPostRelatedToPost')
         );
         HooksAPIFacade::getInstance()->addAction(
-            'gd_createupdate_post:update',
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE,
             array($this, 'updatedPostRelatedToPost'),
             10,
             2
