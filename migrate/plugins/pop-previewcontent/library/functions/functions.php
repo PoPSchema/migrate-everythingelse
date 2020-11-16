@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPSchema\CustomPosts\Types\Status;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 HooksAPIFacade::getInstance()->addFilter('gd-createupdate-post:execute:successstring', 'gdPppCreateupdateAddPreviewLink', 10, 3);
 function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
@@ -28,7 +29,12 @@ function gdPppCreateupdateAddPreviewLink($success_string, $post_id, $status)
     return $success_string;
 }
 
-HooksAPIFacade::getInstance()->addFilter('gd_createupdate_post', 'gdPppAddPublicPreview', 10, 1);
+HooksAPIFacade::getInstance()->addFilter(
+    AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
+    'gdPppAddPublicPreview',
+    10,
+    1
+);
 function gdPppAddPublicPreview($post_id)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();

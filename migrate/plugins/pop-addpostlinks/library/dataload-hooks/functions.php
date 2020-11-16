@@ -1,7 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 {
@@ -19,7 +20,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
             2
         );
         HooksAPIFacade::getInstance()->addAction(
-            'gd_createupdate_post',
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
             array($this, 'createupdate'),
             10,
             2

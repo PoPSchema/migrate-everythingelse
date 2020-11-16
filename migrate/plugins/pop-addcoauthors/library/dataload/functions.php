@@ -1,9 +1,10 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 if (class_exists('coauthors_plus')) {
-    HooksAPIFacade::getInstance()->addAction('gd_createupdate_post', 'gdCapSharewithprofiles', 10);
+    HooksAPIFacade::getInstance()->addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE, 'gdCapSharewithprofiles', 10);
 }
 function gdCapSharewithprofiles($post_id)
 {
