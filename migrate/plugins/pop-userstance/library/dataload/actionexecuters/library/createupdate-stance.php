@@ -20,7 +20,7 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
     }
 
     // Update Post Validation
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
         if ($form_data['stancetarget']) {
             // Check that the referenced post exists
@@ -38,7 +38,7 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
 
         // If cheating then that's it, no need to validate anymore
         if (!$errors) {
-            parent::validatecontent($errors, $form_data);
+            parent::validateContent($errors, $form_data);
         }
     }
 
@@ -94,9 +94,9 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
         return $category_error_msgs;
     }
 
-    protected function validatecreatecontent(&$errors, $form_data)
+    protected function validateCreateContent(array &$errors, array $form_data): void
     {
-        parent::validatecreatecontent($errors, $form_data);
+        parent::validateCreateContent($errors, $form_data);
 
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $cmseditpostsapi = \PoP\EditPosts\FunctionAPIFactory::getInstance();
@@ -159,23 +159,29 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
     //     return $post_data;
     // }
 
-    protected function createadditionals($post_id, $form_data)
+    /**
+     * @param mixed $post_id
+     */
+    protected function createAdditionals($post_id, array $form_data): void
     {
-        parent::createadditionals($post_id, $form_data);
+        parent::createAdditionals($post_id, $form_data);
 
         if ($target = $form_data['stancetarget']) {
             \PoPSchema\CustomPostMeta\Utils::addCustomPostMeta($post_id, GD_METAKEY_POST_STANCETARGET, $target, true);
         }
 
         // Allow for URE to add the AuthorRole meta value
-        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Stance:createadditionals', $post_id, $form_data);
+        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Stance:createAdditionals', $post_id, $form_data);
     }
 
-    protected function updateadditionals($post_id, $form_data, $log)
+    /**
+     * @param mixed $post_id
+     */
+    protected function updateAdditionals($post_id, array $form_data, array $log): void
     {
-        parent::updateadditionals($post_id, $form_data, $log);
+        parent::updateAdditionals($post_id, $form_data, $log);
 
         // Allow for URE to add the AuthorRole meta value
-        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Stance:updateadditionals', $post_id, $form_data, $log);
+        HooksAPIFacade::getInstance()->doAction('GD_CreateUpdate_Stance:updateAdditionals', $post_id, $form_data, $log);
     }
 }

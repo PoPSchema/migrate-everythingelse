@@ -8,12 +8,12 @@ class GD_CreateUpdate_Profile extends GD_CreateUpdate_User
         return GD_ROLE_PROFILE;
     }
 
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
-        parent::validatecontent($errors, $form_data);
+        parent::validateContent($errors, $form_data);
 
         // Allow to validate the extra inputs
-        $hooked_errors = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_profile:validatecontent', array(), $form_data);
+        $hooked_errors = HooksAPIFacade::getInstance()->applyFilters('gd_createupdate_profile:validateContent', array(), $form_data);
         foreach ($hooked_errors as $error) {
             $errors[] = $error;
         }

@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 
 class Wassup_CreateUpdate_Link_Utils
 {
-    public static function validatecontent(&$errors, $form_data)
+    public static function validateContent(&$errors, $form_data)
     {
         if (empty($form_data['content'])) {
             // The link will be the content. So then replace the error message if the content (link) is empty

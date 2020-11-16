@@ -12,7 +12,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return 'subscriber';
     }
 
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
         if (empty($form_data['first_name'])) {
             $errors[] = TranslationAPIFacade::getInstance()->__('The name cannot be empty', 'pop-application');
@@ -35,7 +35,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         }
     }
 
-    protected function validatecreatecontent(&$errors, $form_data)
+    protected function validateCreateContent(array &$errors, array $form_data): void
     {
 
         // Check the username
@@ -81,7 +81,7 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         }
     }
 
-    protected function validateupdatecontent(&$errors, $form_data)
+    protected function validateUpdateContent(array &$errors, array $form_data): void
     {
         $user_id = $form_data['user_id'];
         $user_email = $form_data['user_email'];
@@ -203,16 +203,19 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
     public function validateErrors(array $form_data): ?array
     {
         $errors = [];
-        $this->validatecontent($errors, $form_data);
+        $this->validateContent($errors, $form_data);
         $vars = ApplicationState::getVars();
         if ($vars['global-userstate']['is-user-logged-in']) {
-            $this->validateupdatecontent($errors, $form_data);
+            $this->validateUpdateContent($errors, $form_data);
         } else {
-            $this->validatecreatecontent($errors, $form_data);
+            $this->validateCreateContent($errors, $form_data);
         }
         return $errors;
     }
 
+    /**
+     * @return mixed The ID of the updated entity, or an Error
+     */
     protected function update(array $form_data)
     {
         // Do the Post update
@@ -230,6 +233,9 @@ class GD_CreateUpdate_User extends AbstractMutationResolver
         return $user_id;
     }
 
+    /**
+     * @return mixed The ID of the created entity, or an Error
+     */
     protected function create(array $form_data)
     {
         $user_id = $this->createuser($form_data);

@@ -19,10 +19,10 @@ abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
      * Function below was copied from class GD_CreateUpdate_PostLink
     --------------------------------------------------
      */
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
-        parent::validatecontent($errors, $form_data);
-        Wassup_CreateUpdate_Link_Utils::validatecontent($errors, $form_data);
+        parent::validateContent($errors, $form_data);
+        Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
     }
 
     /**

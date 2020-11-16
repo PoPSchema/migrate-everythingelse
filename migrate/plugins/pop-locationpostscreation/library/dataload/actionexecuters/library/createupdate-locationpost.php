@@ -13,7 +13,10 @@ abstract class GD_CreateUpdate_LocationPost extends AbstractCreateUpdateCustomPo
         return true;
     }
 
-    protected function additionals($post_id, $form_data)
+    /**
+     * @param mixed $post_id
+     */
+    protected function additionals($post_id, array $form_data): void
     {
         parent::additionals($post_id, $form_data);
 

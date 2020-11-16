@@ -11,10 +11,10 @@ class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationRes
         return $ret;
     }
 
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
-        parent::validatecontent($errors, $form_data);
-        Wassup_CreateUpdate_Link_Utils::validatecontent($errors, $form_data);
+        parent::validateContent($errors, $form_data);
+        Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
     }
 
     protected function getEditorInput()
@@ -22,7 +22,10 @@ class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationRes
         return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK];
     }
 
-    protected function additionals($post_id, $form_data)
+    /**
+     * @param mixed $post_id
+     */
+    protected function additionals($post_id, array $form_data): void
     {
         parent::additionals($post_id, $form_data);
 

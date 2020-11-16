@@ -14,8 +14,8 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
             10
         );
         HooksAPIFacade::getInstance()->addAction(
-            'GD_CreateUpdate_Post:validatecontent',
-            array($this, 'validatecontent'),
+            'GD_CreateUpdate_Post:validateContent',
+            array($this, 'validateContent'),
             10,
             2
         );
@@ -27,7 +27,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         );
     }
 
-    public function validatecontent($errors_in_array, $form_data)
+    public function validateContent($errors_in_array, $form_data)
     {
         $errors = &$errors_in_array[0];
 

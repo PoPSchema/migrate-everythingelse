@@ -17,9 +17,9 @@ abstract class GD_CreateUpdate_Event extends AbstractCreateUpdateCustomPostMutat
     }
 
     // Update Post Validation
-    protected function validatecontent(&$errors, $form_data)
+    protected function validateContent(array &$errors, array $form_data): void
     {
-        parent::validatecontent($errors, $form_data);
+        parent::validateContent($errors, $form_data);
 
         // Validate for any status (even "draft"), since without date EM doesn't create the Event
         if (empty(array_filter(array_values($form_data['when'])))) {

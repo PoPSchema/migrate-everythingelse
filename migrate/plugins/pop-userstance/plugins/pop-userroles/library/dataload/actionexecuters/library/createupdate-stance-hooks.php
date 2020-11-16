@@ -7,12 +7,12 @@ class UserStance_DataLoad_CreateUpdateStanceHooks
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'GD_CreateUpdate_Stance:createadditionals',
-            array($this, 'createadditionals')
+            'GD_CreateUpdate_Stance:createAdditionals',
+            array($this, 'createAdditionals')
         );
     }
 
-    public function createadditionals($post_id)
+    public function createAdditionals($post_id)
     {
 
         // Redundancy on who has created the Stance: an individual or an organization

@@ -12,20 +12,20 @@ class GD_CreateOrUpdate_Stance extends GD_CreateUpdate_Stance
 
         if ($post_id) {
             // If already exists any of these errors above, return errors
-            $this->validateupdate($errors);
+            $this->validateUpdate($errors);
             if ($errors) {
                 return $errors;
             }
-            $this->validateupdatecontent($errors, $form_data);
+            $this->validateUpdateContent($errors, $form_data);
         } else {
             // If already exists any of these errors above, return errors
-            $this->validatecreate($errors);
+            $this->validateCreate($errors);
             if ($errors) {
                 return $errors;
             }
-            $this->validatecreatecontent($errors, $form_data);
+            $this->validateCreateContent($errors, $form_data);
         }
-        $this->validatecontent($errors, $form_data);
+        $this->validateContent($errors, $form_data);
         return $errors;
     }
 
