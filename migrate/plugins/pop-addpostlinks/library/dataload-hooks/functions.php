@@ -14,7 +14,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
             10
         );
         HooksAPIFacade::getInstance()->addAction(
-            'GD_CreateUpdate_Post:validateContent',
+            AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CONTENT,
             array($this, 'validateContent'),
             10,
             2
