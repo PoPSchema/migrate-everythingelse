@@ -3,13 +3,14 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
+use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
 class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 {
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'GD_CreateUpdate_Post:form-data',
+            AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
             array($this, 'getFormData'),
             10
         );
@@ -21,7 +22,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         );
         HooksAPIFacade::getInstance()->addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'createupdate'),
+            array($this, 'createUpdate'),
             10,
             2
         );
@@ -38,7 +39,7 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
         }
     }
 
-    public function createupdate($post_id, $form_data)
+    public function createUpdate($post_id, $form_data)
     {
 
         // Save the link in the post meta
