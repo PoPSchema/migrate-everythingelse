@@ -7,5 +7,10 @@ class PoP_UserStance_DataLoad_ActionExecuter_Update_Stance extends AbstractCreat
     {
         return GD_Update_Stance::class;
     }
+
+    protected function isUpdate(): bool
+    {
+        return true;
+    }
 }
 

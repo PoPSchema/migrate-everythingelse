@@ -25,5 +25,11 @@ class PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends Abstr
 
         return $form_data;
     }
+
+    protected function isUpdate(): bool
+    {
+        // If param "?pid" is provided then it's update, otherwise it's create
+        return $this->getUpdateCustomPostID() != null;
+    }
 }
 

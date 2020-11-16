@@ -6,5 +6,10 @@ class GD_DataLoad_ActionExecuter_Update_LocationPost extends GD_DataLoad_ActionE
     {
         return GD_Update_LocationPost::class;
     }
+
+    protected function isUpdate(): bool
+    {
+        return true;
+    }
 }
 

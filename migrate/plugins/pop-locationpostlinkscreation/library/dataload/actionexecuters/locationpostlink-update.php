@@ -7,5 +7,10 @@ class GD_DataLoad_ActionExecuter_Update_LocationPostLink extends AbstractCreateU
     {
         return GD_Update_LocationPostLink::class;
     }
+
+    protected function isUpdate(): bool
+    {
+        return true;
+    }
 }
 

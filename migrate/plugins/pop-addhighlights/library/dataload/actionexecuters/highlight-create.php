@@ -6,5 +6,10 @@ class GD_DataLoad_ActionExecuter_Create_Highlight extends GD_DataLoad_ActionExec
     {
         return GD_Create_Highlight::class;
     }
+
+    protected function isUpdate(): bool
+    {
+        return false;
+    }
 }
 

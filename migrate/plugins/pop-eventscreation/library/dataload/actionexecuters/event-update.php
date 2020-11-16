@@ -6,5 +6,10 @@ class GD_DataLoad_ActionExecuter_Update_Event extends GD_DataLoad_ActionExecuter
     {
         return GD_Update_Event::class;
     }
+
+    protected function isUpdate(): bool
+    {
+        return true;
+    }
 }
 
