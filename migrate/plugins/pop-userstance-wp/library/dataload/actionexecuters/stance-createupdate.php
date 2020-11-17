@@ -1,6 +1,8 @@
 <?php
 
-class PoP_UserStanceWP_WP_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance
+use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolverBridge;
+
+class PoP_UserStanceWP_WP_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends CreateOrUpdateStanceMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {

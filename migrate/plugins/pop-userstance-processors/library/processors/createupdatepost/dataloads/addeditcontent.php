@@ -1,10 +1,13 @@
 <?php
 
+use PoPSchema\CustomPosts\Types\Status;
+use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\Stances\TypeResolvers\StanceTypeResolver;
 use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
-use PoP\ComponentModel\State\ApplicationState;
-use PoPSchema\CustomPosts\Types\Status;
-use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSitesWassup\StanceMutations\MutationResolvers\CreateStanceMutationResolverBridge;
+use PoPSitesWassup\StanceMutations\MutationResolvers\UpdateStanceMutationResolverBridge;
+use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolverBridge;
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -64,15 +67,15 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_STANCE_CREATE:
-                return PoP_UserStance_DataLoad_ActionExecuter_Create_Stance::class;
+                return CreateStanceMutationResolverBridge::class;
             case self::MODULE_DATALOAD_STANCE_UPDATE:
-                return PoP_UserStance_DataLoad_ActionExecuter_Update_Stance::class;
+                return UpdateStanceMutationResolverBridge::class;
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 if (!\PoP\ComponentModel\Server\Utils::disableCustomCMSCode()) {
                     return PoP_UserStanceWP_WP_DataLoad_ActionExecuter_CreateOrUpdate_Stance::class;
                 }
-                return PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance::class;
+                return CreateOrUpdateStanceMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
