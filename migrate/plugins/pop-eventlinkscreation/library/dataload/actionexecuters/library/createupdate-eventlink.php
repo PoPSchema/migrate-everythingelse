@@ -14,10 +14,7 @@ abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
 
 
     /**
-     *
-     * --------------------------------------------------
      * Function below was copied from class GD_CreateUpdate_PostLink
-    --------------------------------------------------
      */
     protected function validateContent(array &$errors, array $form_data): void
     {
@@ -26,10 +23,7 @@ abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
     }
 
     /**
-     *
-     * --------------------------------------------------
      * Function below was copied from class GD_CreateUpdate_PostLink
-    --------------------------------------------------
      */
     protected function getEditorInput()
     {
