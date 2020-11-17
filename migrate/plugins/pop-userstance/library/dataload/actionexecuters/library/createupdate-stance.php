@@ -42,24 +42,27 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
         }
     }
 
-    protected function getCategoriesModule()
-    {
-        if ($this->showCategories()) {
-            return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
-        }
+    // @TODO: Migrate when package "Categories" is completed
+    // protected function getCategoriesModule()
+    // {
+    //     if ($this->showCategories()) {
+    //         return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
+    //     }
 
-        return parent::getCategoriesModule();
-    }
+    //     return parent::getCategoriesModule();
+    // }
 
-    protected function getCategoryTaxonomy(): ?string
-    {
-        return POP_USERSTANCE_TAXONOMY_STANCE;
-    }
+    // @TODO: Migrate when package "Categories" is completed
+    // protected function getCategoryTaxonomy(): ?string
+    // {
+    //     return POP_USERSTANCE_TAXONOMY_STANCE;
+    // }
 
-    protected function showCategories()
-    {
-        return true;
-    }
+    // @TODO: Migrate when package "Categories" is completed
+    // protected function showCategories()
+    // {
+    //     return true;
+    // }
 
     public function getCustomPostType(): string
     {

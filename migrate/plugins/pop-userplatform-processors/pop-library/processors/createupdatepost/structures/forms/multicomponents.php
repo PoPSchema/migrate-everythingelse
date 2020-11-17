@@ -27,14 +27,15 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         );
     }
 
-    protected function canInputMultipleCategories()
-    {
-        return false;
-        // return HooksAPIFacade::getInstance()->applyFilters(
-        //     'GD_CreateUpdate_Post:multiple-categories',
-        //     true
-        // );
-    }
+    // @TODO: Migrate when package "Categories" is completed
+    // protected function canInputMultipleCategories()
+    // {
+    //     return false;
+    //     // return HooksAPIFacade::getInstance()->applyFilters(
+    //     //     'GD_CreateUpdate_Post:multiple-categories',
+    //     //     true
+    //     // );
+    // }
 
     public function getSubmodules(array $module): array
     {
@@ -113,12 +114,12 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
                 if (!($classs = $this->getProp($module, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';
                 }
-                $status = GD_CreateUpdate_Utils::moderate() ? 
-                    [self::class, self::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] : 
+                $status = GD_CreateUpdate_Utils::moderate() ?
+                    [self::class, self::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
                     [self::class, self::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
                 $this->appendProp($status, $props, 'class', $classs);
                 break;
-        
+
             case self::MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE:
             case self::MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE:
                 // Bind the Embed iframe and the input together. When the input value changes, the iframe
@@ -127,7 +128,7 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
                 $this->setProp([PoP_Module_Processor_ReloadEmbedPreviewConnectors::class, PoP_Module_Processor_ReloadEmbedPreviewConnectors::MODULE_LAYOUT_RELOADEMBEDPREVIEWCONNECTOR], $props, 'input-module', [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK]);
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
