@@ -72,9 +72,6 @@ class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_P
                 return UpdateStanceMutationResolverBridge::class;
             case self::MODULE_DATALOAD_STANCE_CREATEORUPDATE:
             case self::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                if (!\PoP\ComponentModel\Server\Utils::disableCustomCMSCode()) {
-                    return PoP_UserStanceWP_WP_DataLoad_ActionExecuter_CreateOrUpdate_Stance::class;
-                }
                 return CreateOrUpdateStanceMutationResolverBridge::class;
         }
 

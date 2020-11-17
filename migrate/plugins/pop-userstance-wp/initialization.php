@@ -14,10 +14,5 @@ class PoP_UserStanceWP_Initialization
          * Load the Set-up
          */
         include_once 'setup/load.php';
-
-        /**
-         * Load the Library
-         */
-        include_once 'library/load.php';
     }
 }
