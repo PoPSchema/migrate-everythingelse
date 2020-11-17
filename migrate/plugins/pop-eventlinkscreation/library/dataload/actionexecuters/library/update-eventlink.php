@@ -1,8 +1,8 @@
 <?php
 
-use PoPSchema\PostMutations\MutationResolvers\UpdatePostMutationResolverTrait;
+use PoPSchema\CustomPostMutations\MutationResolvers\UpdateCustomPostMutationResolverTrait;
 
 class GD_Update_EventLink extends GD_CreateUpdate_EventLink
 {
-    use UpdatePostMutationResolverTrait;
+    use UpdateCustomPostMutationResolverTrait;
 }

@@ -1,8 +1,8 @@
 <?php
 
-use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolverTrait;
+use PoPSchema\CustomPostMutations\MutationResolvers\CreateCustomPostMutationResolverTrait;
 
 class GD_Create_Stance extends GD_CreateUpdate_Stance
 {
-    use CreatePostMutationResolverTrait;
+    use CreateCustomPostMutationResolverTrait;
 }

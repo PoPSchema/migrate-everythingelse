@@ -1,8 +1,8 @@
 <?php
 
-use PoPSchema\PostMutations\MutationResolvers\CreatePostMutationResolverTrait;
+use PoPSchema\CustomPostMutations\MutationResolvers\CreateCustomPostMutationResolverTrait;
 
 class GD_Create_LocationPostLink extends GD_CreateUpdate_LocationPostLink
 {
-    use CreatePostMutationResolverTrait;
+    use CreateCustomPostMutationResolverTrait;
 }

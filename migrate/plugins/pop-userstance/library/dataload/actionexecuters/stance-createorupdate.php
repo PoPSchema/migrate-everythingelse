@@ -58,6 +58,11 @@ class PoP_UserStance_DataLoad_ActionExecuter_CreateOrUpdate_Stance extends Abstr
         return false;
     }
 
+    /**
+     * Watch out! This functions is called from nowhere!
+     * Lost during the migration!
+     * @todo: Restore calling this function
+     */
     protected function getSuccessTitle($referenced = null)
     {
         $feedback_title = PoP_UserStance_PostNameUtils::getNameUc();
