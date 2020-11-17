@@ -27,15 +27,14 @@ class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processo
         );
     }
 
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function canInputMultipleCategories()
-    // {
-    //     return false;
-    //     // return HooksAPIFacade::getInstance()->applyFilters(
-    //     //     'GD_CreateUpdate_Post:multiple-categories',
-    //     //     true
-    //     // );
-    // }
+    protected function canInputMultipleCategories()
+    {
+        return false;
+        // return HooksAPIFacade::getInstance()->applyFilters(
+        //     'GD_CreateUpdate_Post:multiple-categories',
+        //     true
+        // );
+    }
 
     public function getSubmodules(array $module): array
     {

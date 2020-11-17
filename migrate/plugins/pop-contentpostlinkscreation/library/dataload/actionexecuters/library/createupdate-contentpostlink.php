@@ -4,13 +4,12 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 
 class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategories()
-    // {
-    //     $ret = parent::getCategories();
-    //     $ret[] = POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
-    //     return $ret;
-    // }
+    protected function getCategories()
+    {
+        $ret = parent::getCategories();
+        $ret[] = POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS;
+        return $ret;
+    }
 
     protected function validateContent(array &$errors, array $form_data): void
     {

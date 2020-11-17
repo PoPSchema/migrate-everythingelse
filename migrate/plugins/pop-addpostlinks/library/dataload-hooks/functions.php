@@ -3,7 +3,7 @@ use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
-use PoPSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
+use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
 class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
 {

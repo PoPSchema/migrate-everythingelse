@@ -9,16 +9,6 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCus
 
 abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMutationResolver
 {
-    protected function supportsTitle()
-    {
-        return false;
-    }
-
-    protected function getEditorInput()
-    {
-        return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
-    }
-
     // Update Post Validation
     protected function validateContent(array &$errors, array $form_data): void
     {
@@ -43,50 +33,14 @@ abstract class GD_CreateUpdate_Stance extends AbstractCreateUpdateCustomPostMuta
     }
 
     // @TODO: Migrate when package "Categories" is completed
-    // protected function getCategoriesModule()
-    // {
-    //     if ($this->showCategories()) {
-    //         return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
-    //     }
-
-    //     return parent::getCategoriesModule();
-    // }
-
-    // @TODO: Migrate when package "Categories" is completed
     // protected function getCategoryTaxonomy(): ?string
     // {
     //     return POP_USERSTANCE_TAXONOMY_STANCE;
     // }
 
-    // @TODO: Migrate when package "Categories" is completed
-    // protected function showCategories()
-    // {
-    //     return true;
-    // }
-
     public function getCustomPostType(): string
     {
         return POP_USERSTANCE_POSTTYPE_USERSTANCE;
-    }
-
-    protected function moderate()
-    {
-        return false;
-    }
-
-    protected function getSuccessTitle($referenced = null)
-    {
-        $feedback_title = PoP_UserStance_PostNameUtils::getNameUc();
-        if ($referenced) {
-            $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-            return sprintf(
-                TranslationAPIFacade::getInstance()->__('%1$s after reading “%2$s”', 'pop-userstance'),
-                $feedback_title,
-                $customPostTypeAPI->getTitle($referenced)
-            );
-        }
-
-        return $feedback_title;
     }
 
     protected function getCategoriesErrorMessages()
