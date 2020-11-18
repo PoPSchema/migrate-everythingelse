@@ -3,7 +3,7 @@ use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoPSitesWassup\FlagMutations\MutationResolverBridges\FlagMutationResolverBridge;
+use PoPSitesWassup\FlagMutations\MutationResolverBridges\FlagCustomPostMutationResolverBridge;
 
 class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -49,7 +49,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_FLAG => FlagMutationResolverBridge::class,
+            self::MODULE_DATALOAD_FLAG => FlagCustomPostMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;
