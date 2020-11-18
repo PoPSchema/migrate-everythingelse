@@ -1,5 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\PostLinkMutations\MutationResolverBridges\CreatePostLinkMutationResolverBridge;
+use PoPSitesWassup\PostLinkMutations\MutationResolverBridges\UpdatePostLinkMutationResolverBridge;
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -88,9 +90,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads ex
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_CREATE:
-                return GD_DataLoad_ActionExecuter_Create_ContentPostLink::class;
+                return CreatePostLinkMutationResolverBridge::class;
             case self::MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE:
-                return GD_DataLoad_ActionExecuter_Update_ContentPostLink::class;
+                return UpdatePostLinkMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
