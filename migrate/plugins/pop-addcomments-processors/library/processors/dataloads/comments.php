@@ -2,6 +2,7 @@
 use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoPSitesWassup\CommentMutations\MutationResolverBridges\AddCommentToCustomPostMutationResolverBridge;
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
