@@ -1,7 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSchema\Events\TypeResolvers\EventTypeResolver;
+use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoPSitesWassup\EventMutations\MutationResolverBridges\CreateEventMutationResolverBridge;
+use PoPSitesWassup\EventMutations\MutationResolverBridges\UpdateEventMutationResolverBridge;
 
 class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -91,9 +93,9 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_EVENT_CREATE:
-                return GD_DataLoad_ActionExecuter_Create_Event::class;
+                return CreateEventMutationResolverBridge::class;
             case self::MODULE_DATALOAD_EVENT_UPDATE:
-                return GD_DataLoad_ActionExecuter_Update_Event::class;
+                return UpdateEventMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
