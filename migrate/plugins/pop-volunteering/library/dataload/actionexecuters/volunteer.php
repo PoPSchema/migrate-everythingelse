@@ -1,7 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoPSitesWassup\FormMutations\MutationResolverBridges\AbstractFormComponentMutationResolverBridge;
 
-class GD_DataLoad_ActionExecuter_Volunteer extends GD_DataLoad_FormActionExecuterBase
+class GD_DataLoad_ActionExecuter_Volunteer extends AbstractFormComponentMutationResolverBridge
 {
     public function getMutationResolverClass(): string
     {

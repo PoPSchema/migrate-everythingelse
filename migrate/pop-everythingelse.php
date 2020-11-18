@@ -22,7 +22,6 @@ class Plugins
             'getpop-demo-pages-processors',
             'google-analytics-dashboard-for-wp-pop',
             'google-sitemap-generator-pop',
-            'gravityforms-pop',
             'gravityforms-pop-genericforms',
             'gravityforms-pop-processors',
             'gravityforms-pop-webplatform',
