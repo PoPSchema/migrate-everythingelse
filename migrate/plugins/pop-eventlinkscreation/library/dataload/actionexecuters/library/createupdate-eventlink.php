@@ -2,14 +2,15 @@
 
 abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
 {
-    protected function populate(&$EM_Event, $post_data)
+    protected function populate(object &$event, array $post_data): void
     {
-
+        /** @var EM_Event */
+        $EM_Event = &$event;
         // Add class "Link" on the event object
         if (!$EM_Event->get_categories()->terms[POP_EVENTLINKS_CAT_EVENTLINKS]) {
             $EM_Event->get_categories()->terms[POP_EVENTLINKS_CAT_EVENTLINKS] = new EM_Category(POP_EVENTLINKS_CAT_EVENTLINKS);
         }
-        return parent::populate($EM_Event, $post_data);
+        parent::populate($EM_Event, $post_data);
     }
 
 
