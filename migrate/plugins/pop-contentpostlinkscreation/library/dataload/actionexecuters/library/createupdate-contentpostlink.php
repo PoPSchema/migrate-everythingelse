@@ -1,4 +1,5 @@
 <?php
+use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationResolver
@@ -13,7 +14,7 @@ class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationRes
     protected function validateContent(array &$errors, array $form_data): void
     {
         parent::validateContent($errors, $form_data);
-        Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
+        MutationResolverUtils::validateContent($errors, $form_data);
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
+
 abstract class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_LocationPost
 {
     protected function getCategories()
@@ -17,7 +19,7 @@ abstract class GD_CreateUpdate_LocationPostLink extends GD_CreateUpdate_Location
     protected function validateContent(array &$errors, array $form_data): void
     {
         parent::validateContent($errors, $form_data);
-        Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
+        MutationResolverUtils::validateContent($errors, $form_data);
     }
 
     /**

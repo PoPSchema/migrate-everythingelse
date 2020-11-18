@@ -1,5 +1,7 @@
 <?php
 
+use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
+
 abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
 {
     protected function populate(object &$event, array $post_data): void
@@ -20,7 +22,7 @@ abstract class GD_CreateUpdate_EventLink extends GD_CreateUpdate_Event
     protected function validateContent(array &$errors, array $form_data): void
     {
         parent::validateContent($errors, $form_data);
-        Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
+        MutationResolverUtils::validateContent($errors, $form_data);
     }
 
     /**
