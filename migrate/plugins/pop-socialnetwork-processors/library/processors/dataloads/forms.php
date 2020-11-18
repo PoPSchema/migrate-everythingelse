@@ -1,8 +1,9 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Translation\Facades\TranslationAPIFacade;
 use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoPSitesWassup\ContactUserMutations\MutationResolverBridges\ContactUserMutationResolverBridge;
 
 class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -48,7 +49,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_CONTACTUSER => GD_DataLoad_ActionExecuter_ContactUser::class,
+            self::MODULE_DATALOAD_CONTACTUSER => ContactUserMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;

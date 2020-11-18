@@ -1,6 +1,7 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\ShareMutations\MutationResolverBridges\ShareByEmailMutationResolverBridge;
 
 class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -44,7 +45,7 @@ class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormData
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_SHAREBYEMAIL => GD_DataLoad_ActionExecuter_ShareByEmail::class,
+            self::MODULE_DATALOAD_SHAREBYEMAIL => ShareByEmailMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;

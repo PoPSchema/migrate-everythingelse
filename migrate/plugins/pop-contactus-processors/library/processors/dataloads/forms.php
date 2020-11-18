@@ -1,6 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSitesWassup\ContactUsMutations\MutationResolverBridges\ContactUsComponentMutationResolverBridge;
 
 class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -44,7 +44,7 @@ class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_Form
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_CONTACTUS => GD_DataLoad_ActionExecuter_ContactUs::class,
+            self::MODULE_DATALOAD_CONTACTUS => ContactUsComponentMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;

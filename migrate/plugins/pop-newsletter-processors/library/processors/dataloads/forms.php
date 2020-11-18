@@ -1,6 +1,8 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\NewsletterMutations\MutationResolverBridges\NewsletterSubscriptionMutationResolverBridge;
+use PoPSitesWassup\NewsletterMutations\MutationResolverBridges\NewsletterUnsubscriptionMutationResolverBridge;
 
 class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -38,8 +40,8 @@ class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_For
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_NEWSLETTER => GD_DataLoad_ActionExecuter_NewsletterSubscription::class,
-            self::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION => GD_DataLoad_ActionExecuter_NewsletterUnsubscription::class,
+            self::MODULE_DATALOAD_NEWSLETTER => NewsletterSubscriptionMutationResolverBridge::class,
+            self::MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION => NewsletterUnsubscriptionMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;

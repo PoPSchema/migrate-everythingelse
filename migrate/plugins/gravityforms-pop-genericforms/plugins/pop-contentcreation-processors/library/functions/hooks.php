@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsComponentMutationResolverBridge;
 
 class PoP_ContentCreation_GFHooks
 {
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'GD_DataLoad_ActionExecuter_GravityForms:fieldnames',
+            GravityFormsComponentMutationResolverBridge::HOOK_FORM_FIELDNAMES,
             array($this, 'getFieldnames'),
             10,
             2
@@ -18,11 +19,11 @@ class PoP_ContentCreation_GFHooks
         if ($form_id == PoP_ContentCreation_GFHelpers::getFlagFormId()) {
             return PoP_ContentCreation_GFHelpers::getFlagFormFieldNames();
         }
-        
+
         return $fieldnames;
     }
 }
-    
+
 /**
  * Initialize
  */

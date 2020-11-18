@@ -1,12 +1,13 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoPSitesWassup\GravityFormsMutations\MutationResolverBridges\GravityFormsComponentMutationResolverBridge;
 
 class PoP_SocialNetwork_GFHooks
 {
     public function __construct()
     {
         HooksAPIFacade::getInstance()->addFilter(
-            'GD_DataLoad_ActionExecuter_GravityForms:fieldnames',
+            GravityFormsComponentMutationResolverBridge::HOOK_FORM_FIELDNAMES,
             array($this, 'getFieldnames'),
             10,
             2
@@ -18,11 +19,11 @@ class PoP_SocialNetwork_GFHooks
         if ($form_id == PoP_SocialNetwork_GFHelpers::getContactuserFormId()) {
             return PoP_SocialNetwork_GFHelpers::getContactuserFormFieldNames();
         }
-        
+
         return $fieldnames;
     }
 }
-    
+
 /**
  * Initialize
  */

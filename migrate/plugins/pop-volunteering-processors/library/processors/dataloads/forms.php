@@ -1,7 +1,8 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostTypeResolver;
+use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoPSitesWassup\VolunteerMutations\MutationResolverBridges\VolunteerMutationResolverBridge;
 
 class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
@@ -47,7 +48,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $actionexecuters = array(
-            self::MODULE_DATALOAD_VOLUNTEER => GD_DataLoad_ActionExecuter_Volunteer::class,
+            self::MODULE_DATALOAD_VOLUNTEER => VolunteerMutationResolverBridge::class,
         );
         if ($actionexecuter = $actionexecuters[$module[1]]) {
             return $actionexecuter;
