@@ -1,5 +1,6 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\AbstractSystemComponentMutationResolverBridge;
 
 class GD_DataLoad_ActionExecuter_SystemBuildServer extends AbstractSystemComponentMutationResolverBridge
 {
