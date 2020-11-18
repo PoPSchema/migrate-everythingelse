@@ -22,5 +22,10 @@ abstract class GD_DataLoad_ActionExecuter_CreateUpdate_ContentPostLink extends A
         return $form_data;
     }
 
+    protected function getEditorInput()
+    {
+        return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK];
+    }
+
 }
 

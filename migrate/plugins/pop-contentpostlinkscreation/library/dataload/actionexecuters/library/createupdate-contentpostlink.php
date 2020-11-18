@@ -1,5 +1,4 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 
 class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationResolver
@@ -15,11 +14,6 @@ class GD_CreateUpdate_PostLink extends AbstractCreateUpdateCustomPostMutationRes
     {
         parent::validateContent($errors, $form_data);
         Wassup_CreateUpdate_Link_Utils::validateContent($errors, $form_data);
-    }
-
-    protected function getEditorInput()
-    {
-        return [PoP_Module_Processor_CreateUpdatePostTextFormInputs::class, PoP_Module_Processor_CreateUpdatePostTextFormInputs::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK];
     }
 
     /**
