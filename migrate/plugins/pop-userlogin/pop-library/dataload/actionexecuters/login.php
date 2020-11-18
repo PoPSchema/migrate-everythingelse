@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 
 class GD_DataLoad_ActionExecuter_Login extends AbstractComponentMutationResolverBridge
 {

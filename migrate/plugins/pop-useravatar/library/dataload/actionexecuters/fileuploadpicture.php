@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\State\ApplicationState;
 
 class GD_DataLoad_ActionExecuter_FileUploadPicture extends AbstractComponentMutationResolverBridge

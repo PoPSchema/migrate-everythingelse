@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 
 abstract class AbstractSystemComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

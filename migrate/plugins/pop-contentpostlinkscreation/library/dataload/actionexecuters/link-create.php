@@ -1,5 +1,5 @@
 <?php
-use PoPSitesWassup\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolverBridge;
+use PoPSitesWassup\CustomPostMutations\MutationResolverBridges\AbstractCreateUpdateCustomPostMutationResolverBridge;
 
 class GD_DataLoad_ActionExecuter_Create_ContentPostLink extends GD_DataLoad_ActionExecuter_CreateUpdate_ContentPostLink
 {

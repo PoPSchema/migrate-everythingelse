@@ -1,7 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
-use PoPSitesWassup\HighlightMutations\MutationResolvers\CreateHighlightMutationResolverBridge;
-use PoPSitesWassup\HighlightMutations\MutationResolvers\UpdateHighlightMutationResolverBridge;
+use PoPSitesWassup\HighlightMutations\MutationResolverBridges\CreateHighlightMutationResolverBridge;
+use PoPSitesWassup\HighlightMutations\MutationResolverBridges\UpdateHighlightMutationResolverBridge;
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
     public const MODULE_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';

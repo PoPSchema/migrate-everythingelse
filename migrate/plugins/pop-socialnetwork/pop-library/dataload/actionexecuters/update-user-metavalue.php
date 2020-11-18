@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 
 abstract class GD_DataLoad_ActionExecuter_UpdateUserMetaValue extends AbstractComponentMutationResolverBridge
 {

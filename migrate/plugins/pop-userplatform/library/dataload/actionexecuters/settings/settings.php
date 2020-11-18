@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\MutationResolvers\AbstractComponentMutationResolverBridge;
+use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
 
 class GD_DataLoad_ActionExecuter_Settings extends AbstractComponentMutationResolverBridge
