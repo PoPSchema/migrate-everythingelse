@@ -3,8 +3,6 @@ namespace PoP\UserAccount;
 
 interface FunctionAPI
 {
-    public function login($credentials);
-    public function logout();
     public function checkPassword($user_id, $password);
     public function checkPasswordResetKey($key, $login);
     public function resetPassword($user, $pwd);
