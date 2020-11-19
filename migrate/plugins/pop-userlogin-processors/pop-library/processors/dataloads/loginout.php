@@ -1,5 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LoginMutationResolverBridge;
+use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LogoutMutationResolverBridge;
+use PoPSitesWassup\UserStateMutations\MutationResolverBridges\LostPasswordMutationResolverBridge;
+use PoPSitesWassup\UserStateMutations\MutationResolverBridges\ResetLostPasswordMutationResolverBridge;
 
 class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -56,7 +60,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         if ($inner = $inner_modules[$module[1]]) {
             $ret[] = $inner;
         }
-    
+
         return $ret;
     }
 
@@ -64,16 +68,16 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOGIN:
-                return GD_DataLoad_ActionExecuter_Login::class;
+                return LoginMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_LOSTPWD:
-                return GD_DataLoad_ActionExecuter_LostPassword::class;
+                return LostPasswordMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_LOSTPWDRESET:
-                return GD_DataLoad_ActionExecuter_LostPasswordReset::class;
+                return ResetLostPasswordMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_LOGOUT:
-                return GD_DataLoad_ActionExecuter_Logout::class;
+                return LogoutMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
@@ -84,10 +88,10 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOGIN:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_LOGIN];
-            
+
             case self::MODULE_DATALOAD_LOSTPWD:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_LOSTPWD];
-            
+
             case self::MODULE_DATALOAD_LOSTPWDRESET:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_LOSTPWDRESET];
 
@@ -120,7 +124,7 @@ class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_Data
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Sending...', 'pop-coreprocessors'));
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }
