@@ -7,6 +7,16 @@ use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\CustomPosts\TypeResolvers\CustomPostUnionTypeResolver;
 use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\FollowUserMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnfollowUserMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\RecommendPostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\SubscribeToTagMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvotePostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoUpvotePostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\DownvotePostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoDownvotePostMutationResolverBridge;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -59,16 +69,16 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $executers = array(
-            self::MODULE_DATALOADACTION_FOLLOWUSER => GD_DataLoad_ActionExecuter_FollowUser::class,
-            self::MODULE_DATALOADACTION_UNFOLLOWUSER => GD_DataLoad_ActionExecuter_UnfollowUser::class,
-            self::MODULE_DATALOADACTION_RECOMMENDPOST => GD_DataLoad_ActionExecuter_RecommendPost::class,
-            self::MODULE_DATALOADACTION_UNRECOMMENDPOST => GD_DataLoad_ActionExecuter_UnrecommendPost::class,
-            self::MODULE_DATALOADACTION_SUBSCRIBETOTAG => GD_DataLoad_ActionExecuter_SubscribeToTag::class,
-            self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG => GD_DataLoad_ActionExecuter_UnsubscribeFromTag::class,
-            self::MODULE_DATALOADACTION_UPVOTEPOST => GD_DataLoad_ActionExecuter_UpvotePost::class,
-            self::MODULE_DATALOADACTION_UNDOUPVOTEPOST => GD_DataLoad_ActionExecuter_UndoUpvotePost::class,
-            self::MODULE_DATALOADACTION_DOWNVOTEPOST => GD_DataLoad_ActionExecuter_DownvotePost::class,
-            self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => GD_DataLoad_ActionExecuter_UndoDownvotePost::class,
+            self::MODULE_DATALOADACTION_FOLLOWUSER => FollowUserMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNFOLLOWUSER => UnfollowUserMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_RECOMMENDPOST => RecommendPostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNRECOMMENDPOST => UnrecommendPostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_SUBSCRIBETOTAG => SubscribeToTagMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG => UnsubscribeFromTagMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UPVOTEPOST => UpvotePostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNDOUPVOTEPOST => UndoUpvotePostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_DOWNVOTEPOST => DownvotePostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvotePostMutationResolverBridge::class,
         );
         if ($executer = $executers[$module[1]]) {
             return $executer;
