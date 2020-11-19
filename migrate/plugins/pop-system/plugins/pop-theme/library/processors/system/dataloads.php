@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateThemeMutationResolverBridge;
+
 class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {
     public const MODULE_DATALOADACTION_SYSTEM_GENERATETHEME = 'dataloadaction-system-generate-theme';
@@ -28,7 +30,7 @@ class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadMo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATETHEME:
-                return GD_DataLoad_ActionExecuter_SystemGenerateTheme::class;
+                return GenerateThemeMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

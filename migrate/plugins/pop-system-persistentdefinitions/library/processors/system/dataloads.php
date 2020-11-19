@@ -1,5 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\SaveDefinitionFileMutationResolverBridge;
+
 class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {
     public const MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE = 'dataloadaction-system-savedefinitionfile';
@@ -14,7 +16,6 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
 
     public function shouldExecuteMutation(array $module, array &$props): bool
     {
-
         // The actionexecution is triggered directly
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
@@ -28,7 +29,7 @@ class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends Abs
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE:
-                return GD_DataLoad_ActionExecuter_SystemBuildServer::class;
+                return SaveDefinitionFileMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

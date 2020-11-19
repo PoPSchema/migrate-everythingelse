@@ -1,5 +1,9 @@
 <?php
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\BuildSystemMutationResolverBridge;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\InstallSystemMutationResolverBridge;
+use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateSystemMutationResolverBridge;
+
 class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {
     public const MODULE_DATALOADACTION_SYSTEM_BUILD = 'dataloadaction-system-build';
@@ -34,13 +38,13 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModulePr
     {
         switch ($module[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
-                return GD_DataLoad_ActionExecuter_SystemBuild::class;
+                return BuildSystemMutationResolverBridge::class;
 
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATE:
-                return GD_DataLoad_ActionExecuter_SystemGenerate::class;
+                return GenerateSystemMutationResolverBridge::class;
 
             case self::MODULE_DATALOADACTION_SYSTEM_INSTALL:
-                return GD_DataLoad_ActionExecuter_SystemInstall::class;
+                return InstallSystemMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
