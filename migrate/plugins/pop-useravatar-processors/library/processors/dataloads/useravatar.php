@@ -1,9 +1,11 @@
 <?php
-use PoP\ComponentModel\Modules\ModuleUtils;
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\ComponentModel\Modules\ModuleUtils;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\UpdateUserAvatarMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\FileUploadPictureMutationResolverBridge;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -116,10 +118,10 @@ class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module
                 // 2. Update the avatar, on the POST operation
                 $moduleAtts = (count($module) >= 3) ? $module[2] : null;
                 if ($moduleAtts && $moduleAtts['executeupdate']) {
-                    return GD_DataLoad_ActionExecuter_UserAvatar_Update::class;
+                    return UpdateUserAvatarMutationResolverBridge::class;
                 }
 
-                return                	GD_DataLoad_ActionExecuter_FileUploadPicture::class;
+                return FileUploadPictureMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
