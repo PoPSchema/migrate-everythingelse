@@ -17,7 +17,7 @@ class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_NONSOCIALLOGINUSER:
                 if (isSocialloginUser()) {
-                    return new \PoP\ComponentModel\Error('sociallogin-user');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('sociallogin-user');
                 }
                 break;
         }

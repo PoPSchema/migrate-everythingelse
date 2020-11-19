@@ -25,7 +25,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY:
                 if (!gdUreIsCommunity($current_user_id)) {
-                    return new \PoP\ComponentModel\Error('profilenotcommunity');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('profilenotcommunity');
                 }
                 break;
 
@@ -38,7 +38,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 $community_status = gdUreFindCommunityMetavalues($community, $status);
 
                 if (empty($community_status)) {
-                    return new \PoP\ComponentModel\Error('editingnotcommunitymember');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('editingnotcommunitymember');
                 }
                 break;
 
@@ -46,7 +46,7 @@ class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheck
                 $user_id = $_REQUEST[POP_INPUTNAME_USERID];
                 $nonce = $_REQUEST[POP_INPUTNAME_NONCE];
                 if (!gdVerifyNonce($nonce, GD_NONCE_EDITMEMBERSHIPURL, $user_id)) {
-                    return new \PoP\ComponentModel\Error('nonceinvalid');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('nonceinvalid');
                 }
                 break;
         }

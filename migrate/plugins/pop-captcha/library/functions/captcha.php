@@ -27,7 +27,7 @@ class GD_Captcha
 
     public static function validate($value)
     {
-        $errors = new \PoP\ComponentModel\Error();
+        $errors = new \PoP\ComponentModel\ErrorHandling\Error();
 
         // No captcha?
         $captcha = $value['input'];

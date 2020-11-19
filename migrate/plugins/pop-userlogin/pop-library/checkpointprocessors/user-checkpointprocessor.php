@@ -22,7 +22,7 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = $vars['global-userstate']['current-user-id'];
                 if (!\PoPSchema\UserRoles\Utils::hasRole('administrator', $user_id)) {
-                    return new \PoP\ComponentModel\Error('userisnotadmin');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('userisnotadmin');
                 }
                 break;
         }

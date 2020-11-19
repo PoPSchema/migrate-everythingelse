@@ -20,18 +20,18 @@ class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
             case self::CHECKPOINT_PROFILEACCESS:
                 // Check if the user has Profile Access: access to add/edit content
                 if (!userHasProfileAccess()) {
-                    return new \PoP\ComponentModel\Error('usernoprofileaccess');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('usernoprofileaccess');
                 }
                 break;
 
             case self::CHECKPOINT_PROFILEACCESS_SUBMIT:
                 // Check if the user has Profile Access: access to add/edit content
                 if (!doingPost()) {
-                    return new \PoP\ComponentModel\Error('notdoingpost');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('notdoingpost');
                 }
 
                 if (!userHasProfileAccess()) {
-                    return new \PoP\ComponentModel\Error('usernoprofileaccess');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('usernoprofileaccess');
                 }
                 break;
         }

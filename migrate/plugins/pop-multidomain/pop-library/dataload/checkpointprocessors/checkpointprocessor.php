@@ -17,11 +17,11 @@ class PoP_MultiDomain_Dataload_CheckpointProcessor extends AbstractCheckpointPro
                 // Check if the domain passed in param 'domain' is allowed
                 $domain = PoP_Domain_Utils::getDomainFromRequest();
                 if (!$domain) {
-                    return new \PoP\ComponentModel\Error('domainempty');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('domainempty');
                 }
                 $allowed_domains = PoP_WebPlatform_ConfigurationUtils::getAllowedDomains();
                 if (!in_array($domain, $allowed_domains)) {
-                    return new \PoP\ComponentModel\Error('domainnotvalid');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('domainnotvalid');
                 }
                 break;
         }

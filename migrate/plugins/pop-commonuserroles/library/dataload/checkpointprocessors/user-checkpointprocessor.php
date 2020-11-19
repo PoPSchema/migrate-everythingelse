@@ -23,13 +23,13 @@ class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcesso
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEORGANIZATION:
                 if (!gdUreIsOrganization($current_user_id)) {
-                    return new \PoP\ComponentModel\Error('profilenotorganization');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('profilenotorganization');
                 }
                 break;
 
             case self::CHECKPOINT_LOGGEDINUSER_ISPROFILEINDIVIDUAL:
                 if (!gdUreIsIndividual($current_user_id)) {
-                    return new \PoP\ComponentModel\Error('profilenotindividual');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('profilenotindividual');
                 }
                 break;
         }

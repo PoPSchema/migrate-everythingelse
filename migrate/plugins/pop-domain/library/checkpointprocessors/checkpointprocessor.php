@@ -19,7 +19,7 @@ class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcesso
                 // Check if the domain passed in param 'domain' is allowed
                 $domain = PoP_Domain_Utils::getDomainFromRequest();
                 if (!$domain) {
-                    return new \PoP\ComponentModel\Error('domainempty');
+                    return new \PoP\ComponentModel\ErrorHandling\Error('domainempty');
                 }
                 break;
         }
