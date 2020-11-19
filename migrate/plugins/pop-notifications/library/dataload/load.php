@@ -1,6 +1,5 @@
 <?php
 
-require_once 'actionexecuters/load.php';
 require_once 'queryhandlers/load.php';
 
 // // This one must be loaded after the previous ones

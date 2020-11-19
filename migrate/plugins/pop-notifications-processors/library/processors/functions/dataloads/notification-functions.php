@@ -2,6 +2,9 @@
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoPSchema\Notifications\TypeResolvers\NotificationTypeResolver;
 use PoP\ComponentModel\Facades\MutationResolution\MutationResolutionManagerFacade;
+use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAsReadNotificationMutationResolverBridge;
+use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAsUnreadNotificationMutationResolverBridge;
+use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAllAsReadNotificationMutationResolverBridge;
 
 class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -119,9 +122,9 @@ class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_Da
     public function getComponentMutationResolverBridgeClass(array $module): ?string
     {
         $executers = array(
-            self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => GD_DataLoad_ActionExecuter_NotificationMarkAllAsRead::class,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD => GD_DataLoad_ActionExecuter_NotificationMarkAsRead::class,
-            self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD => GD_DataLoad_ActionExecuter_NotificationMarkAsUnread::class,
+            self::MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD => MarkAllAsReadNotificationMutationResolverBridge::class,
+            self::MODULE_DATALOAD_MARKNOTIFICATIONASREAD => MarkAsReadNotificationMutationResolverBridge::class,
+            self::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD => MarkAsUnreadNotificationMutationResolverBridge::class,
         );
         if ($executer = $executers[$module[1]]) {
             return $executer;
