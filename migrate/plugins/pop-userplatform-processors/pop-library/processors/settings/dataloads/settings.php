@@ -1,5 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\RedirectQueryInputOutputHandler;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\SettingsMutationResolverBridge;
 
 class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -34,7 +35,7 @@ class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_SETTINGS:
-                return GD_DataLoad_ActionExecuter_Settings::class;
+                return SettingsMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

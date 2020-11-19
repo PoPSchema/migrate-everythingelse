@@ -1,5 +1,7 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\LocationPostMutations\MutationResolverBridges\CreateLocationPostMutationResolverBridge;
+use PoPSitesWassup\LocationPostMutations\MutationResolverBridges\UpdateLocationPostMutationResolverBridge;
 
 class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
@@ -89,9 +91,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_LOCATIONPOST_CREATE:
-                return GD_DataLoad_ActionExecuter_Create_LocationPost::class;
+                return CreateLocationPostMutationResolverBridge::class;
             case self::MODULE_DATALOAD_LOCATIONPOST_UPDATE:
-                return GD_DataLoad_ActionExecuter_Update_LocationPost::class;
+                return UpdateLocationPostMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);

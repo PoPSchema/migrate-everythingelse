@@ -1,8 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
-use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoP\Engine\ModuleProcessors\DBObjectIDFromURLParamModuleProcessorTrait;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\EditMembershipMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\UpdateMyCommunitiesMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\InviteMembersMutationResolverBridge;
 
 class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -45,13 +48,13 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
-                return GD_DataLoad_ActionExecuter_InviteMembers::class;
+                return InviteMembersMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
-                return GD_DataLoad_ActionExecuter_EditMembership::class;
+                return EditMembershipMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
-                return GD_DataLoad_ActionExecuter_Update_MyCommunities::class;
+                return UpdateMyCommunitiesMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
@@ -75,26 +78,26 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
                 $ret[] = [GD_URE_Module_Processor_ProfileForms::class, GD_URE_Module_Processor_ProfileForms::MODULE_FORM_EDITMEMBERSHIP];
                 break;
         }
-    
+
         return $ret;
     }
 
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         switch ($module[1]) {
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
                 $this->addJsmethod($ret, 'refetchBlockOnUserLoggedIn');
                 break;
-        
+
          // case self::MODULE_DATALOAD_INVITENEWMEMBERS:
 
          //     $this->addJsmethod($ret, 'destroyPageOnUserNoRole');
          //     break;
-        
+
          // case self::MODULE_DATALOAD_EDITMEMBERSHIP:
 
          //     // $this->addJsmethod($ret, 'destroyPageOnUserNoRole');
@@ -112,7 +115,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
 
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
                 return [GD_URE_Module_Processor_ProfileFeedbackMessages::class, GD_URE_Module_Processor_ProfileFeedbackMessages::MODULE_FEEDBACKMESSAGE_INVITENEWMEMBERS];
-        
+
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return [GD_URE_Module_Processor_ProfileFeedbackMessages::class, GD_URE_Module_Processor_ProfileFeedbackMessages::MODULE_FEEDBACKMESSAGE_EDITMEMBERSHIP];
         }
@@ -128,7 +131,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
 
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
                 return [GD_UserCommunities_Module_Processor_UserCheckpointMessages::class, GD_UserCommunities_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY];
-        
+
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return [GD_UserCommunities_Module_Processor_UserCheckpointMessages::class, GD_UserCommunities_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP];
         }
@@ -164,7 +167,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 return UserTypeResolver::class;
         }
-    
+
         return parent::getTypeResolverClass($module);
     }
 
@@ -184,7 +187,7 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
             case self::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE:
                 $this->setProp([[PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS]], $props, 'loading-msg', TranslationAPIFacade::getInstance()->__('Submitting...', 'ure-popprocessors'));
                 break;
-        
+
             case self::MODULE_DATALOAD_INVITENEWMEMBERS:
             case self::MODULE_DATALOAD_EDITMEMBERSHIP:
                 // $this->mergeProp($module, $props, 'params', array(

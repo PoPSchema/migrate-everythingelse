@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\ComponentModel\Facades\Instances\InstanceManagerFacade;
+use PoPSitesWassup\EverythingElseMutations\MutationResolvers\SettingsMutationResolver;
 
 HooksAPIFacade::getInstance()->addAction(
     'popcms:init',
@@ -9,8 +10,8 @@ HooksAPIFacade::getInstance()->addAction(
 function gdQtInitsettings()
 {
     $instanceManager = InstanceManagerFacade::getInstance();
-    /** @var GD_Settings */
-    $actionExecuterSettings = $instanceManager->getInstance(GD_Settings::class);
+    /** @var SettingsMutationResolver */
+    $actionExecuterSettings = $instanceManager->getInstance(SettingsMutationResolver::class);
     $actionExecuterSettings->add(
     	[GD_QT_Module_Processor_SelectFormInputs::class, GD_QT_Module_Processor_SelectFormInputs::MODULE_QT_FORMINPUT_LANGUAGE],
     	new GD_QT_Settings_UrlOperator_Language()

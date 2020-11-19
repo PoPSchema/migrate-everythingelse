@@ -1,5 +1,9 @@
 <?php
 use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateIndividualProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateOrganizationProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateWithCommunityIndividualProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge;
 
 class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processor_UpdateProfileDataloadsBase
 {
@@ -27,10 +31,16 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_ProfileOrganization::class;
-            
+                if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
+                    return CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class;
+                }
+                return CreateUpdateOrganizationProfileMutationResolverBridge::class;
+
             case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_ProfileIndividual::class;
+                if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
+                    return CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class;
+                }
+                return CreateUpdateIndividualProfileMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
@@ -49,7 +59,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
                 $ret[] = [GD_URE_Module_Processor_UpdateProfileForms::class, GD_URE_Module_Processor_UpdateProfileForms::MODULE_FORM_PROFILEINDIVIDUAL_UPDATE];
                 break;
         }
-    
+
         return $ret;
     }
 
@@ -62,7 +72,7 @@ class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processo
             case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE:
                 return [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL];
         }
-    
+
         return parent::getCheckpointmessageModule($module);
     }
 

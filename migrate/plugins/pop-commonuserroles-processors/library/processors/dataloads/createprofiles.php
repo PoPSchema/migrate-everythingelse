@@ -1,5 +1,10 @@
 <?php
 
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateIndividualProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateOrganizationProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateWithCommunityIndividualProfileMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge;
+
 class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processor_CreateProfileDataloadsBase
 {
     public const MODULE_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
@@ -37,10 +42,16 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_ProfileOrganization::class;
-            
+                if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
+                    return CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge::class;
+                }
+                return CreateUpdateOrganizationProfileMutationResolverBridge::class;
+
             case self::MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE:
-                return GD_DataLoad_ActionExecuter_CreateUpdate_ProfileIndividual::class;
+                if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
+                    return CreateUpdateWithCommunityIndividualProfileMutationResolverBridge::class;
+                }
+                return CreateUpdateIndividualProfileMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
@@ -59,7 +70,7 @@ class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processo
                 $ret[] = [GD_URE_Module_Processor_CreateProfileForms::class, GD_URE_Module_Processor_CreateProfileForms::MODULE_FORM_PROFILEINDIVIDUAL_CREATE];
                 break;
         }
-    
+
         return $ret;
     }
 }

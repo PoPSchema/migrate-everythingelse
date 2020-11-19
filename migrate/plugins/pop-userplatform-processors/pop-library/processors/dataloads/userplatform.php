@@ -1,8 +1,11 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\TypeResolvers\UserTypeResolver;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\TypeResolvers\UserTypeResolver;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\InviteUsersMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\ChangeUserPasswordMutationResolverBridge;
+use PoPSitesWassup\EverythingElseMutations\MutationResolverBridges\UpdateMyPreferencesMutationResolverBridge;
 
 class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -44,13 +47,13 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
-                return GD_DataLoad_ActionExecuter_ChangePassword_User::class;
+                return ChangeUserPasswordMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_MYPREFERENCES:
-                return GD_DataLoad_ActionExecuter_UpdateMyPreferences::class;
+                return UpdateMyPreferencesMutationResolverBridge::class;
 
             case self::MODULE_DATALOAD_INVITENEWUSERS:
-                return GD_DataLoad_ActionExecuter_InviteUsers::class;
+                return InviteUsersMutationResolverBridge::class;
         }
 
         return parent::getComponentMutationResolverBridgeClass($module);
