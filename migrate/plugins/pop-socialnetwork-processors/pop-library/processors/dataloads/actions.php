@@ -13,10 +13,10 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\RecommendPost
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPostMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\SubscribeToTagMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
-use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvotePostMutationResolverBridge;
-use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoUpvotePostMutationResolverBridge;
-use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\DownvotePostMutationResolverBridge;
-use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoDownvotePostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomPostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoUpvoteCustomPostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\DownvoteCustomPostMutationResolverBridge;
+use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UndoDownvoteCustomPostMutationResolverBridge;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
@@ -75,10 +75,10 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
             self::MODULE_DATALOADACTION_UNRECOMMENDPOST => UnrecommendPostMutationResolverBridge::class,
             self::MODULE_DATALOADACTION_SUBSCRIBETOTAG => SubscribeToTagMutationResolverBridge::class,
             self::MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG => UnsubscribeFromTagMutationResolverBridge::class,
-            self::MODULE_DATALOADACTION_UPVOTEPOST => UpvotePostMutationResolverBridge::class,
-            self::MODULE_DATALOADACTION_UNDOUPVOTEPOST => UndoUpvotePostMutationResolverBridge::class,
-            self::MODULE_DATALOADACTION_DOWNVOTEPOST => DownvotePostMutationResolverBridge::class,
-            self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvotePostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UPVOTEPOST => UpvoteCustomPostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNDOUPVOTEPOST => UndoUpvoteCustomPostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_DOWNVOTEPOST => DownvoteCustomPostMutationResolverBridge::class,
+            self::MODULE_DATALOADACTION_UNDODOWNVOTEPOST => UndoDownvoteCustomPostMutationResolverBridge::class,
         );
         if ($executer = $executers[$module[1]]) {
             return $executer;
