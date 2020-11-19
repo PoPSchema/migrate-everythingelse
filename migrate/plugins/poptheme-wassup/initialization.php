@@ -24,7 +24,14 @@ class PoPTheme_Wassup_Initialization
         /**
          * Load the plugins' libraries
          */
-        include_once 'plugins/load.php';
+        // Execute after everything else, so that the other plugins have loaded
+        HooksAPIFacade::getInstance()->addAction(
+            'plugins_loaded',
+            function () {
+                include_once 'plugins/load.php';
+            },
+            1500
+        );
 
         /**
          * Load the Themes
@@ -44,7 +51,7 @@ class PoPTheme_Wassup_Initialization
 
     public function optimizeScripts()
     {
-    
+
         // Move scripts to the footer (they are not needed immediately anyway!)
         // Wanted to do it also for jQuery, but it breaks everything!
         // Taken from http://www.joanmiquelviade.com/how-to-move-jquery-script-to-the-footer/
@@ -66,7 +73,7 @@ class PoPTheme_Wassup_Initialization
             $dist_css_folder = $css_folder . '/dist';
             $includes_css_folder = $css_folder . '/includes';
             $cdn_css_folder = $includes_css_folder . '/cdn';
-            
+
             /* ------------------------------
             * 3rd Party Libraries (using CDN whenever possible)
             ----------------------------- */
