@@ -50,8 +50,8 @@ function isProfile($user = null)
  */
 function userHasProfileAccess($user_id = null)
 {
-    $editPostsCapability = NameResolverFacade::getInstance()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
-    return userHasAccess($editPostsCapability, $user_id);
+    $editCustomPostsCapability = NameResolverFacade::getInstance()->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
+    return userHasAccess($editCustomPostsCapability, $user_id);
 }
 
 /**

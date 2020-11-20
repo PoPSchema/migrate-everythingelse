@@ -11,10 +11,10 @@ function gdCurrentUserCanEdit($post_id = null)
     $vars = ApplicationState::getVars();
     $userID = $vars['global-userstate']['current-user-id'];
     $authors = gdGetPostauthors($post_id);
-    $editPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
+    $editCustomPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_CUSTOMPOSTS_CAPABILITY);
     return $userRoleTypeDataResolver->userCan(
         $userID,
-        $editPostsCapability
+        $editCustomPostsCapability
     ) && in_array(
         $userID,
         $authors
