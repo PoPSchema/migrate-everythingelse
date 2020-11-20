@@ -25,7 +25,6 @@ class CMSLooseContracts extends AbstractLooseContractSet
     public function getRequiredNames(): array {
 		return [
 			// Capabilities
-			'popcms:capability:editPosts',
 			'popcms:capability:deletePages',
 		];
 	}

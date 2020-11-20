@@ -39,7 +39,6 @@ class CMSLooseContractImplementations extends AbstractLooseContractResolutionSet
 		]);
 
 		$this->nameResolver->implementNames([
-			'popcms:capability:editPosts' => 'edit_posts',
 			'popcms:capability:deletePages' => 'delete_pages',
 		]);
 	}

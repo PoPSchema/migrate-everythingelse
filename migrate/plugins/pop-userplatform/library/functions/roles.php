@@ -1,6 +1,7 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\Users\TypeDataLoaders\UserTypeDataLoader;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
@@ -49,7 +50,8 @@ function isProfile($user = null)
  */
 function userHasProfileAccess($user_id = null)
 {
-    return userHasAccess(NameResolverFacade::getInstance()->getName('popcms:capability:editPosts'), $user_id);
+    $editPostsCapability = NameResolverFacade::getInstance()->getName(LooseContractSet::NAME_EDIT_POSTS_CAPABILITY);
+    return userHasAccess($editPostsCapability, $user_id);
 }
 
 /**

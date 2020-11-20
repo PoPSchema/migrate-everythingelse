@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\CustomPostMutations\LooseContracts\LooseContractSet;
 use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
 function gdCurrentUserCanEdit($post_id = null)
@@ -10,10 +11,10 @@ function gdCurrentUserCanEdit($post_id = null)
     $vars = ApplicationState::getVars();
     $userID = $vars['global-userstate']['current-user-id'];
     $authors = gdGetPostauthors($post_id);
-    $editPostCapability = $nameResolver->getName('popcms:capability:editPosts');
+    $editPostsCapability = $nameResolver->getName(LooseContractSet::NAME_EDIT_POSTS_CAPABILITY);
     return $userRoleTypeDataResolver->userCan(
         $userID,
-        $editPostCapability
+        $editPostsCapability
     ) && in_array(
         $userID,
         $authors
