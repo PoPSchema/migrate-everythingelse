@@ -1,13 +1,14 @@
 <?php
 
-use PoP\Hooks\Facades\HooksAPIFacade;
 use PoP\Routing\RouteNatures;
-use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
-use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
-use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
-use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoP\Hooks\Facades\HooksAPIFacade;
 use PoPSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
+use PoPSchema\Tags\Routing\RouteNatures as TagRouteNatures;
+use PoPSchema\Pages\Routing\RouteNatures as PageRouteNatures;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
+use PoPSchema\CustomPosts\Routing\RouteNatures as CustomPostRouteNatures;
 
 define('POP_RESOURCELOADERCONFIGURATION_HOME_STATIC', 'static');
 define('POP_RESOURCELOADERCONFIGURATION_HOME_FEED', 'feed');
@@ -97,7 +98,8 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         if (empty($roles)) {
             // Being here, GD_ROLE_PROFILE is not defined. Then, simply get any random user from the DB, and use its corresponding configuration (the default layouts for all non-profile users (eg: "subscriber") will be used)
             $user_ids = $cmsusersapi->getUsers($query, ['return-type' => ReturnTypes::IDS]);
-            $role = \PoPSchema\UserRoles\Utils::getTheUserRole($user_ids[0]);
+            $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+            $role = $userRoleTypeDataResolver->getTheUserRole($user_ids[0]);
             $roles = array($role);
             $user_role_combinations = array($roles);
         } else {

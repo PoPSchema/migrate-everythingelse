@@ -30,7 +30,8 @@ function getUserRoleCombinationsCommunityRole($user_role_combinations)
 
 function gdUreIsCommunity($user = null)
 {
-    return isProfile($user) && \PoPSchema\UserRoles\Utils::hasRole(GD_URE_ROLE_COMMUNITY, $user);
+    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+    return isProfile($user) && $userRoleTypeDataResolver->hasRole(GD_URE_ROLE_COMMUNITY, $user);
 }
 
 function gdUreGetuserrole($userID)

@@ -1,6 +1,6 @@
 <?php
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 
 class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
@@ -17,11 +17,11 @@ class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointPr
     public function process(array $checkpoint)
     {
         $vars = ApplicationState::getVars();
-        $translationAPI = TranslationAPIFacade::getInstance();
         switch ($checkpoint[1]) {
             case self::CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR:
                 $user_id = $vars['global-userstate']['current-user-id'];
-                if (!\PoPSchema\UserRoles\Utils::hasRole('administrator', $user_id)) {
+                $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+                if (!$userRoleTypeDataResolver->hasRole('administrator', $user_id)) {
                     return new \PoP\ComponentModel\ErrorHandling\Error('userisnotadmin');
                 }
                 break;

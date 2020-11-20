@@ -1,11 +1,21 @@
 <?php
-use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\LooseContracts\Facades\NameResolverFacade;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
 function gdCurrentUserCanEdit($post_id = null)
 {
+    $nameResolver = NameResolverFacade::getInstance();
+    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
     $vars = ApplicationState::getVars();
-    $cmsuserrolesapi = \PoPSchema\UserRoles\FunctionAPIFactory::getInstance();
+    $userID = $vars['global-userstate']['current-user-id'];
     $authors = gdGetPostauthors($post_id);
-    return $cmsuserrolesapi->currentUserCan(NameResolverFacade::getInstance()->getName('popcms:capability:editPosts')) && (in_array($vars['global-userstate']['current-user-id'], $authors));
+    $editPostCapability = $nameResolver->getName('popcms:capability:editPosts');
+    return $userRoleTypeDataResolver->userCan(
+        $userID,
+        $editPostCapability
+    ) && in_array(
+        $userID,
+        $authors
+    );
 }

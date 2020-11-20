@@ -1,13 +1,14 @@
 <?php
 namespace PoPSchema\UserRoles;
 
-use PoP\Translation\Facades\TranslationAPIFacade;
 use PoP\Hooks\Facades\HooksAPIFacade;
-use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
 use PoP\ComponentModel\State\ApplicationState;
+use PoP\Translation\Facades\TranslationAPIFacade;
+use PoPSchema\Users\Routing\RouteNatures as UserRouteNatures;
+use PoPSchema\UserRoles\Facades\UserRoleTypeDataResolverFacade;
 
 HooksAPIFacade::getInstance()->addFilter(
-    \PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT, 
+    \PoP\ComponentModel\ModelInstance\ModelInstance::HOOK_COMPONENTS_RESULT,
     function ($components) {
         $vars = ApplicationState::getVars();
         switch ($vars['nature']) {
@@ -22,7 +23,8 @@ HooksAPIFacade::getInstance()->addFilter(
                     )
                 );
                 if (in_array(POP_MODELINSTANCECOMPONENTTYPE_AUTHOR_ROLE, $component_types)) {
-                    $components[] = TranslationAPIFacade::getInstance()->__('user role:', 'pop-engine').\PoPSchema\UserRoles\Utils::getTheUserRole($user_id);
+                    $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
+                    $components[] = TranslationAPIFacade::getInstance()->__('user role:', 'pop-engine') . $userRoleTypeDataResolver->getTheUserRole($user_id);
                 }
                 break;
         }
