@@ -1,5 +1,6 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
+use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Application_RequestMeta_Hooks
 {
@@ -26,6 +27,8 @@ class PoP_Application_RequestMeta_Hooks
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         $meta['sitename'] = $cmsapplicationapi->getSiteName();
+        $vars = ApplicationState::getVars();
+        $meta['version'] = $vars['version'];
         return $meta;
     }
 }
