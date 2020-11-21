@@ -56,11 +56,11 @@ function gdUreGetuserroleCommonroles($role, $user_id)
 function gdUreIsOrganization($user_id = null)
 {
     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole(GD_URE_ROLE_ORGANIZATION, $user_id);
+    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole($user_id, GD_URE_ROLE_ORGANIZATION);
 }
 
 function gdUreIsIndividual($user_id = null)
 {
     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole(GD_URE_ROLE_INDIVIDUAL, $user_id);
+    return isProfile($user_id) && $userRoleTypeDataResolver->hasRole($user_id, GD_URE_ROLE_INDIVIDUAL);
 }

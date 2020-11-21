@@ -42,7 +42,7 @@ function getUserRoleCombinationsProfileRole($user_role_combinations)
 function isProfile($user = null)
 {
     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return $userRoleTypeDataResolver->hasRole(GD_ROLE_PROFILE, $user);
+    return $userRoleTypeDataResolver->hasRole($user, GD_ROLE_PROFILE);
 }
 
 /**

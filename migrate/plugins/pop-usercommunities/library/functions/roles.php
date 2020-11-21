@@ -31,7 +31,7 @@ function getUserRoleCombinationsCommunityRole($user_role_combinations)
 function gdUreIsCommunity($user = null)
 {
     $userRoleTypeDataResolver = UserRoleTypeDataResolverFacade::getInstance();
-    return isProfile($user) && $userRoleTypeDataResolver->hasRole(GD_URE_ROLE_COMMUNITY, $user);
+    return isProfile($user) && $userRoleTypeDataResolver->hasRole($user, GD_URE_ROLE_COMMUNITY);
 }
 
 function gdUreGetuserrole($userID)
