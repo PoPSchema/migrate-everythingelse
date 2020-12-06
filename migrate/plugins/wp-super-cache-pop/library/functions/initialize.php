@@ -6,8 +6,8 @@ use PoP\API\Response\Schemes as APISchemes;
 // Then, as a hack, simply re-construct the logic of this function
 // if (doingJson()) {
 if (
-	$_REQUEST[GD_URLPARAM_OUTPUT] == GD_URLPARAM_OUTPUT_JSON ||
-	$_REQUEST[GD_URLPARAM_SCHEME] == APISchemes::API
+	$_REQUEST[GD_URLPARAM_OUTPUT] ?? null == GD_URLPARAM_OUTPUT_JSON ||
+	$_REQUEST[GD_URLPARAM_SCHEME] ?? null == APISchemes::API
 	) {
     define('JSON_REQUEST', true);
 }

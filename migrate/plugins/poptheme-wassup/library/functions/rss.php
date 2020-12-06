@@ -25,7 +25,7 @@ function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
         // If it is the daily feed, then show only posts posted in the last 24 hs
-        if ($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
+        if ($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
             $query_today = array(
                 'column'  => 'post_date',
                 'after'   => '- 1 days'
@@ -61,7 +61,7 @@ function gdRssAuthor($output)
     global $authordata;
     $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
     $url = $cmsusersapi->getUserURL($authordata->ID);
-    
+
     $output = sprintf(
         '<a href="%s" style="%s">%s</a>',
         $url,
@@ -91,7 +91,7 @@ function gdCustomRssFeaturedimageSize($img_attr)
     //     GD_URLPARAM_RSSCAMPAIGN_WEEKLY,
     // );
     // if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], $campaigns)) {
-    if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN], popGetRssPostlistCampaigns())) {
+    if (in_array($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null, popGetRssPostlistCampaigns())) {
         $thumb_width = HooksAPIFacade::getInstance()->applyFilters(
             'poptheme_wassup_rss:thumb_width',
             132

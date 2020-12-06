@@ -12,11 +12,11 @@ class PoP_MultiDomain_Engine_Utils
     public static function addVars(array $vars_in_array): void
     {
         $vars = &$vars_in_array[0];
-        $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN];
+        $vars['domain'] = $_REQUEST[POP_URLPARAM_DOMAIN] ?? null;
 
         // Add the external URL's domain, only if we are on the External Page
         if ($vars['routing-state']['is-standard'] && $vars['route'] == POP_MULTIDOMAIN_ROUTE_EXTERNAL) {
-            if ($external_url = $_REQUEST[GD_URLPARAM_URL]) {
+            if ($external_url = $_REQUEST[GD_URLPARAM_URL] ?? null) {
                 $vars['external-url-domain'] = getDomain($external_url);
             }
         }

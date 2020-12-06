@@ -24,7 +24,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     public function getLayoutSubmodules(array $module)
     {
         $ret = parent::getLayoutSubmodules($module);
-    
+
         switch ($module[1]) {
             case self::MODULE_FORMINNER_LOGIN:
                 $ret = array_merge(
@@ -92,7 +92,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
                 if (RequestUtils::loadingSite()) {
-                    if ($value = $_REQUEST[POP_INPUTNAME_CODE]) {
+                    if ($value = $_REQUEST[POP_INPUTNAME_CODE] ?? null) {
                         $this->setProp([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE], $props, 'default-value'/*'selected-value'*/, $value);
                         $this->appendProp([PoP_Module_Processor_LoginFormGroups::class, PoP_Module_Processor_LoginFormGroups::MODULE_FORMINPUTGROUP_LOSTPWDRESET_CODE], $props, 'class', 'hidden');
                     }

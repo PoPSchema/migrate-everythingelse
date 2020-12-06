@@ -50,14 +50,14 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
                         // If the post was not just created but actually updated (created first and then on that same page updated it)
                         // then change the success code
                         $pid = $dbobjectids[0];
-                        if ($pid == $_REQUEST[POP_INPUTNAME_POSTID]) {
+                        if (isset($_REQUEST[POP_INPUTNAME_POSTID]) && $pid == $_REQUEST[POP_INPUTNAME_POSTID]) {
                             $ret['msgs'][0]['header']['code'] = 'update-success-header';
                         }
                     }
                 }
                 break;
         }
-        
+
         return $ret;
     }
 }

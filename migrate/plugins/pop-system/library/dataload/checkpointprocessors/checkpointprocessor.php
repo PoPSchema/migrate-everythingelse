@@ -24,7 +24,7 @@ class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
                 }
 
                 // Validate the user has provided the System Access Key as a param in the URL
-                $key = $_REQUEST['systemaccesskey'];
+                $key = $_REQUEST['systemaccesskey'] ?? null;
                 if (!$key) {
                     return new \PoP\ComponentModel\ErrorHandling\Error('systemaccesskeyempty');
                 }

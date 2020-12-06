@@ -5,7 +5,7 @@ use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputH
 class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryInputOutputHandler
 {
     // function getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
@@ -19,12 +19,12 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
     //             // then change the success code
     //             $pid = $dbobjectids[0];
     //             if ($pid == $_REQUEST[POP_INPUTNAME_POSTID]) {
-                    
+
     //                 $ret['msgs'][0]['header']['code'] = 'update-success-header';
     //             }
     //         }
     //     }
-        
+
     //     return $ret;
     // }
 
@@ -42,7 +42,8 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
         // then the 'pid' is already sent in the request. Then already use it.
         // Otherwise, if we create a post successfully, then when editing the validation fails, it will delete the
         // 'pid' from the response and treat the next iteration as yet a new post
-        if ($pid = $_REQUEST[POP_INPUTNAME_POSTID]) {
+        if (isset($_REQUEST[POP_INPUTNAME_POSTID])) {
+            $pid = $_REQUEST[POP_INPUTNAME_POSTID];
             $ret[POP_INPUTNAME_POSTID] = $pid;
             $ret[POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITURL, $pid);
         }
@@ -57,12 +58,12 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
                 $ret[POP_INPUTNAME_NONCE] = $nonce;
             }
         }
-        
+
         return $ret;
     }
 
     // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     // Empty params needed for initialBlockMemory:
@@ -91,11 +92,11 @@ class GD_DataLoad_QueryInputOutputHandler_AddPost extends ActionExecutionQueryIn
     //             $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = $nonce;
     //         }
     //     }
-        
+
     //     return $ret;
     // }
 }
-    
+
 /**
  * Initialize
  */
