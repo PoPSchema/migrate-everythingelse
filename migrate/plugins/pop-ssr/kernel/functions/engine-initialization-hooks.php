@@ -141,6 +141,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $cachemanager = PersistentCacheFacade::getInstance();
             $useCache = !is_null($cachemanager);
         }
+        $dynamic_data_properties = null;
         if ($useCache) {
             $dynamic_data_properties = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES);
         }

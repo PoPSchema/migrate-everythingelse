@@ -62,6 +62,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $add_settings = in_array(GD_URLPARAM_DATAOUTPUTITEMS_MODULESETTINGS, $dataoutputitems);
 
         if ($add_settings) {
+            $immutable_jssettings = $mutableonmodel_jssettings = null;
             if ($useCache) {
                 $immutable_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS);
                 $mutableonmodel_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS);
@@ -158,7 +159,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                     $ret['modulejsdata'] = $has_extra_routes ? array($current_uri => $combined_modulejsdata) : $combined_modulejsdata;
                 }
             }
-            
+
             // Specify all the URLs to be intercepted by the current page. This is needed to obtain their configuration in the webplatform, under this page's URL
             $this->intercept_urls = $root_processor->getIntercepturlsMergedmoduletree($root_module, $root_props);
         }
@@ -280,7 +281,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             $data,
             $this
         );
-            
+
         return $data;
     }
 
@@ -334,7 +335,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     }
 
     // protected function getJsonModuleImmutableSettings(array $module, array &$props) {
-    
+
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
     // 	$json_settings = parent::getJsonModuleImmutableSettings($module, $props);
@@ -361,7 +362,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // }
 
     // protected function getJsonModuleMutableonrequestSettings(array $module, array &$props) {
-    
+
     // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
     // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($module, $props);
@@ -370,7 +371,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     // 	$processor = $moduleprocessor_manager->getProcessor($module);
 
     // 	$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($module, $props);
-        
+
     // 	return $json_runtimesettings;
     // }
 }

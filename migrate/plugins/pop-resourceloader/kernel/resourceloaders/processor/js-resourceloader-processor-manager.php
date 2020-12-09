@@ -421,21 +421,20 @@ class PoP_JSResourceLoaderProcessorManager {
 
 			// For that object/method, get all of internal and external method calls and add them to the queue
 			$process = array();
-			if ($this->mapping['internalMethodCalls'][$jsObject] && $this->mapping['internalMethodCalls'][$jsObject][$method]) {
-
+			if ($this->mapping['internalMethodCalls'][$jsObject][$method] ?? null) {
 				foreach ($this->mapping['internalMethodCalls'][$jsObject][$method] as $calledMethod) {
 
 					$process[] = $jsObject.'::'.$calledMethod;
 				}
 			}
-			if ($this->mapping['externalMethodCalls'][$jsObject] && $this->mapping['externalMethodCalls'][$jsObject][$method]) {
+			if ($this->mapping['externalMethodCalls'][$jsObject][$method] ?? null) {
 
 				foreach ($this->mapping['externalMethodCalls'][$jsObject][$method] as $calledJSObject => $calledMethod) {
 
 					$process[] = $calledJSObject.'::'.$calledMethod;
 				}
 			}
-			if ($this->mapping['methodExecutions'][$jsObject] && $this->mapping['methodExecutions'][$jsObject][$method]) {
+			if ($this->mapping['methodExecutions'][$jsObject][$method] ?? null) {
 
 				foreach ($this->mapping['methodExecutions'][$jsObject][$method] as $calledMethod) {
 
