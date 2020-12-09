@@ -33,7 +33,7 @@ class PoP_SPA_RequestMeta_Hooks
                 GD_URLPARAM_STRATUM,
             ];
             foreach ($elemKeys as $elemKey) {
-                if ($elemValue = $meta[$elemKey]) {
+                if ($elemValue = $meta[$elemKey] ?? null) {
                     $meta[ParamConstants::PARAMS][$elemKey] = $elemValue;
                 }
             }

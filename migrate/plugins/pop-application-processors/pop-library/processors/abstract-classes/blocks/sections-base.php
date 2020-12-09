@@ -145,7 +145,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 POP_FORMAT_MAP => 'map pop-block-map',
                 POP_FORMAT_CALENDARMAP => 'map pop-block-map pop-block-calendarmap pop-block-calendar',
             );
-            if ($class = $classes[$format]) {
+            if ($class = $classes[$format] ?? null) {
                 $this->appendProp($module, $props, 'class', $class);
             }
 
@@ -156,7 +156,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 POP_FORMAT_MAP => 'map',
                 POP_FORMAT_CALENDARMAP => 'calendarmap',
             );
-            if ($resourceloader = $resourceloaders[$format]) {
+            if ($resourceloader = $resourceloaders[$format] ?? null) {
                    // Artificial property added to identify the template when adding module-resources
                 $this->setProp($module, $props, 'resourceloader', $resourceloader);
             }

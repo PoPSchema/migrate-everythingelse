@@ -54,7 +54,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
         // foreach ($this->getSubmodules($module) as $submodule) {
-            
+
         //     $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($module, $props), $this->getBootstrapcomponentType($module));
         //     $ret[$submoduleOutputName]['data-initjs-targets'] = sprintf(
@@ -71,7 +71,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         return '';
     }
-    
+
     // protected function getInitjsBlockbranches(array $module, array &$props) {
 
     //     return array_merge(
@@ -85,9 +85,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     //     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
 
     //     $ret = array();
-        
+
     //     foreach ($this->getSubmodules($module) as $submodule) {
-            
+
     //         $submoduleOutputName = ModuleUtils::getModuleOutputName($submodule);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($module, $props), $this->getBootstrapcomponentType($module));
     //         $ret[] = sprintf(
@@ -118,7 +118,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 return $submodule;
             }
         }
-    
+
         if ($this->isMandatoryActivePanel($module)) {
             return $this->getDefaultActivepanelSubmodule($module);
         }
@@ -137,7 +137,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         $submodules = $this->getSubmodules($module);
         return $submodules[0];
     }
-    
+
     public function getPanelTitle(array $module)
     {
         return null;
@@ -195,14 +195,14 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     public function getJsmethods(array $module, array &$props)
     {
         $ret = parent::getJsmethods($module, $props);
-        
+
         if ($this->getPanelHeaderTooltips($module, $props)) {
             $this->addJsmethod($ret, 'tooltip', 'tooltip');
         }
 
         return $ret;
     }
-    
+
     public function getImmutableConfiguration(array $module, array &$props): array
     {
         $ret = parent::getImmutableConfiguration($module, $props);
@@ -211,7 +211,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         if ($panel_modules = $this->getPanelSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['panels'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $panel_modules
             );
         }
@@ -233,16 +233,16 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 $header = array(
                     'moduleoutputname' => ModuleUtils::getModuleOutputName($header_submodule)
                 );
-                if ($title = $titles[$headerSubmoduleFullName]) {
+                if ($title = $titles[$headerSubmoduleFullName] ?? null) {
                     $header['title'] = $title;
                 }
-                if ($thumb = $thumbs[$headerSubmoduleFullName]) {
+                if ($thumb = $thumbs[$headerSubmoduleFullName] ?? null) {
                     $header['fontawesome'] = $thumb;
                 }
-                if ($tooltip = $tooltips[$headerSubmoduleFullName]) {
+                if ($tooltip = $tooltips[$headerSubmoduleFullName] ?? null) {
                     $header['tooltip'] = $tooltip;
                 }
-                
+
                 if ($subheader_submodules) {
                     $subheaders = array();
                     foreach ($subheader_submodules as $subheader_submodule) {
@@ -250,13 +250,13 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                         $subheader = array(
                             'moduleoutputname' => ModuleUtils::getModuleOutputName($subheader_submodule)
                         );
-                        if ($title = $titles[$subheaderSubmoduleFullName]) {
+                        if ($title = $titles[$subheaderSubmoduleFullName] ?? null) {
                             $subheader['title'] = $title;
                         }
-                        if ($thumb = $thumbs[$subheaderSubmoduleFullName]) {
+                        if ($thumb = $thumbs[$subheaderSubmoduleFullName] ?? null) {
                             $subheader['fontawesome'] = $thumb;
                         }
-                        if ($tooltip = $tooltips[$subheaderSubmoduleFullName]) {
+                        if ($tooltip = $tooltips[$subheaderSubmoduleFullName] ?? null) {
                             $subheader['tooltip'] = $tooltip;
                         }
                         $subheaders[] = $subheader;
@@ -268,7 +268,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 $panel_headers[] = $header;
             }
             $ret['panel-headers'] = $panel_headers;
-            
+
             if ($panelheader_class = $this->getPanelheaderClass($module)) {
                 $ret[GD_JS_CLASSES]['panelheader'] = $panelheader_class;
             }
@@ -279,7 +279,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                 $ret['panelheader-params'] = $panelheader_params;
             }
         }
-        
+
         if ($dropdown_title = $this->getDropdownTitle($module)) {
             $ret[GD_JS_TITLES] = array(
                 'dropdown' => $dropdown_title
@@ -308,10 +308,10 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
             $ret['body-class'] = $body_class;
         }
         $ret['buttons'] = $this->getButtons($module);
-        
+
         return $ret;
     }
-    
+
     public function getMutableonmodelConfiguration(array $module, array &$props): array
     {
         $ret = parent::getMutableonmodelConfiguration($module, $props);
@@ -319,7 +319,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         if ($active_submodule = $this->getActivepanelSubmodule($module)) {
             $ret['active'] = ModuleUtils::getModuleOutputName($active_submodule);
         }
-        
+
         return $ret;
     }
 
@@ -355,7 +355,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     //     if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($module)) {
     //         $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
     //     }
-        
+
     //     parent::initModelProps($module, $props);
     // }
 }

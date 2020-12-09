@@ -149,7 +149,7 @@ class PoP_ResourceLoaderProcessorUtils {
         // Iterate through all the pages added as configuration for this nature,
         // and all the resources for each
         $nature_route_formats = self::getNatureRoutesAndFormats();
-        if ($route_formats = $nature_route_formats[$nature]) {
+        if ($route_formats = $nature_route_formats[$nature] ?? null) {
 
             // If there is more than one page, then add the tabs component (eg: feeds)
             // If there is only one page defined, then there is no need for the tabs (eg: homepage)
@@ -819,7 +819,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function addPagesectionJsmethods(&$js_methods, $moduleMethods, $priority) {
 
         foreach ($moduleMethods as $module => $priorityGroupMethods) {
-            if ($groupMethods = $priorityGroupMethods[$priority]) {
+            if ($groupMethods = $priorityGroupMethods[$priority] ?? null) {
                 foreach ($groupMethods as $group => $methods) {
                     foreach ($methods as $method) {
                         $js_methods[] = $method;
@@ -832,7 +832,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function addBlockJsmethods(&$js_methods, $moduleMethods, $priority) {
 
         if ($priorityGroupMethods = $moduleMethods[GD_JS_METHODS]) {
-            if ($groupMethods = $priorityGroupMethods[$priority]) {
+            if ($groupMethods = $priorityGroupMethods[$priority] ?? null) {
                 foreach ($groupMethods as $group => $methods) {
                     foreach ($methods as $method) {
                         $js_methods[] = $method;

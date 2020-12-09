@@ -19,7 +19,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
             $ret = HooksAPIFacade::getInstance()->applyFilters('PoP_Module_Processor_CustomSectionBlocks:getDataloadSource:author', $ret, $author);
         }
         // }
-    
+
         return $ret;
     }
 
@@ -39,7 +39,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
                 // If they are horizontal, then bring all the results, until we fix how to place the load more button inside of the horizontal scrolling div
                 POP_FORMAT_HORIZONTALMAP => -1,
             );
-            if ($limit = $limits[$format]) {
+            if ($limit = $limits[$format] ?? null) {
                 $ret['limit'] = $limit;
             }
         }
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
 
         return $ret;
     }
-    
+
     //-------------------------------------------------
     // PROTECTED Functions
     //-------------------------------------------------
@@ -70,11 +70,11 @@ abstract class PoP_Module_Processor_SectionDataloadsBase extends PoP_Module_Proc
     {
         return ListQueryInputOutputHandler::class;
     }
-    
+
     protected function getInnerSubmodules(array $module): array
     {
         $ret = parent::getInnerSubmodules($module);
-                
+
         if ($inner_module = $this->getInnerSubmodule($module)) {
             $ret[] = $inner_module;
         }

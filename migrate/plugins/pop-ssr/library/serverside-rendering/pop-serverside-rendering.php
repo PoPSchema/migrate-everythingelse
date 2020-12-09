@@ -122,7 +122,7 @@ class PoP_ServerSideRendering
     {
 
         // If the file has already been included, then return it
-        if ($renderer = $this->renderers[$filename]) {
+        if ($renderer = $this->renderers[$filename] ?? null) {
             return $renderer;
         }
 

@@ -29,7 +29,7 @@ class PoP_VolunteeringProcessors_FilterUtils
         if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
             $volunteer_modules = self::getVolunteerModules();
             $moduleFullName = ModuleUtils::getModuleFullName($module);
-            if ($volunteer_module = $volunteer_modules[$moduleFullName]) {
+            if ($volunteer_module = $volunteer_modules[$moduleFullName] ?? null) {
                 $filterinputs[] = $volunteer_module;
             }
         }

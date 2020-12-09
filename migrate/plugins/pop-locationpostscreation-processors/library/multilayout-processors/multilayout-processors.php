@@ -15,7 +15,7 @@ class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Mu
                     );
                 }
 
-                if ($layout = $location_modules[$format]) {
+                if ($layout = $location_modules[$format] ?? null) {
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(
                         'isType',

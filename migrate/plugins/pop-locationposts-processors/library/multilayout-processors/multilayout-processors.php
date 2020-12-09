@@ -51,7 +51,7 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
                     );
                 }
 
-                if ($layout = $location_modules[$format]) {
+                if ($layout = $location_modules[$format] ?? null) {
                     $layouts[$field] = $layout;
                 }
                 break;

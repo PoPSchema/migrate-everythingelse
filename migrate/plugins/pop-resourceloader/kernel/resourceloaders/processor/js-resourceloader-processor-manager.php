@@ -439,7 +439,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 				foreach ($this->mapping['methodExecutions'][$jsObject][$method] as $calledMethod) {
 
-					if ($calledJSObjects = $this->mapping['publicMethods'][$calledMethod]) {
+					if ($calledJSObjects = $this->mapping['publicMethods'][$calledMethod] ?? null) {
 
 						foreach ($calledJSObjects as $calledJSObject) {
 
@@ -473,7 +473,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			$jsObject = $parts[0];
 			$method = $parts[1];
 
-			if ($called_jsmethods = $this->mapping['methodExecutions'][$jsObject][$method]) {
+			if ($called_jsmethods = $this->mapping['methodExecutions'][$jsObject][$method] ?? null) {
 
 				$jsmethods = array_merge(
 					$jsmethods,
@@ -513,7 +513,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		$publicmethods_jsobjects = array();
 		foreach ($methods as $method) {
 
-			if ($publicmethod_jsobjects = $this->mapping['publicMethods'][$method]) {
+			if ($publicmethod_jsobjects = $this->mapping['publicMethods'][$method] ?? null) {
 
 				foreach ($publicmethod_jsobjects as $jsobject) {
 					$publicmethods_jsobjects[$jsobject][] = $method;
@@ -559,7 +559,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			// We have been given a list of $methods to obtain their dependencies
 			// These methods will do calls to internal functions (in the same JS object),
 			// these methods must also be added (ad infinitum)
-			if ($internalMethodCalls = $this->mapping['internalMethodCalls'][$jsobject]) {
+			if ($internalMethodCalls = $this->mapping['internalMethodCalls'][$jsobject] ?? null) {
 
 				$queue = $jsobject_methods;
 				while ($queue) {
@@ -592,11 +592,11 @@ class PoP_JSResourceLoaderProcessorManager {
 			$this->addResourceDependencies($resources, $resource, false);
 
 			// Enqueue the dependencies needed by the methods
-			if ($externalMethodCalls = $this->mapping['externalMethodCalls'][$jsobject]) {
+			if ($externalMethodCalls = $this->mapping['externalMethodCalls'][$jsobject] ?? null) {
 
 				foreach ($jsobject_methods as $jsobject_method) {
 
-					if ($external_jsobjects_methods = $externalMethodCalls[$jsobject_method]) {
+					if ($external_jsobjects_methods = $externalMethodCalls[$jsobject_method] ?? null) {
 
 						foreach ($external_jsobjects_methods as $external_jsobject => $external_jsobject_methods) {
 

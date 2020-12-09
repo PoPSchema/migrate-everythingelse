@@ -13,7 +13,7 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                 $extra_layouts = array(
                     POP_FORMAT_SIMPLEVIEW => [PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::class, PoP_PostCategoryLayouts_Module_Processor_SimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW_FEATUREIMAGE],
                 );
-                if ($layout = $extra_layouts[$format]) {
+                if ($layout = $extra_layouts[$format] ?? null) {
                     if (POP_POSTCATEGORYLAYOUTS_CATEGORIES_LAYOUTFEATUREIMAGE) {
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(

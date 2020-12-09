@@ -38,7 +38,7 @@ class PoPTheme_CategoryProcessors_SectionFilterHooks
         switch ($taxonomy) {
             case 'category':
                 $routes = PoP_CategoryPosts_Utils::getCatRoutes();
-                if ($route = $routes[$term]) {
+                if ($route = $routes[$term] ?? null) {
                     return RouteUtils::getRouteTitle($route);
                 }
                 break;

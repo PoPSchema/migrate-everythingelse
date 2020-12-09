@@ -33,7 +33,7 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                         );
                     }
 
-                    if ($layout = $stance_layouts[$format]) {
+                    if ($layout = $stance_layouts[$format] ?? null) {
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
                             'isType',

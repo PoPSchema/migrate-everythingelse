@@ -74,10 +74,10 @@ class PoP_Events_Multilayout_Processor extends PoP_Application_Multilayout_Proce
 
                     // TODO: Split past/non-past on a level below, using the conditionalOnDataFieldSubmodule
                     // Temporarily commented (code `$event_post_type.'-'.POP_EVENTS_SCOPE_PAST` belongs to the old way of doing things, doesn't work anymore)
-                    // if ($layout = $pasts[$format]) {
+                    // if ($layout = $pasts[$format] ?? null) {
                     //     $layouts[$event_post_type.'-'.POP_EVENTS_SCOPE_PAST] = $layout;
                     // }
-                    if ($layout = $defaults[$format]) {
+                    if ($layout = $defaults[$format] ?? null) {
                         $layouts[$field] = $layout;
                     }
                     break;
