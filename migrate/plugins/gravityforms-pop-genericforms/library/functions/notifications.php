@@ -12,13 +12,13 @@ function gdGfChangeAutoresponderEmailProfiles($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        if ($profiles_ids = $_POST[POP_INPUTNAME_USERID]) {
+        if ($profiles_ids = $_POST[POP_INPUTNAME_USERID] ?? []) {
             $emails = array();
             $profiles = explode(',', $profiles_ids);
             foreach ($profiles as $profile_id) {
                 $emails[] = $cmsusersapi->getUserEmail($profile_id);
             }
-        
+
             $notification['to'] = implode(', ', $emails);
         }
     }
@@ -31,7 +31,7 @@ function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
 {
     if ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
         $cmsusersapi = \PoPSchema\Users\FunctionAPIFactory::getInstance();
-        if ($post_ids = $_POST[POP_INPUTNAME_POSTID]) {
+        if ($post_ids = $_POST[POP_INPUTNAME_POSTID] ?? []) {
             $emails = array();
             foreach (explode(',', $post_ids) as $post_id) {
                 $profiles = gdGetPostauthors($post_id);
@@ -39,7 +39,7 @@ function gdGfChangeAutoresponderEmailPostowners($notification, $form, $entry)
                     $emails[] = $cmsusersapi->getUserEmail($profile_id);
                 }
             }
-        
+
             $notification['to'] = implode(', ', $emails);
         }
     }
@@ -64,11 +64,11 @@ function gdGfEmailLayout($notification, $form, $entry)
 
     // Check if the recipient of the email is known. If so, extract their names
     if ($notification['name'] == GD_GF_NOTIFICATION_PROFILES) {
-        if ($ids = $_POST[POP_INPUTNAME_USERID]) {
+        if ($ids = $_POST[POP_INPUTNAME_USERID] ?? []) {
             $user_ids = explode(',', $ids);
         }
     } elseif ($notification['name'] == GD_GF_NOTIFICATION_POSTAUTHORS) {
-        if ($post_ids = $_POST[POP_INPUTNAME_POSTID]) {
+        if ($post_ids = $_POST[POP_INPUTNAME_POSTID] ?? []) {
             foreach (explode(',', $post_ids) as $post_id) {
                 $user_ids = array_merge(
                     $user_ids,

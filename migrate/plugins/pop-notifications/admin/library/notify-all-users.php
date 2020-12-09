@@ -47,12 +47,12 @@ function aalPopNotifyallusersMetaBoxContent()
     if ($vars['global-userstate']['current-user-id'] != POP_NOTIFICATIONS_USERPLACEHOLDER_SYSTEMNOTIFICATIONS) {
         return;
     }
-    
+
     wp_nonce_field(AAL_POP_NOTIFYALLUSERS_NONCE, 'aal_pop_notifyallusers_nonce');
 
     $submitted = ('POST' == $_SERVER['REQUEST_METHOD']);
     if ($submitted) {
-        $notification = $_POST['aal_pop_notifyallusers'];
+        $notification = $_POST['aal_pop_notifyallusers'] ?? '';
     }
 
     _e('Notify all users: enter a message to link to this post:', 'pop-notifications');
@@ -78,7 +78,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
         return;
     }
 
-    if (@!wp_verify_nonce($_POST['aal_pop_notifyallusers_nonce'], AAL_POP_NOTIFYALLUSERS_NONCE)) {
+    if (@!wp_verify_nonce($_POST['aal_pop_notifyallusers_nonce'] ?? '', AAL_POP_NOTIFYALLUSERS_NONCE)) {
         return $post_id;
     }
 
@@ -86,7 +86,7 @@ function aalPopNotifyallusersMetaBoxSave($post_id)
         return $post_id;
     }
 
-    if ($notification = trim($_POST['aal_pop_notifyallusers'])) {
+    if ($notification = trim($_POST['aal_pop_notifyallusers'] ?? '')) {
         PoP_Notifications_Utils::notifyAllUsers($post_id, $notification);
     }
 }

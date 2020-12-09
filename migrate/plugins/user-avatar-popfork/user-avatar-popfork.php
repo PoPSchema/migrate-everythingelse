@@ -6,7 +6,7 @@ Description: User Avatar for the Platform of Platforms (PoP), forked from User A
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 Author URI: https://getpop.org/u/leo/
-*/ 
+*/
 
 // Hack PoP Plug-in
 define ('USERAVATARPOP_FILENAME', 'useravatar_filename');
@@ -41,7 +41,7 @@ function user_avatar_admin_print_styles() {
  * @return void
  */
 function user_avatar_init(){
-	
+
 	wp_enqueue_style( 'global' );
 	wp_enqueue_style( 'wp-admin' );
 	wp_enqueue_style( 'colors' );
@@ -59,12 +59,12 @@ function user_avatar_init(){
 /**
  * user_avatar_core_set_avatar_constants function.
  * Description: Establishing restraints on sizes of files and dimensions of images.
- * Sets the default constants 
+ * Sets the default constants
  * @access public
  * @return void
  */
 function user_avatar_core_set_avatar_constants() {
-	
+
 	global $bp;
 
 	// Hack PoP Plug-in: Save the user avatar filename in the DB?
@@ -120,31 +120,31 @@ function user_avatar_core_set_avatar_constants() {
 
 	if ( !defined( 'USER_AVATAR_DEFAULT_THUMB' ) )
 		define( 'USER_AVATAR_DEFAULT_THUMB', plugins_url('/user-avatar/images/mystery-man-50.jpg') );
-		
-		
-	// set the language 
+
+
+	// set the language
 	// Hack PoP Plug-in: comment
 	// load_plugin_textdomain( 'user-avatar', false , basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 // Hack PoP Plug-in: addition of function below
-function gd_get_avatar_upload_path() { 
+function gd_get_avatar_upload_path() {
 
-	$upload_dir = wp_upload_dir(); 
+	$upload_dir = wp_upload_dir();
 	$avatar_folder = $upload_dir['basedir']."/userphoto/";
 
 	if( !file_exists($avatar_folder) ) {
 		@mkdir($avatar_folder, 0777 ,true);
 	}
-	
+
 	return $avatar_folder;
 }
 // Hack PoP Plug-in: addition of function below
-function gd_get_avatar_upload_url() { 
-	
-	$upload_dir = wp_upload_dir(); 
-	// return $upload_dir['baseurl'] . '/avatars/'; 
-	return $upload_dir['baseurl'] . '/userphoto/'; 
+function gd_get_avatar_upload_url() {
+
+	$upload_dir = wp_upload_dir();
+	// return $upload_dir['baseurl'] . '/avatars/';
+	return $upload_dir['baseurl'] . '/userphoto/';
 }
 
 // Hack PoP Plug-in: not needed anymore
@@ -158,7 +158,7 @@ function gd_get_avatar_upload_url() {
 // {
 // 	if( !file_exists(WP_CONTENT_DIR."/uploads/avatars/") )
 // 		mkdir(WP_CONTENT_DIR."/uploads/avatars/", 0777 ,true);
-	
+
 // 	return WP_CONTENT_DIR."/uploads/avatars/";
 // }
 
@@ -170,23 +170,23 @@ function gd_get_avatar_upload_url() {
 //  * @return void
 //  */
 // function user_avatar_core_avatar_url()
-// {	
+// {
 // 	return WP_CONTENT_URL."/uploads/avatars/";
 // }
 
 /**
  * user_avatar_add_photo function.
- * The content inside the iframe 
+ * The content inside the iframe
  * Description: Creating panels for the different steps users take to upload a file and checking their uploads.
  * @access public
  * @return void
  */
 function user_avatar_add_photo() {
 	global $current_user;
-	
-	if(($_GET['uid'] == $current_user->ID || current_user_can('edit_users')) &&  is_numeric($_GET['uid'])) 
+
+	if(($_GET['uid'] ?? null == $current_user->ID || current_user_can('edit_users')) &&  is_numeric($_GET['uid'] ?? null))
 	{
-		$uid = $_GET['uid'];
+		$uid = $_GET['uid'] ?? null;
 	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php do_action('admin_xml_ns'); ?> <?php language_attributes(); ?>>
 <head>
@@ -211,30 +211,30 @@ var userSettings = {
 </script>
 <?php
 
-	
+
 	do_action('user_avatar_iframe_head');
-	
-	
+
+
 ?>
 
 </head>
 <body>
 <?php
-	switch($_GET['step'])
+	switch($_GET['step'] ?? null)
 	{
 		case 1:
 			user_avatar_add_photo_step1($uid);
 		break;
-		
+
 		case 2:
 			user_avatar_add_photo_step2($uid);
 		break;
-		
+
 		case 3:
 			user_avatar_add_photo_step3($uid);
 		break;
 	}
-		
+
 	do_action('admin_print_footer_scripts');
 ?>
 <script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
@@ -249,7 +249,7 @@ var userSettings = {
 
 /**
  * user_avatar_add_photo_step1 function.
- * The First Step in the process 
+ * The First Step in the process
  * Description: Displays the users photo and they can choose to upload another if they please.
  * @access public
  * @param mixed $uid
@@ -271,13 +271,13 @@ function user_avatar_add_photo_step1($uid)
 		<p class="submit"><input type="submit" value="<?php esc_attr_e('Upload'); ?>" /></p>
 	</form>
 	</div>
-	
+
 	<?php
 }
 
 /**
  * user_avatar_add_photo_step2 function.
- * The Second Step in the process 
+ * The Second Step in the process
  * Description: Takes the uploaded photo and saves it to database.
  * @access public
  * @param mixed $uid
@@ -285,8 +285,8 @@ function user_avatar_add_photo_step1($uid)
  */
 function user_avatar_add_photo_step2($uid)
 {
-	
-	
+
+
 		if (!(($_FILES["uploadedfile"]["type"] == "image/gif") || ($_FILES["uploadedfile"]["type"] == "image/jpeg") || ($_FILES["uploadedfile"]["type"] == "image/png") || ($_FILES["uploadedfile"]["type"] == "image/pjpeg") || ($_FILES["uploadedfile"]["type"] == "image/x-png"))){
 			echo "<div class='error'><p>".__("Please upload an image file (.jpeg, .gif, .png).",'user-avatar')."</p></div>";
 			user_avatar_add_photo_step1($uid);
@@ -298,12 +298,12 @@ function user_avatar_add_photo_step2($uid)
 		if ( isset($file['error']) ){
 			die( $file['error'] );
 		}
-		
+
 		$url = $file['url'];
 		$type = $file['type'];
 		$file = $file['file'];
 		$filename = basename($file);
-		
+
 		set_transient( 'avatar_file_'.$uid, $file, 60 * 60 * 5 );
 		// Construct the object array
 		$object = array(
@@ -314,11 +314,11 @@ function user_avatar_add_photo_step2($uid)
 
 		// Save the data
 		list($width, $height, $type, $attr) = getimagesize( $file );
-		
+
 		if ( $width > 420 ) {
 			$oitar = $width / 420;
 			$image = wp_crop_image($file, 0, 0, $width, $height, 420, $height / $oitar, false, str_replace(basename($file), 'midsize-'.basename($file), $file));
-			
+
 
 			$url = str_replace(basename($url), basename($image), $url);
 			$width = $width / $oitar;
@@ -334,9 +334,9 @@ function user_avatar_add_photo_step2($uid)
 		$url = apply_filters('user_avatar_add_photo:image-url', $url, $file, $uid);
 		?>
 		<form id="iframe-crop-form" method="POST" action="<?php echo admin_url('admin-ajax.php'); ?>?action=user_avatar_add_photo&step=3&uid=<?php echo esc_attr($uid); ?>">
-		
+
 		<h4><?php _e('Choose the part of the image you want to use as your profile image.','user-avatar'); ?> <input type="submit" class="button" id="user-avatar-crop-button" value="<?php esc_attr_e('Crop Image','user-avatar'); ?>" /></h4>
-		
+
 		<div id="testWrap">
 		<img src="<?php echo $url; ?>" id="upload" width="<?php echo esc_attr($width); ?>" height="<?php echo esc_attr($height); ?>" />
 		</div>
@@ -352,13 +352,13 @@ function user_avatar_add_photo_step2($uid)
 		<input type="hidden" name="y2" id="y2" />
 		<input type="hidden" name="width" id="width" value="<?php echo esc_attr($width) ?>" />
 		<input type="hidden" name="height" id="height" value="<?php echo esc_attr($height) ?>" />
-		
+
 		<input type="hidden" name="oitar" id="oitar" value="<?php echo esc_attr($oitar); ?>" />
 		<?php wp_nonce_field('user-avatar'); ?>
 		</p>
 		</div>
 		</form>
-		
+
 		<script type="text/javascript">
 
 	function onEndCrop( coords ) {
@@ -405,15 +405,15 @@ function user_avatar_add_photo_step2($uid)
 				jQuery('#y1').val(c.y1);
 				jQuery('#width').val(c.width);
 				jQuery('#height').val(c.height);
-				
-				
-				
+
+
+
 				if (!c.width || !c.height)
         			return;
-    
+
 			    var scaleX = <?php echo USER_AVATAR_FULL_WIDTH; ?> / c.width;
 			    var scaleY = <?php echo USER_AVATAR_FULL_HEIGHT; ?> / c.height;
-				
+
 			    jQuery('#preview img').css({
 			        width: Math.round(scaleX * <?php echo $width; ?>),
 			        height: Math.round(scaleY * <?php echo $height; ?>),
@@ -466,20 +466,20 @@ function gd_useravatar_get_filename($uid) {
 /**
  * user_avatar_add_photo_step3 function.
  * The Third Step in the Process
- * Description: Deletes previous uploaded picture and creates a new cropped image in its place. 
+ * Description: Deletes previous uploaded picture and creates a new cropped image in its place.
  * @access public
  * @param mixed $uid
  * @return void
  */
 function user_avatar_add_photo_step3($uid) {
-	
+
 	if ( $_POST['oitar'] > 1 ) {
 		$_POST['x1'] = $_POST['x1'] * $_POST['oitar'];
 		$_POST['y1'] = $_POST['y1'] * $_POST['oitar'];
 		$_POST['width'] = $_POST['width'] * $_POST['oitar'];
 		$_POST['height'] = $_POST['height'] * $_POST['oitar'];
 	}
-	
+
 	$original_file = get_transient( 'avatar_file_'.$uid );
 					 delete_transient('avatar_file_'.$uid );
 
@@ -493,12 +493,12 @@ function user_avatar_add_photo_step3($uid) {
 
 	// Hack PoP Plug-in: externalize content into a separate function
 	gd_user_avatar_add_photo($uid, $original_file, $_POST);
-	
+
 	/* Remove the original */
 	@unlink( $original_file );
-		
+
 	if ( is_wp_error( $thumb ) )
-		wp_die( __( 'Image could not be processed.  Please go back and try again.' ), __( 'Image Processing Error' ) );		
+		wp_die( __( 'Image could not be processed.  Please go back and try again.' ), __( 'Image Processing Error' ) );
 	?>
 	<script type="text/javascript">
 		self.parent.user_avatar_refresh_image('<?php echo user_avatar_get_avatar($uid, 150); ?>');
@@ -513,13 +513,13 @@ function user_avatar_add_photo_step3($uid) {
 		</span>
 		<a id="user-avatar-step3-close" class="button" onclick="self.parent.tb_remove();" ><?php _e('Close','user-avatar'); ?></a>
 	</div>
-<?php	
-}	
+<?php
+}
 
 // Hack PoP Plug-in: remove spaces, trim, etc
 // Function copied from BlueImp uploadHandler.php: protected function trim_file_name($file_path, $name, $size, $type, $error, $index, $content_range)
 function gd_useravatar_trim_file_name($file_path, $name) {
-    
+
     // Remove path information and dots around the filename, to prevent uploading
     // into different directories or replacing hidden system files.
     // Also remove control characters and spaces (\x00..\x20) around the filename:
@@ -574,11 +574,11 @@ function gd_useravatar_trim_file_name($file_path, $name) {
 
 // Hack PoP Plug-in: externalize content into a separate function
 function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
-	
+
 	// Hack PoP Plug-in: variable $filepath changed, variable $folderpath and $filename are new
 	// Comment Leo 05/02/2016: to add compatibility to the structure for both AWS and non-AWS versions,
-	// keep the name of the file as the original, and regenerate the structure from the folders, with each folder containing 1 file 
-	
+	// keep the name of the file as the original, and regenerate the structure from the folders, with each folder containing 1 file
+
 	$filename = basename($original_file);//"{$uid}_".time();
 
 	// Hack PoP Plug-in: remove spaces, trim, etc
@@ -592,10 +592,10 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 	$thumb = $thumbpath.$filename;
 	$photopath = $folderpath.'photo/';
 	$photo = $photopath.$filename;
-	
+
 	// delete the previous files
 	user_avatar_delete_files($uid);
-	
+
 	// if(!file_exists($folderpath)) {
 
 	// Create the structure again
@@ -616,7 +616,7 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 		$cropinfo['y1'] = ($file_size[1] - $file_size_min) / 2;
 		$cropinfo['width'] = $cropinfo['height'] = $file_size_min;
 	}
-	
+
 	// Hack PoP Plug-in: copy the original, resize the original, crop the thumb
 	copy($original_file, $original);
 	$image = wp_get_image_editor( $original_file );
@@ -624,17 +624,17 @@ function gd_user_avatar_add_photo($uid, $original_file, $cropinfo = array()) {
 	    $image->resize( USER_AVATAR_PHOTO_MAXWIDTH, USER_AVATAR_PHOTO_MAXHEIGHT );
 	    $image->save( $photo );
 	}
-	$thumb = wp_crop_image( $original_file, $cropinfo['x1'], $cropinfo['y1'], $cropinfo['width'], $cropinfo['height'], USER_AVATAR_FULL_WIDTH, USER_AVATAR_FULL_HEIGHT, false, $thumb );	
-	
+	$thumb = wp_crop_image( $original_file, $cropinfo['x1'], $cropinfo['y1'], $cropinfo['width'], $cropinfo['height'], USER_AVATAR_FULL_WIDTH, USER_AVATAR_FULL_HEIGHT, false, $thumb );
+
 	// Hack PoP Plug-in: create extra avatars
 	gd_useravatar_save_avatars($original_file, $filename, $folderpath, $thumb);
 
 	// Save the user meta with the avatar filename
 	gd_useravatar_save_filename($uid, $filename);
-	
+
 	// Hack PoP Plug-in: allow for further actions, eg: uploading the image to S3
 	do_action('gd_user_avatar', $uid, $folderpath, $filename, $original, $thumb, $photo);
-}	
+}
 /**
  * user_avatar_delete_files function.
  * Description: Deletes the avatar files based on the user id.
@@ -666,10 +666,10 @@ function user_avatar_delete_files($uid)	{
 }
 
 /**
- * Based on the 
+ * Based on the
  * user_avatar_core_fetch_avatar_filter() 1.2.5 BP
  *
- * Description: Attempts to filter get_avatar function and let Word/BuddyPress have a go at  
+ * Description: Attempts to filter get_avatar function and let Word/BuddyPress have a go at
  * 				finding an avatar that may have been uploaded locally.
  *
  * @param string $avatar The result of get_avatar from before-filter
@@ -681,11 +681,11 @@ function user_avatar_delete_files($uid)	{
  */
 function user_avatar_fetch_avatar_filter( $avatar, $user, $size, $default, $alt ) {
 	global $pagenow;
-	
-	//If user is on discussion page, return $avatar 
+
+	//If user is on discussion page, return $avatar
     if($pagenow == "options-discussion.php")
     	return $avatar;
-    	
+
 	// If passed an object, assume $user->user_id
 	if ( is_object( $user ) )
 		$id = $user->user_id;
@@ -701,10 +701,10 @@ function user_avatar_fetch_avatar_filter( $avatar, $user, $size, $default, $alt 
 	// If somehow $id hasn't been assigned, return the result of get_avatar
 	if ( empty( $id ) )
 		return !empty( $avatar ) ? $avatar : $default;
-		
+
 	// check yo see if there is a file that was uploaded by the user
 	if( user_avatar_avatar_exists($id) ):
-	
+
 		$user_avatar = user_avatar_fetch_avatar( array( 'item_id' => $id, 'width' => $size, 'height' => $size, 'alt' => $alt ) );
 		if($user_avatar)
 			return $user_avatar;
@@ -714,7 +714,7 @@ function user_avatar_fetch_avatar_filter( $avatar, $user, $size, $default, $alt 
 	// else:
 	// 	return !empty( $avatar ) ? $avatar : $default;
 	endif;
-	// for good measure 
+	// for good measure
 	// Hack PoP Plug-in: add filter to change default result
 	return apply_filters('gd_avatar_default', (!empty( $avatar ) ? $avatar : $default), $user, $size, $default, $alt);
 }
@@ -733,7 +733,7 @@ add_filter( 'get_avatar', 'user_avatar_fetch_avatar_filter', 10, 5 );
  * @return string Formatted HTML <img> element, or raw avatar URL based on $html arg
  */
 function user_avatar_fetch_avatar( $args = '' ) {
-	
+
 	$defaults = array(
 		'item_id'		=> false,
 		'object'		=> "user",		// user/group/blog/custom type (if you use filters)
@@ -749,7 +749,7 @@ function user_avatar_fetch_avatar( $args = '' ) {
 		'no_grav'		=> false,		// If there is no avatar found, return false instead of a grav?
 		'html'			=> true			// Wrap the return img URL in <img />
 	);
-	
+
 	// Compare defaults to passed and extract
 	$params = wp_parse_args( $args, $defaults );
 	extract( $params, EXTR_SKIP );
@@ -757,26 +757,26 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	// Hack PoP Plug-in: comment unneeded code
 	// if($width > 50)
 	// 	$type = "full";
-		
+
 	// Hack PoP Plug-in: comment unneeded code
 	// $avatar_size = ( 'full' == $type ) ? '-bpfull' : '-bpthumb';
 	$class .= " avatar ";
 	$class .= " avatar-". $width ." ";
 	$class .= " photo";
-	
+
 	if ( false === $alt)
 		$safe_alt = '';
 	else
 		$safe_alt = esc_attr( $alt );
-	
-	
+
+
 	// Add an identifying class to each item
 	$class .= ' ' . $object . '-' . $item_id . '-avatar';
 
 	// Set CSS ID if passed
 	if ( !empty( $css_id ) )
 		$css_id = " id=\"".esc_attr($css_id)."\"";
-	
+
 	// Hack PoP Plug-in: comment unneeded code
 	$html_width = " width=\"".esc_attr($width)."\"";
 	// // Set avatar width
@@ -792,29 +792,29 @@ function user_avatar_fetch_avatar( $args = '' ) {
 	// 	$html_height = " height=\"".esc_attr($height)."\"";
 	// else
 	// 	$html_height = ( 'thumb' == $type ) ? ' height="' . esc_attr(USER_AVATAR_THUMB_HEIGHT) . '"' : ' height="' . esc_attr(USER_AVATAR_FULL_HEIGHT) . '"';
-	
+
 
 	// Hack PoP Plug-in: all of it pretty much
 	if ($avatar_data = user_avatar_avatar_exists($item_id, array('size' => $width))):
 
 		$avatar_url = $avatar_data['url'];
-		
+
 		// Hack PoP Plug-in: comment all code below, unneeded
 		// // Hack PoP Plug-in: this is a bug, it must use USER_AVATAR_URL where the path can be overriden
 		// // Also already point to folder "/thumb"
 		// //$avatar_src = get_site_url()."/wp-content/uploads/avatars/".$item_id."/".$avatar_img;
 		// $avatar_src = USER_AVATAR_URL.$item_id."/thumb/".$avatar_img;
 		// if(function_exists('is_subdomain_install') && !is_subdomain_install())
-		// 	// Hack PoP Plug-in: same problems with this line here			
+		// 	// Hack PoP Plug-in: same problems with this line here
 		// 	//$avatar_src = "/wp-content/uploads/avatars/".$item_id."/".$avatar_img;
 		// 	$avatar_src = "/".USER_AVATAR_UPLOAD_PATH.$item_id."/thumb/".$avatar_img;
-		
+
 		// // Hack PoP Plug-in: add /thumb
-		// $avatar_folder_dir = USER_AVATAR_UPLOAD_PATH."{$item_id}/thumb/";		
+		// $avatar_folder_dir = USER_AVATAR_UPLOAD_PATH."{$item_id}/thumb/";
 		// $file_time = filemtime ($avatar_folder_dir."/".$avatar_img);
-		
+
 		// $avatar_url = plugins_url('/user-avatar/user-avatar-pic.php')."?src=".$avatar_src ."&w=".$width."&id=".$item_id."&random=".$file_time;
-		
+
 		// Hack PoP Plug-in: add a filter for the response, so we can add a hook to replace the string
 		// So all the code below has been modified
 		$avatar = '';
@@ -841,11 +841,11 @@ function gd_useravatar_avatar_sizes() {
 
 // Hack PoP Plug-in
 function gd_useravatar_save_avatars($original_file, $filename, $dest_filepath, $cropped_file = null/*, $check_exists = false*/) {
-	
+
 	// Crop them to make them square
 	/** WordPress Image Administration API */
 	require_once(ABSPATH . 'wp-admin/includes/image.php');
-	
+
 	// /** WordPress Media Administration API */
 	require_once(ABSPATH . 'wp-admin/includes/media.php');
 
@@ -869,7 +869,7 @@ function gd_useravatar_save_avatars($original_file, $filename, $dest_filepath, $
 		$file_y1 = ($file_size[1] - $file_size_min) / 2;
 
 		foreach ($thumbsizes as $thumbsize) {
-		
+
 			// $cropped_thumbsize = $dest_filepath.'-'.$thumbsize.".jpg";
 			$avatarpath = $dest_filepath.$thumbsize.'/';
 			if(!file_exists($avatarpath)) {
@@ -877,12 +877,12 @@ function gd_useravatar_save_avatars($original_file, $filename, $dest_filepath, $
 				mkdir($avatarpath);
 			}
 			$cropped_thumbsize = $avatarpath.$filename;
-			
+
 			// if ($check_exists) {
-			
+
 			// 	if(file_exists($cropped_thumbsize)) continue;
 			// }
-			
+
 			// Calculate coordinates to crop
 			$cropped_thumbsize = wp_crop_image( $src_file, $file_x1, $file_y1, $file_size_min, $file_size_min, $thumbsize, $thumbsize, false, $cropped_thumbsize );
 		}
@@ -893,31 +893,31 @@ function gd_useravatar_save_avatars($original_file, $filename, $dest_filepath, $
 add_action("admin_init", "user_avatar_delete");
 /**
  * user_avatar_delete function.
- * 
+ *
  * @access public
  * @return void
  */
 function user_avatar_delete(){
-		
+
 		global $pagenow;
-		
+
 		$current_user = wp_get_current_user();
-		
+
 		// If user clicks the remove avatar button, in URL deleter_avatar=true
-		if( isset($_GET['delete_avatar']) && wp_verify_nonce($_GET['_nononce'], 'user_avatar') && ( $_GET['u'] == $current_user->id || current_user_can('edit_users')) )
+		if( isset($_GET['delete_avatar']) && wp_verify_nonce($_GET['_nononce'] ?? null, 'user_avatar') && ( $_GET['u'] ?? null == $current_user->id || current_user_can('edit_users')) )
 		{
-			$user_id = $_GET['user_id'];
+			$user_id = $_GET['user_id'] ?? null;
 			if(is_numeric($user_id))
 				$user_id = "?user_id=".$user_id;
-				
-			user_avatar_delete_files($_GET['u']);
+
+			user_avatar_delete_files($_GET['u'] ?? null);
 			wp_redirect(get_option('siteurl') . '/wp-admin/'.$pagenow.$user_id);
-			
-		}		
+
+		}
 }
 /**
  * user_avatar_form function.
- * Description: Creation and calling of appropriate functions on the overlay form. 
+ * Description: Creation and calling of appropriate functions on the overlay form.
  * @access public
  * @param mixed $profile
  * @return void
@@ -925,7 +925,7 @@ function user_avatar_delete(){
 function user_avatar_form($profile)
 {
 	global $current_user;
-	
+
 	// Check if it is current user or super admin role
 	if( $profile->ID == $current_user->ID || current_user_can('edit_user', $current_user->ID) || is_super_admin($current_user->ID) )
 	{
@@ -934,16 +934,16 @@ function user_avatar_form($profile)
 	<div id="user-avatar-display" class="submitbox" >
 	<h3 ><?php _e('Picture','user-avatar'); ?></h3>
 	<p id="user-avatar-display-image"><?php echo user_avatar_get_avatar($profile->ID, 150); ?></p>
-	<a id="user-avatar-link" class="button-primary thickbox" href="<?php echo admin_url('admin-ajax.php'); ?>?action=user_avatar_add_photo&step=1&uid=<?php echo $profile->ID; ?>&TB_iframe=true&width=720&height=450" title="<?php _e('Upload and Crop an Image to be Displayed','user-avatar'); ?>" ><?php _e('Update Picture','user-avatar'); ?></a> 
-	
-	<?php 
+	<a id="user-avatar-link" class="button-primary thickbox" href="<?php echo admin_url('admin-ajax.php'); ?>?action=user_avatar_add_photo&step=1&uid=<?php echo $profile->ID; ?>&TB_iframe=true&width=720&height=450" title="<?php _e('Upload and Crop an Image to be Displayed','user-avatar'); ?>" ><?php _e('Update Picture','user-avatar'); ?></a>
+
+	<?php
 		// Remove the User-Avatar button if there is no uploaded image
-		
+
 		if(isset($_GET['user_id'])):
 			$remove_url = admin_url('user-edit.php')."?user_id=".$_GET['user_id']."&delete_avatar=true&_nononce=". wp_create_nonce('user_avatar')."&u=".$profile->ID;
 		else:
 			$remove_url = admin_url('profile.php')."?delete_avatar=true&_nononce=". wp_create_nonce('user_avatar')."&u=".$profile->ID;
-		
+
 		endif;
 		if ( user_avatar_avatar_exists($profile->ID) ):?>
 			<a id="user-avatar-remove" class="submitdelete deleteaction" href="<?php echo esc_url_raw($remove_url); ?>" title="<?php _e('Remove User Avatar Image','user-avatar'); ?>" ><?php _e('Remove','user-avatar'); ?></a>
@@ -959,19 +959,19 @@ function user_avatar_form($profile)
 		if(!jQuery("#user-avatar-remove").is('a')){
 			jQuery('#user-avatar-link').after(" <a href='<?php echo $remove_url; ?>' class='submitdelete'  id='user-avatar-remove' ><?php _e('Remove','user-avatar'); ?></a>")
 		}
-			
-	
+
+
 	}
-	
+
 	</script>
 	<?php
 	}
-} 
+}
 
 /*-- HELPER FUNCTIONS --*/
 /**
  * user_avatar_avatar_exists function.
- * 
+ *
  * @access public
  * @param mixed $id
  * @return void
@@ -983,7 +983,7 @@ function user_avatar_avatar_exists($id, $args = ''){
 		'size'				=> false,
 		'source'			=> 'thumb',			// $source: original / thumb / photo
 	);
-	
+
 	// Compare defaults to passed and extract
 	$params = wp_parse_args( $args, $defaults );
 
@@ -997,7 +997,7 @@ function user_avatar_avatar_exists($id, $args = ''){
 
 	// If using meta, then simply check if the meta exists
 	if (USERAVATARPOP_USEMETA) {
-		
+
 		if ($filename = gd_useravatar_get_filename($id)) {
 
 			// If the size is among the list of avatars generated, then return that one
@@ -1020,7 +1020,7 @@ function user_avatar_avatar_exists($id, $args = ''){
 	}
 
 	// If not using meta, check if the file actually exists in the folder
-	
+
 	// First check if the $size is given, if so try to find the avatar with that size
 	if ($size) {
 
@@ -1029,10 +1029,10 @@ function user_avatar_avatar_exists($id, $args = ''){
 		if (file_exists($avatar_folder_dir) && is_dir($avatar_folder_dir)) {
 
 			$allfiles = scandir($avatar_folder_dir);
-		
+
 			// Skip . and .. folders
 			array_shift($allfiles);
-			array_shift($allfiles);	
+			array_shift($allfiles);
 			if ($filename = $allfiles[0]) {
 
 				$filename = basename($filename);
@@ -1045,14 +1045,14 @@ function user_avatar_avatar_exists($id, $args = ''){
 	}
 
 	// The file is unique in this folder
-	$avatar_folder_dir = USER_AVATAR_UPLOAD_PATH."{$id}/{$source}/";	
+	$avatar_folder_dir = USER_AVATAR_UPLOAD_PATH."{$id}/{$source}/";
 	if (file_exists($avatar_folder_dir) && is_dir($avatar_folder_dir)) {
 
 		$allfiles = scandir($avatar_folder_dir);
 
 		// Skip . and .. folders
 		array_shift($allfiles);
-		array_shift($allfiles);	
+		array_shift($allfiles);
 		if ($filename = $allfiles[0]) {
 
 			$filename = basename($filename);
@@ -1062,24 +1062,24 @@ function user_avatar_avatar_exists($id, $args = ''){
 			);
 		}
 	}
-	
+
 	return false;
 }
 
 /**
  * user_avatar_get_avatar function.
- * 
+ *
  * @access public
  * @param mixed $id
  * @param mixed $width
  * @return void
  */
 function user_avatar_get_avatar($id,$width) {
-	
+
 	if(! get_option('show_avatars')):
-	
+
 		if( user_avatar_avatar_exists($id) ):
-	
+
 			$user_avatar = user_avatar_fetch_avatar( array( 'item_id' => $id, 'width' => $width, 'height' => $width, 'alt' => '' ) );
 			if($user_avatar):
 				return $user_avatar;
