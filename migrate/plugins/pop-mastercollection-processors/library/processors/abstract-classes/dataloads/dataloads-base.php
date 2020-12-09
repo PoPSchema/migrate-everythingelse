@@ -124,12 +124,12 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] ?? null || $data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) && !$dbobjectids) {
+        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !(($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null)) && !$dbobjectids) {
             $ret['do-not-render'] = true;
         }
 
         // Add class "pop-loadingcontent" if doing lazy-load
-        if ($data_properties[DataloadingConstants::LAZYLOAD] ?? null || $data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) {
+        if (($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null)) {
             $ret['class'] = POP_CLASS_LOADINGCONTENT;
         }
 

@@ -184,7 +184,7 @@ function gd_get_avatar_upload_url() {
 function user_avatar_add_photo() {
 	global $current_user;
 
-	if(($_GET['uid'] ?? null == $current_user->ID || current_user_can('edit_users')) &&  is_numeric($_GET['uid'] ?? null))
+	if((($_GET['uid'] ?? null) == $current_user->ID || current_user_can('edit_users')) && is_numeric($_GET['uid'] ?? null))
 	{
 		$uid = $_GET['uid'] ?? null;
 	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
