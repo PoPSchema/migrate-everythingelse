@@ -174,74 +174,74 @@ class PoP_ServerSideManager
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
         if ($context && \PoP\ComponentModel\Server\Utils::compactResponseJsonKeys()) {
             // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-            if ($context[GD_JS_SUBMODULES]) {
+            if ($context[GD_JS_SUBMODULES] ?? null) {
                 $context['modules'] = $context[GD_JS_SUBMODULES];
             }
-            if ($context['bs']['dbkeys']) {
+            if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
             }
-            if ($context[GD_JS_MODULE]) {
+            if ($context[GD_JS_MODULE] ?? null) {
                 $context['module'] = $context[GD_JS_MODULE];
             }
-            if ($context[GD_JS_TEMPLATE]) {
+            if ($context[GD_JS_TEMPLATE] ?? null) {
                 $context['template'] = $context[GD_JS_TEMPLATE];
             }
-            if ($context[GD_JS_MODULEOUTPUTNAME]) {
+            if ($context[GD_JS_MODULEOUTPUTNAME] ?? null) {
                 $context['moduleoutputname'] = $context[GD_JS_MODULEOUTPUTNAME];
             }
-            if ($context[GD_JS_SUBMODULEOUTPUTNAMES]) {
+            if ($context[GD_JS_SUBMODULEOUTPUTNAMES] ?? null) {
                 $context['submoduleoutputnames'] = $context[GD_JS_SUBMODULEOUTPUTNAMES];
             }
-            if ($context[POP_JS_TEMPLATES]) {
+            if ($context[POP_JS_TEMPLATES] ?? null) {
                 $context['templates'] = $context[POP_JS_TEMPLATES];
             }
-            if ($context[GD_JS_INTERCEPT]) {
+            if ($context[GD_JS_INTERCEPT] ?? null) {
                 $context['intercept'] = $context[GD_JS_INTERCEPT];
             }
 
             // Params
-            if ($context[GD_JS_PARAMS]) {
+            if ($context[GD_JS_PARAMS] ?? null) {
                 $context['params'] = $context[GD_JS_PARAMS];
             }
-            if ($context[GD_JS_DBOBJECTPARAMS]) {
+            if ($context[GD_JS_DBOBJECTPARAMS] ?? null) {
                 $context['dbobject-params'] = $context[GD_JS_DBOBJECTPARAMS];
             }
-            if ($context[GD_JS_PREVIOUSMODULESIDS]) {
+            if ($context[GD_JS_PREVIOUSMODULESIDS] ?? null) {
                 $context['previousmodules-ids'] = $context[GD_JS_PREVIOUSMODULESIDS];
             }
 
             // Appendable
-            if ($context[GD_JS_APPENDABLE]) {
+            if ($context[GD_JS_APPENDABLE] ?? null) {
                 $context['appendable'] = $context[GD_JS_APPENDABLE];
             }
 
             // Frequently used keys in many different modules
-            if ($context[GD_JS_CLASS]) {
+            if ($context[GD_JS_CLASS] ?? null) {
                 $context['class'] = $context[GD_JS_CLASS];
             }
-            if ($context[GD_JS_CLASSES]) {
+            if ($context[GD_JS_CLASSES] ?? null) {
                 $context['classes'] = $context[GD_JS_CLASSES];
 
-                if ($context[GD_JS_CLASSES][GD_JS_APPENDABLE]) {
+                if ($context[GD_JS_CLASSES][GD_JS_APPENDABLE] ?? null) {
                     $context['classes']['appendable'] = $context[GD_JS_CLASSES][GD_JS_APPENDABLE];
                 }
             }
-            if ($context[GD_JS_STYLE]) {
+            if ($context[GD_JS_STYLE] ?? null) {
                 $context['style'] = $context[GD_JS_STYLE];
             }
-            if ($context[GD_JS_STYLES]) {
+            if ($context[GD_JS_STYLES] ?? null) {
                 $context['styles'] = $context[GD_JS_STYLES];
             }
-            if ($context[GD_JS_TITLES]) {
+            if ($context[GD_JS_TITLES] ?? null) {
                 $context['titles'] = $context[GD_JS_TITLES];
             }
-            if ($context[GD_JS_DESCRIPTION]) {
+            if ($context[GD_JS_DESCRIPTION] ?? null) {
                 $context['description'] = $context[GD_JS_DESCRIPTION];
             }
-            if ($context[GD_JS_INTERCEPTURLS]) {
+            if ($context[GD_JS_INTERCEPTURLS] ?? null) {
                 $context['intercept-urls'] = $context[GD_JS_INTERCEPTURLS];
 
-                if ($context[GD_JS_EXTRAINTERCEPTURLS]) {
+                if ($context[GD_JS_EXTRAINTERCEPTURLS] ?? null) {
                     $context['extra-intercept-urls'] = $context[GD_JS_EXTRAINTERCEPTURLS];
                 }
             }

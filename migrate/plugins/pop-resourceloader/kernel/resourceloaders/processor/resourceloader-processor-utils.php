@@ -327,18 +327,14 @@ class PoP_ResourceLoaderProcessorUtils {
         // Then, when processing POP_ADDLOCATIONS_ROUTE_ADDLOCATION, we can have a configuration for both target=main and target=modals
         // Then, also set the format as the "default" one, because these pages will never be called using format="navigator" (etc), there will be no format whatsoever
         $duplicate_as_default_format = false;
-        if ($components['target']) {
-
+        if ($components['target'] ?? null) {
             $target = $components['target'];
-        }
-        else {
-
+        } else {
             $format_targets = HooksAPIFacade::getInstance()->applyFilters(
                 'PoP_ResourceLoaderProcessorUtils:resources-from-current-vars:format-targets',
                 array()
             );
             if ($format_targets[$format]) {
-
                 // Notice that we are not changing here the format to default, but say to duplicate the entry
                 // This is to avoid having complete entries in the corresponding resourceloader-config-....js file
                 // (such as config-resources-pagenavigator.js), because it treats an empty array as "[]" in JSON,
@@ -346,9 +342,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 $target = $format_targets[$format];
                 $duplicate_as_default_format = true;
                 // $format = POP_VALUES_DEFAULT;
-            }
-            else {
-
+            } else {
                 $target = POP_TARGET_MAIN;
             }
         }
@@ -718,12 +712,9 @@ class PoP_ResourceLoaderProcessorUtils {
         $engine = EngineFacade::getInstance();
         // After setting the new $vars properties, we can obtain the entry module
         $entryModule = $engine->getEntryModule();
-        if ($options['use-engine-entrymodule-props']) {
-
+        if ($options['use-engine-entrymodule-props'] ?? null) {
             $entry_model_props = $engine->model_props;
-        }
-        else {
-
+        } else {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
             // and then visiting the 2nd post will not have its needed resource loaded

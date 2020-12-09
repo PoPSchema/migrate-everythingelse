@@ -14,14 +14,14 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         $vars = ApplicationState::getVars();
-        
+
         // Show error message if no items, but only if the checkpoint did not fail
         // Do not show the message when doing loadLatest
         $checkpoint_failed = GeneralUtils::isError($dataaccess_checkpoint_validation);
-        if (!$checkpoint_failed && empty($dbobjectids) && !$vars['loading-latest']) {
+        if (!$checkpoint_failed && empty($dbobjectids) && (!isset($vars['loading-latest']) || !$vars['loading-latest'])) {
             $query_args = $data_properties[DataloadingConstants::QUERYARGS];
             $pagenumber = $query_args[GD_URLPARAM_PAGENUMBER];
-        
+
             // If pagenumber < 2 => There are no results at all
             $msg = array(
                 'codes' => array(
@@ -35,7 +35,7 @@ abstract class PoP_Module_Processor_ListFeedbackMessageInnersBase extends PoP_Mo
                 $msg
             );
         }
-        
+
         return $ret;
     }
 }

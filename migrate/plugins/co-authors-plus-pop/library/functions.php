@@ -14,8 +14,7 @@ HooksAPIFacade::getInstance()->addFilter('CMSAPI:customposts:query', 'maybeRemov
 function maybeRemoveSupressFilters($query)
 {
 	// If filtering by author, let it also be a co-author
-	if ($query['author']) {
-
+	if (isset($query['author'])) {
 	    // Allow for co-authors plus plug-in to add "posts_where_filter"
 	    $query['suppress_filters'] = false;
 	}

@@ -19,7 +19,7 @@ function gdUserstanceUreTitlemembers($title)
     $author = $vars['routing-state']['queried-object-id'];
     if (gdUreIsCommunity($author)) {
         $vars = ApplicationState::getVars();
-        if ($vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
+        if (isset($vars['source']) && $vars['source'] == GD_URLPARAM_URECONTENTSOURCE_COMMUNITY) {
             $title .= TranslationAPIFacade::getInstance()->__(' + Members', 'pop-userstance-processors');
         }
     }

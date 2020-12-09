@@ -1,7 +1,8 @@
 <?php
 use PoP\Hooks\Facades\HooksAPIFacade;
 /**
-Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
+ * Helper functions, they have the same logic as the original javascript
+ * helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
  */
 class PoP_ServerSide_KernelHelpers
 {
@@ -17,7 +18,7 @@ class PoP_ServerSide_KernelHelpers
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $popManager = PoP_ServerSide_LibrariesFactory::getPopmanagerInstance();
         $condition = $popManager->isFirstLoad($pssId);
-        ;
+
         if ($condition) {
             return $options['fn']();
         } else {
@@ -45,7 +46,7 @@ class PoP_ServerSide_KernelHelpers
         $id = $options['fn']();
         $ignorePSRuntimeId = $context['ignorePSRuntimeId'];
         $domain = $context['tls']['domain'];
-        
+
         // Print also the block URL. Needed to know under what URL to save the session-ids.
         // Set the URL before calling addModule, where it will be needed
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
@@ -58,7 +59,7 @@ class PoP_ServerSide_KernelHelpers
         $items = array();
         $items[] = 'id="'.$generatedId.'"';
         $items[] = 'data-modulename="'.$moduleName.'"';
-        
+
         // For the block, also add the URL on which it was first generated (not initialized... it can be initialized later on)
         if ($url) {
             $items[] = 'data-'.POP_PARAMS_TOPLEVEL_URL.'="'.$url.'"';
@@ -73,7 +74,7 @@ class PoP_ServerSide_KernelHelpers
         $pssId = $options['hash']['pssId'] ?? $context['pss']['pssId'];
         $targetId = $options['hash']['targetId'] ?? $context['bs']['bsId'];
         $moduleName = $options['hash']['module'] ?? $context[GD_JS_MODULE];
-        
+
         $domain = $context['tls']['domain'];
         $group = $options['hash']['group'];
         $popJSRuntimeManager = PoP_ServerSide_LibrariesFactory::getJsruntimeInstance();
@@ -105,7 +106,7 @@ class PoP_ServerSide_KernelHelpers
         $dbObjectDBKey = $prevContext['dbObjectDBKey'];
         $ignorePSRuntimeId = $prevContext['ignorePSRuntimeId'];
         $feedbackObject = $prevContext['feedbackObject'];
-        
+
         // The following values, if passed as a param, then these take priority. Otherwise, use them from the previous context
         $dbKey = $options['hash']['dbKey'] ?? $prevContext['dbKey'];
         $dbObjectIDs = $options['hash']['dbObjectIDs'] ?? $prevContext['dbObjectIDs'];
@@ -151,31 +152,31 @@ class PoP_ServerSide_KernelHelpers
                 $extend['dbObject'] = $dbObject;
             }
         }
-        
-        if ($options['hash']['dbKey'] && $dbObjectID) {
+
+        if (isset($options['hash']['dbKey']) && $dbObjectID) {
             $dbKey = $options['hash']['dbKey'];
             $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
             $extend['dbObject'] = $dbObject;
             $extend['dbObjectDBKey'] = $dbKey;
             $extend['dbKey'] = $dbKey;
             $extend['dbObjectIDs'] = array($dbObjectID);
-        } elseif ($options['hash']['dbKey'] && $options['hash']['dbObjectIDs']) {
+        } elseif (isset($options['hash']['dbKey']) && $options['hash']['dbObjectIDs']) {
             $extend['dbKey'] = $options['hash']['dbKey'];
             $extend['dbObjectIDs'] = $options['hash']['dbObjectIDs'];
-        } elseif ($options['hash']['subcomponent'] && $dbObjectID) {
+        } elseif (isset($options['hash']['subcomponent']) && $dbObjectID) {
             $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
             $dbObject = $popManager->getDBObject($domain, $dbKey, $dbObjectID);
             $extend['dbObject'] = $dbObject;
             $extend['dbObjectDBKey'] = $dbKey;
             $extend['dbKey'] = $dbKey;
             $extend['dbObjectIDs'] = array($dbObjectID);
-        } elseif ($options['hash']['subcomponent'] && $options['hash']['dbObjectIDs']) {
+        } elseif (isset($options['hash']['subcomponent']) && $options['hash']['dbObjectIDs']) {
             $dbKey = $bs['dbkeys'][$options['hash']['subcomponent']];
             $extend['dbKey'] = $dbKey;
             $extend['dbObjectIDs'] = $options['hash']['dbObjectIDs'];
-        } elseif ($options['hash']['dbObjectIDs']) {
+        } elseif (isset($options['hash']['dbObjectIDs'])) {
             $extend['dbObjectIDs'] = $options['hash']['dbObjectIDs'];
-        } elseif ($options['hash']['dbKey']) {
+        } elseif (isset($options['hash']['dbKey'])) {
             // If only the dbKey has value, it means the other value passes (dbObjectID or dbObjectIDs) is null
             // So then put everything to null
             $extend['dbKey'] = $options['hash']['dbKey'];
@@ -185,13 +186,13 @@ class PoP_ServerSide_KernelHelpers
         }
 
         // Make sure the dbObjectIDs are an array
-        if ($extend['dbObjectIDs']) {
+        if ($extend['dbObjectIDs'] ?? null) {
             if (!is_array($extend['dbObjectIDs'])) {
                 $extend['dbObjectIDs'] = array($extend['dbObjectIDs']);
             }
         }
 
-        if ($options['hash']['feedbackObject']) {
+        if ($options['hash']['feedbackObject'] ?? null) {
             // Allow to get data from an object from the feedback (eg: feedbackmessage)
             $extend['feedbackObject'] = $options['hash']['feedbackObject'];
         }
@@ -200,7 +201,7 @@ class PoP_ServerSide_KernelHelpers
             $context,
             $extend
         );
-    
+
         $response = $popManager->getHtml($domain, $moduleName, $context);
 
         // Allow PoP Resource Loader to modify the response, to add embedded scripts
@@ -216,16 +217,15 @@ class PoP_ServerSide_KernelHelpers
             $bId
         );
 
-        if ($options['hash']['unsafe']) {
+        if ($options['hash']['unsafe'] ?? null) {
             return $response;
         }
-        
+
         return new LS($response);
     }
 
     public function withModule($context, $moduleName, $options)
     {
-
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
         if (!$context || !isset($context[GD_JS_SUBMODULEOUTPUTNAMES]) || !isset($context[GD_JS_SUBMODULEOUTPUTNAMES][$moduleName])) {
             return;
@@ -268,7 +268,7 @@ class PoP_ServerSide_KernelHelpers
 
     public function get($db, $index, $options)
     {
-        
+
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
         if (!$db || !isset($db[$index])) {
             return '';
@@ -285,7 +285,7 @@ class PoP_ServerSide_KernelHelpers
         $context = $options['hash']['context'] ?? $options['_this'];
         $condition = false;
         // Allow to execute a method to check for the condition (eg: is user-id from the object equal to website logged in user?)
-        if ($options['hash']['method']) {
+        if ($options['hash']['method'] ?? null) {
             $popJSLibraryManager = PoP_ServerSide_LibrariesFactory::getJslibraryInstance();
             $args = array(
                 'domain' => $context['tls']['domain'],
@@ -301,7 +301,7 @@ class PoP_ServerSide_KernelHelpers
         } else {
             $condition = $db[$index];
         }
-        
+
         if ($condition) {
             return $options['fn']();
         } else {
@@ -311,7 +311,6 @@ class PoP_ServerSide_KernelHelpers
 
     public function withget($db, $index, $options)
     {
-
         // Comment Leo 10/06/2017: here we ask for !isset() and not just !, so that if there is an empty array, it still works...
         if (!$db || !isset($db[$index])) {
             return '';

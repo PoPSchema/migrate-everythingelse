@@ -55,8 +55,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         );
 
         // Extract the resources from the current vars: needed when doing generate_bundlefile_on_runtime()
-        if ($options['from-current-vars']) {
-
+        if ($options['from-current-vars'] ?? null) {
             // Re-use the already-generated $props
             $options['use-engine-entrymodule-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
@@ -113,8 +112,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
 
         // "fetching-json": Remove those resources which are already loaded in "loading-site"
         // This will make resources.js much smaller
-        if ($ignore_resources = $options['ignore-resources']) {
-
+        if ($ignore_resources = $options['ignore-resources'] ?? null) {
             foreach ($flat_resources as $nature => $key_resources) {
                 foreach ($key_resources as $key => $resources) {
                     $flat_resources[$nature][$key] = array_values(array_diff(
@@ -152,9 +150,9 @@ class PoP_ResourceLoader_FileReproduction_Utils {
             return self::$resource_mapping[$encoded];
         }
 
-        $matchPaths = $options['match-paths'];
-        $matchNature = $options['match-nature'];
-        $matchFormat = $options['match-format'];
+        $matchPaths = $options['match-paths'] ?? null;
+        $matchNature = $options['match-nature'] ?? null;
+        $matchFormat = $options['match-format'] ?? null;
 
         // Get all the resources, for the different natures
         $app_resources = self::getResources($modulefilter, $options);

@@ -69,7 +69,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
             case self::MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST:
                 // For the quickview we return something different
                 $vars = ApplicationState::getVars();
-                if ($vars['target'] == POP_TARGET_QUICKVIEW) {
+                if (isset($vars['target']) && $vars['target'] == POP_TARGET_QUICKVIEW) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST];
                 }
 
@@ -92,7 +92,7 @@ class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Pro
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-stances-carousel');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

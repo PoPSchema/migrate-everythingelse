@@ -22,26 +22,26 @@ class PoP_Theme_Meta_Hooks
             $vars = ApplicationState::getVars();
 
             // Send the current selected theme back
-            if ($vars['theme']) {
+            if ($vars['theme'] ?? null) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEME] = $vars['theme'];
             }
-            if ($vars['thememode']) {
+            if ($vars['thememode'] ?? null) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMEMODE] = $vars['thememode'];
             }
-            if ($vars['themestyle']) {
+            if ($vars['themestyle'] ?? null) {
                 $meta[ParamConstants::PARAMS][GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
             }
 
             $pushurlprops = array();
 
             // Theme: send only when it's not the default one (so the user can still see/copy/share the embed/print URL)
-            if ($vars['theme'] && !$vars['theme-isdefault']) {
+            if (isset($vars['theme']) && !$vars['theme-isdefault']) {
                 $pushurlprops[GD_URLPARAM_THEME] = $vars['theme'];
             }
-            if ($vars['thememode'] && !$vars['thememode-isdefault']) {
+            if (isset($vars['thememode']) && !$vars['thememode-isdefault']) {
                 $pushurlprops[GD_URLPARAM_THEMEMODE] = $vars['thememode'];
             }
-            if ($vars['themestyle'] && !$vars['themestyle-isdefault']) {
+            if (isset($vars['themestyle']) && !$vars['themestyle-isdefault']) {
                 $pushurlprops[GD_URLPARAM_THEMESTYLE] = $vars['themestyle'];
             }
 

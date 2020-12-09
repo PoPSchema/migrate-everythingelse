@@ -48,7 +48,7 @@ class PoP_UserState_EngineHooks
         $helperCalculations = &$helperCalculations_in_array[0];
 
         // Fetch the lazy-loaded data using the Background URL load
-        if ($helperCalculations['has-userstatedata-load']) {
+        if ($helperCalculations['has-userstatedata-load'] ?? null) {
                 $url = GeneralUtils::addQueryArgs([
                 GD_URLPARAM_DATAOUTPUTITEMS => [
                     GD_URLPARAM_DATAOUTPUTITEMS_META,

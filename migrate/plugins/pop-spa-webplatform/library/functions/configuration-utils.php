@@ -12,7 +12,7 @@ class PoP_SPAWebPlatform_ConfigurationUtils
             $url = RouteUtils::getRouteURL($route);
 
             // If preloading (eg: INITIALFRAMES) then add the action=preload and modulefilter=page URL parameters
-            if ($configuration['preload']) {
+            if ($configuration['preload'] ?? null) {
                 $url = GeneralUtils::addQueryArgs([
                     \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager::URLPARAM_MODULEFILTER => \PoP\SPA\ModuleFilters\Page::NAME,
                     GD_URLPARAM_ACTIONS.'[]' => GD_URLPARAM_ACTION_PRELOAD,

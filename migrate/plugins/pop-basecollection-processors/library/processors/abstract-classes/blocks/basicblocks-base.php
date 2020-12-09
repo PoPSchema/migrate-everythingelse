@@ -154,7 +154,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] || $data_properties[DataloadingConstants::EXTERNALLOAD]) && !$dbobjectids) {
+        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] ?? null || $data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) && !$dbobjectids) {
             $ret['do-not-render'] = true;
         }
 

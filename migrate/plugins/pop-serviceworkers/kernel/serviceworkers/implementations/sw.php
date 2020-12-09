@@ -71,7 +71,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $configuration['${contentCDNOriginalDomain}'] = $cmsengineapi->getSiteURL();
         $configuration['${contentCDNDomain}'] = '';
         $configuration['${contentCDNParams}'] = array();
-        
+
         // Allow to hook the CDN configuration
         $configuration = HooksAPIFacade::getInstance()->applyFilters('PoP_ServiceWorkers_Job_SW:configuration', $configuration);
 
@@ -97,7 +97,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
                 $precache = array_values($this->getAppshellPages());
             }
         }
-        
+
         // Hook in the resources to pre-cache
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
@@ -108,7 +108,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getExcludedFullpaths($resourceType)
     {
-        
+
         // Hook in the resources to exclude
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude:full',
@@ -119,7 +119,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getExcludedPartialpaths($resourceType)
     {
-        
+
         // Hook in the resources to exclude
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
@@ -181,7 +181,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $strategies = array();
         if ($resourceType == 'json') {
             // $hasParams = $this->getIgnoredParams($resourceType);
-        
+
             // Hook in the paths to include
             // All the layout loaders (eg: POP_POSTS_ROUTE_LOADERS_POSTS_LAYOUTS) belong here
             // It can be resolved to all silentDocument pages without a checkpoint
@@ -231,7 +231,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
         // Each item in the array must be an array of two items: [param, value]
         $excluded = array();
-        
+
         // Hook in the params to exclude
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:exclude-paramvalues:'.$resourceType,
@@ -255,7 +255,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         if ($pos > -1) {
             array_splice($multidomains, $pos, 1);
         }
-        
+
         return $multidomains;
     }
 
@@ -275,13 +275,13 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         if ($pos > -1) {
             array_splice($multidomain_locales, $pos, 1);
         }
-        
+
         return $multidomain_locales;
     }
 
     protected function getLocales()
     {
-        
+
         // Allow qTrans to modify this
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:locales',
@@ -294,10 +294,10 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $url = RouteUtils::getRouteURL($route);
         if (defined('POP_THEME_INITIALIZED')) {
-            $themename = $options['themename'];
-            $thememodename = $options['thememodename'];
+            $themename = $options['themename'] ?? '';
+            $thememodename = $options['thememodename'] ?? '';
             $url = GeneralUtils::addQueryArgs([
-                GD_URLPARAM_THEMEMODE =>$thememodename,
+                GD_URLPARAM_THEMEMODE => $thememodename,
                 GD_URLPARAM_THEME => $themename,
             ], $url);
         }
@@ -311,7 +311,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
     }
 
     // protected function getContentDomains() {
-        
+
     //     // Allow to hook in https://content.getpop.org
     //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
     //     return HooksAPIFacade::getInstance()->applyFilters(
@@ -360,7 +360,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getLocalesByurl()
     {
-        
+
         // Allow qTrans to modify this
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:locales_byurl',
@@ -372,7 +372,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
 
     protected function getDefaultLocale()
     {
-        
+
         // Allow qTrans to modify this
         return HooksAPIFacade::getInstance()->applyFilters(
             'PoP_ServiceWorkers_Job_Fetch:default_locale',
@@ -380,7 +380,7 @@ class PoP_ServiceWorkers_Job_SW extends PoP_ServiceWorkers_Job
         );
     }
 }
-    
+
 /**
  * Initialize
  */

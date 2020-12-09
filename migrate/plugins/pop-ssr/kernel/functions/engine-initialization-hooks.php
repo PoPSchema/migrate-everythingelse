@@ -181,7 +181,7 @@ class PoP_SSR_EngineInitialization_Hooks
 
     protected function addDynamicDatabaseEntries(&$data, &$dynamicdatabases, $dbobjectids, $typeResolver_class, array $data_properties)
     {
-        if ($data_properties['data-fields']) {
+        if ($data_properties['data-fields'] ?? null) {
             $instanceManager = InstanceManagerFacade::getInstance();
 
             // Data to be copied can come from either the database or the userstatedatabase

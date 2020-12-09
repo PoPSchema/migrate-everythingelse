@@ -29,7 +29,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
                 $feedbackmessages
             );
         }
-                
+
         return $ret;
     }
 
@@ -41,7 +41,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $submodules
             );
         }
@@ -49,10 +49,10 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         if ($status = $this->getStatusSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['status'] = ModuleUtils::getModuleOutputName($status);
         }
-        
+
         if ($feedbackmessages = $this->getFeedbackmessageSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['feedbackmessages'] = array_map(
-                [ModuleUtils::class, 'getModuleOutputName'], 
+                [ModuleUtils::class, 'getModuleOutputName'],
                 $feedbackmessages
             );
 
@@ -63,7 +63,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
                 $ret['feedbackmessages-bottom'] = true;
             }
         }
-        
+
         return $ret;
     }
 
@@ -123,16 +123,16 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-        
-        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] || $data_properties[DataloadingConstants::EXTERNALLOAD]) && !$dbobjectids) {
+
+        if ($this->getProp($module, $props, 'do-not-render-if-no-results') && !($data_properties[DataloadingConstants::LAZYLOAD] ?? null || $data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) && !$dbobjectids) {
             $ret['do-not-render'] = true;
         }
 
         // Add class "pop-loadingcontent" if doing lazy-load
-        if ($data_properties[DataloadingConstants::LAZYLOAD] || $data_properties[DataloadingConstants::EXTERNALLOAD]) {
+        if ($data_properties[DataloadingConstants::LAZYLOAD] ?? null || $data_properties[DataloadingConstants::EXTERNALLOAD] ?? null) {
             $ret['class'] = POP_CLASS_LOADINGCONTENT;
         }
-        
+
         return $ret;
     }
 }

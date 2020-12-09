@@ -153,7 +153,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             }
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
-            if ($ret['data-fields']) {
+            if ($ret['data-fields'] ?? null) {
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
@@ -185,7 +185,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             }
 
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_modules_data_properties['data-fields']) {
+            if ($subcomponent_modules_data_properties['data-fields'] ?? null) {
                 $subcomponent_modules_data_properties['data-fields'] = array_unique($subcomponent_modules_data_properties['data-fields']);
 
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? array();
@@ -196,7 +196,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
                     )
                 );
             }
-            if ($subcomponent_modules_data_properties['subcomponents']) {
+            if ($subcomponent_modules_data_properties['subcomponents'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
@@ -210,7 +210,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     // protected function removeEmptyEntries(&$ret) {
 
     //     // If after the propagation, we have entries of 'subcomponents' empty, then remove them
-    //     if ($ret['subcomponents']) {
+    //     if ($ret['subcomponents'] ?? null) {
 
     //         // Iterate through all the data_field => dataloaders
     //         $subcomponent_data_fields = array_keys($ret['subcomponents']);

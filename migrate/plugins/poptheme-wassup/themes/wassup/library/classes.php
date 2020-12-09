@@ -6,7 +6,7 @@ HooksAPIFacade::getInstance()->addFilter("gdClassesBody", 'gdWassupThemeBodyClas
 function gdWassupThemeBodyClass($body_classes)
 {
     $vars = ApplicationState::getVars();
-    if ($vars['theme'] == GD_THEME_WASSUP) {
+    if (isset($vars['theme']) && $vars['theme'] == GD_THEME_WASSUP) {
         $thememode = $vars['thememode'];
 
         // For the 'simple' and 'embed' themes, also add 'sliding' in the body class, since these are sliding implementations and need its css classes
@@ -31,10 +31,10 @@ function gdWassupThemeBodyClass($body_classes)
         }
 
         // if (PoP_ApplicationProcessors_Utils::narrowBody()) {
-        
+
         //     $body_classes[] = 'narrow';
         // }
     }
-    
+
     return $body_classes;
 }

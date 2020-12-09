@@ -377,7 +377,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_SINGLERELATEDSTANCECONTENT_NEUTRAL_SCROLL_LIST:
                 // For the quickview we return something different
                 $vars = ApplicationState::getVars();
-                if ($vars['target'] == POP_TARGET_QUICKVIEW) {
+                if (isset($vars['target']) && $vars['target'] == POP_TARGET_QUICKVIEW) {
                     return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST];
                 }
 
@@ -417,7 +417,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_AUTHORSTANCES_PRO_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_AUTHOR_STANCES_PRO];
-            
+
             case self::MODULE_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_AUTHORSTANCES_NEUTRAL_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL];
@@ -433,7 +433,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_TAGSTANCES_PRO_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_STANCES_PRO];
-            
+
             case self::MODULE_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_TAGSTANCES_NEUTRAL_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_STANCES_NEUTRAL];
@@ -471,7 +471,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 $this->appendProp($module, $props, 'class', 'pop-block-carousel block-stances-carousel');
                 break;
         }
-        
+
         parent::initModelProps($module, $props);
     }
 }

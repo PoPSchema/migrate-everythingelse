@@ -26,7 +26,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     }
 
     // function getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getUniquetodomainQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
@@ -50,7 +50,7 @@ class GD_DataLoad_QueryInputOutputHandler_CommentList extends ListQueryInputOutp
     }
 
     // function getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-    
+
     //     $ret = parent::getDatafeedback($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
     //     $query_args = $data_properties[ParamConstants::QUERYARGS];
