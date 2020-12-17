@@ -67,12 +67,15 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 $immutable_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS);
                 $mutableonmodel_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS);
             }
-            if (!$immutable_jssettings) {
+            if ($immutable_jssettings === null) {
                 $immutable_jssettings = $processor->getImmutableJssettingsModuletree($module, $model_props);
-                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsModuletree($module, $model_props);
-
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS, $immutable_jssettings);
+                }
+            }
+            if ($mutableonmodel_jssettings === null) {
+                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsModuletree($module, $model_props);
+                if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS, $mutableonmodel_jssettings);
                 }
             }
