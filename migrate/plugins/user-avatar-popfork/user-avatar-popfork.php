@@ -904,7 +904,7 @@ function user_avatar_delete(){
 		$current_user = wp_get_current_user();
 
 		// If user clicks the remove avatar button, in URL deleter_avatar=true
-		if( isset($_GET['delete_avatar']) && wp_verify_nonce($_GET['_nononce'] ?? null, 'user_avatar') && ( $_GET['u'] ?? null == $current_user->id || current_user_can('edit_users')) )
+		if( isset($_GET['delete_avatar']) && wp_verify_nonce($_GET['_nononce'] ?? null, 'user_avatar') && ( ($_GET['u'] ?? null) == $current_user->id || current_user_can('edit_users')) )
 		{
 			$user_id = $_GET['user_id'] ?? null;
 			if(is_numeric($user_id))

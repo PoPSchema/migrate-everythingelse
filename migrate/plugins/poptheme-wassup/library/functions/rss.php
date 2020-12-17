@@ -25,7 +25,7 @@ function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
         // If it is the daily feed, then show only posts posted in the last 24 hs
-        if ($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
+        if (($_REQUEST[GD_URLPARAM_RSSCAMPAIGN] ?? null) == GD_URLPARAM_RSSCAMPAIGN_DAILYPOSTDIGEST) {
             $query_today = array(
                 'column'  => 'post_date',
                 'after'   => '- 1 days'
