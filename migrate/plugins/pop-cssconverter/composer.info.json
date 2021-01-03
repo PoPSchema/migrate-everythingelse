@@ -1,4 +1,5 @@
 {
+    "name": "pop-migrate-everythingelse/cssconverter",
     "require": {
         "sabberworm/php-css-parser": "*"
     }

@@ -1,6 +1,6 @@
 # (Temporary package) Migrate code to package: Everything Else
 
-Code to be migrated, from legacy PHP 5 code to modern PHP 7 code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds support for meta queries
+Code to be migrated, from legacy to modern PHP code ([read more here](https://github.com/leoloso/PoP#codebase-migration)). Target package description:  Adds support for meta queries
 
 ## Install
 
@@ -9,6 +9,10 @@ Via Composer
 ``` bash
 composer require pop-schema/migrate-everythingelse
 ```
+
+## Development
+
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Schema/packages/migrate-everythingelse`](https://github.com/leoloso/PoP/tree/master/layers/Schema/packages/migrate-everythingelse).
 
 ## Security
 
@@ -36,4 +40,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-code-quality]: https://scrutinizer-ci.com/g/pop-schema/everythingelse
 [link-downloads]: https://packagist.org/packages/pop-schema/everythingelse
 [link-author]: https://github.com/leoloso
-[link-contributors]: ../../contributors
+[link-contributors]: ../../../../../../contributors
